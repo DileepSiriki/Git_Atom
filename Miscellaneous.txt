@@ -188,3 +188,7 @@ Programming languages are divided into five subcategories: First generation, Sec
 
 COMMUNICATION PROTOCOLS : (TCP/IP , UDP etc; )
 =================================================
+
+
+STATEFUL vs STATELESS :
+==================================================

@@ -72,6 +72,18 @@ PAAS = IAAS + APP:ICATIONS (Apache - Python - Node JS)       -----> DEVELOPERS
 SAAS = PAAS + USER APPS (Gmail  - Drive - O365 - Maps)       -----> EVERYONE
 BAAS = SAAS + Buiseness Processing (Accounting - Auditing)
 
+ ----  ----------- ------- ---------- ---------------- --------------  ------- ------- -----------
+|DATA  APPLICATION RUNTIME MIDDLEWARE OPERATING_SYSTEM VIRTUALIZATION  SERVERS STORAGE NETWORKING |
+ ----  ----------- ------- ---------- ---------------- --------------  ------- ------- -----------
+ |___| |_________________________________________________________________________________________|
+   1                                     SAAS                                       2
+ |_______________| |_____________________________________________________________________________|
+   1                                     PAAS                                       2
+ |____________________________________________________| |________________________________________|
+   1                                     IAAS                                       2
+
+1 = client has to manage
+2 = vendor manages
 
 ADVANTAGES OF CLOUD :
 =======================

@@ -1,0 +1,323 @@
+####VIEW NETWORKING TUTORIALS BY RAVINDRA BABU RAVULA :: https://youtu.be/UXMIxCYZu8o
+IANA -> INTERNET ASSIGNED NUMBER AUTHORITY. --> Responsible for IP address allocations.
+Classless - IPV4 , IPV6
+Classfull - CIDR
+
+    Network-1                                           Network-2
+---------------------                                 --------------------
+|   HOST-1          |                                 |  HOST-2          |
+|                   |       www.google.com            |                  |
+|                   | ----------------------------> a | ---> b --> c [p] |  [ P = Process / port ]
+---------------------                                 --------------------
+          1                                                     2
+1 = Your Network say AIRTEL                        2 = Say a Network that hosts GOOGLE in Usage
+    It has your HOST                                   It has a Host that serves google pages
+
+When you type in www.google.com , it has to first :
+  a --> Go to the destination network (using Network-Id in IP)
+  b --> from destination , it has to identify the host that serves webpages (using Host-Id in IP)
+  c --> from the host it has to identify the process to request for pages transfer (using Port number)
+
+So we need to somehow translate the domain name into IP address.
+IP ADDRESS = NETWORK-Id + HOST-Id
+             Network-Id is used to reach Network and then Host-Id is used to reach the destination host .
+PORT       = This specifies the process running the desired web pages .
+             Ex : for a webservice on HTTP -> Default is PORT-80 (we need not specify port for default ports)
+                  ftp - 21 etc;
+
+For this Address translation, ISP (Internet Service Provider) will use a DNS (Domain Name Server).
+This DNS info is cached for not go to DNS all the time . That's why the first time it is rum , pages take time but from next time they are quick.
+
+NUMBER SYSTEM:
+---------------
+If the base of a number system is " n " :
+--> Then we have " n " symbols in that number system and they all start from 0 and then 1 2 3 4 5 ...... (n-1)
+
+UNARY NUMBER SYSTEM   :   0                   [ 1 = 0 && 2 = 00 && 3 = 000           ]
+BINARY NUMBER SYSTEM  :   0 1                 [ Computer language                    ]      base = 2
+OCTAL NUMBER SYSTEM   :   0 1 2 3 4 5 6 7                                                   base = 8
+DECIMAL NUMBER SYSTEM :   0 1 2 3 4 5 6 7 8 9 [ Everyday used                        ]      base = 10
+HEXA NUMBER SYSTEM    :   0 1 .... 9 A B .. f [ Since only 9 numbers , we use A to F ]      base = 16
+                                                --> A = 11, B = 12 .... F = 15
+
+2^1 = 2
+2^2 = 4
+.
+.
+2^10 = 1024 also called " K "
+2^20 = M mega
+2^30 = G giga
+2^40 = T tera
+
+      1-bit - 2 numbers                     2-bits - 4 numbers                       3-bits - 8 numbers
+  ---------------                       -------------                              -----------
+       0                                      00 10                                   000 001 010 100
+       1                                      01 11                                   101 110 011 111
+
+So for a "n" bit number , we have 2^n numbers called the ADDRESS SPACE .
+So if we chose n bits as N/W ID             --> 2^n
+The other n-k bits will be for Host Id part --> 2^(n-k)
+IPV4 = 32 bits --> 4 blocks*8bits [ block-1 : block-2 : block-3 : block-4 ]
+
+CONVERT BINARY TO DECIMAL : ( n^0 = 1 )
+-----------------------------
+111001    = 1*2^5 + 1*2^4 + 1*2^3 + 0*2^2 + 0*2^1 + 1*2^0 = 57
+00        = 0*2^1 + 0*2^0  = 0
+11        = 1*2^1 + 1*2^0  = 3
+1000 0000 = 1*2^7 + 0*2^6 + 0*2^5 + 0*2^4 + 0*2^3 + 0*2^2 + 0*2^1 + 0*2^0 = 128
+1111 1111 = 1*2^7 + 1*2^6 + 1*2^5 + 1*2^4 + 1*2^3 + 1*2^2 + 1*2^1 + 1*2^0 = 255
+
+BINARY FORMAT :
+-----------------
+Out of 32 bits , if the binary addresses starts with : [ 0000 0000 . 0000 0000 . 0000 0000 . 0000 0000]
+we have 8 octets of 4 bits each OR 4 blocks or 8 bits each . We consider the first OCTET for classification :
+
+    --> 0     - class A  -- Since 1 bit  is  fixed out of 32 , we have (2^31) IP-Addresses -- [ 1   to 126 ]
+    --> 10    - class B  -- Since 2 bits are fixed out of 32 , we have (2^30) IP-Addresses -- [ 128 to 191 ]
+    --> 110   - class c  -- Since 3 bits are fixed out of 32 , we have (2^29) IP-Addresses -- [ 192 to 223 ]
+    --> 1110  - class D  -- Since 4 bits are fixed out of 32 , we have (2^28) IP-Addresses -- [ 224 to 231 ]
+    --> 1111  - class E  -- Since 4 bits are fixed out of 32 , we have (2^28) IP-Addresses -- [ 225 to 255 ]
+
+DECIMAL FORMAT :
+------------------
+But if an IP is given in DOTTED DECIMAL NUMBER SYSTEM , consider the first OCTET [ 17.34.56.4 ] , consider 17
+and convert 17 to binary and classify based on first bits.
+
+CLASS A -->         -------------------------------------------------
+                   |  8-bits |           24-bits                     |  --> 8-bits for N/W and 24-bits for HOST
+                    -------------------------------------------------
+                     N/W - ID               HOST - ID
+
+    Since we have 32 bits and 1st bit is fixed [ X _ _ _ _ _ _ _ ] , we have 31 remaining bits .
+
+                       2^7   N/W ID's    = 128 Networks        [ N/W 0 to N/W 127 ]
+                       2^24  HOST ID's   = 16 million hosts
+
+    So we have 16 million IP addresses for each of the 2^7 Network. --> [ 0 to 127 ]
+    But We do not use IP's starting with 0 and 127 for special purposes , so practically we have 126 Networks [ 1 to 126]
+    So if we have an IP ADDRESS that starts with 1 - 126 , it is belonging to CLASS-A.
+    Since only minimal (126) networks and huge (16 million) hosts , big giants such as Pentagon and NASA buy them .
+
+CLASS B -->         -------------------------------------------------
+                   |          16-bits     |           16-bits        |  --> 16-bits for N/W and 16-bits for HOST
+                    -------------------------------------------------
+                            N/W - ID                   HOST - ID
+
+    Since we have 32 bits and 2-bits  are fixed [ X X _ _ _ _ _ _ ] , we have 30 remaining bits .
+
+                      2^14   N/W  ID's   ~  16000 Networks        [ N/W 128 to N/W 191 ]
+                      2^16   HOST ID's
+
+    So we have 2^16  IP addresses for each of the 2^14 Networks. --> [ 128 to 191 ]
+    So if we have an IP ADDRESS that starts with 128 - 191 , it is belonging to CLASS-B.
+    Companies such as Pentagon and SBI and IRCTC buy them .
+
+
+CLASS C -->         -------------------------------------------------
+                   |          24-bits                    |   8-bits  |  --> 24-bits for N/W and 8-bits for HOST
+                    -------------------------------------------------
+                                   N/W - ID                  HOST - ID
+
+    Since we have 32 bits and 2-bits  are fixed [ X X X _ _ _ _ _ ] , we have 29 remaining bits .
+
+                      2^21   N/W  ID's  ~  2million Networks        [ N/W 192 to N/W 223 ]
+                      2^8    HOST ID's  =  256
+
+    So we have 256 IP addresses for each of the 2^21 Networks. --> [ 192 to 223 ]
+    So if we have an IP ADDRESS that starts with 192 - 223 , it is belonging to CLASS-B.
+    Universities and colleges buy these.
+
+CLASS D and CLASS E :
+    There is no concept of N/W ID and HOST ID here . All the addresses are simple IP addresses.
+    But the range of CLASS D is : 224 to 231 --> used for multi casting
+    And the range of CLASS E is : 232 to 255 --> Reserved for secure purposes such as military .
+
+NOTE : Even the first and last host IP's are reserved in every class . --> UNICASTING and MULTICASTING
+       So practically we have hosts as (total hosts - 2 )
+       So for class A --> 16 million - 2
+              class C --> 256 - 2
+
+       LIMITED BROADCAST ADDRESS  --> 255.255.255.255 --> used for limited broad casting , so not assigned to any host .
+       NETWORK ID                 --> X.0.0.0         --> represents the whole Network X
+       DIRECTED BROADCAST ADDRESS --> X.255.255.255   --> represent all hosts in network X
+
+       Consider 11.0.0.0 , 25.0.0.0 , 221.0.0.0
+           --> These are not used as IP addresses but used as NETWORK ID's to represent a NETWORK .
+           --> So the first IP address is always reserved (X.0.0.0)
+           --> 1st IP is used to represent the whole Network .
+
+CASTING -->
+------------
+UNI casting    - one host to one host    --   [ DATA - SOURCE_IP - DESTINATION_IP ]  <--> [ data - 11.1.2.3 - 12.1.2.3 ]
+BROAD casting  - one host to many hosts
+
+                 LIMITED  -> sending messages from one host to all hosts in the same network
+                             Suppose we want to send a message from 11.1.2.3 to all hosts in same network 11 -> 11.x.x.x
+                             since that for a class A , 2^16 hosts are there , it is practically not possible to send 2^16 data packets .
+                             so the alternative is to put all 1's in destination Ip part . --> [255.255.255.255]
+                             [ data - 11.1.2.3 - 255.255.255.255 ]
+                             So When a Network sees the destination IP as 255.255.255.255 , instead of routing it out if its network, it sends it inside to all hosts again.
+
+                 DIRECTED -> sending messages from one host to all hosts in a different network
+                             Suppose we want to send a message from 11.1.2.3 to all hosts in different network 12 -> 12.x.x.x
+                             So we put all 1's in the last 3 octets and 1st octet is the N/W Id. --> [X.255.255.255]
+                             [ data - 11.1.2.3 - 20.255.255.255 ]
+
+EXAMPLES :
+------------
+1.2.3.4            --> since starts with 1 , it is a CLASS A  -- 1st octet N/W id , next 3octets HOST Id.
+                       so split as [ 1  -  2.3.4 ]
+                       N/W id is the network the IP belongs = put all 0's in Host ID part
+                       N/W ID = 1.0.0.0
+                       DBA    = 1.255.255.255
+                       LBA    = 255.255.255.255
+
+150.3.150.150      --> since starts with 150 , it is a CLASS B -- First 2 octets N/W id , next 2 octets HOST Id.
+                       so split as [ 150.3  - 150.150 ]
+                       N/W id = the network the IP belongs = put all 0's in Host ID part
+                       N/W ID = 150.3.0.0
+                       DBA    = 150.3.255.255
+                       LBA    = 255.255.255.255
+
+220.15.1.10        --> since starts with 220 , it is a CLASS c -- First 3 octets N/W id , last octet is HOST Id.
+                       so split as [ 220.15.1 - 10 ]
+                       N/W id = the network the IP belongs = put all 0's in Host ID part
+                       N/W ID = 220.15.1.0
+                       DBA    = 220.15.1.255
+                       LBA    = 255.255.255.255
+
+250.1.2.3          --> since starts with 250  , it is a CLASS E
+                       Since we do not have concept of N/W and HOST Id in class D and E , not possible .
+
+300.1.2.3          --> 300 is not a valid range for any IP
+
+
+SUBNETS :
+-----------
+Since that maintaining huge number of hosts is a difficult job , we divide a network into multiple networks for a better maintenance .
+say in a company divide network into subnets for Developers , testers and admins.
+But now there is an extra overhead of searching for the subnet in  a network .
+Also every subnet wastes an extra of 2 IP addresses for DBA and N/W ID .
+
+Consider a N/W : 200.1.2.0 --> since its class C , we use the last 8 bits as Host ID , hence we use these 8 bits for subnetting as well.
+                           --> 200.1.2.X --> 200.1.2._ _ _ _ _ _ _ _
+                           --> If we want 2 subnets , we chose the 1st bit , if we want 4 subnets , we chose the 1st 2 bits.
+                           --> Say we want to create 2 subnets A and B :
+                           --> 200.1.2.0 _ _ _ _ _ _ _ _  and 200.1.2.1 _ _ _ _ _ _ _ _ (we chose the 1st bit of the last octant and gave it 0 and 1 respectively)
+                           --> When we have a subnet we need to have an internal route table to move traffic to respective subnets.
+
+                                                     N/W Id = 200.1.2.0  <-- 200.1.2.0  -->  DBA = 200.1.2.255
+                                                               ------------------------------------
+                                       200.1.2.0 000 0000     |                |                   |    200.1.2.1 000 0000
+                                       200.1.2.0 000 0001     |                |                   |    200.1.2.1 000 0001
+                                            ...               |     A        XXXXX       B         |          ...
+                                            ...               |                |                   |          ...
+                                       200.1.2.0 111 1111     |                |                   |     200.1.2.1 111 1111
+                                                               ------------------------------------
+                                                                               |
+                  RANGE =       200.1.2.0 to 200.1.2.127                       |                          200.1.2.128 to 200.1.2.255
+    N/W ID or SUBNET-ID =       200.1.2.0                                    YYYYY                        200.1.2.128
+                    DBA =       200.1.2.127                                                               200.1.2.255
+
+                                                                   XXXXX = Internal Route table
+                                                                   YYYYY = External Route table
+
+The confusion is that : The N/W ID for whole network =  N/W ID of subnet A
+                        The DBA of whole network     =  DBA of subnet B
+--> This is eliminated by the route table that gets the request . The external route does not know about internal Subnets . It only sends data.
+--> If you are talking about 200.1.2.0 from outside , you mean for whole network , if you are talking from inside it is for Subnet-A .
+--> So there is  a packet 200.1.2.255
+    --> From outside : say from ecternal route table YYYYY to XXXXX , then it is sent to all hosts in the total network (for both subnets A and B)
+    --> From inside  : say a packet from subnet A , then it will be routed to Subnet B (because its DBA is 200.1.2.255)
+
+SIMILARLY FOR 4 SUBNETS :
+    A --> 0   - 63     N/W ID : 200.1.2.0
+    B --> 64  - 127    N/W ID : 200.1.2.64
+    C --> 128 - 191    N/W ID : 200.1.2.128
+    D --> 192 - 255    N/W ID : 200.1.2.192
+
+
+SUBNET MASK : [ Used by an internal route table for finding the NETWORK - ID i.e; the NETWORK the host belongs to ]
+----------------
+Subnet mask is a 32 bit number containing 0's and 1's .
+        --> 1's : Represent N/W ID & Subnet ID part
+        --> 0's : Represent HOST ID part
+
+STEP 1 : [ Create the Subnet Mask ] --> Main Network : 200.1.2.0
+         Place 1's in the N/W ID & Subnet ID part and 0's in HOST ID port.
+
+                --> For 2 subnets : 200.1.2. X _ _ _ _ _ _ _
+                    Subnet mask   : 1111 1111 . 1111 1111 . 1111 1111 . 1 000 0000  ( Since we use 1st bit only ) -- 255.255.255.128
+
+                --> For 4 subnets : 200.1.2. X X _ _ _ _ _ _
+                                  : 1111 1111 . 1111 1111 . 1111 1111 . 11 00 0000  ( Since we use 1st 2-bits ) --- 255.255.255.192
+
+STEP 2 : [ Convert IP into Binary and do an AND operation ] --> If we have 4 SUBNETS
+
+    FOR 4 SUBNETS :
+    A --> 0   - 63     N/W ID : 200.1.2.0
+    B --> 64  - 127    N/W ID : 200.1.2.64
+    C --> 128 - 191    N/W ID : 200.1.2.128
+    D --> 192 - 255    N/W ID : 200.1.2.192
+
+         EXAMPLE 1 : IP : 200.1.2.130
+            --> SUBNET MASK    :  255.255.255.192  = 1111 1111 . 1111 1111 . 1111 1111 . 1100 0000  (4 subnets)
+            --> DESTINATION IP :  200.1.2.130      = 1100 1000 . 0000 0001 . 0000 0010 . 1000 0010
+                                                  -----------------------------------------------
+                                   AND OPERATION   =  1100 1000 . 0000 0001 . 0000 0010 . 1000 0000   = 200.1.2.128 --> NETWORK ID // SUBNET ID
+                                                  ------------------------------------------------
+         EXAMPLE 2 : IP : 200.1.2.10
+            --> SUBNET MASK    :  255.255.255.192  = 1111 1111 . 1111 1111 . 1111 1111 . 1100 0000  (4 subnets)
+            --> DESTINATION IP :  200.1.2.10       = 1100 1000 . 0000 0001 . 0000 0010 . 0000 1010
+                                                   -----------------------------------------------
+                                  AND OPERATION    = 1100 1000 . 0000 0001 . 0000 0010 . 0000 0000   = 200.1.2.0 --> NETWORK ID // SUBNET ID
+                                                   ------------------------------------------------
+
+ROUTE TABLE FOR A SUBNET :
+---------------------------
+Consider the below subnets and their interfaces :
+    A --> 0   - 63     N/W ID : 200.1.2.0
+    B --> 64  - 127    N/W ID : 200.1.2.64
+    C --> 128 - 191    N/W ID : 200.1.2.128
+    D --> 192 - 255    N/W ID : 200.1.2.192
+    E --> External Router to INTERNAL ROUTER LINK
+
+    --> When a router gets a request with a DESTINATION-IP , then it will do an "AND" with SUBNET-MASK.
+    --> If the output matches with 1st NETWORK-ID , it will look at the INTERFACE and route the packet to that Interface.
+    --> If the 1st entry is a mismatch , it will search with the 2nd entry and so on ....
+    --> If none of the entries match , the default will always match , means the packet does not belong to this network .
+
+                      NETWORK-ID          SUBNET-MASK       INTERFACE
+                    -----------------------------------------------------
+                      200.1.2.0         255.255.255.192         A
+                      200.1.2.64        255.255.255.192         B
+                      200.1.2.128       255.255.255.192         C
+                      200.1.2.192       255.255.255.192         D
+                      0.0.0.0           0.0.0.0                 E    [  DEFAULT INTERFACE ]
+
+
+CLASSLESS INTER DOMAIN ROUTING (CIDR) : (No concept of CLASSES)
+------------------------------------------
+The issue with classfull addresses is that :
+    --> Even though you want 100 IP's , you have to buy a class C IP.
+    --> And if you want more than 256 , say 300 we need to buy a Class B IP , which has 2^16 IP's
+    --> There is a huge wastage in IP addresses . Hence CIDR.
+
+In CIDR , we do not have a concept of CLASS. We have BLOCK concept.
+We are assigned the exact number of IP's we request for .
+So NETWORK ID is called as BLOCK ID in CIDR.
+The disadvantage of CIDR is that we do not know the number of N/W id and HoST ID bits in the IP assigned .
+
+So to overcome this , CIDR = a.b.c.d /n [ where n = number of bits in N/W id. ]
+  20.4.56.124 / 20  --> This means there are 20 N/W ID bits and (32-20) , 12 HOST Id bits. --> Block has 2^12 IP addresses
+  10.45.56.102 / 12 --> This means there are 12 N/W ID bits and (32-12) , 20 HOST Id bits. --> Block has 2^20 IP addresses
+
+So for an IP , a.b.c.d / n -> N/W Id bits  = n
+                              HOST Id bits = 32-n
+                              IP Addresses = 2^(32-n)
+Rules for forming a CIDR :
+--> All IP's should be contiguous
+--> A block requested should always be a power of 2 - (2^n)
+    so you can not request 50 IP's , rather 64 IP's
+--> First IP address in a block should be evenly divisible by size of block. Size means the total number of IP's.
+    The reason being that such an IP has the 0's in the last octet and hence can be used an BLOCK-Id.
