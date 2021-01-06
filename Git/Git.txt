@@ -8,12 +8,12 @@ VERSION CONTROL SYSYTEMS : Is a software that helps software developers to work 
 
 GIT :
 =====
-The major diference between Git and any other VCS is the way Git thinks about its data.
+The major difference between Git and any other VCS is the way Git thinks about its data.
 Conceptually, most other systems store information as a list of file-based changes.
 These systems (CVS, Subversion, Perforce, Bazaar, and so on) think of the information they keep as a set of files and the changes made to each file over time.
 
-But in GIT gvery time you commit, or save the state of your project in Git, it basically takes a picture of what all your files look like at that moment and stores a reference to that snapshot.
-To be eficient, if files have not changed, Git doesn’t store the file again, just a link to the previous identical file it has already stored.
+But in GIT every time you commit, or save the state of your project in Git, it basically takes a picture of what all your files look like at that moment and stores a reference to that snapshot.
+To be efficient, if files have not changed, Git doesn’t store the file again, just a link to the previous identical file it has already stored.
 Git thinks about its data more like a stream of snapshots.
 
 The mechanism that Git uses for this checksumming is called a SHA-1 hash.
@@ -33,7 +33,7 @@ FILE STRUCTURE :
 GIT DIRECTORY : is where Git stores the metadata and object database for your project.
 This is the most important part of Git, and it is what is copied when you clone a repository from another computer.
 
-WORKING DIRECtory : is a single checkout of one version of the project.
+WORKING DIRECTORY : is a single checkout of one version of the project.
 These files are pulled out of the compressed database in the Git directory and placed on disk for you to use or modify
 
 STAGING AREA : is a file, generally contained in your Git directory, that stores information about what will go into your next commit.
@@ -277,7 +277,7 @@ git commit --amend -m "<new commit message>" -> to change the previous commit an
 gitk -> gitk is a graphical history viewer.
         Think of it like a powerful GUI shell over git log and git grep.
         This is the tool to use when you’re trying to find something that happened in the past, or visualize your project’s history .
-        most useful is the --all flag, which tells gitk to show commits reachable from any ref, not just HEAD. 
+        most useful is the --all flag, which tells gitk to show commits reachable from any ref, not just HEAD.
 
 
 Git doesn’t store data as a series of change sets or differences, but instead as a series of snapshots.

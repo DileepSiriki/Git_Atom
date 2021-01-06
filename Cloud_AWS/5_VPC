@@ -510,9 +510,19 @@ A DHCP server dynamically assigns an IP address and other network configuration 
 INTERNET GATEWAY :
 --------------------
 An internet gateway is a horizontally scaled, redundant, and highly available VPC component that enables communication between your VPC and the internet.
-There is a default IGW attached to your default VPC .
+There is a default IGW attached to your default VPC . An internet gateway supports IPv4 and IPv6 traffic.
+An internet gateway serves two purposes:
+  --> To provide a target in your VPC route tables for internet-routable traffic, and
+  --> To perform network address translation (NAT) for instances that have been assigned public IPv4 addresses.
+
 To use an internet gateway, attach it to your VPC and specify it as a target in your subnet route table for internet-routable IPv4 or IPv6 traffic.
 An internet gateway performs network address translation (NAT) for instances that have been assigned public IPv4 addresses.
+
+To enable communication over the internet for IPv4, your instance must have a public IPv4 addressor an Elastic IP address that's associated with a private IPv4 address on your instance.
+Your instance is only aware of the private (internal) IP address space defined within the VPC and subnet.
+The internet gateway logically provides the one-to-one NAT on behalf of your instance, so that when traffic leaves your VPC subnet and goes to the internet, the reply address field is set to the public IPv4 address or Elastic IP address of your instance, and not its private IP address.
+Conversely, traffic that's destined for the public IPv4 address or Elastic IP address of your instance has its destination address translated into the instance's private IPv4 address before the traffic is delivered to the VPC.
+
 
 NETWORK ADDRESS TRANSLATOR (NAT): [Permit internet access to Instances in a private Subnet]
 ----------------------------------
@@ -698,8 +708,49 @@ In most cases, security groups can meet your needs; however, you can also use ne
       when launching the instance, or associates the security group with           with (therefore, it provides an additional layer of defence if the security
       the instance later on                                                        group rules are too permissive)
 
+VPC FLOW LOGS :
+------------------
+VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC.
+Flow log data can be published to Amazon Cloud Watch Logs or AmazonS3.
+After you've created a flow log, you can retrieve and view its data in the chosen destination
+You can create a flow log for a VPC, a subnet, or a network interface.
+If you create a flow log for a subnet or VPC, each network interface in that subnet or VPC is monitored.
+To create a flow log, you specify:
+  •  The resource for which to create the flow log
+  •  The type of traffic to capture (accepted traffic, rejected traffic, or all traffic)
+  •  The destinations to which you want to publish the flow log data
 
+ELASTIC NETWORK INTERFACE :
+------------------------------
+An elastic network interface  is a virtual network interface that can include the following attributes:
+  •  a primary private IPv4 address
+  •  one or more secondary private IPv4 addresses
+  •  one Elastic IP address per private IPv4 address
+  •  one public IPv4 address, which can be auto-assigned to the network interface for eth0 when you launch an instance
+  •  one or more IPv6 addresses•  one or more security groups
+  •  a MAC address
+  •  a source/destination check flag•  a description
+You can create a network interface, attach it to an instance, detach it from an instance, and attach it to another instance.
+A network interface's attributes follow it as it is attached or detached from an instance and reattached to another instance.
+When you move a network interface from one instance to another, network traffic is redirected to the new instance.
+Each instance in your VPC has a default network interface (the primary network interface) that is assigned a private IPv4 address from the IPv4 address range of your VPC.
+You cannot detach a primary network interface from an instance. You can create and attach an additional network interface to any instance in your VPC.
 
+ROUTE TABLES :
+-----------------
+  •  Main route table     — The route table that automatically comes with your VPC.
+                            It controls the routing for all subnets that are not explicitly associated with any other route table.
+  •  Custom route table   — A route table that you create for your VPC.
+  •  Edge association     — A route table that you use to route inbound VPC traffic to an appliance.
+                            You associate a route table with the internet gateway or virtual private gateway, and specify the network interface of your appliance as the target for VPC traffic.
+  •  Route association    — The association between a route table and a subnet, internet gateway, or virtual private gateway.
+  •  Subnet route table   — A route table that's associated with a subnet.
+  •  Gateway route table  — A route table that's associated with an internet gateway or virtual private gateway.
+  •  Local gateway route  — A route table that's associated with an Outposts local gateway.
+  •  Destination          — The range of IP addresses where you want traffic to go (destination CIDR).
+                            For example, an external corporate network with a 172.16.0.0/12 CIDR.
+  •  Propagation          — Route propagation allows a virtual private gateway to automatically propagate routes to the route tables.
+                            This means that you don't need to manually enter VPN routes to your route tables.
 
 
 
@@ -716,6 +767,8 @@ https://www.geeksforgeeks.org/difference-between-stateless-and-stateful-protocol
 
 AWS GATEWAYS : CONNECTING CORPORATE NETWORKS : [ VIRTUAL PRIVATE GATEWAY & DIRECT CONNECT GATEWAY & TRANSIT GATEWAY ]
 -----------------------------------------------
+### We also have INTERNET GATEWAY AND EGRESS ONLY GATEWAYS apart from above
+
 You can optionally connect your VPC to your own corporate data centre using an IPsec AWS Site-to-Site VPN connection.
 A Site-to-Site VPN connection consists of two VPN tunnels between :
     --> A virtual private gateway or transit gateway on the AWS side, and a customer gateway device located in your data centre .
