@@ -1,4 +1,4 @@
-NETWORKING  TUTORIAL : --> IPv6 addresses are globally unique, and are therefore public by default.
+NETWORKING  TUTORIAL : --> IPv6 addresses are globally unique, and are therefore public by default. There is no concept of private IPV6.
 ============================
 ####VIEW NETWORKING TUTORIALS BY RAVINDRA BABU RAVULA :: https://youtu.be/UXMIxCYZu8o
 IANA -> INTERNET ASSIGNED NUMBER AUTHORITY. --> Responsible for IP address allocations.
@@ -400,6 +400,10 @@ NON-DEFAULT VPC & SUBNET : IPV4
     If a subnet doesn't have a route to the internet gateway, the subnet is known as a private subnet.
     If a subnet doesn't have a route to the internet gateway, but has its traffic routed to a virtual private gateway for a Site-to-Site VPN connection, the subnet is known as a VPN-only subnet.
     If you create more than one subnet in a VPC, the CIDR blocks of the subnets cannot overlap.
+    The smallest CIDR block you can specify is /28, and the largest is /16. Preferable in the range of 10.0.0.0/16, or 192.168.0.0/16
+    Once created , we can later add extra CIDR blocks (non-overlapping only) AWS --> VPC --> Select VPC --> Actions --> edit CIDR blocks --> add new CIDR
+    Similar steps to delete a CIDR as well. (Min 1 CIDR is required)
+    We can delete a default VPC and default subnets as well.
 
 --> The first four IP addresses and the last IP address in each subnet CIDR block are not available for you touse, and cannot be assigned to an instance.
     •10.0.0.0: Network address.
@@ -456,10 +460,16 @@ NON-DEFAULT VPC & SUBNET : IPV4
     Availability Zones are distinct locations that are engineered to be isolated from failures in other Availability Zones.
     By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location
 
+--> Your resources can communicate over IPv4, or IPv6, or both.
+    IPv4 and IPv6 communication are independent of each other.
+    You cannot disable IPv4 support for your VPC and subnets; this is the default IP addressing system for Amazon VPC and Amazon EC2.
+
 
 NON-DEFAULT VPC & SUBNET : IPV6
 --------------------------------
 Similar to creating a IPV4.
+The VPC CIDR block size is fixed at /56.
+The subnet CIDR block size is fixed at /64.
 You can connect to your instance through its IPv6 address using SSH or Remote Desktop from your home network.
 Your local computer must have an IPv6 address and must be configured to use IPv6.
 If you also want your instance to be accessible via an IPv4 address over the internet, SSH, or RDP, you must associate an Elastic IP address
@@ -472,9 +482,24 @@ The fourth entry routes all other IPv6 subnet traffic to the internetgateway.
         Destination                            Target
         ----------------------------------------------
         10.0.0.0/16                            local
-        2001:db8:1234:1a00::/56                local
+        2001:db8:1234:1a00::/56                local [ Mandatory to put both IPV4 and IPv6 as well ]
         0.0.0.0/0                              igw-id
         ::/0                                   igw-id
+
+ --> Your instance in a VPC receives an IPv6 address if an IPv6 CIDR block is associated with your VPC and your subnet, and if one of the following is true:
+        •  Your subnet is configured to automatically assign an IPv6 address to the primary network interface of an instance during launch.
+        •  You manually assign an IPv6 address to your instance during launch.
+        •  You assign an IPv6 address to your instance after launch.
+        •  You assign an IPv6 address to a network interface in the same subnet, and attach the network interface to your instance after launch.
+
+ --> When you delete a VPC using the VPC console, we also delete the following VPC components for you:
+        •  Subnets    •  Security groups   •  Network ACLs    •  Route tables
+        •  Gateway endpoints    •  Internet gateways   •  Egress-only internet gateways  •  DHCP options
+ --> Before deleting , we need to make sure we :
+        • Terminate all EC2 instances in that VPCs
+        • VPC peering Connections
+        • Interface endpoints
+        • NAT gateways
 
 
 DHCP :
@@ -491,7 +516,16 @@ An internet gateway performs network address translation (NAT) for instances tha
 
 NETWORK ADDRESS TRANSLATOR (NAT): [Permit internet access to Instances in a private Subnet]
 ----------------------------------
-Alternatively, to allow an instance in your VPC to initiate outbound connections to the internet but prevent unsolicited inbound connections from the internet,
+    HOW NAT WORKS :
+    ---------------
+    Network Address Translation (NAT) is designed for IP address conservation.
+    It enables private IP networks that use unregistered IP addresses to connect to the Internet.
+    NAT operates on a router, usually connecting two networks together, and translates the private (not globally unique) addresses in the internal network into legal addresses, before packets are forwarded to another network.
+    As part of this capability, NAT can be configured to advertise only one address [ ELASTIC IP ] for the entire network to the outside world.
+    This provides additional security by effectively hiding the entire internal network behind that address.
+    NAT offers the dual functions of security and address conservation and is typically implemented in remote-access environments.
+
+To allow an instance in your VPC to initiate outbound connections to the internet but prevent unsolicited inbound connections from the internet,
 you can use a network address translation(NAT) device for IPv4 traffic.
 NAT maps multiple private IPv4 addresses to a single public IPv4 address.
 A NAT device has an Elastic IP address and is connected to the internet through an internet gateway.
@@ -609,6 +643,10 @@ In most cases, security groups can meet your needs; however, you can also use ne
       You must modify the rules to enable inbound traffic and restrict the outbound traffic as needed .
       If there are IPV6 instances , we need to add IPV6 addresses and ranges as well .
 
+      Your VPC automatically comes with a default security group.
+      If you don't specify a different security group when you launch the instance, we associate the default security group with your instance.
+
+
             INBOUND :
             ---------
             SOURCE                       PROTOCOL  PORTS  COMMENTS
@@ -643,6 +681,22 @@ In most cases, security groups can meet your needs; however, you can also use ne
       ---------------
       The NACL table also have similar rules .
       The table has a RULE number and also ALLOW and DENY options as well.
+
+                                SECURITY GROUP                                                               NETWORK ACL
+      -------------------------------------------------------------------------------------------------------------------------------------------
+      Operates at the instance level                                               Operates at the subnet level
+
+      Supports allow rules only                                                    Supports allow rules and deny rules
+
+      Is stateful: Return traffic is automatically allowed,                        Is stateless: Return traffic must be explicitly allowed by rules
+                   regardless of any rules.
+
+      We evaluate all rules before deciding whether to allow traffic               We process rules in order, starting with the lowest numbered rule,
+                                                                                   when deciding whether to allow traffic
+
+      Applies to an instance only if someone specifies the security group          Automatically applies to all instances in the subnets that it's associated
+      when launching the instance, or associates the security group with           with (therefore, it provides an additional layer of defence if the security
+      the instance later on                                                        group rules are too permissive)
 
 
 

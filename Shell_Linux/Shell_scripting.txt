@@ -713,7 +713,7 @@ then
 fi
 
 
-For Mathematical Operators :
+For Mathematical Operators : [ we should specify -le and not le in code ]
 
 -eq ======== is equal to ======================== (5 == 6) ======== if test 5 -eq 6 ======== if expr [ 5 -eq 6 ]
 -ne ======== is not equal to ==================== 5 != 6   ======== if test 5 -ne 6 ======== if expr [ 5 -ne 6 ]

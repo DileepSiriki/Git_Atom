@@ -50,7 +50,10 @@ Your AWS account has a limit on the number of instances that you can have runnin
         When an instance is stopped, the instance performs a normal shutdown, and then transitions to a stopped state.
         All of its Amazon EBS volumes remain attached, and you can start the instance again at a later time.
         When an instance is in a stopped state, you can attach or detach Amazon EBS volumes. You can also create an AMI from the instance, and you can change the kernel, RAM disk, and instance type.
-
+        The Public IPV4 address is released and a new public IPv4 address is assigned after restarting again.
+        An IPv6 address persists when you stop and start your instance, and is released when you terminate your instance.
+        This is because there is no concept of public and private IPV6 ip's.
+        
     --> TERMINATE :
         hen an instance is terminated, the instance performs a normal shutdown.
         The root device volume is deleted by default, but any attached Amazon EBS volumes are preserved by default.
