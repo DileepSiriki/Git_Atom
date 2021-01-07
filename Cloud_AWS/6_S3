@@ -1,0 +1,159 @@
+------------------------------
+AMAZON SIMPLE STORAGE SERVICE :
+------------------------------
+
+#### S3 does not require region selection. --> GLOBAL by default
+#### But you can select the closest region while creating.
+
+Amazon Simple Storage Service (Amazon S3) is storage for the internet.
+You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web.
+Amazon S3 stores data as objects within buckets. An object is a file and any optional metadata that describes the file.
+To store a file in Amazon S3, you upload it to a bucket. When you upload a file as an object, you can set permissions on the object and any metadata.
+Buckets are containers for objects. You can have one or more buckets.
+You can control access for each bucket, deciding who can create, delete, and list objects in it.
+You can also choose the geographical Region where Amazon S3 will store the bucket and its contents and view access logs for the bucket and its objects.
+
+          Create a Bucket -> Upload a file -> Aws Adds metadata -> Aws creates an OBJECT [ file + metadata ]
+          BUCKET = OBJECT 1 + OBJECT 2 + . . . . .
+          OBJECT = FILE + METADATA
+          ## Before you can store data in Amazon S3, you must create a bucket.
+          ## You are not charged for creating a bucket. You are charged only for storing objects in the bucket and for transferring objects in and out of the bucket.
+
+S3 is used to :
+         • Backup and storage – Provide data backup and storage services for others.
+         • Application hosting – Provide services that deploy, install, and manage web applications.
+         • Media hosting – Build a redundant, scalable, and highly available infrastructure that hosts video, photo, or music uploads and downloads.
+         • Software delivery – Host your software applications that customers can download.
+
+
+BUCKET :
+-----------
+You can use buckets to group related objects in the same way that you use a directory to group files in a file system.
+By default, you can create up to 100 buckets in each of your AWS accounts.
+If you need additional buckets, you can increase your account bucket quota to a maximum of 1,000 buckets by submitting a service quota increase.
+    •  Bucket names must be between 3 and 63 characters long.
+    •  After you create the bucket, you can't change its name.
+    •  Bucket names can consist only of lowercase letters, numbers, dots (.), and hyphens (-).
+    •  Bucket names must begin and end with a letter or number.
+    •  Bucket names must not be formatted as an IP address (for example, 192.168.5.4).
+    •  Bucket names can't begin with xn-- (for buckets created after February 2020).
+    •  Bucket names must be unique within a partition.
+       --> A partition is a grouping of Regions. AWS currently has three partitions.
+           •   aws         (Standard Regions)
+           •   aws-cn      (China Regions)
+           •   aws-us-gov  (AWS GovCloud [US] Regions).
+
+CREATE A BUCKET :
+  --> Specify a unique name -->  region --> Public access --> Bucket versioning --> Encryption --> Object lock [ write once , read many , available if versioning is enabled]
+
+UPLOAD AN OBJECT :
+  --> Select Bucket --> Upload [ drag/drop or Addfiles/folders ] --> storage class -> Encryption --> ACL [ Permissions for other users / Accounts ] --> Upload
+
+ACTIONS ON OBJECTS :
+  --> Select Bucket --> Select Object / Objects --> Actions [ open , copy , move, delet, download , rename, edit meta data/tags/encryption/storage class ]
+
+DELETE BUCKET :
+  --> If you plan to delete your bucket, you must first empty your bucket, which deletes all the objects in the bucket.
+  --> Buckets --> select Bucket --> top --> first EMPTY --> then DELETE
+
+SERVER SIDE ENCRYPTION :
+  --> Amazon S3 key (SSE-S3 ) : encryption key that Amazon S3 creates, manages, and uses for you.
+  --> AWS Key Management Service key (SSE-KMS) : An encryption key protected by AWS Key Management Service (AWS KMS).
+
+--> Select a bucket and check all options , Under MANAGEMENT we can write rules to replicate bucket to another region/account etc;
+
+STORAGE CLASSES :
+-------------------
+1. FOR FREQUENTLY ACCESSED OBJECTS :
+   For performance-sensitive use cases (those that require millisecond access time) and frequently accessed data, Amazon S3 provides the following storage classes:
+
+    --> S3 STANDARD         —  The default storage class If you don't specify the storage class when you upload an object, Amazon S3 assigns the S3 Standard storage class.
+    --> REDUCED REDUNDANCY  —  The Reduced Redundancy Storage (RRS) storage class is designed for noncritical, reproducible data that can be stored with less redundancy than the S3 Standard storage class.
+
+2. FOR AUTOMATICALLY OPTIMIZING DATA WITH CHANGING PATTERNS :
+   S3 Intelligent Tiering is an Amazon S3 storage class designed to optimize storage costs by automatically moving data to the most cost-effective access tier, without operational overhead.
+   It works by storing objects in four access tiers:
+    --> two low latency access tiers optimized for frequent and infrequent access, and
+    --> two opt-in archive access tiers designed for asynchronous access that are optimized for rare access.
+
+  S3 Intelligent-Tiering works by monitoring access patterns and then moving the objects that have not been accessed in " N " consecutive days
+    --> Objects that are uploaded or transitioned to S3 Intelligent-Tiering are automatically stored in the Frequent Access tier.
+    --> 30 DAYS  : to the Infrequent Access tier.
+    --> 90 DAYS  : to the Archive Access tier,
+    --> 180 DAYS : to the Deep Archive Access tier.
+    -->If the objects are accessed later, the objects are moved back to the Frequent Access tier.
+
+3. FOR INFREQUENTLY ACCESSED OBJECTS :
+   The S3 Standard-IA and S3 One Zone-IA storage classes are designed for long-lived and infrequently accessed data. (IA stands for infrequent access.)
+   IA means  INFREQUENT ACCESS .
+   USED FOR : storing backups &  For older data that is accessed infrequently, but that still requires millisecond access.
+
+   --> S3 STANDARD-IA : Amazon S3 stores the object data redundantly across multiple geographically separated Availability Zones (similar to the S3 Standard storage class).
+       S3 Standard-IA objects are resilient to the loss of an Availability Zone.
+       This storage class offers greater availability and resiliency than the S3 One Zone-IA class.
+
+   --> S3 ONE ZONE-IA : Amazon S3 stores the object data in only one Availability Zone, which makes it less expensive than S3 Standard-IA.
+       However, the data is not resilient to the physical loss of the Availability Zone resulting from disasters, such as earthquakes and floods.
+
+4. FOR ARCHIVING OBJECTS :
+   --> S3 GLACIER : Has a minimum storage duration period of 90 days and can be accessed in as little as 1-5 minutes using expedited retrieval.
+       If you have deleted, overwritten, or transitioned to a different storage class an object before the 90-day minimum, you are charged for 90 days.
+
+  --> S3 GLACIER DEEP ARCHIVE : Has a minimum storage duration period of 180 days and a default retrieval time of 12 hours.
+      S3 Glacier Deep Archive is the lowest cost storage option in AWS
+
+==============================
+OTHER STORAGE OPTIONS IN AWS
+==============================
+
+AWS STORAGE GATEWAY :
+-----------------------
+The AWS Storage Gateway is a service connecting an on-premises software appliance with cloud-based storage to provide seamless and secure integration
+between an organization's on-premises IT environment and AWS's storage infrastructure.
+
+Storage Gateway offers three different types of gateways – File Gateway, Tape Gateway, and Volume Gateway
+that seamlessly connect on-premises applications to cloud storage, caching data locally for low-latency access.
+Your applications connect to the service through a virtual machine or gateway hardware appliance using standard storage protocols, such as NFS, SMB, and iSCSI.
+The gateway connects to AWS storage services, such as Amazon S3, Amazon S3 Glacier, Amazon S3 Glacier Deep Archive, Amazon EBS, and AWS Backup, providing storage for files, volumes, snapshots, and virtual tapes in AWS.
+
+               -----------                                                       -----------
+              |            |                         --                         |           |
+              |    AWS     | <--------------------> |  | <--------------------> |   SITE    |
+              |            |                         --                         |           |
+               -----------                                                       -----------
+                            <------------ TAKES FREQUENT SNAPSHOTS ----------->
+
+AWS SNOWBALL :
+----------------
+Snowball is a petabyte-scale data transport solution that uses secure appliances to transfer large amounts of data into and out of the AWS cloud.
+Using Snowball addresses common challenges with large-scale data transfers including high network costs, long transfer times, and security concerns.
+Snowball is limited to 50 & 80Tb, Snowball Edge is limited to 100Tb but support a clustering feature.
+
+How Pricing Works: Snowball pricing has four main cost components:
+    (1) a service fee for each job you run,
+    (2) data transfer fees from Amazon S3,
+    (3) the shipping costs to transport a Snowball appliance to and from your address, and
+    (4) the number of days you keep Snowball onsite.
+
+ELASTIC BLOCK STORE :
+-----------------------
+Its a hard drive to EC2 instances .
+Persists its data even after termination of an instance .
+EBS can be connected to only one Instance at a time .
+But one instance can be connected more than one EBS .
+
+             -----------
+            |            | <-------------------->   /_\   EBS-1
+            |    EC2     |
+            |            | <-------------------->   /_\   EBS-2
+             -----------
+
+GLACIER :
+------------
+Explained above .
+Used for data archiving.
+
+CLOUD FRONT :
+---------------
+Its a content delivery network . Similar to a cache.
+Its stores the static pages that are frequently requested buy users .
