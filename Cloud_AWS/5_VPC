@@ -5,6 +5,19 @@ IANA -> INTERNET ASSIGNED NUMBER AUTHORITY. --> Responsible for IP address alloc
 Classless - IPV4 , IPV6
 Classfull - CIDR
 
+MAC vs IP : MEDIA-ACCESS-CONTROL ADDRESS  // INTERNET PROTOCOL ADDRESS
+--------------
+Both MAC Address and IP Address are used to uniquely identify a machine on the internet.
+--> MAC address is provided by the chip
+    IP Address is provided by the Internet Service Provider.
+--> MAC identifies the device participating in a network
+    IP identifies the network / connection participating
+--> MAC is a 48-bit addresses
+    IP is a 32 bit address ipv4 and 128 bits for IPV6
+--> D8-D3-85-EB-12-E3 -> D8-D3-85 [ address of manufacturer ] EB-12-E3 [ system address ]
+    10.1.2.3 , ::/0
+
+
 STATEFUL [ FTP / TELNET ] VS STATELESS [ HTTP / DNS ] :
 ----------------------------------------------------------
 The difference between stateful vs. stateless is essentially whether or not an application or process stores data over time.
@@ -162,9 +175,17 @@ NOTE : Even the first and last host IP's are reserved in every class . --> UNICA
            --> So the first IP address is always reserved (X.0.0.0)
            --> 1st IP is used to represent the whole Network .
 
+RESERVED PRIVATE ADDRESSES :
+-----------------------------
+10.0.0.0    - 10.255.255.255
+176.16.0.0  - 172.31.255.255
+192.168.0.0 - 192.168.255.255
+
 CASTING -->
 ------------
 UNI casting    - one host to one host    --   [ DATA - SOURCE_IP - DESTINATION_IP ]  <--> [ data - 11.1.2.3 - 12.1.2.3 ]
+                 MAC address is used for unicasting similar to the static private address.
+
 BROAD casting  - one host to many hosts
 
                  LIMITED  -> sending messages from one host to all hosts in the same network
