@@ -1,0 +1,83 @@
+ELASTIC LOAD BALANCING : AWS -> EC2 -> Elastic load balancers .
+----------------------------
+It automatically distributes your incoming traffic across multiple targets, such asEC2 instances, containers, and IP addresses, in one or more Availability Zones.
+It monitors the health of its registered targets, and routes traffic only to the healthy targets.
+Elastic Load Balancing scales your load balancer as your incoming traffic changes over time.
+It can automatically scale to the vast majority of workloads.
+Using a load balancer increases the availability and fault tolerance of your applications.
+You can configure health checks, which monitor the health of the compute resources, so that the load balancer sends requests only to the healthy ones.
+Supports :
+     Application Load Balancers,
+     Network Load Balancers,
+     Gateway Load Balancers, and
+     Classic Load Balancers.
+
+WAY OF WORKING :
+-----------------
+-> A load balancer accepts incoming traffic from clients and routes requests to its registered targets (such as EC2 instances) in one or more Availability Zones.
+-> The load balancer also monitors the health of its registered targets and ensures that it routes traffic only to healthy target
+-> When the load balancer detects an unhealthy target, it stops routing traffic to that target.
+-> It then resumes routing traffic to that target when it detects that the target is healthy again.
+
+-> You configure your load balancer to accept incoming traffic by specifying one or more listeners.
+-> A listener is a process that checks for connection requests.
+-> It is configured with a protocol and port number for connections from clients to the load balancer.
+-> Likewise, it is configured with a protocol and port number for connections from the load balancer to the targets.
+
+->When you enable an Availability Zone for your load balancer, Elastic Load Balancing creates a load balancer node in the Availability Zone.
+  If you register targets in an Availability Zone but do not enable the Availability Zone, these registered targets do not receive traffic.
+
+-> If you enable multiple availability zones and If one Availability Zone becomes unavailable or has no healthy targets, the load balancer can route traffic to the healthy targets in another Availability Zone.
+   CROSS ZONE LOAD BALANCING needs to be enabled for this feature .
+   if it is disabled , only targets in that availability zone receive traffic.
+
+-> After you disable an Availability Zone, the targets in that Availability Zone remain registered with the load balancer.
+   However, even though they remain registered, the load balancer does not route traffic to them.
+
+SCENARIO :
+------------
+Consider 2 Availability Zones M and N having LOAD BALANCERS X and Y respectively.  M has 2 instances and N has 8 instances in their subnets.
+Say a client is sending traffic (100%) , Router sends 50% data to each X and Y .
+
+          CROSS ZONE LOAD BALANCING ENABLED :
+         [ since ENABLED, X and Y can route traffic equally to all 10 instances as 10% each ]
+
+                                                        client
+                                                          |
+                                                          z [ router ]
+                                                      _ _ | _ _
+                                                  X  |          | Y
+                                  M  -----------------          ----------------------------------------------------- N
+                                          A      B               C    D    E   F    G    H    I    J    K    L
+                                        10%     10%             10%  10%  10% 10%  10%  10%  10%  10%  10%  10%
+
+          -
+          CROSS ZONE LOAD BALANCING DISABLED :
+          [ since DISABLED, X and Y can not route traffic equally to all 10 instances and share their share of 50% traffic with instances in their availability zones.]
+
+                                                        client
+                                                          |
+                                                          z [ router ]
+                                                      _ _ | _ _
+                                                  X  |          | Y
+                                  M  -----------------          ----------------------------------------------------- N
+                                          A      B               C      D      E    F    G     H     I     J     K     L
+                                        25%    25%              6.25% 6.25% 6.25% 6.25% 6.25% 6.25% 6.25% 6.25% 6.25% 6.25%
+
+         ***** With Application Load Balancers, cross-zone load balancing is always enabled.
+         ***** With Network Load Balancers and Gateway Load Balancers, cross-zone load balancing is disabled by default.
+         ***** with classic load balancers , if we create it from :
+                                      API or CLI -> DISABLED
+                                      Console    -> ENABLED
+
+
+REQUEST ROUTING:
+----------------
+Before a client sends a request to your load balancer, it resolves the load balancer's domain name using a Domain Name System (DNS) server.
+The DNS entry is controlled by Amazon, because your load balancers are in the amazonaws.com domain.
+The Amazon DNS servers return one or more IP addresses to the client. These are the IP addresses of the load balancer nodes for your load balance.
+As traffic to your application changes over time, Elastic Load Balancing scales your load balancer and updates the DNS entry.
+The DNS entry also specifies the time-to-live (TTL) of 60 seconds.
+This helps ensure that the IP addresses can be remapped quickly in response to changing traffic.
+The client determines which IP address to use to send requests to the load balancer.
+The load balancer node that receives the request selects a healthy registered target and sends the request to the target using its private IP address.

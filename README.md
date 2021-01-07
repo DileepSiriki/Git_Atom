@@ -22,3 +22,15 @@ Installing atom for first time , then do below to execute scripts :
     -> select a piece of code and then press ctrl+shft+b to run  the script.
     -> ctrl+, opens settings.
     ->GITHUB and GIT settings at https://www.hongkiat.com/blog/manage-git-github-atom/
+
+ADD COLOURS TO FILE :
+------------------------
+-----------------------
+SAMPLE TEXT / HEADING :
+-----------------------
+
+Enter some sample text as shown above at the top of the file. [ also the lines as shown on top & bottom of text]
+At the bottom toolbar , check for 3rd one [ plain text / c / python ] after CRLF and UTF-8.
+If it is showing plain text , do :
+Select YAML for green and red colours.
+To not get colours , select plain text .

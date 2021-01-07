@@ -181,7 +181,7 @@ RESERVED PRIVATE ADDRESSES :
 176.16.0.0  - 172.31.255.255
 192.168.0.0 - 192.168.255.255
 
-CASTING -->
+CASTING :
 ------------
 UNI casting    - one host to one host    --   [ DATA - SOURCE_IP - DESTINATION_IP ]  <--> [ data - 11.1.2.3 - 12.1.2.3 ]
                  MAC address is used for unicasting similar to the static private address.
