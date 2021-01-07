@@ -5,6 +5,20 @@ IANA -> INTERNET ASSIGNED NUMBER AUTHORITY. --> Responsible for IP address alloc
 Classless - IPV4 , IPV6
 Classfull - CIDR
 
+STATEFUL [ FTP / TELNET ] VS STATELESS [ HTTP / DNS ] :
+----------------------------------------------------------
+The difference between stateful vs. stateless is essentially whether or not an application or process stores data over time.
+Stateful applications store data, while stateless applications do not.
+These devices in stateful connections  track source and destination IP addresses, as well as protocol or port information in an active connections table, which handles statistics of a network's active connections.
+Stateful devices also inspect the packet payload to verify that the device contains the appropriate data.
+Payload inspection might monitor a TCP handshake between devices, for example.
+Because stateful devices save the connection information, the devices can reference that data when subsequent packets pass through the same connection.
+Thus, the firewall can recognize packets that are part of existing and permitted connections, while also easily differentiating between legitimate and nonlegitimate connections.
+The saved data in the connections table continuously updates as connections form, age and expire.
+If a stateful firewall no longer sees packets passing over an established connection, after a while, that connection will time out and drop from the established connections state table.
+Additionally, if communications restarted after the connection dropped from the table, the connection would need to go through the setup process over again.
+
+
     Network-1                                           Network-2
 ---------------------                                 --------------------
 |   HOST-1          |                                 |  HOST-2          |
@@ -584,21 +598,6 @@ It prevents the internet from initiating an IPv6 connection with your instances.
 An egress-only internet gateway is stateful: it forwards traffic from the instances in the subnet to the internet or other AWS services, and then sends the response back to the instances.
 AWS --> VPC --> Egress only Gateways.
 
-VPC ENDPOINT :
-----------------
-A VPC endpoint enables you to create a private connection between your VPC and another AWS service without requiring access over the Internet.
-Uses either  a NAT device, a VPN connection, or AWS Direct Connect. Endpoints are virtual devices.
-They are horizontally scaled, redundant, and highly available VPC components that allow communication between instances in your VPC and AWS services without imposing availability risks or bandwidth constraints on your network traffic.
-
-      Type-1 :
-      Gateway type endpoints are available only for AWS services including S3 and DynamoDB.
-      These endpoints will add an entry to your route table you selected and route the traffic to the supported services through Amazon’s private network.
-
-      TYPE-2 :
-      Interface type endpoints provide private connectivity to services powered by Private Link, being AWS services, your own services or SaaS solutions, and supports connectivity over Direct Connect.
-      More AWS and SaaS solutions will be supported by these endpoints in the future. Please refer to VPC Pricing for the price of interface type endpoints.
-
-
 SECURITY GROUP :
 --------------------
 A security group acts as a virtual firewall to control the traffic for its associated instances.
@@ -753,41 +752,130 @@ ROUTE TABLES :
                             This means that you don't need to manually enter VPN routes to your route tables.
 
 
+VPC ENDPOINT :
+----------------
+A virtual device that enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by AWS Private Link.
+It does not require an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
+Instances in your VPC do not require public IP addresses to communicate with resources in the service.
+Traffic between your VPC and the other service does not leave the Amazon network.
+
+VPC -> Endpoints -> create an end point -> service category -> service names
+In service names , in the TYPE field, we have interface and gateway endpoint selections .
+we have gateway only for S3 and DYNAMO DB. [ check the TYPE filed column ]
+
+  • VPC endpoint — The entry point in your VPC that enables you to connect privately to a service.
+    The following are the different types of VPC endpoints. You create the type of VPC endpoint required by the supported service.
+      •  Gateway endpoint
+      •  Interface endpoint
+      •  Gateway Load Balancer endpoint
+  •  Endpoint service — Your own application or service in your VPC. Other AWS principals can create an endpoint from their VPC to your endpoint service.
+  •  AWS Private Link — A technology that provides private connectivity between VPCs and services  by using private IP addresses
+
+      TYPE-1 : INTERFACE ENDPOINT --> AWS PRIVATE LINK
+      -------------------------------
+      An interface endpoint is an elastic network interface with a private IP address from the IP address range of your subnet.
+      It serves as an entry point for traffic destined to a supported AWS service or a VPC endpoint service. Interface endpoints are powered by AWS Private Link
+      Interface type endpoints provide private connectivity to services powered by Private Link, being AWS services, your own services or SaaS solutions, and supports connectivity over Direct Connect.
+      Interface endpoints are typically accessed using the public or private DNS name associated with the service,
+         These services include :
+              some AWS services  --> AWS EC2 , etc;
+              services hosted by other AWS customers
+              Partners in their own VPCs (referred to as endpoint services), --> to an already created endpoint
+              supported AWS Marketplace Partner
+        The owner of the service is the service provider, and you, as the principal creating the interface endpoint, are the service consumer.
+        VPC -> Endpoints -> create an end point -> service category
+
+        Type-2 : GATEWAY LOAD BALANCER ENDPOINT --> AWS PRIVATE LINK
+        ----------------------------------------
+        A Gateway Load Balancer endpoint enables you to intercept traffic and route it to a service that you 've configured using Gateway Load Balancers, for example, for security inspection.
+        The owner of the service is the service provider, and you, as the principal creating the Gateway Load Balancer endpoint, are the service consumer.
 
 
+        TYPE-3 : GATEWAY VPC ENDPOINTS
+        ---------------------------------
+        Gateway type endpoints are available only for AWS services including S3 and DynamoDB.
+        These endpoints will add an entry to your route table you selected and route the traffic to the supported services through Amazon’s private network.
+        gateway endpoints and Gateway Load Balancer endpoints serve as a target for a route in your route table for traffic destined for the service.
+
+AWS VPN CONNECTIONS :
+-------------------------
+You can connect your Amazon VPC to remote networks and users using the following VPN connectivity options.
+By default, instances that you launch into an Amazon VPC can't communicate with your own (remote) network.
+You can enable access to your remote network from your VPC by creating an AWS Site-to-Site VPN (Site-to-Site VPN) connection, and configuring routing to pass traffic through the connection.
+You can create an IPsec VPN connection between your VPC and your remote network.
+On the AWS side of the Site-to-Site VPN connection, a virtual private gateway or transit gateway provides two VPN endpoints (tunnels)for automatic failover.
+You configure your customer gateway device on the remote side of the Site-to-Site VPN connection.
+
+The following are the key concepts for Site-to-Site VPN:
+
+  VPN connection          : A secure connection between your on-premises equipment and your VPCs.
+  VPN tunnel              : An encrypted link where data can pass from the customer network to or from AWS.
+  Customer gateway        : An AWS resource which provides information to AWS about your customer gateway device.
+  Customer gateway device : A physical device or software application on your side of the Site-to-Site VPN connection.
+  Virtual private gateway : The VPN concentrator on the Amazon side of the Site-to-Site VPN connection.
+                            You use a virtual private gateway or a transit gateway as the gateway for the Amazon side of the Site-to-Site VPN connection.
+  Transit gateway         : A transit hub that can be used to interconnect your VPCs and on-premises networks.
+                            You use a transit gateway or virtual private gateway as the gateway for the Amazon side of the Site-to-Site VPN connection.
 
 
+DIRECT CONNECT :
+----------------
+AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard Ethernet fibre-optic cable.
+One end of the cable is connected to your router, the other to an AWS Direct Connect router.
+With this connection, you can create virtual interfaces directly to public AWS services (for example, to Amazon S3) or to Amazon VPC, bypassing internet service providers in your network path.
+An AWS Direct Connect location provides access to AWS in the Region with which it is associated.
+You can use a single connection in a public Region or AWS GovCloud (US) to access public AWS services in all other public Regions.
+
+The following are the key components that you use for AWS Direct Connect:
+    Connections        :  Create a connection in an AWS Direct Connect location to establish a network connection from your premises to an AWS Region.
+    Virtual interfaces :  Create a virtual interface to enable access to AWS services.
+                          A public virtual interface enables access to public services, such as Amazon S3.
+                          A private virtual interface enables access to your VPC.
 
 
+      VIRTUAL PRIVATE GATEWAY <----------------- VPN CONNECTION ---------------> CUSTOMER GATEWAY
+           or TRANSIT GATEWAY                                                    for CORPORATE NETWORK
 
-https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-gateways-intro.html
-https://aws.amazon.com/directconnect/
-https://searchnetworking.techtarget.com/answer/What-does-stateful-vs-stateless-mean-in-a-networking-context
-https://www.geeksforgeeks.org/difference-between-stateless-and-stateful-protocol/
 
 AWS GATEWAYS : CONNECTING CORPORATE NETWORKS : [ VIRTUAL PRIVATE GATEWAY & DIRECT CONNECT GATEWAY & TRANSIT GATEWAY ]
 -----------------------------------------------
-### We also have INTERNET GATEWAY AND EGRESS ONLY GATEWAYS apart from above
+### We also have INTERNET GATEWAY AND EGRESS ONLY GATEWAYS apart from above , used to connect to open internet .
+### You can optionally connect your VPC to your own corporate data centre using an IPsec AWS Site-to-Site VPN connection.
 
-You can optionally connect your VPC to your own corporate data centre using an IPsec AWS Site-to-Site VPN connection.
 A Site-to-Site VPN connection consists of two VPN tunnels between :
     --> A virtual private gateway or transit gateway on the AWS side, and a customer gateway device located in your data centre .
     --> A customer gateway device is a physical device or software appliance that you configure on your side of the Site-to-Site VPN connection.
 
-                    -----------                                                      -----------
+                    -----------                                                       -----------
                    |            |                         --                         |           |
                    |    AWS     | <--------------------> |  | <--------------------> |   SITE    |
                    |            |                         --                         |           |
                     -----------                                                       -----------
 
-          VIRTUAL PRIVATE GATEWAY <----------------- VPN CONNECTION ---------------> CUSTOMER GATEWAY
-               or TRANSIT GATEWAY                                                    for CORPORATE NETWORK
 
+    DIRECT CONNECT GATEWAY :   [2017]    [ CHECK DIAGRAM : 20 ]
+    -------------------------------------------
+    It uses the concept of DIRECT CONNECT .
+    A Direct Connect gateway is a globally available resource. You can create the Direct Connect gateway in any Region and access it from all other Regions.
 
-        VIRTUAL PRIVATE GATEWAY : VERSION -1
+    In the diagram-20 : [Across same account]
+    The Direct Connect gateway enables you to use your AWS Direct Connect connection in the US East (N. Virginia) Region to access VPCs in your account in both the US East (N. Virginia) and US West (N. California) Regions.
+    Each VPC has a virtual private gateway that connects to the Direct Connect gateway using a virtual private gateway association.
+    The Direct Connect gateway uses a private virtual interface for the connection to the AWS Direct Connect location.
+    There is an AWS Direct Connect connection from the location to the customer data center.
+
+    In the duagram-21 : [Across different accounts]
+    A Direct Connect gateway owner (Account Z)  owns the Direct Connect gateway.
+    Account A and Account B want to use the Direct Connect gateway.
+    Account A and Account B each send an association proposal to Account Z.
+    Account Z accepts the association proposals and can optionally update the prefixes that are allowed from Account A's virtual private gateway or Account B's virtual private gateway.
+    After Account Z accepts the proposals, Account A and Account B can route traffic from their virtual private gateway to the Direct Connect gateway.
+    Account Z also owns the routing to the customers because Account Z owns the gateway.
+
+    It uses either of the following :
+
+        VIRTUAL PRIVATE GATEWAY :
         ------------------------------------
-        ### Multiple VPCs in the same region sharing the same Direct Connect.
-
         You can optionally connect your VPC to your own corporate data centre using an IPsec AWS Site-to-Site VPN connection,
         Instead of an Internet Gateway , we use a VIRTUAL PRIVATE GATWAY.
         A Site-to-Site VPN connection consists of two VPN tunnels between a virtual private gateway or transit gateway on the AWS side, and a customer gateway device located in your data centre.
@@ -804,14 +892,9 @@ A Site-to-Site VPN connection consists of two VPN tunnels between :
         In a nutshell, A Virtual Private Gateway is a way for you to land in your cloud when creating a VPN tunnel.
         You can create up to ten VPN tunnels to the exterior, Non-VPC networking locations per VPG interfaced and each of these tunnels will be connected using the IPSec protocol.
 
-        DIRECT CONNECT GATEWAY : VERSION -2 [2017]
-        -------------------------------------------
-        ### Multiple VPCs spread across multiple regions sharing the same Direct Connect.
 
-
-        TRANSIT GATEWAY : VERSION -3 [2019]
+        TRANSIT GATEWAY :
         ------------------------------------
-        ### Multiple VPCs in the same region, spread across different AWS accounts using the same Direct Connect.
         A transit gateway is a network transit hub that you can use to interconnect your virtual private clouds (VPCs) and on-premises networks.
         A transit gateway acts as a Regional virtual router for traffic flowing between your virtual private clouds (VPCs) and on-premises networks.
         A transit gateway scales elastically based on the volume of network traffic.
@@ -824,6 +907,18 @@ A Site-to-Site VPN connection consists of two VPN tunnels between :
 
         Create it from -> VPC -> Transit gateway -> Attach to VPC using Transit Gateway Attachments tab
         Now edit the TRANSIT GATEWAY ROUTE tables to connect to EC2 in other VPC .
+
+        Diagram -22 -> Across single account ->
+            Enables you to create a single connection to your Direct Connect connection that all of your VPCs can use.
+
+        Diagram -23 -> Across multiple accounts ->
+            Consider this scenario of a Direct Connect gateway owner (Account Z) who owns the Direct Connect gateway.
+            Account A owns the transit gateway and wants to use the Direct Connect gateway.
+            Account Z accepts the association proposals and can optionally update the prefixes that are allowed from Account A's transit gateway.
+            After Account Z accepts the proposals, the VPCs attached to the transit gateway can route traffic from the transit gateway to the Direct Connect gateway.
+            Account Z also owns the routing to the customers because Account Z owns the gateway
+
+
 
 
 PAGE-7
