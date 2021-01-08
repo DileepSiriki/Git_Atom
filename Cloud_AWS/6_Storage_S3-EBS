@@ -158,7 +158,27 @@ How Pricing Works: Snowball pricing has four main cost components:
     (3) the shipping costs to transport a Snowball appliance to and from your address, and
     (4) the number of days you keep Snowball onsite.
 
-ELASTIC BLOCK STORE :
+
+GLACIER :
+------------
+Explained above .
+Used for data archiving.
+
+CLOUD FRONT :
+---------------
+Its a content delivery network . Similar to a cache.
+Its stores the static pages that are frequently requested buy users .
+
+Amazon EC2 instance store :
+Many instances can access storage from disks that are physically attached to the host computer.
+Thisdisk storage is referred to as instance store.
+Instance store provides temporary block-level storage forinstances.
+The data on an instance store volume persists only during the life of the associated instance.
+if you stop, hibernate, or terminate an instance, any data on instance store volumes is lost.
+
+
+
+ELASTIC BLOCK STORE : AWS -> EC2 -> Elastic Block Store -> create a volume -> if you specify snapshot , you create EBS from a snapshot else a normal EBS .
 -----------------------
 Its a hard drive to EC2 instances .
 Persists its data even after termination of an instance .
@@ -170,13 +190,85 @@ But one instance can be connected more than one EBS .
             |    EC2     |
             |            | <-------------------->   /_\   EBS-2
              -----------
+Amazon EBS provides durable, block-level storage volumes that you can attach to a running instance.
+You can use Amazon EBS as a primary storage device for data that requires frequent and granularupdates.
+For example, Amazon EBS is the recommended storage option when you run a database on aninstance.
+The volume persists independently from the running life of an instance. After an EBS volumeis attached to an instance, you can use it like any other physical hard drive.
+You can also detach an EBS volume from oneinstance and attach it to another instance. Y
+ou can dynamically change the configuration of a volumeattached to an instance.
+EBS volumes can also be created as encrypted volumes using the Amazon EBSencryption feature.
+To keep a backup copy of your data, you can create a snapshot of an EBS volume, which is stored inAmazon S3.
 
-GLACIER :
-------------
-Explained above .
-Used for data archiving.
+EBS volumes are created in a specific Availability Zone, and can then be attached to any instancesin that same Availability Zone.
+To make a volume available outside of the Availability Zone, you cancreate a snapshot and restore that snapshot to a new volume anywhere in that Region.
+You can copysnapshots to other Regions and then restore them to new volumes there.
+You can increase the volumes of an instance at any time by attaching more EBS to it.
 
-CLOUD FRONT :
----------------
-Its a content delivery network . Similar to a cache.
-Its stores the static pages that are frequently requested buy users .
+        Amazon EBS provides the following volume types: DEPENDS ON IPOS / THROUGHPUT / HDD / SDD
+        A hard disk drive (HDD) is an old-school storage device that uses mechanical platters and a moving read/write head to access data.
+        A solid-state drive (SSD) is a newer, faster type of device that stores data on instantly-accessible memory chips.
+
+        IOPS measures the number of read and write operations per second, while throughput measures the number of bits read or written per second.
+        You have 4 buckets (Disk blocks) of the same size that you want to fill or empty water.
+        You'll be using a jug to transfer the water into the buckets. Now your question will be ,
+            At a given time (per second), how many jugs of water can you pour(write) or withdraw (read)? This is IOPS
+            At a given time (per second) what's the amount(bit, kb, mb, ect) of water the jug can transfer into/out of the bucket continuously? This is throughput.
+
+          SOLID STATE DRIVES SSD : costly
+
+              General Purpose SSD :
+                General Purpose SSD volumes (gp2 and gp3) balance price and performance for a wide variety oftransactional workloads.
+                These volumes are ideal for a use cases such as boot volumes, medium-size single instance databases, and development and test environments.
+
+              Provisioned IOPS SSD :
+                Provides high performance for mission-critical, low-latency, or high-throughput workloads.
+                Provisioned IOPS SSD volumes (io1 and io2) support up to 64,000 IOPS and 1,000 MiB/s ofthroughput.
+                This enables you to predictably scale to tens of thousands of IOPS per EC2 instance.
+
+         HARD DISK DRIVES HDD: Cheap
+
+              Throughput Optimized HDD :
+                Throughput Optimized HDD volumes (st1) provide low-cost magnetic storage that defines performance in terms of throughput rather than IOPS.
+                These volumes are ideal for large, sequential workloads such as Amazon EMR, ETL, data warehouses, and log processing.
+
+              Cold HDD :
+                Cold HDD volumes (sc1) provide low-cost magnetic storage that defines performance in terms ofthroughput rather than IOPS.
+                These volumes are ideal for large, sequential, cold-data workloads.
+                If you require infrequent access to your data and are looking to save costs, these volumes provides inexpensive block storage.
+
+        USES OF EBS :
+          Data availability :
+             These are  automatically replicated within its Availability Zone to prevent dataloss due to failure of any single hardware component.
+             You can attach an EBS volume to any EC2 instancein the same Availability Zone.
+
+          Data persistence : --> Delete on Termination checkbox
+            EBS volumes that are attached to a running instance can automatically detach from the instance withtheir data intact when the instance is terminated.
+            if you uncheck the Delete on Termination checkbox when you configure EBS volumes for your instance on the EC2 console
+
+          Data encryption :
+            Amazon EBS encryption uses AWS Key Management Service (AWS KMS) .
+            The snapshots created from this encrypted EBS is also encrypted.
+
+          Snapshots : use Amazon Data Lifecycle Manager 
+            Ebs -> snapshots -> create ->
+                                          either from a volume  --> Single volume snapshot
+                                          or instance --> Multi volume snapshot [ as instance contain more than 1 volume attached ]
+
+            Thevolume does not need to be attached to a running instance in order to take a snapshot.
+            Snapshots of encrypted EBS volumes are automatically encrypted.
+            When you create a new volume from a snapshot, it's an exact copy of the original volume at the timethe snapshot was taken.
+            Snapshots are incremental backups, meaning that only the blocks on the volume that have changedafter your most recent snapshot are saved.
+            If you have a volume with 100 GiB of data, but only 5 GiB ofdata have changed since your last snapshot, only the 5 GiB of modified data is written to Amazon S3.
+
+          Flexibility : ebs -> select a volume-> actions -> attach/detach
+            EBS volumes support live configuration changes while in production. You can modify volume type,volume size, and IOPS capacity without service interruptions.
+
+      Amazon Data Lifecycle Manager : SNAPSHOTS AUTOMATION  AWS -> Ebs -> life cycle manager
+
+        You can use Amazon Data Lifecycle Manager to automate the creation, retention, and deletion of EBSsnapshots and EBS-backed AMIs.
+        When you automate snapshot and AMI management, it helps you to ,
+          •Protect valuable data by enforcing a regular backup schedule.
+          •Create standardized AMIs that can be refreshed at regular intervals.
+          •Retain backups as required by auditors or internal compliance.
+          •Reduce storage costs by deleting outdated backups.
+          •Create disaster recovery backup policies that back up data to isolated accounts.

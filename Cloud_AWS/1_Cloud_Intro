@@ -174,3 +174,43 @@ FIVE PILLARS OF AWS :
 5. COST OPTIMIZATION : -> AWS Cost Explorer ,  AWS Cost & Usage Report
   Focuses on achieving business outcomes while minimizing costs.
   OpEx is an ongoing pay-as-you-go model whereas CapEx is a one-time purchase model.
+
+
+AWS ACCEPTABLE USE POLICY :
+----------------------------
+This Acceptable Use Policy (this “Policy”) describes prohibited uses of the web services offered by Amazon Web Services, Inc. and its affiliates (the “Services”) and the website located at http://aws.amazon.com (the “AWS Site”).
+The examples described in this Policy are not exhaustive.
+We may modify this Policy at any time by posting a revised version on the AWS Site. By using the Services or accessing the AWS Site, you agree to the latest version of this Policy.
+If you violate the Policy or authorize or help others to do so, we may suspend or terminate your use of the Services.
+
+    No Illegal, Harmful, or Offensive Use or Content
+    No Security Violations
+    No Network Abuse
+    No E-Mail or Other Message Abuse
+
+AWS SHARED RESPONSIBILITY MODEL :
+----------------------------------
+Security and Compliance is a shared responsibility between AWS and the customer.
+This shared model can help relieve the customer’s operational burden as AWS operates, manages and controls the components from the host operating system and virtualization layer down to the physical security of the facilities in which the service operates.
+The customer assumes responsibility and management of the guest operating system (including updates and security patches), other associated application software as well as the configuration of the AWS provided security group firewall.
+Whereas the host operating system is software installed on a computer to interact with the hardware, the guest operating system is software installed onto and running on the virtual machine.
+Customers should carefully consider the services they choose as their responsibilities vary depending on the services used, the integration of those services into their IT environment, and applicable laws and regulations.
+The nature of this shared responsibility also provides the flexibility and customer control that permits the deployment.
+As shown in the chart below, this differentiation of responsibility is commonly referred to as Security “of” the Cloud versus Security “in” the Cloud.
+
+AWS - Security of the cloud
+      operates, manages and controls the components from the host operating system and virtualization layer down to the physical security of the AWS  facilities.
+      This infrastructure consisting  of the hardware, software, networking, and facilities that run AWS Cloud services.
+
+CUSTOMER - Security in the cloud
+           responsibility and management of the guest operating system (including updates and security patches)
+           application software and firewall configurations
+           Platforms , Applications , IAM , OS , Network and Firewall configuration
+           client side and server side data encryption , networking traffic encryption and its integrity
+
+AWS & CUSTOMER or BOTH :
+        Inherited Controls : Physical and Environmental controls
+        Shared Controls    :
+           Patch Management – AWS is responsible for patching and fixing flaws within the infrastructure, but customers are responsible for patching their    guest OS and applications.
+           Configuration Management – AWS maintains the configuration of its infrastructure devices, but a customer is responsible for configuring their own guest operating systems, databases, and applications.
+           Awareness & Training - AWS trains AWS employees, but a customer must train their own employees.
