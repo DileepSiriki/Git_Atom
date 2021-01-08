@@ -1,0 +1,102 @@
+ROUTE 53 :
+-----------
+Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web service.
+You can use Route 53 to perform three main functions in any combination: domain registration, DNS routing, and health checking.
+
+1. Register domain names
+--> Your website needs a name, such as example.com. Route 53 lets you register a name for your website or web application, known as a domain name.
+    If you create a website , you need to assign it a domain name so that users use it to reach your site.
+    So You choose a domain name and confirm that it's available, meaning that no one else has registered the domain name that you want.
+    If the domain name you want is already in use, you can try other names or try changing only the top-level domain, such as .com, to another top-level domain, such as .net etc;
+    When you register a domain with Route 53, :
+    --> •  Creates a hosted zone that has the same name as your domain.
+    --> •  Assigns a set of four name servers to the hosted zone , name servers tell users where to find your website content. [ s3 or webserver ]
+    --> •  Gets the name servers from the hosted zone and adds them to the domain.
+    At the end of the registration process, we send your information to the registrar for the domain. The domain registrar is either Amazon Registrar, Inc. or our registrar associate, Gandi .
+    The registrar sends your information to the registry for the domain. A registry is a company that sells domain registrations for one or more top-level domains, such as .com.
+    The registry stores the information about your domain in their own database and also stores some of the information in the public WHOIS database.
+
+
+2. Route internet traffic to the resources for your domain
+--> When a user opens a web browser and enters your domain name (example.com) or subdomain name(acme.example.com) in the address bar, Route 53 helps connect the browser with your website orweb application.
+    When the user enters an DNS name for you website ROUTE 53 translates it to a valid IP address
+    To route traffic to your resources, you create records, also known as resource record sets, in your hosted zone. Each record includes information about how you want to route traffic for your domain,
+
+
+3. Check the health of your resources :
+--> Route 53 sends automated requests over the internet to a resource, such as a web server, to verify that it's reachable, available, and functional.
+    You also can choose to receive notifications when a resource becomes unavailable and choose to route internet traffic away from unhealthy resources.
+    You create a health check and specify values that define how you want the health check to work, such as :
+      --> The IP address or domain name of the endpoint, such as a web server, that you want Route 53 to monitor.
+      --> The protocol that you want Amazon Route 53 to use to perform the check: HTTP, HTTPS, or TCP.
+      --> How often you want Route 53 to send a request to the endpoint. This is the request interval.
+      --> How many consecutive times the endpoint must fail to respond to requests before Route 53considers it unhealthy. This is the failure threshold
+      --> Optionally, how you want to be notified when Route 53 detects that the endpoint is unhealthy.
+      -->  Route 53 automatically sets a CloudWatch alarm. CloudWatch uses Amazon SNS to notify users that an endpoint is unhealthy.
+
+    Route 53 starts to send requests to the endpoint at the interval that you specified in the health check.
+    If the endpoint responds to the requests, Route 53 considers the endpoint to be healthy
+    If the endpoint doesn't respond to a request, Route 53 starts to count the number of consecutive requests it considers as unhealthy.
+    If Route 53 considers the endpoint unhealthy and if you configured notification for the health check, Route 53 notifies CloudWatch.
+    If you configured notification for the health check, CloudWatch triggers an alarm and uses AmazonSNS to send notification to the specified recipients
+
+
+DNS RESOLUTION :
+----------------
+      1--> User opens browser and enters the web address.
+      2--> The request for www.example.com is routed to a DNS resolver, which is typically managed by the user's internet service provider (ISP) or the WIFI provider.
+      3--> The DNS resolver for the ISP forwards the request for www.example.com to a DNS root name server.
+      4--> The DNS resolver forwards the request for www.example.com again, this time to one of the TLD nameservers for .com domains.
+           The name server for .com domains responds to the request with the names of the four Route 53 name servers that are associated with the example.com domain.
+           The DNS resolver caches (stores) the four Route 53 name servers.
+      5--> The DNS resolver chooses a Route 53 name server and forwards the request for www.example.com to that name server.
+      6--> The Route 53 name server looks in the example.com hosted zone for the www.example.com record, gets the associated value, such as the IP address for a web server, 192.0.2.44.
+           It returns the IP address to the DNS resolver.
+      7--> The DNS resolver finally has the IP address that the user needs. The resolver returns that value to the web browser.
+           The DNS resolver also caches the IP address for example.com for an amount of time that you specify so that it can respond more quickly the next ti
+      8--> The web browser sends a request for www.example.com to the IP address that it got from the DNS resolver.
+      9--> The web server or other resource at 192.0.2.44 returns the web page for www.example.com to the web browser.
+
+
+                             ------    3.WWW.EXAMPLE.COM             ---
+        2.WWW.EXAMPLE.COM   |  D   |  ----------------------------> |   | -->  DNA ROOT NAME SERVER
+                 ---------->|  N   |  <---------------------------- |   |
+                |           |  S   |   GO TO NAMESERVER FOR .COM     ---
+                |           |      |
+                |           |  R   |
+                |           |  E   |   4.WWW.EXAMPLE.COM             ---
+          WEBSERVER         |  S   | ---------------------------->  |   | -->  NAME SERVER FOR .COM TLD [ Top level Domain ]
+       -------------        |  O   | <----------------------------  |   |
+      |  1. USER    |       |  L   |   GO TO ROUTE53 NAME SERVER     ---
+       -------------        |  V   |
+        ^   |    ^          |  E   |
+        |   |    |          |  R   |   5.WWW.EXAMPLE.COM             ---
+        |   |    |          |      | ---------------------------->  |   | -->  AMAZON ROUTE53 NAME SERVER
+        |   |    |          |      | <----------------------------  |   |
+        |   |    L ---------|      |   6. 192.0.0.22                 ---
+        |   | 7. 192.0.0.22  ------
+        |   |
+        |   |         8. HTTPS://WWW.EXAMPLE.COM                     ---
+        |   L-----------------------------------------------------> |   | -->  WEBSERVER FOR WWW.EXAMPLE.COM -- 192.0.0.22
+        L --------------------------------------------------------- |   |
+                      9. WEB PAGE FOR WWW.EXAMPLE.COM                ---
+
+
+DNS CONCEPTS :
+---------------
+DOMAIN NAME       : The name, such as example.com, that a user types in the address bar of a web browser to access a website or a web application.
+DOMAIN REGISTRAR  : A company that is accredited by ICANN (Internet Corporation for Assigned Names and Numbers) to process domain registrations for specific top-level domains (TLDs)
+DOMAIN REGISTRY   : A company that owns the right to sell domains that have a specific top-level domain. For example, VeriSign is the registry that owns the right to sell domains that have a .com TLD
+TOP LEVEL DOMAIN  : The last part of a domain name, such as .com, .org, or .ninja.
+HOSTED ZONE       : A container for records, which include information about how you want to route traffic for a domain(such as example.com) and all of its subdomains (such as www.example.com, retail.example.com, and seattle.accounting.example.com).
+                    A hosted zone has the same name as the corresponding domain.
+                    For example , www.example.com 's record might have info about the IP address and another record abut its mail server etc;
+NAME SERVER       : Servers in the Domain Name System (DNS) that help to translate domain names into the IP addresses that computers use to communicate with one another.
+SUB DOMAIN        : A domain name that has one or more labels prepended to the registered domain name.
+                    For example, if you register the domain name example.com, then www.example.com is a sub domain.
+                    If you create the hosted zone accounting.example.com for the example.com domain, thenseattle.accounting.example.com is a subdomain.
+
+DNS NAMES :
+------------
+Domain names (including the names of domains, hosted zones, and records) consist of a series of labels separated by dots.
+Each label can be up to 63 bytes long. The total length of a domain name cannot exceed 255 bytes, including the dot

@@ -857,6 +857,12 @@ The following are the key components that you use for AWS Direct Connect:
       VIRTUAL PRIVATE GATEWAY <----------------- VPN CONNECTION ---------------> CUSTOMER GATEWAY
            or TRANSIT GATEWAY                                                    for CORPORATE NETWORK
 
+Accessing public services in a remote Region :
+To access public resources in a remote Region, you must set up a public virtual interface and establisha Border Gateway Protocol (BGP) session.
+
+Accessing VPCs in a remote Region :
+You can create a Direct Connect gateway in any public Region. Use it to connect your AWS Direct Connectconnection over a private virtual interface to VPCs in your account that are located in different Regionsor to a transit gateway.
+
 
 AWS GATEWAYS : CONNECTING CORPORATE NETWORKS : [ VIRTUAL PRIVATE GATEWAY & DIRECT CONNECT GATEWAY & TRANSIT GATEWAY ]
 -----------------------------------------------

@@ -125,6 +125,60 @@ STORAGE CLASSES :
   --> S3 GLACIER DEEP ARCHIVE : Has a minimum storage duration period of 180 days and a default retrieval time of 12 hours.
       S3 Glacier Deep Archive is the lowest cost storage option in AWS
 
+
+STATIC WEBSITE HOSTING :
+-------------------------
+STEP 1 : In route53 , register for a domain , say example.com
+
+STEP 2 :
+
+Create a Bucket : example.com
+
+  Bucket name should be similar to the domain name as in example.common
+  Select the bucket and then check for PROPERTIES .
+  Move to bottom of the page and enable static website hosting .
+  --> IN the options , select  HOST A STATIC WEBSITE
+  We should make this bucket public.
+  Specify the index and error pages .
+  You'll create an HTML file and upload it to your bucket for an index page.
+
+Create another Bucket : www.example.com
+
+  If you also want your users to be able to use www.your-domain-name, such as www.example.com, toaccess your sample website, you create a second S3 bucket.
+  You then configure the second bucket toroute traffic to the first bucket.
+
+  Once the bucket www.example.com is created ,
+  go to permissions -> enable static website HOSTING
+  --> IN the options , select REDIRECT REQUESTS FOR AN OBJECT
+  Enter the target bucket [above bucket example.com]
+  Select http protocol as S3 do not support https.
+
+STEP 3:
+  create a html page and save it as index.html .
+  upload the page into the bucket.
+
+STEP 4 :
+  Route DNS traffic for your domain to yourwebsite bucket
+  Goto Route53 -> Hosted zones -> if you register a domain , a hosted zone is created automatically.
+  chose your domain in hosted zones
+  chose create record  -> record contains information about how you want to route traffic for one domain
+  Choose Simple routing and choose Next
+  Choose Define simple record
+    --> specify RECORD NAME --> Accept the default value, which is the name of your hostedzone and your domain. This will route internet traffic to the bucket that has the same name asyour domain.
+    --> Repeat the process for www.example.com and other sub domains.
+    --> specify VALUE/ROUTE to Choose Alias to S3 website endpoint, then choose the AWS Region that the bucket was createdin
+    For the first record that you create, choose the bucket that has the same name as your hostedzone and your domain.
+    For the second record, choose the bucket that has the name www.your-domain-name.
+    --> specify RECORD TYPE --> Accept the default value of A – Routes traffic to an IPv4 address and some AWS resources
+  Chose define simple records
+  chose create record.
+
+  STEP 5 :
+    To verify that the website is working correctly, open a web browser and browse to the following URLs:
+      •  http://your-domain-name – Displays the index document in the your-domain-name bucket
+      •  http://www.your-domain-name – Redirects your request to the your-domain-name bucket
+
+
 ==============================
 OTHER STORAGE OPTIONS IN AWS
 ==============================
@@ -249,7 +303,7 @@ You can increase the volumes of an instance at any time by attaching more EBS to
             Amazon EBS encryption uses AWS Key Management Service (AWS KMS) .
             The snapshots created from this encrypted EBS is also encrypted.
 
-          Snapshots : use Amazon Data Lifecycle Manager 
+          Snapshots : use Amazon Data Lifecycle Manager
             Ebs -> snapshots -> create ->
                                           either from a volume  --> Single volume snapshot
                                           or instance --> Multi volume snapshot [ as instance contain more than 1 volume attached ]
