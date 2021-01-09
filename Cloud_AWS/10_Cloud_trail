@@ -1,0 +1,77 @@
+CLOUD TRAIL :
+----------------
+AWS CloudTrail is an AWS service that helps you enable governance, compliance, and operational and risk auditing of your AWS account.
+Actions taken by a user, role, or an AWS service are recorded as events in CloudTrail.
+Events include actions taken in the AWS Management Console, AWS Command Line Interface, and AWS SDKs and APIs.
+You can use CloudTrail to view, search, download, archive, analyse, and respond to account activity across your AWS infrastructure.
+You can identify who or what took which action, what resources were acted upon, when the event occurred, and other details to help you analyse and respond to activity in your AWS account.
+
+DEFAULT : CLOUD TRAIL EVENT  - Only for 90 days
+---------------------------------
+--> By default you can  view events in the CloudTrail console by going to Event history.
+--> Event history allows you to view, search, and download the past 90 days of activity in your AWS account.
+--> While the events provided in Event history in the CloudTrail console are useful for reviewing recent activity, they are limited to recent activity, and they do not include all possible events that canbe recorded by CloudTrail.
+--> Additionally, your view of events in the console is limited to the AWS Region where you are signed in.
+
+CLOUD TRAIL  : - For long term record
+------------------------------------------
+--> In addition, you can create a CloudTrail trail to archive, analyse, and respond to changes in your AWS resources.
+--> A trail is a configuration that enables delivery of events to an Amazon S3 bucket that you specify
+--> A trail that applies to all regions :  records events in each region and delivers the CloudTrail event log files to an S3 bucket that you specify.
+                                           an all-regions trail is the default option when you create a trail.
+--> A trail that applies to one region  :  [ can only be done using CLI ]
+                                           records events in that particular region only .
+When CloudTrail logging is turned on, CloudWatch writes log files to the Amazon S3 bucket that you specified when you configured CloudTrail.
+
+***** TRAIL EVENTS are just normal actions taken in your account for the past 90 days .
+      They can de downloaded and filtered to view  the required actions -> AWS -> Cloud Trails -> filter using search box
+***** TRAILS are a trail events that are configured to be saved to S3 bucket, CloudWatch Logs, and CloudWatch Events.
+      Trails are just filtered Trail events .
+
+TRAILS :
+-----------
+A trail is a configuration that enables delivery of CloudTrail events to an Amazon S3 bucket, CloudWatch Logs, and CloudWatch Events.
+You can use a trail to filter the CloudTrail events you want delivered, encrypt your CloudTrail event log files with an AWS KMS key, and set up Amazon SNS notifications for log file delivery.
+The home Region is the only AWS Region where you can view and update the trail after it iscreated, even if the trail logs events in all AWS Regions.
+
+An event in CloudTrail is the record of an activity in an AWS account.
+This activity can be an action taken by a user, role, or service that is monitorable by CloudTrail.
+CloudTrail events provide a history of both API and non-API account activity made through the AWS Management Console, AWS SDKs, command line tools, and other AWS services.
+There are three types of events that can be logged in CloudTrail :
+    --> management events,
+    --> data events, and
+    --> CloudTrail Insights events.
+    By default, trails log management events, but not data or Insights events.
+
+    MANAGEMENT EVENTS :
+      Information about management operations called control plane operations.
+      • Configuring security (for example, IAM AttachRolePolicy API operations).
+      • Registering devices (for example, Amazon EC2 CreateDefaultVpc API operations).
+      • Configuring rules for routing data (for example, Amazon EC2 CreateSubnet API operations).
+      • Setting up logging (for example, AWS CloudTrail CreateTrail API operations).
+      Also include non-API events that occur in your account. For example, when  a user signs in to your account, CloudTrail logs the ConsoleLogin event.
+      Management events include security events such as IAM CreateUser and AttachRolePolicy events, resource events such as RunInstances and CreateBucket, and many more.
+
+   DATA EVENTS : AWS -> Cloud Trail -> left panel -> insights
+      Provide information about the resource operations performed on or in a resource called data plane operations.
+      • Amazon S3 object-level API activity (for example, GetObject, DeleteObject, and PutObject API operations).
+      • AWS Lambda function execution activity (the Invoke API).
+      • Amazon S3 object-level API activity on AWS Outposts.
+
+   CLOUD TRAIL INSIGHTS :
+      CloudTrail Insights events capture unusual activity in your AWS account.
+      Insights events provide relevant information, such as the associated API, incident time, and statistics, that help you understand and act on unusual activity.
+      Unlike other types of events captured in a CloudTrail trail, Insights events are logged only when CloudTrail detects changes in your account's API usage that differ significantly from the account's typical usage patterns.
+      You geta detailed graph on the insights ,  and we can filetr trails and download as well.
+
+      EX : Your account typically logs no more than 20 Amazon S3 deleteBucket API calls per minute, but your account starts to log an average of 100 deleteBucket API calls per minute.
+           Your account typically logs 20 calls per minute to the Amazon EC2AuthorizeSecurityGroupIngress API, but your account starts to log zero calls to AuthorizeSecurityGroupIngress.
+
+AWS -> Cloud Trail -> left panel -> create a trail -> select the type of trail you want to create .
+
+You can perform more advanced tasks with your CloudTrail files.
+    •Create multiple trails per region.
+    •Monitor CloudTrail log files by sending them to CloudWatch Logs.
+    •Share log files between accounts.
+    •Use the AWS CloudTrail Processing Library to write log processing applications in Java.
+    •Validate your log files to verify that they have not changed after delivery by CloudTrail.

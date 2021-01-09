@@ -1,0 +1,93 @@
+AWS CLOUD WATCH : It is a metrics repository .
+------------------
+Amazon CloudWatch monitors your Amazon Web Services (AWS) resources and the applications you run on AWS in real time.
+You can use CloudWatch to collect and track metrics, which are variables you can measure for your resources and applications.
+The CloudWatch home page automatically displays metrics about every AWS service you use.
+You can additionally create custom dashboards to display metrics about your custom applications, and display custom collections of metrics that you choose.
+You can create alarms that watch metrics and send notifications or automatically make changes to the resources you are monitoring when a threshold is breached.
+       For example :
+       you can monitor the CPU usage and disk reads and writes of your Amazon EC2 instances and then use this data to determine whether you should launch additional instances to handle increased load.
+       You can also use this data to stop under-used instances to save money.
+
+Amazon CloudWatch is basically a metrics repository.
+An AWS service—such as Amazon EC2—puts metrics into the repository, and you retrieve statistics based on those metrics.
+If you put your own custom metrics into the repository, you can retrieve statistics on these metrics as well.
+You can use metrics to calculate statistics and then present the data graphically in the CloudWatch console.
+You can configure alarm actions to stop, start, or terminate an Amazon EC2 instance when certain criteria are met.
+In addition, you can create alarms that initiate Amazon EC2 Auto Scaling and Amazon Simple Notification Service (Amazon SNS) actions on your behalf.
+You can also use CloudWatch cross-Region functionality to aggregate statistics from different Regions.
+
+CONCEPTS :
+-----------
+
+NAMESPACE :
+A namespace is a container for CloudWatch metrics.
+Metrics in different namespaces are isolated from each other, so that metrics from different applications are not mistakenly aggregated into the same statistics.
+The AWS namespaces typically use the following naming convention: AWS/service. For example, Amazon EC2 uses the AWS/EC2 namespace.
+
+METRICS :
+Metrics are the fundamental concept in CloudWatch. A metric represents a time-ordered set of data points that are published to CloudWatch.
+For example, the CPU usage of a particularEC2 instance is one metric provided by Amazon EC2.
+Metrics exist only in the Region in which they are created. Metrics cannot be deleted, but they automatically expire after 15 months if no new data is published to them.
+Data points older than 15months expire on a rolling basis; as new data points come in, data older than 15 months is dropped.
+
+TIME STAMPS :
+Each metric data point must be associated with a time stamp.
+The time stamp can be up to two weeks in the past and up to two hours into the future.
+Time stamps are dateTime objects, with the complete date plus hours, minutes, and seconds (for example, 2016-10-31T23:59:59Z).
+
+METRICS RETENTION :
+CloudWatch retains metric data as follows:
+  • Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution custom metrics.
+  • Data points with a period of 60 seconds (1 minute) are available for 15 days
+  • Data points with a period of 300 seconds (5 minute) are available for 63 days
+  • Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months)
+
+DIMENSIONS :
+A dimension is a name/value pair that is part of the identity of a metric. You can assign up to 10dimensions to a metric.
+For example, you can get statistics for a specific EC2 instance by specifying the InstanceId dimension when you search for metrics.
+
+DIMENSION COMBINATIONS :
+CloudWatch treats each unique combination of dimensions as a separate metric, even if the metrics have the same metric name.
+You can only retrieve statistics using combinations of dimensions that you specifically published.
+When you retrieve statistics, specify the same values for the namespace, metric name, and dimension parameters that were used when the metrics were created.
+You can also specify the start and end times for CloudWatch to use for aggregation.
+
+RESOLUTION :
+Each metric is one of the following:
+  • Standard resolution, with data having a one-minute granularity
+  • High resolution, with data at a granularity of one second
+Metrics produced by AWS services are standard resolution by default.
+When you publish a custom metric, you can define it as either standard resolution or high resolution.
+
+STATISTICS :
+Statistics are metric data aggregations over specified periods of time.
+CloudWatch provides statistics based on the metric data points provided by your custom data or provided by other AWS services to CloudWatch.
+Aggregations are made using the namespace, metric name, dimensions, and the data point unit of measure, within the time period you specify.
+
+UNITS :
+Each statistic has a unit of measure. Example units include Bytes, Seconds, Count, and Percent.
+You can specify a unit when you create a custom metric. If you do not specify a unit, CloudWatch uses None as the unit.
+Units help provide conceptual meaning to your data.
+
+PERIODS :
+A period is the length of time associated with a specific Amazon CloudWatch statistic.
+Each statistic represents an aggregation of the metrics data collected for a specified period of time.
+Periods are defined in numbers of seconds, and valid values for period are 1, 5, 10, 30, or any multiple of 60.
+
+AGGREGATION :
+Amazon CloudWatch aggregates statistics according to the period length that you specify when retrieving statistics.
+You can publish as many data points as you want with the same or similar timestamps.
+
+PERCENTILE :
+A percentile indicates the relative standing of a value in a dataset.
+For example, the 95th percentil emeans that 95 percent of the data is lower than this value and 5 percent of the data is higher than this value.
+Percentiles help you get a better understanding of the distribution of your metric data.
+
+ALARMS :
+You can use an alarm to automatically initiate actions on your behalf.
+An alarm watches a single metric over a specified time period, and performs one or more specified actions, based on the value of the metric relative to a threshold over time.
+The action is a notification sent to an Amazon SNS topic or an Auto Scaling policy. You can also add alarms to dashboards.
+Alarms invoke actions for sustained state changes only.
+CloudWatch alarms do not invoke actions simply because they are in a particular state.
+The state must have changed and been maintained for a specified number of periods.
