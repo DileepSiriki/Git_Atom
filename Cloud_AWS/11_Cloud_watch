@@ -1,4 +1,4 @@
-AWS CLOUD WATCH : It is a metrics repository .
+AWS CLOUD WATCH : It is a metrics repository . --> All about graphs !!
 ------------------
 Amazon CloudWatch monitors your Amazon Web Services (AWS) resources and the applications you run on AWS in real time.
 You can use CloudWatch to collect and track metrics, which are variables you can measure for your resources and applications.
@@ -91,3 +91,49 @@ The action is a notification sent to an Amazon SNS topic or an Auto Scaling poli
 Alarms invoke actions for sustained state changes only.
 CloudWatch alarms do not invoke actions simply because they are in a particular state.
 The state must have changed and been maintained for a specified number of periods.
+
+
+AMAZON CLOUD WATCH DASH BOARDS : --> All dashboards are global, not Region-specific.
+--------------------------------
+Amazon CloudWatch dashboards are customizable home pages in the CloudWatch console that you can use to monitor your resources in a single view.
+Even those resources that are spread across different Regions.
+You can use CloudWatch dashboards to create customized views of the metrics and alarms for your AWS resources.
+
+CLOUD WATCH ALARMS :
+---------------------
+• A metric alarm watches a single CloudWatch metric or the result of a math expression based on CloudWatch metrics.
+The alarm performs one or more actions based on the value of the metric or expression relative to a threshold over a number of time periods.
+The action can be sending a notification to an Amazon SNS topic, performing an Amazon EC2 action or an Auto Scaling action, or creating a Systems Manager OpsItem.
+
+• A composite alarm includes a rule expression that takes into account the alarm states of other alarms that you have created.
+The composite alarm goes into ALARM state only if all conditions of the rule are met.
+The alarms specified in a composite alarm's rule expression can include metric alarms and other composite alarms.
+
+Using composite alarms can reduce alarm noise.
+You can create multiple metric alarms, and also create a composite alarm and set up alerts only for the composite alarm.
+For example, a composite might go into ALARM state only when all of the underlying metric alarms are in ALARM state.
+Composite alarms can send Amazon SNS notifications when they change state, and can create SystemsManager OpsItems when they go into ALARM state, but can't perform EC2 actions or Auto Scaling actions.
+
+ ALARM STATES :
+ -----------------
+ A metric alarm has the following possible states:
+ • OK – The metric or expression is within the defined threshold.
+ • ALARM – The metric or expression is outside of the defined threshold.
+ • INSUFFICIENT_DATA – The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.
+
+ When you create an alarm, you specify three settings to enable CloudWatch to evaluate when to change the alarm state:
+ • PERIOD is the length of time to evaluate the metric or expression to create each individual data point for an alarm.
+   It is expressed in seconds. If you choose one minute as the period, the alarm evaluates the metric once per minute.
+
+ • EVALUATION PERIODS is the number of the most recent periods, or data points, to evaluate when determining alarm state.
+
+ • DATAPOINTS to Alarm is the number of data points within the Evaluation Periods that must be breaching to cause the alarm to go to the ALARM state.
+   The breaching data points don't have to be consecutive, they just must all be within the last number of data points equal to Evaluation Period.
+
+Once an alarm is set , we can create an SNS topic and subscribe to it for notifications.
+--> Create an SNS Topic
+--> Subscribe to the Topic
+--> Enter the SNS Topic in the ALARM configuration to get notifications .
+
+Using Alarm , we can also send a notification , do an Ec2 action [stop,terminate,reboot] , do an autoscaling of instance.
+Also we can send email for billing costs if it exceeds some limit etc;.

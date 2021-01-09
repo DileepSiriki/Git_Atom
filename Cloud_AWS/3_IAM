@@ -115,9 +115,9 @@ TEMPORARY CREDS IN IAM :
            You're creating an application that runs on an Amazon Elastic Compute Cloud (Amazon EC2) instance and that application makes requests to AWS.
            You're creating an app that runs on a mobile phone and that makes requests to AWS.
 
-TAGS :
+TAGS : --> USED IN RESOURCE GROUPS [ grouping resources ] // 12_Resource_groups
 -------
-    IAM tags are key-value pairs you can add to your user.
+    IAM tags are key-value pairs you can add to your user. Tags are words or phrases that act as metadata that you can use to identify and organize your AWS resources.
     Tags can include user information, such as an email address, or can be descriptive, such as a job title.
     You can use the tags to organize, track, or control access for this user
     Tag key–value pairs are not case sensitive, but case is preserved. This means that you cannothave separate Department and department tag keys.
@@ -125,6 +125,10 @@ TAGS :
      • You cannot create a tag key or value that begins with the text aws:. This tag prefix is reserved for AWSinternal use.
      • You can create a tag with an empty value such as phoneNumber = . You cannot create an empty tagkey.
 
+    Tags are key and value pairs that act as metadata for organizing your AWS resources.
+    With most AWS resources, you have the option of adding tags when you create the resource, whether it's an Amazon EC2 instance, an Amazon S3 bucket, or other resource.
+    However, you can also add tags to multiple, supported resources at once by using Tag Editor.
+    TAG EDITOR : AWS -> RSOURCE GRPOUPS -> TAG EDITOR
 
 ARN : AMAZOAN RESOURCE NAMES
 ------------------------------

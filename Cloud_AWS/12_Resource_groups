@@ -1,0 +1,78 @@
+RESOURCE :
+-------------
+Resource is an entity that you can work with. Examples include an Amazon EC2 instance, an AWS CloudFormation stack, or an Amazon S3 bucket.
+If you work with multiple resources, you might find it useful to manage them as a group rather than move from one AWS service to another for each task.
+If you manage large numbers of related resources, such as EC2 instances that make up an application layer, you likely need to perform bulk actions on these resources at one time.
+Examples of bulk actions include:
+      --> Applying updates or security patches.
+      --> Upgrading applications.
+      --> Opening or closing ports to network traffic.
+      --> Collecting specific log and monitoring data from your fleet of instances.
+
+Tags are properties of a resource, so they are shared across your entire account.
+Users in a department or specialized group can draw from a common vocabulary (tags) to create resource groups that are meaningful to their roles and responsibilities.
+Having a common pool of tags also means that when users share a resource group, they don't have to worry about missing or conflicting tag information.
+
+
+RESOURCE GROUPS : -- USE SYSTEM MANAGER LATER TO AUTOMATE TASKS
+--------------------
+Using resource groups enables you to use tags to organize projects, focus on a subset of your architecture, or just distinguish between your production and development environments.
+You can use resource groups to organize your AWS resources. Resource groups make it easier to manage and automate tasks on large numbers of resources at one time.
+A resource group is a collection of AWS resources that are all in the same AWS region, and that match criteria provided in a query.
+In Resource Groups, there are two types of queries on which you can build a group.
+Both query types include resources that are specified in the format AWS::service::resource.
+
+In AWS Resource Groups, a query is the foundation of a group.
+You can base a resource group on one of two types of queries , SHOWN BELOW :
+
+  -> Tag-based : Tag-based queries include lists of resources and tags.
+                 Tags are keys that help identify and sort your resources within your organization.
+                 Optionally, tags include values for keys.
+  -> AWS CloudFormation stack-based :
+                 In an AWS CloudFormation stack-based query, you choose an AWS CloudFormation stack in your account in the current region, and then choose resource types within the stack that you want to be in the group.
+                 You can base your query on only one AWS CloudFormation stack.
+
+****** Resource groups can be nested; a resource group can contain existing resource groups in the same region.
+AWS -> RESOURCE GROUPS -> CREATE RESOURCE GROUP
+1. In the tag -besed , select all resources you want to group and then specify the tags and values that pick a specific resource from that group.
+2. click on view group resources that matched the tag values in the resource group.
+
+1. On Create query-based group, in Group type, choose the CloudFormation stack based group type.
+2. Choose the stack that you want to be the basis of your group. A resource group can be based on only one stack. To filter the list of stacks, start typing the name of the stack.
+
+--> Now specify the group name and description .
+--> You may specify a tag and key to include this in another resource group.
+--> click create group.
+--> If you want to edit a group , select the group -> actions -> edit
+
+The following list describes some of the cases in which resource grouping can help organize your resources.
+
+  -> An application that has different phases, such as development, staging, and production.
+  -> Projects managed by multiple departments or individuals.
+  -> A set of AWS resources that you use together for a common project or that you want to manage or monitor as a group.
+  -> A set of resources related to applications that run on a specific platform, such as Android or iOS.
+
+
+  For example, you are developing a web application, and you are maintaining separate sets of resources for your alpha, beta, and release stages.
+  Each version runs on Amazon EC2 with an Amazon Elastic Block Store storage volume.
+  You use Elastic Load Balancing to manage traffic and Route 53 to manage your domain.
+  Without Resource Groups, you might have to access multiple consoles just to check the status of your services or modify the settings for one version of your application.
+
+  With Resource Groups, you use a single page to view and manage your resources.
+  For example, let’s say you use the tool to create a resource group for each version—alpha, beta, and release—of your application.
+  To check your resources for the alpha version of your application, open your resource group.
+  Then view the consolidated information on your resource group page.
+  To modify a specific resource, choose the resource's links on your resource group page to access the service console that has the settings that you need.
+
+Groups have unique Amazon Resource Names (ARNs) : arn:aws:resource-groups:region:account:group/group-name
+
+ONCE RESOURCE GROUP IS MADE , WE CAN USE AWS-SYSTEM-MANAGER TO DO GROUP TASKS .
+
+============================
+
+TAG EDITOR :
+-------------
+Tags are words or phrases that act as metadata that you can use to identify and organize your AWS resources.
+With Tag Editor, you build a query to find resources in one or more AWS Regions that are available for tagging.
+You can choose up to 20 individual resource types, or build a query on All resource types.
+--> select one or more regions -> select resource types [ AWS::EC2::Instance and AWS::S3::Bucket ] -> enter tags as needed [ aws autocompletes ]
