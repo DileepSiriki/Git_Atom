@@ -119,7 +119,7 @@ Chef Automate is an included server software package that provides automated wor
 
 ==================================================================
 ==================================================================
-AWS SUPPORT // TRUSTED ADVISOR :
+AWS SUPPORT // TRUSTED ADVISOR : --> AWS -> Support Centre -> Create a Case
 ==================================================================
 AWS Support offers four support plans: Basic, Developer, Business, and Enterprise
 
@@ -166,8 +166,20 @@ To change your support plan :
 ==================================================================
 ==================================================================
 AWS TRUSTED ADVISOR : Cost Optimization -  Performance -  Security - Fault Tolerance -  Service Limits
-
 ==================================================================
+AWS Trusted Advisor is your customized cloud expert! It helps you to observe best practices for the use of AWS by inspecting your AWS environment with an eye toward saving money, improving system performance and reliability, and closing security gaps.
+All AWS customers can start optimizing their cloud resources by using four of AWS Trusted Advisor’s most popular best-practice recommendations on service limits and security configurations.
+Access to the four free checks does not expire, and you can access the remaining 33 checks and additional features by upgrading to Business or Enterprise-level Support.
+The four free checks include :
+Security Groups - Specific Ports Unrestricted,
+Service Limits,
+IAM Use, and
+MFA on Root Account
+
+You can configure Trusted Advisor notifications to receive weekly email about any changes in their check results.
+You can also subscribe to Business and Enterprise-level support to access the full suite of Trusted Advisor best-practice checks, API access, and a host of other support features, such as phone and chat access to support personnel, architecture guidance, API access, and help with third-party software configuration.
+
+
 AWS Trusted Advisor draws upon best practices learned from serving hundreds of thousands of AWS customers.
 Trusted Advisor inspects your AWS environment, and then makes recommendations when opportunities exist to save money, improve system availability and performance, or help close security gaps.
 All AWS customers have access to five Trusted Advisor checks.

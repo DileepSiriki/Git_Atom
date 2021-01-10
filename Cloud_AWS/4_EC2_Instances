@@ -53,7 +53,7 @@ Your AWS account has a limit on the number of instances that you can have runnin
         The Public IPV4 address is released and a new public IPv4 address is assigned after restarting again.
         An IPv6 address persists when you stop and start your instance, and is released when you terminate your instance.
         This is because there is no concept of public and private IPV6 ip's.
-        
+
     --> TERMINATE :
         hen an instance is terminated, the instance performs a normal shutdown.
         The root device volume is deleted by default, but any attached Amazon EBS volumes are preserved by default.
@@ -566,3 +566,57 @@ STORAGE EC2 :
   you can copy it from one AWS Region to another, or within the same Region. -> Snapshots -> Actions -> copy
   Amazon S3server-side encryption (256-bit AES) protects a snapshot's data in transit during a copy operation
   Regularly back up your EBS volumes using Amazon EBS snapshots , and create an Amazon Machine Image (AMI) from your instance to save the configuration as a template forlaunching future instances.
+
+
+====================
+
+EC2 PRICING :
+---------------
+There are five ways to pay for Amazon EC2 instances: On-Demand, Savings Plans, Reserved Instances, and Spot Instances.
+You can also pay for Dedicated Hosts which provide you with EC2 instance capacity on physical servers dedicated for your use.
+
+ON-DEMAND :
+-------------
+With On-Demand instances, you pay for compute capacity by the hour or the second depending on which instances you run.
+No longer-term commitments or upfront payments are needed.
+You can increase or decrease your compute capacity depending on the demands of your application and only pay the specified per hourly rates for the instance you use.
+On-Demand instances are recommended for:
+
+   Users that prefer the low cost and flexibility of Amazon EC2 without any up-front payment or long-term commitment
+   Applications with short-term, spiky, or unpredictable workloads that cannot be interrupted
+   Applications being developed or tested on Amazon EC2 for the first time
+
+SPOT INSTANCES :
+-----------------
+Amazon EC2 Spot instances allow you to request spare Amazon EC2 computing capacity for up to 90% off the On-Demand price.
+Spot instances are recommended for:
+
+      Applications that have flexible start and end times
+      Applications that are only feasible at very low compute prices
+      Users with urgent computing needs for large amounts of additional capacity
+
+SAVINGS PLAN :
+---------------
+Savings Plans are a flexible pricing model that offer low prices on EC2 and Fargate usage, in exchange for a commitment to a consistent amount of usage (measured in $/hour) for a 1 or 3 year term.
+
+RESERVED INSTANCES :
+--------------------
+Reserved Instances provide you with a significant discount (up to 75%) compared to On-Demand instance pricing.
+In addition, when Reserved Instances are assigned to a specific Availability Zone, they provide a capacity reservation, giving you additional confidence in your ability to launch instances when you need them.
+For applications that have steady state or predictable usage, Reserved Instances can provide significant savings compared to using On-Demand instances.
+Reserved Instances are recommended for:
+
+   Applications with steady state usage
+   Applications that may require reserved capacity
+   Customers that can commit to using EC2 over a 1 or 3 year term to reduce their total computing costs
+
+
+
+
+==============
+
+AWS Fargate :
+
+AWS Fargate is a serverless compute engine for containers that works with both Amazon Elastic Container Service (Amazon ECS) and Amazon Elastic Kubernetes Service (Amazon EKS).
+Fargate makes it easy for you to focus on building your applications.
+Fargate removes the need to provision and manage servers, lets you specify and pay for resources per application, and improves security through application isolation by design.

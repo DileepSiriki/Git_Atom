@@ -1,0 +1,102 @@
+AWS BILLING :
+---------------
+#### Cost Explorer - AWS Budgets - AWS Knowledge Centre
+
+AWS Billing and Cost Management is the service that you use to pay your AWS bill, monitor your usage, and analyze and control your costs.
+AWS automatically charges the credit card that you provided when you signed up for a new account with AWS. Charges appear on your monthly credit card bill.
+The Billing and Cost Management service provides features that you can use to do the following:
+  •Estimate and plan your AWS costs
+  •Receive alerts if your costs exceed a threshold that you set
+  •Assess your biggest investments in AWS resources
+  •Simplify your accounting if you work with multiple AWS accounts
+
+The AWS Billing and Cost Management console includes the no-cost Cost Explorer tool for viewing your AWS cost data as a graph.
+With Cost Explorer, you can filter graphs by values such as :
+  --> API operation, Availability Zone, AWS service, custom cost allocation tag, Amazon EC2  , purchase option, AWS Region, usage type, usage type group, and more.
+
+All AWS account owners have access to account and billing support free of charge.
+You can find answers to your questions quickly by visiting the AWS Knowledge Center.
+
+Open the Billing and Cost Management console athttps://console.aws.amazon.com/billing/ , we have the following :
+    --> Cost Explorer         : To track and analyze your AWS usage. Cost Explorer is free for all accounts.
+    --> Budgets               : To manage budgets for your account and to get notified
+    --> Budgets Reports       : Notifications from Budgets
+    --> Savings Plans         : Flexible pricing model that offer low prices on AWS usage, in exchange for a commitment to a consistent amount of usage (measured in $/hour) for a 1- or 3-year term.
+    --> Cost & Usage Reports
+    --> Cost Categories
+    --> Cost allocation tags
+    --> Orders and Invoices   : To see your past payments and transactions.
+
+POST -CLOSURE PERIOD : - 90 DAYS
+-------------------------
+After you close an AWS account in accordance with the process above, you can no longer use it to access AWS services, but for 90 days after your account is closed (the "Post-Closure Period"), you can view your AWS account's past billing information and access AWS Support.
+You can contact support if you would like to reopen your account and you might be charged for any resources that are not terminated .
+After the Post-Closure Period, we permanently close your AWS account, and you can't reopen it.
+Any content that you didn't delete is deleted, and any AWS services that you didn't terminate are terminated.
+
+Some services, such as Amazon EC2, Amazon RDS, and Elastic Load Balancing, charge for usage on an hourly basis.
+The AWS Free Tier for these services provides you with a monthly allotment of hours for the first 12 months.
+
+COST EXPLORER :
+------------------
+Cost Explorer is a tool that enables you to view and analyze your costs and usage.
+You can explore your usage and costs using the main graph, the Cost Explorer cost and usage reports, or the Cost Explorer RI reports.
+You can view data for up to the last 12 months, forecast how much you're likely to spend for the next 12 months, and get recommendations for what Reserved Instances to purchase.
+You can use CostExplorer to identify areas that need further inquiry and see trends that you can use to understand your costs.
+
+AWS BUDGETS :
+------------------
+You can use AWS Budgets to track and take action on your AWS cost and usage.
+You can use AWSBudgets to monitor your aggregate utilization and coverage metrics for your Reserved Instances (RIs) or Savings Plans.
+  • Setting a monthly cost budget with a FIXED target amount
+  • Setting a monthly cost budget with a VARIABLE target amount
+  • Setting a monthly usage budget with a fixed usage amount
+  • Setting a daily utilization or coverage budget to track your RI or Savings Plans.
+
+AWS COST ANAMOLY DETECTION :
+--------------------------------
+AWS Cost Anomaly Detection is an AWS Cost Management feature that uses machine learning to continuously monitor your cost and usage to detect unusual spends.
+Using AWS Cost Anomaly Detection includes the following benefits:
+  • Receive alerts individually in aggregated reports. You can receive alerts in an email or an Amazon SNS topic.
+  • Evaluate your spend patterns using machine learning methods to minimize false positive alerts. For example, you can evaluate weekly or monthly seasonality and organic growth.
+  • Analyze and determine the root cause of the anomaly, such as account, service, Region, or usage type that is driving the cost increase.
+
+
+AWS PRICING CALCULATOR : -> Check costs before actually using and create an estimate . https://calculator.aws/#/
+--------------------------
+AWS Pricing Calculator lets you explore AWS services and create an estimate for the cost of your use cases on AWS.
+You can model your solutions before building them, explore the price points and calculations behind your estimate, and find the available instance types and contract terms that meet your needs.
+This enables you to make informed decisions about using AWS.
+You can plan your AWS costs and usage or price out setting up a new set of instances and services.
+
+SAVE & SHARE THE ESTIMATE YOU CREATE :
+You can save each estimate's unique link to share or revisit directly through your browser.
+Estimates are saved to AWS public servers. Any changes that you make to an estimate requires you to save again.
+AWS Pricing Calculator doesn't save automatically.
+Each time that you save an estimate, the system generates a unique link.
+If you don't copy and save the newly generated link, you can't access any saved changes.
+
+
+AWS SAVINGS PLAN :
+--------------------
+Savings Plans is a flexible pricing model that helps you save up to 72 percent on Amazon EC2, AWS Fargate, and AWS Lambda usage.
+Savings Plans provides you lower prices for your Amazon EC2 usage, Fargate, and Lambda in exchange for a commitment to a consistent usage amount (measured in $/hour)for a one or three year term.
+Every type of compute usage has an On-Demand rate and a Savings Plans rate.
+For example, if you commit to $10/hour of compute usage, your usage is charged at your Savings Plans rate up to $10.
+Any usage beyond your Savings Plans commitment is charged at your regular On-Demand rates.
+
+  • Compute Savings Plans :
+    These plans automatically apply to your EC2 instance usage, regardless of instance family (for example, M5, C5, etc.), instance sizes (for example, c5.large, c5.xlarge, etc.), Region (for example, us-east-1, us-east-2, etc.),
+    operating system (for example, Windows, Linux, etc.), or tenancy(for example, Dedicated, default, dedicated host).
+    They also apply to your Fargate and Lambda usage.
+
+    With a Compute Savings Plans, you can move a workload from C5 to M5, shift your usage from EU(Ireland) to EU (London), or migrate your application from Amazon EC2 to Amazon ECS using Fargate at any time.
+    You can continue to benefit from the low prices provided by Compute Savings Plans as you make these changes.
+
+  • EC2 Instance Savings Plans
+    provide savings up to 72 percent off On-Demand, in exchange for a commitment to a specific instance family in a chosen AWS Region (for example, M5 in Virginia).
+
+Difference b/w Reserved Instances and Savings plan :
+-------------------------------------------------------
+Savings Plans are a flexible pricing model that offers low prices, just like Amazon EC2 RIs, but with added flexibility.
+With Savings Plans you can reduce your bill by committing to a consistent amount of compute usage (measured in $/hour), instead of specific instance configurations.
