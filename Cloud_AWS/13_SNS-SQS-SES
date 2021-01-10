@@ -1,2 +1,245 @@
+SNS : IS A TOPIC Service.
+SQS : IS A QUEUE Service.
+      Unlimited Throughput , minimum one delivery , Best effort ordering - STANDARD QUEUE
+      High Throughput , Exactly one delivery , First in First OUT - FIFO QUESES
+
 SIMPLE NOTIFICATION SERVICE :
 ----------------------------------
+Amazon Simple Notification Service (Amazon SNS) is a managed service that provides message delivery from publishers to subscribers (also known as producers and consumers).
+Publishers communicate asynchronously with subscribers by sending messages to a topic, which is a logical access point and communication channel.
+Clients can subscribe to the SNS topic and receive published messages using a supported protocol, such as Amazon SQS, AWS Lambda, HTTP, email, mobile push notifications, and mobile text messages (SMS).
+You pay based on the number of messages that you publish, the number of notifications that you deliver, and any additional API calls for managing topics and subscriptions.
+
+                                                          APPLICATION TO APPLICATION SUBSCRIBERS
+ -----------                          TOPIC                        -----------
+|            |                         --                         |           |  AMAZON SQS
+|    SNS     | <--------------------> |  | <--------------------> |           |  AWS LAMBDA
+|            |                         --                         |           |  HTTP/S
+ -----------                            |                          -----------
+                                        |
+                                        |                           -----------
+                                        |                          |           |  MOBILE TEXT
+                                        |                          |           |  MOBILE PUSH
+                                        L _ _ _ _ _ _ _ _ _ _ _ _  |           |  EMAIL - SES
+                                                                    -----------
+                                                          APPLICATION TO APPLICATION SUBSCRIBERS
+
+    • Application-to-application messaging
+    • Application-to-person notifications
+    • Standard and FIFO topics
+    • Message delivery retry
+    • Dead-letter queues -- an Amazon SQS queue for messages that can't be delivered successfully due to client errors or server error.
+    • Message attributes -- we can provide arbitrary metadata .
+    • Message filtering -- filtering based on policies
+    • Message security
+
+SCENARIO : 1
+---------------
+you can develop an application that publishes a message to an SNS topic whenever an order is placed for a product.
+Then, SQS queues that are subscribed to the SNS topic receive identical notifications for the new order.
+An Amazon Elastic Compute Cloud (Amazon EC2) server instance attached to one of the SQS queues can handle the processing or fulfillment of the order.
+And you can attach another Amazon EC2 server instance to a data warehouse for analysis of all orders received.
+you can subscribe another SQS queue to the same SNS topic for new incoming orders.
+Then, by attaching this new SQS queue to your test environment, you can continue to improve and test your application using data received from your production environment.
+
+                                                                   -----------
+                                        ------------------------> |           |
+                                        |                         |    SQS    | --------O EC2
+                                        |                         |           |
+                                        |                          -----------
+                                        |
+ -----------                            |                          -----------
+|            |                         ---                        |           |
+|    SNS     | <--------------------> | T | <-------------------->|    SQS    | --------O EC2
+|            |    TO TOPIC             ---                        |           |
+ -----------                            |                          -----------
+                                        |
+                                        |                           -----------
+                                        |                          |           |
+                                        |                          |   SQS     |--------O EC2
+                                        L _ _ _ _ _ _ _ _ _ _ _ _  |           |
+                                                                    -----------
+--> Also you can receive immediate notification when an event occurs, such as a specific change to your Amazon EC2 AutoScaling group,
+    a new file uploaded to an Amazon S3 bucket, or a metric threshold breached in Amazon CloudWatch.
+--> you could send e-commerce order confirmations as user notifications
+--> you can use Amazon SNS to send update notifications to an app. The notification message can include a link to download and install the update.
+
+GETTING STARTED :
+------------------
+AWS -> SNS -> TOPICS -> CREATE A TOPIC
+
+FIFO :
+    Strictly-preserved message ordering
+    Exactly-once message delivery
+    High throughput, up to 300 publishes/second
+    Subscription protocols: SQS
+
+STANDARD :
+    Best-effort message ordering
+    At-least once message delivery
+    Highest throughput in publishes/second
+    Subscription protocols: SQS, Lambda, HTTP, SMS, email, mobile application endpoints
+
+WHO CAN PUBLICH TO TOPIC :
+    Only the topic owner : Only the owner of the topic can publish to the topic
+    Everyone : Anybody can publish
+    Only the specified AWS accounts : Only the specified AWS account IDs can publish to the topic
+
+WHO CAN SUBSCRIBE TO TOPIC :
+    Only the topic owner : Only the owner of the topic can subscribe to the topic
+    Everyone : Any AWS account can subscribe to the topic
+    Only the specified AWS accounts : Only the specified AWS account IDs can subscribe to the topic
+    Only requesters with certain endpoints
+
+--> Now create SUBSCRIPTIONS , We can specify the protocol to all available A2A and A2P endpoints.
+
+SNS - FIFO QUEUES : Check Reference Pictures
+-----------------------
+To fan out messages from Amazon SNS FIFO topics to AWS Lambda functions, extra steps are required.
+First, subscribe Amazon SQS FIFO queues to the topic.
+Then configure the queues to trigger the functions.
+
+SNS FIFO topics can't deliver messages to customer managed endpoints, such as email addresses, mobile apps, phone numbers for text messaging (SMS), or HTTP(S) endpoints.
+These endpoint types aren't guaranteed to preserve strict message ordering.
+
+--> An Amazon SNS FIFO topic delivers messages to subscribed Amazon SQS FIFO queues in the exact order that the messages are published to the topic.
+    With an SQS FIFO queue, the queues' consumers receive the messages in the exact order that the messages are sent to the queue.
+    This setup preserves end-to-end message ordering.
+--> Though the two messages are delivered to the subscribers in a different time, message ordering is preserved for each subscriber.
+    Each subscriber is perceived in isolation from any other subscribers.
+--> Messages that belong to the same group are processed one by one, in a strict order relative to the group.
+    When you publish messages to an Amazon SNS FIFO topic, you set the message group ID. The group ID is a mandatory token that specifies that a message belongs to a specific message group.
+    Groups are independent of each other . So FIFO make sure that the messages belonging to a group are sent exactly in a order.
+    The messages from various groups can be mixed but order of a particular group is preserved .
+
+DUPLICATION :
+--------------
+When you publish a message to an SNS FIFO topic, the message must include a deduplication ID.
+This ID is included in the message that the SNS FIFO topic delivers to the subscribed SQS FIFO queues.
+If a message with a particular deduplication ID is successfully published to an SNS FIFO topic, any message published with the same deduplication ID, within the five-minute deduplication interval, is accepted but not delivered.
+The SNS FIFO topic continues to track the message deduplication ID, even after the message is delivered to subscribed endpoints.
+
+FAN OUT MESSAGES TO AWS LAMBDA :
+----------------------------------
+Amazon SNS and AWS Lambda are integrated so you can invoke Lambda functions with Amazon SNSnotifications.
+When a message is published to an SNS topic that has a Lambda function subscribed to it, the Lambda function is invoked with the payload of the published message.
+The Lambda function receives the message payload as an input parameter and can manipulate the information in the message, publish the message to other SNS topics, or send the message to other AWS services.
+--> While subscribing , provide the AEN of the lambda function you want to subscribe .
+
+FAN OUT TO SQS  QUEUES :
+----------------------------
+Amazon SNS works closely with Amazon Simple Queue Service (Amazon SQS).
+Both services provide different benefits for developers.
+Amazon SNS allows applications to send time-critical messages to multiple subscribers through a “push” mechanism, eliminating the need to periodically check or “poll” for updates.
+Amazon SQS is a message queue service used by distributed applications to exchange messages through a polling model, and can be used to decouple sending and receiving components— without requiring each component to be concurrently available.
+Using Amazon SNS and Amazon SQS together, messages can be delivered to applications that require immediate notification of an event, and also persisted in an Amazon SQS queue for other applications to process at a later time.
+
+When you subscribe an Amazon SQS queue to an Amazon SNS topic, you can publish a message to the topic and Amazon SNS sends an Amazon SQS message to the subscribed queue.
+The Amazon SQS message contains the subject and message that were published to the topic along with metadata about the message in a JSON document.
+For an Amazon SNS topic to be able to send messages to a queue, you must set a policy on the queue that allows the Amazon SNS topic to perform the sqs:SendMessage action.
+
+
+========================================================================
+========================================================================
+AMAZON SIMPLE QUEUE SERVICE :
+==============================
+Amazon Simple Queue Service (Amazon SQS) offers a secure, durable, and available hosted queue that lets you integrate and decouple distributed software systems and components.
+Amazon SQS and Amazon SNS are queue and topic services that are highly scalable, simple to use, and don't require you to set up message brokers.
+Amazon SQS stores messages until microservices and serverless applications process them.
+
+--> Many number of applications can send messages to a queue .
+So you cant request for a particular mesage , all you can do is poll for all messages .
+Amazon SQS begins to poll servers to find messages in the queue. The progress bar on the right side of the Receive messages section displays the polling duration.
+
+
+Dead-Letter queues :
+----------------------
+If a message can't be consumed successfully, you can send it to a dead-letter queue (DLQ). Dead-letter queues let you isolate problematic messages to determine why they are failing.
+When you designate a queue to be a source queue, a DLQ is not created automatically. You must first create a queue to designate as the DLQ.
+The DLQ queue type (standard or FIFO) must match the source queues. You can associate the same DLQ with more than one source queue.
+The Maximum receives value determines when a message will be sent to the DLQ. If the ReceiveCount for a message exceeds the maximum receive count for the queue, Amazon SQS moves the message to the associated DLQ (with its original message ID).
+You must use the same AWS account to create the DLQ and the source queues that send messages to the DLQ. Also, the DLQ must reside in the same region as the source queues that use the DLQ.
+
+Message deduplication ID :
+-------------------------------
+The token used for deduplication of sent messages.
+If a message with a particular messagededuplication ID is sent successfully, any messages sent with the same message deduplication ID are accepted successfully but aren't delivered during the 5-minute deduplication interval.
+Note : Message deduplication applies to an entire queue, not to individual message groups.
+Amazon SQS continues to keep track of the message deduplication ID even after the message is received and deleted.
+
+Message group ID :
+--------------------
+The tag that specifies that a message belongs to a specific message group.
+Messages that belong to the same message group are always processed one by one, in a strict order relative to the message group (however, messages that belong to different message groups might be processed out of order)
+
+FIFO DELIVERY LOGIC :
+-------------------------
+SENDING MESSAGES ->
+If multiple messages are sent in succession to a FIFO queue, each with a distinct message deduplication ID, Amazon SQS stores the messages and acknowledges the transmission.
+Then, each message can be received and processed in the exact order in which the messages were transmitted.
+In FIFO queues, messages are ordered based on message group ID.
+If multiple hosts (or different threads on the same host) send messages with the same message group ID to a FIFO queue, AmazonSQS stores the messages in the order in which they arrive for processing.
+To make sure that AmazonSQS preserves the order in which messages are sent and received, each producer should use a unique message group ID to send all its messages.
+FIFO queue logic applies only per message group ID. Each message group ID represents a distinct ordered message group within an Amazon SQS queue.
+For each message group ID, all messages are sent and received in strict order. However, messages with different message group ID values might be sent and received out of order. You must associate a message group ID with a message. If youdon't provide a message group ID, the action fails. If you require a single group of ordered messages,provide the same message group ID for messages sent to the FIFO queue.
+
+RECIEVING MESSAGES ->
+You can't request to receive messages with a specific message group ID.
+When receiving messages from a FIFO queue with multiple message group IDs, Amazon SQS first attempts to return as many messages with the same message group ID as possible.
+This allows other consumers to process messages with a different message group ID.
+
+EXACTLY ONE PROCESSING ->
+Unlike standard queues, FIFO queues don't introduce duplicate messages.
+FIFO queues help you avoid sending duplicates to a queue.
+If you retry the SendMessage action within the 5-minute deduplication interval, Amazon SQS doesn't introduce any duplicates into the queue.
+To configure deduplication, you must do one of the following:
+    • Enable content-based deduplication. This instructs Amazon SQS to use a SHA-256 hash to generate the message deduplication ID using the body of the message—but not the attributes of the message.
+    • Explicitly provide the message deduplication ID (or view the sequence number) for the message.
+
+MESSAGE ATTRIBUTES ->
+Amazon SQS lets you include structured metadata (such as timestamps, geospatial data, signatures, and identifiers) with messages using message attributes.
+Each message can have up to 10 attributes.
+Message attributes are optional and separate from the message body (however, they are sent alongside it).
+Your consumer can use message attributes to handle a message in a particular way without having to process the message body first.
+
+
+==========================================================================
+==========================================================================
+AMAZON SIMPLE EMAIL SERVICE :
+=================================
+Amazon SES is an email platform that provides an easy, cost-effective way for you to send and receive email using your own email addresses and domains.
+For example, you can send marketing emails such as special offers, transactional emails such as order confirmations, and other types of correspondence such as newsletters.
+When you use Amazon SES to receive mail, you can develop software solutions such as email autoresponders, email unsubscribe systems, and applications that generate customer support tickets from incoming emails.
+
+==========================================================================
+==========================================================================
+AMAZON CONNECT :
+==========================================================================
+Amazon Connect is an omnichannel cloud contact center.
+You can set up a contact center in a few steps, add agents who are located anywhere, and start engaging with your customers.
+You can create personalized experiences for your customers using omnichannel communications.
+For example, you can dynamically offer chat and voice contact , based on such factors as customer preference and estimated wait times.
+Agents, meanwhile, conveniently handle all customers from just one interface .
+For example, they can chat with customers, and create or respond to tasks as they are routed to them.
+Amazon Connect is an open platform that you can integrate with other enterprise applications, such as Salesforce .
+In addition, you can take advantage of the AWS ecosystem to innovate new experiences for your customers.
+
+Amazon Connect uses Amazon Simple Storage Service (Amazon S3) to store recorded conversations and exported reports.
+When you set up Amazon Connect, it creates default buckets for these requirements, or you can point it to existing Amazon S3 infrastructure
+Uses SNS and SES for messaging.
+You can have CHATS and CALLS and create TASKS configured in your own application like salesforce .
+
+
+==========================================================================
+AMAZON MQ :
+==========================================================================
+Amazon MQ is a managed message broker service for that makes it easy to migrate to a message broker in the cloud.
+A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.
+Currently, AmazonMQ supports Apache ActiveMQ and RabbitMQ engine types.
+
+SQS/SNS/MQ :
+Amazon MQ is a managed message broker service that provides compatibility with many popular message brokers.
+We recommend Amazon MQ for migrating applications from existing message brokers that rely on compatibility with APIs such as JMS or protocols such as AMQP 0-9-1, AMQP 1.0, MQTT, OpenWire, and STOMP.
+
+Amazon SQS and Amazon SNS are queue and topic services that are highly scalable, simple to use, and don't require you to set up message brokers. 
+We recommend these services for new applications that can benefit from nearly unlimited scalability and simple APIs.

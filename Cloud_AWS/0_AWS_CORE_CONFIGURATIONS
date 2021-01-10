@@ -1,3 +1,44 @@
+=========================================================
+=========================================================
+TOPICS TO COVER :
+=========================================================
+=========================================================
+
+Compute : Amazon EC2 - AWS Elastic Beanstalk - AWS Lambda
+
+Storage : Amazon S3 - Amazon EBS - Amazon S3 Glacier - AWS Snow Family - AWS Storage Gateway
+
+Database : Amazon RDS - Amazon DynamoDB
+
+Security, Identity, & Compliance : AWS IAM - AWS Resource Access Manager - AWS Resource Groups & Tag Editor
+
+Cryptography & PKI : AWS Key Management Service (AWS KMS)
+
+Management & Governance : Auto Scaling - CloudFormation - CloudTrail - CloudWatch - Command line Interface -
+
+                          Config - OpsWorks - Organizations - Trusted Advisor
+
+Networking & Content Delivery : CloudFront - Direct Connect - Elastic Load Balancing - Route 53 - VPC - VPN
+
+Application Integration : Simple Notification Service - Simple Queue Service - Step Functions
+
+Customer Engagement : Simple Email Service
+
+Migration & Transfer : WS Application Discovery Service -  AWS Database Migration Service
+
+Billing & Cost Management : Billing & Cost Management - Pricing Calculator
+
+=======================================================
+
+NETFLIX CONFIGURATION USING AWS
+NOTE BOOK POINTS
+SINGLE LINE ABOUT EACH AND EVRY TOPIC 
+
+
+
+
+
+
 --------------------
 CONFIGURATIONS :
 --------------------
@@ -362,33 +403,3 @@ Additional Resources :
     AWS Quick Starts
     AWS Solutions
     Amazon Silk
-
-=========================================================
-=========================================================
-TOPICS TO COVER :
-=========================================================
-=========================================================
-
-Compute : Amazon EC2 - AWS Elastic Beanstalk - AWS Lambda
-
-Storage : Amazon S3 - Amazon EBS - Amazon S3 Glacier - AWS Snow Family - AWS Storage Gateway
-
-Database : Amazon RDS - Amazon DynamoDB
-
-Security, Identity, & Compliance : AWS IAM - AWS Resource Access Manager - AWS Resource Groups & Tag Editor
-
-Cryptography & PKI : AWS Key Management Service (AWS KMS)
-
-Management & Governance : Auto Scaling - CloudFormation - CloudTrail - CloudWatch - Command line Interface -
-
-                          Config - OpsWorks - Organizations - Trusted Advisor
-
-Networking & Content Delivery : CloudFront - Direct Connect - Elastic Load Balancing - Route 53 - VPC - VPN
-
-Application Integration : Simple Notification Service - Simple Queue Service - Step Functions
-
-Customer Engagement : Simple Email Service
-
-Billing & Cost Management : Billing & Cost Management - Pricing Calculator
-
-=======================================================
