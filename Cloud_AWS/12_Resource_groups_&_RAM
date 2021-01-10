@@ -1,4 +1,4 @@
-RESOURCE :
+RESOURCE : RESOURCE GROUPS AND RESOURCE ACCESS MANAGER
 -------------
 Resource is an entity that you can work with. Examples include an Amazon EC2 instance, an AWS CloudFormation stack, or an Amazon S3 bucket.
 If you work with multiple resources, you might find it useful to manage them as a group rather than move from one AWS service to another for each task.
@@ -76,3 +76,33 @@ Tags are words or phrases that act as metadata that you can use to identify and 
 With Tag Editor, you build a query to find resources in one or more AWS Regions that are available for tagging.
 You can choose up to 20 individual resource types, or build a query on All resource types.
 --> select one or more regions -> select resource types [ AWS::EC2::Instance and AWS::S3::Bucket ] -> enter tags as needed [ aws autocompletes ]
+
+==============================
+
+RESOURCE ACCESS MANAGER :
+---------------------------
+AWS Resource Access Manager (AWS RAM) lets you share your resources with any AWS account or through AWS Organizations.
+If you have multiple AWS accounts, you can create resources centrally and use AWS RAM to share those resources with other accounts.
+This eliminates the need to provision duplicate resources in every account, which reduces operational overhead.
+You can share resources that you own by creating a resource share.
+When you create a resource share, you specify a name, the resources to share, and the principals with whom to share.
+Principals can be AWS accounts, organizational units, or an entire organization from AWS Organizations.
+Your account retains full ownership of the resources that you share.
+
+The following sections list the services that integrate with AWS RAM, and the resources that support sharing.
+    • AWS App Mesh
+    • Amazon Aurora
+    • AWS Certificate Manager Private Certificate Authority
+    • AWS Code Build
+    • Amazon EC2
+    • EC2 Image Builder
+    • AWS Glue
+    • AWS License Manager
+    • AWS Network Firewall
+    • AWS Outposts
+    • AWS Resource Groups
+    • Amazon Route 53
+    • Amazon VPC
+
+AWS -> RAM -> CREATE A RESOURCE SHARE -> GIVE A NAME -> SELECT RESOURCES
+AWS -> RAM -> shared with me -> accept -> to accept a resource share.
