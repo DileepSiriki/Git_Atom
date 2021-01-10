@@ -1,0 +1,180 @@
+==================================================================
+==================================================================
+AWS ORGANIZATIONS :
+==================================================================
+AWS Organizations is an account management service that enables you to consolidate multiple AWS accounts into an organization that you create and centrally manage.
+AWS Organizations includes account management and consolidated billing capabilities that enable you to better meet the budgetary, security, and compliance needs of your business.
+As an administrator of an organization, you can create accounts in your organization and invite existing accounts to join the organization.
+
+  --> Centralized management of all of your AWS accounts
+      You can combine your existing accounts into an organization that enables you to manage the accounts centrally.
+
+  --> Consolidated billing for all member accounts
+       management accounts can also access the billing information, account information, and account activity of member accounts in their organization.
+
+  --> Hierarchical grouping of your accounts to meet your budgetary, security, or compliance needs
+      You can group your accounts into organizational units (OUs) and attach different access policies to each OU.
+
+  --> Policies to centralize control over the AWS services and API actions that each account can access.
+      you can restrict which AWS services, resources, and individual API actions the users and roles in each member account can access.
+
+  --> Policies to standardize tags across the resources in your organization's accounts.
+      You can use tag policies to maintain consistent tags, including the preferred case treatment of tagkeys and tag values.
+
+  --> Policies to control how AWS artificial intelligence (AI) and machine learning services can collect and store data.
+  --> Policies that configure automatic backups for the resources in your organization's accounts
+  --> Integration and support for AWS Identity and Access Management (IAM)
+
+  --> Global access
+      AWS Organizations is a global service with a single endpoint that works from any and all AWS Regions. You don't need to explicitly select a region to operate in.
+
+  --> Data replication that is eventually consistent
+      AAWS Organizations achieves high availability by replicating data across multiple servers in AWS data centers within its Region.
+      If a request to change some data is successful, the change is committed and safely stored
+
+  --> Free to use
+
+ORGANIZATION UNIT [ OU ]:
+--------------------------
+A container for accounts  within a root .
+An OU also can contain other OUs, enabling you to create a hierarchy that resembles an upside-down tree, with a root at the top and branches of OUs that reach down, ending in accounts that are the leaves of the tree.
+When you attach a policy to one of the nodes in the hierarchy, it flows down and affects all the branches (OUs)and leaves (accounts) beneath it.
+An OU can have exactly one parent, and currently each account can be a member of exactly one OU.
+
+
+==================================================================
+==================================================================
+AWS CONFIG :
+==================================================================
+AWS Config provides a detailed view of the configuration of AWS resources in your AWS account.
+This includes how the resources are related to one another and how they were configured in the past so that you can see how the configurations and relationships change over time.
+
+With AWS Config, you can do the following:
+  • Evaluate your AWS resource configurations for desired settings.
+  • Get a snapshot of the current configurations of the supported resources that are associated with your AWS account.
+  • Retrieve configurations of one or more resources that exist in your account.
+  • Retrieve historical configurations of one or more resources.
+  • Receive a notification whenever a resource is created, modified, or deleted.
+  • View relationships between resources. For example, you might want to find all resources that use a particular security group.
+
+  --> AWS Resources
+      AWS resources are entities that you create and manage using the AWS Management Console, the AWS Command Line Interface (CLI), the AWS SDKs, or AWS partner tools.
+
+  --> Configuration History
+      A configuration history is a collection of the configuration items for a given resource over any time period.
+      A configuration history can help you answer questions about, for example, when the resource was first created, how the resource has been configured over the last month, and what configuration changes were introduced yesterday at 9 AM.
+      You can select a given resource in the AWSConfig console and navigate to all previous configuration items for that resource using the timeline.
+
+  --> Configuration Items
+      A configuration item represents a point-in-time view of the various attributes of a supported AWS resource that exists in your account.
+      The components of a configuration item include metadata, attributes, relationships, current configuration, and related events
+
+  --> Configuration Recorder
+      The configuration recorder stores the configurations of the supported resources in your account as configuration items.
+      You must first create and then start the configuration recorder before you can start recording.
+      You can stop and restart the configuration recorder at any time.
+
+  --> Configuration Snapshot
+      A configuration snapshot is a collection of the configuration items for the supported resources tha texist in your account.
+      This configuration snapshot is a complete picture of the resources that are being recorded and their configurations.
+      The configuration snapshot can be a useful tool for validating your configuration.
+
+  --> Resource Relationship
+      AWS Config discovers AWS resources in your account and then creates a map of relationships between AWS resources.
+      For example, a relationship might include an Amazon EBS volume vol-123ab45dattached to an Amazon EC2 instance i-a1b2c3d4 that is associated with security group sg-ef678hk.
+
+• Specifying the types of AWS resources for recording.
+• Configuring resources to record, including:
+    • Selecting an Amazon S3 bucket.
+    • Selecting an Amazon SNS topic.
+    • Creating AWS Config role.
+• Creating managed rules and custom rules that represent desired configuration settings for specific AWS resources or for an entire AWS account.
+• Creating and managing configuration aggregators to aggregate data across multiple accounts and regions.
+• Viewing a snapshot of current configurations of the supported resources.
+• Viewing relationships between AWS resources.
+
+
+==================================================================
+==================================================================
+AWS OPSWORKS :
+==================================================================
+AWS OpsWorks is a configuration management service that helps you configure and operate applications in a cloud enterprise by using Puppet or Chef.
+AWS OpsWorks Stacks and AWS OpsWorks for ChefAutomate let you use Chef cookbooks and solutions for configuration management,
+while OpsWorks for Puppet Enterprise lets you configure a Puppet Enterprise master server in AWS.
+Puppet offers a set of tools for enforcing the desired state of your infrastructure, and automating on-demand tasks
+
+AWS OpsWorks for Puppet Enterprise :
+OpsWorks for Puppet Enterprise lets you create AWS-managed Puppet master servers
+A Puppet master server manages nodes in your infrastructure, stores facts about those nodes, and serves as a central repository for your Puppet modules.
+Modules are reusable, shareable units of Puppet code that contain instructions about how your infrastructure should be configured
+Provides a suite of automation tools that enable you to inspect, deliver, operate, and future-proof your applications, and access toa user interface that lets you view information about your nodes and Puppet activitie
+
+AWS OpsWorks for Chef Automate :
+AWS OpsWorks for Chef Automate lets you create AWS-managed Chef servers that include ChefAutomate premium features, and use the Chef DK and other Chef tooling to manage them.
+A Chefserver manages nodes in your environment, stores information about those nodes, and serves as a central repository for your Chef cookbooks.
+The cookbooks contain recipes that are run by the ChefInfra client (chef-client) agent on each node that you manage by using Chef.
+You can use Chef tools like knife and Test Kitchen to manage nodes and cookbooks on a Chef server in the AWSOpsWorks for Chef Automate service.
+Chef Automate is an included server software package that provides automated workflow for continuous deployment and compliance checks.
+
+
+==================================================================
+==================================================================
+AWS SUPPORT // TRUSTED ADVISOR :
+==================================================================
+AWS Support offers four support plans: Basic, Developer, Business, and Enterprise
+
+All AWS customers automatically have 24/7 access to these features of the Basic support plan:
+• One-on-one responses to account and billing questions
+• Support forums
+• Service health checks
+• Documentation, technical papers, and best practice guides
+
+Customers with a Developer support plan have access to these additional features:
+• Best practice guidance
+• Building-block architecture support: guidance on how to use AWS products, features, and services together
+• AWS Identity and Access Management (IAM) to control user access to AWS Support
+
+In addition, customers with a Business or Enterprise support plan have access to these features:
+• Use-case guidance – What AWS products, features, and services to use to best support your specific needs.
+• AWS Trusted Advisor  – A feature of AWS Support, which inspects customer environments and identifies opportunities to save money, close security gaps, and improve system reliability and performance.
+• The AWS Support API to interact with Support Center and Trusted Advisor.
+  You can use the AWSSupport API to automate support case management and Trusted Advisor operations.
+• Third-party software support – Help with Amazon Elastic Compute Cloud (Amazon EC2) instance operating systems and configuration.
+
+In addition, customers with an Enterprise support plan have access to these features:
+• Application architecture guidance – Contextual guidance on how services fit together to meet your specific use case, workload, or application.
+• Infrastructure event management – Short-term engagement with AWS Support to get a deep understanding of your use case. After analysis, provide architectural and scaling guidance for an event.
+• Technical account manager – Work with a technical account manager (TAM) for your specific use cases and applications.
+• White-glove case routing.
+• Management business reviews.
+
+--> In the AWS Management Console, you can create three types of customer cases in AWS Support:
+• Account and billing support cases are available to all AWS customers so you can get help with billing and account-related questions.
+• Service limit increase requests are also available to all AWS customers. For information about the default service quotas, formerly referred to as limits, see AWS service limits.
+• Technical support cases connect you to technical support for help with service-related technical issues and, in some cases, third-party applications.
+
+** If you have the Basic support plan, you can't create a technical support case.
+** If you have a Developer support plan, you can communicate using the web.
+** If you have a Business or Enterprise support plan, you can also communicate by phone or live chat
+
+To change your support plan :
+1. Sign in to the AWS Management Console with your root account credentials at https://console.aws.amazon.com/support/plans/home.
+2. On the Support plans page, choose Change plan.
+3. On the Change support plan page, choose your New plan, review the plan information, and then choose Change plan.
+
+
+==================================================================
+==================================================================
+AWS TRUSTED ADVISOR : Cost Optimization -  Performance -  Security - Fault Tolerance -  Service Limits
+
+==================================================================
+AWS Trusted Advisor draws upon best practices learned from serving hundreds of thousands of AWS customers.
+Trusted Advisor inspects your AWS environment, and then makes recommendations when opportunities exist to save money, improve system availability and performance, or help close security gaps.
+All AWS customers have access to five Trusted Advisor checks.
+Customers with a Business or Enterprise support plan can view all Trusted Advisor checks.
+
+Organizational view for AWS Trusted Advisor :
+Organizational view lets you view Trusted Advisor checks for all accounts in your AWS Organizations.
+After you enable this feature, you can create reports to aggregate the check results for all member accounts in your organization.
+The report includes a summary of check results and information about affected resources for each account.
+The management account in your organization must have a Business or Enterprise support plan TO use this.
