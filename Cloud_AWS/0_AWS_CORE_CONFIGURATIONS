@@ -5,7 +5,7 @@ TOPICS TO COVER :
 =========================================================
 
 Compute : Amazon EC2 - AWS Elastic Beanstalk - AWS Lambda
-                      ----------------------
+                      
 Storage : Amazon S3 - Amazon EBS - Amazon S3 Glacier - AWS Snow Family - AWS Storage Gateway
 
 Security, Identity, & Compliance : AWS IAM - AWS Resource Access Manager - AWS Resource Groups & Tag Editor
@@ -33,17 +33,15 @@ Migration & Transfer : WS Application Discovery Service -  AWS Database Migratio
 Database : Amazon RDS - Amazon DynamoDB
          ------------  ---------------
 
-
-
 codecommit - git
 
 =======================================================
 
 NETFLIX CONFIGURATION USING AWS
 NOTE BOOK POINTS
-SINGLE LINE ABOUT EACH AND EVRY TOPIC
-
-
+SINGLE LINE ABOUT EACH AND EVRY TOPIC and introductory vedios
+Explain JSON files in IAM.
+Deploy a static website in aws s3
 
 
 
