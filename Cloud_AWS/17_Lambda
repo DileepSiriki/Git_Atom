@@ -1,0 +1,108 @@
+AWS LAMBDA : --> [ To build serverless applications composed of functions that are triggered by events ]
+----------------
+AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers.
+Lambda runs your code only when needed and scales automatically, from a few requests per day to thousands per second.
+You pay only for the compute time that you consume—there is no charge when your code is not running.
+With Lambda, you can run code for virtually any type of application or backend service, all with zero administration.
+Lambda runs your code on a high-availability compute infrastructure and performs all of the administration of the compute resources.
+This includes server and operating system maintenance, capacity provisioning and automatic scaling, code monitoring and logging.
+All you need to do is supply your code in one of the languages that Lambda supports.
+
+You can use Lambda to run your code in response to events, such as :
+  --> changes to data in an Amazon Simple Storage Service (Amazon S3) bucket or Amazon DynamoDB table;
+  --> to run your code in response to HTTP requests using Amazon API Gateway; or
+  --> to invoke your code using API calls made using AWS SDKs.
+
+When using Lambda, you are responsible only for your code.
+Lambda manages the compute fleet that offers a balance of memory, CPU, network, and other resources.
+**** This is in exchange for flexibility, which means you cannot log in to compute instances, or customize the operating system on provided runtimes.
+These constraints enable Lambda to perform operational and administrative activities on your behalf, including :
+  --> provisioning capacity, monitoring fleet health, applying security patches, deploying your code, and monitoring and logging your Lambda functions.
+
+**** YOU CAN NOT MANAGE YOUR COMPUTE INSTANCES IN LAMBDA. IF YOU WANT TO DO SO , USE EC2 or BEANSTALK .
+
+===================== IMPORTANT=====================================================================================================================
+EXAMPLES : If we want our code to do tasks such as :
+            --> In app purchases upon a button click by user
+            --> Update street address as in Zomato
+            --> Or make image thumbnails when user uploads a photo etc ;
+
+            We can trigger LAMBDA for the above scenarios :
+            --> when there is a change in a bucket due to image upload
+            --> Updates in dynamo DB
+            --> In app activity
+
+    Code we run in LAMDA is called as LAMBDA FUNCTION .
+    we can write our code and upload a zip file --> a .zip with code + All dependencies or a Container image
+    or write code directly in LAMBDA console which provides a code editor for non-compiled languages that lets you modify and test code quickly. [ such as Node.js or Python. ]
+    or use predefined code inbuilt for common use case scenarios.
+    LAMBDA issues itself an execution role to execute the functions from IAM.  Goto IAM -> Roles
+    You can get the log groups or execution logs from CloudWatch .
+    You can automate the creation and clean up of functions, log groups, and roles with AWSCloudFormation .
+    So we upload code and only pay for the time our code runs . It is taken care by LAMBDA.
+
+=====================================================================================================================================================
+LAYERS:
+--------
+It is a .zip file archive that contains libraries, a custom runtime, or other dependencies.
+You can use a layer to distribute a dependency to multiple functions. You do not use layers with container images.
+Instead, you package your preferred runtime, libraries, and other dependencies into the container image when you build the image.
+
+EVENT :
+---------
+It is a JSON-formatted document that contains data for a Lambda function to process.
+The runtime converts the event to an object and passes it to your function code.
+When you invoke a function, you determine the structure and contents of the event.
+
+Example CUSTOM event – weather data
+{
+  "TemperatureK": 281,
+  "WindKmh": -3,
+  "HumidityPct": 0.55,
+  "PressureHPa": 1020
+}
+
+Example SERVICE event – Amazon SNS notification
+{
+  "Records": [
+      {
+        "Sns": {
+             "Timestamp": "2019-01-02T12:45:07.000Z",
+             "Signature": "tcc6faL2yUC6dgZdmrwh1Y4cGa/ebXEkAi6RibDsvpi+tE/1+82j...65r==",
+             "MessageId": "95df01b4-ee98-5cb9-9903-4c221d41eb5e",
+             "Message": "Hello from SNS!",
+             ...
+
+TRIGGER :
+----------
+A trigger is a resource or configuration that invokes a Lambda function.
+This includes AWS services that you can configure to invoke a function, applications that you develop, and event source mappings .
+An event source mapping is a resource in Lambda that reads items from a stream or queue and invokes a function.
+
+INVOKE LAMBDA FROM CloudTrail -> S3 -> Lambda // CloudWatch // Ec2 // SNS // SQS
+--------------------------------------------------------------------------
+You can take advantage of Amazon S3's bucket notification feature and direct Amazon S3 to publish object-created events to AWS Lambda.
+Whenever CloudTrail writes logs to your S3 bucket, Amazon S3 can then invoke your Lambda function by passing the Amazon S3 object-created event as a parameter.
+The S3 event provides information, including the bucket name and key name of the log object that CloudTrail created.
+Your Lambda function code can read the log object and process the access records logged by CloudTrail.
+
+Amazon CloudWatch events help you to respond to state changes in your AWS resources.
+When your resources change state, they automatically send events into an event stream.
+You can create rules that match selected events in the stream and route them to your AWS Lambda function to take action.
+For example, you can automatically invoke an AWS Lambda function to log the state of an EC2 instance or AutoScaling group.
+
+You can use AWS Lambda to process lifecycle events from Amazon Elastic Compute Cloud and manage Amazon EC2 resources.
+Amazon EC2 sends events to Amazon CloudWatch Events for lifecycle events such as when an instance changes state, when an Amazon Elastic Block Store volume snapshot completes, or when a spot instance is scheduled to be terminated.
+You configure CloudWatch Events to forward those events to a Lambda function for processing.
+CloudWatch Events invokes your Lambda function asynchronously with the event document from Amazon EC2.
+
+You can use a Lambda function to process Amazon Simple Notification Service notifications.
+Amazon SNS supports Lambda functions as a target for messages sent to a topic.
+You can subscribe your function to topics in the same account or in other AWS accounts.
+
+You can use an AWS Lambda function to process messages in an Amazon Simple Queue Service (AmazonSQS) queue.
+Lambda event source mappings support standard queues and first-in, first-out(FIFO) queues.
+With Amazon SQS, you can offload tasks from one component of your application by sending them to a queue and processing them asynchronously.
+Lambda polls the queue and invokes your Lambda function synchronously  with an event that contains queue messages.
+Lambda reads messages in batches and invokes your function once for each batch.
+When your function successfully processes a batch, Lambda deletes its messages from the queue.

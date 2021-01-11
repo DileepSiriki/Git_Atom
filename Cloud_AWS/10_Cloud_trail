@@ -5,6 +5,7 @@ Actions taken by a user, role, or an AWS service are recorded as events in Cloud
 Events include actions taken in the AWS Management Console, AWS Command Line Interface, and AWS SDKs and APIs.
 You can use CloudTrail to view, search, download, archive, analyse, and respond to account activity across your AWS infrastructure.
 You can identify who or what took which action, what resources were acted upon, when the event occurred, and other details to help you analyse and respond to activity in your AWS account.
+CloudTrail captures API calls as events. . A trail enables CloudTrail to deliver log files of events to an Amazon S3 bucket.
 
 DEFAULT : CLOUD TRAIL EVENT  - Only for 90 days
 ---------------------------------

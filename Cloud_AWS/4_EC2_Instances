@@ -68,7 +68,8 @@ Amazon EC2 is hosted in multiple locations world-wide. These locations are compo
       Each Amazon EC2 Region is designed to be isolated from the other Amazon EC2 Regions. This achieves the greatest possible fault tolerance and stability.
       When you view your resources, you see only the resources that are tied to the Region that you specified. This is because Regions are isolated from each other, and we don't automatically replicate resources across Regions.
 
-    • Availability Zones are multiple, isolated locations within each Region. Each Region has multiple, isolated locations known as Availability Zones.
+    • Region is devided into availability zones to isolate themselves from a disaster to other zones.
+      Availability Zones are multiple, isolated locations within each Region. Each Region has multiple, isolated locations known as Availability Zones.
       Availability Zones are distinct locations that are engineered to be isolated from failures in other Availability Zones.
       By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location
       An Availability Zone is represented by a Region code followed by a letter identifier; for example,us-east-1a --> AZ ID is unique for all accounts but us-east-1a might not be same for all.
@@ -107,8 +108,6 @@ Amazon EC2 is hosted in multiple locations world-wide. These locations are compo
           B = REGIONS
           C = AVAILABILITY ZONE
           D = EDGE LOCATIONS
-
-
 
 EC2 ROOT DEVICE VOLUME : [ AMIs backed by Amazon EC2 instance store (OLDER) <===> AMIs backed by Amazon EBS.(LATEST) ]
 -------------------------
