@@ -47,8 +47,14 @@ benifits of cloud
 wordpress blog - youtube https://www.youtube.com/embed/qKljYgi2lQ0?rel=0&hd=1
 STS - https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html
 
+ENI in VPC : https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#scenarios-enis
+A secondary ENIcan be added to an instance. While primary ENIs cannot be detached from an instance, secondary ENIs can be detached and attached to a different instance
+
 security - KMS , IAM , STS (security token service) , CloudTrail , Cloudwatch alarms , SNS
 
+s3 storage classes
+
+===================================
 --------------------
 CONFIGURATIONS :
 --------------------

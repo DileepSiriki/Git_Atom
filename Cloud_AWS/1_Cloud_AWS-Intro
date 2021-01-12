@@ -146,6 +146,39 @@ A hypervisor allows one host computer to support multiple guest VMs by virtually
     Once the operating system is running, the hosted hypervisor can launch. Type-2 hypervisors are often used to run multiple operating systems on a single machine, rather than to emulate numerous running systems on the hardware.
     Popular Type-2 hypervisors include VMware Workstation, VirtualBox
 
+END OF CLOUD INTRO
+============================================================================================================
+############################################################################################################
+============================================================================================================
+CLOUD COMPUTING :
+------------------
+Cloud computing is the on-demand delivery of compute power, database, storage, applications, and other IT resources through a cloud services platform via the Internet with pay-as-you-go pricing.
+With cloud computing, you don’t need to make large upfront investments in hardware and spend a lot of time on the heavy lifting of managing that hardware.
+Instead, you can provision exactly the right type and size of computing resources you need to power your newest bright idea or operate your IT department.
+You can access as many resources as you need, almost instantly, and only pay for what you use.
+With cloud computing you avoid undifferentiated work such as procurement, maintenance, and capacity planning.
+
+A cloud services platform such as Amazon Web Services or Azure owns and maintains the network-connected hardware required for these application services.
+while you provision and use what you need via a web application.
+
+• Trade capital expense for variable expense
+• Stop guessing capacity
+• Increase speed and agility
+• Stop spending money running and maintaining data centers
+• Go global in minutes
+
+EX : Netflix in Aws
+
+AMAZON WEB SERVICES  : Since 2006 -
+--------------------------
+Amazon Web Services offers a broad set of global cloud-based products including compute, storage, databases, analytics, networking, mobile, developer tools, management tools, IoT, security, and enterprise applications: on-demand, available in seconds, with pay-as-you-go pricing.
+From data warehousing to deployment tools, directories to content delivery, over 175 AWS services are available around 190 countries .
+This allows enterprises, start-ups, small and medium-sized businesses, and customers in the public sector to access the building blocks they need to respond quickly to changing business requirements.
+One of the key benefits of cloud computing is the opportunity to replace upfront capital infrastructure expenses with low variable costs that scale with your business.
+With the cloud, businesses no longer need to plan for and procure servers and other IT infrastructure weeks or months in advance.
+Instead, they can instantly spin up hundreds or thousands of servers in minutes and deliver results faster.
+
+
 
 FIVE PILLARS OF AWS :
 =======================
@@ -153,6 +186,7 @@ FIVE PILLARS OF AWS :
   Focuses on how you can continuously improve your ability to run systems, create better procedures, and gain insights.
   Human error is the primary cause of defects and operational incidents. The more operations that can be automated, the less chance there is for human error.
     Infrastructure as Code -> process of managing your infrastructure through machine-readable configuration files to automate your infrastructure -> CLOUD FORMATION
+
     Observability -> Observability is the process of measuring the internal state of your system. This is usually done to optimize it to some desired end state.
 
 2. SECURITY : -> Policies (IAM) , Network Security (VPC) , Encryption (KMS)
@@ -225,11 +259,19 @@ REZIONS AND ZONES : open EC2 -> move to bottom -> SERVICE HEALTH & ZONE STATUS
 ----------------------------------------------------------------------------------
 Amazon EC2 is hosted in multiple locations world-wide. These locations are composed of Regions, Availability Zones, Local Zones, AWS Outposts, and Wavelength Zones.
 
-    • Each Region is a separate geographic area.
+REGIONS : --> 24 In Total
+-------------------------
+    • An AWS Region is a physical location in the world and each Region is a separate geographic area.
       Each Amazon EC2 Region is designed to be isolated from the other Amazon EC2 Regions. This achieves the greatest possible fault tolerance and stability.
       When you view your resources, you see only the resources that are tied to the Region that you specified. This is because Regions are isolated from each other, and we don't automatically replicate resources across Regions.
 
-    • Region is devided into availability zones to isolate themselves from a disaster to other zones.
+#### Regions are completely isolated so this achieves the greatest possible fault tolerance and stability.
+#### Availability Zones are connected through low latency links .
+#### AWS provides you with the flexibility to place instances and store data within multiple geographic regions as well as across multiple Availability Zones within each AWS Region.
+
+AVAILABILITY ZONES : --> 77 In Total
+----------------------------------------
+    • Region is divided into availability zones to isolate themselves from a disaster to other zones. These are discrete data centres.
       Availability Zones are multiple, isolated locations within each Region. Each Region has multiple, isolated locations known as Availability Zones.
       Availability Zones are distinct locations that are engineered to be isolated from failures in other Availability Zones.
       By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location
@@ -241,9 +283,7 @@ Amazon EC2 is hosted in multiple locations world-wide. These locations are compo
 
       The resources that you create in one Region do not exist in any other Region unless you explicitly use a replication feature offered by an AWS service.
       For example, Amazon S3 and Amazon EC2 support cross-Region replication.
-      Some services, such as AWS Identity and Access Management (IAM), do not have Regional resources. 
-
-
+      Some services, such as AWS Identity and Access Management (IAM), do not have Regional resources.
 
     • Local Zones provide you the ability to place resources, such as compute and storage, in multiple locations closer to your end users.
       Local Zones have their own connections to the internet and support AWS Direct Connect, so that resources created in a Local Zone can serve local users with low-latency communications.
@@ -252,7 +292,6 @@ Amazon EC2 is hosted in multiple locations world-wide. These locations are compo
 
     • AWS Outposts is a fully managed service that extends AWS infrastructure, services, APIs, and tools to customer premises.
       By providing local access to AWS managed infrastructure, AWS Outposts enables customers to build and run applications on premises using the same programming interfaces as in AWSRegions, while using local compute and storage resources for lower latency and local data processing needs.
-
 
     • Wavelength Zones allow developers to build applications that deliver ultra-low latencies to 5G devices and end users. Wavelength deploys standard AWS compute and storage services to the edge of telecommunication carriers' 5G networks.
       A Wavelength Zone is represented by a Region code followed by an identifier that indicates the Wavelength Zone, for example, us-east-1-wl1-bos-wlz-1.
@@ -277,5 +316,3 @@ Amazon EC2 is hosted in multiple locations world-wide. These locations are compo
           D = EDGE LOCATIONS
 
 ### List all regions and zones , edge locations , wavelengths , outposts for interview purpose // get a rough sketch
-
-SECURITY is provided by -> KMS - CMK and IAM

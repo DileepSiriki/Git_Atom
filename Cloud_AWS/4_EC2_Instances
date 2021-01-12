@@ -180,7 +180,8 @@ INSTANCE PURCHASING OPTIONS :
       The price per second for a running On-Demand Instance is fixed.
       Recommends that you use On-Demand Instances for applications with short-term, irregular workloads that cannot be interrupted.
       You can request a limit increase for each On-Demand Instance limit type from the Limits page or the vCPU limits calculator in the Amazon EC2 console
-
+      On-Demand Instances would be billed for the number of seconds they are running.
+      
 •Reserved Instances – Reduce your Amazon EC2 costs by making a commitment to a consistent instance configuration, including instance type and Region, for a term of 1 or 3 years.
       You can purchase a Reserved Instance for a one-year or three-year commitment, with the three-year commitment offering a bigger discount.
       Reserved Instances do not renew automatically; when they expire, you can continue using the EC2instance without interruption, but you are charged On-Demand rates.
@@ -196,6 +197,8 @@ INSTANCE PURCHASING OPTIONS :
       Spot Instances with a defined duration (also known as Spot blocks) are designed not to be interrupted and will run continuously for the duration you select.
       This makes them ideal for jobs that take a finite time to complete, such as batch processing, encoding and rendering, modeling and analysis, and continuous integration.
       You can use a duration of 1, 2, 3, 4, 5, or 6 hour.
+
+      While Spot Instances would be the least costl yoption, they are not suitable for jobs that cannot be interrupted or must complete within a certain time period.
 
       In nav bar (left) -> find option "SPOT INSTANCES"
       To launch , similar steps -> launch-> select AMI (step-1) -> Type (step-2) -> configure Instance (step-3) -> here tick purchasing options (Request spot instances)

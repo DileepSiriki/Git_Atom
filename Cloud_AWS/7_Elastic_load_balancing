@@ -12,6 +12,13 @@ Supports :
      Gateway Load Balancers, and
      Classic Load Balancers.
 
+An Application Load Balancer (ALB) sends requests to healthy instances only.
+An ALB performs periodic health checks on targets in a target group.
+An instance that fails health checks for a configurable number of consecutive times is considered unhealthy.
+The load balancer will no longer send requests to the instance until it passes another health check.
+So if an instance stops working , it does not replace it rather it stops sending requests to that unhealthy instance .
+Replacing is a function of autoscaling and not load balancer .
+
 WAY OF WORKING :
 -----------------
 -> A load balancer accepts incoming traffic from clients and routes requests to its registered targets (such as EC2 instances) in one or more Availability Zones.

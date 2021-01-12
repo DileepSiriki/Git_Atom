@@ -202,6 +202,8 @@ Each message can have up to 10 attributes.
 Message attributes are optional and separate from the message body (however, they are sent alongside it).
 Your consumer can use message attributes to handle a message in a particular way without having to process the message body first.
 
+When the ReceiveMessageWaitTimeSeconds property of a queue is set to a value greater than zero, long polling is in effect.
+Long polling reduces the number of empty responses by allowing Amazon SQS to wait until a message is available before sending a response to a ReceiveMessage request.
 
 ==========================================================================
 ==========================================================================
@@ -241,5 +243,5 @@ SQS/SNS/MQ :
 Amazon MQ is a managed message broker service that provides compatibility with many popular message brokers.
 We recommend Amazon MQ for migrating applications from existing message brokers that rely on compatibility with APIs such as JMS or protocols such as AMQP 0-9-1, AMQP 1.0, MQTT, OpenWire, and STOMP.
 
-Amazon SQS and Amazon SNS are queue and topic services that are highly scalable, simple to use, and don't require you to set up message brokers. 
+Amazon SQS and Amazon SNS are queue and topic services that are highly scalable, simple to use, and don't require you to set up message brokers.
 We recommend these services for new applications that can benefit from nearly unlimited scalability and simple APIs.
