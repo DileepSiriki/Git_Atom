@@ -773,7 +773,7 @@ ROUTE TABLES :
                             This means that you don't need to manually enter VPN routes to your route tables.
 
 
-VPC ENDPOINT :
+VPC ENDPOINT : [ An endpoint is a URL that is the entry point for a web service ]
 ----------------
 A virtual device that enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by AWS Private Link.
 It does not require an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
@@ -954,6 +954,8 @@ CONNECT RESOURCES EXPLICITLY : [ AWS DEVICE FARM <--> AWS PRIVATE LINK <--> VPC 
 AWS Private Link provides private connectivity between VPCs and services hosted on AWS or on-premises, securely on the Amazon network.
 By providing a private endpoint to access your services, AWS Private Link ensures your traffic is not exposed to the public internet.
 AWS Private Link makes it easy to connect services across different accounts and VPCs to significantly simplify your network architecture.
+It is a  technology that enables you to privately access AWS resources by using private IP addresses.
+PrivateLink restricts all network traffic between your VPC and AWS resources to the Amazon network. 
 
 
 AWS Private Link is a highly available, scalable technology that enables you to privately connect your VPC to supported AWS services

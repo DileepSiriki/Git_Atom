@@ -1,0 +1,201 @@
+AWS CLOUD FORMATION : [ Similar to using GIT with Coding .]
+-----------------------
+AWS Cloud-Formation is a service that helps you model and set up your Amazon Web Services resources so that you can spend less time managing those resources and more time focusing on your applications that run in AWS.
+You create a template that describes all the AWS resources that you want (like AmazonEC2 instances or Amazon RDS DB instances), and AWS Cloud-Formation takes care of provisioning and configuring those resources for you.
+You don't need to individually create and configure AWS resources and figure out what's dependent on what; AWS Cloud-Formation handles all of that.
+AWS Cloud-Formation is a free service; however, you are charged for the AWS resources you include in your stacks at the current rates for each resource.
+
+USER --> TEMPLATE [ yaml / json / txt ] --> CREATE A STACK --> Cloud-Formation HANDLES THE REST
+
+--> Simplify infrastructure management :
+    For a scalable web application that also includes a back-end database, you might use an Auto Scaling group, an Elastic Load Balancing load balancer, and an Amazon Relational Database Service data base instance.
+    Launching these resources individually and maintaining is a complex task .
+    Instead, you can create or modify an existing AWS Cloud-Formation template.
+    A template describes all of your resources and their properties. Now create a stack and leave the rest to Cloud-Formation.
+    After the stack has been successfully created, your AWS resources are up and running.
+    You can delete the stack just as easily, which deletes all the resources in the stack.
+
+--> Quickly replicate your infrastructure :
+    If your application requires additional availability, you might replicate it in multiple regions so that if one region becomes unavailable, your users can still use your application in other regions.
+    The challenge in replicating your application is that it also requires you to replicate your resources.
+    Manually doing this would require us to record all resources and launching them again in another region .
+    With a Cloud-Formation template you can just replicate your application in another region with ease.
+
+--> Easily control and track changes to your infrastructure :
+    In case you want to update a resource say an auto scaling group , if we do it manually we might incur issues and have to rollback to original state.
+    Because these templates are text files, you simply track differences in your templates to track changes to your infrastructure, similar to the way developers control revisions to source code.
+    you can use a version control system with your templates so that you know exactly what changes were made, who made them, and when.
+    If at any point you need to reverse changes to your infrastructure, you can use a previous version of your template.
+
+CONCEPTS :
+------------
+
+TEMPLATE :
+----------
+It is a JSON or YAML formatted text file. You can save these files with any extension, such as .json, .yaml, .template, or .txt.
+AWS Cloud-Formation uses these templates as blueprints for building your AWS resources.
+For example, in a template, you can describe an AmazonEC2 instance, such as the instance type, the AMI ID, block device mappings, and its Amazon EC2 key pair name.
+
+  Example YAML :
+  AWSTemplateFormatVersion: "2010-09-09"
+  Description: A sample template
+  Resources:
+      MyEC2Instance:
+            Type: "AWS::EC2::Instance"
+            Properties:
+                ImageId: "ami-0ff8a91507f77f867"
+                InstanceType: t2.micro
+                KeyName: testkey
+                BlockDeviceMappings:
+                    -
+                        DeviceName: /dev/sdm
+                        Ebs:
+                            VolumeType: io1
+                            Iops: 200
+                            DeleteOnTermination: false
+                            VolumeSize: 20
+
+STACK :
+--------
+A stack is a collection of related AWS resources that you can manage as a single unit.
+You create, update, and delete a collection of resources by creating, updating, and deleting stacks.
+All the resources in a stack are defined by the stack's AWS Cloud-Formation template.
+Suppose you created a template that includes an Auto Scaling group, Elastic Load Balancing load balancer, and an Amazon Relational Database Service (Amazon RDS) database instance.
+To create those resources, you create a stack by submitting the template that you created, and AWS Cloud-Formation provisions all those resources for you.
+Because AWS CloudFormation treats the stack resources as a single unit, they must all be created or deleted successfully for the stack to be created or deleted.
+options available to create a stack :
+  -> upload a template to S3 , specify already existing template in S3 , use any of the  sample templates available for testing , or write your own directly on console .
+To estimate the cost of your stack, select the Estimate cost link in the Template section.
+
+CHANGE SETS :
+---------------
+If you need to make changes to the running resources in a stack, you update the stack.
+Before making changes to your resources, you can generate a change set, which is a summary of your proposed changes.
+Change sets allow you to see how your changes might impact your running resources, especially for critical resources, before implementing them.
+Example when you want to change the name of a table in Database.
+
+WAY OF WORKING :
+-----------------
+When you create a stack, AWS Cloud-Formation makes underlying service calls to AWS to provision and configure your resources.
+Note that AWS Cloud-Formation can perform only actions that you have permission to do. So create IAM roles with the required roles.
+
+1. We design an Cloud-Formation template with the desired resources .
+  We can use either a AWSCloud-Formation Designer or write one in a text editor. You can also choose to use a provided template.
+
+2. Save the template locally or in an S3 bucket. If you created a template, save it with any file extension like .json, .yaml, or .txt
+
+3. Create an AWS Cloud-Formation stack by specifying the location of your template file , such as a path on your local computer or an Amazon S3 URL.
+   If the template contains parameters, you can specify input values when you create the stack.
+   Parameters help when you don't want to store sensitive information such as Usernames and passwords.
+   Parameters enable you to pass in values to your template so that you can customize your resources each time you create a stack.
+
+4. If you specify a template file stored locally, AWS Cloud-Formation uploads it to an S3 bucket in your AWS account.
+   AWS Cloud-Formation creates a bucket for each region in which you upload a template file.
+   The buckets are accessible to anyone with Amazon Simple Storage Service (Amazon S3) permissions in your AWS account.
+   If a bucket created by AWSCloud-Formation is already present, the template is added to that bucket.
+   Then whenever you create or update a stack, specify the Amazon S3 URL of a template file.
+
+5. AWS Cloud-Formation provisions and configures resources by making calls to the AWS services that are described in your template.
+   After all the resources have been created, AWS Cloud-Formation reports that your stack has been created.
+   You can then start using the resources in your stack.
+   If stack creation fails, AWS Cloud-Formation rolls back your changes by deleting the resources that it created.
+
+UPDATING STACK WITH CHANGE SETS :
+------------------------------------
+When you need to update your stack's resources, you can modify the stack's template.
+You don't need to create a new stack and delete the old one.
+To update a stack, create a change set by submitting a modified version of the original stack template, different input parameter values, or both.
+AWSCloud-Formation compares the modified template with the original template and generates a change set.
+The change set lists the proposed changes.
+After reviewing the changes, you can execute the change set to update your stack or you can create a new change set.
+
+1. You can modify an AWS Cloud-Formation stack template by using AWS Cloud-Formation Designer or a text editor.
+   For example, if you want to change the instance type for an EC2 instance, you would change the value of the InstanceType property in the original stack's template.
+
+2. Save the AWS Cloud-Formation template locally or in an S3 bucket.
+
+3. Create a change set by specifying the stack that you want to update and the location of the modified template, such as a path on your local computer or an Amazon S3 URL.
+   If the template contains parameters, you can specify values when you create the change set.
+   If you specify a template that is stored on your local computer, AWS Cloud-Formation automatically uploads your template to an S3 bucket in your AWS account.
+
+4. View the change set to check that AWS Cloud-Formation will perform the changes that you expect.
+   For example, check whether AWS Cloud-Formation will replace any critical stack resources.
+   You can create as many change sets as you need until you have included the changes that you want.
+
+5. Execute the change set that you want to apply to your stack.
+   AWS Cloud-Formation updates your stack by updating only the resources that you modified and signals that your stack has been successfully updated.
+   If the stack updates fails, AWS Cloud-Formation rolls back changes to restore the stack to the last known working state.
+
+DELETE A STACK :
+-------------------
+When you delete a stack, you specify the stack to delete, and AWS Cloud-Formation deletes the stack and all the resources in that stack.
+If you want to delete a stack but want to retain some resources in that stack, you can use a deletion policy to retain those resources.
+After all the resources have been deleted, AWS Cloud-Formation signals that your stack has been successfully deleted.
+If AWS Cloud-Formation cannot delete a resource, the stack will not be deleted.
+Any resources that haven't been deleted will remain until you can successfully delete the stack.
+
+ENABLING CLOUD TRAIL :
+--------------
+AWS CloudFormation is integrated with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in AWS CloudFormation.
+CloudTrail captures all API calls for AWS CloudFormation as events, including calls from the AWS CloudFormation console and from code calls to the AWS CloudFormation APIs.
+If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for AWS CloudFormation.
+If you don't configure a trail, you can still view the most recent events in the CloudTrail console in Event history.
+
+BEST PRACTICES :
+------------------
+Planning and organizing :
+  •Organize your stacks by lifecycle and ownership
+  •Use cross-stack references to export shared resources
+  •Use IAM to control access
+  •Reuse templates to replicate stacks in multiple environments
+  •Verify quotas for all resource types
+  •Use nested stacks to reuse common template patterns
+
+Creating templates
+  •Do not embed credentials in your templates
+  •Use AWS-specific parameter types
+  •Use parameter constraints
+  •Use AWS::CloudFormation::Init to deploy software applications on Amazon EC2instances
+  •Use the latest helper scripts
+  •Validate templates before using them
+
+Managing stacks
+  •Manage all stack resources through AWS CloudFormation
+  •Create change sets before updating your stacks
+  •Use stack policies
+  •Use AWS CloudTrail to log AWS CloudFormation calls
+  •Use code reviews and revision controls to manage your templates
+  •Update your Amazon EC2 Linux instances regularly
+
+USING CODE-PIPELINE :
+--------------------------
+Continuous delivery is a release practice in which code changes are automatically built, tested, and prepared for release to production.
+With AWS CloudFormation and CodePipeline, you can use continuous delivery to automatically build and test changes to your AWS CloudFormation templates before promoting them to production stacks.
+This release process lets you rapidly and reliably make changes to your AWS infrastructure.
+For example, you can create a workflow that automatically builds a test stack when you submit an updated template to a code repository.
+After AWS CloudFormation builds the test stack, you can test it and then decide whether to push the changes to a production stack
+
+Use CodePipeline to build a continuous delivery workflow by building a pipeline for AWSCloudFormation stacks.
+CodePipeline has built-in integration with AWS CloudFormation, so you can specify AWS CloudFormation-specific actions, such as creating, updating, or deleting a stack, within a pipeline.
+
+
+REASONS FOR FAILURE OF CREATION / DELETION OF STACK :
+---------------------------------------------------------
+•Delete stack fails
+•Dependency error  --> To resolve a dependency error, add a DependsOn attribute to resources that depend on other resources in your template.
+•Error parsing parameter when passing a list
+•Insufficient IAM permissions
+•Invalid value or unsupported resource property
+•Limit exceeded
+•Nested stacks are stuck in UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, or UPDATE_ROLLBACK_IN_PROGRESS
+•No updates to perform
+•Resource failed to stabilize during a create, update, or delete stack operation
+•Security group does not exist in VPC
+•Update rollback failed
+•Wait condition didn't receive the required number of signals from an Amazon EC2 instance
+•Resource removed from stack but not deleted.
+
+SAMPLE TEMPLATES :
+----------------------
+Forexample, one sample template describes a load-balancing, auto scaling WordPress blog in an AmazonVPC.
+To view the sample templates, go to https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-sample-templates.html
