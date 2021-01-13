@@ -151,8 +151,11 @@ EC2 ROOT DEVICE VOLUME : [ AMIs backed by Amazon EC2 instance store (OLDER) <===
 -->You can convert an instance store-backed Linux AMI that you own to an Amazon EBS-backed Linux AMI.
    You can't convert an instance store-backed Windows AMI to an Amazon EBS-backed Windows AMI and you cannot convert an AMI that you do not own.
 
-AMAZON MACHIENE IMAGE : AMI
+AMAZON MACHIENE IMAGE : AMI -->
 -----------------------------
+Bundle of an OS and pre installed s/w for your virtual machine .
+It has a fixed state , so when you start , stop and start , they have a same data.
+
 It is a template that contains a software configuration (for example, an operating system, an application server, and applications)
 From an AMI, you launch an instance, which is a copy of the AMI running as a virtual server in the cloud. You can also launch multiple instances of an AMI.
 Your instances keep running until you stop, hibernate, or terminate them, or until they fail.
@@ -173,6 +176,7 @@ You can also create your own custom AMI or AMIs; doing so enables you to quickly
 -->AMIs that are backed by Amazon EBS snapshots can take advantage of Amazon EBS encryption.
    Snapshots of both data and root volumes can be encrypted and attached to an AMI.
 
+
 INSTANCE PURCHASING OPTIONS :
 ------------------------------
 •On-Demand Instances – Pay, by the second, for the instances that you launch.
@@ -181,7 +185,7 @@ INSTANCE PURCHASING OPTIONS :
       Recommends that you use On-Demand Instances for applications with short-term, irregular workloads that cannot be interrupted.
       You can request a limit increase for each On-Demand Instance limit type from the Limits page or the vCPU limits calculator in the Amazon EC2 console
       On-Demand Instances would be billed for the number of seconds they are running.
-      
+
 •Reserved Instances – Reduce your Amazon EC2 costs by making a commitment to a consistent instance configuration, including instance type and Region, for a term of 1 or 3 years.
       You can purchase a Reserved Instance for a one-year or three-year commitment, with the three-year commitment offering a bigger discount.
       Reserved Instances do not renew automatically; when they expire, you can continue using the EC2instance without interruption, but you are charged On-Demand rates.
@@ -198,13 +202,22 @@ INSTANCE PURCHASING OPTIONS :
       This makes them ideal for jobs that take a finite time to complete, such as batch processing, encoding and rendering, modeling and analysis, and continuous integration.
       You can use a duration of 1, 2, 3, 4, 5, or 6 hour.
 
-      While Spot Instances would be the least costl yoption, they are not suitable for jobs that cannot be interrupted or must complete within a certain time period.
-
+      While Spot Instances would be the least costlY option, they are not suitable for jobs that cannot be interrupted or must complete within a certain time period.
+      They are terminated by AWS if it costs more than your BID in next 2 minutes .
+      It gives some time window for you to save your work .
+      
       In nav bar (left) -> find option "SPOT INSTANCES"
       To launch , similar steps -> launch-> select AMI (step-1) -> Type (step-2) -> configure Instance (step-3) -> here tick purchasing options (Request spot instances)
 
 •Dedicated Hosts – Pay for a physical host that is fully dedicated to running your instances, and bring your existing per-socket, per-core, or per-VM software licenses to reduce costs.
 •Dedicated Instances – Pay, by the hour, for instances that run on single-tenant hardware.
+
+                              ON-DEMAND           RESERVED            SPOT
+            ----------------------------------------------------------------------
+            PRICE               HIGH              MEDIUM              LOW
+            FLEXIBILITY         HIGH              LOW                 MEDIUM
+            RELIABILITY         MEDIUM            HIGH                LOW
+
 
                                          Dedicated Host                                                Dedicated Instance
   --------------------------------------------------------------------------------------------------------------------------------------
@@ -226,6 +239,20 @@ INSTANCE PURCHASING OPTIONS :
       This gives you the ability to create and manage Capacity Reservations independently from the billing discounts offered by Savings Plans or regional Reserved Instances.
       By creating Capacity Reservations, you ensure that you always have access to EC2 capacity when you need it, for as long as you need it
       Your On-Demand Instance limits per Region apply.
+
+  T 2 . MICRO = T -  Instance Family
+                2 - Generation 2
+                Micro - Indicating Instance is very small.
+                1 CPU & 1 Gb Memory
+
+  M 3 . LARGE = M - Instance Family
+                3 - Generation 3
+                Large - Balanced CPU to Memory Ratio .
+                2 CPU & 7.5 Gb Memory
+
+ R 3 . LARGE = 2 CPU & 15 Gb Memory   -> Enterprise Servers .
+ D2          = For high sequential Read / Write -> Data base operations .
+
 
 LIFECYCLE :
 --------------

@@ -10,10 +10,12 @@ CLOUD INTRO :
     It offers online data storage, infrastructure, and application.
     It offers platform independency, as the software is not required to be installed locally on the PC.
     Hence, the Cloud Computing is making our business applications mobile and collaborative.
-    It can be classified to two types ""
+    It can be classified to two types :
+
       --> DEPLOYMENT MODELS
         Deployment models define the type of access to the cloud, i.e., how the cloud is located?
         Cloud can have any of the four types of access: PUBLIC, PRIVATE, HYBRID, COMMUNITY.
+
       --> SERVICE MODELS
         Cloud computing is based on service models : IAAS , PAAS , SAAS.
 
@@ -195,6 +197,10 @@ Instead, you can provision exactly the right type and size of computing resource
 You can access as many resources as you need, almost instantly, and only pay for what you use.
 With cloud computing you avoid undifferentiated work such as procurement, maintenance, and capacity planning.
 
+cloud computing provides means by which we can access applications as utilities over the internet.
+It allows us to create/configure/customize the Business online.
+Since we need not install any software locally , it is platform independent.
+
 A cloud services platform such as Amazon Web Services or Azure owns and maintains the network-connected hardware required for these application services.
 while you provision and use what you need via a web application.
 
@@ -208,7 +214,7 @@ EX : Netflix in Aws
 
 AMAZON WEB SERVICES  : Since 2006 -
 --------------------------
-Amazon Web Services offers a broad set of global cloud-based products including compute, storage, databases, analytics, networking, mobile, developer tools, management tools, IoT, security, and enterprise applications: on-demand, available in seconds, with pay-as-you-go pricing.
+Amazon Web Services is a secure cloud service offering a broad set of global cloud-based products including compute, storage, databases, analytics, networking, mobile, developer tools, management tools, IoT, security, and enterprise applications: on-demand, available in seconds, with pay-as-you-go pricing.
 From data warehousing to deployment tools, directories to content delivery, over 175 AWS services are available around 190 countries .
 This allows enterprises, start-ups, small and medium-sized businesses, and customers in the public sector to access the building blocks they need to respond quickly to changing business requirements.
 One of the key benefits of cloud computing is the opportunity to replace upfront capital infrastructure expenses with low variable costs that scale with your business.
@@ -246,6 +252,32 @@ FIVE PILLARS OF AWS :
   Focuses on achieving business outcomes while minimizing costs.
   OpEx is an ongoing pay-as-you-go model whereas CapEx is a one-time purchase model.
 
+
+WAYS TO COMMUNICATE WITH AWS :
+-------------------------------
+
+  WEB CONSOLE                     ----
+  CLI                                 |------- API --------------- AWS
+  SDK for java,python etc ;           |------- API --------------- SERVICES
+  Blue-Prints                     ----
+
+  WEB CONSOLE is the actual AWS Page
+  CLI is used to automate tasks similar to JENKINS written in python.
+  SDK is used to integrate AWS in our Applications --> SDK = API + IDE + Debugger + Tools
+  Blue-Prints are used to convert services & dependencies into a real running System in AWS . --> Cloud Formation
+  Everything in AWS can be controlled via API by making REST API calls using HTTPS protocols. This is inconvenient hence CLI and SDK's have evolved.
+
+
+SECURITY IN AWS :
+--------------------
+It is provided by the below :
+  --> IAM & ROLES -- Identity and Management Services
+  --> MFA         -- Multi Factor Authentication
+  --> KMS         -- Key Master Service
+  --> STS         -- Security Token Service
+  --> CLOUD TRAIL
+  --> CLOUD WATCH ALARMS
+  --> SNS Notifications
 
 AWS ACCEPTABLE USE POLICY :
 ----------------------------

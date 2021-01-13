@@ -18,6 +18,18 @@ Both MAC Address and IP Address are used to uniquely identify a machine on the i
     10.1.2.3 , ::/0
 
 
+OSI MODEL                   TCP/IP                  PROTOCOL
+---------------------------------------------------------------
+Application                 Application             HTTP
+Presentation                    "                   MIME
+Session                         "                   SSL
+Transport                   Transport               TCP / UDP
+Network                     Internet                IP / ICMP
+Data Link                   Network Access          PPP / HDLC
+Physical                        "                   ETHERNET
+---------------------------------------------------------------
+
+
 STATEFUL [ FTP / TELNET ] VS STATELESS [ HTTP / DNS ] :
 ----------------------------------------------------------
 The difference between stateful vs. stateless is essentially whether or not an application or process stores data over time.
@@ -756,6 +768,13 @@ When you move a network interface from one instance to another, network traffic 
 Each instance in your VPC has a default network interface (the primary network interface) that is assigned a private IPv4 address from the IPv4 address range of your VPC.
 You cannot detach a primary network interface from an instance. You can create and attach an additional network interface to any instance in your VPC.
 
+ELASTIC IP's : -> Add more data. ENI vs EIP **
+----------------
+Elastic IP of a server A can be attached to Server B and requests will now go from Server A to Server B.
+We can connect multiple Public Ip's to a server by attaching multiple Elastic Network Interfaces to it .
+Useful if we want to run multiple apps on the same port or if you want to host multiple websites using fixed public IP.
+Now a server can serve 2 websites because it has 2 public IP's . It serves website based on the IP present in the request packet.
+
 ROUTE TABLES :
 -----------------
   •  Main route table     — The route table that automatically comes with your VPC.
@@ -955,7 +974,7 @@ AWS Private Link provides private connectivity between VPCs and services hosted 
 By providing a private endpoint to access your services, AWS Private Link ensures your traffic is not exposed to the public internet.
 AWS Private Link makes it easy to connect services across different accounts and VPCs to significantly simplify your network architecture.
 It is a  technology that enables you to privately access AWS resources by using private IP addresses.
-PrivateLink restricts all network traffic between your VPC and AWS resources to the Amazon network. 
+PrivateLink restricts all network traffic between your VPC and AWS resources to the Amazon network.
 
 
 AWS Private Link is a highly available, scalable technology that enables you to privately connect your VPC to supported AWS services
@@ -986,3 +1005,13 @@ This creates an elastic network interface in your subnet with a private IP addre
     |------------------- REGION-1 ------------------------|                                       |--------- REGION-1 or REGION-x ----------------------|
 
 You can also create your own AWS Private Link-powered service (endpoint service) and enable other AWS customers to access your service.
+
+
+===============
+
+SERVER & BROWSER :
+---------------------
+A server is a special computer connected directly to a computer .
+It has webpages in its hard disk.
+A web server contains all the data while a web browser helps displaying that data .
+They use http or https to communicate among themselves.

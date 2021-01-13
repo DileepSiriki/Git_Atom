@@ -42,7 +42,7 @@ NOTE BOOK POINTS
 SINGLE LINE ABOUT EACH AND EVRY TOPIC and introductory vedios
 Explain JSON files in IAM.
 Deploy a static website in aws s3
-yaml vs JSON
+yaml vs JSON - JMES - JSON query language
 benifits of cloud
 wordpress blog - youtube https://www.youtube.com/embed/qKljYgi2lQ0?rel=0&hd=1
 STS - https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html
@@ -50,8 +50,7 @@ STS - https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html
 ENI in VPC : https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#scenarios-enis
 A secondary ENIcan be added to an instance. While primary ENIs cannot be detached from an instance, secondary ENIs can be detached and attached to a different instance
 
-security - KMS , IAM , STS (security token service) , CloudTrail , Cloudwatch alarms , SNS
-
+what is an API and what are Rest API calls .
 s3 storage classes
 
 ===================================

@@ -67,6 +67,9 @@ options available to create a stack :
   -> upload a template to S3 , specify already existing template in S3 , use any of the  sample templates available for testing , or write your own directly on console .
 To estimate the cost of your stack, select the Estimate cost link in the Template section.
 
+--> A template is like a Class , only 1 can be available
+--> A Stack is like an object , any number of objects can be created .
+
 CHANGE SETS :
 ---------------
 If you need to make changes to the running resources in a stack, you update the stack.

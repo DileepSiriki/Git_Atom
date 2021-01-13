@@ -186,6 +186,14 @@ Programming languages are divided into five subcategories: First generation, Sec
   Basic page tags, such as <head>, <body>, and <div> define sections of the page, while tags such as <table>, <form>, <image>, and <a> define elements within the page
   XML is used for storing structured data, rather than formatting information on a page. While HTML documents use predefined tags (like the examples above), XML files use custom tags to define elements.
 
+
+SERVER  & BROWSER :
+----------------------
+A server is a special computer connected directly to a computer .
+It has webpages in its hard disk.
+A web server contains all the data while a web browser helps displaying that data .
+They use http or https to communicate among themselves.
+
 COMMUNICATION PROTOCOLS : (TCP/IP , UDP etc; )
 =================================================
 
