@@ -202,10 +202,10 @@ INSTANCE PURCHASING OPTIONS :
       This makes them ideal for jobs that take a finite time to complete, such as batch processing, encoding and rendering, modeling and analysis, and continuous integration.
       You can use a duration of 1, 2, 3, 4, 5, or 6 hour.
 
-      While Spot Instances would be the least costlY option, they are not suitable for jobs that cannot be interrupted or must complete within a certain time period.
+      While Spot Instances would be the least costly option, they are not suitable for jobs that cannot be interrupted or must complete within a certain time period.
       They are terminated by AWS if it costs more than your BID in next 2 minutes .
       It gives some time window for you to save your work .
-      
+
       In nav bar (left) -> find option "SPOT INSTANCES"
       To launch , similar steps -> launch-> select AMI (step-1) -> Type (step-2) -> configure Instance (step-3) -> here tick purchasing options (Request spot instances)
 
