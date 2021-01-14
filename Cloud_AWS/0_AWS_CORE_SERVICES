@@ -11,10 +11,12 @@ s3 storage classes - availability and durability , capacities -
 cloud trail vs cloud watch - multiple questions
 Database : Amazon RDS - Amazon DynamoDB
 update yaml info in 1_Cloud_aws-intro at the bottom
+glacier vs glacier deep archive
 
 WHAT IS SERVERLESS APPLICATION
 ===================================
 
+NOTE : Recommended to View the YouTube Video , link provided beside the topic heading before going through the material.
 
 ##################################################################################################################
 ##################################################################################################################
@@ -132,7 +134,7 @@ COMPUTE  :
 ##################################################################################################################
 ##################################################################################################################
 
-1. ELASTIC COMPUTE CLOUD : < Self - Explanatory // Has a separate chapter >
+1. ELASTIC COMPUTE CLOUD :  < Has a separate detailed chapter >
 Amazon Elastic Compute Cloud (Amazon EC2) provides scalable computing capacity in the Amazon Web Services (AWS) Cloud.
 Using Amazon EC2 eliminates your need to invest in hardware up front, so you can develop and deploy applications faster.
 You can use Amazon EC2 to launch as many or as few virtual servers as you need, configure security and networking, and manage storage.
@@ -148,7 +150,7 @@ With AWS Batch, there is no need to install or manage batch computing software, 
 After a compute environment is up and associated with a job queue, you can define job definitions that specify which Docker container images to run your jobs.
   --> Break work into bathes and tell AWS which batch needs which resources are required and when to execute a batch
 
-3. AWS ELASTI BEANSTALK : < Self - Explanatory // Has a separate chapter > https://www.youtube.com/watch?v=SrwxAScdyT0&t=28s
+3. AWS ELASTI BEANSTALK :  < Has a separate detailed chapter > https://www.youtube.com/watch?v=SrwxAScdyT0&t=28s
 --> Focus on your code --> Write it --> Upload it -->  AWS takes care of required resources .
 With AWS Elastic Beanstalk, you can quickly deploy and manage applications in the AWS Cloud without worrying about the infrastructure that runs those applications.
 AWS Elastic Beanstalk reduces management complexity without restricting choice or control.
@@ -158,7 +160,7 @@ You simply upload your application, and AWS Elastic Beanstalk automatically hand
 It's a fully-managed AWS service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date “golden” server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.
 Crete a custom image based on required parameters and share the AMI across accounts or for instances in your account .
 
-5. AWS LAMBDA : < Self - Explanatory // Has a separate chapter >
+5. AWS LAMBDA :  < Has a separate detailed chapter >
 --> Do something in response to events such as an api call / SNS / a data change in S3 /etc ;
 With AWS Lambda, you can run code without provisioning or managing servers.
 You pay only for the compute time that you consume—there’s no charge when your code isn’t running.
@@ -272,6 +274,9 @@ The Amazon ECS task scheduler is responsible for placing tasks within your clust
    Is present on every ec2 instance.
    Is included with an ECS-Optimised Amazon Machine Image - AMI
 
+// KUBERNETIS also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+   It groups containers that make up an application into logical units for easy management and discovery.
+
 3. AMAZON EKS : [ Amazon Elastic Kubernetes Service  ]
 It s a managed service that you can use to run Kubernetes on AWS without needing to install, operate, and maintain your own Kubernetes control plane or nodes.
 Kubernetes is an open-source system for automating the deployment, scaling, and management of containerized applications.
@@ -302,12 +307,76 @@ STORAGE   :
 ##################################################################################################################
 ##################################################################################################################
 
+1. AMAZON SIMPLE STORAGE SERVICE - S3 :  < Has a separate detailed chapter >
+--> Has 11 9's of durability . 99.999999999
+It is storage for the internet. You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web.
+You can accomplish these tasks using the simple and intuitive web interface of the AWS Management Console.
+A bucket is a container for objects stored in Amazon S3. Every object is contained in a bucket.
 
-    Amazon S3
-    AWS Backup
-    Amazon EBS
-    Amazon EFS
-    Amazon FSx
-    Amazon S3 Glacier
-    AWS Snow Family
-    AWS Storage Gateway
+2. AWS BACKUP : https://www.youtube.com/watch?v=QDiXzFx2iMU&t=17s
+AWS Backup is a fully managed backup service that makes it easy to centralize and automate the backup of data across AWS services in the cloud as well as on premises [ uses AWS STORAGE GATEWAY for on premisis].
+Using AWS Backup, you can configure backup policies and monitor backup activity for your AWS resources in one place.
+AWS Backup automates and consolidates backup tasks that were previously performed service-by-service, and removes the need to create custom scripts and manual processes.
+It provides a fully managed backup service and a policy-based backup solution .
+These features include Amazon Elastic Block Store (Amazon EBS) snapshots, Amazon Relational Database Service (Amazon RDS)snapshots, Amazon DynamoDB backups, AWS Storage Gateway snapshots, and others.
+AWS Backup implements its backup features using the existing capabilities of these AWS services.
+You can write backup PLANS to tell when to back up and when to move backup to Glacier etc;
+
+3. AMAZON ELASTIC BLOCK STORE - EBS :  < Has a separate detailed chapter > // https://www.youtube.com/watch?v=77qLAl-lRpo
+High performance and low latency block storage - has 4 types.
+Amazon Elastic Block Store (Amazon EBS) is a web service that provides block level storage volumes for use with EC2 instances.
+EBS volumes are highly available and reliable storage volumes that can be attached to any running instance and used like a hard drive.
+
+4. AMAZON ELASTIC FILE SYSTEM - EFS : -> Its a Cloud File  https://www.youtube.com/watch?v=6ZIPBC78U0s&t=8s
+It provides file storage for your Amazon EC2 instances.
+With Amazon EFS, you can create a file system, mount the file system on your EC2 instances, and then read and write data from your EC2 instances to and from your file system.
+It provides a simple, scalable, fully managed elastic NFS filesystem for use with AWS Cloud services and on-premises resources.
+Amazon EFS has a simple web services interface that allows you to create and configure file systems quickly and easily.
+Multiple Amazon EC2instances can access an Amazon EFS file system at the same time, providing a common data source for workloads and applications running on more than one instance or server.
+Using Amazon EFS with Microsoft Windows–based Amazon EC2 instances is not supported.
+
+                        EC2-a --
+                        EC2-b   | <---------->  |||||||||  -> EFS
+                        EC2-c --       NFS
+            So multiple instances can access NFS at the same time using a standard NFSv4 Protocol .
+            Once EFS is create d, we can mount EC2 instances on EFS.
+            Useful when application runs on multiple EC2.
+
+Whenyou first create your file system, there is only one root directory at /.
+By default, only the root user (UID0) has read-write-execute permissions. For other users to modify the file system, the root user must explicitly grant them access.
+You use EFS access points to provision directories that are writable from a specific application
+
+// EFS for Linux
+// FSx for Windows
+
+5. AMAZON FSx : https://www.youtube.com/watch?v=4v08-CzjH1U
+Amazon FSx provides fully managed third-party file systems with the native compatibility and feature sets for workloads such as Microsoft Windows–based storage, high-performance computing, machine learning, and electronic design automation.
+Amazon FSx supports two file system types: Lustre and Windows File Server.
+With file storage on Amazon FSx, the code, applications, and tools that Windows developers and administrators use today can continue to work unchanged.
+Windows applications and workloads ideal for Amazon FSx include business applications, home directories, web serving, content management, data analytics, software build setups, and media processing workloads.
+
+6. AMAZON SNOW FAMILY : < Has a separate detailed chapter - Storage_s3 >
+ -> Snow cone        - https://www.youtube.com/watch?v=X_8LM7E_hiE      -- 8 TB storage   --> 1 SMALL BOX [ uses opshub application for data transfer ]
+    Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80 TB storage  --> 1 SUITCASE
+    Snow Ball edge   - https://www.youtube.com/watch?v=bxSD1Nha2k8      -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
+    Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1 Exabyte      --> 1 Truck
+
+   1 Exabyte = 1000 petabytes
+   Snow ball can be connected in series to have a Petabyte's storage  = 1 million GB = 1024 Terabytes
+
+7. AMAZON STORAGE GATEWAY : < Has a separate detailed chapter - Storage_s3 > -- https://www.youtube.com/watch?v=DPyc0q4MYsM -- https://www.youtube.com/watch?v=Spzdj1NUJbA -- https://www.youtube.com/watch?v=2I4CKdNESoQ&t=8s --
+--> HYBRID CLOUD STORAGE SERVICE WITH A LOCAL CACHE . -- FILE GATEWAY -- VOLUME GATEWAY -- TAPE GATEWAY .
+AWS Storage Gateway is a service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between your on-premises IT environment and the AWS storage infrastructure in the cloud.
+Securely takes data from on premises data centre and uploads in S3 using SSL. We can get back data when ever we need it , for example if a hard disk crashed in on-premisi then we need to restore it back .
+Storage gateway keeps regular backups from S3 so that it can restore to on-premises when needed.
+
+The above process is needed until you are ready to move completely to cloud .
+Slowly we can also launch an EC2 and attach an EBS with data from S3 and migrate to cloud directly.
+
+
+
+##################################################################################################################
+##################################################################################################################
+DATABASE   :
+##################################################################################################################
+##################################################################################################################

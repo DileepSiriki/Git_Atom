@@ -188,7 +188,7 @@ STEP 4 :
 OTHER STORAGE OPTIONS IN AWS
 ==============================
 
-AWS STORAGE GATEWAY :
+AWS STORAGE GATEWAY : https://www.youtube.com/watch?v=Spzdj1NUJbA -> VV.IMP --> Watch it
 -----------------------
 The AWS Storage Gateway is a service connecting an on-premises software appliance with cloud-based storage to provide seamless and secure integration
 between an organization's on-premises IT environment and AWS's storage infrastructure.
@@ -208,21 +208,22 @@ The gateway connects to AWS storage services, such as Amazon S3, Amazon S3 Glaci
     File Gateway :  A file gateway supports a file interface into Amazon Simple Storage Service (AmazonS3) and combines a service and a virtual software appliance.
     By using this combination, you can storeand retrieve objects in Amazon S3 using industry-standard file protocols such as Network File System(NFS) and Server Message Block (SMB).
     The software appliance, or gateway, is deployed into your on-premises environment as a virtual machine (VM) running on VMware ESXi, Microsoft Hyper-V, or LinuxKernel-based Virtual Machine (KVM) hypervisor.
-    The gateway provides access to objects in S3 as files orfile share mount points.
+    The gateway provides access to objects in S3 as files or file share mount points.
 
-    Volume Gateway : A volume gateway provides cloud-backed storage volumes that you can mount asInternet Small Computer System Interface (iSCSI) devices from your on-premises application servers.
+    Volume Gateway : A volume gateway provides cloud-backed storage volumes that you can mount as Internet Small Computer System Interface (iSCSI) devices from your on-premises application servers.
     The volume gateway is deployed into your on-premises environment as a VM running on VMware ESXi,KVM, or Microsoft Hyper-V hypervisor.
     Your on-premises applications can access these as Internet Small Computer System Interface (iSCSI)targets
     The gateway supports the following volume configurations -
-      • Cached volumes : You store your data in Amazon Simple Storage Service (Amazon S3) and retain acopy of frequently accessed data subsets locally.
+      • Cached volumes : You store your data in Amazon Simple Storage Service (Amazon S3) and retain a copy of frequently accessed data subsets locally.
       • Stored volumes : If you need low-latency access to your entire dataset, first configure your on-premises gateway to store all your data locally.
-                         Then asynchronously back up point-in-time snapshotsof this data to Amazon S3.
+                         Then asynchronously back up point-in-time snapshots of this data to Amazon S3.
 
    Tape Gateway : A tape gateway provides cloud-backed virtual tape storage.
-   The tape gateway isdeployed into your on-premises environment as a VM running on VMware ESXi, KVM, or Microsoft Hyper-V hypervisor.
+   The tape gateway is deployed into your on-premises environment as a VM running on VMware ESXi, KVM, or Microsoft Hyper-V hypervisor.
    With a tape gateway, you can cost-effectively and durably archive backup data in GLACIER orDEEP_ARCHIVE.
+   The tapes are moved to aws by trucks and are converted to objects to be stored in glacier storage / S3.
 
-You can run AWS Storage Gateway either on-premises as a VM appliance, as a hardware appliance, or inAWS as an Amazon EC2 instance.
+You can run AWS Storage Gateway either on-premises as a VM appliance, as a hardware appliance, or in AWS as an Amazon EC2 instance.
 
 
 
@@ -314,7 +315,8 @@ You can increase the volumes of an instance at any time by attaching more EBS to
             At a given time (per second), how many jugs of water can you pour(write) or withdraw (read)? This is IOPS
             At a given time (per second) what's the amount(bit, kb, mb, ect) of water the jug can transfer into/out of the bucket continuously? This is throughput.
 
-          SOLID STATE DRIVES SSD : costly
+          SOLID STATE DRIVES SSD : costly --> Low latency - High IOPS
+              Used for BOOT volumes , transactional work loads [ enteprise apps , relational data bases, NOSQL data bases ]
 
               General Purpose SSD :
                 General Purpose SSD volumes (gp2 and gp3) balance price and performance for a wide variety oftransactional workloads.
@@ -325,8 +327,8 @@ You can increase the volumes of an instance at any time by attaching more EBS to
                 Provisioned IOPS SSD volumes (io1 and io2) support up to 64,000 IOPS and 1,000 MiB/s ofthroughput.
                 This enables you to predictably scale to tens of thousands of IOPS per EC2 instance.
 
-         HARD DISK DRIVES HDD: Cheap
-
+         HARD DISK DRIVES HDD: Cheap --> Higest Throughput
+              For Straming IO , Big data , data ware housing , log processing applications
               Throughput Optimized HDD :
                 Throughput Optimized HDD volumes (st1) provide low-cost magnetic storage that defines performance in terms of throughput rather than IOPS.
                 These volumes are ideal for large, sequential workloads such as Amazon EMR, ETL, data warehouses, and log processing.
