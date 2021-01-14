@@ -386,11 +386,11 @@ AVAILABILITY ZONES : --> 77 In Total
 
 ### List all regions and zones , edge locations , wavelengths , outposts for interview purpose // get a rough sketch
 
-JSON - XML :-
+JSON - XML - YAML :-
 ---------------
 AWS uses JSON and XML's extensively for templates and policies .
 Both JSON and XML can be used to receive data from a web server.
-Comments are not allowed in JSON. 
+Comments are not allowed in JSON.
 JSON - Java Script Object Notation
 XML - Extensible Markup Language
 
