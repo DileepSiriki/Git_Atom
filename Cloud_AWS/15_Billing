@@ -17,6 +17,9 @@ With Cost Explorer, you can filter graphs by values such as :
 All AWS account owners have access to account and billing support free of charge.
 You can find answers to your questions quickly by visiting the AWS Knowledge Center.
 
+Consolidated billing allows you to view, manage, and pay bills for multiple AWS accounts in one user interface.
+Volume discounts can be earned by combining the usage from all accounts your own.
+
 Open the Billing and Cost Management console athttps://console.aws.amazon.com/billing/ , we have the following :
     --> Cost Explorer         : To track and analyze your AWS usage. Cost Explorer is free for all accounts.
     --> Budgets               : To manage budgets for your account and to get notified

@@ -28,7 +28,7 @@ Network                     Internet                IP / ICMP
 Data Link                   Network Access          PPP / HDLC
 Physical                        "                   ETHERNET
 ---------------------------------------------------------------
-
+** CHECK REFERENE PIC - OSI Model
 
 STATEFUL [ FTP / TELNET ] VS STATELESS [ HTTP / DNS ] :
 ----------------------------------------------------------

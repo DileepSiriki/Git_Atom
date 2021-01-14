@@ -92,6 +92,10 @@ STORAGE CLASSES :
 
     --> S3 STANDARD         —  The default storage class If you don't specify the storage class when you upload an object, Amazon S3 assigns the S3 Standard storage class.
     --> REDUCED REDUNDANCY  —  The Reduced Redundancy Storage (RRS) storage class is designed for noncritical, reproducible data that can be stored with less redundancy than the S3 Standard storage class.
+                               The reduced redundancy storage class has the lowest durability of all the storage classes.
+                               This means object stored in this storage class have the highest probability of being lost.
+                               So you should only store objects in this storage class if they can be easily reproduced.
+                               In exchange for the lower durability, the cost is lower than the standard storage class.
 
 2. FOR AUTOMATICALLY OPTIMIZING DATA WITH CHANGING PATTERNS :
    S3 Intelligent Tiering is an Amazon S3 storage class designed to optimize storage costs by automatically moving data to the most cost-effective access tier, without operational overhead.
@@ -109,6 +113,7 @@ STORAGE CLASSES :
 3. FOR INFREQUENTLY ACCESSED OBJECTS :
    The S3 Standard-IA and S3 One Zone-IA storage classes are designed for long-lived and infrequently accessed data. (IA stands for infrequent access.)
    IA means  INFREQUENT ACCESS .
+   Infrequent access has the lowest availability rating (99.90%). Standard and Reduced Redundancy have an availability rating of 99.99%
    USED FOR : storing backups &  For older data that is accessed infrequently, but that still requires millisecond access.
 
    --> S3 STANDARD-IA : Amazon S3 stores the object data redundantly across multiple geographically separated Availability Zones (similar to the S3 Standard storage class).
@@ -238,7 +243,7 @@ Supports upto Dozens of TB. It can be used in space-constrained environments whe
  The AWS DataSync agent is alsopre-installed before your devices are shipped to you.
  you connect it to your on-premises network and set the IP address eithermanually or automatically with DHCP.
  You must download and install AWS OpsHub for Snow Family, on a windows or mac lappy.
- When data is transferred , you can ship it back . 
+ When data is transferred , you can ship it back .
 
 
 AWS SNOWBALL :
