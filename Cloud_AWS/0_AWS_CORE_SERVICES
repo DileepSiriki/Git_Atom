@@ -124,6 +124,8 @@ Each cluster runs an Amazon Redshift engine and contains one or more databases.
 Redshift lets you easily save the results of your queries back to your S3 data lake using open formats, like Apache Parquet, so that you can do additional analytics from other analytics services like Amazon EMR, Amazon Athena, and Amazon SageMaker.
 
 
+
+
 ##################################################################################################################
 ##################################################################################################################
 COMPUTE  :
@@ -191,7 +193,7 @@ You can use AWSParallelCluster with batch schedulers, such as AWS Batch and Slur
 AWS Parallel Cluster facilitates quick start proof of concept deployments and production deployments.
 You can also build higher level workflows, such as a genomics portal that automates an entire DNA sequencing workflow, on top of AWSParallelCluster.
 
-10. AWS SERVERLESS APPLICATION MODEL :
+10. AWS SAM : [ SERVERLESS APPLICATION MODEL ]
 The AWS Serverless Application Model (AWS SAM) is an open-source framework that you can use to buildserverless applications on AWS.
 You can use AWS SAM to define your serverless applications.
 It is an extension of CLOUD FORMATION
@@ -210,10 +212,102 @@ To help 5G --> Gaming experience - smart cities - robotics - autonomous driving 
 
 
 
+##################################################################################################################
+##################################################################################################################
+CONTAINERS   :
+##################################################################################################################
+##################################################################################################################
 
-Amazon Lightsail
-AWS Outposts
-AWS ParallelCluster
-AWS Serverless Application Model (AWS SAM)
-AWS Serverless Application Repository
-AWS Wavelength
+// DOCKER FILE  is a text document that contains commands that are used to assemble an image.
+   We can use any command that call on the command line.
+   Docker builds images automatically by reading the instructions from the Dockerfile.
+
+    $ docker build  /path/to/a/Dockerfile  --> To build an image.
+
+// DOCKER image is a read-only template with instructions for creating a Docker container.
+   A docker image is described in text file called a Dockerfile, which has a simple, well-defined syntax.
+
+// Docker container is a running instance of an image.
+   You can use Command Line Interface (CLI) commands to run, start, stop, move, or delete a container.
+   You can also provide configuration for the network and environment variables.
+   Docker container is an isolated and secure application platform, but it can share and access to resources running in a different host or container.
+
+// DOCKER packages software into standardized units called CONTAINERS .
+   They have everything your software needs to run including Libraries , system tools , code and run time .
+   It lets you quickly deploy and scale applications into any environment and know your code will run .
+
+    $ docker run hello-world   // $ docker run <image> --> To create a container from an image and run it.
+    https://www.javatpoint.com/docker-java-example
+
+1. AMAZON ECR :  [ Amazon Elastic Container Registry ] // https://www.youtube.com/watch?v=H73uX0TOX9g&t=2s
+It is a fully managed Docker container registry that makes it easy for developers to store, manage, and deploy DOCKER CONTAINER IMAGES.
+Supports private container image repositories with resource-based permissions using AWS IAM. This is so that specified users or Amazon EC2 instances can access your container repositories and images.
+Sports public container image repositories as well.
+A repository is where you store your Docker or Open Container Initiative (OCI) images in Amazon ECR.
+Each time you push or pull an image from Amazon ECR, you specify the repository and the registry location which informs where to push the image to or where to pull it from.
+
+// Once an image is registered in the ECR , we can run that image as a container in the ECS service. -- ECS is a logical group of EC2 instances.
+   ECS CLUSTER is a logical group of EC2 instances that you can place containers into .
+   Ec2 instances can be of different configurations , types , and in diff. AZ's
+
+2.AMAZON ECS : [ Amazon Elastic Container Service ] // https://www.youtube.com/watch?v=zBqjh61QcB4&t=4s && https://www.youtube.com/watch?v=eq4wL2MiNqo
+Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast container management service that makes it easy to run, stop, and manage containers on a cluster.
+Amazon ECS enables you to launch and stop your container-based applications by using simple API calls.
+You can create Amazon ECS clusters within a new or existing VPC.
+After a cluster is up and running, you can create task definitions that define which container images run across your clusters.
+Your task definitions are used to run tasks or create services. Container images are stored in and pulled from container registries, for example, the Amazon Elastic Container Registry.
+
+To prepare your application to run on Amazon ECS, you must create a task definition.
+The task definition is a text file (in JSON format) that describes one or more containers (up to a maximum of ten) that form your application.
+The task definition can be thought of as a blueprint for your application. It specifies various parameters for your application.
+For example, these parameters can be used to indicate which containers should be used, which ports should be opened for your application, and what data volumes should be used with the containers in the task.
+The specific parameters available for your task definition depend on the needs of your specific application.
+
+A task is the instantiation of a task definition within a cluster.
+After you have created a task definition for your application within Amazon ECS, you can specify the number of tasks to run on your cluster.
+The Amazon ECS task scheduler is responsible for placing tasks within your cluster. There are several different scheduling options available.
+
+// ECS AGENT manages the state of containers on an EC2 instance.
+   Manages how ECS communicates with the docker daemon on the ec2.
+   Is present on every ec2 instance.
+   Is included with an ECS-Optimised Amazon Machine Image - AMI
+
+3. AMAZON EKS : [ Amazon Elastic Kubernetes Service  ]
+It s a managed service that you can use to run Kubernetes on AWS without needing to install, operate, and maintain your own Kubernetes control plane or nodes.
+Kubernetes is an open-source system for automating the deployment, scaling, and management of containerized applications.
+Amazon EKS automatically detects and replaces unhealthy control plane instances, and it provides automated version upgrades and patching for them.
+Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use all of the existing plugins and tooling from the Kubernetes community.
+
+4. AWS FARGATE :
+AWS Fargate is a serverless compute engine for containers that works with both Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS).
+Fargate makes it easy for you to focus on building your applications.
+Fargate removes the need to provision and manage servers, lets you specify and pay for resources per application, and improves security through application isolation by design.
+Fargate allocates the right amount of compute, eliminating the need to choose instances and scale cluster capacity.
+You only pay for the resources required to run your containers, so there is no over-provisioning and paying for additional servers.
+Fargate runs each task or pod in its own kernel providing the tasks and pods their own isolated compute environment.
+This enables your application to have workload isolation and improved security by design.
+This is why customers such as Vanguard, Accenture, Foursquare, and Ancestry have chosen to run their mission critical applications on Fargate.
+
+5. AWS APP2CONTAINER :
+It is a command-line tool for modernizing .NET and Java applications into containerized applications.
+Using A2C simplifies your migration tasks by performing inventory and analysis of your existing applications, creating Docker containers that include your application dependencies, and generating deployment templates based on AWS best practices with known values filled in for you.
+After you have reviewed your templates, A2C helps you register your containers to Amazon ECR, deploy to Amazon ECS or Amazon EKS, and build CI/CD pipelines using AWS CodeStar.
+It is also a command line tool to help you lift and shift applications that run in your on-premises data centers or on virtual machines, so that they run in containers that are managed by Amazon ECS or Amazon EKS. Thus providing a step towards modernization .
+
+
+
+##################################################################################################################
+##################################################################################################################
+STORAGE   :
+##################################################################################################################
+##################################################################################################################
+
+
+    Amazon S3
+    AWS Backup
+    Amazon EBS
+    Amazon EFS
+    Amazon FSx
+    Amazon S3 Glacier
+    AWS Snow Family
+    AWS Storage Gateway
