@@ -562,3 +562,6 @@ So instead of doing "git <command> <cmmit-id>" , you can do "git <command> maste
 When you run commands like git branch (branchname), Git basically runs that update-ref command to add the SHA-1 of the last commit of the branch you’re on into whatever new reference you want to create.
 when you run git branch (branchname), how does Git know the SHA-1 of the last commit? The answer is the HEAD file (.git/HEAD) which is nothing but
 (.git/refs/heads/<branch>)
+
+
+HOW GIT TAKES CARE OF DOCS AND IMAGES ???

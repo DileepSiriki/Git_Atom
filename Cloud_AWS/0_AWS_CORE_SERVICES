@@ -12,11 +12,38 @@ cloud trail vs cloud watch - multiple questions
 Database : Amazon RDS - Amazon DynamoDB
 update yaml info in 1_Cloud_aws-intro at the bottom
 glacier vs glacier deep archive
+replicate data across regions
 
-WHAT IS SERVERLESS APPLICATION
 ===================================
 
-NOTE : Recommended to View the YouTube Video , link provided beside the topic heading before going through the material.
+TOTAL AVAILABLE SERVICE CATEGORIES  IN AWS : (As of January 2021)
+====================================================================
+This page contains a detailed description of what the services do in each of the categories .
+Topics having a higher importance have individual chapters written after them.
+Recommended to View the YouTube Video , link provided beside the topic heading before going through the material.
+
+-------------------------------------------------------------------------------------------------------------------
+SERVICES COVERED :                                                SERVICES NOT COVERED :
+-------------------------------------------------------------------------------------------------------------------
+Analytics                                                         AR & VR
+Application Integration                                           Blockchain
+Billing & Cost Management                                         Front-End Web & Mobile
+Business Applications                                             Game Development
+Compute                                                           Internet of Things (IoT)
+Containers                                                        Machine Learning
+Cryptography & PKI                                                Media Services
+Customer Enablement Services                                      Quantum Computing
+Customer Engagement                                               Robotics
+Data Base                                                         Satellite
+Developer Tools
+End User Computing
+Management & Governance
+Migration & Transfer
+Networking & Content Delivery
+Security, Identity, & Compliance
+Storage
+
+
 
 ##################################################################################################################
 ##################################################################################################################

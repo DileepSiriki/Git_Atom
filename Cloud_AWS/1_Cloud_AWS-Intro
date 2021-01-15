@@ -354,11 +354,23 @@ AVAILABILITY ZONES : --> 77 In Total
       For example, Amazon S3 and Amazon EC2 support cross-Region replication.
       Some services, such as AWS Identity and Access Management (IAM), do not have Regional resources.
 
+LOCAL ZONES :
+----------------
     • Local Zones provide you the ability to place resources, such as compute and storage, in multiple locations closer to your end users.
       Local Zones have their own connections to the internet and support AWS Direct Connect, so that resources created in a Local Zone can serve local users with low-latency communications.
       A Local Zone is represented by a Region code followed by an identifier that indicates the location, for example, us-west-2-lax-1a
       We need to enable them in order to use , then create a subnet .
 
+      A Local Zone is an extension of an AWS Region that is geographically close to your users.
+      You can extend any VPC from the parent AWS Region into Local Zones by creating a new subnet and assigning it to the AWS Local Zone.
+      When you create a subnet in a Local Zone, your VPC is extended to that Local Zone.
+      The subnet in the Local Zone operates the same as other subnets in your VPC
+
+      A Local Zone is represented by an AWS Region code followed by an identifier that indicates the location, for example us-west-2-lax-1a.
+      Resources created in a Local Zone canserve local users with very low-latency communications.
+
+OUTPOSTS & WAVELENGTHS :
+--------------------------
     • AWS Outposts is a fully managed service that extends AWS infrastructure, services, APIs, and tools to customer premises.
       By providing local access to AWS managed infrastructure, AWS Outposts enables customers to build and run applications on premises using the same programming interfaces as in AWSRegions, while using local compute and storage resources for lower latency and local data processing needs.
 
@@ -466,3 +478,31 @@ JSON represents data in two ways:
                             }
                           ]
             }
+
+
+
+WHAT IS SERVERLESS APPLICATION : <Add some more data>
+-----------------------------------
+Now don’t be fooled by the name. You can’t run a compute function without a computer environment (a “server”) somewhere that’ll host it.
+What “serverless” does allow is for individual developers to run their code for seconds or minutes at a time on some else’s cloud servers.
+The serverless model—as provided by services like AWS Lambda—makes it possible to design code that reacts to external events.
+When, for instance, a video file is uploaded to a repository (like an AWS S3 bucket or even an on-premises FTP site), it can trigger a Lambda function that will convert the file to a new video format.
+There’s no need to maintain and pay for an actual instance running 24/7, just for the moments your code is actually running.
+And there’s no administration overhead to worry about.
+
+SCALABILITY :
+-------------------
+A scalable service will automatically grow in capacity to seamlessly meet any changes in demand.
+A well-designed cloud-based operation will constantly monitor the health of its application stack and respond whenever preset performance metrics might soon go unmet.
+The response might include automatically launching new server instances to add extra compute power to your existing cluster.
+But it will probably also involve prepopulating those instances with the application data and configuration settings they’ll need to actually serve your application to your clients.
+A large cloud provider like AWS will, for all practical purposes, have endless available capacity so the only practical limit to the maximum size of your application is your organization’s budget
+
+ELASTICITY :
+----------------
+You can stretch an elastic band far beyond its resting state.
+But part of what makes it truly elastic is the fact that, when you let go of it, it immediately returns to its original size.
+The reason the word elastic is used in the names of so many AWS services (Elastic Compute Cloud, Elastic Load Balancing, Elastic Beanstalk, and so on) is because those services are built to be easily and automatically resized.
+Generally, you set the maximum and minimum performance levels you want for your application, and the AWS service(s) you’re using will automatically add or remove resources to meet changing usage demands.
+By way of illustration, a scalable ecommerce website could be configured to function using just a single server during low-demand periods, but any number of additional servers could be automatically brought online as demand spikes.
+When demand drops back down, unused servers will be shut down automatically.

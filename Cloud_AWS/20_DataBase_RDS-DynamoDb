@@ -1,0 +1,172 @@
+SQL vs NO-SQL :
+-----------------
+Structured Query language (SQL) pronounced as "S-Q-L" or sometimes as "See-Quel" is the standard language for dealing with Relational Databases.
+A relational database defines relationships in the form of tables.
+Ex : MySQL Database, Oracle, Ms SQL Server, Sybase, PostgreSQL etc.
+ACID --> Atomicity - Consistency - Isolation - Durability
+
+
+Not only Structured Query language (NO-SQL) pronounced as "Not only SQL" or sometimes as "Not SQL" is the standard language for dealing with Non-Relational/Distributed  Databases.
+NoSQL is a non-relational DMS, that does not require a fixed schema, avoids joins, and is easy to scale.
+NoSQL database is used for distributed data stores with humongous data storage needs. NoSQL is used for Big data and real-time web apps
+For example companies like Twitter, Facebook, Google that collect terabytes of user data every single day.
+Ex : MongoDB, Redis, , Neo4j, Cassandra, Hbase.
+BASE : Basically Available - Soft State - Eventually Consistent
+
+--> SQL databases are table based databases whereas NoSQL databases can be document based, key-value pairs, graph databases.
+--> SQL databases have a predefined schema whereas NoSQL databases use dynamic schema for unstructured data.
+--> SQL should be used when data validity is super important NoSQL is used when it's more important to have fast data than correct data.
+--> SQL databases are vertically scalable. This means that you can increase the load on a single server by increasing things like RAM, CPU or SSD.
+    NoSQL databases are horizontally scalable. This means that you handle more traffic by sharing, or adding more servers in your NoSQL database.
+    It is similar to adding more floors to the same building versus adding more buildings to the neighbourhood.
+
+
+Postgre SQL is an object-relational database management system (ORDBMS).
+It offers support for SQL and NoSQL.
+PostgreSQL support modern applications feature like JSON, XML etc. while MySQL only supports JSON.
+
+#########################################################################################################################
+#########################################################################################################################
+
+AVAILABLE DATABASE SERVICES AND USE-CASES  :
+-----------------------------------------------
+
+DATABASE TYPE     USE CASE                                                      AWS SERVICE
+================================================================================================================================================
+Relational        Traditional applications, ERP, CRM, e-commerce                Amazon Aurora - Amazon RDS -  Amazon Redshift
+================================================================================================================================================
+Key-value         High-traffic web apps, e-commerce systems,                    Amazon DynamoDB
+                  gaming applications
+================================================================================================================================================
+In-memory         Caching, session management, gaming leader boards,            Amazon ElastiCache for Memcached -  Amazon ElastiCache for Redis
+                  geospatial applications
+================================================================================================================================================
+Document          Content management, catalogs, user profiles                   Amazon DocumentDB (with MongoDB compatibility)
+================================================================================================================================================
+Wide column       High scale industrial apps for equipment maintenance,         Amazon Keyspaces (for Apache Cassandra)
+                  fleet management, and route optimization
+================================================================================================================================================
+Graph             Fraud detection, social networking, recommendation engines    Amazon Neptune
+================================================================================================================================================
+Time series       IoT applications, DevOps, industrial telemetry                Amazon Timestream
+================================================================================================================================================
+Ledger            Systems of record, supply chain, registrations,               Amazon QLDB
+                  banking transactions
+================================================================================================================================================
+
+
+#########################################################################################################################
+#########################################################################################################################
+
+RDS - Relational Database Service :
+-------------------------------------
+It is a web service that makes it easier to set up, operate, and scale a relational database in the cloud.
+It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
+
+  • When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together. With AmazonRDS, these are split apart so that you can scale them independently.
+    If you need more CPU, less IOPS, or more storage, you can easily allocate them.
+  • Amazon RDS manages backups, software patching, automatic failure detection, and recovery.
+  • To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances. It also restricts access to certain system procedures and tables that require advanced privileges.
+  • You can have automated backups performed when you need them, or manually create your own backup snapshot. You can use these backups to restore a database. The Amazon RDS restore processworks reliably and efficiently.
+  • You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server.
+  • In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management (IAM) to define users and permissions.
+
+DB INSTANCE : [  Isolated database environment running in the cloud ]
+-------------------------------------------------------------------------
+The basic building block of Amazon RDS is the DB instance. Each DB instance runs a DB engine.
+Amazon RDS currently supports the MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server DB engines.
+A DB instance is an isolated database environment in the AWS Cloud. Your DB instance can contain multiple user-created databases.
+The computation and memory capacity of a DB instance is determined by its DB instance class.
+You can select the DB instance that best meets your needs. If your needs change over time, you can change DB instances.
+DB instance storage comes in three types:
+    --> Magnetic,
+    --> General Purpose (SSD), and
+    --> Provisioned IOPS(PIOPS).
+You can run your DB instance in several Availability Zones.
+Your primary DB instance is synchronously replicated across Availability Zones to the secondary instance.
+A security group controls the access to a DB instance. It does so by allowing access to IP address ranges or Amazon EC2 instances that you specify.
+When you use Amazon RDS, you can choose to use on-demand DB instances or reserved DB instances.
+
+You can have up to 40 Amazon RDS DB instances, with the following limitations:
+    • 10 for each SQL Server edition (Enterprise, Standard, Web, and Express) under the "license-included" model
+    • 10 for Oracle under the "license-included" model
+    • 40 for MySQL, MariaDB, or PostgreSQL
+    • 40 for Oracle under the "bring-your-own-license" (BYOL) licensing model
+
+Each DB instance has a DB instance identifier.
+The identifier is used as part of the DNS hostname allocated to your instance by RDS.
+For example, if you specify db1 as the DB instance identifier, then RDS will automatically allocate a DNS endpoint for your instance, such as db1.123456789012.us-east-1.rds.amazonaws.com
+
+Amazon RDS creates a master user account for your DB instance as part of the creation process.
+This master user has permissions to create databases and to perform create, delete, select, update, and insert operations on tables the master user creates.
+You must set the master user password when you create a DB instance
+
+DB INSTANCE CLASSES :
+----------------------
+Amazon RDS supports three types of instance classes:
+    --> Standard [db.m1 , db.m3 ... ],
+    --> Memory Optimized [ db.m2, db.r3, db.r4, db.r5 ... ], and
+    --> Burstable Performance [ db.t2, db.t3 ]
+You can change the CPU and memory available to a DB instance by changing its DB instance class.
+
+RDS STORAGE TYPES :
+----------------------
+Amazon RDS provides three storage types:
+  --> General Purpose SSD (also known as gp2),
+  --> Provisioned IOPS SSD (also known as io1), and
+  --> magnetic (also known as standard).
+You can create MySQL, MariaDB, Oracle, and PostgreSQL RDS DB instances with up to 64 tebibytes (TiB) of storage.
+You can create SQL Server RDS DB instances with up to 16 TiB of storage.
+For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types.
+
+  • General Purpose SSD :
+    General Purpose SSD volumes offer cost-effective storage that is ideal for a broad range of workloads.
+    These volumes deliver single-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time.
+    Baseline performance for these volumes is determined by the volume's size.
+
+  • Provisioned IOPS :
+    Provisioned IOPS storage is designed to meet the needs of I/O-intensive workloads,
+    particularly database workloads, that require low I/O latency and consistent I/O throughput.
+
+  • Magnetic :
+    Amazon RDS also supports magnetic storage for backward compatibility.
+    We recommend that you use General Purpose SSD or Provisioned IOPS for any new storage needs.
+    The maximum amount of storage allowed for DB instances on magnetic storage is less than that of the other storage types.
+
+BILLING :
+-----------
+    • On-Demand Instances :
+      Pay by the hour for the DB instance hours that you use.
+      Pricing is listed on a per-hour basis, but bills are calculated down to the second and show times in decimal form.
+      RDS usage is now billed in one second increments, with a minimum of 10 minutes.
+
+    • Reserved Instances :
+      Reserve a DB instance for a one-year or three-year term and get a significant discount compared to the on-demand DB instance pricing.
+      With Reserved Instance usage, you can launch, delete, start, or stop multiple instances within an hour and get the Reserved Instance benefit for all of the instances.
+
+CONNECTING :
+---------------
+AWS -> RDS -> create a DB instance [ chose any type you want ]-> Easy create -> generate credentials -> save endpoint URl and ports
+Open CLI -> mysql -h <endpoint> -P 3306 -u <mymasteruser>  -p
+
+
+#########################################################################################################################
+#########################################################################################################################
+
+AWS AURORA :
+-------------
+Amazon Aurora (Aurora) is a fully managed relational database engine that's compatible with MySQL and PostgreSQL.
+With some workloads, Aurora can deliver up to five times the throughput of MySQL and up to three times the throughput of PostgreSQL without requiring changes to most of your existing applications.
+Aurora is part of the managed database service Amazon Relational Database Service (Amazon RDS).
+Aurora management operations typically involve entire clusters of database servers that are synchronized through replication, instead of individual database instances.
+The automatic clustering, replication, and storage allocation make it simple and cost-effective to set up, operate, and scale your largest MySQL and PostgreSQL deployments.
+
+An Amazon Aurora DB cluster consists of one or more DB instances and a cluster volume that manages the data for those DB instances.
+An Aurora cluster volume is a virtual database storage volume that spans multiple Availability Zones, with each Availability Zone having a copy of the DB cluster data.
+ --> Primary DB Instance and Aurora Replica
+
+AWS DYNAMO DB :
+-------------------
+Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.
+You can use Amazon DynamoDB to create a database table that can store and retrieve any amount of data, and serve any level of request traffic.
+Amazon DynamoDB automatically spreads the data and traffic for the table over a sufficient number of servers to handle the request capacity specified by the customer and the amount of data stored, while maintaining consistent and fast performance.
