@@ -14,6 +14,13 @@ update yaml info in 1_Cloud_aws-intro at the bottom
 glacier vs glacier deep archive
 replicate data across regions
 
++++++++++++++++++++++
+list services - youtube aws/doc
+  --> overview pdf
+ccp study guide
+above Topics
+dumps gather
+
 ===================================
 
 TOTAL AVAILABLE SERVICE CATEGORIES  IN AWS : (As of January 2021)
@@ -21,6 +28,7 @@ TOTAL AVAILABLE SERVICE CATEGORIES  IN AWS : (As of January 2021)
 This page contains a detailed description of what the services do in each of the categories .
 Topics having a higher importance have individual chapters written after them.
 Recommended to View the YouTube Video , link provided beside the topic heading before going through the material.
+Also view the reference pictures attached if any in \Git_Atom\Cloud_AWS\Reference_pics .
 
 -------------------------------------------------------------------------------------------------------------------
 SERVICES COVERED :                                                SERVICES NOT COVERED :
@@ -399,6 +407,114 @@ Storage gateway keeps regular backups from S3 so that it can restore to on-premi
 
 The above process is needed until you are ready to move completely to cloud .
 Slowly we can also launch an EC2 and attach an EBS with data from S3 and migrate to cloud directly.
+
+
+
+##################################################################################################################
+##################################################################################################################
+DATABASE   :
+##################################################################################################################
+##################################################################################################################
+
+DATABASE TYPE     USE CASE                                                      AWS SERVICE
+================================================================================================================================================
+Relational        Traditional applications, ERP, CRM, e-commerce                Amazon Aurora - Amazon RDS -  Amazon Redshift
+================================================================================================================================================
+Key-value         High-traffic web apps, e-commerce systems,                    Amazon DynamoDB
+                  gaming applications
+================================================================================================================================================
+In-memory         Caching, session management, gaming leader boards,            Amazon ElastiCache for Memcached -  Amazon ElastiCache for Redis
+                  geospatial applications
+================================================================================================================================================
+Document          Content management, catalogs, user profiles                   Amazon DocumentDB (with MongoDB compatibility)
+================================================================================================================================================
+Wide column       High scale industrial apps for equipment maintenance,         Amazon Keyspaces (for Apache Cassandra)
+                  fleet management, and route optimization
+================================================================================================================================================
+Graph             Fraud detection, social networking, recommendation engines    Amazon Neptune
+================================================================================================================================================
+Time series       IoT applications, DevOps, industrial telemetry                Amazon Timestream
+================================================================================================================================================
+Ledger            Systems of record, supply chain, registrations,               Amazon QLDB
+                  banking transactions
+================================================================================================================================================
+
+1. AMAZON AURORA : < Has a separate detailed chapter - Database >  https://www.youtube.com/watch?v=eMzCI7S1P9M&t=19s
+Amazon Aurora (Aurora) is a fully managed relational database engine that's compatible with MySQL and PostgreSQL.
+With some workloads, Aurora can deliver up to five times the throughput of MySQL and up to three times the throughput of PostgreSQL without requiring changes to most of your existing applications.
+Aurora is part of the managed database service Amazon Relational Database Service (Amazon RDS).
+Aurora management operations typically involve entire clusters of database servers that are synchronized through replication, instead of individual database instances.
+The automatic clustering, replication, and storage allocation make it simple and cost-effective to set up, operate, and scale your largest MySQL and PostgreSQL deployments.
+
+2. AMAZON DOCUMENT-DB :  https://www.youtube.com/watch?v=tkzDp9T8V-k
+Amazon DocumentDB (with MongoDB compatibility) is a fast, reliable, and fully managed database service that makes it easy for you to set up, operate, and scale MongoDB-compatible databases.
+Typically, in the application tier, data is represented as a JSON document because it is more intuitive for developers to think of their data model as a document.
+The popularity of document databases has grown because they let you persist data in a database by using the same document model format that you use in your application code.
+Document databases are a practical solution to online profiles in which different users provide different types of information. Using a document database, you can store eachuser's profile efficiently by storing only the attributes that are specific to each user.
+Suppose that a user elects to add or remove information from their profile. In this case, their document could be easily replaced with an updated version that contains any recently added attributes anddata or omits any newly omitted attributes and data.
+
+Document databases are used for storing semi structured data as a document—rather than normalizing data across multiple tables, each with a unique and fixed structure, as in a relational database.
+Different types of documents can be stored in the same document database, thus meeting the requirement for processing similar data that is in different formats.
+
+3. AMAZON DYNAMO-DB : < Has a separate detailed chapter - Database >   https://www.youtube.com/watch?v=sI-zciHAh-4
+Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.
+You can use Amazon DynamoDB to create a database table that can store and retrieve any amount of data, and serve any level of request traffic.
+Amazon DynamoDB automatically spreads the data and traffic for the table over a sufficient number of servers to handle the request capacity specified by the customer and the amount of data stored, while maintaining consistent and fast performance.
+DynamoDB lets you offload the administrative burdens of operating and scaling a distributed database so that you don't have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling.
+You can create on-demand backups and enable point-in-time recovery for your Amazon DynamoDB tables.
+Point-in-time recovery helps protect your tables from accidental write or delete operations.
+With point-in-time recovery, you can restore a table to any point in time during the last 35 days
+Allows you to delete expired items from tables automatically to help you reduce storage usage and the cost of storing data that is no longer relevant.
+
+4. AMAZON ELASTIC CACHE FOR REDIS: -> https://www.youtube.com/watch?v=GoNsuTqeMto&t=18s
+--> Caching data and providing it to users quickly rather than getting it from Disks. // example for applications in mobiel .
+Amazon ElastiCache makes it easy to set up, manage, and scale distributed in-memory cache environments in the AWS Cloud.
+It provides a high performance, resizable, and cost-effective in-memory cache, while removing complexity associated with deploying and managing a distributed cache environment.
+ElastiCache works with both the Redis and Memcached engines.
+
+5. AMAZON KEYSPACES [APAHE ASSANDRA] :
+
+6. AMAZON NEPTUNE: Used for fraud detection // https://www.youtube.com/watch?v=Rl6UwE7kLio
+Amazon Neptune is a fast, reliable, fully managed graph database service that makes it easy to build and run applications that work with highly connected datasets.
+The core of Neptune is a purpose-built, high-performance graph database engine that is optimized for storing billions of relationships and querying the graph with milliseconds latency.
+Neptune supports the popular graph query languages Apache TinkerPop Gremlin and W3C’s SPARQL, allowing you to build queries that efficiently navigate highly connected datasets.
+Neptune powers graph use cases such as recommendation engines, fraud detection, knowledge graphs, drug discovery, and network security.
+
+Each node represents an entity (a person, place, thing, category or other piece of data), and each relationship represents how two nodes are associated.
+This general-purpose structure allows you to model all kinds of scenarios – from a system of roads, to a network of devices, to a population’s medical history or anything else defined by relationships.
+
+7. AMAZON QUANTUM LEDGER DATABASE - QLDB :  https://www.youtube.com/watch?v=jcZ_rsLJrqk
+Amazon Quantum Ledger Database (Amazon QLDB) is a fully managed ledger database that provides a transparent, immutable, and cryptographically verifiable transaction log owned by a central trusted authority.
+You can use Amazon QLDB to track all application data changes, and maintain a complete and verifiable history of changes over time.
+Ex : Banks data -> keeps full history of changes. -- Immutable and Transparent.
+
+8. AMAZON RDS : < Has a separate detailed chapter - Database >   https://www.youtube.com/watch?v=eMzCI7S1P9M&t=19s
+It is a web service that makes it easier to set up, operate, and scale a relational database in the cloud.
+It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
+
+  • When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together. With AmazonRDS, these are split apart so that you can scale them independently.
+    If you need more CPU, less IOPS, or more storage, you can easily allocate them.
+  • Amazon RDS manages backups, software patching, automatic failure detection, and recovery.
+  • To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances. It also restricts access to certain system procedures and tables that require advanced privileges.
+  • You can have automated backups performed when you need them, or manually create your own backup snapshot. You can use these backups to restore a database. The Amazon RDS restore processworks reliably and efficiently.
+  • You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server.
+  • In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management (IAM) to define users and permissions.
+
+9. AMAZON REDSHIFT :  https://www.youtube.com/watch?v=_qKm6o1zK3U&t=22s
+For data from BIG-DATA , enterprise applications //  used mainly for data analytics by quickly mining data .
+Amazon Redshift is a fast, fully managed, petabyte-scale data warehouse service that makes it simple and cost-effective to efficiently analyze all your data using your existing business intelligence tools.
+It is optimized for datasets ranging from a few hundred gigabytes to a petabyte or more and costs less than $1,000 per terabyte per year, a tenth the cost of most traditional data warehousing solutions.
+
+10. AMAZON TIMESTREAM :
+With Amazon Timestream, you can easily store and analyze sensor data for IoT applications, metrics for DevOps use cases, and telemetry for application monitoring scenarios such as clickstream data analysis.
+Used to store and analyze trillions of time series data points per day.
+Timestream saves you time and cost in managing the lifecycle of time series data by keeping recent data in memory and moving historical data to a cost optimized storage tier based upon user defined policies.
+Timestream’s purpose-built query engine lets you access and analyze recent and historical data together, without having to specify its location.
+Examples of a growing list of use cases for Timestream include:
+--> Monitoring metrics to improve the performance and availability of your applications.
+--> Storage and analysis of industrial telemetry to streamline equipment management and maintenance.
+--> Tracking user interaction with an application over time.
+--> Storage and analysis of IoT sensor data
 
 
 
