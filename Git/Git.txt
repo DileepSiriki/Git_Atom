@@ -8,6 +8,7 @@ VERSION CONTROL SYSYTEMS : Is a software that helps software developers to work 
 
 GIT :
 =====
+### CHEAT-SHEET : https://github.com/github/training-kit/blob/master/downloads/github-git-cheat-sheet.md 
 The major difference between Git and any other VCS is the way Git thinks about its data.
 Conceptually, most other systems store information as a list of file-based changes.
 These systems (CVS, Subversion, Perforce, Bazaar, and so on) think of the information they keep as a set of files and the changes made to each file over time.
