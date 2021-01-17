@@ -10,7 +10,7 @@ Publishers communicate asynchronously with subscribers by sending messages to a 
 Clients can subscribe to the SNS topic and receive published messages using a supported protocol, such as Amazon SQS, AWS Lambda, HTTP, email, mobile push notifications, and mobile text messages (SMS).
 You pay based on the number of messages that you publish, the number of notifications that you deliver, and any additional API calls for managing topics and subscriptions.
 
-                                                          APPLICATION TO APPLICATION SUBSCRIBERS
+                                                             APPLICATION TO APPLICATION 
  -----------                          TOPIC                        -----------
 |            |                         --                         |           |  AMAZON SQS
 |    SNS     | <--------------------> |  | <--------------------> |           |  AWS LAMBDA
@@ -22,7 +22,7 @@ You pay based on the number of messages that you publish, the number of notifica
                                         |                          |           |  MOBILE PUSH
                                         L _ _ _ _ _ _ _ _ _ _ _ _  |           |  EMAIL - SES
                                                                     -----------
-                                                          APPLICATION TO APPLICATION SUBSCRIBERS
+                                                                APPLICATION TO PERSON
 
     • Application-to-application messaging
     • Application-to-person notifications
