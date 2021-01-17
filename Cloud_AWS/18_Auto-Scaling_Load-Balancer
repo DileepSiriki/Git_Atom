@@ -1,0 +1,139 @@
+AWS AUTO-SCALING : AWS -> EC2 -> AUTO-SCALING
+--------------------
+Amazon EC2 Auto Scaling helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application.
+You create collections of EC2 instances, called AutoScaling groups.
+You can specify the minimum number of instances in each Auto Scaling group, and Amazon EC2 Auto Scaling ensures that your group never goes below this size.
+You can specify the maximum number of instances in each Auto Scaling group, and Amazon EC2 Auto Scaling ensures that your group never goes above this size.
+If you specify the desired capacity, either when you create the group or at any time thereafter, Amazon EC2 Auto Scaling ensures that your group has this many instances.
+If you specify scaling policies, then Amazon EC2 Auto Scaling can launch or terminate instances as demand on your application increases or decreases.
+Free of cost . You only pay for the AWS resources (for example, EC2 instances and CloudWatch alarms) that you use.
+
+  • Better fault tolerance --> Amazon EC2 Auto Scaling can detect when an instance is unhealthy, terminate it, and launch an instance to replace it.
+    You can also configure Amazon EC2 Auto Scaling to use multiple Availability Zones. If one Availability Zone becomes unavailable, Amazon EC2 Auto Scaling can launch instances in another one to compensate.
+
+  • Better availability    -->  Amazon EC2 Auto Scaling helps ensure that your application always has the right amount of capacity to handle the current traffic demand.
+
+  • Better cost management -->  Amazon EC2 Auto Scaling can dynamically increase and decrease capacity as needed.
+    Because you pay for the EC2 instances you use, you save money by launching instances when they are needed and terminating them when they aren't.
+
+Amazon EC2 Auto Scaling enables you to take advantage of the safety and reliability of geographic redundancy by spanning Auto Scaling groups across multiple Availability Zones within a Region.
+When one Availability Zone becomes unhealthy or unavailable, Auto Scaling launches new instances in an unaffected Availability Zone.
+When the unhealthy Availability Zone returns to a healthy state, Auto Scaling automatically redistributes the application instances evenly across all of the designated Availability Zones.
+An Auto Scaling group can contain EC2 instances in one or more Availability Zones within the same Region.
+However, Auto Scaling groups cannot span multiple Regions.
+For Auto Scaling groups in a VPC, the EC2 instances are launched in subnets.
+You select the subnets for your EC2 instances when you create or update the Auto Scaling group. You can select one or more subnets per Availability Zone
+
+
+
+For example, the following Auto Scaling group has :
+    --> a minimum size of one instance,
+    --> a desired capacity of two instances, and
+    --> a maximum size of four instances.
+    --> The scaling policies that you define adjust the number of instances, within your minimum and maximum number of instances,
+
+                 ----------------------------------------------------------------------------------
+                |          ---------         ---------         ---------         ---------         |
+                |         |         |       |         |       |         |       |         |        |
+                |         |   ON    |       |   ON    |       |   OFF   |       |   OFF   |        |  --> AUTO SCALING GROUP
+                |         |         |       |         |       |         |       |         |        |
+                |          ---------         ---------         ---------         ---------         |
+                 ----------------------------------------------------------------------------------
+                         |------------|
+                            Min. Size
+                         |------------------------------|    |-------------------------------|
+                          Desired Capacity                     Scaled out as needed
+                         |-----------------------------------------------------------------|
+                                                   Max. Size
+
+GROUP :
+--------
+Your EC2 instances are organized into groups so that they can be treated as a logical unit for the purposes of scaling and management.
+When you create a group, you can specify its minimum, maximum, and, desired number of EC2 instances.
+
+CONFIGURATION TEMPLATE :
+--------------------------
+Your group uses a launch template, or a launch configuration (not recommended, offers fewer features), as a configuration template for its EC2 instances.
+You can specify information such as the AMI ID, instance type, key pair, security groups, and block device mapping for your instances.
+
+SCALING OPTIONS :
+------------------
+ --> Maintain current instance levels at all times :
+     Amazon EC2 Auto Scaling performs a periodic health check on running instances within an Auto Scaling group.
+     When Amazon EC2 Auto Scaling finds an unhealthy instance, it terminates that instance and launches a new one.
+     This can be achieved by setting the same value for minimum, maximum, and desired capacity.
+     The group maintains this number of running instances even if an instance becomes unhealthy.
+     If you stop or terminate a running instance, the instance is considered to be unhealthy and is replaced.
+     If any instance terminates unexpectedly, Amazon EC2 Auto Scaling detects the termination and launches a replacement instance.
+ --> Scale manually :
+     Its  where you specify only the change in the maximum, minimum, or desired capacity of your Auto Scaling group.
+     Amazon EC2 Auto Scaling manages the process of creating or terminating instances to maintain the updated capacity.
+ --> Scale based on a schedule :
+     Scaling by schedule means that scaling actions are performed automatically as a function of time and date.
+     This is useful when you know exactly when to increase or decrease the number of instances in your group, simply because the need arises on a predictable schedule
+ --> Scale based on demand :
+     A scaling policy instructs Amazon EC2 Auto Scaling to track a specific CloudWatch metric, and it defines what action to take when the associated CloudWatch alarm is in ALARM. T
+     A more advanced way to scale your resources, using scaling policies, lets you define parameters that control the scaling process.
+     For example, let's say that you have a web application that currently runs on two instances and you want the CPU utilization of the Auto Scaling group to stay at around 50percent when the load on the application changes.
+     This method is useful for scaling in response to changing conditions, when you don't know when those conditions will change.
+     You can set up AmazonEC2 Auto Scaling to respond for you.
+ --> Use predictive scaling :
+     You can also use Amazon EC2 Auto Scaling in combination with AWS Auto Scaling to scale resources across multiple services.
+     AWS Auto Scaling can help you maintain optimal availability and performance by combining predictive scaling and dynamic scaling (proactive and reactive approaches, respectively) to scale your Amazon EC2 capacity faster.
+
+When a scaling policy is executed, if the capacity calculation produces a number outside of the minimum and maximum size range of the group, Amazon EC2 Auto Scaling ensures that the new capacity never goes outside of the minimum and maximum size limits.
+When your instance is terminated, any associated Elastic IP addresses are disassociated and are not automatically associated with the new instance.
+You must associate these Elastic IP addresses with the new instance manually.
+Similarly, when your instance is terminated, its attached EBS volumes are detached. You must attach these EBS volumes to the new instance manually.
+
+
+--> To create an AUTO SCALING GROUP :
+    You can create a LAUNCH TEMPLATE , aws -> Ec2 -> Instances -> launch Template
+    or create a LAUNCH CONFIGURATION , aws -> Ec2 -> Auto Scaling -> Launch Configuration
+    An Auto Scaling group is a collection of EC2 instances, and is the core of Amazon EC2 Auto Scaling.
+    When you create an Auto Scaling group, you include information such as the subnets for the instances and the initial number of instances to start with
+
+Both launch template and launch configuration are similar except that :
+Defining a launch template instead of a launch configuration allows you to have multiple versions of a template.
+With versioning, you can create a subset of the full set of parameters and then reuse it to create other templates or template versions.
+For example, you can create a default template that defines common configuration parameters and allow the other parameters to be specified as part of another version of the same template.
+
+AMAZON AUTO SCALING CAPACITY REBALANCING :
+--------------------------------------------
+You can configure Amazon EC2 Auto Scaling to monitor and automatically respond to changes that affect the availability of your Spot Instances.
+Capacity Rebalancing helps you maintain work load availability by proactively augmenting your fleet with a new Spot Instance before a running instance is interrupted by EC2.
+Amazon EC2 Auto Scaling is aware of EC2 instance rebalance recommendation notifications. AmazonEC2 emits these notifications when Spot Instances are at elevated risk of interruption.
+When Capacity Rebalancing is enabled for an Auto Scaling group, Amazon EC2 Auto Scaling attempts to proactively replace Spot Instances in the group that have received a rebalance recommendation, providing the opportunity to rebalance your workload to new Spot Instances that are not at elevated risk of interruption.
+This means that your workload can continue to process the work while Amazon EC2 AutoScaling launches a new Spot Instance before an existing instance is interrupted.
+You can also optionally use a lifecycle hook to perform a custom action on instances before termination.
+
+
+LOAD BALANCER TO AUTO SCALING :
+---------------------------------
+Registering your Auto Scaling group with an Elastic Load Balancing load balancer helps you set up a load-balanced application.
+Elastic Load Balancing works with Amazon EC2 Auto Scaling to distribute incoming traffic across your healthy Amazon EC2 instances.
+This increases the scalability and availability of your application.
+You can enable Elastic Load Balancing within multiple Availability Zones to increase the fault tolerance of your applications.
+
+LOAD BALANCING :
+-------------------
+Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, Lambda functions, and virtual appliances.
+It can handle the varying load of your application traffic in a single Availability Zone or across multiple Availability Zones.
+Elastic Load Balancing offers four types of load balancers that all feature the high availability, automatic scaling, and robust security necessary to make your applications fault tolerant.
+
+  Application Load Balancer : https://aws.amazon.com/elasticloadbalancing/application-load-balancer/
+  Application Load Balancer is best suited for load balancing of HTTP and HTTPS traffic and provides advanced request routing targeted at the delivery of modern application architectures, including microservices and containers.
+  Application Load Balancer routes traffic to targets within Amazon VPC based on the content of the request.
+
+  Network Load Balancer : https://aws.amazon.com/elasticloadbalancing/network-load-balancer/
+  Network Load Balancer is best suited for load balancing of Transmission Control Protocol (TCP), User Datagram Protocol (UDP), and Transport Layer Security (TLS) traffic where extreme performance is required.
+  Network Load Balancer routes traffic to targets within Amazon VPC and is capable of handling millions of requests per second while maintaining ultra-low latencies.
+
+  Gateway Load Balancer : https://aws.amazon.com/elasticloadbalancing/gateway-load-balancer/
+  Gateway Load Balancer makes it easy to deploy, scale, and run third-party virtual networking appliances.
+  Providing load balancing and auto scaling for fleets of third-party appliances, Gateway Load Balancer is transparent to the source and destination of traffic.
+  This capability makes it well suited for working with third-party appliances for security, network analytics, and other use cases.
+
+  Classic Load Balancer : https://aws.amazon.com/elasticloadbalancing/classic-load-balancer/
+  Classic Load Balancer provides basic load balancing across multiple Amazon EC2 instances and operates at both the request level and the connection level.
+  Classic Load Balancer is intended for applications that were built within the EC2-Classic network.

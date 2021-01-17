@@ -4,12 +4,13 @@ TOTAL AVAILABLE SERVICE CATEGORIES  IN AWS : (As of January 2021)
 
 NOTE :
 ########
-This page contains a detailed description of what the services do in each of the categories .
-Topics having a higher importance have individual chapters written after them.
-Recommended to View the YouTube Video , link provided beside the topic heading before going through the material.
-Also view the reference pictures attached if any in \Git_Atom\Cloud_AWS\Reference_pics .
-If we have 2 or more services performing a similar activity , the likely chances are that the basic one is a free service while others are PAID services .
-  --> AWS Cloud Watch (free) - AWS Detective (30 days free)- AWS Guard Duty  (30 days free)
+1. This page contains a detailed description of what the services do in each of the categories .
+2. Topics having a higher importance have individual chapters written after them. Marked with < Has a separate detailed chapter > after the header.
+3. Recommended to View the YouTube Video , link provided beside the topic heading before going through the material.
+4. Also view the reference pictures attached if any in \Git_Atom\Cloud_AWS\Reference_pics .
+5. If we have 2 or more services performing a similar activity , the likely chances are that the basic one is a free service while others are PAID services .
+     --> AWS Cloud Watch (free) - AWS Detective (30 days free)- AWS Guard Duty  (30 days free)
+6. Also a Resource  may be a combination of one or more resources or a subset of a single resource providing much more detailed infrastructure .
 
 -------------------------------------------------------------------------------------------------------------------
 SERVICES COVERED :                                                SERVICES NOT COVERED :
@@ -1050,9 +1051,309 @@ For any traced request to your application, you can see detailed information not
 
 
 
-
 ##################################################################################################################
 ##################################################################################################################
 MANAGEMENT & GOVERNANCE :
 ##################################################################################################################
 ##################################################################################################################
+
+1. AWS APPCONFIG : // Different from CONFIG // Integrated DEPLOY action in AWS CODE PIPELINE .
+Use AWS AppConfig, a capability of AWS Systems Manager, to create, manage, and quickly deploy application configurations.
+You can use AWS AppConfig with applications hosted on Amazon Elastic Compute Cloud (Amazon EC2) instances, AWS Lambda, containers, mobile applications, or IoT devices.
+AWS AppConfig supports controlled deployments and includes built-in validation checks and monitoring.
+At a high level , there are three processes for working with AWSCONFIG .
+  --> 1. Configure :  AWS AppConfig to work with your application.
+  --> 2. Enable    :  your application code to periodically check for and receive configuration data from AWS AppConfig.
+  --> 3. Deploy    :  a new or updated configuration
+
+  APPLICATION : An application in AWS AppConfig is a logical unit of code that provides capabilities for your customers.
+                For example, an application can be a microservice that runs on EC2 instances, a mobile application installed by your users and AWS Lambda, or any system you run on behalf of others.
+  ENVIRONMENT : For each application, you define one or more environments.
+                An environment is a logical deployment group of AWS AppConfig applications, such as applications in a Beta or Production environment.
+                You can also define environments for application sub components such as the Web, Mobile, and Back-end components for your application.
+  CONFIGURATION PROFILE : A configuration profile enables AWS AppConfig toaccess your configuration in its stored location.
+                You can store configurations in YAML / JSON / Object in S3 / Document in SYSTEMS MANAGER.
+                It can have validators which appconfig checks while deployment and rolls back if any validator constraint is not met .
+
+AWS AppConfig helps simplify the following tasks:
+
+  --> CONFIGURE  : Source your configurations from Amazon Simple Storage Service (Amazon S3), AWS AppConfig hosted configurations, Parameter Store, Systems Manager Document Store.
+                   Use AWS CodePipeline integration to source your configurations from Bitbucket Pipelines, GitHub, and AWS CodeCommit.
+  --> VALIDATE   : While deploying application configurations, a simple typo could cause an unexpected outage.
+                   Prevent errors in production systems using AWS AppConfig validators.
+                   AWS AppConfig validators provide asyntactic check using a JSON schema deployments proceed only when the checks pass .
+  --> DEPLOY     : Define deployment criteria and rate controls to determine how your targets receive the new configuration
+                   Monitor each deployment to proactively catch any errors using AWS AppConfig integration with Amazon CloudWatch Events.
+                   If AWS AppConfig encounters an error, the system rolls back.
+
+
+2. AWS AUTO-SCALING : < Has a separate detailed chapter >
+Auto scaling is enabled by Amazon CloudWatch and is available at no additional charge beyond the service fees for CloudWatch and the other AWS resources that you use.
+Amazon EC2 Auto Scaling helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application.
+You create collections of EC2 instances, called AutoScaling groups. You can specify the minimum number of instances in each Auto Scaling group, and Amazon EC2 Auto Scaling ensures that your group never goes below this size.
+You can specify the maximum number of instances in each Auto Scaling group, and Amazon EC2 Auto Scaling ensures that your group never goes above this size.
+If you specify scaling policies, then Amazon EC2 Auto Scaling can launch or terminate instances as demand on your application increases or decreases.
+
+--> Groups : Your EC2 instances are organized into groups so that they can be treated as a logical unit for the purposes of scaling and management.
+             When you create a group, you can specify its minimum, maximum, and, desired number of EC2 instances.
+--> Configuration templates : Your group uses a launch template, or a launch configuration , as a configuration template for its EC2 instances.
+             You can specify information such as the AMI ID, instance type, key pair, security groups, and block device mapping for your instances.
+--> Scaling options  : Amazon EC2 Auto Scaling provides several ways for you to scale your Auto Scaling groups.
+             You can configure a group to scale based on if certain conditions are met or on a schedule .
+
+SCALING OPTIONS :
+ --> Maintain current instance levels at all times :
+ --> Scale manually :
+ --> Scale based on a schedule :
+ --> Scale based on demand :
+ --> Use predictive scaling :
+
+3. AWS BACKINT AGENT FOR SAP HANA :
+AWS Backint Agent for SAP HANA (AWS Backint Agent) is an SAP-certified backup and restore application for SAP HANA workloads running on Amazon EC2 instances in the cloud.
+
+4. AWS CHATBOT :
+AWS Chatbot is an AWS service that enables DevOps and software development teams to use Slack or Amazon Chime chat rooms to monitor and respond to operational events in their AWS Cloud.
+AWS Chatbot processes AWS service notifications from Amazon Simple Notification Service (Amazon SNS), and forwards them to Slack or Amazon Chime chat rooms so teams can analyze and act on them.
+Teams can respond to AWS service events from a chat room where the entire team can collaborate, regardless of location.
+Slack and Amazon Chimeusers map the SNS topics to their Slack channels or Amazon Chime web hooks.
+For Slack, after the Slack administrator approves AWS Chatbot support for the Slack workspace, anyone in the workspace can add AWS Chatbot to their Slack channels. For Amazon Chime, users with AWS Identity and Access Management (IAM) permissions to use Amazon Chime can add AWS Chatbot to their web hooks.
+
+5. AWS CLOUD-FORMATION : < Has a separate detailed chapter >  https://www.youtube.com/watch?v=Omppm_YUG2g&t=8s
+--> Create a JSON template with required resources and AWS does the rest.
+AWS CloudFormation enables you to create and provision AWS infrastructure deployments predictably and repeatedly.
+It helps you leverage AWS products such as Amazon EC2, Amazon Elastic Block Store, Amazon SNS, Elastic Load Balancing, and Auto Scaling to build highly reliable, highly scalable, cost-effective applications in the cloud without worrying about creating and configuring the underlying AWS infrastructure.
+AWS CloudFormation enables you to use a template file to create and delete a collection of resources together as a single unit (a stack).
+
+6. AWS CLOUD-TRAIL : < Has a separate detailed chapter >  https://www.youtube.com/watch?v=mXQSnbc9jMs
+--> Integrates with CLOUD WATCH for a detailed monitoring and alarms.
+With AWS CloudTrail, you can monitor your AWS deployments in the cloud by getting a history of AWS API calls for your account, including API calls made via the AWS Management Console, the AWS SDKs, the command line tools, and higher-level AWS services.
+You can also identify which users and accounts called AWS APIs for services that support CloudTrail, the source IP address the calls were made from, and when the calls occurred.
+You can integrate CloudTrail into applications using the API, automate trail creation for your organization, check the status of your trails, and control how administrators turn CloudTrail logging on and off.
+
+Event history allows you to view, search, and download the past 90 days of activity in your AWS account.
+In addition, you can create a CloudTrail trail to archive, analyze, and respond to changes in your AWS resources.
+A trail is a configuration that enables delivery of events to an Amazon S3 bucket that you specify. Subscribe to a SNS topic to receive notifications about log file delivery to your bucket.
+You can also deliver and analyze events in a trail with Amazon CloudWatch Logs and Amazon CloudWatch Events.
+INSIGHTS : Configure your trails to log Insights events to help you identify and respond to unusual activity associated with write management API calls.
+--> While creating a trail in Console , we get the option if we want to send them to cloud watch . Enable it !!!!
+
+7. AWS CLOUD-WATCH : < Has a separate detailed chapter > https://www.youtube.com/watch?v=a4dhoTQCyRA
+Amazon CloudWatch provides a reliable, scalable, and flexible monitoring solution that you can start using within minutes.
+You no longer need to set up, manage, and scale your own monitoring systems and infrastructure.
+It saves logs as metrics and events . You can set high resolution alarms , send SNS and take automatic actions !!
+
+The CloudWatch home page automatically displays metrics about every AWS service you use.
+You can additionally create custom dashboards to display metrics about your custom applications, and display custom collections of metrics that you choose.
+You can create alarms that watch metrics and send notifications or automatically make changes to the resources you are monitoring when a threshold is breached.
+For example, you can monitor the CPU usage and disk reads and writes of your Amazon EC2 instances and then use this data to determine whether you should launch additional instances to handle increased load.
+You can also use this data to stop under-used instances to save money.
+
+8. AWS COMMAND LINE INTERFACE : < Has a separate detailed chapter >
+The AWS Command Line Interface (AWS CLI) is a unified tool that provides a consistent interface for interacting with all parts of AWS.
+We have the latest CLI-v2.0 with more functionalities.
+We download it and install and run commands in the inbuilt shell . --> cmd for windows , terminal for linux
+HELP : aws help
+       aws command help
+       aws command subcommand help --> aws ec2 describe-instances help | more
+
+       If any command returns errors , then use the --debug flag to see logs
+       Use --debug option to see the debug logs for each step in a AWS command.
+
+9. AWS COMPUTE OPTIMIZER :
+AWS Compute Optimizer recommends optimal AWS compute resources for your workloads.
+It can help you reduce costs and improve performance, by using machine learning to analyze your historical utilization metrics.
+Compute Optimizer helps you choose the optimal resource configuration based on your utilization data.
+It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads.
+It also provides graphs showing recent utilization metric history data, as well as projected utilization for recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off.
+The analysis and visualization of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements.
+Compute Optimizer generates recommendations for the following resources:
+    • Amazon Elastic Compute Cloud (Amazon EC2) instances
+    • Amazon EC2 Auto Scaling groups
+    • Amazon Elastic Block Store (Amazon EBS) volumes
+    • AWS Lambda functions
+
+10. AWS CONFIG : < Has a separate detailed chapter >  https://www.youtube.com/watch?v=MJDuAvNEv64&t=26s && https://www.youtube.com/watch?v=X_fznJtSyV8&t=8s
+--> To assess , audit and evaluate your resources .And to make sure resources are compliant with industry standards.
+--> We get notified if a resource is non-compliant or matches a rule against compliance.
+To configure the config , we need to make sure that the instances are managed by SYSTEMS MANAGER . So create a role and assign it to the instances.
+AWS Config provides a detailed view of the resources associated with your AWS account, including how they are configured, how they are related to one another, and how the configurations and their relationships have changed over time.
+
+11. AWS CONSOLE MOBILE APPLICATION :
+The AWS Console Mobile Application, provided by Amazon Web Services, lets you view and manage a select set of resources to support incident response while on-the-go // or away from the computer.
+With the Console Mobile Application, you can monitor resources and view configuration details, metrics,and alarms for a select subset of AWS services.
+You can see an overview of the account status with real-time data on Amazon CloudWatch, AWS Personal Health Dashboard, and AWS Billing and Cost Management.
+You can view ongoing issues and follow through to the relevant CloudWatch alarm screens for a detailed view with graphs and configuration options.
+In addition, you can check on the status of specific AWS services, view detailed resource screens, and perform some actions.
+
+12. AWS CONTROL TOWER : Organizations + SSO + Service Catalog
+AWS Control Tower is a service that enables you to enforce and manage governance rules for security, operations, and compliance at scale across all your organizations and accounts in the AWS Cloud.
+AWS Control Tower creates an abstraction or orchestration layer that combines and integrates the capabilities of several other AWS services, including AWS Organizations, AWS Single Sign-on, and AWS Service Catalog.
+AWS Control Tower provides the easiest way to set up and govern a secure, compliant, multi-account AWS environment based on best practices established by working with thousands of enterprises.
+If you are hosting more than a handful of accounts, it’s beneficial to have an orchestration layer that facilitates account deployment and account governance.
+With AWS Control Tower, end users on your distributed teams can provision new AWS accounts quickly.
+Meanwhile your central cloud administrators know that all accounts are aligned with centrally established, company-wide compliance policies.
+
+  --> Landing zone – A landing zone is a well-architected, multi-account AWS environment that's based on security and compliance best practices.
+      It is the enterprise-wide container that holds all of your organizational units (OUs), accounts, users, and other resources that you want to be subject to compliance regulation.
+      A landing zone can scale to fit the needs of an enterprise of any size.
+  --> Guardrails – A guardrail is a high-level rule that provides ongoing governance for your overall AWS environment. It's expressed in plain language.
+      Two kinds of guardrails exist: preventive and detective.
+      Three categories of guidance apply to the two kinds of guardrails: mandatory, strongly recommended, or elective.
+  --> Account Factory – An Account Factory is a configurable account template that helps to standardize the provisioning of new accounts with pre-approved account configurations.
+      AWS Control Tower offers a built-in Account Factory that helps automate the account provisioning workflow in your organization.
+
+13. AWS DATA LIFE CYCLE MANAGER :
+With Amazon Data Lifecycle Manager, you can manage the lifecycle of your AWS resources. You create lifecycle policies to automate operations on specified resources.
+You can use Amazon Data Lifecycle Manager to automate the creation, retention, and deletion of EBS snapshots and EBS-backed AMIs.
+When you automate snapshot and AMI management, it helps you to:
+    •  Protect valuable data by enforcing a regular backup schedule.
+    •  Create standardized AMIs that can be refreshed at regular intervals.
+    •  Retain backups as required by auditors or internal compliance.
+    •  Reduce storage costs by deleting outdated backups.
+    •  Create disaster recovery backup policies that back up data to isolated accounts.
+When combined with the monitoring features of Amazon CloudWatch Events and AWS CloudTrail, Amazon Data Lifecycle Manager provides a complete backup solution for Amazon EC2 instances and individual EBS volumes at no additional cost.
+
+14. AWS HEALTH :
+AWS Health provides personalized information about events that can affect your AWS infrastructure, guides you through scheduled changes, and accelerates the troubleshooting of issues that affect your AWS resources and accounts.
+All customers can use the Personal Health Dashboard (PHD), powered by the AWS Health API. The dashboard requires no setup, and it's ready to use for authenticated AWS users.
+The Personal Health Dashboard organizes issues in three groups: open issues, scheduled changes, and other notifications.
+When you choose an event in the Event log list, the Event details pane appears with information about the event and resources that are affected by the event.
+--> Event logs show everything happening around the world in AWS .
+--> You can view ACCOUNT SPECIFIC and also PUBLIC EVENTS [issues common for everybody in all regions say ec2 services down etc :]
+
+15. AWS LICENSE MANAGER  : Bring Your Own License - BYOL // Sends SNS if a license is expiring.
+AWS License Manager streamlines the process of bringing software vendor licenses ( for example, Microsoft, SAP, Oracle, and IBM) to the cloud.
+As you build out cloud infrastructure on AWS, you can save costs by using bring-your-own-license (BYOL) opportunities, that is, by repurposing your existing license inventory for use with cloud resources.
+License Manager reduces the risk of licensing overages and penalties with inventory tracking that is tied directly into AWS services.
+License Manager's built-in dashboards provide ongoing visibility into license usage and assistance with vendor audits.
+
+16. AMAZON MANAGED SERVICE FOR GRAFANA - AMG :
+(AMG) is a fully managed and secure data visualization service that enables you to instantly query, correlate, and visualize operational metrics, logs, and traces from multiple data sources.
+AMG makes it easy to deploy, operate, and scale Grafana, a widely deployed open-source data visualization tool popular for its extensible data support.
+
+17. AMAZON MANAGED SERVICE FOR PROMETHEUS - AMP :
+It provides highly available, secure, and managed monitoring for your containers.
+Amazon Managed Service for Prometheus is a serverless, Prometheus-compatible monitoring service for container metrics that makes it easier to securely monitor container environments at scale.
+With AMP, you can use the same open-source Prometheus data model and query language that you use today to monitor the performance of your containerized workloads, and also enjoy improved scalability, availability, and security without having to manage the underlying infrastructure.
+
+18. AWS MANAGEMENT CONSOLE :
+Self - Explanatory .
+
+19. AWS OPSWORKS : < Has a separate detailed chapter > https://www.youtube.com/watch?v=BhNfhHXvhhc
+AWS OpsWorks provides a simple and flexible way to create and manage stacks and applications.
+With AWS OpsWorks, you can provision AWS resources, manage their configuration, deploy applications to those resources, and monitor their health.
+
+AWS OpsWorks is a configuration management service that helps you configure and operate applications in a cloud enterprise by using Puppet or Chef.
+AWS OpsWorks Stacks and AWS OpsWorks for ChefAutomate let you use Chef cookbooks and solutions for configuration management, while OpsWorks for Puppet Enterprise lets you configure a Puppet Enterprise master server in AWS.
+Puppet offers a set of tools for enforcing the desired state of your infrastructure, and automating on-demand tasks.
+
+20. AWS ORGANIZATIONS : < Has a separate detailed chapter >
+AWS Organizations is an account management service that lets you consolidate multiple AWS accounts into an organization that you create and centrally manage.
+With AWS Organizations, you can create member accounts and invite existing accounts to join your organization.
+You can organize those accounts and manage them as a group.
+AWS Organizations includes account management and consolidated billing capabilities that enable you to better meet the budgetary, security, and compliance needs of your business.
+As an administrator of an organization, you can create accounts in your organization and invite existing accounts to join the organization.
+
+Basic organization that consists of "n" accounts can be  organized into "m" organizational units (OUs) under the root.
+The organization also has several policies that are attached to some of the OUs or directly to accounts.
+
+      ROOT ACCOUNT --> ORGANIZATIONAL UNIT - 1 --> Member - q ; Member - p
+                   --> ORGANIZATIONAL UNIT - 2
+                   --> ORGANIZATIONAL UNIT - 3 --> Member - a ; Member - b ; Member -c
+
+21. AWS PROTON :
+AWS Proton creates and manages standardized infrastructure and deployment tooling for developers and their serverless and container-based applications
+The AWS Proton service is a two-pronged automation framework.
+As an administrator, you can create service templates to provide standardized infrastructure and deployment tooling for serverless and container-based applications.
+Then developers on your team, in turn, can select from the available service templates to automate their application or service deployments.
+Platform teams can use AWS Proton to define and manage standard application stacks that contain the architecture, infrastructure resources, and the CI/CD software deployment pipeline.
+When developers use the AWS Proton self-service interface to select a service template, they're selecting a standardized application stack definition for their code deployments.
+Proton automatically provisions the resources, configures the CI/CD pipeline, and deploys the code into the defined infrastructure.
+
+22. AWS SERVICE CATALOG :
+AWS Service Catalog enables IT administrators to create, manage, and distribute portfolios of approved products to end users, who can then access the products they need in a personalized portal.
+Typical products include servers, databases, websites, or applications that are deployed using AWS resources (for example, an Amazon EC2 instance or an Amazon RDS database).
+You can control which users have access to specific products to enforce compliance with organizational business standards, manage product lifecycles, and help users find and launch products with confidence.
+
+23. AWS SERVICE QUOTAS :
+Service Quotas is a service for viewing and managing your quotas easily and at scale as your AWS workloads grow.
+Quotas, also referred to as limits, are the maximum number of resources that you can create in an AWS account.
+WS service defines its quotas and establishes default values for those quotas.
+Depending on your business needs, you might need to increase your service quota values.
+Service Quotas makes it easy to look up your service quotas and to request increases.
+
+24. AWS SYSTEMS MANAGER :
+Use AWS Systems Manager to organize, monitor, and automate management tasks on your AWS resources and also use to view and control your infrastructure onAWS.
+AWS Systems Manager gives you visibility and control of your infrastructure on AWS.
+Systems Manager provides a unified user interface so you can view operational data from multiple AWS services and enables you to automate operational tasks across your AWS resources.
+
+A managed instance is a machine that has been configured for use with Systems Manager.
+Systems Manager also helps you configure and maintain your managed instances.
+Supported machine types include Amazon Elastic Compute Cloud (Amazon EC2) instances, on-premises servers, and virtual machines (VMs), including VMs in other cloud environments.
+Supported operating system types include Windows Server, macOS, Raspbian, and multiple distributions of Linux,.
+Systems Manager helps you maintain security and compliance by scanning your managed instances and reporting on (or taking corrective action on)any policy violations it detects.
+
+After tagging the required resources in a region , you can view a consolidated dashboard in Systems Manager that reports the status of all the resources that are part of the region.
+If a problem arises with any of these resources, you can take corrective action immediately.
+
+Systems Manager is comprised of individual capabilities , which are grouped into five categories:
+--> Operations Management, Application Management, Change Management, Node Management, and Shared Resources
+    • Group AWS resources together by any purpose or activity you choose, such as application, environment, region, project, campaign, business unit, or software lifecycle.
+    • Centrally define the configuration options and policies for your managed instances.
+    • Centrally view, investigate, and resolve operational work items related to AWS resources.
+    • Automate or schedule a variety of maintenance and deployment tasks.• Use and create runbook-style SSM documents that define the actions to perform on your managed instances.
+    • Run a command, with rate and error controls, that targets an entire fleet of managed instances.
+    • Securely connect to a managed instance with a single click, without having to open an inbound port or manage SSH keys.
+    • Separate your secrets and configuration data from your code by using parameters, with or without encryption, and then reference those parameters from a number of other AWS services.
+    • Perform automated inventory by collecting metadata about your Amazon EC2 and on-premises managed instances. Metadata can include information about applications, network configurations, and more.
+    • View consolidated inventory data from multiple AWS Regions and accounts that you manage.
+    • Quickly see which resources in your account are out of compliance and take corrective action from a centralized dashboard.
+    • View active summaries of metrics and alarms for your AWS resources.
+
+25. AWS TOOLS FOR POWER-SHELL :
+AWS Tools for PowerShell and AWS Tools for PowerShell Core are PowerShell modules, built on functionality exposed by the AWS SDK for .NET, that enable you to script operations on AWS resources from the PowerShell command line.
+Although you use the SDK’s service clients and methods to implement the cmdlets, the cmdlets give you a PowerShell experience to specify parameters and handle results.
+For example, the cmdlets in both modules support PowerShell pipelining to pipe PowerShell objects to and from the cmdlets.
+
+26. AWS TRUSTED ADVISOR : < Has a separate detailed chapter >
+AWS Support provides support for users of Amazon Web Services.
+All users have access to account and billing help in the AWS Support Center.
+In addition, customers with some support plans have access to additional features, including AWS Trusted Advisor and an API for programmatic access to support cases and Trusted Advisor.
+
+AWS Trusted Advisor is an online tool that provides you real time guidance to help you provision your resources following AWS best practices.
+Trusted Advisor checks help optimize your AWS infrastructure, increase security and performance, reduce your overall costs, and monitor service limits.
+Whether establishing new workflows, developing applications, or as part of ongoing improvement, take advantage of the recommendations provided by Trusted Advisor on a regular basis to help keep your solutions provisioned optimally.
+
+AWS Basic Support and AWS Developer Support customers get access to 6 security checks (S3 Bucket Permissions, Security Groups - Specific Ports Unrestricted, IAM Use, MFA on Root Account, EBS Public Snapshots, RDS Public Snapshots) and 50 service limit checks.
+AWS Business Support and AWS Enterprise Support customers get access to all 115 Trusted Advisor checks (14 cost optimization, 17 security, 24 fault tolerance, 10 performance, and 50 service limits) and recommendations.
+
+27. AWS WELL-ARCHITECTURED TOOL :
+Use the AWS Well-Architected Tool to review your workloads against current AWS architectural best practices.
+The AWS Well-Architected Tool measures the workload and provides recommendations on how to improve your architecture.
+  • Assisting with documenting the decisions that you make
+  • Providing recommendations for improving your workload based on best practices
+  • Guiding you in making your workloads more reliable, secure, efficient, and cost-effective
+
+Today, you can use AWS WA Tool to document and measure your workload using the best practices from the AWS Well-Architected Framework.
+These best practices were developed by AWS Solutions Architects based on their years of experience building solutions across a wide variety of businesses.
+The frame work provides a consistent approach for measuring architectures and provides guidance for implementing designs that scale with your needs over time.
+
+
+
+##################################################################################################################
+##################################################################################################################
+MIGRATION & TRANSFER :
+##################################################################################################################
+##################################################################################################################
+
+1.
+
+
+    AWS Application Discovery Service
+    AWS Database Migration Service
+    AWS DataSync
+    AWS Migration Hub
+    AWS Schema Conversion Tool
+    AWS Server Migration Service
+    AWS Snow Family
+    AWS Transfer Family
