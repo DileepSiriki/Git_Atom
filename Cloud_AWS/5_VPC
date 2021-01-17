@@ -857,6 +857,23 @@ The following are the key concepts for Site-to-Site VPN:
   Transit gateway         : A transit hub that can be used to interconnect your VPCs and on-premises networks.
                             You use a transit gateway or virtual private gateway as the gateway for the Amazon side of the Site-to-Site VPN connection.
 
+View Reference pics -> NW_*** for more info.
+
+You can optionally enable acceleration for your Site-to-Site VPN connection.
+An accelerated Site-to-Site VPN connection (accelerated VPN connection) uses AWS GLOBAL ACCELERATOR to route traffic from your on-premises network to an AWS edge location that is closest to your customer gateway device.
+AWS Global Accelerator optimizes the network path, using the congestion-free AWS global network to route traffic to the endpoint that provides the best application performance.
+You can use an accelerated VPN connection to avoid network disruptions that might occu rwhen traffic is routed over the public internet.
+When you create an accelerated VPN connection, we create and manage two accelerators on your behalf,one for each VPN tunnel.
+
+To set up a Site-to-Site VPN connection, use the following steps:
+  •Step 1: Create a customer gateway
+  •Step 2: Create a target gateway --> Can be a virtual private gateway or transit gateway
+  •Step 3: Configure routing
+  •Step 4: Update your security group
+  •Step 5: Create a Site-to-Site VPN connection
+  •Step 6: Download the configuration file
+  •Step 7: Configure the customer gateway device using the configuration file.
+
 
 DIRECT CONNECT :
 ----------------
@@ -876,11 +893,36 @@ The following are the key components that you use for AWS Direct Connect:
       VIRTUAL PRIVATE GATEWAY <----------------- VPN CONNECTION ---------------> CUSTOMER GATEWAY
            or TRANSIT GATEWAY                                                    for CORPORATE NETWORK
 
-Accessing public services in a remote Region :
-To access public resources in a remote Region, you must set up a public virtual interface and establisha Border Gateway Protocol (BGP) session.
 
-Accessing VPCs in a remote Region :
-You can create a Direct Connect gateway in any public Region. Use it to connect your AWS Direct Connectconnection over a private virtual interface to VPCs in your account that are located in different Regionsor to a transit gateway.
+A Direct Connect gateway is a globally available resource. You can create the Direct Connect gateway inany Region and access it from all other Regions.
+AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable.
+One end of the cable is connected to your router, the other to an AWS Direct Connect router.
+With this connection in place, you can create virtual interfaces directly to the AWS cloud and Amazon Virtual Private Cloud, bypassing Internet service providers in your network path.
+AWS Direct Connect has two billing elements: port hours and outbound data transfer. Port hour pricing is determined by capacity and connection type (dedicated connection or hosted connection).
+
+You can therefore use a single AWS Direct Connect connection to build multi-Region services. This connection an be configured to access a VPC in your account in any other public Region
+Accessing public services in a remote region :
+--> To access public resources in a remote Region, you must set up a public virtual interface and establish a Border Gateway Protocol (BGP) session.
+Accessing VPC's in a remote region :
+--> You can create a Direct Connect gateway in any public Region. Use it to connect your AWS Direct Connect connection over a private virtual interface to VPCs in your account that are located in different Regionsor to a transit gateway.
+
+There are two types of connections:
+• Dedicated Connection: A physical Ethernet connection associated with a single customer. Customers can request a dedicated connection through the AWS Direct Connect console, the CLI, or the API.
+    Speeds :  1Gbps and 10Gbps
+• Hosted Connection: A physical Ethernet connection that an AWS Direct Connect Partner provisionson behalf of a customer. Customers request a hosted connection by contacting a partner in the AWSDirect Connect Partner Program, who provisions the connection.
+    Speeds :  50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps,500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps.
+
+You must create one of the following virtual interfaces to begin using your AWS Direct Connect connection.
+• Private virtual interface: Access an Amazon VPC using private IP addresses.
+• Public virtual interface: Access AWS services from your on-premises data center.
+  Allow AWS services, or AWS customers access to your public networks over the interface instead of traversing the internet.
+• Transit virtual interface: Access one or more Amazon VPC Transit Gateways associated with DirectConnect gateways.
+  You can use transit virtual interfaces with 1/2/5/10 Gbps AWS Direct Connect connections.
+
+Use AWS Direct Connect gateway to connect your VPCs. You associate an AWS Direct Connect gateway with either of the following gateways:
+• A transit gateway when you have multiple VPCs in the same Region
+• A virtual private gateway
+
 
 
 AWS GATEWAYS : CONNECTING CORPORATE NETWORKS : [ VIRTUAL PRIVATE GATEWAY & DIRECT CONNECT GATEWAY & TRANSIT GATEWAY ]
@@ -939,6 +981,9 @@ A Site-to-Site VPN connection consists of two VPN tunnels between :
         You can create up to ten VPN tunnels to the exterior, Non-VPC networking locations per VPG interfaced and each of these tunnels will be connected using the IPSec protocol.
 
 
+                ON_PREMISIS N/W <--> Customer GW <== VPN-Connection ==>  Virtual Private GW <--> VPC
+
+
         TRANSIT GATEWAY :
         ------------------------------------
         A transit gateway is a network transit hub that you can use to interconnect your virtual private clouds (VPCs) and on-premises networks.
@@ -953,6 +998,10 @@ A Site-to-Site VPN connection consists of two VPN tunnels between :
 
         Create it from -> VPC -> Transit gateway -> Attach to VPC using Transit Gateway Attachments tab
         Now edit the TRANSIT GATEWAY ROUTE tables to connect to EC2 in other VPC .
+
+                                                                                    |<--> VPC-2
+                ON_PREMISIS N/W <--> Customer GW <== VPN-Connection ==>  Transit GW |<--> VPC-1
+                                                                                    |<--> VPC-3
 
         Diagram -22 -> Across single account ->
             Enables you to create a single connection to your Direct Connect connection that all of your VPCs can use.

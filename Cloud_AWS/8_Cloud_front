@@ -52,6 +52,17 @@ REGIONAL EDGE CACHE:
   --> This helps keep more of your content closer to your viewers, reducing the need for CloudFront to go back to your origin server
   *** So if POP does not have some content , instead of going to ORIGIN SERVER , it first checks the REGIONAL EDGE CACHE .
 
+  CloudFront also has regional edge caches that bring more of your content closer to your viewers, even when the content is not popular enough to stay at a POP, to help improve performance for that content.
+  Regional edge caches are CloudFront locations that are deployed globally, close to your viewers.
+  They'relocated between your origin server and the POPs—global edge locations that serve content directly to viewers. As objects become less popular, individual POPs might remove those objects to make roomfor more popular content.
+  Regional edge caches have a larger cache than an individual POP, so objects remain in the cache longer at the nearest regional edge cache location.
+  This helps keep more of your content closer to your viewers, reducing the need for CloudFront to go back to your origin server, and improving overall performance for viewers.
+  When a viewer makes a request on your website or through your application, DNS routes the request to the POP that can best serve the user’s request.
+  This location is typically the nearest CloudFront edge location in terms of latency. In the POP, CloudFront checks its cache for the requested files. If the files are in the cache, CloudFront returns them to the user.
+  If the files are not in the cache, the POPs go to the nearest regional edge cache to fetch the object. In the regional edge cache location, CloudFront again checks its cache for the requested files.
+  If the files are in the cache, CloudFront forwards the files to the POP that requested them. As soon as the first byte arrives from regional edge cache location, CloudFront begins to forward the files to the user.
+  CloudFront also adds the files to the cache in the POP for the next time someone requests those files.
+
 
 LAMBDA@EGDE :
 -------------------

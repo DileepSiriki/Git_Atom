@@ -12,6 +12,11 @@ Supports :
      Gateway Load Balancers, and
      Classic Load Balancers.
 
+If you need flexible application management, we recommend that you use an Application Load Balancer.
+If extreme performance and static IP is needed for your application, we recommend that you use a Network Load Balancer.
+If you have an existing application that was built within the EC2-Classic network, then you should use a Classic Load Balancer.
+https://aws.amazon.com/elasticloadbalancing/features/#Product_comparisons
+
 An Application Load Balancer (ALB) sends requests to healthy instances only.
 An ALB performs periodic health checks on targets in a target group.
 An instance that fails health checks for a configurable number of consecutive times is considered unhealthy.
