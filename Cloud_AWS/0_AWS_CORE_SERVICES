@@ -203,7 +203,7 @@ These features are all available for a low, predictable monthly price.
     So instead of changing applications to meet both cloud and on premises apps , we can use same API's to access resources in both.
     AWS Technician comes and set up all the resources needed to connect resources in cloud and resources in on-premises.
 An Outpost is a pool of AWS compute and storage capacity deployed at a customer site.
-AWS Outposts brings native AWS services, infrastructure, and operating models to virtually any data center, co-location space, or on-premises facility.
+AWS Outposts brings native AWS services, infrastructure, and operating models to virtually any data centre, co-location space, or on-premises facility.
 You can use the same services, tools, and partner solutions to develop for the cloud and on premises .
 
 9. AWS PARALLEL CLUSTER : HPC // 1000's of CPU or GPU.   https://www.youtube.com/watch?v=r4RxT-IMtFY
@@ -314,7 +314,7 @@ This is why customers such as Vanguard, Accenture, Foursquare, and Ancestry have
 It is a command-line tool for modernizing .NET and Java applications into containerized applications.
 Using A2C simplifies your migration tasks by performing inventory and analysis of your existing applications, creating Docker containers that include your application dependencies, and generating deployment templates based on AWS best practices with known values filled in for you.
 After you have reviewed your templates, A2C helps you register your containers to Amazon ECR, deploy to Amazon ECS or Amazon EKS, and build CI/CD pipelines using AWS CodeStar.
-It is also a command line tool to help you lift and shift applications that run in your on-premises data centers or on virtual machines, so that they run in containers that are managed by Amazon ECS or Amazon EKS. Thus providing a step towards modernization .
+It is also a command line tool to help you lift and shift applications that run in your on-premises data centres or on virtual machines, so that they run in containers that are managed by Amazon ECS or Amazon EKS. Thus providing a step towards modernization .
 
 
 
@@ -331,7 +331,7 @@ You can accomplish these tasks using the simple and intuitive web interface of t
 A bucket is a container for objects stored in Amazon S3. Every object is contained in a bucket.
 
 2. AWS BACKUP : https://www.youtube.com/watch?v=QDiXzFx2iMU&t=17s
-AWS Backup is a fully managed backup service that makes it easy to centralize and automate the backup of data across AWS services in the cloud as well as on premises [ uses AWS STORAGE GATEWAY for on premisis].
+AWS Backup is a fully managed backup service that makes it easy to centralize and automate the backup of data across AWS services in the cloud as well as on premises [ uses AWS STORAGE GATEWAY for on premises].
 Using AWS Backup, you can configure backup policies and monitor backup activity for your AWS resources in one place.
 AWS Backup automates and consolidates backup tasks that were previously performed service-by-service, and removes the need to create custom scripts and manual processes.
 It provides a fully managed backup service and a policy-based backup solution .
@@ -541,7 +541,7 @@ The two main components of Amazon Cognito are user pools and identity pools.
 5. AWS DIRETORY SERVICE : -> To use Microsoft Active Directory - MAD // https://www.youtube.com/watch?v=XNTsmRe8k7Q&t=9s
 --> MAD is  used to manage computers and other devices on a network.
 --> It is a primary feature of Windows Server, an operating system that runs both local and Internet-based servers.
---> So a similar functionality is provided by AWS Directory service , used to handle unlimited number of servers and their credentials and let users login through single sign on with existing corporate credentials on premisis.
+--> So a similar functionality is provided by AWS Directory service , used to handle unlimited number of servers and their credentials and let users login through single sign on with existing corporate credentials on premises.
 --> As an admin you  can manage both windows and linux instances and no more needed to manage credentials to individual servers.
 AWS Directory Service provides multiple ways to set up and run Microsoft Active Directory with other AWS services such as Amazon EC2, Amazon RDS for SQL Server, Amazon FSx for Windows File Server, and AWS Single-Sign On.
 AWS Directory Service for Microsoft Active Directory, also known as AWS Managed Microsoft AD, enables your directory-aware workloads and AWS resources to use a managed Active Directory in the AWS Cloud.
@@ -1346,14 +1346,165 @@ MIGRATION & TRANSFER :
 ##################################################################################################################
 ##################################################################################################################
 
-1.
+// Classical way of DB migration can be time consuming, difficult and expensive . Users also can not use the DB while in transfer.
+// Also converting data into a new data base type is difficult .
+
+--> NETWORK BASED SERVICES : Private Network Connectors to AWS            - AWS DIRECT CONNECT
+                             Edge Locations for S3 Enabled applications   - AMAZON S3 TRANSFER ACCELERATION
+
+--> ONLINE  DATA TRANSFER :  Load stream Data into S3                     - AMAZON KINESIS
+                             Online transfer of active data               - AWS DATA SYNC
+                             SFTP transfer to S3                          - AWS TRANSFER FOR SFTP
+                             Database Transfer                            - AWS DATABSE MIGRATION
+                             VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
+
+--> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball / Snow Mobile ]
+
+--> HYBRID DATA STORAGE   :  Access AWS storage from On-premises          - AWS STORAGE GATEWAY
 
 
-    AWS Application Discovery Service
-    AWS Database Migration Service
-    AWS DataSync
-    AWS Migration Hub
-    AWS Schema Conversion Tool
-    AWS Server Migration Service
-    AWS Snow Family
-    AWS Transfer Family
+1. AWS APPLICATION DISCOVERY SERVICE :  https://www.youtube.com/watch?v=TYiqPrCA4fc
+--> Deploy Discovery Agent on resources  - Migrate to cloud // Integrated with MIGRATION HUB //
+It helps you plan your migration to the AWS cloud quickly and reliably plan application migration projects by automatically identifying applications running in on-premises data centres, their associated dependencies, and their performance profile.
+It is integrated with AWS Migration Hub, which simplifies your migration tracking as it aggregates your migration status information into a single console.
+You can view the discovered servers, group them into applications, and then track the migration status of each application from the Migration Hub console in your home region.
+Application Discovery Service integrates with application discovery solutions from AWS Partner Network(APN) partners.
+These third-party solutions can help you import details about your on-premises environment directly into Migration Hub, without using any discovery connector or discovery agent.
+
+The AWS Discovery Agent is AWS software that you install on on-premises servers and VMs targeted for discovery and migration.
+Agents capture system configuration, system performance, running processes, and details of the network connections between systems.
+Agents support most Linux and Windows operating systems, and you can deploy them on physical on-premises servers, Amazon EC2 instances, and virtual machines.
+After registration, it pings the service at 15-minute intervals for configuration information.
+
+You can get data about your servers and applications into the AWS Migration Hub console for migration tracking in three ways:
+-->  Migration Hub import, the AWS Agentless Discovery Connector, and the AWS Application Discovery Agent.
+
+2. AWS DATABASE MIGRATION SERVICE - DMS : https://www.youtube.com/watch?v=ouia1Sc5QGo&t=16s // AWS SCHEMA CONVERSION TOOL
+--> Migrate Data base to and from Cloud to on premises. // Bidirectional
+AWS Database Migration Service (AWS DMS) is a cloud service that makes it easy to migrate relational databases, data warehouses, NoSQL databases, and other types of data store.
+These services can include a database on Amazon RDS or a database on an Amazon EC2 instance. You can also migrate a database from an AWS service to an on-premises database.
+You can migrate data between heterogeneous or homogenous database engines.
+
+With AWS DMS, you can perform one-time migrations, and you can replicate ongoing changes to keep sources and targets in sync.
+If you want to change database engines, you can use the AWS Schema Conversion Tool (AWS SCT) to translate your database schema to the new platform.
+And then use AWS DMS to migrate to cloud . Any data that can not be converted is marked for review later .
+
+AWS Database Migration Service (AWS DMS) is a web service that you can use to migrate data from a source data store to a target data store.
+These two data stores are called endpoints. You can migrate between source and target endpoints that use the same database engine, such as from an Oracle database to an Oracle database.
+You can also migrate between source and target endpoints that use different database engines, such as from an Oracle database to a PostgreSQL database.
+The only requirement to use AWS DMS is that one of your endpoints must be on an AWS service.
+You can't use AWS DMS to migrate from an on-premises database to another on-premises database.
+
+At a high level, when using AWS DMS you do the following:
+  --> • Create a replication server.
+  --> • Create source and target endpoints that have connection information about your data stores.
+  --> • Create one or more migration tasks to migrate data between the source and target data stores.
+A task can consist of three major phases:
+  --> • The full load of existing data
+  --> • The application of cached changes
+  --> • Ongoing replication
+
+While the replication is going on , all the transactions are cached and the cached data is migrated at the end to not disturb the flow of business or miss any data transaction.
+
+// DMS is for DATA BASE migration
+// DATA SYNC is for DATA migration
+
+3. AWS DATA-SYNC : Online Transfer // https://www.youtube.com/watch?v=jPRquig6Nrw
+AWS DataSync is an online data transfer service that simplifies, automates, and accelerates moving data between on-premises storage systems and AWS storage services, and also among  AWS storage services themselves .
+DataSync can copy data between Network File System (NFS), Server Message Block (SMB) fileservers, self-managed object storage, AWS Snow cone, Amazon Simple Storage Service (Amazon S3)buckets, Amazon EFS file systems, and Amazon FSx for Windows File Server file systems.
+
+                     ON_PREMISIS                                                          AWS CLOUD
+                                                              TLS
+    Shared File system <----> AWS Data Sync agent  <========================> AWS Data Sync <----> AWS S3 / EFS
+
+4. AWS MIGRATION-HUB :
+AWS Migration Hub provides a single location to track migration tasks across multiple AWS tools and partner solutions.
+With Migration Hub, you can choose the AWS and partner migration tools that best fit your needs while providing visibility into the status of your migration projects.
+Migration Hub also provides key metrics and progress information for individual applications, regardless of which tools are used to migrate them.
+Migration Hub supports migration status updates from the following AWS services:
+  --> • AWS Database Migration Service
+  --> • AWS Server Migration Service
+  --> • AWS Cloud Endure Migration
+
+5. AWS SCHEMA CONVERSION TOOL : // USED BY AWS-DMS
+The AWS Schema Conversion Tool makes heterogeneous database migrations easy by automatically converting the source database schema and a majority of the custom code to a format compatible with the target database.
+The custom code that the tool converts includes views, stored procedures, and functions.
+Any code that the tool cannot convert automatically is clearly marked so that you can convert it yourself.
+You can convert relational OLTP schema, or data warehouse schema.
+Your converted schema is suitable for an Amazon Relational Database Service (Amazon RDS) MySQL, MariaDB, Oracle, SQL Server, PostgreSQL DB, an Amazon Aurora DB cluster, or an Amazon Redshift cluster.
+The converted schema can also be used with a database on an Amazon EC2 instance or stored as data on an Amazon S3 bucket.
+
+  SCT EINDOW : view Ref pic.
+  1. In the left panel, the schema from your source database is presented in a tree view. Your database schema is "lazy loaded."
+     In other words, when you select an item from the tree view, AWS SCT gets and displays the current schema from your source database.
+  2. In the top middle panel, action items appear for schema elements from the source database engine that couldn't be converted automatically to the target database engine.
+  3. In the right panel, the schema from your target DB instance is presented in a tree view. Your database schema is "lazy loaded."
+     That is, at the point when you select an item from the tree view, AWS SCT gets and displays the current schema from your target database.
+  4. In the lower left panel, when you choose a schema element, properties describing the source schema element and the SQL command to create that element in the source database are displayed.
+  5. In the lower right panel, when you choose a schema element, properties describing the target schema element and the SQL command to create that element in the target database are displayed.
+      You can edit this SQL command and save the updated command with your project.
+
+6. AWS SERVER MIGRATION SERVICE : Microsoft or Azure to AWS
+AWS Server Migration Service (AWS SMS) combines data collection tools with automated server replication to speed the migration of on-premises servers to AWS.
+AWS Server Migration Service automates the migration of your on-premises VMware vSphere, Microsoft Hyper-V/SCVMM, and Azure virtual machines to the AWS Cloud.
+AWS SMS incrementally replicates your server VMs as cloud-hosted Amazon Machine Images (AMIs) ready for deployment on Amazon EC2.
+Working with AMIs, you can easily test and update your cloud-based images before deploying them in production.
+
+The Server Migration Connector is a FreeBSD VM that you install in your on-premises virtualization environment.
+The supported platforms are VMware vSphere, Microsoft Hyper-V/SCVMM, and Microsoft Azure. We need to install this on the on premises / virtual VM.
+Now open the Server Migration Service on AWS and do the transfer.
+
+7. AWS SNOW FAMILY :
+The AWS Snow Family is a service that helps customers who need to run operations in austere, non-data centre environments, and in locations where there's no consistent network connectivity.
+You can use these devices to locally and cost-effectively access the storage and compute power of the AWS Cloud in places where an internet connection might not be an option.
+
+AWS Snowcone [2kg] is a portable, rugged, and secure device for edge computing and data transfer.
+You can use Snowcone to collect, process, and move data to AWS, either offline by shipping the device to AWS, or online by using AWS DataSync.
+With two CPUs and 8 TB of storage, Snowcone can run edge computing workloads that use Amazon Elastic Compute Cloud (Amazon EC2) instances, and store data securely.
+you can carry one in a backpack, use it with battery-based operation, and use the Wi-Fi interface to gather sensor data.
+Snowcone supports a file interface with NFS support. The Snowcone device supports data transfer from on-premises Windows, Linux, and macOS servers and file-based applications through the NFS interface.
+It can be used in space-constrained environments where Snowball Edge devices don't fit.
+
+-> Snow cone        - https://www.youtube.com/watch?v=X_8LM7E_hiE      -- 8 TB storage   --> 1 SMALL BOX [ uses opshub application for data transfer ]
+   Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80 TB storage  --> 1 SUITCASE
+   Snow Ball edge   - https://www.youtube.com/watch?v=bxSD1Nha2k8      -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
+   Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1 Exabyte      --> 1 Truck
+
+  1 Exabyte = 1000 petabytes
+  Snow ball can be connected in series to have a Petabyte's storage  = 1 million GB = 1024 Terabytes
+
+8. AWS TRANSFER FAMILY :
+AWS Transfer Family is a secure transfer service that stores your data in Amazon S3 and simplifies the migration of :
+  --> Secure Shell File Transfer Protocol (SFTP),
+  --> File Transfer Protocol Secure (FTPS), and
+  --> File Transfer Protocol (FTP) workflows to AWS.
+
+AWS Transfer Family is a secure transfer service that enables you to transfer files into and out of AWSstorage services.
+Supports transferring data from the following :
+  --> Amazon Simple Storage Service (Amazon S3) storage.
+  --> Amazon Elastic File System (Amazon EFS) Network File System (NFS) file system
+
+You can get started with AWS Transfer Family by creating a file transfer protocol-enabled server and then assigning users to use the server.
+To service your AWS Transfer Family users' transfer requests, you create an AWS Identity and Access Management (IAM) role to access your Amazon S3 bucket or Amazon Elastic File System.
+AWS Transfer Family supports any standard file transfer protocol client. Some commonly used clients are the following:
+  -->  OpenSSH – A Macintosh and Linux command line utility.
+  -->  WinSCP – A Windows-only graphical client.
+  -->  Cyberduck – A Linux, Macintosh, and Microsoft Windows graphical client.
+  -->  FileZilla – A Linux, Macintosh, and Windows graphical client.
+
+STEP-1 : Sign into Aws - Transfer family
+STEP-2 : Create an SFTP enabled server
+         Secure Shell (SSH) File Transfer Protocol (SFTP) is a network protocol used for secure transfer of data over the internet.
+         The protocol supports the full security and authentication functionality of SSH.
+         It is widely used to exchange data, including sensitive information between business partners in a variety of industries such as financial services, healthcare, retail, and advertising.
+         create server -> SFTP
+STEP-3 : Add a user to the created server and provide an S3 bucket as home folder for the transferred files to be stored.
+STEP-4 : Open any client and initiate transfer.
+
+
+
+##################################################################################################################
+##################################################################################################################
+NETWORKING & CONTENT DELIVERY :
+##################################################################################################################
+##################################################################################################################

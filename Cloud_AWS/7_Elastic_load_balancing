@@ -88,3 +88,26 @@ The DNS entry also specifies the time-to-live (TTL) of 60 seconds.
 This helps ensure that the IP addresses can be remapped quickly in response to changing traffic.
 The client determines which IP address to use to send requests to the load balancer.
 The load balancer node that receives the request selects a healthy registered target and sends the request to the target using its private IP address.
+
+=========
+
+Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, Lambda functions, and virtual appliances.
+It can handle the varying load of your application traffic in a single Availability Zone or across multiple Availability Zones.
+Elastic Load Balancing offers four types of load balancers that all feature the high availability, automatic scaling, and robust security necessary to make your applications fault tolerant.
+
+  Application Load Balancer : https://aws.amazon.com/elasticloadbalancing/application-load-balancer/
+  Application Load Balancer is best suited for load balancing of HTTP and HTTPS traffic and provides advanced request routing targeted at the delivery of modern application architectures, including microservices and containers.
+  Application Load Balancer routes traffic to targets within Amazon VPC based on the content of the request.
+
+  Network Load Balancer : https://aws.amazon.com/elasticloadbalancing/network-load-balancer/
+  Network Load Balancer is best suited for load balancing of Transmission Control Protocol (TCP), User Datagram Protocol (UDP), and Transport Layer Security (TLS) traffic where extreme performance is required.
+  Network Load Balancer routes traffic to targets within Amazon VPC and is capable of handling millions of requests per second while maintaining ultra-low latencies.
+
+  Gateway Load Balancer : https://aws.amazon.com/elasticloadbalancing/gateway-load-balancer/
+  Gateway Load Balancer makes it easy to deploy, scale, and run third-party virtual networking appliances.
+  Providing load balancing and auto scaling for fleets of third-party appliances, Gateway Load Balancer is transparent to the source and destination of traffic.
+  This capability makes it well suited for working with third-party appliances for security, network analytics, and other use cases.
+
+  Classic Load Balancer : https://aws.amazon.com/elasticloadbalancing/classic-load-balancer/
+  Classic Load Balancer provides basic load balancing across multiple Amazon EC2 instances and operates at both the request level and the connection level.
+  Classic Load Balancer is intended for applications that were built within the EC2-Classic network.
