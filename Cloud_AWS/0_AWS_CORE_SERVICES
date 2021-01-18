@@ -12,27 +12,23 @@ NOTE :
      --> AWS Cloud Watch (free) - AWS Detective (30 days free)- AWS Guard Duty  (30 days free)
 6. Also a Resource  may be a combination of one or more resources or a subset of a single resource providing much more detailed infrastructure .
 
--------------------------------------------------------------------------------------------------------------------
-SERVICES COVERED :                                                SERVICES NOT COVERED :
--------------------------------------------------------------------------------------------------------------------
-Analytics                                                         AR & VR
-Application Integration                                           Blockchain
-Billing & Cost Management                                         Front-End Web & Mobile
-Business Applications                                             Game Development
-Compute                                                           Internet of Things (IoT)
-Containers                                                        Machine Learning
-Cryptography & PKI                                                Media Services
-Customer Enablement Services                                      Quantum Computing
-Customer Engagement                                               Robotics
-Data Base                                                         Satellite
-Developer Tools
-End User Computing
-Management & Governance
-Migration & Transfer
-Networking & Content Delivery
-Security, Identity, & Compliance
-Storage
 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICES COVERED :
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Analytics                     Compute                  Data Base                Management & Governance         Satellite
+Application Integration       Containers               Developer Tools          Migration & Transfer            Security, Identity, & Compliance
+AR & VR                       Cryptography & PKI       End User Computing       Networking & Content Delivery   Storage
+Billing & Cost Management     Customer Enablement      Front-End Web & Mobile   Quantum Computing
+Business Applications         Customer Engagement      Game Development         Robotics
+Blockchain
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICES NOT COVERED :
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Internet of Things (IoT)
+Machine Learning
+Media Services                                      
 
 
 ##################################################################################################################
@@ -2146,9 +2142,40 @@ SATELLITE -  ROBOTICS -  QUANTUM COMPUTING -  BLOCKCHAIN -  AR & VR -  GAME DEVE
 ##################################################################################################################
 
 1. AWS GROUND STATION : // Satellite
+AWS Ground Station is a fully managed service that enables you to control satellite communications, process satellite data, and scale your satellite operations.
+With AWS Ground Station, you don't have to build or manage your own ground station infrastructure.
+
 2. AWS ROBO MAKER : // Robotics
+AWS RoboMaker is a service that makes it easy to develop, simulate, and deploy intelligent robotics applications at scale.
+AWS RoboMaker extends the Robot Operating System (ROS) framework with cloud services. This includes AWS machine learning services.
+It includes monitoring services. It even includes analytics services. These combine to enable a robot to do several things on its own.
+Stream data, navigate, communicate, comprehend, and learn. AWS RoboMaker provides a robotics application development environment.
+It provides a robotics simulation service, which speeds application testing.
+You can easily create hundreds of new worlds from templates you define using Simulation WorldForge.
+It provides a fleet management service so you can deploy and manage applications remotely
+
 3. AMAZON BRAKET : // Quantum
+Quantum computers perform calculations based on the probability of an object's state before it is measured - instead of just 1s or 0s - which means they have the potential to process exponentially more data compared to classical computers.
+Amazon Braket is a fully managed service that helps you get started with quantum computing by providing a development environment.
+THE environment helps to explore and design quantum algorithms, test them on simulated quantum computers, and run them on your choice of different quantum hardware technologies.
+
 4. AMAZON MANAGED BLOCK CHAIN : // Block chain
+In the simplest terms, Blockchain can be described as a data structure that holds transactional records and while ensuring security, transparency, and decentralization.
+You can also think of it as a chain or records stored in the forms of blocks which are controlled by no single authority.
+Each block has a cryptographic hash of the previous block, a timestamp, and transaction data.
+A blockchain is a decentralized ledger of all transactions across a peer-to-peer network. Using this technology, participants can confirm transactions without a need for a central clearing authority.
+Amazon Managed Blockchain is a fully managed service that makes it easy to create and manage scalable blockchain networks using the Ethereum or Hyperledger Fabric open-source frameworks.
+
 5. AMAZON SUMERIAN : // AR - VR
+Amazon Sumerian is a set of tools for creating high-quality virtual reality (VR) experiences on the web.
+With Sumerian, you can construct an interactive 3D scene without any programming experience, test it in the browser, and publish it as a website that is immediately available to users.
+The Sumerian 3D engine provides a library for advanced scripting with JavaScript but you don't have to be a programmer to create interactive AR, VR, or 3D!
+ the built-in state machine to animate objects and respond to user input like clicks and movement.
+
 6. AMAZON GAME-LIFT : // Game
+GameLift provides solutions for hosting session-based multiplayer game servers in the cloud, including a fully managed service for deploying, operating, and scaling game servers.
+Built on AWS global computing infrastructure, GameLift helps you deliver high-performance, high-reliability, low-cost game servers while dynamically scaling your resource usage to meet player demand.
+
 7. AMAZON LUMBER-YARD : // Game
+Lumberyard is a free AAA game engine deeply integrated with AWS and Twitch—with full source.
+Lumberyard provides a growing set of tools to help you create the highest quality games, engage massive communities of fans, and connect games to the vast compute and storage of the cloud.
