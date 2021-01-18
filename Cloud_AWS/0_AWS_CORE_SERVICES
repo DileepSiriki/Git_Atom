@@ -1751,8 +1751,122 @@ END USER COMPUTING :
 ##################################################################################################################
 ##################################################################################################################
 
+// The following are used if you have a corporate N/W or if you are an enterprise and you want to provide services to your end users.
+   All the services are monitored by an admin and he provides / revokes accesses to users .
+// software developers in an organization can use Amazon WorkSpaces to access all desktop resources from any computer or tablet.
+   Engineers can use AppStream 2.0 to stream GPU intensive apps.
+   And sales leaders can use Amazon WorkLink to access internal web-based content, such as sales data, from their mobile devices.
+
+
 1. AMAZON WORKSPACES :
-2. AMAZON APP-STREAM 2.0 :
-3. AMAZON WORK-DOCS :
-4. AMAZON WORK-LINK :
-5. AMAZON WAM :
+Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows or Amazon Linux desktops for your users, known as WorkSpaces.
+Amazon WorkSpaces eliminates the need to procure and deploy hardware or install complex software.
+You can quickly add or remove users as your needs change. Users can access their virtual desktops from multiple devices or web browsers.
+As an admin you have the rights to remove add users and assign applications to users using WAM.
+
+Amazon WorkSpaces offers an easy way to provide a cloud-based desktop experience to your end users.
+Select from a choice of bundles that offer a range of different amounts of CPU, memory, storage, and a choice of applications.
+Users can connect from a PC, Mac desktop computer, iPad, Kindle, or Android tablet.
+
+  • Connect to your WorkSpace and pick up from right where you left off. Amazon WorkSpaces provides a persistent desktop experience.
+  • Amazon WorkSpaces provides the flexibility of either monthly or hourly billing for WorkSpaces.
+  • Deploy and manage applications for your Windows WorkSpaces by using Amazon WorkSpaces Application Manager (Amazon WAM).
+  • For Windows desktops, you can bring your own licenses and applications, or purchase them from the AWS Marketplace for Desktop Apps.
+  • Create a standalone managed directory for your users, or connect your WorkSpaces to your on-premises directory so that your users can use their existing credentials to obtain seamless access to corporate resources.
+  • From any Operating system , use any other operating system
+  • Encrypt data using AWS KMS , Use MFA , Select the range of IP addresses to use.
+
+Each WorkSpace is associated with a virtual privatecloud (VPC), and a directory to store and manage information for your WorkSpaces and users.
+Directories are managed through the AWS Directory Service, which offers the following options: Simple AD, AD Connector, or AWS Directory Service for Microsoft Active Directory, also known as AWS Managed Microsoft AD.
+The login information is sent to an authentication gateway, which forwards the traffic to the directory for the WorkSpace. After the user is authenticated, streaming traffic is initiated through the streaming gateway.
+Client applications use HTTPS over port 443 for all authentication and session-related information.
+Client applications use port 4172 (PCoIP) and port 4195 (WSP) for pixel streaming to the WorkSpace and ports 4172 and 4195 for network health checks.
+Each WorkSpace has two elastic network interfaces associated with it: a network interface for management and streaming (eth0) and a primary network interface (eth1).
+The primary network interface has an IP address provided by your VPC, from the same subnets used by the directory.
+This ensures that traffic from your WorkSpace can easily reach the directory. Access to resources in the VPC is controlled by the security groups assigned to the primary network interface.
+
+Example Computer names • Linux: A-1xxxxxxxxxxxx
+                       • Windows: IP-Cxxxxxx or WSAMZN-xxxxxxx or EC2AMAZ-xxxxxxx
+
+
+2. AMAZON WAM :
+Amazon WorkSpaces Application Manager (Amazon WAM) offers a fast, flexible, and secure way for you to deploy and manage applications for Amazon WorkSpaces  with Windows.
+Amazon WAM accelerates software deployment, updates, patching, and retirement by packaging Microsoft Windows desktop applications into virtual containers that run as though they are installed natively.
+Amazon WAM is fully integrated with the AWS Management Console, and allows you to build an application catalog from your line-of-business applications, third-party applications that you own the license for, and applications purchased through the AWS Marketplace.
+
+Amazon WAM is available in two versions: Amazon WAM Lite and Amazon WAM Standard.
+With Amazon WAM Lite, you can manage and deliver applications from the AWS Marketplace free of charge. You pay only for the applications that your users activate.
+With Amazon WAM Standard, you can build your application catalog with line-of-business applications, third-party applications for which you own licenses, and applications from the AWS Marketplace for Desktop Apps.
+With Amazon WAM, you pay only for the applications that are used, on a per-user basis.
+
+
+3. AMAZON APP-STREAM 2.0 :
+--> Amazon AppStream 2.0 is a fully managed application streaming service that provides users with instant access to their desktop applications from anywhere.
+Amazon AppStream 2.0 is a fully managed, secure application streaming service that lets you stream desktop applications to users without re writing applications.
+AppStream 2.0 provides users with instant access to the applications that they need with a responsive, fluid user experience on the device of their choice.
+AppStream 2.0 provides users access to the applications they need on the device of their choice, with a responsive, fluid user experience that is indistinguishable from natively installed applications.
+
+With AppStream 2.0, you can easily add your existing desktop applications to AWS and enable your users to instantly stream them.
+You can maintain a single version of each of your applications, which makes application management easier. Your users always access the latest versions of their applications.
+Your applications run on AWS compute resources, and data is never stored on users' devices, which means they always get a high performance, secure experience.
+
+Choose the fleet type that meets your needs. There are two types of fleets:
+    • Always-On — Your instances run all the time, even when no users are streaming applications. Use an Always-On fleet to provide your users with instant access to their applications.
+    • On-Demand — Your instances run only when users are streaming applications. Idle instances that are available for streaming are in a stopped state. Use an On-Demand fleet to optimize your streaming charges and provide your users with access to their applications after a 1-2 minute wait.
+
+IMAGE BUILDER : It is a virtual machine that you use to create an image. You can launch and connect to an image builder by using the AppStream 2.0 console.
+                After you connect to an image builder, you can install, add, and test your applications, and then use the image builder to create an image.
+IMAGE         : An image contains applications that you can stream to your users, and default Windows and application settings to enable your users to get started with their applications quickly.
+                To add other applications, update existing applications, or change image settings, you must create a new image.
+FLEET         : A fleet consists of fleet instances (also known as streaming instances) that run the image that you specify.
+                You can set the desired number of streaming instances for your fleet and configure policies to scale your fleet automatically based on demand.
+STACK         : A stack consists of an associated fleet, user access policies, and storage configurations.
+                You set up a stack to start streaming applications to users.
+STREAMING INSTANCE : A streaming instance (also known as a fleet instance) is an EC2 instance that is made available to a single user for application streaming.
+                After the user’s session completes, the instance is terminated by EC2.
+
+
+4. AMAZON WORK-DOCS :
+Amazon WorkDocs is a fully managed, secure enterprise storage and sharing service with strong administrative controls and feedback capabilities that improve user productivity.
+Files are stored in the cloud, safely and securely. Your user's files are only visible to them, and their designated contributors and viewers.
+Other members of your organization do not have access to other user's files unless they are specifically granted access.
+
+Users can share their files with other members of your organization for collaboration or review.
+The Amazon WorkDocs client applications can be used to view many different types of files, depending on the Internet media type of the file.
+Amazon WorkDocs supports all common document and image formats, and support for additional media types is constantly being added.
+
+Administrators use the Amazon WorkDocs console to create and deactivate Amazon WorkDocs sites. With the admin control panel, they can manage users, storage, and security settings.
+Non-administrative users use the client applications to access their files. They never use the AmazonWorkDocs console or the administration dashboard.
+Amazon WorkDocs offers several different client applications and utilities:
+  • A web application used for document management and reviewing.
+  • Native apps for mobile devices used for document review.
+  • A document synchronization app used to synchronize a folder on your macOS or Windows desktop with your Amazon WorkDocs files.
+  • Web clipper browser extensions for several popular web browsers that allow you to save an image of awebpage to your Amazon WorkDocs files.
+You must have an AWS account to create or administer an Amazon WorkDocs site. Users do not needan AWS account to connect to and use Amazon WorkDocs.
+
+
+5. AMAZON WORK-LINK : Similar to UX-Apps TCS
+Amazon WorkLink is a fully managed, cloud-based service that enables secure, one-click access to internal websites and web apps from mobile devices.
+In a single step, your users, such as employees, can access internal websites as efficiently as they access any other public website.
+They enter a URL in their web browser, or choose a link to an internal website in an email.
+Because website data is never stored or cached locally on mobile browsers, Amazon WorkLink reduces the risk of information loss or theft.
+In addition, all cached content is deleted from AWS when users end their browsing session.
+To use Amazon WorkLink, your users download the Amazon WorkLink app to their mobile device and login with their company credentials.
+After initial setup, the Amazon WorkLink app works in the background while employees browse internal websites using Safari on iOS phones and Google Chrome on Android phones.
+
+
+
+
+##################################################################################################################
+##################################################################################################################
+APPLICATION INTEGRATION  :
+##################################################################################################################
+##################################################################################################################
+
+1. AMAZON APP-FLOW :
+2. AMAZON EVENT-BRIDGE :
+3. AMAZON MQ :
+4. AMAZON SNS : < Has a separate detailed chapter > // Also documented in Front-End Web & Mobile.
+5. AMAZON SQS : < Has a separate detailed chapter >
+6. AWS STEP FUNCTIONS :
+7. AMAZON SWF :
