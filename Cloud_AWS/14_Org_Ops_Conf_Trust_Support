@@ -122,6 +122,11 @@ Chef Automate is an included server software package that provides automated wor
 AWS SUPPORT // TRUSTED ADVISOR : --> AWS -> Support Centre -> Create a Case
 ==================================================================
 AWS Support offers four support plans: Basic, Developer, Business, and Enterprise
+https://console.aws.amazon.com/support/plans/home?#/ **V.IMP
+  --> Basic                 - Included
+  --> Current plan          - Starting at $29 per month
+  --> Developer	Business    - Starting at $100 per month
+  --> Enterprise            - Starting at $15,000 per month
 
 All AWS customers automatically have 24/7 access to these features of the Basic support plan:
 • One-on-one responses to account and billing questions

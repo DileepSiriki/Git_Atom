@@ -41,7 +41,9 @@ ANALYTICS :
 ##################################################################################################################
 ##################################################################################################################
 
-1. AMAZON APP FLOW :  https://www.youtube.com/watch?v=USzaWjjjOJI
+1. AMAZON APP-FLOW :  https://www.youtube.com/watch?v=USzaWjjjOJI
+// We may have SAAS apps such as sales force - slack etc; . Sharing data b/w them and AWS for analytics and archiving and automatic workflow isimportant.
+// But managing the transfer is difficult which is handled by APP-FLOW.
 Bidirectional data transfer from SAAS Applications To AWS
 Amazon App Flow is a fully-managed integration service that enables you to securely exchange data between software as a service (SaaS) applications, such as Salesforce, Slack and AWS services, such as Amazon Simple Storage Service (Amazon S3) and Amazon Redshift.
 For example, you can ingest contact records from Salesforce to Amazon Redshift or pull support tickets from Zendesk to an Amazon S3 bucket.
@@ -62,7 +64,7 @@ You can easily change your search parameters, fine tune search relevance, and ap
       Free text, Boolean, and Faceted search - Autocomplete suggestions - Customizable relevance ranking and query-time rank expressions - Field weighting
       Geospatial search - Highlighting - Support for 34 languages
 
-4. AWS DATA EXCHANGE : https://www.youtube.com/watch?v=Lu9QVJ0Rml4&t=26s
+4. AWS DATA-EXCHANGE : https://www.youtube.com/watch?v=Lu9QVJ0Rml4&t=26s
 AWS Data Exchange is a service that makes it easy for AWS customers to securely exchange file-based data sets in the AWS Cloud.
 As a subscriber, you can find and subscribe to hundreds of products from qualified data providers.
 Then, you can quickly download the data set or copy it to Amazon S3 for use across a variety of AWS analytics and machine learning service.
@@ -70,7 +72,7 @@ Providers in AWS Data Exchange have a secure, transparent, and reliable channel 
 To promote a safe, secure, and trustworthy service for everyone, AWS Data Exchange scans all data published by providers before it is made available to subscribers. If AWS detects malware, the affected asset is removed.
 Used by colleges, hospitals , scientists to get data from various data lakes .
 
-5. AWS DATA PIPELINE :
+5. AWS DATA-PIPELINE :
 AWS Data Pipeline is a web service that you can use to automate the movement and transformation of data.
 With AWS Data Pipeline, you can define data-driven workflows, so that tasks can be dependent on the successful completion of previous tasks.
 You define the parameters of your data transformations and AWS Data Pipeline enforces the logic that you've set up.
@@ -85,7 +87,7 @@ Amazon Elasticsearch Service (Amazon ES) is a managed service that makes it easy
 Elasticsearch is a popular open-source search and analytics engine for use cases such as log analytics, real-time application monitoring, and click stream analysis.
 With Amazon ES, you get direct access to the Elasticsearch APIs; existing code and applications work seamlessly with the service.
 
-7. AMAZON EMR : https://www.youtube.com/watch?v=QuwaBOESGiU
+7. AMAZON ELASTIC MAP REDUCE - EMR : https://www.youtube.com/watch?v=QuwaBOESGiU
 APACHE SPARK - APACHE HADOOP - CLUSTERS - SPARK  --> Maintaining Hadoop and Spark is costly so EMR does this for  us .
 Amazon EMR is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.
 By using these frameworks and related open-source projects, such as Apache Hive and Apache Pig, you can process data for analytics purposes and business intelligence workloads.
@@ -116,7 +118,7 @@ You can also configure your Kinesis video stream to durably store media data for
 Kinesis Video Streams automatically stores this data and encrypts it at rest.
 --> logs from mobile applications - logs from e-commers purchases - information from social media - satellite data - audio - video - spy cams - security cams etc;
 
-10. AWS LAKE FORMATION :
+10. AWS LAKE-FORMATION :
 The data lake is your persistent data that is stored in Amazon S3 and managed by Lake Formation using a Data Catalog.
 The Data Catalog is your persistent metadata store. It is a managed service that lets you store, annotate, and share metadata in the AWS Cloud.
 Metadata about data sources and targets is in the form of databases and tables.
@@ -126,12 +128,12 @@ These steps include collecting, cleansing, moving, and cataloging data, and secu
 You point Lake Formation at your data sources, and Lake Formation crawls those sources and moves the data into your new Amazon Simple Storage Service (Amazon S3) data lake.
 After the data is securely stored in the data lake, users can access the data through their choice of analytics services, including Amazon Athena, Amazon Redshift, and Amazon EMR.
 
-11. AMAZON  MSK : Managed Streaming for Apache Kafka
+11. AMAZON  MANAGED STREAMING FOR KAFKA - MSK : Managed Streaming for Apache Kafka
 Amazon Managed Streaming for Apache Kafka (Amazon MSK) is a fully managed service that enables you to build and run applications that use Apache Kafka to process streaming data.
 Amazon MSK provides the control-plane operations, such as those for creating, updating, and deleting clusters.
 It lets you use Apache Kafka data-plane operations, such as those for producing and consuming data. It runs open-source versions of Apache Kafka.
 
-12. AMAZON QUICKSIGHT : https://www.youtube.com/watch?v=2V1bHRLRG-w&t=8s
+12. AMAZON QUICK-SIGHT : https://www.youtube.com/watch?v=2V1bHRLRG-w&t=8s
 Amazon QuickSight is a cloud-scale business intelligence (BI) service that you can use to deliver easy-to-understand insights to the people who you work with, wherever they are.
 It connects to your data in the cloud and combines data from many different sources.
 In a single data dashboard, QuickSight can include AWS data, third-party data, big data, spreadsheet data, SaaS data, B2B data, and more.
@@ -1753,12 +1755,14 @@ END USER COMPUTING :
 
 // The following are used if you have a corporate N/W or if you are an enterprise and you want to provide services to your end users.
    All the services are monitored by an admin and he provides / revokes accesses to users .
+   Mainly used by employees working remotely.
+   This also make sures that the main organizational information is not stored on users local machine.
 // software developers in an organization can use Amazon WorkSpaces to access all desktop resources from any computer or tablet.
    Engineers can use AppStream 2.0 to stream GPU intensive apps.
    And sales leaders can use Amazon WorkLink to access internal web-based content, such as sales data, from their mobile devices.
 
 
-1. AMAZON WORKSPACES :
+1. AMAZON WORKSPACES : https://www.youtube.com/watch?v=uCH04Mlg0yU&t=9s
 Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows or Amazon Linux desktops for your users, known as WorkSpaces.
 Amazon WorkSpaces eliminates the need to procure and deploy hardware or install complex software.
 You can quickly add or remove users as your needs change. Users can access their virtual desktops from multiple devices or web browsers.
@@ -1789,7 +1793,7 @@ Example Computer names • Linux: A-1xxxxxxxxxxxx
                        • Windows: IP-Cxxxxxx or WSAMZN-xxxxxxx or EC2AMAZ-xxxxxxx
 
 
-2. AMAZON WAM :
+2. AMAZON WORKSPACES APPLICATION MANAGER -WAM :
 Amazon WorkSpaces Application Manager (Amazon WAM) offers a fast, flexible, and secure way for you to deploy and manage applications for Amazon WorkSpaces  with Windows.
 Amazon WAM accelerates software deployment, updates, patching, and retirement by packaging Microsoft Windows desktop applications into virtual containers that run as though they are installed natively.
 Amazon WAM is fully integrated with the AWS Management Console, and allows you to build an application catalog from your line-of-business applications, third-party applications that you own the license for, and applications purchased through the AWS Marketplace.
@@ -1826,7 +1830,9 @@ STREAMING INSTANCE : A streaming instance (also known as a fleet instance) is an
                 After the user’s session completes, the instance is terminated by EC2.
 
 
-4. AMAZON WORK-DOCS :
+4. AMAZON WORK-DOCS : https://www.youtube.com/watch?v=DGQGYgiYdnA
+--> STORE - SYNC - SHARE FILES from anywhere to anywhere.
+--> Directly edit docs online.
 Amazon WorkDocs is a fully managed, secure enterprise storage and sharing service with strong administrative controls and feedback capabilities that improve user productivity.
 Files are stored in the cloud, safely and securely. Your user's files are only visible to them, and their designated contributors and viewers.
 Other members of your organization do not have access to other user's files unless they are specifically granted access.
@@ -1845,7 +1851,10 @@ Amazon WorkDocs offers several different client applications and utilities:
 You must have an AWS account to create or administer an Amazon WorkDocs site. Users do not needan AWS account to connect to and use Amazon WorkDocs.
 
 
-5. AMAZON WORK-LINK : Similar to UX-Apps TCS
+5. AMAZON WORK-LINK : Similar to UX-Apps TCS // https://www.youtube.com/watch?v=Si2q7rhinMo
+--> Give secure access to internal websites and web apps through mobile phones , since using a VPN is not a feasiblee solution .
+--> we need to install the work-link application .
+
 Amazon WorkLink is a fully managed, cloud-based service that enables secure, one-click access to internal websites and web apps from mobile devices.
 In a single step, your users, such as employees, can access internal websites as efficiently as they access any other public website.
 They enter a URL in their web browser, or choose a link to an internal website in an email.
@@ -1863,10 +1872,283 @@ APPLICATION INTEGRATION  :
 ##################################################################################################################
 ##################################################################################################################
 
-1. AMAZON APP-FLOW :
-2. AMAZON EVENT-BRIDGE :
-3. AMAZON MQ :
+1. AMAZON APP-FLOW : // Explained in ANALYTICS https://www.youtube.com/watch?v=USzaWjjjOJI&t=4s
+// We may have SAAS apps such as sales force - slack etc; . Sharing data b/w them and AWS for analytics and archiving and automatic workflow isimportant.
+// But managing the transfer is difficult which is handled by APP-FLOW.
+Bidirectional data transfer from SAAS Applications To AWS
+Amazon App Flow is a fully-managed integration service that enables you to securely exchange data between software as a service (SaaS) applications, such as Salesforce, Slack and AWS services, such as Amazon Simple Storage Service (Amazon S3) and Amazon Redshift.
+For example, you can ingest contact records from Salesforce to Amazon Redshift or pull support tickets from Zendesk to an Amazon S3 bucket.
+
+2. AMAZON EVENT-BRIDGE : // Formerly CloudWatch Events.
+// Bridge b/w your apps - SAAS - AWS apps
+Amazon EventBridge is a serverless event bus service that makes it easy to connect your applications with data from a variety of sources.
+EventBridge delivers a stream of real-time data from your own applications, software-as-a-service (SaaS) applications, and AWS services and routes that data to targets such as AWS Lambda.
+You can set up routing rules to determine where to send your data to build application architectures that react in real time to all of your data sources.
+EventBridge enables you to build event-driven architectures that are loosely coupled and distributed.
+
+  • Events – An event indicates a change in an environment. This can be an AWS environment, an SaaS partner service or application, or one of your own custom applications or services.
+  • Rules – A rule matches incoming events and routes them to targets for processing. A single rule can route to multiple targets, all of which are processed in parallel.
+  • Targets – A target processes events. Targets can include Amazon EC2 instances, Lambda functions, Kinesis streams, Amazon ECS tasks, Step Functions state machines, Amazon SNS topics, Amazon SQSqueues, and built-in targets. A target receives events in JSON format.
+  • Event buses – An event bus receives events. When you create a rule, you associate it with a specific event bus, and the rule is matched only to events received by that event bus.
+                  You can create custom event buses to receive events from your custom applications.
+                  You can also create partner event buses to receive events from SaaS partner applications.
+                  Partner event buses, which can receive events from applications and services created by AWS software as a service (SaaS) partners
+  • Partner event sources – A partner event source is used by an AWS partner to send events to an AWS customer account.
+
+3. AMAZON MANAGED MESSAGE BROKER - MQ : // Documented in Chapter SNS-SQS   https://www.youtube.com/watch?v=iDT1zFpy1kE&t=23s
+Amazon MQ is a managed message broker service that makes it easy to set up and operate message brokers in the cloud.
+Amazon MQ provides interoperability with your existing applications and services.
+Amazon MQ works with your existing applications and services without the need to manage, operate, or maintain your own messaging system.
+
 4. AMAZON SNS : < Has a separate detailed chapter > // Also documented in Front-End Web & Mobile.
+
 5. AMAZON SQS : < Has a separate detailed chapter >
+It is a fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.
+Amazon SQS moves data between distributed application components and helps you decouple these components.
+
 6. AWS STEP FUNCTIONS :
-7. AMAZON SWF :
+AWS Step Functions makes it easy to coordinate the components of distributed applications as a series of steps in a visual workflow.
+You can quickly build and run state machines to execute the steps of your application in a reliable and scalable fashion.
+
+Step Functions is a serverless orchestration service that lets you combine AWS Lambda functions and other AWS services to build business-critical applications.
+Through Step Functions' graphical console, you see your application’s workflow as a series of event-driven steps.
+Step Functions is based on state machines and tasks. A state machine is a workflow. A task is a state in a workflow that represents a single unit of work that another AWS service performs. Each step in aworkflow is a state.
+With Step Functions' built-in controls, you examine the state of each step in your workflow to make sure that your application runs in order and as expected.
+
+Depending on your use case, you can have Step Functions call AWS services, such as Lambda, to perform tasks.
+You can create workflows that process and publish machine learning models.
+You can have Step Functions control AWS services, such as AWS Glue, to create extract, transform, and load (ETL) workflows.
+You also can create long-running, automated workflows for applications that require human interaction.
+
+We have 6 use-cases : See ref pics ,
+  1. Function orchestration :
+     You create a workflow that runs a group of Lambda functions (steps) in a specific order.
+     One Lambda function's output passes to the next Lambda function's input. The last step in your workflow gives a result.
+     With Step Functions, you can see how each step in your workflow interacts with one other, so you can make sure that each step performs its intended function.
+
+  2. Branching :
+     A customer requests a credit limit increase. Using a Choice state, you can have Step Functions make decisions based on the Choice state’s input.
+     If the request is more than your customer’s pre-approved credit limit, you can have Step Functions send your customer's request to a manager for sign-off.
+     If the request is less than your customer’s pre-approved credit limit, you can have Step Functions approve the request automatically.
+
+  3. Error Handling :
+     RETRY : In this use case, a customer requests a username. The first time, your customer’s request is unsuccessful. Using a Retry statement, you can have Step Functions try your customer's request again.
+     CATCH : In a similar use case, a customer requests an unavailable username. Using a Catch statement, you have Step Functions suggest an available username. If your customer takes the available username, you canhave Step Functions go to the next step in your workflow.
+
+  4. Human In the loop :
+     Using a banking app, one of your customers sends money to a friend. Your customer waits for a confirmation email.
+     With a call back and a task token, you have Step Functions tell Lambda to send your customer’s money and report back when your customer’s friend receives it.
+     After Lambda reports back that your customer’s friend received the money, you can have Step Functions go to the next step in your workflow, which is to send your customer a confirmation email.
+
+  5. Parallel Processing :
+    A customer converts a video file into five different display resolutions, so viewers can watch the video on multiple devices.
+    Using a Parallel state, Step Functions inputs the video file, so Lambda can process itinto the five display resolutions at the same time.
+
+  6. Dynamic Parallelism :
+     A customer orders three items, and you need to prepare each item for delivery.
+     You check each item's availability, gather each item, and then package each item for delivery.
+     Using a Map state, Step Functions has Lambda process each of your customer's items in parallel.
+     Once all of your customer's items are packaged for delivery, Step Functions goes to the next step in your workflow, which is to send your customer a confirmation email with tracking information.
+
+
+7. AMAZON SIMPLE WORK FLOW - SWF :
+Amazon Simple Workflow Service (Amazon SWF) makes it easy to build applications that coordinate work across distributed components.
+In Amazon SWF, a task represents a logical unit of work that is performed by a component of your application.
+Coordinating tasks across the application involves managing inter task dependencies, scheduling, and concurrency in accordance with the logical flow of the application.
+Amazon SWF gives you full control over implementing tasks and coordinating them without worrying about underlying complexities such as tracking their progress and maintaining their state.
+
+When using Amazon SWF, you implement workers to perform tasks.
+These workers can run either on cloud infrastructure, such as Amazon Elastic Compute Cloud (Amazon EC2), or on your own premises.
+You can create tasks that are long-running, or that may fail, time out, or require restarts—or that may complete with varying throughput and latency.
+Amazon SWF stores tasks and assigns them to workers when they are ready, tracks their progress, and maintains their state, including details on their completion.
+To coordinate tasks, you write a program that gets the latest state of each task from Amazon SWF and uses it to initiate subsequent tasks.
+Amazon SWF maintains an application's execution state durably so that the application is resilient to failures in individual components.
+With Amazon SWF, you can implement, deploy, scale, and modify these application components independently.
+
+
+
+
+##################################################################################################################
+##################################################################################################################
+BUISENES APPLICATION  :
+##################################################################################################################
+##################################################################################################################
+
+1. ALEXA FOR BUSINESS :
+// Similar to your Alexa in house , you can set up 100's of alexa in an organization and sync data between users.
+// schedule  meetings , check available rooms for booking , join meetings , get sales reports for your specific company .
+Alexa for Business makes it easy for you to use Alexa in your organization.
+Alexa for Business gives you the tools you need to manage Alexa devices, enroll your users, and assign skills, at scale.
+You can build your own context-aware voice skills using the Alexa Skills Kit, and the Alexa for Business APIs, and you can make these available as private skills for your organization.
+Alexa for Business also makes it easy to voice-enable your products and services, providing context-aware voice experiences for your customers.
+
+2. AMAZON CHIME :
+Amazon Chime is a secure, real-time, unified communications service that transforms meetings by making them more efficient and easier to conduct.
+Amazon Chime is a communications service that transforms online meetings with an application that is secure and comprehensive. Amazon Chime works across your devices so that you can stay connected.
+You can use Amazon Chime for online meetings, video conferencing, calls, and chat. You can also share content inside and outside of your organization.
+Amazon Chime provides usage-based pricing. You pay only for the users with Pro permissions that host meetings, and only on the days that those meetings are hosted. Meeting attendees and chat users are not charged.
+
+The easiest way for your users to get started with Amazon Chime is to download and use the AmazonChime Pro version for free for 30 days.
+To continue using the Amazon Chime Pro version after the 30-day free trial period, you must create an Amazon Chime administrator account and add your users to it.
+The invited users receive email invitations to join the Amazon Chime Team account that you created.
+When they register their Amazon Chime user accounts, they receive Pro permissions by default, and their 30-day trial ends.
+If they have already signed up for an Amazon Chime user account with their work email address, they can continue to use that account.
+They can also download the Amazon Chime clientapp at any time by choosing Download Amazon Chime and signing in to their user account.
+You are only charged for a user with Pro permissions when they host a meeting.
+There is no charge forusers with Basic permissions. Basic users cannot host meetings, but they can attend meetings and usechat.
+
+3. AMAZON HONEY-CODE : https://www.youtube.com/watch?v=vMR2KOJUEr8
+// Build a custom managed app using a visual editor .
+// First setup data in tables , tables work like spread sheets but have database capabilities.
+// Next build the apps layout . Now link app and the tables, set personalization for specific users to see what they can see or not see.
+// Set specific actions to be done on an event such as when data is updated .
+// EX : A sale can be setup and the customer accepts it on his console and you get the response. once done you may delete the application.
+// You are redirected to a HONEYCODE application apart from AWS.
+
+Amazon Honeycode is a fully managed service that allows you to quickly build mobile and web apps for teams—without programming. Build Honeycode apps for managing almost anything, like projects, customers, operations, approvals, resources, and even your team.
+When API activity occurs in Amazon Honeycode apps, the activity is recorded in a CloudTrail event.
+You can view, search, and download recent events in your AWS account.
+For an ongoing record of events in Amazon Honeycode, as well as your other AWS accounts, you cancreate a trail.
+A trail enables CloudTrail to continuously deliver events as log files to an Amazon S3bucket.
+
+4. AMAZON WORK-MAIL : https://www.youtube.com/watch?v=3Wq-ghtB0XQ
+// Maintaining personal email service is tough !! -> Buy dedicated resources [ h/w and s/w ] -> hire staff to run the resources -> regular maintenance -> upgrades, security patches, backups , disaster recovery .
+// 3rd party apps have risk of encryption , mobile compatibility , latency etc ;
+
+Amazon WorkMail is a managed email and calendaring service that offers strong security controls and support for existing desktop and mobile clients.
+Can integrate with corporate active directory so existing users and groups can use it in a similar way.
+Can access mail and calendar from multiple devices mobile - tablet - desktop - all OS - windows - IOS and has compatibility with OUTLOOK and other popular services .
+When your Amazon WorkMail administrator invites you to sign in to your Amazon WorkMail account, you can sign in using the Amazon WorkMail web client.
+
+Amazon WorkMail has a web-based client that you use to access your Amazon WorkMail account from a web browser.
+The Amazon WorkMail web client includes integrated applications, such as Mail, Calendar, and Contacts.
+Your Amazon WorkMail system administrator provides you with your initial sign-in credentials, which consist of a user name and a password.
+Your administrator also provides you with a unique Amazon WorkMail web client URL. This URL contains a unique alias set up by your Amazon WorkMail site administrator.
+The web client URL looks like this:https://alias.awsapps.com/mail.
+
+
+#################################################################################################################
+##################################################################################################################
+CUSTOMER ENABLEMENT SERVICES  :
+##################################################################################################################
+##################################################################################################################
+
+1. AWS MANAGED SERVICES - MSP : https://www.youtube.com/watch?v=9yHuq3ABJaI&t=8s
+// 3Rd party partners providing full life cycle solutions .
+AWS Managed Services is an enterprise service that provides ongoing management of your AWS infrastructure operations.
+AMS provides full-lifecycle services to provision, run, and support your infrastructure, and automates common activities such as change requests, monitoring, patch management, security, and backup services.
+
+2. AWS PROFESSIONAL SERVICES :
+The AWS Professional Services organization is a global team of experts that can help you realize your desired business outcomes when using the AWS Cloud. We work together with your team and your chosen member of the AWS Partner Network (APN) to execute your enterprise cloud computing initiatives.
+The team provides assistance through a collection of offerings which help you achieve specific outcomes related to enterprise cloud adoption.
+They also deliver focused guidance through our global specialty practices, which cover a variety of solutions, technologies, and industries.
+
+3. AWS SUPPORT :  < Has a separate detailed chapter >
+AWS Support provides a mix of tools and technology, people, and programs designed to proactively help you optimize performance, lower costs, and innovate faster.
+They save time for your team by helping you to move faster in the cloud and focus on your core business.
+They are determined to make our customers successful on their cloud journey and address requests that range from answering best practices questions, guidance on configuration, all the way to break-fix and problem resolution.
+On behalf of our customers, we are focused on solving some of the toughest challenges that hold you back in your cloud journey.
+Sometimes that means helping you troubleshoot an issue, but more often, it involves "looking around corners" to find ways for you to better utilize AWS services, answer best practices questions, and provide guidance on configuration.
+We focus on helping you achieve the outcomes you need to make your business successful. It is our approach to Support that sets AWS apart.
+
+There are multiple SUPPORT PLANS available. All AWS customers automatically have 24/7 access to these features of the Basic support plan:
+https://console.aws.amazon.com/support/plans/home?#/ **V.IMP
+  --> Basic                 - Included
+  --> Current plan          - Starting at $29 per month
+  --> Developer	Business    - Starting at $100 per month
+  --> Enterprise            - Starting at $15,000 per month
+
+4. AWS TRAINING & CERTIFICATION :
+We have a separate directory containing Dumps and PDF's required for the certifications .
+  TRAINING : https://aws.amazon.com/training/?id=docs_gateway
+  DOCS     : https://docs.aws.amazon.com/
+
+5. AWS IQ :
+// Submit request -> review responses -> select expert -> work securely -> Pay from AWS billing.
+AWS IQ enables customers to quickly find, engage, and pay AWS Certified third-party experts for on-demand project work.
+AWS IQ enables AWS Certified experts to help customers and get paid for their AWS Certification expertise.
+You create a request and choose from experts who respond. Before you agree to any payments, compare and chat with experts about your project.
+Once you agree to an expert's proposal including project milestones, maximum payment, and terms, the expert can get started.
+If necessary, you grant project appropriate permission to your AWS account for the expert to perform the work.
+After project milestones are completed, you pay the expert directly from your AWS account.
+
+AWS IQ is a good choice when you're stuck on one or more tasks and need someone to do thework for you.
+AWS IQ is also a good choice for projects that are outside your area of expertise.
+With AWSIQ, you get help from an expert to move your project forward.
+
+
+##################################################################################################################
+##################################################################################################################
+CUSTOMER ENGAGEMENT  :
+##################################################################################################################
+##################################################################################################################
+
+1. AMAZON CONNECT : https://www.youtube.com/watch?v=syF1CEiWAto
+// Set up a Customer care centre.
+
+Amazon Connect is an omnichannel cloud contact center.
+You can set up a contact center in afew steps, add agents who are located anywhere, and start engaging with your customers.
+Amazon Connect is a contact center as a service (CCaS) solution that offers easy, self-service configuration and enables dynamic, personal, and natural customer engagement at any scale.
+Voice and Chat channels and support tickets tracking .
+All support channel data is logged in S3.
+It uses Machine Learning (ML) and Artificial Intelligence (AI) for analytics .
+
+2. AMAZON PINPOINT :
+// Documented in Front End Web & Mobile
+Amazon Pinpoint helps you engage your customers by sending them email, SMS and voice messages, and push notifications.
+You can use Amazon Pinpoint to send targeted messages (such as promotions and retention campaigns), as well as transactional messages (such as order confirmations and password reset messages).
+you have to add customer contact information into Amazon Pinpoint, and then create segments that target certain customers.
+Next, you have to create your messages and schedule your campaigns.
+Finally, after you send your campaigns, you can use the analytics dashboards that are built into Amazon Pinpoint to see how well the campaigns performed.
+
+3. AMAZON SIMPLE EMAIL SERVICE - SES :  < Has a separate detailed chapter >
+Amazon Simple Email Service (Amazon SES) is an email sending and receiving service that provides an easy, cost-effective way for you to send email.
+  • Add email-sending capabilities to any application. If your application runs in Amazon Elastic ComputeCloud (Amazon EC2), you can use Amazon SES to send 62,000 emails every month at no additional charge.
+    You can send email from Amazon EC2 by using an AWS SDK, by using the Amazon SES SMTP interface, or by making calls directly to the Amazon SES API.
+  • Use AWS Elastic Beanstalk to create an email-enabled application such as a program that uses Amazon SES to send a newsletter to customers.
+  • Set up Amazon Simple Notification Service (Amazon SNS) to notify you of your emails that bounced, produced a complaint, or were successfully delivered to the recipient's mail server.
+    When you use Amazon SES to receive emails, your email content can be published to Amazon SNS topics.
+  • Use the AWS Management Console to set up Easy DKIM, which is a way to authenticate your emails.
+    Although you can use Easy DKIM with any DNS provider, it is especially easy to set up when you manage your domain with Route 53.
+
+##################################################################################################################
+##################################################################################################################
+BILLING & COST MANAGEMENT   :
+##################################################################################################################
+##################################################################################################################
+
+1. AWS BOLLING & COST MANAGEMENT : < Has a separate detailed chapter >
+AWS Billing and Cost Management is the service that you use to pay your AWS bill, monitor your usage, and analyze and control your costs.
+AWS automatically charges the credit card that you provided when you signed up for a new account with AWS. Charges appear on your monthly credit card bill.
+The Billing and Cost Management service provides features that you can use to do the following:
+  •Estimate and plan your AWS costs
+  •Receive alerts if your costs exceed a threshold that you set
+  •Assess your biggest investments in AWS resources
+  •Simplify your accounting if you work with multiple AWS accounts
+
+2. AWS PRICING CALCULATOR : < Has a separate detailed chapter >
+AWS Pricing Calculator lets you explore AWS services and create an estimate for the cost of your use cases on AWS.
+You can model your solutions before building them, explore the price points and calculations behind your estimate, and find the available instance types and contract terms that meet your needs.
+This enables you to make informed decisions about using AWS.
+You can plan your AWS costs and usage or price out setting up a new set of instances and services.
+
+3. SAVINGS PLAN : < Has a separate detailed chapter >
+Savings Plans is a flexible pricing model that helps you save up to 72 percent on Amazon EC2, AWS Fargate, and AWS Lambda usage.
+Savings Plans provides you lower prices for your Amazon EC2 usage, Fargate, and Lambda in exchange for a commitment to a consistent usage amount (measured in $/hour)for a one or three year term.
+Every type of compute usage has an On-Demand rate and a Savings Plans rate.
+For example, if you commit to $10/hour of compute usage, your usage is charged at your Savings Plans rate up to $10.
+Any usage beyond your Savings Plans commitment is charged at your regular On-Demand rates.
+
+##################################################################################################################
+##################################################################################################################
+SATELLITE -  ROBOTICS -  QUANTUM COMPUTING -  BLOCKCHAIN -  AR & VR -  GAME DEVELOPMENT
+##################################################################################################################
+##################################################################################################################
+
+1. AWS GROUND STATION : // Satellite
+2. AWS ROBO MAKER : // Robotics
+3. AMAZON BRAKET : // Quantum
+4. AMAZON MANAGED BLOCK CHAIN : // Block chain
+5. AMAZON SUMERIAN : // AR - VR
+6. AMAZON GAME-LIFT : // Game
+7. AMAZON LUMBER-YARD : // Game
