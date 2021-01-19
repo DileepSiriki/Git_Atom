@@ -441,42 +441,53 @@ You can add the stop, terminate, reboot, or recover actions to any alarm that is
 We need to pre create an SNS Topic to recieve notification.
 --> we can make alarms to do the following : STOP - TERMINATE - REBOOT - RECOVER
 
-NETWORKING IN EC2 :
+NETWORKING IN EC2 : IP ADDRESSES ARE ALLOCATED USING DHCP !!
 ----------------------
-Amazon EC2 and Amazon VPC support both the IPv4 and IPv6 addressing protocols. --> Default is IPv4
+Amazon EC2 and Amazon VPC support both the IPv4 and IPv6 addressing protocols. --> Default is IPv4 , you can not disable this behaviour .
 When you create a VPC, you must specify an IPv4 CIDR block (a range of private IPv4 addresses).
-You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign IPv6 addresses from that block to instances in your subnet.
+You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign IPv6 addresses from that block to instances in your subnet.  IPv6 addresses are reachable over the Internet.
 
   PRIVATE IPV4 - INTERNAL DNS : (By default IP is assigned)
         A private IPv4 address is an IP address that's not reachable over the Internet.
         You can use private IPv4addresses for communication between instances in the same VPC.
         we can't resolve the internal DNS hostname outside of the VPC.
         An instance receives a primary private IP address from the IPv4 address range of the subnet.
+
+        When you launch an instance, we allocate a primary private IPv4 address for the instance.
+        Each instance is also given an internal DNS hostname that resolves to the primary private IPv4 address;
+         --> for example, ip-10-251-50-12.ec2.internal.
+        You can use the internal DNS hostname for communication between instances in the same VPC, but we can't resolve the internal DNS hostname outside of the VPC.
+
         Each instance has a default network interface (eth0) that is assigned the primary privateIPv4 address.
         You can also specify additional private IPv4 addresses, known as secondary private IPv4addresses.
         Unlike primary private IP addresses, secondary private IP addresses can be reassigned from one instance to another.
         A private IPv4 address, regardless of whether it is a primary or secondary address, remains associated with the network interface when the instance is stopped and started, or hibernated and started, and is released when the instance is terminated.
 
   PUBLIC IPV4 - EXTERNAL DNS : (If Default VPC is used -> Assigned , If Non-Default VPC is used -> Not assigned)
-  #### PUBLIC IP addressing is available only during launch .
-  #### So to alter this , we can use ELASTIC IP after launch and associate or disassociate accordingly.
+  #### PUBLIC IP addressing is available only during launch and is disassociated when ec2 is stopped, hibernated etc;
+  #### So to alter this , we can use ELASTIC IP after launch and associate or disassociate accordingly. only IPV4 , does not support IPV6.
 
         A public IP address is an IPv4 address that's reachable from the Internet.
         You can use public addresses for communication between your instances and the Internet.
         We resolve an external DNS hostname to the public IP address of the instance from outside its VPC, and to the private IPv4 address of the instance from inside its VPC.
         The public IP address is mapped to the primary private IP address through network address translation (NAT).
 
+        Each instance that receives a public IP address is also given an external DNS hostname; for example, ec2-203-0-113-25.compute-1.amazonaws.com.
         When you launch an instance in a default VPC, we assign it a public IP address by default.
         When you launch an instance into a nondefault VPC, the subnet has an attribute that determines whether instances launched into that subnet receive a public IP address from the public IPv4 address pool.
         By default, we don't assign a public IP address to instances launched in a nondefault subnet.
+
         You can control whether your instance receives a public IP address as follows:
-            • FOR NON-DEFAULT  : Modifying the public IP addressing attribute of your subnet. ( https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip )
-            • FOR DEFAULT      : Enabling or disabling the public IP addressing feature during launch, which overrides the subnet's public IP addressing attribute
+            • FOR NON-DEFAULT  :
+              Modifying the public IP addressing attribute of your subnet. ( https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip )
+            • FOR DEFAULT/NON-DEFAULT :
+              Enabling or disabling the public IP addressing feature during launch, which overrides the subnet's public IP addressing attribute
                 --> launch -> select -> in CONFIGURE INSTANCE -> Auto-assign Public IP -> enable/disable
 
         You cannot manually associate or disassociate a public IP address from your instance after launch. But it is released when :
             --> Instance is stopped, hibernated, or terminated. Your stopped or hibernated instance receives a new public IP address when it is started.
             --> Instance is associated with an Elastic IP address with it. When you disassociate the Elastic IP address from your instance, it receives a new public IP address.
+            --> If the public IP address of your instance in a VPC has been released, it will not receive a new one if there is more than one network interface attached to your instance.
             --> Instance's public IP address is released while it has a secondary private IP address that is associated with an Elastic IP address, the instance does not receive a new public IP address
 
         So if you require a persistent public IP address that can be associated to and from instances as you require, use an Elastic IP address instead.
@@ -484,14 +495,33 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
 
         When you add a second network interface, the system can no longer auto-assign a publicIPv4 address.
         You will not be able to connect to the instance over IPv4 unless you assign an Elastic IP address to the primary network interface (eth0).
-        You can assign the Elastic IPaddress after you complete the Launch
+        You can assign the Elastic IPaddress after you complete the Launch.
+        The public IPv4 address is displayed as a property of the network interface in the console, but it's mapped to the primary private IPv4 address through NAT.
 
-  ELASTIC IP ADDRESS - IPV4:
+        CONSIDERATIONS :
+        -----------------
+        1. You can't manually disassociate the public IP address from your instance after launch.
+           Instead, it's automatically released in certain cases, after which you cannot reuse it.
+           If you require a persistent public IP address that you can associate or disassociate at will, assign an Elastic IP address to the instance after launch instead.
+
+        2. You cannot auto-assign a public IP address if you specify more than one network interface.
+           Additionally, you cannot override the subnet setting using the auto-assign public IP feature if you specify an existing network interface for eth0.
+
+        3. The public IP addressing feature is only available during launch.
+           However, whether you assign a public IP address to your instance during launch or not, you can associate an Elastic IP address with your instance after it's launched.
+           You can also modify your subnet's public IPv4 addressing behaviour.
+
+
+  AMAZON DNS SERVER :
+        Amazon provides a DNS server that resolves Amazon-provided IPv4 DNS hostnames to IPv4 addresses.
+        The Amazon DNS server is located at the base of your VPC network range plus two.
+
+  ELASTIC IP ADDRESS - IPV4: // AWS do not support Elastic IP addresses for IPv6.
         An Elastic IP address is a public IPv4 address that you can allocate to your account.
         You can associate it to and disassociate it from instances as you require. It's allocated to your account until you choose to release it.
         AWS do not support Elastic IP addresses for IPv6.
         The public IP addressing feature is only available during launch.
-        However, whether you assign a publicIP address to your instance during launch or not, you can associate an Elastic IP address with your instance after it's launched
+        However, whether you assign a public IP address to your instance during launch or not, you can associate an Elastic IP address with your instance after it's launched
 
   IPV6 ADDRESSES :
         If your VPC and subnet have IPv6 CIDR blocks associated with them, you can assign an IPv6 address to your instance during or after launch.
@@ -507,10 +537,15 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
           •You assign an IPv6 address to a network interface in the same subnet, and attach the network interface to your instance after launch
        You can assign additional IPv6 addresses to your instance by assigning them to a network interface attached to your instance.
 
+       An IPv6 address persists when you stop and start, or hibernate and start, your instance, and is released when you terminate your instance.
+       You cannot reassign an IPv6 address while it's assigned to another network interface—you must first unassign it.
+
+
  MULTIPLE IP ADDRESSES :
  #### You can assign multiple IPV4/IPV6 addresses To a single network interface eth0 or You can add a device and add IP's
  #### We can do this while launching -> launch -> configure Instance -> below Network Interfaces -> add device
  #### or after launching Instance  -> select ec2 -> instance -> actions -> networking -> manage Ip adresses .
+
         •Host multiple websites on a single server by using multiple SSL certificates on a single server and associating each certificate with a specific IP address.
         •Operate network appliances, such as firewalls or load balancers, that have multiple IP addresses for each network interface.
         •Redirect internal traffic to a standby instance in case your instance fails, by reassigning the secondary IP address to the standby instance.
@@ -522,23 +557,127 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
           You will not be able to connect to the instance over IPv4 unless you assign an Elastic IP address to the primary network interface (eth0).
           You can assign the Elastic IP address after you complete the Launch .
 
- ELASTIC IP ADDRESSES :( public IPv4 address) -> EC2 -> nav panel -> Elastic IP's [-> Actions -> associate/disassociate/Release etc;]
+ HOW MLTIPLE IP ADDRESSES WORK :
+ --> You can assign a secondary private IPv4 address to any network interface. The network interface need not be attached to the instance.
+ --> You can assign multiple IPv6 addresses to a network interface that's in a subnet that has an associated IPv6 CIDR block.
+ --> You must choose a secondary IPv4 address from the IPv4 CIDR block range of the subnet for the network interface.
+ --> You must choose IPv6 addresses from the IPv6 CIDR block range of the subnet for the network interface.
+ --> You associate security groups with network interfaces, not individual IP addresses.
+     Therefore, each IP address you specify in a network interface is subject to the security group of its network interface.
+ --> Multiple IP addresses can be assigned and unassigned to network interfaces attached to running or stopped instances.
+ --> Secondary private IPv4 addresses that are assigned to a network interface can be reassigned to another one if you explicitly allow it.
+ --> An IPv6 address cannot be reassigned to another network interface; you must first unassign the IPv6 address from the existing network interface.
+ --> When assigning multiple IP addresses to a network interface using the command line tools or API, the entire operation fails if one of the IP addresses can't be assigned.
+ --> Primary private IPv4 addresses, secondary private IPv4 addresses, Elastic IP addresses, and IPv6 addresses remain with a secondary network interface when it is detached from an instance or attached to an instance.
+ --> Although you can't detach the primary network interface from an instance, you can reassign the secondary private IPv4 address of the primary network interface to another network interface.
+
+                    | Primary   - N/W interface - 1 - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] , Public IPV4 , IPV6-1 , IPV6-2
+                    | Secondary - N/W interface - 2 - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] , Public IPV4 , IPV6-1 , IPV6-2
+        INSTANCE -->|     .
+                    |     .
+                    |     .     - N/W interface - n - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] , Public IPV4 , IPV6-1 , IPV6-2
+
+                      ** You can assign a secondary private IPv4 address to an instance, associate an Elastic IPv4 address with a secondary private IPv4 address, and unassign a secondary private IPv4 address.
+                      ** There is no concept of public / private IPV6. They are globally reachable as they are unique.
+                      ** Secondary private IPv4 addresses that are assigned to a network interface can be reassigned to another one if you explicitly allow it.
+                      ** An IPv6 address cannot be reassigned to another network interface; you must first unassign the IPv6 address from the existing network interface.
+                      ** you can't detach the primary network interface from an instance
+
+  The following list explains how multiple IP addresses work with Elastic IP addresses (IPv4 only):
+  --> Each private IPv4 address can be associated with a single Elastic IP address, and vice versa.
+  --> When a secondary private IPv4 address is reassigned to another interface, the secondary private IPv4 address retains its association with an Elastic IP address.
+  --> When a secondary private IPv4 address is unassigned from an interface, an associated Elastic IP address is automatically disassociated from the secondary private IPv4 address.
+
+
+ ELASTIC IP ADDRESSES :( public IPv4 address // no IPV6 ) -> EC2 -> navigational panel -> Elastic IP's [-> Actions -> associate/disassociate/Release etc;]
+ --> If you require a persistent public IP address that can be associated to and from instances as you require, use an Elastic IP address instead.
+
+ --> An Elastic IP address is a static IPv4 address designed for dynamic cloud computing.
+     By using an Elastic IP address, you can mask the failure of an instance or software by rapidly remapping the address to another instance in your account.
+     An Elastic IP address is allocated to your AWS account, and is yours until you release it.
+
+ --> An Elastic IP address is a public IPv4 address, which is reachable from the internet.
+     If your instance does not have a public IPv4 address, you can associate an Elastic IP address with your instance to enable communication with the internet.
+     For example, this allows you to connect to your instance from your local computer.
+
+ --> To ensure efficient use of Elastic IP addresses, we impose a small hourly charge if an Elastic IP address is not associated with a running instance, or if it is associated with a stopped instance or an unattached network interface.
+     While your instance is running, you are not charged for one Elastic IP address associated with the instance, but you are charged for any additional Elastic IP addresses associated with the instance.
+
+    --> An Elastic IP address is static; it does not change over time.
+    --> To use an Elastic IP address, you first allocate one to your account, and then associate it with your instance or a network interface.
+    --> When you associate an Elastic IP address with an instance, it is also associated with the instance's primary network interface.
+        When you associate an Elastic IP address with a network interface that is attached to an instance, it is also associated with the instance.
+    --> When you associate an Elastic IP address with an instance or its primary network interface, the instance's public IPv4 address (if it had one) is released back into Amazon's pool of public IPv4 addresses.
+        You cannot reuse a public IPv4 address, and you cannot convert a public IPv4 address to an Elastic IP address.
+    --> You can disassociate an Elastic IP address from a resource, and then associate it with a different resource.
+        To avoid unexpected behaviour, ensure that all active connections to the resource named in the existing association are closed before you make the change.
+        After you have associated your Elastic IP address to a different resource, you can reopen your connections to the newly associated resource.
+    --> A disassociated Elastic IP address remains allocated to your account until you explicitly release it.
+    --> When you associate an Elastic IP address with an instance that previously had a public IPv4 address, the public DNS host name of the instance changes to match the Elastic IP address.
+    --> We resolve a public DNS host name to the public IPv4 address or the Elastic IP address of the instance outside the network of the instance, and to the private IPv4 address of the instance from within the network of the instance.
+    --> An Elastic IP address comes from Amazon's pool of IPv4 addresses, or from a custom IP address pool that you have brought to your AWS account.
+    --> When you allocate an Elastic IP address from an IP address pool that you have brought to your AWS account, it does not count toward your Elastic IP address limits.
+    --> When you allocate the Elastic IP addresses, you can associate the Elastic IP addresses with a network border group. This is the location from which we advertise the CIDR block. Setting the network border group limits the CIDR block to this group.
+        If you do not specify the network border group, we set the border group containing all of the Availability Zones in the Region (for example, us-west-2).
+    --> An Elastic IP address is for use in a specific network border group only.
+    --> An Elastic IP address is for use in a specific Region only, and cannot be moved to a different Region.
+
     By default, all AWS accounts are limited to five (5) Elastic IP addresses per Region, because public (IPv4)internet addresses are a scarce public resource.
-    An Elastic IP address is a static(it does not change over time) IPv4 address designed for dynamic cloud computing.
-    By using an Elastic IP address, you can mask the failure of an instance or software by rapidly remapping the address to another instance in your account.
-    you are not charged for one Elastic IP address associated with the instance when the instance is running but charged for a stopped instance or an unattached network interface.
-    When you associate an Elastic IP address with an instance, it is also associated with the instance's primary network interface.
-    When you associate an Elastic IP address with a network interface that is attached to an instance, it is also associated with the instance.
-    When you associate an Elastic IP address with an instance or its primary network interface, the instance's public IPv4 address (if it had one) is released back into Amazon's pool of public IPv4addresses.
-    A disassociated Elastic IP address remains allocated to your account until you explicitly release it.
-    When you associate an Elastic IP address with an instance that previously had a public IPv4 address, the public DNS host name of the instance changes to match the Elastic IP address.
+    If you're associating an Elastic IP address with your instance to enable communication with the internet, you must also ensure that your instance is in a public subnet.
 
-NETWORK INTERFACES :
-    Each instance has a default network interface, called the primary network interface.
-    You cannot detach a primary network interface from an instance. You can create and attach additional network interfaces.
-    If you have an Elastic IP address, you can associate it with one of the private IPv4 addresses for the network interface. You can associate one Elastic IP address with each private IPv4 address.
 
- EC2-CLASSIC :
+  NETWORK INTERFACES / ELASTIC NETWORK INTERFACE :
+  Each instance has a default network interface, called the primary network interface.
+  You cannot detach a primary network interface from an instance. You can create and attach additional network interfaces.
+  If you have an Elastic IP address, you can associate it with one of the private IPv4 addresses for the network interface. You can associate one Elastic IP address with each private IPv4 address.
+
+  While launching an instance , In the Network Interfaces section, do the following to add an secondary network interface.
+   --> To add another network interface, choose Add Device.
+       The console enables you to specify up to two network interfaces when you launch an instance.
+       After you launch the instance, choose Network Interfaces in the navigation pane to add additional network interfaces.
+   --> When you add a second network interface, the system can no longer auto-assign a public IPv4 address.
+       You will not be able to connect to the instance over IPv4 unless you assign an Elastic IP address to the primary network interface (eth0).
+       You can assign the Elastic IP address after you complete the Launch wizard.
+   --> For each network interface, under Secondary IP addresses, choose Add IP, and then enter a private IP address from the subnet range, or accept the default Auto-assign value to let Amazon select an address.
+
+   --> After you assign a secondary private IPv4 address to your instance, you need to configure the operating system on your instance to recognize the secondary private IP address.
+       It is not done automatically .
+
+   An elastic network interface is a logical networking component in a VPC that represents a virtual network card. It can include the following attributes:
+    - A primary private IPv4 address from the IPv4 address range of your VPC
+    - One or more secondary private IPv4 addresses from the IPv4 address range of your VPC
+    - One Elastic IP address (IPv4) per private IPv4 address
+    - One public IPv4 address
+    - One or more IPv6 addresses
+    - One or more security groups
+    - A MAC address
+    - A source/destination check flag
+
+   If you disassociate an Elastic IP address from a network interface, you can release it back to the address pool.
+   This is the only way to associate an Elastic IP address with an instance in a different subnet or VPC, as network interfaces are specific to subnets.
+   You can specify whether the network interface should be automatically deleted when you terminate the instance to which it's attached.
+
+   Attaching multiple network interfaces to an instance is useful when you want to:
+   --> Create a management network. -> Scenario explained in Reference pic , Multiple-network_interface
+   --> Use network and security appliances in your VPC.
+   --> Create dual-homed instances with workloads/roles on distinct subnets.
+   --> Create a low-budget, high-availability solution.
+
+  REQUEST MANAGED NETWORK INTERFACE :
+  A requester-managed network interface is a network interface that an AWS service creates in your VPC.
+  This network interface can represent an instance for another service, such as an Amazon RDS instance, or it can enable you to access another service or resource, such as an AWS PrivateLink service, or an Amazon ECS task.
+  You cannot modify or detach a requester-managed network interface.
+  If you delete the resource that the network interface represents, the AWS service detaches and deletes the network interface for you.
+  To change the security groups for a requester-managed network interface, you might have to use the console or command line tools for that service.
+
+ NETWORK CARDS :
+   Instances with multiple network cards provide higher network performance, including bandwidth capabilities above 100 Gbps and improved packet rate performance.
+   Each network interface is attached to a network card. The primary network interface must be assigned to network card index 0.
+   If you enable Elastic Fabric Adapter (EFA) when you launch an instance that supports multiple network cards, all network cards are available.
+   You can assign up to one EFA per network card. An EFA counts as a network interface.
+   --> Only instance of type P4D supports multiple network cards ( 4 cards). All other instance types support one network card.
+
+   EC2-CLASSIC :
     With EC2-Classic, your instances run in a single, flat network that you share with other customers.
     With Amazon VPC, your instances run in a virtual private cloud (VPC) that's logically isolated to your AWS account.
     The EC2-Classic platform was introduced in the original release of Amazon EC2. If you created your AWS account after 2013-12-04, it does not support EC2-Classic, so you must launch your Amazon EC2instances in a VPC

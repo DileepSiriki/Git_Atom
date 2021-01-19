@@ -21,7 +21,7 @@ You use IAM to control who is authenticated (signed in) and authorized (has perm
 
        PASSWORD POLICIES :
           Go to IAM -> Left section -> Account Settings -> Password Policies (edit / create / delete)
-          First we need to attach password poliy to IAM Admin to give him access to update password Policies.
+          First we need to attach password policy to IAM Admin to give him access to update password Policies.
 
 GROUP :
 --------
@@ -114,11 +114,14 @@ TEMPORARY CREDS IN IAM :
          When to create an IAM role (instead of a user):
            You're creating an application that runs on an Amazon Elastic Compute Cloud (Amazon EC2) instance and that application makes requests to AWS.
            You're creating an app that runs on a mobile phone and that makes requests to AWS.
-      
+
       AWS SECURITY TOKEN SERVICE [ STS ] : -> Temporary Creds Using ROLES
       ---------------------------------------
       AWS Security Token Service (AWS STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users).
-      You can use the AWS Security Token Service (AWS STS) to create and provide trusted users with temporary security credentials that can control access to your AWS resources.
+      You can use the AWS Security Token Service (AWS STS) to create and provide trusted users (Federated Users) with temporary security credentials that can control access to your AWS resources.
+      By default, AWS Security Token Service (STS) is available as a global service, and all AWS STS requests go to a single endpoint at https://sts.amazonaws.com.
+      
+
       Temporary security credentials work almost identically to the long-term access key credentials that your IAM users can use, with the following differences:
 
       1. Temporary security credentials are short-term, as the name implies. They can be configured to last for anywhere from a few minutes to several hours.
@@ -201,3 +204,410 @@ MFA : MULTI FACTOR AUTHENTICATION
 ---------------------------------
     Go to -> account name -> My security credential-> MFA -> Assign MFA -> [Virtual app - Token - U2F Device]
     Download Google Authenticator -> scan -> enter OTP twice -> Authenticate
+
+
+-
+JSON - XML - YAML :-
+--------------------
+AWS uses JSON extensively for templates and policies .
+Both JSON , YAML and XML can be used to receive data from a web server.
+Comments are not allowed in JSON. JSON is a user-friendly substitute to XML as it is light weight and easy to read.
+JSON - Java Script Object Notation
+XML - Extensible Markup Language
+YAML - Ain't Markup Language
+
+      Json Example :
+      ----------------
+
+          {"employees":[
+            { "firstName":"John", "lastName":"Doe" },
+            { "firstName":"Anna", "lastName":"Smith" },
+            { "firstName":"Peter", "lastName":"Jones" }
+          ]}
+
+      XML Example :
+      ----------------
+
+          <employees>
+            <employee>
+              <firstName>John</firstName> <lastName>Doe</lastName>
+            </employee>
+            <employee>
+              <firstName>Anna</firstName> <lastName>Smith</lastName>
+            </employee>
+            <employee>
+              <firstName>Peter</firstName> <lastName>Jones</lastName>
+            </employee>
+          </employees>
+
+JSON is Like XML Because :
+  Both JSON and XML are "self describing" (human readable)
+  Both JSON and XML are hierarchical (values within values)
+  Both JSON and XML can be parsed and used by lots of programming languages
+  Both JSON and XML can be fetched with an XMLHttpRequest
+
+JSON is Unlike XML Because :
+  JSON doesn't use end tag
+  JSON is shorter
+  JSON is quicker to read and write
+  JSON can use arrays
+
+The biggest difference is:
+ XML has to be parsed with an XML parser. JSON can be parsed by a standard JavaScript function.
+
+JavaScript Object Notation, more commonly known by the acronym JSON, is an open data interchange format that is both human and machine-readable.
+Despite the name JavaScript Object Notation, JSON is independent of any programming language and is a common API output in a wide variety of applications.
+JSON represents data in two ways:
+
+    Object : A collection of name-value (or key-value) pairs. An object is defined within left ({) and right (}) braces.
+             Each name-value pair begins with the name, followed by a colon, followed by the value. Name-value pairs are comma separated.
+    Array  : An ordered collection of values. An array is defined within left ([) and right (]) brackets.
+             Items in the array are comma separated.
+
+             {                                                                                                              -----
+              creationDate : 25-10-2020,         <- Name-Value pairs & Comma seperated                                           |
+              modifieddate : 01-12-2021,                                                                                         |
+              name : Dileep ,                                                                                                    |
+              employees:[                                             ---                                                        | <-- OBJECT
+                         { "firstName":"John", "lastName":"Doe" },       |                                                       |
+                         { "firstName":"Anna", "lastName":"Smith" },     |<- ARRAY - Containing objects with a name-value pair   |
+                         { "firstName":"Peter", "lastName":"Jones" }     |                                                       |
+                       ]                                              ---                                                        |
+            }                                                                                                                ----
+
+
+    Administrator  IAM Policy :
+    ------------------------------
+            {
+              "Version": "2012-10-17",
+              "Statement": [
+                            {
+                                "Effect": "Allow",
+                                "Action": "*",
+                                "Resource": "*"
+                            }
+                          ]
+            }
+
+
+YAML: It is a light-weight, human-readable data-representation language.
+It is primarily designed to make the format easy to read while including complex features.
+Since YAML is a superset of JSON, it can parse JSON with a YAML parser.
+The extensions in YAML are .yaml or .yml.
+Comments are denoted with a hash/number sign.
+
+UNDERSTANDING JSON POLICY IN AWS :
+-------------------------------------
+http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-grammar.html
+https://aws.amazon.com/blogs/security/back-to-school-understanding-the-iam-policy-grammar/
+
+IAM policies use JSON syntax and a policy must use correct JSON syntax.
+
+  --> Data is represented by a name-value pair separated by a colon.
+      For example, “Effect”: “Allow” – in this example “Effect” is the name and “Allow” is the value.
+  --> When data is made up of multiple name-value pairs, the name-value pairs are separated by commas.
+  --> Braces, better known as “curly brackets” ({ }), denote an object. Objects can hold multiple name-value pairs.
+  --> Square brackets ([ ]) denote an array that holds one or multiple values, with values separated by commas.
+
+
+JSON policy documents are made up of elements. The elements are listed here in the general order you use them in a policy.
+The order of the elements doesn't matter—for example, the Resource element can come before the Action element.
+
+
+
+  USING ARRAYS IN POLICIES:
+  ----------------------------
+    JSON arrays are a powerful way to specify multiple values in a policy.
+    For example, you can grant users access to multiple resources using an array.
+    An array is denoted with square brackets ([ ]) and the items in the array are separated by commas.
+    Remember, there is no comma after the last item in the array.
+    For example, instead of writing two separate policies to grant access to different S3 buckets, you can write one policy and specify both S3 buckets in an array.
+        {
+         "Version": "2012-10-17",
+         "Statement": [
+           {
+             "Effect": "Allow",
+             "Action": [
+               "s3:PutObject",
+               "s3:GetObject",
+               "s3:DeleteObject"
+             ],
+             "Resource": [
+               "arn:aws:s3:::dev-bucket/*",
+               "arn:aws:s3:::qa-bucket/*"
+             ]
+           }
+         ]
+       }
+
+   POLICY BLOCKS AND STSTEMENTS :
+   ----------------------------------
+     If you dissect any policy, you will see they always start and end with a curly brace.
+     These curly braces denote a policy block. Each policy must have exactly one policy block.
+     Within the policy block, a single statement block is required. The statement block is where you specify your desired access.
+     A statement block can be an array of statements to hold one or more statements.
+
+     The curly braces on lines 1 and 14 express the policy block.
+     Lines 3 through 13 specify the statement block.
+     Note that the statement block  is shown as an array (with [ ]) even though it contains only one statement.
+      1. {
+      2.  "Version": "2012-10-17",
+      3.  "Statement": [
+      4.    {
+      5.      "Effect": "Allow",
+      6.      "Action": [
+      7.        "s3:PutObject",
+      8.        "s3:GetObject",
+      9.        "s3:DeleteObject"
+      10.      ],
+      11.      "Resource": "arn:aws:s3:::dev-bucket/*"
+      12.    }
+      13.  ]
+      14. }
+
+    COMMON ERORS IN POLICY BLOCKS :
+    ---------------------------------
+    1. Multiple Policy blocks in one policy : The following policy is not valid because it contains more than one policy block.
+                                               There should be only one top level pair of curly braces ({ }).
+          {
+           "Statement": [
+             {
+               "Effect":"Allow",
+               "Action":"ec2:Describe*",
+               "Resource":"*"
+             }
+           ]
+          }
+          {
+           "Statement": [
+             {
+               "Effect": "Allow",
+               "Action": "s3:*",
+               "Resource": ["arn:aws:s3:::my-bucket/*"]
+             }
+           ]
+         }
+
+         To fix this policy, you can merge all the policy blocks together into a single array of statements, as in this example:
+
+         {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "ec2:Describe*",
+              "Resource":"*"
+            },
+            {
+              "Effect": "Allow",
+              "Action": "s3:*",
+              "Resource": [
+                "arn:aws:s3:::my-bucket/*"
+              ]
+            }
+          ]
+        }
+
+     2. Multiple statement blocks in one policy – This policy includes multiple statements blocks as separate items.
+     {
+      "Statement":[
+       {
+        "Effect":"Allow",
+        "Action":["s3:ListBucket"],
+        "Resource":["arn:aws:s3:::my-bucket"]
+       }
+      ],
+      "Statement":[
+       {
+         "Effect":"Allow",
+         "Action":["*"],
+         "Resource":["arn:aws:s3:::my-bucket/*"]
+       }
+      ]
+     }
+
+    To fix the policy above, you can merge the statement blocks into an array, as shown in the following example:
+
+      {
+        "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": ["s3:ListBucket"],
+         "Resource": ["arn:aws:s3:::my-bucket"]
+        },
+        {
+         "Effect": "Allow",
+         "Action": ["*"],
+         "Resource": ["arn:aws:s3:::my-bucket/*"]
+        }
+        ]
+      }
+
+  ELEMENTS INCLDED IN A STATEMENT BLOCK :
+  -----------------------------------------
+  We refer to the data (i.e., name-value pairs) included inside the statement block as elements.
+  It is important to note that only one element of each type can be specified in a statement block.
+  However, you can use an array to specify multiple values in an element.
+  There are five core types of elements that you can use in your policy. Some are required and some are optional.
+
+  --> Effect     (Required) – Specifies whether the statement will explicitly allow (“Allow”) or deny (“Deny”) access.
+                              These are the only two values that are valid in this element.
+  --> Action*    (Required) – Describes the type of access that should be allowed or denied.
+  --> Resource*  (Required) – Specifies the object or objects that the statement covers.
+  --> Principal* (Optional) – Specifies the user, account, service, or other entity that is allowed or denied access to a resource.
+                              Principals can only be used for resource-based policies.
+                              For policies within IAM, the policy is attached to the Principal it applies to.
+  --> Condition  (Optional) – Lets you specify conditions for when a policy is in effect.
+
+  *NOTE : For ACTION , RESOURCE & PRINCIPAL ,
+          You can also append a “Not” to this element type – which enables you to specify an exception to a list for the element.
+          For example, “NotAction” will evaluate to all actions except those that you list.
+
+      COMMON ERRORS IN STATEMENT BLOCKS :
+      -------------------------------------
+      1. Repeated elements in one statement block :
+         This policy is incorrect because an element (in this case, Resource) appears multiple times in a statement.
+
+        {
+         "Statement": [
+            {
+             "Effect": "Allow",
+             "Action": "s3:*",
+             "Resource": "arn:aws:s3:::my-bucket",
+             "Resource": "arn:aws:s3:::my-bucket/*"
+           }
+         ]
+        }
+
+      This is a perfect place to use an array to denote multiple resource values.
+      The following example shows how to use an array to update this policy to comply with JSON syntax:
+
+      {
+       "Statement": [
+          {
+           "Effect": "Allow",
+           "Action": "s3:*",
+           "Resource": ["arn:aws:s3:::my-bucket",
+            "arn:aws:s3:::my-bucket/*"
+           ]
+         }
+       ]
+      }
+
+     2. Multiple conflicting elements in one statement block :
+        This issue is a variation of the preceding one (multiple repeated elements), but with the added complication that the repeated elements are contradictory.
+        The policy is invalid because there are multiple Effect elements in one statement block.
+        Right now, this policy would be evaluated using the last Effect in the policy, which in this case would be “Allow”. However, you might want to “Deny” access.
+
+         {
+          "Statement": [
+             {
+              "Effect": "Deny",
+              "Effect": "Allow",
+              "Action": "s3:*",
+              "Resource": "arn:aws:s3:::my-bucket"
+            }
+          ]
+         }
+
+   In order to fix this policy, include only one Effect element, as in the following example:
+
+         {
+          "Statement": [
+             {
+              "Effect": "Deny",
+              "Action": "s3:*",
+              "Resource": "arn:aws:s3:::my-bucket"
+            }
+          ]
+         }
+
+   you cannot use both Action and NotAction in the same policy statement.
+   Other pairs that are mutually exclusive include Principal/NotPrincipal and Resource/NotResource.
+
+  VERSIONS IN POLICIES :
+  ------------------------
+  You may have noticed a version number in most policies. Here is what you need to know about the Version element in policies:
+  --> The version specifies the policy language version used. It is not a version you create.
+      Versions allow IAM to enhance the policy language while continuing to support existing policies.
+  --> It is best practice to always specify the current version in your policies.
+      At the time of publishing, this version is “2012-10-17”.
+      This will enable you to use the most recent features in the policy language.
+  --> If you have an older policy that uses version “2008-10-17,” it will continue to work.
+      However, you will not be able to use newer features like policy variables in this policy.
+      If you do not specify a version then it defaults to “2008-10-17.”
+
+  IAM supports the following Version element values:
+  --> 2012-10-17. This is the current version of the policy language, and you should always include a Version element and set it to 2012-10-17.
+      Otherwise, you cannot use features such as policy variables that were introduced with this version.
+  --> 2008-10-17. This was an earlier version of the policy language. You might see this version on older existing policies.
+      Do not use this version for any new policies or when you update any existing policies.
+
+  EX : ${aws:username} --> Policy variables
+
+      COMMON ERRORS IN VERSIONING :
+      -------------------------------
+      1. Missing version number :
+         The policy below is incorrect because there is no version specified and therefore the policy defaults to version “2008-10-17,” which does not support policy variables.
+
+        {
+          "Statement": [
+            {
+              "Action": [
+                "iam:*AccessKey*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                "arn:aws:iam::accountid:user/${aws:username}"
+              ]
+            }
+          ]
+        }
+
+        To enable policy variables, add the latest version, “2012-10-17”, to the policy.
+
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Action": [
+                "iam:*AccessKey*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                "arn:aws:iam::accountid:user/${aws:username}"
+              ]
+            }
+          ]
+        }
+
+ OTHER EXAMPLES OF ELEMENTS IN JSON POLICY :
+ --------------------------------------------
+ 1. NotPrincipal:
+     {
+        "Version": "2012-10-17",
+        "Statement": [{
+            "Effect": "Deny",
+            "NotPrincipal": {"AWS": [
+                "arn:aws:iam::444455556666:user/Bob",
+                "arn:aws:iam::444455556666:root"
+            ]},
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::BUCKETNAME",
+                "arn:aws:s3:::BUCKETNAME/*"
+            ]
+        }]
+    }
+
+ 2. Action : The Action element describes the specific action or actions that will be allowed or denied.
+    "Action": "sqs:SendMessage"
+    "Action": "ec2:StartInstances"
+    "Action": "iam:ChangePassword"
+    "Action": [ "sqs:SendMessage", "sqs:ReceiveMessage", "ec2:StartInstances", "iam:ChangePassword", "s3:GetObject" ]
+    "Action": "s3:*"
+    "Action": "iam:*AccessKey*" --> CreateAccessKey, DeleteAccessKey, ListAccessKeys, and UpdateAccessKey.
+
+    NotAction is an advanced policy element that explicitly matches everything except the specified list of actions.
+    Using NotAction can result in a shorter policy by listing only a few actions that should not match, rather than including a long list of actions that will match.
+    When using NotAction, you should keep in mind that actions specified in this element are the only actions in that are limited.
+    This, in turn, means that all of the applicable actions or services that are not listed are allowed if you use the Allow effect

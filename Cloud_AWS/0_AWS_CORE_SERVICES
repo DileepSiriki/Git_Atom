@@ -28,7 +28,7 @@ SERVICES NOT COVERED :
 -------------------------------------------------------------------------------------------------------------------------------------------------
 Internet of Things (IoT)
 Machine Learning
-Media Services                                      
+Media Services
 
 
 ##################################################################################################################
@@ -182,6 +182,9 @@ You pay only for the compute time that you consume—there’s no charge when yo
 You can run code for virtually any type of application or backend service—all with zero administration.
 Just upload your code and Lambda takes care of everything required to run and scale your code with high availability.
 You can set up your code to automatically trigger from other AWS services or call it directly from any web or mobile app.
+The Lambda free tier includes 1M free requests per month and 400,000 GB-seconds of compute time per month.
+Past this, it costs $0.20 per 1 million requests and $0.00001667 for every GB-seconds. The GB-seconds is based on the memory consumption of the Lambda function.
+
 
 6. AWS LAUNCH WIZARD :
 --> Used by enterprise applications .
@@ -343,6 +346,7 @@ Amazon Elastic Block Store (Amazon EBS) is a web service that provides block lev
 EBS volumes are highly available and reliable storage volumes that can be attached to any running instance and used like a hard drive.
 
 4. AMAZON ELASTIC FILE SYSTEM - EFS : -> Its a Cloud File  https://www.youtube.com/watch?v=6ZIPBC78U0s&t=8s
+Amazon Elastic File System (Amazon EFS) provides a simple, scalable, fully managed elastic NFS file system for use with AWS Cloud services and on-premises resources.
 It provides file storage for your Amazon EC2 instances.
 With Amazon EFS, you can create a file system, mount the file system on your EC2 instances, and then read and write data from your EC2 instances to and from your file system.
 It provides a simple, scalable, fully managed elastic NFS filesystem for use with AWS Cloud services and on-premises resources.
@@ -357,9 +361,14 @@ Using Amazon EFS with Microsoft Windows–based Amazon EC2 instances is not supp
             Once EFS is create d, we can mount EC2 instances on EFS.
             Useful when application runs on multiple EC2.
 
-Whenyou first create your file system, there is only one root directory at /.
+When you first create your file system, there is only one root directory at /.
 By default, only the root user (UID0) has read-write-execute permissions. For other users to modify the file system, the root user must explicitly grant them access.
 You use EFS access points to provision directories that are writable from a specific application
+
+Amazon EFS oﬀers two storage classes, Standard and Infrequent Access.
+The Standard storage class is used to store frequently accessed files.
+The Infrequent Access (IA) storage class is a lower-cost storage class that's designed for storing long-lived, infrequently accessed ﬁles cost-eﬀectively.
+
 
 // EFS for Linux
 // FSx for Windows
@@ -2179,3 +2188,31 @@ Built on AWS global computing infrastructure, GameLift helps you deliver high-pe
 7. AMAZON LUMBER-YARD : // Game
 Lumberyard is a free AAA game engine deeply integrated with AWS and Twitch—with full source.
 Lumberyard provides a growing set of tools to help you create the highest quality games, engage massive communities of fans, and connect games to the vast compute and storage of the cloud.
+
+
+##################################################################################################################
+ADDITIONAL RESOURCES  :
+##################################################################################################################
+##################################################################################################################
+
+1. AWS MARKET-PLACE :  https://www.youtube.com/watch?v=RxCRHsAqiWs
+// Buy & Sell - Paid or Free AWS Software Solutions .
+AWS Marketplace is an online store where you can buy or sell software that runs on Amazon Web Services (AWS).
+AWS Marketplace is a curated digital catalog customers can use to find, buy, deploy, and manage third-party software, data, and services that customers need to build solutions and run their businesses.
+AWS Marketplace includes thousands of software listings from popular categories such as security, networking, storage, machine learning, business intelligence, database, as well as related professional services to help you manage and support those solutions.
+AWS Marketplace also simplifies software licensing and procurement with flexible pricing options and multiple deployment methods.
+
+Customers can quickly launch preconfigured software with just a few clicks, and choose software solutions in Amazon Machine Images (AMIs), software as a service (SaaS),
+Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source.
+The product can be free to use or it can have an associated charge. AWS handles billing and payments, and charges appear on customers’ AWS bill.
+
+SELLER :  seller can be an independent software vendor (ISV), consulting partner, managed services provider (MSP), or individual who has something to offer that works with AWS products and services.
+
+One way of delivering your products to buyers is with Amazon Machine Images (AMIs) - Docker Images - SAAS Apps.
+An AMI provides the information required to launch an Amazon Elastic Compute Cloud (Amazon EC2) instance.
+You create a custom AMI for your product, and buyers can use it to create EC2 instances with your product already installed and ready to use.
+
+
+2. AWS GOVCLOUD - United States :
+The AWS GovCloud (US) Regions are isolated AWS Regions designed to enable U.S. government agencies and customers to move sensitive workloads into the cloud by addressing their specific regulatory and compliance requirements.
+The AWS GovCloud (US) Regions adhere to U.S. International Traffic in Arms Regulations (ITAR) requirements.
