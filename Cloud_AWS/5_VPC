@@ -1069,7 +1069,8 @@ They use http or https to communicate among themselves.
 
 =================================================================================================================================
 =================================================================================================================================
-AMAZON VIRTUAL PRIVATE CLOUD CONNECTIVITY OPTIONS : See reference pics Vpc_*
+AMAZON VIRTUAL PRIVATE CLOUD CONNECTIVITY OPTIONS :  Mandatory to  see reference pics VPC_Scenario-* for pictures with scenario .
+### Open the picture and read the data for a better understanding.
 =================================================================================================================================
 =================================================================================================================================
 
@@ -1080,7 +1081,7 @@ These include connectivity options for integrating remote customer networks with
 Amazon VPC provides multiple network connectivity options for you to use, depending on your current network designs and requirements.
 These connectivity options include using either the internet or an AWS Direct Connect connection as the network backbone and terminating the connection into AWS or user-managed network endpoints.
 
-1. NETWORK TO AMAZON VPC CONNECTIVITY OPTIONS :
+1. On PREMISIS NETWORK TO AMAZON VPC CONNECTIVITY OPTIONS :
 -------------------------------------------------
 This section provides design patterns for connecting remote networks with your Amazon VPC environment.
 These options are useful for integrating AWS resources with your existing on-site services (for example, monitoring, authentication, security, data or other systems) by extending your internal networks into the AWS Cloud.
@@ -1089,16 +1090,98 @@ VPC connectivity to remote customer networks is best achieved when using non-ove
 For example, if you’d like to connect one or more VPCs to your home network, make sure they are configured with unique Classless Inter-Domain Routing (CIDR) ranges.
 We recommend allocating a single, contiguous, non-overlapping CIDR block to be used by each VPC
 
-  A. AWS MANAGED VPN : // Virtual Private gateway.
+  A. AWS MANAGED VPN : // Virtual Private gateway. - VPC_Scenario-1
      STATIC  :  Amazon VPC provides the option of creating an IPsec VPN connection between your remote networks and Amazon VPC over the internet.
      Consider taking this approach when you want to take advantage of an AWS-managed VPN endpoint that includes automated redundancy and failover built into the AWS side of the VPN connection.
      DYNAMIC : The virtual private gateway also supports and encourages multiple user gateway connections so that you can implement redundancy and failover on your side of the VPN connection.
      Both dynamic and static routing options are provided to give you flexibility in your routing configuration. Dynamic routing uses BGP peering to exchange routing information between AWS and these remote endpoints.
 
-  B. AWS TRANSIT GW + VPN :
+  B. AWS TRANSIT GW + VPN : VPC_Scenario-2
      STATIC  : AWS Transit Gateway is an AWS managed high availability and scalability regional network transit hub used to interconnect VPCs and customer networks.
      AWS Transit Gateway + VPN, using the Transit Gateway VPN attachment, provides the option of creating an IPsec VPN connection between your remote network and the Transit Gateway over the internet.
      Consider using this approach when you want to take advantage of an AWS-managed VPN endpoint for connecting to multiple VPCs in the same region without the additional cost and management of multiple IPSec VPN connections to multiple Amazon VPCs.
      DYNAMIC : AWS Transit Gateway also supports and encourages multiple user gateway connections so that you can implement redundancy and failover on your side of the VPN connection
      Both dynamic and static routing options are provided to give you flexibility in your routing configuration on the Transit Gateway VPN IPSec attachment. Dynamic routing uses BGP peering to exchange routing information between AWS and these remote endpoints.
-     https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-transit-gateway-vpn.html
+
+ C. DIRECT CONNECT : // VIF = virtual interface - VPC_Scenario-3
+    AWS Direct Connect makes it easy to establish a dedicated connection from an on-premises network to one or more VPCs in the same region.
+    Using private VIF on AWS Direct Connect, you can establish private connectivity between AWS and your data center, office, or colocation environment
+    AWS Direct Connect can reduce network costs, increase bandwidth throughput, and provide a more consistent network experience than internet-based connections.
+    It uses industry-standard 802.1q VLANs to connect to Amazon VPC using private IP addresses.
+    AWS Direct Connect lets you establish 1 Gbps or 10 Gbps dedicated network connections (or multiple connections) between AWS networks and one of the AWS Direct Connect locations.
+    A Direct Connect gateway is a globally available resource to enable connections to multiple Amazon VPCs across different regions or AWS accounts.
+    This feature also allows you to connect to any participating VPCs from one private VIF, reducing AWS Direct Connect management,
+
+ D. DIRECT CONNECT + TRANSIT GW : VPC_Scenario-4
+    AWS Direct Connect + AWS Transit Gateway, using transit VIF attachment to Direct Connect gateway, enables your network to connect up to three regional centralized routers over a private dedicated connection.
+    Each AWS Transit Gateway is a network transit hub to interconnect VPCs in the same region, consolidating Amazon VPC routing configuration in one place.
+    This solution simplifies management of connections between an Amazon VPC and your networks over a private connection that can reduce network costs, increase bandwidth throughput, and provide a more consistent network experience than internet-based connections.
+
+ E. DIRECT CONNECT + VPN : VPC_Scenario-5
+    With AWS Direct Connect + VPN, you can combine AWS Direct Connect dedicated network connections with the Amazon VPC VPN.
+    AWS Direct Connect public VIF established a dedicated network connection between your network to public AWS resources, such as an Amazon virtual private gateway IPsec endpoint.
+
+ F. DIRECT CONNECT + TRANSIT GATEWAY + VPN : VPC_Scenario-6
+    With AWS Direct Connect + AWS Transit Gateway + VPN, using public VIF on AWS Direct Connect, enables end-to-end IPSec-encrypted connections between your networks and a regional centralized router for Amazon VPCs over a private dedicated connection.
+
+ G. VPN CLOUD-HUB : VPC_Scenario-7
+    Building on the AWS managed VPN options described previously, you can securely communicate from one site to another using the AWS VPN CloudHub.
+    The AWS VPN CloudHub operates on a simple hub-and-spoke model that you can use with or without a VPC.
+    Use this approach if you have multiple branch offices and existing internet connections and would like to implement a convenient, potentially low-cost hub-and-spoke model for primary or backup connectivity between these remote offices.
+    The following figure shows the AWS VPN CloudHub architecture, with dashed lines indicating network traffic between remote sites being routed over their AWS VPN connections.
+
+ H. SOFWARE SITE-to-SITE VPN : --> Manage both sides of VPN yourself. VPC_Scenario-8
+    Amazon VPC offers you the flexibility to fully manage both sides of your Amazon VPC connectivity by creating a VPN connection between your remote network and a software VPN appliance running in your Amazon VPC network.
+    This option is recommended if you must manage both ends of the VPN connection, either for compliance purposes or for leveraging gateway devices that are not currently supported by Amazon VPC’s VPN solution.
+    You can choose from an ecosystem of multiple partners and open source communities that have produced software VPN appliances that run on Amazon EC2.
+    Along with this choice comes the responsibility that you must manage the software appliance, including configuration, patches, and upgrades.
+    Note that this design introduces a potential single point of failure into the network design because the software VPN appliance runs on a single Amazon EC2 instance.
+
+
+2. AMAZON VPC To AMAZON VPC CONNECTIVITY OPTIONS :
+---------------------------------------------------
+Use these design patterns when you want to integrate multiple Amazon VPCs into a larger virtual network.
+This is useful if you require multiple VPCs due to security, billing, presence in multiple regions, or internal charge-back requirements, to more easily integrate AWS resources between Amazon VPCs.
+You can also combine these patterns with the Network–to–Amazon VPC connectivity options for creating a corporate network that spans remote networks and multiple VPCs.
+
+VPC connectivity between VPCs is best achieved when using non-overlapping IP ranges for each VPC being connected.
+For example, if you’d like to connect multiple VPCs, make sure each VPC is configured with unique Classless Inter-Domain Routing (CIDR) ranges.
+Therefore, we advise you to allocate a single, contiguous, non-overlapping CIDR block to be used by each VPC.
+
+  A. VPC To VPV PEERING : VPC_Scenario-9
+     A VPC peering connection is a networking connection between two VPCs that enables routing using each VPC’s private IP addresses as if they were in the same network.
+     VPC peering connections can be created between your own VPCs or with a VPC in another AWS account. VPC peering also supports inter-region peering.
+     Traffic using inter-region VPC Peering always stays on the global AWS backbone and never traverses the public internet, thereby reducing threat vectors, such as common exploits and DDoS attacks.
+     AWS uses the existing infrastructure of a VPC to create VPC peering connections and do not rely on a separate piece of physical hardware.
+     Therefore, they do not introduce a potential single point of failure or network bandwidth bottleneck between VPCs.
+     Additionally, VPC routing tables, security groups, and network access control lists can be leveraged to control which subnets or instances are able to utilize the VPC peering connection.
+
+  B. AWS TRANSIT GATEWAY : VPC_Scenario-10
+     AWS Transit Gateway is a highly available and scalable service to consolidate the AWS VPC routing configuration for a region with a hub-and- spoke architecture.
+     Each spoke VPC only needs to connect to the Transit Gateway to gain access to other connected VPCs.
+     Transit Gateway across different regions can peer with each other to enable VPC communications across regions.
+     With large number of VPCs, Transit Gateway provides simpler VPC-to-VPC communication management over VPC Peering,
+
+  C. SOFTWARE SITE to SITE VPN : VPC_Scenario-11
+     Amazon VPC provides network routing flexibility.
+     This includes the ability to create secure VPN tunnels between two or more software VPN appliances to connect multiple VPCs into a larger virtual private network so that instances in each VPC can seamlessly connect to each other using private IP addresses.
+     This option is recommended when you want to manage both ends of the VPN connection using your preferred VPN software provider.
+     This option uses an internet gateway attached to each VPC to facilitate communication between the software VPN appliances.
+     You can choose from an ecosystem of multiple partners and open source communities that have produced software VPN appliances that run on Amazon EC2.
+     Along with this choice comes the responsibility for you to manage the software appliance including configuration, patches, and upgrades.
+     Note that this design introduces a potential single point of failure into the network design as the software VPN appliance runs on a single Amazon EC2 instance.
+
+  D. AWS MANAGED VPN : VPC_Scenario-12
+     Amazon VPC provides the option of creating an IPsec VPN to connect your remote networks with your Amazon VPCs over the internet.
+     You can take advantage of multiple VPN connections to route traffic, from your router, between your Amazon VPCs over the internet or AWS Direct Connect
+
+  E. AWS PRIVATE-LINK : VPC_Scenario-13
+     AWS PrivateLink enables you to connect to some AWS services, services hosted by other AWS accounts (referred to as endpoint services), and supported AWS Marketplace partner services, via private IP addresses in your VPC.
+     The interface endpoints are created directly inside of your VPC, using elastic network interfaces and IP addresses in your VPC’s subnets. That means that VPC Security Groups can be used to manage access to the endpoints.
+
+ TRANSIT VPC : VPC_Scenario-14
+ --------------
+ Building on the Software VPN designs mentioned above, you can create a global transit network on AWS. A transit VPC is a common strategy for connecting multiple, geographically disperse VPCs and remote networks in order to create a global network transit center.
+ A transit VPC simplifies network management and minimizes the number of connections required to connect multiple VPCs and remote networks.
+ Along with providing direct network routing between VPCs and on-premises networks, this design also enables the transit VPC to implement more complex routing rules, such as network address translation between overlapping network ranges, or to add additional network-level packet filtering or inspection.
+ The transit VPC design can be used to support important use cases like, private networking, shared connectivity and cross account AWS usage.
