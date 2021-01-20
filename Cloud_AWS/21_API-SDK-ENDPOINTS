@@ -1,0 +1,309 @@
+===============================================================================================
+===============================================================================================
+APPLICATION PROGRAMMING INTERFACES - API :
+//stateful - WebSocket and stateless - HTTP and REST APIs
+// <NEED TO ADD EXTRA INFORMATION >  -- https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-dg.pdf
+===============================================================================================
+===============================================================================================
+When you type www.facebook.com into your browser, a request goes out to Facebook’s remote server.
+Once your browser receives the response, it interprets the code and displays the page.
+To the browser, also known as the client, Facebook’s server is an API.
+This means that every time you visit a page on the Web, you interact with some remote server’s API.
+An API isn’t the same as the remote server — rather it is the part of the server that receives requests and sends responses.
+To summarize, when a company offers an API to their customers, it just means that they’ve built a set of dedicated URLs that return pure data responses — meaning the responses won’t contain the kind of presentational overhead that you would expect in a graphical user interface like a website.
+
+                                                                            -----
+     -------                                                               |     |                    -------            ---------
+    |        |        REQUEST       -----------------------                |  A  |                   |       |          (          )
+    |        | <------------------>|       INTERNET        | <------------>|  P  |<----------------->|       | <------> (  PAGES   )
+    |        |        RESPONSE      -----------------------                |  I  |                   |       |          (          )
+     --------                                                              |     |                    -------             ---------
+    WEB BROWSER                                                             -----                    WEB SERVER            DATABASE
+
+
+HUMAN - HUMAN       --> Speech , text , gestures etc ;
+HUMAN - COMPUTER    --> Monitor with a GUI , Mouse , Keyboard etc ;
+SOFTWARE - SOFTWARE --> API - Application Programming Interface
+An API is a set of programming code that enables data transmission between one software product and another. It also contains the terms of this data exchange.
+
+Application programming interfaces consist of two components:
+  --> Technical specification describing the data exchange options between solutions with the specification done in the form of a request for processing and data delivery protocols.
+  --> Software interface written to the specification that represents it
+
+Example : A Hotel room booking app must communicate with RATES API to fetch current rate for each room.
+          It must talk to the MAP API to provide the user the route to the ROOM from his location .
+
+Even something as simple as copying and pasting on a computer utilizes an API.
+Copying text converts a keystroke into a command, data is stored into RAM on the clipboard utilizing an API, the data is then carried from one application to another using that same API, and finally, data is rendered when pasting using yet another API.
+On the world wide web, the API takes on a slightly different function.
+Web APIs allow for interaction between disparate systems, often for specific use cases.
+For instance, when a user interacts on Twitter, they’re utilizing an API to comment, to store their data, to follow a user, to delete tweets, and so forth. Ultimately, a web API is simply a set of instructions, just like the personal computer API, but based in the web space.
+
+
+TYPES OF API's :
+-----------------
+DATABASE API         : Database APIs enable communication between an application and a database management system.
+                       Developers work with databases by writing queries to access data, change tables, etc.
+OPERATING SYSTEM API : This group of APIs defines how applications use the resources and services of operating systems.
+                       Every OS has its set of APIs, for instance, Windows API or Linux API (kernel–user space API and kernel internal API).
+REMOTE API           : Remote APIs define standards of interaction for applications running on different machines.
+                       In other words, one software product accesses resources located outside the device that requests them, which explains the name.
+                       Since two remotely located applications are connected over a communications network, particularly the internet, most remote APIs are written based on web standards.
+                       Java Database Connectivity API and Java Remote Method Invocation API are two examples of remote application programming interfaces.
+WEB API              : This API class is the most common. Web APIs provide machine-readable data and functionality transfer between web-based systems which represent client-server architecture.
+                       These APIs mainly deliver requests from web applications and responses from servers using Hypertext Transfer Protocol (HTTP).
+                       Developers can use web APIs to extend the functionality of their apps or sites.
+                       Google Maps API enables the addition of a map with an organization’s location.
+
+API PROTOCOLS / SPECIFICATIONS :
+-----------------------------------
+The goal of API specifications is to standardize data exchange between web services.
+In this case, standardization means the ability of diverse systems, written in different programming languages and/or running on different OSs, or using different technologies, to seamlessly communicate with each other.
+
+     REMOTE PROCEDURE CALL :
+     ------------------------
+     Web APIs may adhere to resource exchange principles based on a Remote Procedure Call.
+     This protocol specifies the interaction between client-server based applications.
+     One program (client) requests data or functionality from another program (server), located in another computer on a network, and the server sends the required response.
+     RPC is also known as a subroutine or function call. One of two ways to implement a remote procedure call is SOAP.
+
+     SERVICE OBJECT ACCESS PROTOCOL - SOAP :
+     ----------------------------------------
+     SOAP is a lightweight protocol for exchanging structured information in a decentralized, distributed environment, according to the definition by Microsoft that developed it.
+     Generally speaking, this specification contains the syntax rules for request and response messages sent by web applications.
+     APIs that comply with the principles of SOAP enable XML messaging between systems through HTTP or Simple Mail Transfer Protocol (SMTP) for transferring mail.
+
+     Extensible markup language (XML) is a simple and very flexible text format widely used for data storage and exchange over the internet or other networks.
+     XML defines a set of rules for encoding documents in a format that both humans and machines can read.
+     The markup language is a collection of symbols that can be placed in the text to delineate and label the parts of the text document.
+     XML text documents contain self-descriptive tags of data objects, which makes them easily readable.
+
+     SOAP APIs are preferred among providers of payment gateways, identity management and CRM solutions, as well as financial and telecommunication services. PayPal’s public API is one of the commonly known SOAP APIs.
+
+     REPRESENTATIONAL STATE TRANSFER - REST :
+     -----------------------------------------
+     The term REST was introduced by computer scientist Roy Fielding in a dissertation in 2000.
+     Unlike SOAP, which is a protocol, REST is a software architectural style with six constraints for building applications that work over HTTP, often web services. The World Wide Web is the most common realization and application of this architecture style.
+     REST is considered a simpler alternative to SOAP, which many developers find difficult to use because it requires writing a lot of code to complete every task and following the XML structure for every message sent.
+     REST follows another logic since it makes data available as resources.
+     Each resource is represented by a unique URL, and one can request this resource by providing its URL.
+
+     Web APIs that comply with REST architectural constraints are called RESTful APIs.
+     These APIs use HTTP requests (AKA methods or verbs) to work with resources: GET, PUT, HEAD, POST, PATCH, CONNECT, TRACE, OPTIONS and DELETE.
+     RESTful systems support messaging in different formats, such as plain text, HTML, YAML, XML, and JSON, while SOAP only allows XML.
+     The ability to support multiple formats for storing and exchanging data is one of the reasons REST is a prevailing choice for building public APIs these days.
+
+     JavaScript Object Notation (JSON) is a lightweight and easy-to-parse text format for data exchange.
+     Its syntax is based on a subset of the Standard ECMA-262 3rd Edition.
+     Each JSON file contains collections of name/value pairs and ordered lists of values.
+     Since these are universal data structures, the format can be used with any programming language.
+
+ API AS A LAYER OF SECURITY :
+ -----------------------------
+ Your phone’s data is never fully exposed to the server, and likewise the server is never fully exposed to your phone.
+ Instead, each communicates with small packets of data, sharing only that which is necessary—like ordering takeout.
+ You tell the restaurant what you would like to eat, they tell you what they need in return and then, in the end, you get your meal.
+
+ Modern APIs adhere to standards (typically HTTP and REST), that are developer-friendly, easily accessible and understood broadly
+
+AMAZON API GATEWAY :
+---------------------
+Amazon API Gateway is an AWS service for creating, publishing, maintaining, monitoring, and securing REST, HTTP, and WebSocket APIs at any scale.
+API developers can create APIs that access AWS or other web services, as well as data stored in the AWS Cloud.
+As an API Gateway API developer, you can create APIs for use in your own client applications.
+Or you can make your APIs available to third-party app developers.
+API Gateway creates RESTful APIs that:
+      --> Are HTTP-based.
+      --> Enable stateless client-server communication.
+      --> Implement standard HTTP methods such as GET, POST, PUT, PATCH, and DELETE.
+API Gateway acts as a "front door" for applications to access data, business logic, or functionality from your backend services, such as workloads running on Amazon Elastic Compute Cloud (Amazon EC2), code running on AWS Lambda, any web application, or real-time communication applications.
+
+FEATURES OF AWS API GATEWAY :
+    --> Support for stateful (WebSocket) and stateless (HTTP and REST) APIs.
+    --> Powerful, flexible authentication mechanisms, such as AWS Identity and Access Management policies, Lambda authorizer functions, and Amazon Cognito user pools.
+    --> Developer portal for publishing your APIs.
+    --> CloudTrail logging and monitoring of API usage and API changes.
+    --> CloudWatch access logging and execution logging, including the ability to set alarms.
+    --> Support for custom domain names.
+
+AWS SERVERLESS : Lambda + APIs
+Together with AWS Lambda, API Gateway forms the app-facing part of the AWS serverless infrastructure.
+For an app to call publicly available AWS services, you can use Lambda to interact with required services and expose Lambda functions through API methods in API Gateway.
+AWS Lambda runs your code on a highly available computing infrastructure.
+It performs the necessary execution and administration of computing resources.
+To enable serverless applications, API Gateway supports streamlined proxy integrations with AWS Lambda and HTTP endpoints.
+
+AWS API GATEWAY USE CASES  :
+--------------------------------
+1. TO CREATE HTTP API's:
+   HTTP APIs enable you to create RESTful APIs with lower latency and lower cost than REST APIs.
+   You can use HTTP APIs to send requests to AWS Lambda functions or to any publicly routable HTTP endpoint.
+   For example, you can create an HTTP API that integrates with a Lambda function on the backend.
+   When a client calls your API, API Gateway sends the request to the Lambda function and returns the function's response to the client.
+
+2. TO CREATE REST API's :
+   An API Gateway REST API is made up of resources and methods.
+   A resource is a logical entity that an app can access through a resource path.
+   A method corresponds to a REST API request that is submitted by the user of your API and the response returned to the user.
+   For example, /incomes could be the path of a resource representing the income of the app user.
+   A resource can have one or more operations that are defined by appropriate HTTP verbs such as GET, POST, PUT, PATCH, and DELETE.
+   A combination of a resource path and an operation identifies a method of the API.
+   For example, a POST /incomes method could add an income earned by the caller, and a GET /expenses method could query the reported expenses incurred by the caller.
+
+3. TO CREATE A WEB SOCKET API :
+   In a WebSocket API, the client and the server can both send messages to each other at any time. Backend servers can easily push data to connected users and devices, avoiding the need to implement complex polling mechanism
+   For example, you could build a serverless application using an API Gateway WebSocket API and AWS Lambda to send and receive messages to and from individual users or groups of users in a chat room.
+   Or you could invoke backend services such as AWS Lambda, Amazon Kinesis, or an HTTP endpoint based on message content.
+   You can use API Gateway WebSocket APIs to build secure, real-time communication applications without having to provision or manage any servers to manage connections or large-scale data exchanges. Targeted use cases include real-time applications such as the following:
+   --> Chat applications
+   --> Real-time dashboards such as stock tickers
+   --> Real-time alerts and notifications
+
+WHO USES API GATEWAYS :
+---------------------------
+There are two kinds of developers who use API Gateway: API developers and app developers.
+-->  An API developer creates and deploys an API to enable the required functionality in API Gateway.
+     The API developer must be an IAM user in the AWS account that owns the API.
+-->  An app developer builds a functioning application to call AWS services by invoking a WebSocket or REST API created by an API developer in API Gateway.
+The app developer is the customer of the API developer.
+The app developer doesn't need to have an AWS account, provided that the API either doesn't require IAM permissions or supports authorization of users through third-party federated identity providers supported by Amazon Cognito user pool identity federation.
+Such identity providers include Amazon, Amazon Cognito user pools, Facebook, and Google.
+
+An API developer works with the API Gateway service component for API management, named apigateway, to create, configure, and deploy an API.
+As an API developer, you can create and manage an API by using the API Gateway console, described in Getting started with API Gateway, or by calling the API references.
+There are several ways to call this API. They include using the AWS Command Line Interface (AWS CLI), or by using an AWS SDK.
+In addition, you can enable API creation with AWS CloudFormation templates or (in the case of REST APIs and HTTP APIs) Working with API Gateway extensions to OpenAPI.
+
+
+
+===============================================================================================
+===============================================================================================
+SOFTWARE DEVELOPMENT KIT - SDK :
+===============================================================================================
+===============================================================================================
+An SDK or devkit functions in much the same way, providing a set of tools, libraries, relevant documentation, code samples, processes, and or guides that allow developers to create software applications on a specific platform.
+If an API is a set of building blocks that allow for the creation of something, an SDK is a full-fledged workshop, facilitating creation far outside the scopes of what an API would allow.
+SDKs are the origination sources for almost every program a modern user would interact with.
+From the web browser you work on all the way to the video games you play at the end of the day, many were first built with an SDK, even before an API was used to communicate with other applications.
+
+An SDK is a kit that includes instructions that allow developers to create systems and develop applications.
+APIs, on the other hand, are purpose-built for an express use — to allow communication between applications.
+It should be no surprise then that, when an SDK is used to create an application that has to communicate to other applications, it includes an API for this functionality.
+Inversely, an API is used for communication, but cannot be used solely to create a brand new application.
+
+
+
+===============================================================================================
+===============================================================================================
+ENDPOINTS : [ VPC ENDPOINT - ENDPOINT SERVICE - PRIVATE LINK ]
+==============================================================================================
+===============================================================================================
+We will first learn about ENDPOINT and then move on to VPC ENDPOINT.
+To connect programmatically to an AWS service, you use an endpoint. An endpoint is the URL of the entry point for an AWS web service.
+The AWS SDKs and the AWS Command Line Interface (AWS CLI) automatically use the default endpoint for each service in an AWS Region.
+But you can specify an alternate endpoint for your API requests.
+
+If a service supports Regions, the resources in each Region are independent of similar resources in other Regions.
+For example, you can create an Amazon EC2 instance or an Amazon SQS queue in one Region.
+When you do, the instance or queue is independent of instances or queues in all other Regions.
+
+    REGIONAL ENDPOINTS :
+    -----------------------
+      Most Amazon Web Services offer a Regional endpoint that you can use to make your requests.
+      The general syntax of a Regional endpoint is as follows.
+      --> protocol://service-code.region-code.amazonaws.com
+      For example,
+      --> https://dynamodb.us-west-2.amazonaws.com is the endpoint for the Amazon DynamoDB service in the US West (Oregon) Region.
+
+      Region Name 	                           Code
+      ---------------------------------------------------
+      US East (Ohio) 	                         us-east-2
+      US East (N. Virginia) 	                 us-east-1
+      US West (N. California) 	               us-west-1
+      US West (Oregon) 	                       us-west-2
+      Africa (Cape Town)                       af-south-1
+      Asia Pacific (Hong Kong) 	               ap-east-1
+      Asia Pacific (Mumbai) 	                 ap-south-1
+      Asia Pacific (Osaka-Local) 	             ap-northeast-3
+      Asia Pacific (Seoul) 	                   ap-northeast-2
+      Asia Pacific (Singapore)                 ap-southeast-1
+      Asia Pacific (Sydney)                    ap-southeast-2
+      Asia Pacific (Tokyo) 	                   ap-northeast-1
+      Canada (Central) 	                       ca-central-1
+      China (Beijing)                          cn-north-1
+      China (Ningxia) 	                       cn-northwest-1
+      Europe (Frankfurt) 	                     eu-central-1
+      Europe (Ireland) 	                       eu-west-1
+      Europe (London) 	                       eu-west-2
+      Europe (Milan) 	                         eu-south-1
+      Europe (Paris) 	                         eu-west-3
+      Europe (Stockholm)                       eu-north-1
+      Middle East (Bahrain) 	                 me-south-1
+      South America (São Paulo)                sa-east-1
+
+      Some services, such as IAM, do not support Regions. The endpoints for these services do not include a Region.
+      Other services, such as Amazon EC2, support Regions but let you specify an endpoint that does not include a Region, such as https://ec2.amazonaws.com.
+      When you use an endpoint with no Region, AWS routes the Amazon EC2 request to US East (N. Virginia) (us-east-1), which is the default Region for API calls.
+
+    SERVICE ENDPOINTS :
+    ---------------------
+      You can view the AWS service endpoints using the following options:
+        --> Open Service endpoints and quotas, search for the service name, and click the link to open the page for that service.
+            To view the supported endpoints for all AWS services in the documentation without switching pages, view the information in the Service Endpoints and Quotas page in the PDF instead.
+        --> To programmatically check for service availability using the SDK for Java, see Checking for Service Availability in an AWS Region in the AWS SDK for Java Developer Guide.
+        --> To programmatically view Region and service information using Systems Manager, see Calling AWS Service, Region, and Endpoint Public Parameters in the AWS Systems Manager User Guide. For information about how to use public parameters, see Query for AWS Regions, Endpoints, and More Using AWS Systems Manager Parameter Store
+        --> To see the supported AWS services in each Region (without endpoints), see the Region Table
+
+
+ENDPOINT CONCEPTS :
+----------------------
+VPC ENDPOINT     : The entry point in your VPC that enables you to connect privately to a service.
+                   The following are the different types of VPC endpoints. You create the type of VPC endpoint required by the supported service.
+                   --> Gateway endpoint
+                   --> Interface endpoint
+                   --> Gateway Load Balancer endpoint
+
+ENDPOINT SERVICE : Your own application or service in your VPC.
+                   Other AWS principals can create an endpoint from their VPC to your endpoint service.
+
+PRIVATE LINK     : A technology that provides private connectivity between VPCs and services.
+
+VPC ENDPOINT :
+-----------------
+A VPC endpoint enables private connections between your VPC and supported AWS services and VPC endpoint services powered by AWS PrivateLink.
+AWS PrivateLink is a technology that enables you to privately access services by using private IP addresses.
+Traffic between your VPC and the other service does not leave the Amazon network.
+A VPC endpoint does not require an internet gateway, virtual private gateway, NAT device, VPN connection, or AWS Direct Connect connection.
+Instances in your VPC do not require public IP addresses to communicate with resources in the service.
+VPC endpoints are virtual devices. They are horizontally scaled, redundant, and highly available VPC components.
+They allow communication between instances in your VPC and services without imposing availability risks.
+
+     Interface endpoints : https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html
+     -----------------------
+     An interface endpoint is an elastic network interface with a private IP address from the IP address range of your subnet.
+     It serves as an entry point for traffic destined to a supported AWS service or a VPC endpoint service.
+     Interface endpoints are powered by AWS PrivateLink.
+     These services include some AWS services, services hosted by other AWS customers and Partners in their own VPCs (referred to as endpoint services), and supported AWS Marketplace Partner services.
+     The owner of the service is the service provider, and you, as the principal creating the interface endpoint, are the service consumer.
+
+
+     Gateway Load Balancer endpoints : https://docs.aws.amazon.com/vpc/latest/userguide/vpce-gateway-load-balancer.html
+     ---------------------------------
+     A Gateway Load Balancer endpoint is an elastic network interface with a private IP address from the IP address range of your subnet.
+     Gateway Load Balancer endpoints are powered by AWS PrivateLink.
+     This type of endpoint serves as an entry point to intercept traffic and route it to a service that you've configured using Gateway Load Balancers,
+     for example, for security inspection. You specify a Gateway Load Balancer endpoint as a target for a route in a route table.
+     Gateway Load Balancer endpoints are supported for endpoint services that are configured for Gateway Load Balancers only.
+
+     Gateway endpoints : https://docs.aws.amazon.com/vpc/latest/userguide/vpce-gateway.html
+     ------------------------
+     A gateway endpoint is for supported AWS services only.
+     You specify a gateway endpoint as a route table target for traffic destined to the following AWS services:
+     --> Amazon S3
+     --> DynamoDB
+
+ENDPOINT SERVICE : https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html
+-----------------------
+You can create your own application in your VPC and configure it as an AWS PrivateLink-powered service (referred to as an endpoint service).
+Other AWS principals can create a connection from their VPC to your endpoint service using an interface VPC endpoint or a Gateway Load Balancer endpoint, depending on the type of service.
+You are the service provider, and the AWS principals that create connections to your service are service consumers

@@ -20,18 +20,6 @@ Both MAC Address and IP Address are used to uniquely identify a machine on the i
     10.1.2.3 , ::/0
 
 
-OSI MODEL                   TCP/IP                  PROTOCOL
----------------------------------------------------------------
-Application                 Application             HTTP
-Presentation                    "                   MIME
-Session                         "                   SSL
-Transport                   Transport               TCP / UDP
-Network                     Internet                IP / ICMP
-Data Link                   Network Access          PPP / HDLC
-Physical                        "                   ETHERNET
----------------------------------------------------------------
-** CHECK REFERENE PIC - OSI Model
-
 STATEFUL [ FTP / TELNET ] VS STATELESS [ HTTP / DNS ] :
 ----------------------------------------------------------
 The difference between stateful vs. stateless is essentially whether or not an application or process stores data over time.

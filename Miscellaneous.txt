@@ -194,9 +194,402 @@ It has webpages in its hard disk.
 A web server contains all the data while a web browser helps displaying that data .
 They use http or https to communicate among themselves.
 
-COMMUNICATION PROTOCOLS : (TCP/IP , UDP etc; )
-=================================================
+==================================================================================================
+COMMUNICATION PROTOCOLS : // Check reference pics OSI_*
+DETAILED  : https://www.oreilly.com/library/view/packet-guide-to/9781449308094/ch01.html
+SIMPLE    : https://beginnersbook.com/2019/04/osi-model-in-computer-network/
+IMPORTANT : https://medium.com/jspoint/a-brief-overview-of-the-tcp-ip-model-ssl-tls-https-protocols-and-ssl-certificates-d5a6269fe29e
+==================================================================================================
+
+NOTE  : We have two Models : OSI ( Open System interconnection model ) & TCP-IP ( Transmission Control Protocol - Internet Protocol )
+
+        OSI MODEL                  TCP/IP MODEL                              PROTOCOL
+  --------------------------------------------------------------------------------------------------------------------------
+        Application    |    |      Application                               HTTP - FTP - TELENET - EMAIL - PRINTING
+        Presentation   V    ^          "                                     MIME - SSL - TLS
+        Session        |    |          "                                     RP / RTCP
+        Transport      V    ^      Transport                                 TCP / UDP / SCTP /
+        Network        |    |      Internet                                  IP / ICMP / BGP / RARP / ARP
+        Data Link      V    ^      Link / Network Interface                  PPP / HDLC
+        Physical       |    |      Physical / Network Interface              ETHERNET
+  ---------------------------------------------------------------------------------------------------------------------------
+
+        ** CHECK REFERENE PIC - OSI Model and OSI_*
+
+        ** The sender sends data to Application layer . This adds some header to the data and sends the package down .
+           The data + Headers from the a layer is sent down to the below layer in the sender side .
+           The below layer then adds extra header and sends the data to the layer still below it .
+           This happens until the Physical layer . The physical layer then converts data into signals and sends the data to receiver.
+           The Physical layer in receiver receives the signals and sends the data to above layer.
+           The layers than deletes  the headers added in the same layer in the sender side and sends data to top layer .
+           The top layer then deletes the headers added in the same layer in the sender side and sends the data to layer above it .
+           This happens until data is sent until Application layer again and the receiver interprets the data .
+
+        ** TCP - IP -> Transmission Control Protocol  - Internet Protocol  --> As a MODEL
+           TCP - IP -> Transport layer protocol - Internet layer protocol  --> As a PROTOCOL
+
+OSI MODEL : [ OPEN SYSTEM INTERCONNETION MODEL ]
+===================================================
+
+1. APPLICATION LAYER :
+-------------------------
+PROTOCOL :     SOAP Simple Object Access Protocol - DHCP - DNS - HTTP - HTTPS - NFS - POP3 - SMTP - SNMP - FTP - NTP - IRC - TELNET -
+               SSH - TFTP - IMAP
+
+Application layer is used by computer applications such as google chrome, outlook, FireFox, Skype etc.
+Application layer defines the protocols that are used by computer applications for example:
+HTTP and HTTPS protocols are used by web browsers such as google chrome, FireFox, Safari etc.
+FTP protocol is used for file transfer between two or more computers.
+SMTP protocol is used for emails
+Telnet is used for virtual terminals.
+There are dozens of other protocol that forms the application layer, such as NFS, FMTP, DHCP, SNMP, POP3, IRC, NNTP etc.
+In short you can say that application layer provides the services to computer applications with the help of protocols that are defined in it.
+
+2. PRESENTATION LAYER :
+-------------------------
+PROTOCOL :     TLS Transport Layer Security - AFP Apple Filing Protocol - SSL Secure Socket Layer - FTP - SSH
+
+Presentation layer receives the data from top most layer which is application layer.
+Translation  : The data received from application layer is in form of characters and numbers such as 1234, ERFF etc.
+               The presentation layer converts these characters and numbers into machine understandable format which is known as binary format for example 100111101.
+Encryption   : To protect the sensitivity of data, presentation layer encrypts the data at the sender side before the transmission and the receiver side this data is decrypted by the presentation layer at the receiver side.
+               Secure sockets layer protocol (SSL) is used by the presentation layer for encryption and decryption.
+Compression  : Compress the data to small size so that it can be transferred faster over a network.
+               This compression can be lossy or lossless compression.
+
+3. SESSION LAYER :
+-----------------------
+PROTOCOL     : TCP - UDP
+The main role of session layer is to setup and maintain the connection between different systems.
+Authentication : Before a computer can be connected to a server, the computer has to provide user name and password for the authentication.
+                 The function of authentication and setting up a connection after authentication is performed by session layer.
+Authorization  : Once a connection is established, session layer checks whether the connected computer is authorised to access the data, this function of authorisation checking is also performed by session layer.
+Session        : Session layer also checks that the data which is received from the server in form of data packets belongs to which application for example when you access Facebook profile through your browser, the data transferred from the Facebook server is transferred to your web browser application, thus the session layer helps in session management.
+management
+
+4. TRANSPORT LAYER :
+---------------------
+The main role of transport layer is to check the reliability of data communication.
+Segmentation : Data received from session layer is divided into small data units called segments.
+               Each segment contains the sender and receiver port number along with the sequence number.
+               Port number helps to direct the data segments to the correct application and the sequence number helps to reassemble the data from data segments in correct order.
+Flow control : It controls the flow of data. It checks the capability of the receiver device receiving capability before transmitting data.
+               For example a sender server can send the data at a rate of 200Mbps but a receiving data can only receive data at a rate of 10 Mbps then it controls the flow of data to 10Mbps so that the data doesn’t get lost during transmission.
+Error control: Transport layer also performs error control using Automatic Repeat Request, if a data is lost during transmission, it is send again using automatic repeat request.
+               Transport layer also adds a group of bits called checksum with each segment to check whether the data received at receiver side is not corrupt.
+
+Connection oriented transmission:
+               Connection oriented transmission is done using transmission control protocol (TCP).
+               TCP is considerably slower than UDP because it provides the feedback that the data is received or not, thus a data can be sent again if it is not received.
+Connectionless transmission:
+               Connectionless transmission is done using User Datagram protocol (UDP).
+               UDP is faster than TCP because it doesn’t provide the feedback that the data is actually received at the receiver side or not.
+
+5. NETWORK LAYER :
+--------------------
+The main purpose of network layer is to receive the data segments from transport layer and transfer them from one computer to another computer on different network.
+Logical Addressing : Every computer on a network has a unique IP address.
+                     Network layer assigns the sender and receiver IP address to the data packets before transmitting them so that the data packet reach the correct destination.
+Routing            : It is a method of transferring data packets from source to destination.
+                     It uses the combination of Mask and IP address to transfer the data to correct destination.
+                     Each data packets contains three addition components mask, sender IP, receiver IP.
+                     The Mask determines the computer network to which the data needs to be delivered and then the IP address determines which computer on that particular network needs to receive the data packet.
+Path determination : A computer can be connected to another computer in number of ways.
+                     Network layer determines the optimal path for data transmission so that the data can be transmitted faster to the receiver.
+                     OSPF, BGP, IS-IS protocols are used to determine best possible path for data delivery.
+
+Once the package is stamped with IP protocol, it becomes a network packet that is good enough to be transmitted over the internet.
+This is the last step of the virtual layers (processed by a computer program).
+
+6. DATA LINK LAYER :
+--------------------
+link layer is a physical layer on the device.
+This is a hardware part like the Network Interface Card (NIC) on your device which takes the packet and adds the source and destination MAC addresses to it.
+
+Data link layer receives the data from network layer.
+There are two types of addressing done to the packets transfers from one computer to another computer.
+Logical addressing : Logical addressing is assigning sender and receiver IP addresses to data packets.
+                     This is done at the network layer.
+Physical addressing: Physical addressing is done at data link layer where MAC addresses of sender and receiver are assigned to each data packets.
+
+Data unit in the data link layer is called frame.
+A frame is transferred from one computer to another computer and transmission is done through a transmission media such as wire, cable etc.
+Both sender and receiver computer has NIC that helps in sending and receiving frame.
+These NICs presents at sender and receiver provides a physical link between sender and receiver.
+
+Main functions of data link layer:
+Access the Media     : Allows upper layers of OSI model to use the media using a technique called framing
+Media Access control : How data is placed and received from the media.
+Error Detection      : Tail of the each frame transferred contains certain bits to check whether the data received on the side is corrupted or not.
+
+7. PHYSICAL LAYER :
+-------------------
+Transport layer converts the data into segments,
+Network layer converts the segments into packets and
+Data link layer converts the packets into frames.
+A frame is nothing but a sequence of bits such as 1001011.
+Physical layer converts these binary sequences into signals and transfer it through a transmission media such as cables etc.
+The signals generated by physical layer is based on the transmission media.
+For example an electrical signal is generated if the media is copper cable, light signal if media is optical fibre and radio signal in case of transmission media is air.
+This generated signal is received by the physical layer at the receiver side and converts it into bits.
+
+Digital Transmission : One of the main functions of physical layer is to transfer data in form of signals.
+                       In this guide, we will learn about digital transmission. A data can be either analog or digital.
+                       To transfer the data over a transmission media such as wire, cable etc.
+                       physical layer must need to convert the data to its digital signal.
+
+Digital data to Digital signal conversion:
+                       In this section we will learn how physical layer converts digital data to digital signal.
+                       It uses two techniques to do this conversion: Line coding and block coding.
+
+Line coding : A digital data is in form of binary sequence such as 1000111 (combination of 0s and 1s).
+              Line coding uses three schemes to represent these binary sequences in form of signals that can be transferred.
 
 
-STATEFUL vs STATELESS :
-==================================================
+TCP - IP MODEL : [ TRANSMISSION CONTROL PROTOCOL - INTERNET PROTOCOL ]
+========================================================================
+At this very moment, your browser is using the TCP/IP model to load this webpage from a server. Hence, these together form the INTERNET PROTOCOL SUITE.
+
+1. PHYSICAL AND DATA LINKLAYER :
+------------------------------------
+Physical and Data Link Layers in TCP/IP model does not define any protocols, they support all the standard protocols.
+They are combined known as host-to-network layer. A network in TCP/IP internetwork can be LAN or WAN.
+
+2. NETWORK LAYER :
+------------------------
+In the network layer, the TCP/IP model supports internetworking protocol in short known as IP.
+The IP uses four protocols internally: ARP, RARP, ICMP & IGMP.
+
+Internetworking protocol(IP):
+
+1. It is an unreliable connectionless protocol used by TCP/IP Model.
+2. This protocol is used for data transmission.
+3. This protocol doesn’t do error checking or tracking of data, thus we cannot be sure that the data is actually reached its destination.
+   This is why it is also known as best effort delivery service which means this protocol tries it best to send the data to its destination but doesn’t take an guarantee.
+4. IP protocol transmits the data in form of small packets known as datagrams.
+   Each of these datagrams are transmitted separately, thus they can take different routes and sometime duplicate datagrams can be reached to destination, also they are reached in no particular order at the destination.
+
+Four protocol this Internetworking protocol(IP) uses:
+      Address Resolution Protocol (ARP)
+        ARP finds the physical address by using the IP address.
+        In a network, each device is known as physical address usually imprinted on Network interface card (NIC).
+        ARP protocol is used to find the physical address of a device whose internet address (IP address) is known.
+
+      Reverse Address Resolution Protocol (RARP)
+        RARP protocol helps to find the internet address of a device whose physical address is known.
+
+      Internet Control Message Protocol (ICMP)
+        IP in network layer sends data in form of small packets known as datagrams. ICMP protocol sends the datagrams problems back to sender. It is used for query and error reporting messages.
+
+      Internet Group Message Protocol (IGMP)
+        This protocol is used for simultaneous transmission of a message to a group of recipients.
+
+3. TRANSPORT LAYER :
+---------------------
+Transport layer in TCP/Model can be represented by three protocols:
+Transmission control protocol (TCP), User data gram protocol (UDP) and Stream Control Transmission Protocol (SCTP).
+These three protocols in transport layer are responsible for delivery of messages from one process to another.
+The SCTP protocol was later introduced to meet the needs of newer applications.
+
+  User Datagram protocol (UDP)
+    1. UDP is a process to process protocol used for data transmission.
+    2. It takes the data from upper layer of TCP/IP Model and adds following information to the data:
+        a) Port Address – Source port address of 16 bits and destination port address of 16 bits added to the data so that it reaches to correct destination and displays the correct source of data.
+        b) checksum error control – 16 bits of checksum data is added to the data received from upper layer, this is used for error control.
+        c) length of data – Length defines the total bytes of data in datagram.
+    3. Although this protocol finds the error in the transmission of data, it doesn’t specify the error which makes it hard to identify the actual error in transmission.
+
+  Transmission control protocol (TCP)
+    1. Unlike UDP which is a connectionless protocol, the TCP is a connection oriented protocol.
+    2. A connection must be made between sender and receiver before the transmission of data.
+    3. TCP protocol divides the data in small units called segments. Each segment contains the sequence number which makes it possible to rearrange the segments in correct order at the receiver side to make the complete data.
+    4. It also adds acknowledgement number to the segments to verify that the data is actually reached its destination or not.
+    5. Unlike UDP which is unable to specify the exact error in transmission, this protocol does error control and specifies the exact error which makes TCP a reliable protocol.
+
+  Stream Control Transmission Protocol (SCTP)
+    1. This protocol combines the best features of TCP and UDP protocols.
+    2. It was discovered later to support newer applications such as voice data transmission over the internet.
+
+4. APPLICATION LAYER :
+----------------------------
+  1. This is the top most layer of TCP/IP model.
+  2. It is used for interaction between user and application.
+  3. There are several protocols used by the application layer for user interaction such as: HTTP, SNMP, SMTP, DNS, TELNET, FTP etc.
+     HTTP: HTTP stands for Hypertext transfer protocol, it allows the user to interact with world wide web through the browser application. HTTP can be used to transfer various types of data such as plain text, audio, video etc.
+     FTP: FTP stands for File Transfer Protocol. This protocol is used for transmitting files from one system to another system.
+     TELNET: TELNET is a client-server protocol. It is a reliable connection oriented protocol. This protocol is used on internet or on LAN to provide a bidirectional (both ways) text based communication through a virtual terminal connection.
+     DNS: DNS stands for Domain Name System. Each computer on a network has different IP address, a computer is known by its IP address. DNS provides a mapping to a name to the IP Address so a name can be used to identify a system on network rather than IP address itself.
+     SNMP: SNMP stands for Simple Network Management Protocol. It managers the devices connected to the internet using TCP/IP protocol.
+     SMTP: SMTP stands for Simple mail transfer protocol. It is used for email services, using this protocol a email containing data can be sent to another email address.
+
+==============================================================================================================================================================================================================================================================================================================
+==============================================================================================================================================================================================================================================================================================================
+TLS - SSL / HTTP : Refer pics HTTP_*
+FROM :::: https://medium.com/jspoint/a-brief-overview-of-the-tcp-ip-model-ssl-tls-https-protocols-and-ssl-certificates-d5a6269fe29e
+Open the page to understand better with pictures.
+==============================================================================================================================================================================================================================================================================================================
+==============================================================================================================================================================================================================================================================================================================
+
+In the above communication model (left side), the application layer gets the data from a source (like internal storage or RAM) and wraps some headers of a particular protocol like HTTP.
+This creates a data package of the HTTP protocol and can be read by an application that can understand it like a web browser.
+This HTTP package is sent to the transport layer. The transport layer wraps the package with TCP protocol headers along with the source and destination ports.
+The source port is the port of the application transmitted the data (like a web browser) and destination port is where the application running on the receiving side will receive it.
+This TCP package is received by the internet layer which wraps some IP protocol headers with source and destination IP addresses.
+source IP address is the IP address of the sender device while the destination address is the IP address of the receiver device.
+Once the package is stamped with IP protocol, it becomes a network packet that is good enough to be transmitted over the internet. This is the last step of the virtual layers (processed by a computer program).
+
+The last link layer is a physical layer on the device. This is a hardware part like the Network Interface Card (NIC) on your device which takes the packet and adds the source and destination MAC addresses to it.
+Once the packet is labeled with source and destination MAC addresses with some additional headers of a data transmission protocol (like Ethernet), it can be sent to the internet communication device like a WiFi router or Satellite Dish that will take care of the transmission over the internet.
+Once the packet is received at the receiving end (right side of the diagram above), it will be peeled like an onion until the original data (the HTML document) is recovered.
+The data is extracted successfully without any misinterpretation, one layer at a time, by looking at the protocol of that layer. Once the original data is extracted, it can be consumed by the correct application.
+
+HTTP PROTOCOL :
+------------------
+The HTTP protocol is based on TCP/IP or UDP/IP protocol. Before any data is sent to the receiver, a communication channel should be opened between the sender and the receiver. This is done using TCP/IP alone without any application layer,
+The destination port of the TCP layer is derived from the HTTP protocol. The internet agrees on port number 80 as the default port of HTTP protocol.
+
+First, the client sends an empty packet (without any application data) to the sender with the TCP protocol SYN (synchronize) flag set to 1. When this packet is received by the server, it knows that a client is trying to establish a connection (session).
+The server sends back an empty packet with SYN and ACK (acknowledge) flags set to 1. When the client receives this packet, it knows that the server has responded and willing to accept the request.
+Then the client sends an empty packet with ACK flag set to 1. Once the server receives this packet, a TCP communication channel is opened.
+
+                  CLIENT to SERVER ---> SYN = 1                --> Request for a connection
+                  SERVER to CLIENT ---> SYN = 1 && ACK = 1     --> Willing to Connect
+                  CLIENT to SERVER ---> ACK = 1                --> Session established
+                  --> This is called the TCP three-way handshake. // pic : HTTP_1
+                  --> The above handshake is done without any application data / user data .
+                  --> Once the handshake is done , the real communication is started with application data / user data
+
+Once the server has sent all the data back, could be in one packet or multiple packets, the client has to acknowledge the receipts by sending empty packets that have ACK flags set to 1 and the sequence numbers of the packets it is sending acknowledge for.
+Once the server has no more data to send, it will send an empty packet with FIN (finished) flag set to 1 to indicate the finished message.
+The client can acknowledge this packet to close the connection as described in // pic : HTTP_2
+
+In HTTP PERSISTANT CONNECTION  (keep-alive), the same TCP connection will be used to request for other resources. This is more efficient because we don’t have to go through the same TCP three-way handshake again and again.
+Many times, the client and server communication is not smooth. There could be a loss of packets and packets may arrive in the wrong order, hence such packets need to be retransmitted again.
+The UDP protocol differs in this aspect. In the UDP protocol, the receiver does not have to send the receipt packets and packets loss or packets order is not dealt with any seriousness.
+                 --> UDP - Lost packets are not transmitted back unlike TCP.
+
+HTTP is an insecure protocol since data in an HTTP protocol is encoded in plain text format.
+Any man-in-the-middle can listen to TCP communication and read your personal data transmitted over the web.
+This is why search engines like Google assign lower indexes in the search result to the insecure websites.
+
+SSL - TLS PROTOCOL :
+----------------------
+// TLS is now both SSL and TLS . It is the latest trend. SSL + more security = TLS .
+// HTTPS = HTTP + TLS
+
+HTTPS stands for Hyper Text Transfer Protocol Secure and but it is misleading in some ways.
+HTTPS protocol can not alone do the encryption of data, in fact, it depends on the SSL or TLS protocol layer.
+Both the HTTP protocol layer and the TLS protocol layer are part of the application layer.
+The role of the TLS layer is to establish a secure connection with the server using a TLS handshake (after the TCP handshake) and encrypt the HTTP data using some encryption algorithms negotiated with the server.
+The final encryption data becomes the application data of the network packet the server is going to receive.
+
+Since the application data is encrypted, any man-in-the-middle might obtain the data but won’t be able to make sense of it. This prevents a man-in-the-middle attack.
+When HTTP protocol is used in conjugation with TLS protocol, it is called HTTPS protocol. To invoke a browser or a program to use TLS for the communication, we usually use https:// protocol prefix in the URL.
+
+  ASSYMETRIC KEY ALGORITHM : RSA (Rivest–Shamir–Adleman) -- (Diffie-Hellman)
+  ------------------------------
+  In Asymmetric key algorithm, we have two keys to do encryption and decryption.
+  The public key is used to encrypt the data and made it available to the public. Only the secret key which is kept secret can decrypt it.
+  The asymmetric key encryption is called the public-key cryptography.
+  The most popular asymmetric key algorithm is RSA (Rivest–Shamir–Adleman) because it extensively used on the web for key exchange and digital signature validation.
+  But browsers are now adopting a more secure and efficient Diffie-Hellman key exchange algorithm for key exchange.
+  RSA private key can also be used to encrypt data and public key to decrypt data encrypted by the private key.
+  This used for generating and verifying digital signatures of encrypted data and SSL certificates.
+
+  Asymmetric key algorithms are generally slower and CPU intensive (why?). Bigger the length of the key or the data, longer it will take to encrypt or decrypt the data.
+  Hence public key cryptographic is not used for bulk data encryption.
+  Instead, we use symmetric key cryptography to encrypt or decrypt large amounts of data which is much faster and efficient and the asymmetric key cryptography is just a means to transfer the shared symmetric key.
+
+  SYMETRIC KEY ALGORITHM : AES (Advanced Encryption Standard)
+  -------------------------
+  In the symmetric key algorithm, the same key is used to encrypt and decrypt the data. This key is also called a shared key. This is also a secure algorithm but you can not send this key to the public.
+  Symmetric key cryptography is generally faster than public-key cryptography (why?) and can be used for bulk data encryption. Hence it is also called block cipher or block cipher.
+  The symmetric key algorithm is mainly used to open an encryption channel between two trusted parties.
+  Only these two parties will ever know about the data being shared between them since nobody else on the network has access to the shared symmetric key.
+  One of the most popular symmetric-key algorithms on the web is AES (Advanced Encryption Standard).
+
+SSL PROTOCOL : (secure sockets layer)
+-------------------------------------------
+The SSL protocol was first designed by the Netscape browser team and SSL 2.0 was publicly released in 1995.
+It was soon replaced by the SSL 3.0 that came with security improvements but it was deprecated by IETF in 2015.
+As of now, SSL protocol is broken (except some variations) and nobody uses it.
+The IETF launched the first version of the TLS protocol in 1999 which is now the standard for all encrypted communications on the web.
+When somebody talks about the SSL, they are probably talking about TLS. Even the SSL certificates are in fact the TLS certificates. SSL v3.1 or SSL v4 are just aliases for the TLS 1.0+ versions.
+
+TLS PROTOCOL : (transport security layer)
+----------------------------------------------
+The TLS is an improvement over the SSL protocol. TLS 1.0 was launched in 1999 and it has gone through some iterations.
+The current most supported version of TLS is TLS 1.2.
+TLS 1.3 was launched in 2018. It is a major overhaul of TLS 1.2 which improves efficiency and data security.
+This version reduces the number of handshake requests to establish a secure TCP connection.
+TLS 1.3 only supports the modified version of the Diffie-Hellman public-key cryptography algorithm to share a symmetric key between a client and the server.
+It has also dropped the support of the RSA algorithm for the key exchange.
+
+HTTPS HANDSHAKE WITH TLS 1.2 :
+--------------------------------
+When we send an HTTP request with https:// protocol prefix, first thing first, a TCP connection is established using a three-way handshake we saw before.
+This is indicated by the blue lines in the diagram below. // pic HTTP_3
+
+After a TCP connection is established, the TLS handshake begins. First, the client sends an empty packet but with a TLS 1.2 protocol layer.
+This layer contains some metadata and a Client Hello message.
+In the Client Hello handshake message, we are attaching some list of cipher suites our application (like a browser) currently supports.
+When a Client Hello handshake message is being sent, the application commencing the communication may first try with the highest TLS protocol version like TLS 1.3 and downgrade to a suitable version that server supports.
+If the application does not support the version that the server is asking, it may drop the TCP connection with a warning.
+
+Along with a list of cipher suites, we are sending a server name indication (SNI) message that indicates the hostname (domain name) of the service we are trying to connect with.
+This is used by the server to send back an appropriate SSL certificate that matches this hostname.
+When the server receives the Client Hello packet, it responds with an empty packet that contains the Server Hello message. This packet contains the cipher suite the server has chosen from the list of choices the client provided.
+It then sends a packet that contains the SSL certificate for the domain name we asked for using SNI value. At this point, the server has nothing more to send, so it sends the packet with Server Hello Done message.
+One the client receives the SSL certificate, our application can validate it. This certificate also contains a public key of the cipher suite chosen by the server.
+
+A cipher suite contains a list of cryptographic algorithms and a hash function to encrypt and validate data being transmitted between a client and a server. A simple example of a valid cipher suite would be as follows.
+  --> TLS_RSA_WITH_AES_256_CBC_SHA
+
+If the server chooses the above cipher suite, it means that the server will use the RSA algorithm to encrypt the shared secret key of bulk data encryption.
+The bulk encryption algorithm used by both the client and the server is AES 256 bit (in CBC mode).
+The last part of the cipher suite is the one-way hashing function to create digital signatures. We will talk more about the digital signature later.
+Once the client and server agree on a cipher suite, encrypted communication can be started. So far all our packets were not encrypted as they did not contain any application data and had no prior knowledge of encryption.
+The client now generates a shared secret key for bulk data encryption. As stated in the cipher suite, it will create a 256-bit key of the AES symmetric-key algorithm. This key needs to be shared with the server.
+
+Using the RSA public key of the server obtained from the SSL certificate, the client will encrypt the shared key and send it to the server with the message Client Key Exchange.
+This packet also contains the Change Cipher Spec message to indicate that the client is using the agreed cipher spec for data encryption.
+In the same packet, the client sends a Finished handshake message to indicate that the TLS handshake from the client’s side has been completed. This message is encrypted using the shared symmetric key (AES).
+Once the server receives this packet, it will receive the shared symmetric-key by decrypting the data using its private key. Since nobody else has access to the private key, this shared secret key can not be read on the network.
+By looking at the Change Cipher Spec message, the server will also change its data read/write mode to the agreed cipher spec. Then it will decrypt the handshake message using the shared secret key it just extracted.
+Since the handshake message is Finished, it will send a packet back to the client that contains a Change Cipher Spec message to indicate that the server is using the agreed cipher spec for data encryption and a Finished message encrypted with the shared key.
+
+Once the client receives this packet, TLS 1.2 handshake is complete and application data can be transferred over the TCP channel by encrypting/decrypting it using a selected bulk data encryption algorithm.
+A man-in-the-middle can tamper the handshake but since the shared key has been exchanged with RSA cryptography, handshake it totally secure.
+However, if the encrypted Finished messages have been tampered with, the TCP connection is dropped and no further communication is possible over the same channel.
+
+HTTPS HANDSHAKE WITH TLS 1.3 : (Security + Shorter Handshake than TLS 1.2) // Pic : HTTP_4
+--------------------------------
+TLS 1.3 comes with a lot of improvements. It has dropped support for RSA encryption for key exchange. If the private key of the server is compromised, anybody who has access to this private key will be able to decrypt all messages transmitted between the client and the server.
+
+  SECURITY : ECDHE (Elliptical Curve Diffie Halfman Ephemeral)
+  -------------
+  TLS has made the ECDHE key exchange algorithm mandatory for TLS 1.3 protocol. It is basically a Diffie-Hellman (DH) public key algorithm with Elliptic-curve cryptography. Together they form ECDHE cipher which is much secure.
+  The way ECDHE works is by keeping a randomly generated private key at both the client’s and server’s side. Using the DH algorithm private parameters, DH algorithm public parameters and the elliptic-curve public parameters, the client generates a public key that will be shared with the server along with all the public parameters.
+  Using this public key and parameters of the client along with its own DH algorithm private parameters, the server comes up with its own public key and shares it with the client. The server generates a shared secret key from these results.
+  Using this public key of the server and previous parameters, the client comes with a shared secret key as well. The fancy math behind the DH algorithm allows both client and server to generate the same shared secret key. This shared key is used for bulk data encryption.
+
+Similar to TLS 1.2, a raw secret key won’t be generated at the client and the server ends. Instead, a pre-master secret is generated to compute the final session key that will be used for bulk data encryption.
+The E in ECDHE stands for ephemeral which means the DH parameters generated by the client and the server using the DH algorithm are short-lived.
+Unless a TLS session is being reused, for every new TLS session, new parameters are chosen and new session keys are generated.
+If the private parameters, pre-master secret or session keys are compromised, an attacker will be able to extract data for a single TLS session only.
+Since the SSL private and public keys are not involved in this process, they are not very useful to extract the data being transmitted over a TLS 1.3 channel.
+This empowers TLS 1.3 communication with perfect forward secrecy (PFS).
+
+  SHORTER HANDSHAKE :
+  ---------------------
+  Not only the perfect forward secrecy is the benefit of using TLS 1.3, but TLS 1.3 makes the TLS handshake very short.
+  Like TLS 1.2, the client sends the Client Hello message but in this packet, it also sends the public parameters that will be ultimately used for generating the shared secret key
+  The client also sends the list of supported cipher suites in the same packet and the server will choose a suitable ECDHE algorithm to use.
+
+      --> TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+
+If the server chooses the above algorithm, ECDHE with RSA is used for the key exchange.
+RSA encryption is only used to digitally sign (basically encrypt with the SSL private key) the public key (of the key exchange process) sent by the server so that the client can verify if it is actually being sent by the server.
+When the server responds back with a Server Hello message, it sends the digitally signed public key (of the key exchange process), SSL certificate, Change Cipher Spec message and encrypted Finished message. At this point, the TLS 1.3 handshake from the server’s side is completed.
+One the client receives the digitally signed public key from the server, it will generate the shared secret key and respond back to the client with a Change Cipher Spec and encrypted application data.
+This is the end of the TLS 1.3 handshake from the client’s side.
