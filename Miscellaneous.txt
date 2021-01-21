@@ -439,7 +439,7 @@ source IP address is the IP address of the sender device while the destination a
 Once the package is stamped with IP protocol, it becomes a network packet that is good enough to be transmitted over the internet. This is the last step of the virtual layers (processed by a computer program).
 
 The last link layer is a physical layer on the device. This is a hardware part like the Network Interface Card (NIC) on your device which takes the packet and adds the source and destination MAC addresses to it.
-Once the packet is labeled with source and destination MAC addresses with some additional headers of a data transmission protocol (like Ethernet), it can be sent to the internet communication device like a WiFi router or Satellite Dish that will take care of the transmission over the internet.
+Once the packet is labelled with source and destination MAC addresses with some additional headers of a data transmission protocol (like Ethernet), it can be sent to the internet communication device like a WiFi router or Satellite Dish that will take care of the transmission over the internet.
 Once the packet is received at the receiving end (right side of the diagram above), it will be peeled like an onion until the original data (the HTML document) is recovered.
 The data is extracted successfully without any misinterpretation, one layer at a time, by looking at the protocol of that layer. Once the original data is extracted, it can be consumed by the correct application.
 
@@ -525,7 +525,7 @@ This version reduces the number of handshake requests to establish a secure TCP 
 TLS 1.3 only supports the modified version of the Diffie-Hellman public-key cryptography algorithm to share a symmetric key between a client and the server.
 It has also dropped the support of the RSA algorithm for the key exchange.
 
-HTTPS HANDSHAKE WITH TLS 1.2 :
+HTTPS HANDSHAKE WITH TLS 1.2 :  --> [ TCP HANDSHAKE + TLS HANDSHAKE ]
 --------------------------------
 When we send an HTTP request with https:// protocol prefix, first thing first, a TCP connection is established using a three-way handshake we saw before.
 This is indicated by the blue lines in the diagram below. // pic HTTP_3

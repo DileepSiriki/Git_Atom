@@ -1,0 +1,45 @@
+============================================================================================================
+
+AWS CERTIFICATIONS : --> [ view the user guide AWS_Certifications.pdf ]
+----------------------
+
+There are 4 levels of proficiency in AWS :
+  --> FOUNDATIONAL
+  --> ASSOCIATE
+  --> PROFESSIONAL
+  --> SPECIALITY
+
+There are 5 roles in AWS :
+  --> CLOUD PRACTIONER
+  --> SOLUTIONS ARCHITECT
+  --> SYSOPS ADMINISTRATOR
+  --> DEVELOPER
+  --> DEVOPS ENGINNER
+
+LEVELS & ROLES MAPPING :
+-------------------------------------------------------------------------------------------------------------------------------------
+                                    FOUNDATIONAL                ASSOCIATE             PROFESSIONAL           SPECIALITY**
+-------------------------------------------------------------------------------------------------------------------------------------
+  --> CLOUD PRACTIONER                  Yes                         No                    No                      No
+  --> SOLUTIONS ARCHITECT               No                          Yes                   Yes                     No
+  --> SYSOPS ADMINISTRATOR              No                          Yes                   No                      No
+  --> DEVELOPER                         No                          Yes                   No                      No
+  --> DEVOPS ENGINNER                   No                          No                    Yes                     No
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+**SPECIALITY --> Advanced Networking - Security - Machine Learning - Alexa Skill Builder - Data Analytics - Database
+                 The above speciality certifications can be taken based on your experience .
+
+
+============================================================================================================
+
+GUIDE TO PASS CERTIFICATIONS :
+----------------------------------
+1. Study the chapters AWS_CORE_SERVICES & AWS_CLOUD_INTRO thoroughly.
+2. Now be done with the remaining chapters. These have the higher weightage to the ones that are not documented separately.
+3. Parallelly view the reference pictures along with the chapter .
+4. Go through the AWS_Overview.pdf & AWS_Vpc.pdf & AWS_Certifications.pdf
+5. Study all the FAQ's available in https://aws.amazon.com/faqs/
+6. Now try to answer the dumps made available in this folder.
+7. Try to find new dumps and upload the same .
