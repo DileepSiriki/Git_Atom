@@ -4,6 +4,10 @@ AMAZON SIMPLE STORAGE SERVICE :
 
 #### S3 does not require region selection. --> S3 GLOBAL by default
 #### But BUCKETS are region specific. Select the closest region available for faster access.
+Cheaper: lifecycle policies, reduced redundancy, IA, Glacier
+Resilient: versioning, s3 replication, regional replication
+Performant: CloudFront (for web), regional S3 endpoints, hashing key names
+Secure: VPC endpoints, encryption at rest
 
 Amazon Simple Storage Service (Amazon S3) is storage for the internet.
 You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web.
@@ -281,7 +285,35 @@ First byte latency 	       milliseconds         	milliseconds           	millise
 
 Storage Type &                 YES                   YES                       YES                   YES                    YES                   YES
 Life Cycle Transition
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+STORAGE PRICES :
+-------------------
+S3 Standard - General purpose storage for any type of data, typically used for frequently accessed data	 :
+First 50 TB / Month	                                                              $0.023 per GB
+Next 450 TB / Month                                                             	$0.022 per GB
+Over 500 TB / Month	                                                              $0.021 per GB
+
+S3 Intelligent - Tiering * - Automatic cost savings for data with unknown or changing access patterns	:
+Frequent Access Tier, First 50 TB / Month	                                        $0.023 per GB
+Frequent Access Tier, Next 450 TB / Month	                                        $0.022 per GB
+Frequent Access Tier, Over 500 TB / Month	                                        $0.021 per GB
+Infrequent Access Tier, All Storage / Month	                                      $0.0125 per GB
+Archive Access Tier, All Storage / Month	                                        $0.004 per GB
+Deep Archive Access Tier, All Storage / Month	                                    $0.00099 per GB
+Monitoring and Automation, All Storage / Month	                                  $0.0025 per 1,000 objects
+
+S3 Standard - Infrequent Access * - For long lived but infrequently accessed data that needs millisecond access	:
+All Storage / Month	                                                              $0.0125 per GB
+
+S3 One Zone - Infrequent Access * - For re-createable infrequently accessed data that needs millisecond access	:
+All Storage / Month                                                             	$0.01 per GB
+
+S3 Glacier ** - For long-term backups and archives with retrieval option from 1 minute to 12 hours	:
+All Storage / Month                                                             	$0.004 per GB
+
+S3 Glacier Deep Archive ** - For long-term data archiving that is accessed once or twice in a year and can be restored within 12 hours :
+All Storage / Month	                                                              $0.00099 per GB
 
 
 
