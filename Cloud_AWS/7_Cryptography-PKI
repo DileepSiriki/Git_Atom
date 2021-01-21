@@ -313,7 +313,7 @@ You cannot view, use, track, or audit them. You are not charged a monthly fee or
 ##### AWS KMS also provides SYMMETRIC DATA KEYS  and ASYMETRIC DATA KEY PAIRS that are designed to be used for client-side cryptography outside of AWS KMS.
 
 
-SYMMETRIC DATA KEYS : View Reference pics.
+SYMMETRIC DATA KEYS : View Reference pics available at cloud_AWS/0_Reference_pics.
 ----------------------
 Data keys are encryption keys that you can use to encrypt data, including large amounts of data and other data encryption keys.
 You can use AWS KMS customer master keys (CMKs) to generate, encrypt, and decrypt data keys.

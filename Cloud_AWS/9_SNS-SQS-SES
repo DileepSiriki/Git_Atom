@@ -93,7 +93,7 @@ WHO CAN SUBSCRIBE TO TOPIC :
 
 --> Now create SUBSCRIPTIONS , We can specify the protocol to all available A2A and A2P endpoints.
 
-SNS - FIFO QUEUES : Check Reference Pictures
+SNS - FIFO QUEUES : Check Reference Pictures available at cloud_AWS/0_Reference_pics.
 -----------------------
 To fan out messages from Amazon SNS FIFO topics to AWS Lambda functions, extra steps are required.
 First, subscribe Amazon SQS FIFO queues to the topic.

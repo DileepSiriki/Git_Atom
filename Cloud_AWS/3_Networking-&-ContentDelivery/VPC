@@ -847,7 +847,7 @@ The following are the key concepts for Site-to-Site VPN:
   Transit gateway         : A transit hub that can be used to interconnect your VPCs and on-premises networks.
                             You use a transit gateway or virtual private gateway as the gateway for the Amazon side of the Site-to-Site VPN connection.
 
-View Reference pics -> NW_*** for more info.
+View Reference pics -> NW_*** for more info available at cloud_AWS/0_Reference_pics.
 
 You can optionally enable acceleration for your Site-to-Site VPN connection.
 An accelerated Site-to-Site VPN connection (accelerated VPN connection) uses AWS GLOBAL ACCELERATOR to route traffic from your on-premises network to an AWS edge location that is closest to your customer gateway device.
@@ -1057,7 +1057,8 @@ They use http or https to communicate among themselves.
 
 =================================================================================================================================
 =================================================================================================================================
-AMAZON VIRTUAL PRIVATE CLOUD CONNECTIVITY OPTIONS :  Mandatory to  see reference pics VPC_Scenario-* for pictures with scenario .
+AMAZON VIRTUAL PRIVATE CLOUD CONNECTIVITY OPTIONS :
+Mandatory to  see reference pics VPC_Scenario-* for pictures with scenario available at cloud_AWS/0_Reference_pics.
 ### Open the picture and read the data for a better understanding.
 =================================================================================================================================
 =================================================================================================================================

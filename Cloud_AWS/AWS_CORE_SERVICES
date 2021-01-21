@@ -7,7 +7,7 @@ NOTE :
 1. This page contains a detailed description of what the services do in each of the categories .
 2. Topics having a higher importance have individual chapters written after them. Marked with < Has a separate detailed chapter > after the header.
 3. Recommended to View the YouTube Video , link provided beside the topic heading before going through the material.
-4. Also view the reference pictures attached if any in \Git_Atom\Cloud_AWS\Reference_pics .
+4. Also view the reference pictures attached if any at cloud_AWS/0_Reference_pics.
 5. If we have 2 or more services performing a similar activity , the likely chances are that the basic one is a free service while others are PAID services .
      --> AWS Cloud Watch (free) - AWS Detective (30 days free)- AWS Guard Duty  (30 days free)
 6. Also a Resource  may be a combination of one or more resources or a subset of a single resource providing much more detailed infrastructure .

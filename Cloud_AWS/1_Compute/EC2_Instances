@@ -658,7 +658,7 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
    You can specify whether the network interface should be automatically deleted when you terminate the instance to which it's attached.
 
    Attaching multiple network interfaces to an instance is useful when you want to:
-   --> Create a management network. -> Scenario explained in Reference pic , Multiple-network_interface
+   --> Create a management network. -> Scenario explained in Reference pic , Multiple-network_interface available at cloud_AWS/0_Reference_pics.
    --> Use network and security appliances in your VPC.
    --> Create dual-homed instances with workloads/roles on distinct subnets.
    --> Create a low-budget, high-availability solution.
