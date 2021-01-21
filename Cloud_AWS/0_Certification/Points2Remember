@@ -1,0 +1,51 @@
+AWS MANAGED SERVICES & CUSTOMER MANAGED SERVICES:
+-------------------------------------------------
+AWS Lambda, Amazon RDS, Amazon Redshift, Amazon CloudFront, EMR , Dynamo DB
+For managed services such as Amazon Elastic MapReduce (Amazon EMR) and DynamoDB etc ;
+AWS is responsible for performing all the operations needed to keep the service running.
+
+The AWS-managed services automate time-consuming administration tasks such as hardware provisioning, software setup, patching and backups. The AWS-managed services free customers to focus on their applications so they can give them the fast performance, high availability, security and compatibility they need.
+Examples of AWS-managed services include Amazon RDS, Amazon DynamoDB, Amazon Redshift, Amazon WorkSpaces, Amazon CloudFront, Amazon CloudSearch, and several other services.
+
+On the other hand, customer-managed services are services that are completely managed by the customer.
+For example, a service such as Amazon Elastic Compute Cloud (Amazon EC2) is categorized as Infrastructure as a Service (IaaS) and, as such, requires the customer to perform all of the necessary security configuration and management tasks.
+Customers that deploy an Amazon EC2 instance are responsible for the management of the guest operating system (including updates and security patches), any application software or utilities installed by the customer on the instances, and the configuration of the AWS-provided firewall (called a security group) on each instance.
+The customer is responsible for securing their network by configuring Security Groups, Network Access control Lists (NACLs), and Routing Tables. The customer is also responsible for setting a password policy on their AWS account that specifies the complexity and mandatory rotation periods for their IAM users' passwords.
+Examples of customer-managed services include Amazon Elastic Compute Cloud (Amazon EC2), Amazon Virtual Private Cloud (Amazon VPC), and AWS Identity And Access Management (AWS IAM).
+
+SHARED CONTROLS - AWS & CUSTOMER :
+----------------------------------
+Responsibilities depends on the service used .
+For example, when using Amazon EC2, you are responsible for applying operating system and application security patches regularly. However, such patches are applied automatically when using Amazon RDS.
+
+Shared Controls are controls which apply to both the infrastructure layer and customer layers, but in completely separate contexts or perspectives.
+In a shared control, AWS provides the requirements for the infrastructure and the customer must provide their own control implementation within their use of AWS services.
+Examples include:
+** Patch Management – AWS is responsible for patching the underlying hosts and fixing flaws within the infrastructure, but customers are responsible for patching their guest OS and applications.
+** Configuration Management – AWS maintains the configuration of its infrastructure devices, but a customer is responsible for configuring their own guest operating systems, databases, and applications.
+** Awareness & Training - AWS trains AWS employees, but a customer must train their own employees.
+
+Patching the guest operating system is the responsibility of AWS for the managed services only (such as Amazon RDS).
+The customer is responsible for patching the guest OS for other services (such as Amazon EC2).
+AWS is responsible for patching the underlying hosts, upgrading the firmware, and fixing flaws within the infrastructure for all services, including Amazon EC2.
+
+Both client side and server side encryption is a responsibility of customer.
+AWS offers a lot of services and features that help AWS customers protect their data in the cloud.
+Customers can protect their data by encrypting it in transit and at rest. They can use Cloudtrail to log API and user activity, including who, what, and from where calls were made.
+They can also use the AWS Identity and Access Management (IAM) to control who can access or edit their data.
+
+PENETRATION TESTING :
+----------------------------
+AWS customers are welcome to carry out security assessments and penetration tests against their AWS infrastructure without prior approval for 8 services:
+SO Penetration testing can be done by customers on their own instances without prior authorization from AWS.
+1- Amazon EC2 instances, NAT Gateways, and Elastic Load Balancers.
+2- Amazon RDS.
+3- Amazon CloudFront.
+4- Amazon Aurora.
+5- Amazon API Gateways.
+6- AWS Lambda and Lambda Edge functions.
+7- Amazon Lightsail resources.
+8- Amazon Elastic Beanstalk environments.
+The AWS customers are responsible for performing penetration tests against their AWS infrastructure.
+AWS customers are allowed to perform penetration tests against their AWS infrastructure, but they must ensure that their activities are aligned with AWS policies.
+AWS customers are allowed to perform penetration testing on both AWS-managed services such as Amazon RDS and customer-managed services such as Amazon EC2.

@@ -1,5 +1,11 @@
 # Git_Atom
-Study Material for Git, Python, Shell Scripting, AWK and AWS Cloud.
+This repo is a Study Material for Git, Python, Shell Scripting, AWK and AWS Cloud.
+
+UDEMY is free for TCS Employees.
+So login to tcsglobal.udemy.com and provide your EMp.ID and AUTH.CODE to get started .
+You may ask your friends credentials if you are willing to take courses for free.
+In UDEMY there are multiple dumps and videos available which will be very much helpful.
+Ex : https://tcsglobal.udemy.com/course/aws-certified-cloud-practitioner-practice-test/learn/quiz/4426386#overview
 
 
 ATOM SPECIFICATIONS: --> Steps to do while installing ATOMv!!
