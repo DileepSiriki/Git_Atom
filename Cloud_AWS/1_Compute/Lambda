@@ -108,27 +108,3 @@ Lambda reads messages in batches and invokes your function once for each batch.
 When your function successfully processes a batch, Lambda deletes its messages from the queue.
 
 ============================
-
-AWS ELASTIC BEANSTALK :
-------------------------
-With Elastic Beanstalk, you can quickly deploy and manage applications in the AWS Cloud without having to learn about the infrastructure that runs those applications.
-Elastic Beanstalk reduces management complexity without restricting choice or control.
-You simply upload your application, and Elastic Beanstalk automatically handles the details of capacity provisioning, load balancing, scaling, and application health monitoring.
-It supports applications developed in Go, Java, .NET, Node.js, PHP, Python, and Ruby.
-When you deploy your application, Elastic Beanstalk builds the selected supported platform version and provisions one or more AWS resources, such as Amazon EC2 instances, to run your application.
-There is high-level CLI designed specifically for Elastic Beanstalk known as "eb CLI".
-
-Periodically, you might need to deploy a new version of your application. You can deploy a new version at any time, as long as no other update operations are in progress on your environment.
-You can select your environment and UPLOAD & DEPLOY your update .
-
-The environment is the heart of the application.
-When you create an environment, Elastic Beanstalk provisions the resources required to run your application.
-Every environment has a CNAME (URL) that points to a load balancer. The environment has a URL, such as myapp.us-west-2.elasticbeanstalk.com.
-This URL is aliased in Amazon Route 53 to an Elastic Load Balancing URL—something like abcdef-123456.us-west-2.elb.amazonaws.com—by using a CNAME record.
-Amazon Route 53 is a highly available and scalable Domain Name System (DNS)web service.
-It provides secure and reliable routing to your infrastructure.
-Your domain name that you registered with your DNS provider will forward requests to the CNAME.
-
-The load balancer sits in front of the Amazon EC2 instances, which are part of an Auto Scaling group.
-Amazon EC2 Auto Scaling automatically starts additional Amazon EC2 instances to accommodate increasing load on your application.
-If the load on your application decreases, Amazon EC2 Auto Scaling stops instances, but always leaves at least one instance running.
