@@ -36,7 +36,7 @@ DATABASE TYPE     USE CASE                                                      
 Relational        Traditional applications, ERP, CRM, e-commerce                Amazon Aurora - Amazon RDS -  Amazon Redshift
 ================================================================================================================================================
 Key-value         High-traffic web apps, e-commerce systems,                    Amazon DynamoDB
-                  gaming applications
+(JSON-like)       gaming applications
 ================================================================================================================================================
 In-memory         Caching, session management, gaming leader boards,            Amazon ElastiCache for Memcached -  Amazon ElastiCache for Redis
                   geospatial applications
@@ -168,6 +168,7 @@ An Aurora cluster volume is a virtual database storage volume that spans multipl
 AWS DYNAMO DB :
 =====================
 Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.
+Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale. It is a fully managed cloud database and supports both document and key-value store models. Its flexible data model, reliable performance, and automatic scaling of throughput capacity, makes it a great fit for mobile, web, gaming, ad tech, IoT, and many other applications.
 You can use Amazon DynamoDB to create a database table that can store and retrieve any amount of data, and serve any level of request traffic.
 Amazon DynamoDB automatically spreads the data and traffic for the table over a sufficient number of servers to handle the request capacity specified by the customer and the amount of data stored, while maintaining consistent and fast performance.
 DynamoDB lets you offload the administrative burdens of operating and scaling a distributed database so that you don't have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling.

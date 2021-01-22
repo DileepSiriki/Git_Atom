@@ -30,6 +30,68 @@ Open the Billing and Cost Management console athttps://console.aws.amazon.com/bi
     --> Cost allocation tags
     --> Orders and Invoices   : To see your past payments and transactions.
 
+
+CONSOLIDATED BILLING :
+-------------------------
+You can use the consolidated billing feature in AWS Organizations to consolidate billing and payment for multiple AWS accounts or multiple Amazon Internet Services Pvt. Ltd (AISPL) accounts.
+Every organization in AWS Organizations has a management account that pays the charges of all the member accounts.
+For more information about organizations, see the AWS Organizations User Guide.
+
+Consolidated billing has the following benefits:
+    --> One bill – You get one bill for multiple accounts.
+    --> Easy tracking – You can track the charges across multiple accounts and download the combined cost and usage data.
+    --> Combined usage – You can combine the usage across all accounts in the organization to share the volume pricing discounts, Reserved Instance discounts, and Savings Plans.
+        This can result in a lower charge for your project, department, or company than with individual standalone accounts.
+    --> No extra fee – Consolidated billing is offered at no additional cost.
+
+If you have access to the management account, you can see a combined view of the AWS charges that the member accounts incur. You also can get a cost report for each member account.
+When a member account leaves an organization, the member account can no longer access Cost Explorer data that was generated when the account was in the organization. The data isn't deleted, and the management account in the organization can still access the data.
+If the member account rejoins the organization, the member account can access the data again.
+
+The management account is billed for all charges of the member accounts.
+However, unless the organization is changed to support all features in the organization (not consolidated billing features only) and member accounts are explicitly restricted by policies, each member account is otherwise independent from the other member accounts.
+For example, the owner of a member account can sign up for AWS services, access resources, and use AWS Premium Support unless the management account restricts those actions.
+Each account owner continues to use their own IAM user name and password, with account permissions assigned independently of other accounts in the organization.
+
+Each month, AWS charges the management account owner, and not the owners of the member accounts.
+To see the total usage and charges across all the accounts in an organization, see the Bills page of the management account.
+AWS updates the page multiple times each day. Additionally, AWS makes a downloadable cost report available each day.
+Although the owners of the member accounts aren't charged, they can still see their usage and charges by going to their AWS Bills pages.
+They can't view or obtain data for the management account or any other member accounts on the bill.
+
+  EXAMPLE FOR VOLUME DISCOUNTS :
+  -------------------------------
+  For example, let's say that Bob's consolidated bill includes both Bob's own account and Susan's account.
+  Bob's account is the management account, so he pays the charges for both himself and Susan.
+  Say Bob transfers 8 TB of data during the month and Susan transfers 4 TB.
+
+  For the purposes of this example, AWS charges $0.17 per GB for the first 10 TB of data transferred and $0.13 for the next 40 TB.
+  This translates into $174.08 per TB (= .17*1024) for the first 10 TB, and $133.12 per TB (= .13*1024) for the next 40 TB.
+  Remember that 1 TB = 1024 GB.
+
+  For the 12 TB that Bob and Susan used, Bob's management account is charged ($174.08 * 10 TB) + ($133.12 * 2 TB) = $1740.80 + $266.24 = $2,007.04.
+
+  If they have been billed individually :
+  For the 8Tb that BOB used , ($174.08 * 8 Tb) + For the 4Tb Susan used , ($174.08 * 4 Tb) = $1392.64 + $696.32 = $2088.96
+  So they have combinedly saved  $81 using consolidated billing .
+
+For billing purposes, the consolidated billing feature of AWS Organizations treats all the accounts in the organization as one account.
+This means that all accounts in the organization can receive the hourly cost benefit of Reserved Instances that are purchased by any other account.
+For an Amazon EC2 Reserved Instances example, suppose that Bob and Susan each have an account in an organization.
+Susan has five Reserved Instances of the same type, and Bob has none.
+During one particular hour, Susan uses three instances and Bob uses six, for a total of nine instances on the organization's consolidated bill.
+AWS bills five instances as Reserved Instances, and the remaining four instances as regular instances.
+
+Bob receives the cost benefit from Susan's Reserved Instances only if he launches his instances in the same Availability Zone where Susan purchased her Reserved Instances.
+For example, if Susan specifies us-west-2a when she purchases her Reserved Instances, Bob must specify us-west-2a when he launches his instances to get the cost benefit on the organization's consolidated bill.
+However, the actual locations of Availability Zones are independent from one account to another.
+For example, the us-west-2a Availability Zone for Bob's account might be in a different location than the location for Susan's account.
+
+NOTE : The management account of an organization can turn off Reserved Instance (RI) discount and Savings Plans discount sharing for any accounts in that organization, including the management account. 
+This means that RIs and Savings Plans discounts aren't shared between any accounts that have sharing turned off.
+To share an RI or Savings Plans discount with an account, both accounts must have sharing turned on.
+
+
 POST -CLOSURE PERIOD : - 90 DAYS
 -------------------------
 After you close an AWS account in accordance with the process above, you can no longer use it to access AWS services, but for 90 days after your account is closed (the "Post-Closure Period"), you can view your AWS account's past billing information and access AWS Support.
@@ -78,28 +140,3 @@ Estimates are saved to AWS public servers. Any changes that you make to an estim
 AWS Pricing Calculator doesn't save automatically.
 Each time that you save an estimate, the system generates a unique link.
 If you don't copy and save the newly generated link, you can't access any saved changes.
-
-
-AWS SAVINGS PLAN :
---------------------
-Savings Plans is a flexible pricing model that helps you save up to 72 percent on Amazon EC2, AWS Fargate, and AWS Lambda usage.
-Savings Plans provides you lower prices for your Amazon EC2 usage, Fargate, and Lambda in exchange for a commitment to a consistent usage amount (measured in $/hour)for a one or three year term.
-Every type of compute usage has an On-Demand rate and a Savings Plans rate.
-For example, if you commit to $10/hour of compute usage, your usage is charged at your Savings Plans rate up to $10.
-Any usage beyond your Savings Plans commitment is charged at your regular On-Demand rates.
-
-  • Compute Savings Plans :
-    These plans automatically apply to your EC2 instance usage, regardless of instance family (for example, M5, C5, etc.), instance sizes (for example, c5.large, c5.xlarge, etc.), Region (for example, us-east-1, us-east-2, etc.),
-    operating system (for example, Windows, Linux, etc.), or tenancy(for example, Dedicated, default, dedicated host).
-    They also apply to your Fargate and Lambda usage.
-
-    With a Compute Savings Plans, you can move a workload from C5 to M5, shift your usage from EU(Ireland) to EU (London), or migrate your application from Amazon EC2 to Amazon ECS using Fargate at any time.
-    You can continue to benefit from the low prices provided by Compute Savings Plans as you make these changes.
-
-  • EC2 Instance Savings Plans
-    provide savings up to 72 percent off On-Demand, in exchange for a commitment to a specific instance family in a chosen AWS Region (for example, M5 in Virginia).
-
-Difference b/w Reserved Instances and Savings plan :
--------------------------------------------------------
-Savings Plans are a flexible pricing model that offers low prices, just like Amazon EC2 RIs, but with added flexibility.
-With Savings Plans you can reduce your bill by committing to a consistent amount of compute usage (measured in $/hour), instead of specific instance configurations.

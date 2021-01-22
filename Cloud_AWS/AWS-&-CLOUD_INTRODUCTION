@@ -4,7 +4,7 @@
 #CLOUD COMPUTING : https://www.youtube.com/watch?v=dH0yz-Osy54
                    https://aws.amazon.com/what-is-cloud-computing/
 
-** Watch the above video and read the article  to continue.                  
+** Watch the above video and read the article  to continue.
 
 CLOUD INTRO :
 ===============
@@ -37,6 +37,9 @@ HYBRID CLOUD    : Is a mixture of public and private cloud.
   (CAB)           critical activities are performed using private cloud while the non-critical activities are performed using public cloud.
 
 COMMUNITY CLOUD : Allows systems and services to be accessible by a group of organizations.
+
+// IAAS - PAAS - SAAS are the three basic cloud computing models and they come under AWS.
+// NAAS - NETWORK AS A SERVICE is a part of IAAS and is not the basic one.
 
 XAAS : Anything-as-a-Service is yet another service model, which includes :
        Network-as-a-Service, Business-as-a-Service, Identity-as-a-Service, Database-as-a-Service or Strategy-as-a-Service.

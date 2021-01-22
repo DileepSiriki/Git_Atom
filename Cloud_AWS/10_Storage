@@ -226,6 +226,7 @@ STORAGE CLASSES : https://aws.amazon.com/s3/storage-classes/
        S3 Glacier is a secure, durable, and low-cost storage class for data archiving.
        You can reliably store any amount of data at costs that are competitive with or cheaper than on-premises solutions.
        To keep costs low yet suitable for varying needs, S3 Glacier provides three retrieval options that range from a few minutes to hours.
+       With Amazon Glacier, customers can reliably store their data for as little as $0.004 per gigabyte per month.
 
    Ideal for long-term archive.
    --> Designed for durability of 99.999999999% of objects across multiple Availability Zones
@@ -435,9 +436,9 @@ You can run AWS Storage Gateway either on-premises as a VM appliance, as a hardw
 AWS SNOW-FAMILY:
 -----------------
   -> Snow cone        - https://www.youtube.com/watch?v=X_8LM7E_hiE      -- 8 TB storage   --> 1 SMALL BOX [ uses opshub application for data transfer ]
-     Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80 TB storage  --> 1 SUITCASE
+     Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80 TB storage  --> 1 SUITCASE  [ Snowball is a petabyte-scale data transport solution ]
      Snow Ball edge   - https://www.youtube.com/watch?v=bxSD1Nha2k8      -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
-     Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1 Exabyte      --> 1 Truck
+     Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1 Exabyte      --> 1 Truck     [ AWS Snowmobile is the exabyte-scale data migration service ]
 
     1 Exabyte = 1000 petabytes
     Snow ball can be connected in series to have a Petabyte's storage  = 1 million GB = 1024 Terabytes

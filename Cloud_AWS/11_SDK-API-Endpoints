@@ -178,7 +178,7 @@ In addition, you can enable API creation with AWS CloudFormation templates or (i
 
 ===============================================================================================
 ===============================================================================================
-SOFTWARE DEVELOPMENT KIT - SDK :
+SOFTWARE DEVELOPMENT KIT - SDK : --> Allows you to interact with AWS services using your preferred programming language.
 ===============================================================================================
 ===============================================================================================
 An SDK or devkit functions in much the same way, providing a set of tools, libraries, relevant documentation, code samples, processes, and or guides that allow developers to create software applications on a specific platform.

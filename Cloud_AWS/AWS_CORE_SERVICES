@@ -1,4 +1,4 @@
-====================================================================
+behaviour====================================================================
 TOTAL AVAILABLE SERVICE CATEGORIES  IN AWS : (As of January 2021)
 ====================================================================
 
@@ -92,6 +92,13 @@ Each instance in the cluster is called a node. Each node has a role within the c
 Amazon EMR also installs different software components on each node type, giving each node a role in a distributed application like Apache Hadoop.
 Master node - Core Node - Task Node
 
+Amazon EMR launches clusters in minutes.
+You don’t need to worry about node provisioning, infrastructure setup, Hadoop configuration, or cluster tuning.
+Amazon EMR takes care of these tasks so you can focus on analysis.
+DynamoDB is serverless with no servers to provision, patch, or manage and no software to install, maintain, or operate.
+DynamoDB automatically scales tables up and down to adjust for capacity and maintain performance.
+Availability and fault tolerance are built in, eliminating the need to architect your applications for these capabilities.
+
 
 8. AWS GLUE : https://www.youtube.com/watch?v=oAxvd547kMU&t=28s
 AWS Glue is a fully managed ETL (extract, transform, and load) service that makes it simple and cost-effective to categorize your data, clean it, enrich it, and move it reliably between various data stores and data streams.
@@ -100,19 +107,59 @@ It uses other AWS services to orchestrate your ETL jobs to build data warehouses
 AWS Glue calls API operations to transform your data, create runtime logs, store your job logic, and create notifications to help you monitor your job runs.
 
 9. AMAZON KINESIS : https://www.youtube.com/watch?v=MbEfiX4sMXc&t=19s      &&    https://www.youtube.com/watch?v=07iZOEl0knc&t=29s
-Save data - logs - audio - video -> live stream -> analyze -> take action
-    Kinesis Streams -> low latency streaming of data / video
-    Kinesis Analytics -> perform real time analytics using SQL
-    Kinesis Firehose : Load streams into S3, Elastic Search etc;
+// Collect - storing - analyse high throughput information. -> Take action
+// Not used to STREAM FEED TO mobiles etc ; it is used to STREAM FEED FROM from mobiles, cameras, IOT's and store and analyse them . DO not get confused.
+
+Amazon Kinesis makes it easy to collect, process, and analyze real-time, streaming data.
+This data includes video, audio, application logs, website clickstreams, and IoT telemetry data for machine learning, analytics, and other applications.
+Amazon Kinesis enables you to process and analyze data as it arrives. You're able to respond instantly instead of having to wait until all your data is collected before the processing can begin.
+It can take the below forms :
+    Kinesis Streams   -> Collect and store data streams -- Collect gigabytes of data per second and make it available for processing and analyzing in real time.
+    Real-time data capture : Ingest and store data streams from hundreds of thousands of data sources:
+    --> Log and event data collection
+    --> IoT device data capture
+    --> Mobile data collection
+    --> Gaming data feed
+
+    Kinesis Firehose  -> Process and deliver data streams -- Prepare and load real-time data streams into data stores and analytics tools.
+    Load real-time data : Load streaming data into data lakes, data stores, and analytics tools for:
+    --> Log and event analytics
+    --> IoT data analytics
+    --> Clickstream analytics
+    --> Security monitoring
+
+    Kinesis Analytics -> Analyze streaming data -- Get actionable insights from streaming data in real time.
+    Get insights in real time : Analyze streaming data and gain actionable insights in real time:
+    --> Real-time streaming ETL
+    --> Real-time log analytics
+    --> Ad tech and digital marketing analytics
+    --> Real-time IoT device monitoring
+
+Amazon Kinesis Video Streams enables you to securely stream video from connected devices (IoT devices) to AWS for analytics, machine learning (ML), playback, and other processing.
+Kinesis Video Streams automatically provisions and elastically scales all the infrastructure needed to ingest streaming video data from millions of devices. It durably stores, encrypts, and indexes video data in your streams, and allows you to access your data through easy-to-use APIs.
 
 Amazon Kinesis Video Streams is a fully managed AWS service that you can use to stream live video from devices to the AWS Cloud, or build applications for real-time video processing or batch-oriented video analytics.
 Kinesis Video Streams isn't just storage for video data. You can use it to watch your video streams in real time as they are received in the cloud.
-You can use Kinesis Video Streams to capture massive amounts of live video data from millions of sources, including smartphones, security cameras, webcams, cameras embedded in cars, drones, andother sources.
+You can use Kinesis Video Streams to capture massive amounts of live video data from millions of sources, including smartphones, security cameras, webcams, cameras embedded in cars, drones, and other sources.
 You can also send non-video time-serialized data such as audio data, thermal imagery, depth data, RADAR data, and use kinesis to process these at a later Time.
 you can stream video from a computer's webcam using the GStreamer  library, or from a camera on your network using RTSP.
 You can also configure your Kinesis video stream to durably store media data for the specified retention period.
 Kinesis Video Streams automatically stores this data and encrypts it at rest.
 --> logs from mobile applications - logs from e-commers purchases - information from social media - satellite data - audio - video - spy cams - security cams etc;
+
+  USECASES :
+  --------------
+  The AWS Streaming Data Solution for Amazon Kinesis helps developers more easily configure the core AWS services necessary to capture, store, process, and deliver streaming data by offering two AWS CloudFormation templates.
+  One option is designed to capture data from non-AWS environments such as mobile clients, enable throttling at the API level, and leverage AWS Lambda to handle errors for Amazon Kinesis streams.
+  The second option leverages Apache Flink and provides a fully managed service to handle backups automatically. This option also supports the Amazon Kinesis Producer Library (KPL).
+
+  With Amazon Kinesis services, you can perform real-time analytics on data that has been traditionally analyzed using batch processing.
+  Common streaming use cases include sharing data between different applications, streaming extract-transform-load, and real-time analytics.
+  For example, you can use Kinesis Data Firehose to continuously load streaming data into your S3 data lake or analytics services.
+
+  You can use Amazon Kinesis services for real-time application monitoring, fraud detection, and live leader-boards.
+  You can ingest streaming data using Kinesis Data Streams, process it using Kinesis Data Analytics, and emit the results to any data store or application using Kinesis Data Streams with millisecond end-to-end latency.
+
 
 10. AWS LAKE-FORMATION :
 The data lake is your persistent data that is stored in Amazon S3 and managed by Lake Formation using a Data Catalog.
@@ -135,11 +182,13 @@ It connects to your data in the cloud and combines data from many different sour
 In a single data dashboard, QuickSight can include AWS data, third-party data, big data, spreadsheet data, SaaS data, B2B data, and more.
 Securely push these dashboards to customers. Used to forecast future results and take decisions.
 
-13. AMAZON REDSHIFT : https://www.youtube.com/watch?v=_qKm6o1zK3U&t=9s
+13. AMAZON REDSHIFT : // Documented in Database https://www.youtube.com/watch?v=_qKm6o1zK3U&t=9s
 Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud. An Amazon Redshift data warehouse is a collection of computing resources called nodes, which are organized into a group called a cluster.
 Each cluster runs an Amazon Redshift engine and contains one or more databases.
 Redshift lets you easily save the results of your queries back to your S3 data lake using open formats, like Apache Parquet, so that you can do additional analytics from other analytics services like Amazon EMR, Amazon Athena, and Amazon SageMaker.
 
+Amazon Redshift is a data warehouse service that only supports relational data, NOT key-value data.
+Amazon Redshift is a fast, fully managed data warehouse service that is specifically designed for online analytic processing (OLAP) and business intelligence (BI) applications, which require complex queries against large datasets.
 
 
 
@@ -327,6 +376,7 @@ STORAGE   :
 
 1. AMAZON SIMPLE STORAGE SERVICE - S3 :  < Has a separate detailed chapter >
 --> Has 11 9's of durability . 99.999999999
+Amazon S3 stores any number of objects, but each object does have a size limitation. Individual Amazon S3 objects can range in size from a minimum of 0 bytes to a maximum of 5 terabytes.
 It is storage for the internet. You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web.
 You can accomplish these tasks using the simple and intuitive web interface of the AWS Management Console.
 A bucket is a container for objects stored in Amazon S3. Every object is contained in a bucket.
@@ -341,6 +391,7 @@ AWS Backup implements its backup features using the existing capabilities of the
 You can write backup PLANS to tell when to back up and when to move backup to Glacier etc;
 
 3. AMAZON ELASTIC BLOCK STORE - EBS :  < Has a separate detailed chapter > // https://www.youtube.com/watch?v=77qLAl-lRpo
+Amazon Elastic Block Store (Amazon EBS) is a storage service, NOT a database service.
 High performance and low latency block storage - has 4 types.
 Amazon Elastic Block Store (Amazon EBS) is a web service that provides block level storage volumes for use with EC2 instances.
 EBS volumes are highly available and reliable storage volumes that can be attached to any running instance and used like a hard drive.
@@ -435,6 +486,13 @@ Aurora is part of the managed database service Amazon Relational Database Servic
 Aurora management operations typically involve entire clusters of database servers that are synchronized through replication, instead of individual database instances.
 The automatic clustering, replication, and storage allocation make it simple and cost-effective to set up, operate, and scale your largest MySQL and PostgreSQL deployments.
 
+Amazon Aurora is a MySQL and PostgreSQL-compatible relational database built for the cloud.
+Amazon Aurora combines the performance and availability of traditional enterprise databases with the simplicity and cost-effectiveness of open source databases.
+It delivers up to five times the throughput of standard MySQL and up to three times the throughput of standard PostgreSQL.
+Amazon Aurora is designed to be compatible with MySQL and with PostgreSQL, so that existing applications and tools can run without requiring modification.
+It is available through Amazon Relational Database Service (RDS), freeing you from time-consuming administrative tasks such as provisioning, patching, backup, recovery, failure detection, and repair.
+
+
 2. AMAZON DOCUMENT-DB :  https://www.youtube.com/watch?v=tkzDp9T8V-k
 Amazon DocumentDB (with MongoDB compatibility) is a fast, reliable, and fully managed database service that makes it easy for you to set up, operate, and scale MongoDB-compatible databases.
 Typically, in the application tier, data is represented as a JSON document because it is more intuitive for developers to think of their data model as a document.
@@ -456,10 +514,22 @@ With point-in-time recovery, you can restore a table to any point in time during
 Allows you to delete expired items from tables automatically to help you reduce storage usage and the cost of storing data that is no longer relevant.
 
 4. AMAZON ELASTIC CACHE FOR REDIS: -> https://www.youtube.com/watch?v=GoNsuTqeMto&t=18s
---> Caching data and providing it to users quickly rather than getting it from Disks. // example for applications in mobiel .
+--> Caching data and providing it to users quickly rather than getting it from Disks. // example for applications in mobile .
 Amazon ElastiCache makes it easy to set up, manage, and scale distributed in-memory cache environments in the AWS Cloud.
 It provides a high performance, resizable, and cost-effective in-memory cache, while removing complexity associated with deploying and managing a distributed cache environment.
 ElastiCache works with both the Redis and Memcached engines.
+Amazon ElastiCache is a web service that makes it easy to deploy, operate, and scale an in-memory data store or cache in the cloud.
+The service improves the performance of web applications by allowing you to retrieve information from fast, managed, in-memory data stores, instead of relying entirely on slower disk-based databases.
+
+  IN MEMEMORY vs ELASTICACHE :
+  --------------------------------
+  The most frequently accessed data be stored in elasticache so that the application’s response time is optimal.
+  The primary purpose of an in-memory data store is to provide ultrafast (submillisecond latency) and inexpensive access to copies of data.
+    Querying a database is always slower and more expensive than locating a copy of that data in a cache.
+    Some database queries are especially expensive to perform.
+    An example is queries that involve joins across multiple tables or queries with intensive calculations.
+    By caching (storing) such query results, you pay the price of the query only once.
+    Then you can quickly retrieve the data multiple times without having to re-execute the query.
 
 5. AMAZON KEYSPACES [APAHE ASSANDRA] :
 
@@ -477,9 +547,10 @@ Amazon Quantum Ledger Database (Amazon QLDB) is a fully managed ledger database 
 You can use Amazon QLDB to track all application data changes, and maintain a complete and verifiable history of changes over time.
 Ex : Banks data -> keeps full history of changes. -- Immutable and Transparent.
 
-8. AMAZON RDS : < Has a separate detailed chapter - Database >   https://www.youtube.com/watch?v=eMzCI7S1P9M&t=19s
+8. AMAZON RELSTIONAL DATABASE SERVICE -RDS : < Has a separate detailed chapter - Database >   https://www.youtube.com/watch?v=eMzCI7S1P9M&t=19s
 It is a web service that makes it easier to set up, operate, and scale a relational database in the cloud.
 It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
+Amazon RDS can be used to host Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle, and SQL Server databases.
 
   • When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together. With AmazonRDS, these are split apart so that you can scale them independently.
     If you need more CPU, less IOPS, or more storage, you can easily allocate them.
@@ -490,9 +561,15 @@ It provides cost-efficient, resizable capacity for an industry-standard relation
   • In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management (IAM) to define users and permissions.
 
 9. AMAZON REDSHIFT :  https://www.youtube.com/watch?v=_qKm6o1zK3U&t=22s
+Amazon Redshift is not a MySQL database service. Amazon Redshift is a fully managed data warehouse.
 For data from BIG-DATA , enterprise applications //  used mainly for data analytics by quickly mining data .
 Amazon Redshift is a fast, fully managed, petabyte-scale data warehouse service that makes it simple and cost-effective to efficiently analyze all your data using your existing business intelligence tools.
 It is optimized for datasets ranging from a few hundred gigabytes to a petabyte or more and costs less than $1,000 per terabyte per year, a tenth the cost of most traditional data warehousing solutions.
+Amazon Redshift doesn’t support non-relational data. Amazon Redshift is a fully managed data warehouse service that allows you to run complex analytic queries against petabytes of structured data using standard SQL and your existing Business Intelligence (BI) tools.
+
+Amazon Redshift is a data warehouse service that only supports relational data, NOT key-value data.
+Amazon Redshift is a fast, fully managed data warehouse service that is specifically designed for online analytic processing (OLAP) and business intelligence (BI) applications, which require complex queries against large datasets.
+
 
 10. AMAZON TIMESTREAM :
 With Amazon Timestream, you can easily store and analyze sensor data for IoT applications, metrics for DevOps use cases, and telemetry for application monitoring scenarios such as clickstream data analysis.
@@ -529,6 +606,9 @@ You can submit the security and compliance documents (also known as audit artifa
 You can also use these documents as guidelines to evaluate your own cloud architecture and assess the effectiveness of your company's internal controls.
 AWS Artifact provides documents about AWS only. You can also use AWS Artifact to review, accept, and track the status of AWS agreements such as theBusiness Associate Addendum (BAA).
 AWS customers are responsible for developing or obtaining documents that demonstrate the security and compliance of their companies.
+
+AWS Artifact is a self-service audit artifact retrieval portal that provides customers with on-demand access to AWS’ compliance documentation and AWS agreements. You can use AWS Artifact Agreements to review, accept, and track the status of AWS agreements such as the Business Associate Addendum (BAA).
+You can also use AWS Artifact Reports to download AWS security and compliance documents, such as AWS ISO certifications, Payment Card Industry (PCI), and System and Organization Control (SOC) reports.
 
 3. AWS AUDIT MANAGER :
 When it is time for an audit, AWS Audit Manager helps you manage stakeholder reviews of your controls, which means you can build audit-ready reports with much less manual effort.
@@ -669,10 +749,18 @@ Free for 30days. Pay from the next month!! During the 30-day free trial period, 
 
 13. AWS INSPECTOR : https://www.youtube.com/watch?v=xxvrmBPbNPs
 Amazon Inspector is a security vulnerability assessment service that helps improve the security and compliance of your AWS resources.
-It tests the network accessibility of your Amazon EC2 instances and the security state of your applications that run on those instances. Amazon Inspector assesses applications for exposure,vulnerabilities, and deviations from best practices.
+It tests the network accessibility of your Amazon EC2 instances and the security state of your applications that run on those instances. Amazon Inspector assesses applications for exposure, vulnerabilities, and deviations from best practices.
 Amazon Inspector also offers predefined software called an agent that you can optionally install in the operating system of the EC2 instances that you want to assess.
 Amazon Inspector automatically assesses resources for vulnerabilities or deviations from best practices, and then produces a detailed list of security findings prioritized by level of severity.
 Amazon Inspector includes a knowledge base of hundreds of rules mapped to common security standards and vulnerability definitions that are regularly updated by AWS security researchers.
+
+Amazon Inspector is an automated security assessment service that helps improve the security and compliance of applications deployed on AWS.
+Amazon Inspector automatically assesses applications for vulnerabilities or deviations from best practices. After performing an assessment, Amazon Inspector produces a detailed list of security findings prioritized by level of severity.
+These findings can be reviewed directly or as part of a detailed assessment report which is available via the Amazon Inspector console or API.
+To help get started quickly, Amazon Inspector includes a knowledge base of hundreds of rules mapped to common security best practices and vulnerability definitions.
+Examples of built-in rules include checking for remote root login being enabled, or vulnerable software versions installed.
+These rules are regularly updated by AWS security researchers.
+
 
 14. AWS MACIE :
 Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover, classify, and help you protect your sensitive data in Amazon S3.
@@ -860,6 +948,7 @@ You also create the symmetric keys and asymmetric key pairs that the HSM stores.
 If you need to secure your encryption keys in a service backed by FIPS-validated HSMs, but you do not need to manage the HSM, try AWS Key Management Service (p
 
 6. AWS CERTIFICATE MANAGER - ACM :
+AWS Certificate Manager is a service that lets you easily provision, manage, and deploy public and private Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificates for use with AWS services and your internal connected resources.
 It is used to generate, issue, and manage public and private SSL/TLS certificates for use with your AWS based websites and applications.
 These public certificates verify the identity and authenticity of your web server and the ownership of your public keys.
 In doing so, public certificates initiate a trusted, encrypted connection between you and your users.
@@ -1115,6 +1204,15 @@ SCALING OPTIONS :
  --> Scale based on demand :
  --> Use predictive scaling :
 
+// Elastic Load Balancers do not scale resources.
+// Elastic Load Balancers distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.
+
+// Scaling resources is a function of AWS AUTO SCALING.
+// AWS Auto Scaling is the feature that automates the process of adding/removing server capacity (based on demand).
+// Autoscaling allows you to reduce your costs by automatically turning off resources that aren’t in use.
+// On the other hand, Autoscaling ensures that your application runs effectively by provisioning more server capacity if required.
+
+
 3. AWS BACKINT AGENT FOR SAP HANA :
 AWS Backint Agent for SAP HANA (AWS Backint Agent) is an SAP-certified backup and restore application for SAP HANA workloads running on Amazon EC2 instances in the cloud.
 
@@ -1131,8 +1229,14 @@ AWS CloudFormation enables you to create and provision AWS infrastructure deploy
 It helps you leverage AWS products such as Amazon EC2, Amazon Elastic Block Store, Amazon SNS, Elastic Load Balancing, and Auto Scaling to build highly reliable, highly scalable, cost-effective applications in the cloud without worrying about creating and configuring the underlying AWS infrastructure.
 AWS CloudFormation enables you to use a template file to create and delete a collection of resources together as a single unit (a stack).
 
+AWS CloudFormation allows you to use programming languages or a simple text file to model and provision, in an automated and secure manner, all the resources needed for your applications across all regions and accounts.
+You create a template that describes all the AWS resources that you want (like Amazon EC2 instances or Amazon RDS DB instances), and AWS CloudFormation takes care of provisioning and configuring those resources for you.
+You don't need to individually create and configure AWS resources and figure out what's dependent on what; AWS CloudFormation handles all that for you.
+
+
 6. AWS CLOUD-TRAIL : < Has a separate detailed chapter >  https://www.youtube.com/watch?v=mXQSnbc9jMs
 --> Integrates with CLOUD WATCH for a detailed monitoring and alarms.
+AWS CloudTrail is an AWS service that can be used to monitor all user interactions with the AWS environment.
 With AWS CloudTrail, you can monitor your AWS deployments in the cloud by getting a history of AWS API calls for your account, including API calls made via the AWS Management Console, the AWS SDKs, the command line tools, and higher-level AWS services.
 You can also identify which users and accounts called AWS APIs for services that support CloudTrail, the source IP address the calls were made from, and when the calls occurred.
 You can integrate CloudTrail into applications using the API, automate trail creation for your organization, check the status of your trails, and control how administrators turn CloudTrail logging on and off.
@@ -1144,7 +1248,17 @@ You can also deliver and analyze events in a trail with Amazon CloudWatch Logs a
 INSIGHTS : Configure your trails to log Insights events to help you identify and respond to unusual activity associated with write management API calls.
 --> While creating a trail in Console , we get the option if we want to send them to cloud watch . Enable it !!!!
 
+// AWS CLOUD TRAIL is an AWS service that can be used to monitor all USER interactions / API CALLS with the AWS environment.
+// CloudTrail provides event history of your AWS account activity, including actions taken through the AWS Management Console, AWS SDKs, command line tools, and other AWS services.
+// So if you want to know who took an action on a particular resource CLOUD TRAIL is your choice.
+// For a detailed info about a particular resource we need to use CLOUD WATCH.
+
 7. AWS CLOUD-WATCH : < Has a separate detailed chapter > https://www.youtube.com/watch?v=a4dhoTQCyRA
+Amazon CloudWatch is a service that monitors AWS cloud resources and the applications you run on AWS.
+You can use Amazon CloudWatch to collect and track metrics, collect and monitor log files, set alarms, and automatically react to changes in your AWS resources.
+Amazon CloudWatch can monitor AWS resources such as Amazon EC2 instances, Amazon DynamoDB tables, and Amazon RDS DB instances, as well as custom metrics generated by your applications and services, and any log files your applications generate.
+You can use CloudWatch to detect anomalous behavior in your environments, take automated actions, troubleshoot issues, and discover insights to keep your applications running smoothly.
+
 Amazon CloudWatch provides a reliable, scalable, and flexible monitoring solution that you can start using within minutes.
 You no longer need to set up, manage, and scale your own monitoring systems and infrastructure.
 It saves logs as metrics and events . You can set high resolution alarms , send SNS and take automatic actions !!
@@ -1180,7 +1294,7 @@ Compute Optimizer generates recommendations for the following resources:
     • AWS Lambda functions
 
 10. AWS CONFIG : < Has a separate detailed chapter >  https://www.youtube.com/watch?v=MJDuAvNEv64&t=26s && https://www.youtube.com/watch?v=X_fznJtSyV8&t=8s
---> To assess , audit and evaluate your resources .And to make sure resources are compliant with industry standards.
+--> To assess , audit and evaluate the configuration of your resources . And to make sure resources are compliant with industry standards.
 --> We get notified if a resource is non-compliant or matches a rule against compliance.
 To configure the config , we need to make sure that the instances are managed by SYSTEMS MANAGER . So create a role and assign it to the instances.
 AWS Config provides a detailed view of the resources associated with your AWS account, including how they are configured, how they are related to one another, and how the configurations and their relationships have changed over time.
@@ -1220,13 +1334,39 @@ When you automate snapshot and AMI management, it helps you to:
     •  Create disaster recovery backup policies that back up data to isolated accounts.
 When combined with the monitoring features of Amazon CloudWatch Events and AWS CloudTrail, Amazon Data Lifecycle Manager provides a complete backup solution for Amazon EC2 instances and individual EBS volumes at no additional cost.
 
-14. AWS HEALTH :
+14. AWS HEALTH : // Personal Health Dashboard
 AWS Health provides personalized information about events that can affect your AWS infrastructure, guides you through scheduled changes, and accelerates the troubleshooting of issues that affect your AWS resources and accounts.
 All customers can use the Personal Health Dashboard (PHD), powered by the AWS Health API. The dashboard requires no setup, and it's ready to use for authenticated AWS users.
 The Personal Health Dashboard organizes issues in three groups: open issues, scheduled changes, and other notifications.
 When you choose an event in the Event log list, the Event details pane appears with information about the event and resources that are affected by the event.
 --> Event logs show everything happening around the world in AWS .
 --> You can view ACCOUNT SPECIFIC and also PUBLIC EVENTS [issues common for everybody in all regions say ec2 services down etc :]
+
+AWS Personal Health Dashboard provides alerts and remediation guidance when AWS is experiencing events that may impact you.
+While the Service Health Dashboard displays the general status of AWS services, Personal Health Dashboard gives you a personalized view into the performance and availability of the AWS services underlying your AWS resources.
+AWS Personal Health Dashboard provides a personalized view of the health of the specific services that are powering your workloads and applications.
+What’s more, Personal Health Dashboard proactively notifies you when AWS experiences any events that may affect you, helping provide quick visibility and guidance to help you minimize the impact of events in progress, and plan for any scheduled changes, such as AWS hardware maintenance.
+
+// NOTE :::: Personal health dashboard is different from a Service health Dashboard.
+
+You can get information about the current status and availability of the AWS services any time using the AWS Service Health Dashboard that is available at this link: https://status.aws.amazon.com/
+The Service Health Dashboard is a good way to view the overall status of each AWS service, but provides little in terms of how the health of those services is impacting your resources.
+
+BENIFITS OF PERSONAL HEALTH DASHBOARD :
+-------------------------------------------
+  ** PERSONALIZED VIEW OF SERVICE HEALTH :
+     Personal Health Dashboard gives you a personalized view of the status of the AWS services that power your applications, enabling you to quickly see when AWS is experiencing issues that may impact you.
+     For example, in the event of a lost EBS volume associated with one of your EC2 instances, you would gain quick visibility into the status of the specific service you are using, helping save precious time troubleshooting to determine root cause.
+
+  ** PROACTIVE NOTIFICATIOPNS :
+     The dashboard also provides forward looking notifications, and you can set up alerts across multiple channels, including email and mobile notifications, so you receive timely and relevant information to help plan for scheduled changes that may affect you.
+     In the event of AWS hardware maintenance activities that may impact one of your EC2 instances, for example, you would receive an alert with information to help you plan for, and proactively address any issues associated with the upcoming change.
+
+  ** DETAILED TROUBLESHOOTING GUIDANCE :
+     When you get an alert, it includes remediation details and specific guidance to enable you to take immediate action to address AWS events impacting your resources.
+     For example, in the event of an AWS hardware failure impacting one of your EBS volumes, your alert would include a list of your affected resources, a recommendation to restore your volume, and links to the steps to help you restore it from a snapshot.
+     This targeted and actionable information reduces the time needed to resolve issues.
+
 
 15. AWS LICENSE MANAGER  : Bring Your Own License - BYOL // Sends SNS if a license is expiring.
 AWS License Manager streamlines the process of bringing software vendor licenses ( for example, Microsoft, SAP, Oracle, and IBM) to the cloud.
@@ -1251,6 +1391,7 @@ AWS OpsWorks provides a simple and flexible way to create and manage stacks and 
 With AWS OpsWorks, you can provision AWS resources, manage their configuration, deploy applications to those resources, and monitor their health.
 
 AWS OpsWorks is a configuration management service that helps you configure and operate applications in a cloud enterprise by using Puppet or Chef.
+Chef and Puppet are automation platforms that allow you to use code to automate the configurations of your servers.
 AWS OpsWorks Stacks and AWS OpsWorks for ChefAutomate let you use Chef cookbooks and solutions for configuration management, while OpsWorks for Puppet Enterprise lets you configure a Puppet Enterprise master server in AWS.
 Puppet offers a set of tools for enforcing the desired state of your infrastructure, and automating on-demand tasks.
 
@@ -1267,6 +1408,15 @@ The organization also has several policies that are attached to some of the OUs 
       ROOT ACCOUNT --> ORGANIZATIONAL UNIT - 1 --> Member - q ; Member - p
                    --> ORGANIZATIONAL UNIT - 2
                    --> ORGANIZATIONAL UNIT - 3 --> Member - a ; Member - b ; Member -c
+                   -
+AWS Organizations helps customers centrally govern their environments as they grow and scale their workloads on AWS.
+Whether customers are a growing startup or a large enterprise, Organizations helps them to centrally manage billing; control access, compliance, and security; and share resources across their AWS accounts.
+AWS Organizations has five main benefits:
+  1) Centrally manage access polices across multiple AWS accounts.
+  2) Automate AWS account creation and management.
+  3) Control access to AWS services.
+  4) Consolidate billing across multiple AWS accounts.
+  5) Configure AWS services across multiple accounts.
 
 21. AWS PROTON :
 AWS Proton creates and manages standardized infrastructure and deployment tooling for developers and their serverless and container-based applications
@@ -1293,6 +1443,7 @@ Service Quotas makes it easy to look up your service quotas and to request incre
 Use AWS Systems Manager to organize, monitor, and automate management tasks on your AWS resources and also use to view and control your infrastructure onAWS.
 AWS Systems Manager gives you visibility and control of your infrastructure on AWS.
 Systems Manager provides a unified user interface so you can view operational data from multiple AWS services and enables you to automate operational tasks across your AWS resources.
+AWS Systems Manager provides a unified user interface so you can view operational data from multiple AWS services and allows you to automate operational tasks across your AWS resources.
 
 A managed instance is a machine that has been configured for use with Systems Manager.
 Systems Manager also helps you configure and maintain your managed instances.
@@ -1562,9 +1713,14 @@ If the content is not present then cloudfront stores of copy of it in cache afte
 --> POP Point of Presence // another name for an edge location
 --> Along with EDGE LOCATIONS , it also maintains a REGIONAL EDGE CACHES.
 
+Amazon CloudFront is a global content delivery network (CDN) service that gives businesses and web application developers an easy and cost effective way to distribute content (such as videos, data, applications, and APIs) with low latency and high data transfer speeds.
+Like other AWS services, Amazon CloudFront is a self-service, pay-per-use offering, requiring no long term commitments or minimum fees.
+With CloudFront, your files are delivered to end-users using a global network of edge locations.
+CloudFront is integrated with other AWS services such as AWS Shield for DDoS mitigation, Amazon S3, Elastic Load Balancing or Amazon EC2 as origins for your applications, and Lambda@Edge to run custom code close to your viewers.
+
 CloudFront also has regional edge caches that bring more of your content closer to your viewers, even when the content is not popular enough to stay at a POP, to help improve performance for that content.
 Regional edge caches are CloudFront locations that are deployed globally, close to your viewers.
-They'relocated between your origin server and the POPs—global edge locations that serve content directly to viewers. As objects become less popular, individual POPs might remove those objects to make roomfor more popular content.
+They'r elocated between your origin server and the POPs—global edge locations that serve content directly to viewers. As objects become less popular, individual POPs might remove those objects to make roomfor more popular content.
 Regional edge caches have a larger cache than an individual POP, so objects remain in the cache longer at the nearest regional edge cache location.
 This helps keep more of your content closer to your viewers, reducing the need for CloudFront to go back to your origin server, and improving overall performance for viewers.
 When a viewer makes a request on your website or through your application, DNS routes the request to the POP that can best serve the user’s request.
@@ -1579,6 +1735,8 @@ CloudFront also adds the files to the cache in the POP for the next time someone
           •  Dynamic requests, as determined at request time, do not flow through regional edge caches, but go directly to the origin.
 
 5. ELASTIC LOAD BALANCING : < Has a separate detailed chapter >
+Elastic Load Balancers do not scale resources. Elastic Load Balancers distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.
+
 Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.
 It monitors the health of its registered targets and routes traffic only to the healthy targets.
 You can add and remove compute resources from your load balancer as your needs change, without disrupting the overall flow of requests to your applications.
@@ -1588,6 +1746,15 @@ If you need flexible application management, we recommend that you use an Applic
 If extreme performance and static IP is needed for your application, we recommend that you use a Network Load Balancer.
 If you have an existing application that was built within the EC2-Classic network, then you should use a Classic Load Balancer.
 https://aws.amazon.com/elasticloadbalancing/features/#Product_comparisons
+
+// Elastic Load Balancers do not scale resources.
+// Elastic Load Balancers distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.
+
+// Scaling resources is a function of AWS AUTO SCALING.
+// AWS Auto Scaling is the feature that automates the process of adding/removing server capacity (based on demand).
+// Autoscaling allows you to reduce your costs by automatically turning off resources that aren’t in use.
+// On the other hand, Autoscaling ensures that your application runs effectively by provisioning more server capacity if required.
+
 
 6. AWS DIRECT CONNECT : < Has a separate detailed chapter >
 A Direct Connect gateway is a globally available resource. You can create the Direct Connect gateway in any Region and access it from all other Regions.
@@ -1910,6 +2077,10 @@ Amazon MQ works with your existing applications and services without the need to
 5. AMAZON SQS : < Has a separate detailed chapter >
 It is a fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.
 Amazon SQS moves data between distributed application components and helps you decouple these components.
+It is a fully managed message queuing service that enables you to send, store, and receive messages between software components at any volume, without losing messages or requiring other services to be available.
+SQS lets you decouple application components so that they run independently, increasing the overall fault tolerance of the system.
+Multiple copies of every message are stored redundantly across multiple availability zones so that they are available whenever needed.
+
 
 6. AWS STEP FUNCTIONS :
 AWS Step Functions makes it easy to coordinate the components of distributed applications as a series of steps in a visual workflow.
@@ -2042,6 +2213,14 @@ CUSTOMER ENABLEMENT SERVICES  :
 // 3Rd party partners providing full life cycle solutions .
 AWS Managed Services is an enterprise service that provides ongoing management of your AWS infrastructure operations.
 AMS provides full-lifecycle services to provision, run, and support your infrastructure, and automates common activities such as change requests, monitoring, patch management, security, and backup services.
+AMS is an AWS service that operates AWS on behalf of enterprise customers and partners.
+Enterprises want to adopt AWS at scale but often the skills that have served them well in traditional IT do not always translate to success in the cloud.
+AWS Managed Services (AMS) enables them to migrate to AWS at scale more quickly, reduce their operating costs, improve security and compliance and focus on their differentiating business priorities.
+
+NOTE :
+------------
+This Concept is completely different from the AWS MANAGED SERVICES which include AWS Lambda, Amazon RDS, Amazon Redshift, Amazon CloudFront, Elastic Map Reduce -EMR , Dynamo DB
+AWS is responsible for performing all the operations needed to keep the above service running.
 
 2. AWS PROFESSIONAL SERVICES :
 The AWS Professional Services organization is a global team of experts that can help you realize your desired business outcomes when using the AWS Cloud. We work together with your team and your chosen member of the AWS Partner Network (APN) to execute your enterprise cloud computing initiatives.
@@ -2131,6 +2310,57 @@ The Billing and Cost Management service provides features that you can use to do
   •Assess your biggest investments in AWS resources
   •Simplify your accounting if you work with multiple AWS accounts
 
+AWS COST & USAGE REPORT :
+---------------------------
+The AWS Cost & Usage Report is your one-stop shop for accessing the most detailed information available about your AWS costs and usage.
+The AWS Cost & Usage Report lists AWS usage for each service category used by an account and its IAM users in hourly or daily line items, as well as any tags that you have activated for cost allocation purposes.
+AWS Budgets gives you the ability to set custom budgets that alert you when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.
+
+AWS CONSOLIDATED BILLING :
+----------------------------
+AWS consolidated billing enables an organization to consolidate payments for multiple Amazon Web Services (AWS) accounts within a single organization by making a single paying account.
+For billing purposes, AWS treats all the accounts on the consolidated bill as one account.
+For services such as Amazon EC2 that support a free tier, AWS applies the free tier to the total usage across all accounts in an AWS organization. AWS doesn't apply the free tier to each account individually.
+Some services, such as Amazon EC2 and Amazon S3 have volume pricing tiers across certain usage dimensions that give the user lower prices when they use the service more.
+
+    For example, let's say that Bob's consolidated bill includes both Bob's own account and Susan's account.
+    Bob's account is the management account, so he pays the charges for both himself and Susan.
+    Say Bob transfers 8 TB of data during the month and Susan transfers 4 TB.
+
+    For the purposes of this example, AWS charges $0.17 per GB for the first 10 TB of data transferred and $0.13 for the next 40 TB.
+    This translates into $174.08 per TB (= .17*1024) for the first 10 TB, and $133.12 per TB (= .13*1024) for the next 40 TB.
+    Remember that 1 TB = 1024 GB.
+
+    For the 12 TB that Bob and Susan used, Bob's management account is charged ($174.08 * 10 TB) + ($133.12 * 2 TB) = $1740.80 + $266.24 = $2,007.04.
+
+    If they have been billed individually :
+    For the 8Tb that BOB used , ($174.08 * 8 Tb) + For the 4Tb Susan used , ($174.08 * 4 Tb) = $1392.64 + $696.32 = $2088.96
+    So they have combinedly saved  $81 using consolidated billing .
+
+    For billing purposes, the consolidated billing feature of AWS Organizations treats all the accounts in the organization as one account.
+    This means that all accounts in the organization can receive the hourly cost benefit of Reserved Instances that are purchased by any other account.
+    For an Amazon EC2 Reserved Instances example, suppose that Bob and Susan each have an account in an organization.
+    Susan has five Reserved Instances of the same type, and Bob has none.
+    During one particular hour, Susan uses three instances and Bob uses six, for a total of nine instances on the organization's consolidated bill.
+    AWS bills five instances as Reserved Instances, and the remaining four instances as regular instances.
+
+    Bob receives the cost benefit from Susan's Reserved Instances only if he launches his instances in the same Availability Zone where Susan purchased her Reserved Instances.
+    For example, if Susan specifies us-west-2a when she purchases her Reserved Instances, Bob must specify us-west-2a when he launches his instances to get the cost benefit on the organization's consolidated bill.
+    However, the actual locations of Availability Zones are independent from one account to another.
+    For example, the us-west-2a Availability Zone for Bob's account might be in a different location than the location for Susan's account.
+
+    NOTE : The management account of an organization can turn off Reserved Instance (RI) discount and Savings Plans discount sharing for any accounts in that organization, including the management account.
+    This means that RIs and Savings Plans discounts aren't shared between any accounts that have sharing turned off.
+    To share an RI or Savings Plans discount with an account, both accounts must have sharing turned on.
+
+AWS COST EXPLORER :
+--------------------
+AWS COST EXPLORER  is a free tool that you can use to view your costs and usage.
+You can view data up to the last 13 months, forecast how much you are likely to spend for the next three months, and get recommendations for what Reserved Instances to purchase.
+You can use AWS Cost Explorer to see patterns in how much you spend on AWS resources over time, identify areas that need further inquiry, and see trends that you can use to understand your costs.
+You can also specify time ranges for the data, and view time data by day or by month.
+
+
 2. AWS PRICING CALCULATOR : < Has a separate detailed chapter >
 AWS Pricing Calculator lets you explore AWS services and create an estimate for the cost of your use cases on AWS.
 You can model your solutions before building them, explore the price points and calculations behind your estimate, and find the available instance types and contract terms that meet your needs.
@@ -2196,11 +2426,14 @@ ADDITIONAL RESOURCES  :
 ##################################################################################################################
 
 1. AWS MARKET-PLACE :  https://www.youtube.com/watch?v=RxCRHsAqiWs
+---------------------------------------------------------------------
 // Buy & Sell - Paid or Free AWS Software Solutions .
 AWS Marketplace is an online store where you can buy or sell software that runs on Amazon Web Services (AWS).
 AWS Marketplace is a curated digital catalog customers can use to find, buy, deploy, and manage third-party software, data, and services that customers need to build solutions and run their businesses.
 AWS Marketplace includes thousands of software listings from popular categories such as security, networking, storage, machine learning, business intelligence, database, as well as related professional services to help you manage and support those solutions.
 AWS Marketplace also simplifies software licensing and procurement with flexible pricing options and multiple deployment methods.
+Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
+Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source, AWS.
 
 Customers can quickly launch preconfigured software with just a few clicks, and choose software solutions in Amazon Machine Images (AMIs), software as a service (SaaS),
 Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source.
@@ -2214,5 +2447,146 @@ You create a custom AMI for your product, and buyers can use it to create EC2 in
 
 
 2. AWS GOVCLOUD - United States :
+----------------------------------
 The AWS GovCloud (US) Regions are isolated AWS Regions designed to enable U.S. government agencies and customers to move sensitive workloads into the cloud by addressing their specific regulatory and compliance requirements.
 The AWS GovCloud (US) Regions adhere to U.S. International Traffic in Arms Regulations (ITAR) requirements.
+
+3. AWS MANAGED SERVICES & CUSTOMER MANAGED SERVICES:
+--------------------------------------------------------
+
+AWS MANAGED :
+-----------------
+AWS Lambda, Amazon RDS, Amazon Redshift, Amazon CloudFront, Elastic Map Reduce -EMR , Dynamo DB
+For managed services such as Amazon Elastic MapReduce (Amazon EMR) and DynamoDB etc ;
+AWS is responsible for performing all the operations needed to keep the service running.
+The AWS-managed services automate time-consuming administration tasks such as hardware provisioning, software setup, patching and backups. The AWS-managed services free customers to focus on their applications so they can give them the fast performance, high availability, security and compatibility they need.
+Examples of AWS-managed services include Amazon RDS, Amazon DynamoDB, Amazon Redshift, Amazon WorkSpaces, Amazon CloudFront, Amazon CloudSearch, and several other services.
+AWS is responsible for patching the underlying hosts, upgrading the firmware, and fixing flaws within the infrastructure for all services, including Amazon EC2.
+
+Amazon EMR launches clusters in minutes.
+You don’t need to worry about node provisioning, infrastructure setup, Hadoop configuration, or cluster tuning.
+Amazon EMR takes care of these tasks so you can focus on analysis.
+DynamoDB is serverless with no servers to provision, patch, or manage and no software to install, maintain, or operate.
+DynamoDB automatically scales tables up and down to adjust for capacity and maintain performance.
+Availability and fault tolerance are built in, eliminating the need to architect your applications for these capabilities.
+
+CUSTOMER MANAGED :
+------------------------
+On the other hand, customer-managed services are services that are completely managed by the customer.
+For example, a service such as Amazon Elastic Compute Cloud (Amazon EC2), Amazon VPC, and Amazon S3 are categorized as Infrastructure as a Service (IaaS) and, as such, requires the customer to perform all of the necessary security configuration and management tasks.
+Customers that deploy an Amazon EC2 instance are responsible for the management of the guest operating system (including updates and security patches), any application software or utilities installed by the customer on the instances, and the configuration of the AWS-provided firewall (called a security group) on each instance.
+The customer is responsible for securing their network by configuring Security Groups, Network Access control Lists (NACLs), and Routing Tables. The customer is also responsible for setting a password policy on their AWS account that specifies the complexity and mandatory rotation periods for their IAM users' passwords.
+Examples of customer-managed services include Amazon Elastic Compute Cloud (Amazon EC2), Amazon Virtual Private Cloud (Amazon VPC), and AWS Identity And Access Management (AWS IAM).
+Patching the guest operating system is the responsibility of AWS for the managed services only (such as Amazon RDS). The customer is responsible for patching the guest OS for other services (such as Amazon EC2).
+Data encryption is the responsibility of the customer. Both SERVER SIDE & CLIENT SIDE encryption comes under client responsibility.
+  NOTE :
+  The AWS managed services we mentioned above are different than the AWS Managed Services (AMS) service.
+  AMS is an AWS service that operates AWS on behalf of enterprise customers and partners.
+  Enterprises want to adopt AWS at scale but often the skills that have served them well in traditional IT do not always translate to success in the cloud.
+  AWS Managed Services (AMS) enables them to migrate to AWS at scale more quickly, reduce their operating costs, improve security and compliance and focus on their differentiating business priorities.
+
+4. AWS SHARED CONTROLS - AWS & CUSTOMER:
+--------------------------------------------------
+Responsibilities depends on the service used .
+For example, when using Amazon EC2, you are responsible for applying operating system and application security patches regularly. However, such patches are applied automatically when using Amazon RDS.
+
+Shared Controls are controls which apply to both the infrastructure layer and customer layers, but in completely separate contexts or perspectives.
+In a shared control, AWS provides the requirements for the infrastructure and the customer must provide their own control implementation within their use of AWS services.
+Examples include:
+** Patch Management – AWS is responsible for patching the underlying hosts and fixing flaws within the infrastructure, but customers are responsible for patching their guest OS and applications.
+** Configuration Management – AWS maintains the configuration of its infrastructure devices, but a customer is responsible for configuring their own guest operating systems, databases, and applications.
+** Awareness & Training - AWS trains AWS employees, but a customer must train their own employees.
+
+Patching the guest operating system is the responsibility of AWS for the managed services only (such as Amazon RDS).
+The customer is responsible for patching the guest OS for other services (such as Amazon EC2).
+AWS is responsible for patching the underlying hosts, upgrading the firmware, and fixing flaws within the infrastructure for all services, including Amazon EC2.
+
+Both client side and server side encryption is a responsibility of customer.
+AWS offers a lot of services and features that help AWS customers protect their data in the cloud.
+Customers can protect their data by encrypting it in transit and at rest. They can use Cloudtrail to log API and user activity, including who, what, and from where calls were made.
+They can also use the AWS Identity and Access Management (IAM) to control who can access or edit their data.
+
+5. AWS MICROSERVICES vs MONOLITHIC :
+--------------------------------------
+AWS recommends adopting microservices architecture, not monolithic architecture. With monolithic architectures, application components are tightly coupled and run as a single service.
+With a microservices architecture, an application is built as loosely coupled components.
+Benefits of microservices architecture include:
+  1- Microservices allow each service to be independently scaled to meet demand for the application feature it support.
+  2- Teams are empowered to work more independently and more quickly.
+  3- Microservices enable continuous integration and continuous delivery, making it easy to try out new ideas and to roll back if something doesn’t work.
+  4- Service independence increases an application’s resistance to failure.
+     In a monolithic architecture, if a single component fails, it can cause the entire application to fail.
+     With microservices, applications handle total service failure by degrading functionality and not crashing the entire application.
+
+6.  AWS PENETRATION TESTING : https://aws.amazon.com/security/penetration-testing/
+-------------------------------
+AWS customers are welcome to carry out security assessments and penetration tests against their AWS infrastructure without prior approval for 8 services:
+So Penetration testing can be done by customers on their own instances without prior authorization from AWS.
+
+      PERMITTED ACTIVITIES :                        PROHIBITED ACTIVITIES :
+  ---------------------------------------------------------------------------------------------------------------------------------------------
+      1- Amazon EC2 instances, NAT Gateways,        1. DNS zone walking via Amazon Route 53 Hosted Zones
+         and Elastic Load Balancers.
+      2- Amazon RDS.                                2. Denial of Service (DoS), Distributed Denial of Service (DDoS), Simulated DoS, Simulated DDoS
+      3- Amazon CloudFront.                         3. Port flooding
+      4- Amazon Aurora.                             4. Protocol flooding
+      5- Amazon API Gateways.                       5. Request flooding  (login request flooding, API request flooding)
+      6- AWS Lambda and Lambda Edge functions.
+      7- Amazon Lightsail resources.
+      8- Amazon Elastic Beanstalk environments.
+
+The AWS customers are responsible for performing penetration tests against their AWS infrastructure.
+AWS customers are allowed to perform penetration tests against their AWS infrastructure, but they must ensure that their activities are aligned with AWS policies.
+AWS customers are allowed to perform penetration testing on both AWS-managed services such as Amazon RDS and customer-managed services such as Amazon EC2.
+
+Note: Customers are not permitted to conduct any security assessments of AWS infrastructure, or the AWS services themselves.
+      If you discover a security issue within any AWS services in the course of your security assessment, please contact AWS Security immediately.
+
+7. HORIZONTAL & VERTICAL SCALING :
+-------------------------------------
+HORIZONTAL -> Adding more EC2 instances
+Scaling horizontally takes place through an increase in the number of resources (e.g., adding more hard drives to a storage array or adding more servers to support an application).
+This is a great way to build Internet-scale applications that leverage the elasticity of cloud computing.
+
+VERTICAL -> Add specifications to a single resource.
+Scaling vertically takes place through an increase in the specifications of an individual resource (e.g., upgrading a server with a larger hard drive, adding more memory, or provisioning a faster CPU).
+On Amazon EC2, this can easily be achieved by stopping an instance and resizing it to an instance type that has more RAM, CPU, I/O,or networking capabilities. This way of scaling can eventually hit a limit and it is not always a cost efficient or highly available approach. However, it is very easy to implement and can be sufficient for many use cases especially as a short term solution.
+A "vertically scalable" system is constrained to running its processes on only one computer; in such systems, the only way to increase performance is to add more resources into one computer in the form of faster (or more) CPUs, memory, or storage.
+Vertical scaling may improve performance, but not fault-tolerance; because if this "one computer" fails, the whole system will fail.
+
+Vertical-scaling is often limited to the capacity constraints of a single machine, scaling beyond that capacity often involves downtime and comes with an upper limit.
+With horizontal-scaling it is often easier to scale dynamically by adding more machines in parallel. Hence, in most cases, horizontal-scaling is recommended over vertical-scaling.
+Horizontally scalable systems are oftentimes able to outperform vertically scalable systems by enabling parallel execution of workloads and distributing those across many different computers.
+
+8. AWS WELL ARCHITECTURED FRAMEWORK : https://d1.awsstatic.com/whitepapers/architecture/AWS_Well-Architected_Framework.pdf
+---------------------------------------
+The Well-Architected Framework identifies a set of general design principles to facilitate good design in the cloud:
+
+  --> STOP GUESSING YOUR CAPACITY NEEDS :
+      Eliminate guessing about your infrastructure capacity needs.
+      When you make a capacity decision before you deploy a system, you might end up sitting on expensive idle resources or dealing with the performance implications of limited capacity.
+      With cloud computing, these problems can go away.
+      You can use as much or as little capacity as you need, and scale up and down automatically.
+
+  --> TEST SYSTEMS AT PRODUCTION SCALE :
+      In the cloud, you can create a production-scale test environment on demand, complete your testing, and then decommission the resources.
+      Because you only pay for the test environment when it's running, you can simulate your live environment for a fraction of the cost of testing on premises.
+
+  --> AUTOMATE TO MAKE YOUR ARCHIECTURAL EXPERIMENTATION EASIER :
+      Automation allows you to create and replicate your systems at low cost and avoid the expense of manual effort.
+      You can track changes to your automation, audit the impact, and revert to previous parameters when necessary.
+
+  --> ALLOW FOR EVOLUTIONARY ARCHITECTURES :
+      In a traditional environment, architectural decisions are often implemented as static, one-time events, with a few major versions of a system during its lifetime.
+      As a business and its context continue to change, these initial decisions might hinder the system's ability to deliver changing business requirements.
+      In the cloud, the capability to automate and test on demand lowers the risk of impact from design changes.
+      This allows systems to evolve over time so that businesses can take advantage of innovations as a standard practice.
+
+  --> DRIVE ARCHITECTURES USING DATA :
+      In the cloud you can collect data on how your architectural choices affect the behaviour of your workload.
+      This lets you make fact-based decisions on how to improve your workload.
+      Your cloud infrastructure is code, so you can use that data to inform your architecture choices and improvements over time.
+
+  --> IMPROVE THROUGH GAME DAYS :
+      Test how your architecture and processes perform by regularly scheduling game days to simulate events in production.
+      This will help you understand where improvements can be made and can help develop organizational experience in dealing with events.

@@ -124,11 +124,16 @@ AWS SUPPORT // TRUSTED ADVISOR : --> AWS -> Support Centre -> Create a Case
 AWS Support offers four support plans: Basic, Developer, Business, and Enterprise
 https://console.aws.amazon.com/support/plans/home?#/ **V.IMP
   --> Basic                 - Included
-  --> Current plan          - Starting at $29 per month
-  --> Developer	Business    - Starting at $100 per month
-  --> Enterprise            - Starting at $15,000 per month
+  --> Current plan          - Starting at $29 per month       - https://aws.amazon.com/premiumsupport/plans/
+  --> Developer	Business    - Starting at $100 per month      - https://aws.amazon.com/premiumsupport/plans/
+  --> Enterprise            - Starting at $15,000 per month   - https://aws.amazon.com/premiumsupport/plans/
 
 All AWS customers automatically have 24/7 access to these features of the Basic support plan:
+Basic Support is included for all AWS customers and includes:
+  --> Customer Service and Communities - 24x7 access to customer service, documentation, whitepapers, and support forums.
+  --> AWS Trusted Advisor - Access to the 7 core Trusted Advisor checks and guidance to provision your resources following best practices to increase performance and improve security.
+  --> AWS Personal Health Dashboard - A personalized view of the health of AWS services, and alerts when your resources are impacted.
+
 • One-on-one responses to account and billing questions
 • Support forums
 • Service health checks
@@ -147,12 +152,25 @@ In addition, customers with a Business or Enterprise support plan have access to
 • Third-party software support – Help with Amazon Elastic Compute Cloud (Amazon EC2) instance operating systems and configuration.
 
 In addition, customers with an Enterprise support plan have access to these features:
-AWS Enterprise Support provides you with concierge-like service where the main focus is helping you achieve your outcomes and find success in the cloud.
+AWS Enterprise Support provides you with CONCIERGE-like service where the main focus is helping you achieve your outcomes and find success in the cloud.
+The AWS Concierge Support Team is a specialized offering available only to customers having an Enterprise Support subscription.
+AWS Support Concierge Service assists customers with account and billing inquiries.
+
 • Application architecture guidance – Contextual guidance on how services fit together to meet your specific use case, workload, or application.
-• Infrastructure event management – Short-term engagement with AWS Support to get a deep understanding of your use case. After analysis, provide architectural and scaling guidance for an event.
-• Technical account manager – Work with a technical account manager (TAM) for your specific use cases and applications.
+
+• INFRASTRUCTURE EVENT MANAGEMENT - IEM : Short-term engagement with AWS Support to get a deep understanding of your use case.
+  After analysis, provide architectural and scaling guidance for an event.
+  AWS Infrastructure Event Management is a short-term engagement with AWS Support, included in the Enterprise-level Support product offering, and available for additional purchase for Business-level Support subscribers.
+  AWS Infrastructure Event Management partners with your technical and project resources to gain a deep understanding of your use case and provide architectural and scaling guidance for an event.
+  Common use-case examples for AWS Event Management include advertising launches, new product launches, and infrastructure migrations to AWS.
+
+• TECHNICAL ACCOUNT MANAGER - TAM : work with a technical account manager (TAM) for your specific use cases and applications.
+
 • White-glove case routing.
 • Management business reviews.
+
+===================================================================================================
+===================================================================================================
 
 --> In the AWS Management Console, you can create three types of customer cases in AWS Support:
 • Account and billing support cases are available to all AWS customers so you can get help with billing and account-related questions.
@@ -170,17 +188,84 @@ To change your support plan :
 
 
 ==================================================================
+REPORTING TO THE RIGHT TEAM :
+==================================================================
+0. AWS SUPPORT TEAM :
+------------------------
+AWS Basic Support offers all AWS customers access to our Resource Center, Service Health Dashboard, Product FAQs, Discussion Forums, and Support for Health Checks – at no additional charge.
+Customers who desire a deeper level of support can subscribe to AWS Support at the Developer, Business, or Enterprise level.
+Customers who choose AWS Support gain one-on-one, fast-response support from AWS engineers.
+The service helps customers use AWS's products and features.  With pay-by-the-month pricing and unlimited support cases, customers are freed from long-term commitments.
+Customers with operational issues or technical questions can contact a team of support engineers and receive predictable response times and personalized support.
+You may initiate as many cases as you need. Basic Support plan customers are restricted to customer support and service limit increase cases.
+Customers with the Basic Support plan cannot open technical support cases.
+If you have a paid Support plan, you can open a web support case from Support Center.
+If you have Business or Enterprise-level Support, you can request that AWS contact you at any convenient phone number or start a conversation with one of our engineers via chat.
+
+1. AWS ABUSE TEAM :
+------------------------
+AWS Support can't assist with reports of abuse or questions about notifications from the AWS Abuse team.
+The AWS Abuse team can assist you when AWS resources are used to engage in the following types of abusive behaviour :
+  --> Spam  : You are receiving unwanted emails from an AWS-owned IP address, or AWS resources are used to spam websites or forums.
+  --> Port scanning: Your logs show that one or more AWS-owned IP addresses are sending packets to multiple ports on your server, and you believe this is an attempt to discover unsecured ports.
+  --> DOS attacks: Your logs show that one or more AWS-owned IP addresses are used to flood ports on your resources with packets, and you believe that this is an attempt to overwhelm or crash your server or the software running on your server.
+  --> Intrusion attempts: Your logs show that one or more AWS-owned IP addresses are used to attempt to log in to your resources.
+  --> Hosting objectionable or copyrighted content: You have evidence that AWS resources are used to host or distribute illegal content or distribute copyrighted content without the consent of the copyright holder.
+  --> Distributing malware: You have evidence that AWS resources are used to distribute software that was knowingly created to compromise or cause harm to computers or machines on which it is installed.
+
+If you suspect that AWS resources are used for abusive purposes, contact the AWS Abuse team using the Report Amazon AWS abuse form, or by contacting abuse@amazonaws.com.
+Provide all the necessary information, including logs in plaintext, email headers, and so on, when you submit your request.
+The AWS Abuse team doesn't open attachments under any circumstance. You must provide any necessary information in plaintext.
+
+2. AWS SECURITY TEAM :
+-------------------------
+The AWS Security team is responsible for the security of services offered by AWS.
+
+3. AWS CONCEIRGE TEAM :
+-------------------------
+The AWS Concierge team can assist you with the issues that are related to your billing and account management.
+
+4. AWS CUSTOMER SERVICE TEAM :
+---------------------------------
+The AWS Customer Service team is at the forefront of this transformational technology assisting a global list of customers that are taking advantage of a growing set of services and features to run their mission-critical applications.
+The team helps AWS customers understand what Cloud Computing is all about, and whether it can be useful for their business needs.
+
+5. AWS FINANCE TEAM :
+------------------------
+The AWS Finance Team provides data driven analysis, strategic decision support, financial planning, and controllership to teams
+that plan and build data centers, design and source servers, and develop and sell cloud services at massive scale to developers and businesses all over the world.
+
+
+==================================================================
 ==================================================================
 AWS TRUSTED ADVISOR : Cost Optimization -  Performance -  Security - Fault Tolerance -  Service Limits
 ==================================================================
+AWS Trusted Advisor offers a rich set of best practice checks and recommendations across five categories: cost optimization, security, fault tolerance, performance, and service limits.
 AWS Trusted Advisor is your customized cloud expert! It helps you to observe best practices for the use of AWS by inspecting your AWS environment with an eye toward saving money, improving system performance and reliability, and closing security gaps.
 All AWS customers can start optimizing their cloud resources by using four of AWS Trusted Advisor’s most popular best-practice recommendations on service limits and security configurations.
 Access to the four free checks does not expire, and you can access the remaining 33 checks and additional features by upgrading to Business or Enterprise-level Support.
+
 The four free checks include :
 Security Groups - Specific Ports Unrestricted,
 Service Limits,
 IAM Use, and
 MFA on Root Account
+
+The core security checks include: (Important)
+1- Security Groups - Specific Ports Unrestricted.
+   Checks security groups for rules that allow unrestricted access to specific ports.
+   Unrestricted access increases opportunities for malicious activity (hacking, denial-of-service attacks, loss of data).
+
+2- Amazon S3 Bucket Permissions.
+   Checks buckets in Amazon Simple Storage Service (Amazon S3) that have open access permissions.
+   Bucket permissions that grant List access to everyone can result in higher than expected charges if objects in the bucket are listed by unintended users at a high frequency.
+   Bucket permissions that grant Upload/Delete access to everyone create potential security vulnerabilities by allowing anyone to add, modify, or remove items in a bucket.
+   This check examines explicit bucket permissions and associated bucket policies that might override the bucket permissions.
+
+3- MFA on Root Account.
+   Checks the root account and warns if multi-factor authentication (MFA) is not enabled.
+   For increased security, AWS recommends that you protect your account by using MFA, which requires a user to enter a unique authentication code from their MFA hardware or virtual device when interacting with the AWS console and associated websites.
+
 
 You can configure Trusted Advisor notifications to receive weekly email about any changes in their check results.
 You can also subscribe to Business and Enterprise-level support to access the full suite of Trusted Advisor best-practice checks, API access, and a host of other support features, such as phone and chat access to support personnel, architecture guidance, API access, and help with third-party software configuration.
