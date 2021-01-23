@@ -190,15 +190,26 @@ HYPERVISOR : (Type-1 and Type-2)
 It's a software that exists to run, create and manage the virtual machines. It acts as a Virtual Machine Manager (VMM)
 VMM, is software that creates and runs virtual machines (VMs).
 A hypervisor allows one host computer to support multiple guest VMs by virtually sharing its resources, such as memory and processing.
+The hypervisor manages the virtualization technique and creates, runs, and monitors multiple virtual machines (guest) simultaneously, on single computer hardware (host).
+So, hypervisors regulate the virtualization process, creates multiple virtual machines that allow you to work on several computing instances at once.
+Hypervisors create, start, stop, and reset multiple VMs while virtually sharing its resources like RAM and Network interface controller.
+VMM governs the guest operating systems and manages execution on a virtual operating platform. It furthermore separates Virtual Machines (VMs) from each other logically, so even if one OS crashes for some reason, the other VMs can function unhindered.
+
+// If one HOST goes down , we can directly move virtual machines on to a different HYPERVISOR without effecting anything.
+
+TYPE-1 : Bare Metal Hypervisor - Hardware virtualization
+TYPE-2 : Hosted Hypervisor     - OS virtualization
 
     Type-1, or bare-metal hypervisors, are installed directly onto the physical hardware.
-    As such, they must contain their own operating systems for booting, running the hardware, and connecting to the network.
-    Popular Type-1 hypervisors include Microsoft Hyper-V and VMware ESXi.
+    So a VM must contain their own operating systems for booting, running the hardware, and connecting to the network.
     Because bare-metal hypervisors are isolated from the attack-prone operating system, they are extremely secure.
+    Less attack prone as there is no HOST OS involved .
+    Popular Type-1 hypervisors include Microsoft Hyper-V and VMware ESXi.
 
     Type-2, or hosted hypervisors, run on an operating system that is directly installed on the hardware.
     In this case, a copy of Windows, or a Unix-based system must be installed to boot the system and access the hardware.
     Once the operating system is running, the hosted hypervisor can launch.
+    High attack prone -> If HOST OS gets attacked , all VM's gets attacked.
     Type-2 hypervisors are often used to run multiple operating systems on a single machine, rather than to emulate numerous running systems on the hardware.
     Popular Type-2 hypervisors include VMware Workstation, VirtualBox
 
@@ -221,15 +232,52 @@ A hypervisor allows one host computer to support multiple guest VMs by virtually
                             -------------------------------------------------------------------
                            |                       H Y P E R V I S O R                         | -> Virtual Machine Manager - VMM
                             -------------------------------------------------------------------
-                            -------------------------------------------------------------------
-                           |                          H O S T - O S                            |
-                            -------------------------------------------------------------------
+                    ------------------------------------------------------------------------------------
+                  |         -------------------------------------------------------------------          |
+                  |        |                          H O S T - O S                            |         |    -> Only for Type-2 Hypervisor
+                  |         -------------------------------------------------------------------          |
+                    -------------------------------------------------------------------------------------
                             -------------------------------------------------------------------
                            |                         H A R D W A R E                           |
                             -------------------------------------------------------------------
                                             H  O  S  T  -  M  A  C  H  I  N  E
 
-DIFFERENCES : https://www.hitechnectar.com/blogs/hypervisor-type-1-vs-type-2/
+DIFFERENCES ->> TYPE-1 vs TYPE-2:  https://www.youtube.com/watch?v=FZR0rG3HKIk&t=28s
+-----------------------------------
+The primary contributor to why hypervisors are segregated into two types is because of the presence or absence of the underlying operating system.
+
+Type 1 runs directly on the hardware with Virtual Machine resources provided.
+The Type 1 hypervisor doesn't have to load an underlying OS.
+With direct access to the underlying hardware and no other software -- such as OSes and device drivers -- to contend with for virtualization,
+Type 1 hypervisors are regarded as the most efficient and best-performing hypervisors available for enterprise computing.
+Hypervisors that run directly on physical hardware are also highly secure.
+Virtualization mitigates the risk of attacks that target security flaws and vulnerabilities in OSes because each guest has its own OS.
+This ensures an attack on a guest VM is logically isolated to that VM and can't spread to others running on the same hardware.
+Used by cloud vendors .
+
+Type 2 runs on the host OS to provide virtualization management and other services.
+It relies on the host machine's pre existing OS to manage calls to CPU, memory, storage and network resources.
+the presence of an underlying OS with Type 2 hypervisors introduces unavoidable latency;
+all of the hypervisor's activities and the work of every VM has to pass through the host OS.
+Also, any security flaws or vulnerabilities in the host OS could potentially compromise all of the VMs running above it.
+Used where performance and security are lesser concerns.
+For example, software developers might use a Type 2 hypervisor to create VMs to test a software product prior to release.
+IT organizations typically use Type 2 hypervisors to create virtual desktops.
+
+============================================================================================================
+############################################################################################################
+============================================================================================================
+[ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
+-> On-demand - IT resources compute db n/w apps - public / private - pay as you go -- Buy maintain own - from vendors like aws azure
+-> Platform independent - no downloaded software
+-> Small to large - backup / recovery / email / VM / web apps / big data analytics
+-> hospitals - finance teams - gaming companies
+-> USES :  A agile - c  cost effective - D deploy global in sec - E elastic - F trade capital expense for variable exp - G no engineers for maintenance
+           guessing capacity - no running data centres - serverless - scalable
+-> TYPES : Service P P H C - deploy I P S
+-> Virtualization
+-> Hypervisor & Types
+-> aws 175 services over 190 countries - 5 pillars PROCS
 ============================================================================================================
 ############################################################################################################
 ============================================================================================================
@@ -267,35 +315,36 @@ With the cloud, businesses no longer need to plan for and procure servers and ot
 Instead, they can instantly spin up hundreds or thousands of servers in minutes and deliver results faster.
 
 
-
 FIVE PILLARS OF AWS :
 =======================
 1. OPERATIONAL EXCELLENCE : -> Automation
-  Focuses on how you can continuously improve your ability to run systems, create better procedures, and gain insights.
-  Human error is the primary cause of defects and operational incidents. The more operations that can be automated, the less chance there is for human error.
+   Focuses on how you can continuously improve your ability to run systems, create better procedures, and gain insights.
+   Human error is the primary cause of defects and operational incidents. The more operations that can be automated, the less chance there is for human error.
     Infrastructure as Code -> process of managing your infrastructure through machine-readable configuration files to automate your infrastructure -> CLOUD FORMATION
 
-    Observability -> Observability is the process of measuring the internal state of your system. This is usually done to optimize it to some desired end state.
+    Observability -> Observability is the process of measuring the internal state of your system.
+                     This is usually done to optimize it to some desired end state.
 
 2. SECURITY : -> Policies (IAM) , Network Security (VPC) , Encryption (KMS)
-  Focuses on how to secure your infrastructure on the cloud. Security and compliance is a shared responsibility between AWS and the customer.
-    AWS -> responsible for physical infrastructure, software, and networking capabilities.
+   Focuses on how to secure your infrastructure on the cloud. Security and compliance is a shared responsibility between AWS and the customer.
+    AWS      -> responsible for physical infrastructure, software, and networking capabilities.
     CUSTOMER -> configuration of specific cloud services, the application software, and the management of sensitive data.
 
 3. RELIABILITY :
-  Focuses on how you can build services that are resilient to both service and infrastructure disruptions.
-    Fault Isolation -> Resource and Request , Availability Zone , Region
-    Limits -> Limits are constraints that can be applied to protect your services from excessive load. (SERVICE QUOTAS)
+   Focuses on how you can build services that are resilient to both service and infrastructure disruptions.
+   Fault Isolation -> Resource and Request , Availability Zone , Region
+   Limits -> Limits are constraints that can be applied to protect your services from excessive load. (SERVICE QUOTAS)
 
 4. PERFORMANCE EFFICIENCY :
-  Focuses on how you can run services efficiently and scalably in the cloud to handle any amount of traffic.
-    Selection -> Ability to choose the service that most closely aligns with your workload. AWS has the broadest selection of services. (COMPUTE, STORAGE , DB ,N/W)
-    Scaling -> VERTICAL : say micro instance to a macro instance (increasing capacity of an instance)
-               HORIZONTAL : say 10 instances to 40 instances ( increasing number of instances)
+   Focuses on how you can run services efficiently and scalably in the cloud to handle any amount of traffic.
+   Selection -> Ability to choose the service that most closely aligns with your workload.
+                AWS has the broadest selection of services. (COMPUTE, STORAGE , DB ,N/W)
+   Scaling   -> VERTICAL : say micro instance to a macro instance (increasing capacity of an instance)
+                HORIZONTAL : say 10 instances to 40 instances ( increasing number of instances)
 
 5. COST OPTIMIZATION : -> AWS Cost Explorer ,  AWS Cost & Usage Report
-  Focuses on achieving business outcomes while minimizing costs.
-  OpEx is an ongoing pay-as-you-go model whereas CapEx is a one-time purchase model.
+   Focuses on achieving business outcomes while minimizing costs.
+   OpEx is an ongoing pay-as-you-go model whereas CapEx is a one-time purchase model.
 
 
 WAYS TO COMMUNICATE WITH AWS :
@@ -307,7 +356,7 @@ WAYS TO COMMUNICATE WITH AWS :
   Blue-Prints                     ----
 
   WEB CONSOLE is the actual AWS Page
-  CLI is used to automate tasks similar to JENKINS written in python.
+  CLI is used to automate tasks similar to JENKINS . It is written in python.
   SDK is used to integrate AWS in our Applications --> SDK = API + IDE + Debugger + Tools
   Blue-Prints are used to convert services & dependencies into a real running System in AWS . --> Cloud Formation
   Everything in AWS can be controlled via API by making REST API calls using HTTPS protocols. This is inconvenient hence CLI and SDK's have evolved.
@@ -322,13 +371,14 @@ It is provided by the below :
   --> STS         -- Security Token Service
   --> CLOUD TRAIL
   --> CLOUD WATCH ALARMS
-  --> SNS Notifications
+  --> SNS & Email Notifications
 
 AWS ACCEPTABLE USE POLICY :
 ----------------------------
 This Acceptable Use Policy (this “Policy”) describes prohibited uses of the web services offered by Amazon Web Services, Inc. and its affiliates (the “Services”) and the website located at http://aws.amazon.com (the “AWS Site”).
 The examples described in this Policy are not exhaustive.
-We may modify this Policy at any time by posting a revised version on the AWS Site. By using the Services or accessing the AWS Site, you agree to the latest version of this Policy.
+We may modify this Policy at any time by posting a revised version on the AWS Site.
+By using the Services or accessing the AWS Site, you agree to the latest version of this Policy.
 If you violate the Policy or authorize or help others to do so, we may suspend or terminate your use of the Services.
 
     No Illegal, Harmful, or Offensive Use or Content
@@ -346,22 +396,22 @@ Customers should carefully consider the services they choose as their responsibi
 The nature of this shared responsibility also provides the flexibility and customer control that permits the deployment.
 As shown in the chart below, this differentiation of responsibility is commonly referred to as Security “of” the Cloud versus Security “in” the Cloud.
 
-AWS - Security of the cloud
-      operates, manages and controls the components from the host operating system and virtualization layer down to the physical security of the AWS  facilities.
-      This infrastructure consisting  of the hardware, software, networking, and facilities that run AWS Cloud services.
+AWS      - Security of the cloud
+           operates, manages and controls the components from the host operating system and virtualization layer down to the physical security of the AWS  facilities.
+           This infrastructure consisting  of the hardware, software, networking, and facilities that run AWS Cloud services.
 
 CUSTOMER - Security in the cloud
            responsibility and management of the guest operating system (including updates and security patches)
            application software and firewall configurations
-           Platforms , Applications , IAM , OS , Network and Firewall configuration
+           Platforms, Applications, IAM, OS, Network and Firewall configuration
            client side and server side data encryption , networking traffic encryption and its integrity
 
-AWS & CUSTOMER or BOTH :
+AWS & CUSTOMER or BOTH -
         Inherited Controls : Physical and Environmental controls
         Shared Controls    :
-           Patch Management – AWS is responsible for patching and fixing flaws within the infrastructure, but customers are responsible for patching their    guest OS and applications.
+           Patch Management         – AWS is responsible for patching and fixing flaws within the infrastructure, but customers are responsible for patching their guest OS and applications.
            Configuration Management – AWS maintains the configuration of its infrastructure devices, but a customer is responsible for configuring their own guest operating systems, databases, and applications.
-           Awareness & Training - AWS trains AWS employees, but a customer must train their own employees.
+           Awareness & Training     - AWS trains AWS employees, but a customer must train their own employees.
 
 AWS KNOWLEDGE CENTRE : - Q&A for AWS related queries .
 -------------------------
@@ -369,16 +419,19 @@ Similar to AWS Documentation, AWS Discussion Forums, AWS Support Center.
 All AWS account owners have access to account and billing support free of charge.
 You can find answers to your questions quickly by visiting the AWS Knowledge Center.
 
-REZIONS AND ZONES : open EC2 -> move to bottom -> SERVICE HEALTH & ZONE STATUS
-====================================================================================
+REGIONS AND AVAILABILITY ZONES : https://aws.amazon.com/about-aws/global-infrastructure/regions_az/
+// open EC2 -> move to bottom -> SERVICE HEALTH & ZONE STATUS
+======================================================================================================
 Amazon EC2 is hosted in multiple locations world-wide.
 These locations are composed of Regions, Availability Zones, Local Zones, AWS Outposts, and Wavelength Zones.
 
 REGIONS : --> 24 In Total
 -------------------------
     • An AWS Region is a physical location in the world and each Region is a separate geographic area.
-      Each Amazon EC2 Region is designed to be isolated from the other Amazon EC2 Regions. This achieves the greatest possible fault tolerance and stability.
-      When you view your resources, you see only the resources that are tied to the Region that you specified. This is because Regions are isolated from each other, and we don't automatically replicate resources across Regions.
+      Each Amazon EC2 Region is designed to be isolated from the other Amazon EC2 Regions.
+      This achieves the greatest possible fault tolerance and stability.
+      When you view your resources, you see only the resources that are tied to the Region that you specified.
+      This is because Regions are isolated from each other, and we don't automatically replicate resources across Regions.
 
     • The resources that you create in one Region do not exist in any other Region unless you explicitly use a replication feature offered by an AWS service.
       For example, Amazon S3 and Amazon EC2 support cross-Region replication.
@@ -394,7 +447,8 @@ REGIONS : --> 24 In Total
    • After you disable a Region, the resources in this Region are immediately unavailable.
      However, they are not deleted. You cannot disable a Region that is enabled by default.
 
-When you enable a Region, AWS performs actions to prepare your account in that Region, such as distributing your IAM resources to the Region. This process takes a few minutes for most accounts, but this can take several hours. You cannot use the Region until this process is complete.
+When you enable a Region, AWS performs actions to prepare your account in that Region, such as distributing your IAM resources to the Region.
+This process takes a few minutes for most accounts, but this can take several hours. You cannot use the Region until this process is complete.
 
 #### Regions are completely isolated so this achieves the greatest possible fault tolerance and stability.
 #### Availability Zones are connected through low latency links .
@@ -406,7 +460,7 @@ AVAILABILITY ZONES : --> 77 In Total
       Availability Zones are multiple, isolated locations within each Region. Each Region has multiple, isolated locations known as Availability Zones.
       Availability Zones are distinct locations that are engineered to be isolated from failures in other Availability Zones.
       By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location
-      An Availability Zone is represented by a Region code followed by a letter identifier; for example,us-east-1a --> AZ ID is unique for all accounts but us-east-1a might not be same for all.
+      An Availability Zone is represented by a Region code followed by a letter identifier; for example, us-east-1a --> AZ ID is unique for all accounts but us-east-1a might not be same for all.
       When you launch an instance, you can select an Availability Zone or let us choose one for you.
       If you distribute your instances across multiple Availability Zones and one instance fails, you can design your application so that an instance in another Availability Zone can handle requests.
       You can also use Elastic IP addresses to mask the failure of an instance in one Availability Zone by rapidly remapping the address to an instance in another Availability Zone.
@@ -429,14 +483,15 @@ LOCAL ZONES :
       The subnet in the Local Zone operates the same as other subnets in your VPC
 
       A Local Zone is represented by an AWS Region code followed by an identifier that indicates the location, for example us-west-2-lax-1a.
-      Resources created in a Local Zone canserve local users with very low-latency communications.
+      Resources created in a Local Zone can serve local users with very low-latency communications.
 
 OUTPOSTS & WAVELENGTHS :
 --------------------------
     • AWS Outposts is a fully managed service that extends AWS infrastructure, services, APIs, and tools to customer premises.
       By providing local access to AWS managed infrastructure, AWS Outposts enables customers to build and run applications on premises using the same programming interfaces as in AWSRegions, while using local compute and storage resources for lower latency and local data processing needs.
 
-    • Wavelength Zones allow developers to build applications that deliver ultra-low latencies to 5G devices and end users. Wavelength deploys standard AWS compute and storage services to the edge of telecommunication carriers' 5G networks.
+    • Wavelength Zones allow developers to build applications that deliver ultra-low latencies to 5G devices and end users.
+      Wavelength deploys standard AWS compute and storage services to the edge of telecommunication carriers' 5G networks.
       A Wavelength Zone is represented by a Region code followed by an identifier that indicates the Wavelength Zone, for example, us-east-1-wl1-bos-wlz-1.
 
 EDGE LOCATIONS : - Content Delivery Network
@@ -450,7 +505,7 @@ Amazon CloudFront, Amazon Route 53, AWS Firewall Manager, AWS Shield, and AWS WA
 |    |                                                                                          |      |
 |    |        ------------------------------     -----------------------------      ------      |      |     -----------------------     -----------------
 |    |       |       ----       ----         |  |    ----      ----           |    |            |      |    |    ----               |   |
-| A  |   B   |   C  |  D  |    |    | . . .  |  |   |    |    |    | . . . .  |    | . . . .    |      |    |   |     | . . . . .   |   |
+| A  |   B   |   C  |  D1 |    | D2 | . . .  |  |   |    |    |    | . . . .  |    | . . . .    |      |    |   |     | . . . . .   |   |
 |    |       |       -----      ----         |  |    ----      ----           |    |            |      |    |    -----              |   |
 |    |        ------------------------------     -----------------------------      -------     |      |     ------------------------    -----------------
 |    |                                                                                          |      |
@@ -479,7 +534,7 @@ Increases are not granted immediately. It might take a couple of days for your i
 SCALABILITY :
 -------------------
 A scalable service will automatically grow in capacity to seamlessly meet any changes in demand.
-A well-designed cloud-based operation will constantly monitor the health of its application stack and respond whenever preset performance metrics might soon go unmet.
+A well-designed cloud-based operation will constantly monitor the health of its application stack and respond whenever pre-set performance metrics might soon go unmet.
 The response might include automatically launching new server instances to add extra compute power to your existing cluster.
 But it will probably also involve prepopulating those instances with the application data and configuration settings they’ll need to actually serve your application to your clients.
 A large cloud provider like AWS will, for all practical purposes, have endless available capacity so the only practical limit to the maximum size of your application is your organization’s budget
@@ -506,7 +561,7 @@ Serverless computing (or serverless for short), is an execution model where the 
 And only charging for the amount of resources used to run the code.
 The code is typically run inside stateless containers that can be triggered by a variety of events including http requests, database events, queuing services, monitoring alerts, file uploads, scheduled events (cron jobs), etc.
 The code that is sent to the cloud provider for execution is usually in the form of a function.
-Hence serverless is sometimes referred to as “Functions as a Service” or “FaaS”. Following are the FaaS offerings of the major cloud providers:
+Hence serverless is sometimes referred to as “Functions as a Service” or “FaaS”.
 
 Serverless is a way to describe the services, practices, and strategies that enable you to build more agile applications so you can innovate and respond to change faster.
 With serverless computing, infrastructure management tasks like capacity provisioning and patching are handled by AWS, so you can focus on only writing code that serves your customers. Serverless services like AWS Lambda come with automatic scaling, built-in high availability, and a pay-for-value billing model. Lambda is an event-driven compute service that enables you to run code in response to events from over 150 natively-integrated AWS and SaaS sources - all without managing any servers.
@@ -568,7 +623,8 @@ Once your browser receives the response, it interprets the code and displays the
 To the browser, also known as the client, Facebook’s server is an API.
 This means that every time you visit a page on the Web, you interact with some remote server’s API.
 An API isn’t the same as the remote server — rather it is the part of the server that receives requests and sends responses.
-To summarize, when a company offers an API to their customers, it just means that they’ve built a set of dedicated URLs that return pure data responses — meaning the responses won’t contain the kind of presentational overhead that you would expect in a graphical user interface like a website.
+To summarize, when a company offers an API to their customers, it just means that they’ve built a set of dedicated URLs that return pure data responses
+    — meaning the responses won’t contain the kind of presentational overhead that you would expect in a graphical user interface like a website.
 
                                                                             -----
      -------                                                               |     |                    -------            ---------
@@ -652,16 +708,17 @@ Whether something is stateful or stateless depends on how long the state of inte
 
 COMMUNICATION MODELS :
 ===========================
+** Complete Info with protocols in Miscellaneous.txt in the main directory.
 NOTE  : We have two Models : OSI ( Open System interconnection model ) & TCP-IP ( Transmission Control Protocol - Internet Protocol )
 
         OSI MODEL                  TCP/IP MODEL                              PROTOCOL
   --------------------------------------------------------------------------------------------------------------------------
         Application    |    |      Application                               HTTP - FTP - TELENET - EMAIL - PRINTING
-        Presentation   V    ^          "                                     MIME - SSL - TLS
+        Presentation   v    ^          "                                     MIME - SSL - TLS
         Session        |    |          "                                     RP / RTCP
-        Transport      V    ^      Transport                                 TCP / UDP / SCTP /
+        Transport      v    ^      Transport                                 TCP / UDP / SCTP /
         Network        |    |      Internet                                  IP / ICMP / BGP / RARP / ARP
-        Data Link      V    ^      Link / Network Interface                  PPP / HDLC
+        Data Link      v    ^      Link / Network Interface                  PPP / HDLC
         Physical       |    |      Physical / Network Interface              ETHERNET
   ---------------------------------------------------------------------------------------------------------------------------
 

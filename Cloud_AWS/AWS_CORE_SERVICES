@@ -4,24 +4,24 @@ TOTAL AVAILABLE SERVICE CATEGORIES  IN AWS : (As of January 2021)
 
 NOTE :
 ########
-1. This page contains a detailed description of what the services do in each of the categories .
-2. Topics having a higher importance have individual chapters written after them. Marked with < Has a separate detailed chapter > after the header.
+1. This page contains a detailed description of the individual services from each of the categories .
+2. Services having a higher importance have individual chapters written after them. Marked with < Has a separate detailed chapter > after the header.
 3. Recommended to View the YouTube Video , link provided beside the topic heading before going through the material.
 4. Also view the reference pictures attached if any at cloud_AWS/0_Reference_pics.
 5. If we have 2 or more services performing a similar activity , the likely chances are that the basic one is a free service while others are PAID services .
      --> AWS Cloud Watch (free) - AWS Detective (30 days free)- AWS Guard Duty  (30 days free)
-6. Also a Resource  may be a combination of one or more resources or a subset of a single resource providing much more detailed infrastructure .
-
+     --> Also a Resource  may be a combination of one or more resources or a subset of a single resource providing much more detailed infrastructure .
+        As in Cloud watch gives a detailed metrics while cloud trail shows the basic events.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 SERVICES COVERED :
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Analytics                     Compute                  Data Base                Management & Governance         Satellite
-Application Integration       Containers               Developer Tools          Migration & Transfer            Security, Identity, & Compliance
-AR & VR                       Cryptography & PKI       End User Computing       Networking & Content Delivery   Storage
-Billing & Cost Management     Customer Enablement      Front-End Web & Mobile   Quantum Computing
-Business Applications         Customer Engagement      Game Development         Robotics
-Blockchain
+Analytics                 |  Compute             |   Data Base              |  Management & Governance       |  Satellite
+Application Integration   |  Containers          |   Developer Tools        |  Migration & Transfer          |  Security, Identity & Compliance
+AR & VR                   |  Cryptography & PKI  |   End User Computing     |  Networking & Content Delivery |  Storage
+Billing & Cost Management |  Customer Enablement |   Front-End Web & Mobile |  Quantum Computing             |
+Business Applications     |  Customer Engagement |   Game Development       |  Robotics                      |
+Blockchain                |                      |                          |                                |
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 SERVICES NOT COVERED :
@@ -183,7 +183,8 @@ In a single data dashboard, QuickSight can include AWS data, third-party data, b
 Securely push these dashboards to customers. Used to forecast future results and take decisions.
 
 13. AMAZON REDSHIFT : // Documented in Database https://www.youtube.com/watch?v=_qKm6o1zK3U&t=9s
-Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud. An Amazon Redshift data warehouse is a collection of computing resources called nodes, which are organized into a group called a cluster.
+Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud. 
+An Amazon Redshift data warehouse is a collection of computing resources called nodes, which are organized into a group called a cluster.
 Each cluster runs an Amazon Redshift engine and contains one or more databases.
 Redshift lets you easily save the results of your queries back to your S3 data lake using open formats, like Apache Parquet, so that you can do additional analytics from other analytics services like Amazon EMR, Amazon Athena, and Amazon SageMaker.
 
