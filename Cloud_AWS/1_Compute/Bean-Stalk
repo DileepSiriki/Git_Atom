@@ -5,15 +5,16 @@ Elastic Beanstalk reduces management complexity without restricting choice or co
 You simply upload your application, and Elastic Beanstalk automatically handles the details of capacity provisioning, load balancing, scaling, and application health monitoring.
 It supports applications developed in Go, Java, .NET, Node.js, PHP, Python, and Ruby.
 When you deploy your application, Elastic Beanstalk builds the selected supported platform version and provisions one or more AWS resources, such as Amazon EC2 instances, to run your application.
-There is high-level CLI designed specifically for Elastic Beanstalk known as "eb CLI".
+There is high-level CLI designed specifically for Elastic Beanstalk known as "EB CLI".
 
-Periodically, you might need to deploy a new version of your application. You can deploy a new version at any time, as long as no other update operations are in progress on your environment.
+Periodically, you might need to deploy a new version of your application.
+You can deploy a new version at any time, as long as no other update operations are in progress on your environment.
 You can select your environment and UPLOAD & DEPLOY your update .
 
 The environment is the heart of the application.
 When you create an environment, Elastic Beanstalk provisions the resources required to run your application.
 Every environment has a CNAME (URL) that points to a load balancer. The environment has a URL, such as myapp.us-west-2.elasticbeanstalk.com.
-This URL is aliased in Amazon Route 53 to an Elastic Load Balancing URL—something like abcdef-123456.us-west-2.elb.amazonaws.com—by using a CNAME record.
+This URL is aliased in Amazon Route 53 to an Elastic Load Balancing URL—something like abcdef-123456.us-west-2.elb.amazonaws.com — by using a CNAME record.
 Amazon Route 53 is a highly available and scalable Domain Name System (DNS)web service.
 It provides secure and reliable routing to your infrastructure.
 Your domain name that you registered with your DNS provider will forward requests to the CNAME.
@@ -21,3 +22,37 @@ Your domain name that you registered with your DNS provider will forward request
 The load balancer sits in front of the Amazon EC2 instances, which are part of an Auto Scaling group.
 Amazon EC2 Auto Scaling automatically starts additional Amazon EC2 instances to accommodate increasing load on your application.
 If the load on your application decreases, Amazon EC2 Auto Scaling stops instances, but always leaves at least one instance running.
+
+[[ You do not know any services in AWS but you can deploy from a template of code. - Go, Java, .NET, Node.js, PHP, Python, and Ruby ]]
+[[ Handles the details of capacity provisioning, load balancing, scaling, and application health monitoring.]]
+[[ ENVIRONIMENT - heart , create an environment - CNAME URL(myapp.us-west-2.elasticbeanstalk.com) Pointing to an ELB - aliased to (abcdef-123456.us-west-2.elb.amazonaws.com) ]]
+[[ Route53 will forward the requests to the CNAME of the ELB which sits in front of the EC2.]]
+[[ Explain Pricing ]]
+
+
+
+BEANSTALK vs CLOUD FORMATION : https://stackoverflow.com/questions/14422151/what-is-the-difference-between-elastic-beanstalk-and-cloudformation-for-a-net-p
+---------------------------------------
+---------------------------------------
+They're actually pretty different.
+Elastic Beanstalk is intended to make developers' lives easier.
+CloudFormation is intended to make systems engineers' lives easier.
+
+Elastic Beanstalk is a PaaS-like layer on top of AWS's IaaS services which abstracts away the underlying EC2 instances, Elastic Load Balancers, auto scaling groups, etc.
+This makes it a lot easier for developers, who don't want to be dealing with all the systems stuff, to get their application quickly deployed on AWS.
+It's very similar to other PaaS products such as Heroku, EngineYard, Google App Engine, etc.
+With Elastic Beanstalk, you don't need to understand how any of the underlying magic works.
+
+CloudFormation, on the other hand, doesn't automatically do anything.
+It's simply a way to define all the resources needed for deployment in a huge JSON file.
+So a CloudFormation template might actually create two ElasticBeanstalk environments (production and staging), a couple of Elastic Cache clusters, a DyanmoDB table, and then the proper DNS in Route53.
+I then upload this template to AWS, walk away, and 45 minutes later everything is ready and waiting.
+Since it's just a plain-text JSON file, I can stick it in my source control which provides a great way to version my application deployments.
+It also ensures that I have a repeatable, "known good" configuration that I can quickly deploy in a different region.
+
+Behind the scenes, Elastic Beanstalk uses CloudFormation to create and maintain resources.
+If your application requirements dictate more custom control, the additional functionality of CloudFormation gives you more options to control your workloads.
+ 
+AWS CloudFormation supports Elastic Beanstalk application environments as one of the AWS resource types.
+This allows you, for example, to create and manage an AWS Elastic Beanstalk–hosted application along with an RDS database to store the application data.
+In addition to RDS instances, any other supported AWS resource can be added to the group as well.

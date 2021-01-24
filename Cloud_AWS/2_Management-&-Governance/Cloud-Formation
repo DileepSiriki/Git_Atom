@@ -55,6 +55,24 @@ For example, in a template, you can describe an AmazonEC2 instance, such as the 
                             DeleteOnTermination: false
                             VolumeSize: 20
 
+
+CloudFormation templates are JSON or YAML-formatted text files comprised of five types of elements:
+
+1. An optional list of template parameters (input values supplied at stack creation time)
+2. An optional list of output values (e.g., the complete URL to a web application)
+3. An optional list of data tables used to look up static configuration values (e.g., AMI names)
+4. The list of AWS resources and their configuration values
+5. A template file format version number
+
+Template parameters are used to customize aspects of your template at run time, when the stack is built.
+For example, the Amazon RDS database size, Amazon EC2 instance types, database and web server port numbers can be passed to AWS CloudFormation when a stack is created.
+Each parameter can have a default value and description, and may be marked as “NoEcho” to hide the actual value you enter on the screen and in the AWS CloudFormation event logs.
+When you create an AWS CloudFormation stack, the AWS Management Console will automatically synthesize and present a pop-up dialog form for you to edit parameter values.
+
+Output values are a convenient way to present a stack’s key resources (such as the address of an Elastic Load Balancing load balancer or Amazon RDS database) to the user via the AWS Management Console, or via the command line tools.
+You can use simple functions to concatenate string literals and the value of attributes associated with the actual AWS resources.
+A template can also leverage Registry resource types, your own custom private types, your own macros, and retrieving configuration parameters from AWS Secrets Manager and AWS System Manager Parameter Store.
+
 STACK :
 --------
 A stack is a collection of related AWS resources that you can manage as a single unit.
@@ -202,3 +220,30 @@ SAMPLE TEMPLATES :
 ----------------------
 Forexample, one sample template describes a load-balancing, auto scaling WordPress blog in an AmazonVPC.
 To view the sample templates, go to https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-sample-templates.html
+
+
+AWS BEANSTALK vs AWS CLOUD FORMATION : https://stackoverflow.com/questions/14422151/what-is-the-difference-between-elastic-beanstalk-and-cloudformation-for-a-net-p
+---------------------------------------
+---------------------------------------
+They're actually pretty different.
+Elastic Beanstalk is intended to make developers' lives easier.
+CloudFormation is intended to make systems engineers' lives easier.
+
+Elastic Beanstalk is a PaaS-like layer on top of AWS's IaaS services which abstracts away the underlying EC2 instances, Elastic Load Balancers, auto scaling groups, etc.
+This makes it a lot easier for developers, who don't want to be dealing with all the systems stuff, to get their application quickly deployed on AWS.
+It's very similar to other PaaS products such as Heroku, EngineYard, Google App Engine, etc.
+With Elastic Beanstalk, you don't need to understand how any of the underlying magic works.
+
+CloudFormation, on the other hand, doesn't automatically do anything.
+It's simply a way to define all the resources needed for deployment in a huge JSON file.
+So a CloudFormation template might actually create two ElasticBeanstalk environments (production and staging), a couple of Elastic Cache clusters, a DyanmoDB table, and then the proper DNS in Route53.
+I then upload this template to AWS, walk away, and 45 minutes later everything is ready and waiting.
+Since it's just a plain-text JSON file, I can stick it in my source control which provides a great way to version my application deployments.
+It also ensures that I have a repeatable, "known good" configuration that I can quickly deploy in a different region.
+
+Behind the scenes, Elastic Beanstalk uses CloudFormation to create and maintain resources.
+If your application requirements dictate more custom control, the additional functionality of CloudFormation gives you more options to control your workloads.
+
+AWS CloudFormation supports Elastic Beanstalk application environments as one of the AWS resource types.
+This allows you, for example, to create and manage an AWS Elastic Beanstalk–hosted application along with an RDS database to store the application data.
+In addition to RDS instances, any other supported AWS resource can be added to the group as well.
