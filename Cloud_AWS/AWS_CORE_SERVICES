@@ -1,4 +1,4 @@
-behaviour====================================================================
+====================================================================
 TOTAL AVAILABLE SERVICE CATEGORIES  IN AWS : (As of January 2021)
 ====================================================================
 
@@ -26,9 +26,9 @@ Blockchain                |                      |                          |   
 -------------------------------------------------------------------------------------------------------------------------------------------------
 SERVICES NOT COVERED :
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Internet of Things (IoT)
-Machine Learning
-Media Services
+Internet of Things (IoT)  |
+Machine Learning          |
+Media Services            |
 
 
 ##################################################################################################################
@@ -183,7 +183,7 @@ In a single data dashboard, QuickSight can include AWS data, third-party data, b
 Securely push these dashboards to customers. Used to forecast future results and take decisions.
 
 13. AMAZON REDSHIFT : // Documented in Database https://www.youtube.com/watch?v=_qKm6o1zK3U&t=9s
-Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud. 
+Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud.
 An Amazon Redshift data warehouse is a collection of computing resources called nodes, which are organized into a group called a cluster.
 Each cluster runs an Amazon Redshift engine and contains one or more databases.
 Redshift lets you easily save the results of your queries back to your S3 data lake using open formats, like Apache Parquet, so that you can do additional analytics from other analytics services like Amazon EMR, Amazon Athena, and Amazon SageMaker.

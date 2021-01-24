@@ -267,20 +267,6 @@ IT organizations typically use Type 2 hypervisors to create virtual desktops.
 ============================================================================================================
 ############################################################################################################
 ============================================================================================================
-[ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
--> On-demand - IT resources compute db n/w apps - public / private - pay as you go -- Buy maintain own - from vendors like aws azure
--> Platform independent - no downloaded software
--> Small to large - backup / recovery / email / VM / web apps / big data analytics
--> hospitals - finance teams - gaming companies
--> USES :  A agile - c  cost effective - D deploy global in sec - E elastic - F trade capital expense for variable exp - G no engineers for maintenance
-           guessing capacity - no running data centres - serverless - scalable
--> TYPES : Service P P H C - deploy I P S
--> Virtualization
--> Hypervisor & Types
--> aws 175 services over 190 countries - 5 pillars PROCS
-============================================================================================================
-############################################################################################################
-============================================================================================================
 
 CLOUD COMPUTING :
 ------------------
@@ -472,7 +458,12 @@ AVAILABILITY ZONES : --> 77 In Total
 
 LOCAL ZONES :
 ----------------
-    • Local Zones provide you the ability to place resources, such as compute and storage, in multiple locations closer to your end users.
+// AWS Local Zones are only available in Los Angeles and also available in preview in Boston, Houston, and Miami.
+    • AWS Local Zones are a type of AWS infrastructure deployment that places AWS compute, storage, database, and other select services close to large population, industry, and IT centers.
+      With AWS Local Zones, you can easily run applications that need single-digit millisecond latency closer to end-users in a specific geography.
+      AWS Local Zones are ideal for use cases such as media & entertainment content creation, real-time gaming, live video streaming, and machine learning inference.
+
+      Local Zones provide you the ability to place resources, such as compute and storage, in multiple locations closer to your end users.
       Local Zones have their own connections to the internet and support AWS Direct Connect, so that resources created in a Local Zone can serve local users with low-latency communications.
       A Local Zone is represented by a Region code followed by an identifier that indicates the location, for example, us-west-2-lax-1a
       We need to enable them in order to use , then create a subnet .
@@ -520,6 +511,26 @@ Amazon CloudFront, Amazon Route 53, AWS Firewall Manager, AWS Shield, and AWS WA
 
 
 ### List all regions and zones , edge locations , wavelengths , outposts for interview purpose // get a rough sketch
+
+
+============================================================================================================
+############################################################################################################
+============================================================================================================
+###### SKIP THIS SECTION - just for my reference.
+[ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
+-> On-demand - IT resources compute db n/w apps - public / private - pay as you go -- Buy maintain own - from vendors like aws azure
+-> Platform independent - no downloaded software
+-> Small to large - backup / recovery / email / VM / web apps / big data analytics
+-> hospitals - finance teams - gaming companies
+-> USES :  A agile - c  cost effective - D deploy global in sec - E elastic - F trade capital expense for variable exp - G no engineers for maintenance
+           guessing capacity - no running data centres - serverless - scalable
+-> TYPES : Service P P H C - deploy I P S
+-> Virtualization
+-> Hypervisor & Types
+-> aws 175 services over 190 countries - 5 pillars P R O C S[security/shared responsibility ]
+============================================================================================================
+############################################################################################################
+============================================================================================================
 
 AWS SERVICE QUOTAS :
 --------------------------
@@ -698,7 +709,7 @@ Whether something is stateful or stateless depends on how long the state of inte
     Stateful applications store data, while stateless applications do not.
     These devices in stateful connections  track source and destination IP addresses, as well as protocol or port information in an active connections table, which handles statistics of a network's active connections.
     Stateful devices also inspect the packet payload to verify that the device contains the appropriate data.
-    Payload inspection might monitor a TCP handshake between devices, for example.
+    Payload inspection might monitor a TCP handshake between devices.
     Because stateful devices save the connection information, the devices can reference that data when subsequent packets pass through the same connection.
     Thus, the firewall can recognize packets that are part of existing and permitted connections, while also easily differentiating between legitimate and nonlegitimate connections.
     The saved data in the connections table continuously updates as connections form, age and expire.

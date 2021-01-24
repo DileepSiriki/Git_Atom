@@ -1,39 +1,44 @@
 AWS - EC2 (AMAZON ELASTIC COMPUTE CLOUD)
 ==========================================
-It provides scalable computing capacity in the Amazon WebServices (AWS) Cloud.
+It provides scalable computing capacity in the Amazon Web Services (AWS) Cloud.
 Using Amazon EC2 eliminates your need to invest in hardware up front, so you can develop and deploy applications faster.
 You can use Amazon EC2 to launch as many or as few virtual servers as you need, configure security and networking, and manage storage.
 
-  •Virtual computing environments, known as instances
-  •Preconfigured templates for your instances, known as Amazon Machine Images (AMIs), that package the bits you need for your server (including the operating system and additional software)
-  •Various configurations of CPU, memory, storage, and networking capacity for your instances, known as instance types
-  •Secure login information for your instances using key pairs (AWS stores the public key, and you store the private key in a secure place)
-  •Storage volumes for temporary data that's deleted when you stop, hibernate, or terminate your instance, known as instance store volumes
-  •Persistent storage volumes for your data using Amazon Elastic Block Store (Amazon EBS), known as Amazon EBS volumes
-  •Multiple physical locations for your resources, such as instances and Amazon EBS volumes, known as Regions and Availability Zones
-  •A firewall that enables you to specify the protocols, ports, and source IP ranges that can reach your instances using security groups
-  •Static IPv4 addresses for dynamic cloud computing, known as Elastic IP addresses
-  •Metadata, known as tags, that you can create and assign to your Amazon EC2 resources
-  •Virtual networks you can create that are logically isolated from the rest of the AWS Cloud, and that you can optionally connect to your own network, known as virtual private clouds (VPCs)
+  • Virtual computing environments, known as instances.
+  • Preconfigured templates for your instances, known as Amazon Machine Images (AMIs), that package the bits you need for your server (including the operating system and additional software)
+  • Various configurations of CPU, memory, storage, and networking capacity for your instances, known as instance types
+  • Secure login information for your instances using key pairs (AWS stores the public key, and you store the private key in a secure place)
+  • Storage volumes for temporary data that's deleted when you stop, hibernate, or terminate your instance, known as instance store volumes
+  • Persistent storage volumes for your data using Amazon Elastic Block Store (Amazon EBS), known as Amazon EBS volumes
+  • Multiple physical locations for your resources, such as instances and Amazon EBS volumes, known as Regions and Availability Zones
+  • A firewall that enables you to specify the protocols, ports, and source IP ranges that can reach your instances using security groups
+  • Static IPv4 addresses for dynamic cloud computing, known as Elastic IP addresses
+  • Metadata, known as tags, that you can create and assign to your Amazon EC2 resources
+  • Virtual networks you can create that are logically isolated from the rest of the AWS Cloud, and that you can optionally connect to your own network, known as virtual private clouds (VPCs)
 
 To automatically distribute incoming application traffic across multiple instances, use Elastic Load Balancing.
 To get a managed relational database in the cloud, use Amazon Relational Database Service.
-To make it easier to manage Docker containers on a cluster of EC2 instances, use Amazon ElasticContainer Service (Amazon ECS).
+To make it easier to manage Docker containers on a cluster of EC2 instances, use Amazon Elastic Container Service (Amazon ECS).
 To monitor basic statistics for your instances and Amazon EBS volumes, use Amazon CloudWatch.
-Amazon EC2 supports creating resources using AWS CloudFormation. You create a template, in JSON or YAML, that describes your AWS resources, and AWS CloudFormation provisions and configures those resources for you.
+Amazon EC2 supports creating resources using AWS CloudFormation.
+You create a template, in JSON or YAML, that describes your AWS resources, and AWS CloudFormation provisions and configures those resources for you.
+
+--> To create an exact EC2 instance -> Click on the required instance and -> Click actions -> Launch more like this .
+--> To replicate an EC2 instance into another region -> create an image of instance -> copy image to another region -> launch instance from image.
 
 TYPES OF INSTANCES :
 ---------------------
-  ONDEMAND  : Pay for the instances that you use by the second, with no long-term commitments or upfront payments.
+  ONDEMAND  : Pay for the instances that you use by the hour / second, with no long-term commitments or upfront payments.
   SAVINGS   : You can reduce your Amazon EC2 costs by making a commitment to a consistent amount of usage, in USD per hour, for a term of 1 or 3 years.
   RESERVED  : You can reduce your Amazon EC2 costs by making a commitment to a specific instance configuration, including instance type and Region, for a term of 1 or 3 years.
   SPOT      : Request unused EC2 instances, which can reduce your Amazon EC2 costs significantly.
 
-INSTANCES :
-------------
+INSTANCE LIFECYCLE :
+------------------------
 Is a virtual server in the cloud. Its configuration at launch is a copy of the AMI that you specified when you launched the instance.
 An instance type essentially determines the hardware of the host computer used for your instance.
-Each instance type offers different compute and memory capabilities. Select an instance type based on the amount of memory and computing power that you need for the application or software that you plan to run on the instanc
+Each instance type offers different compute and memory capabilities.
+Select an instance type based on the amount of memory and computing power that you need for the application or software that you plan to run on the instance.
 Your AWS account has a limit on the number of instances that you can have running.
 
     STORAGE :
@@ -44,51 +49,179 @@ Your AWS account has a limit on the number of instances that you can have runnin
         One these are mapped to our instance , we can use them to mount and use . The data is lost if the instance fails (stopped or terminated).
         So this is used for temporary data . We can overcome this by REPLICATION or using AMAZON S3 or EBS Volumes.
 
-    STOP & TERMINATE :
-    -------------------
-    --> STOP :
+    --> STOP & START :
+        ---------------
+        You can stop and start your instance if it has an Amazon EBS volume as its root device. The instance retains its instance ID.
+        When you stop an instance, we shut it down. We don't charge usage for a stopped instance, or data transfer fees, but we do charge for the storage for any Amazon EBS volumes.
+        Each time you start a stopped instance we charge a minimum of one minute for usage. After one minute, we charge only for the seconds you use.
+        For example, if you run an instance for 20 seconds and then stop it, we charge for a full one minute.
+        If you run an instance for 3 minutes and 40 seconds, we charge for exactly 3 minutes and 40 seconds of usage.
+
+        While the instance is stopped, you can treat its root volume like any other volume, and modify it (for example, repair file system problems or update software).
+        You just detach the volume from the stopped instance, attach it to a running instance, make your changes, detach it from the running instance, and then reattach it to the stopped instance.
+        Make sure that you reattach it using the storage device name that's specified as the root device in the block device mapping for the instance.
+        If you decide that you no longer need an instance, you can terminate it.
+        As soon as the state of an instance changes to shutting-down or terminate, we stop charging for that instance.
+
         When an instance is stopped, the instance performs a normal shutdown, and then transitions to a stopped state.
         All of its Amazon EBS volumes remain attached, and you can start the instance again at a later time.
-        When an instance is in a stopped state, you can attach or detach Amazon EBS volumes. You can also create an AMI from the instance, and you can change the kernel, RAM disk, and instance type.
+        When an instance is in a stopped state, you can attach or detach Amazon EBS volumes.
+        You can also create an AMI from the instance, and you can change the kernel, RAM disk, and instance type.
         The Public IPV4 address is released and a new public IPv4 address is assigned after restarting again.
         An IPv6 address persists when you stop and start your instance, and is released when you terminate your instance.
-        This is because there is no concept of public and private IPV6 ip's.
+        This is because there is no concept of public and private IPV6 addresses.
 
     --> TERMINATE :
-        hen an instance is terminated, the instance performs a normal shutdown.
+        -------------
+        When an instance is terminated, the instance performs a normal shutdown.
         The root device volume is deleted by default, but any attached Amazon EBS volumes are preserved by default.
         The instance itself is also deleted, and you can't start the instance again at a later time.
         To prevent accidental termination  ensure that the disableApiTermination attribute is set to true for the instance.
 
-REZIONS AND ZONES : open EC2 -> move to bottom -> SERVICE HEALTH & ZONE STATUS
+    --> HIBERNATE :
+        -------------
+        When you hibernate an instance, Amazon EC2 signals the operating system to perform hibernation (suspend-to-disk).
+        The hibernation freezes all of the processes, saves the contents of the RAM to the EBS root volume, and then performs a regular shutdown.
+        After the shutdown is complete, the instance moves to the stopped state.
+        Any EBS volumes remain attached to the instance, and their data persists, including the saved contents of the RAM.
+        Any Amazon EC2 instance store volumes remain attached to the instance, but the data on the instance store volumes is lost.
+
+        Hibernation saves the contents from the instance memory (RAM) to your Amazon Elastic Block Store (Amazon EBS) root volume.
+        Amazon EC2 persists the instance's EBS root volume and any attached EBS data volumes.
+
+        When you start your instance:
+        --> The EBS root volume is restored to its previous state
+        --> The RAM contents are reloaded
+        --> The processes that were previously running on the instance are resumed
+        --> Previously attached data volumes are reattached and the instance retains its instance ID
+        --> You can hibernate an instance only if it's enabled for hibernation and it meets the hibernation prerequisites.
+
+        You're not charged for instance usage for a hibernated instance when it is in the stopped state.
+        You are charged for instance usage while the instance is in the stopping state, when the contents of the RAM are transferred to the EBS root volume.
+        (This is different from when you stop an instance without hibernating it.) You're not charged for data transfer.
+        However, you are charged for storage of any EBS volumes, including storage for the RAM contents.
+
+   --> REBOOT :
+       ----------
+       An instance reboot is equivalent to an operating system reboot. In most cases, it takes only a few minutes to reboot your instance.
+       When you reboot an instance, it keeps its public DNS name (IPv4), private IPv4 address, IPv6 address (if applicable), and any data on its instance store volumes.
+       Rebooting an instance doesn't start a new instance billing period (with a minimum one-minute charge), unlike stopping and starting your instance.
+       We might schedule your instance for a reboot for necessary maintenance, such as to apply updates that require a reboot.
+       No action is required on your part; we recommend that you wait for the reboot to occur within its scheduled window.
+
+   --> RETIRE :
+       -----------
+       An instance is scheduled to be retired when AWS detects irreparable failure of the underlying hardware that hosts the instance.
+       When an instance reaches its scheduled retirement date, it is stopped or terminated by AWS.
+       If your instance root device is an Amazon EBS volume, the instance is stopped, and you can start it again at any time.
+       Starting the stopped instance migrates it to new hardware.
+       If your instance root device is an instance store volume, the instance is terminated, and cannot be used again.
+       You get a notification / SES about the retirement of an instance if you are using it . You need to move to another instance.
+
+   --> RECOVER :
+       -----------
+       You can create an Amazon CloudWatch alarm that monitors an Amazon EC2 instance and automatically recovers the instance if it becomes impaired due to an underlying hardware failure or a problem that requires AWS involvement to repair.
+       Terminated instances cannot be recovered.
+       A recovered instance is identical to the original instance, including the instance ID, private IP addresses, Elastic IP addresses, and all instance metadata.
+       If the impaired instance is in a placement group, the recovered instance runs in the placement group.
+
+       When the StatusCheckFailed_System alarm is triggered, and the recover action is initiated, you will be notified by the Amazon SNS topic that you selected when you created the alarm and associated the recover action.
+       During instance recovery, the instance is migrated during an instance reboot, and any data that is in-memory is lost.
+       When the process is complete, information is published to the SNS topic you've configured for the alarm.
+       Anyone who is subscribed to this SNS topic will receive an email notification that includes the status of the recovery attempt and any further instructions.
+       You will notice an instance reboot on the recovered instance.
+
+       Examples of problems that cause system status checks to fail include:
+          - Loss of network connectivity
+          - Loss of system power
+          - Software issues on the physical host
+          - Hardware issues on the physical host that impact network reachability
+
+       If your instance has a public IPv4 address, it retains the public IPv4 address after recovery.
+
+REGIONS AND ZONES : open EC2 -> move to bottom -> SERVICE HEALTH & ZONE STATUS
 ----------------------------------------------------------------------------------
-Amazon EC2 is hosted in multiple locations world-wide. These locations are composed of Regions, Availability Zones, Local Zones, AWS Outposts, and Wavelength Zones.
+Amazon EC2 is hosted in multiple locations world-wide.
+These locations are composed of Regions, Availability Zones, Local Zones, AWS Outposts, and Wavelength Zones.
 
-    • Each Region is a separate geographic area.
-      Each Amazon EC2 Region is designed to be isolated from the other Amazon EC2 Regions. This achieves the greatest possible fault tolerance and stability.
-      When you view your resources, you see only the resources that are tied to the Region that you specified. This is because Regions are isolated from each other, and we don't automatically replicate resources across Regions.
+REGIONS : --> 24 In Total
+-------------------------
+    • An AWS Region is a physical location in the world and each Region is a separate geographic area.
+      Each Amazon EC2 Region is designed to be isolated from the other Amazon EC2 Regions.
+      This achieves the greatest possible fault tolerance and stability.
+      When you view your resources, you see only the resources that are tied to the Region that you specified.
+      This is because Regions are isolated from each other, and we don't automatically replicate resources across Regions.
 
-    • Region is devided into availability zones to isolate themselves from a disaster to other zones.
+    • The resources that you create in one Region do not exist in any other Region unless you explicitly use a replication feature offered by an AWS service.
+      For example, Amazon S3 and Amazon EC2 support cross-Region replication.
+      Some services, such as AWS Identity and Access Management (IAM), do not have Regional resources.
+      You can use policy conditions to control access to AWS services in an AWS Region.
+
+    • If a Region is disabled by default, you must enable it before you can create and manage resources. The following Regions are disabled by default:
+      --> Africa (Cape Town)
+      --> Asia Pacific (Hong Kong)
+      --> Europe (Milan)
+      --> Middle East (Bahrain)
+
+   • After you disable a Region, the resources in this Region are immediately unavailable.
+     However, they are not deleted. You cannot disable a Region that is enabled by default.
+
+When you enable a Region, AWS performs actions to prepare your account in that Region, such as distributing your IAM resources to the Region.
+This process takes a few minutes for most accounts, but this can take several hours. You cannot use the Region until this process is complete.
+
+#### Regions are completely isolated so this achieves the greatest possible fault tolerance and stability.
+#### Availability Zones are connected through low latency links .
+#### AWS provides you with the flexibility to place instances and store data within multiple geographic regions as well as across multiple Availability Zones within each AWS Region.
+
+AVAILABILITY ZONES : --> 77 In Total
+----------------------------------------
+    • Region is divided into availability zones to isolate themselves from a disaster to other zones. These are discrete data centres.
       Availability Zones are multiple, isolated locations within each Region. Each Region has multiple, isolated locations known as Availability Zones.
       Availability Zones are distinct locations that are engineered to be isolated from failures in other Availability Zones.
       By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location
-      An Availability Zone is represented by a Region code followed by a letter identifier; for example,us-east-1a --> AZ ID is unique for all accounts but us-east-1a might not be same for all.
+      An Availability Zone is represented by a Region code followed by a letter identifier; for example, us-east-1a --> AZ ID is unique for all accounts but us-east-1a might not be same for all.
       When you launch an instance, you can select an Availability Zone or let us choose one for you.
       If you distribute your instances across multiple Availability Zones and one instance fails, you can design your application so that an instance in another Availability Zone can handle requests.
       You can also use Elastic IP addresses to mask the failure of an instance in one Availability Zone by rapidly remapping the address to an instance in another Availability Zone.
       we can also migrate instances to another AZ --> make an AMI --> launch an instance --> configure
 
-    • Local Zones provide you the ability to place resources, such as compute and storage, in multiple locations closer to your end users.
+      The resources that you create in one Region do not exist in any other Region unless you explicitly use a replication feature offered by an AWS service.
+      For example, Amazon S3 and Amazon EC2 support cross-Region replication.
+      Some services, such as AWS Identity and Access Management (IAM), do not have Regional resources.
+
+LOCAL ZONES :
+----------------
+// AWS Local Zones are only available in Los Angeles and also available in preview in Boston, Houston, and Miami.
+    • AWS Local Zones are a type of AWS infrastructure deployment that places AWS compute, storage, database, and other select services close to large population, industry, and IT centers.
+      With AWS Local Zones, you can easily run applications that need single-digit millisecond latency closer to end-users in a specific geography.
+      AWS Local Zones are ideal for use cases such as media & entertainment content creation, real-time gaming, live video streaming, and machine learning inference.
+
+      Local Zones provide you the ability to place resources, such as compute and storage, in multiple locations closer to your end users.
       Local Zones have their own connections to the internet and support AWS Direct Connect, so that resources created in a Local Zone can serve local users with low-latency communications.
       A Local Zone is represented by a Region code followed by an identifier that indicates the location, for example, us-west-2-lax-1a
       We need to enable them in order to use , then create a subnet .
 
+      A Local Zone is an extension of an AWS Region that is geographically close to your users.
+      You can extend any VPC from the parent AWS Region into Local Zones by creating a new subnet and assigning it to the AWS Local Zone.
+      When you create a subnet in a Local Zone, your VPC is extended to that Local Zone.
+      The subnet in the Local Zone operates the same as other subnets in your VPC
+
+      A Local Zone is represented by an AWS Region code followed by an identifier that indicates the location, for example us-west-2-lax-1a.
+      Resources created in a Local Zone can serve local users with very low-latency communications.
+
+OUTPOSTS & WAVELENGTHS :
+--------------------------
     • AWS Outposts is a fully managed service that extends AWS infrastructure, services, APIs, and tools to customer premises.
       By providing local access to AWS managed infrastructure, AWS Outposts enables customers to build and run applications on premises using the same programming interfaces as in AWSRegions, while using local compute and storage resources for lower latency and local data processing needs.
 
-
-    • Wavelength Zones allow developers to build applications that deliver ultra-low latencies to 5G devices and end users. Wavelength deploys standard AWS compute and storage services to the edge of telecommunication carriers' 5G networks.
+    • Wavelength Zones allow developers to build applications that deliver ultra-low latencies to 5G devices and end users.
+      Wavelength deploys standard AWS compute and storage services to the edge of telecommunication carriers' 5G networks.
       A Wavelength Zone is represented by a Region code followed by an identifier that indicates the Wavelength Zone, for example, us-east-1-wl1-bos-wlz-1.
+
+EDGE LOCATIONS : - Content Delivery Network
+------------------
+A site that CloudFront uses to cache copies of your content for faster delivery to users at any location.
+Amazon CloudFront, Amazon Route 53, AWS Firewall Manager, AWS Shield, and AWS WAF services are offered at AWS Edge Locations.
 
  ---------------------------------------------------------------------------------------------------------------------------------------------------------
 |
@@ -151,10 +284,13 @@ EC2 ROOT DEVICE VOLUME : [ AMIs backed by Amazon EC2 instance store (OLDER) <===
 -->You can convert an instance store-backed Linux AMI that you own to an Amazon EBS-backed Linux AMI.
    You can't convert an instance store-backed Windows AMI to an Amazon EBS-backed Windows AMI and you cannot convert an AMI that you do not own.
 
-AMAZON MACHIENE IMAGE : AMI -->
+AMAZON MACHIENE IMAGE : AMI --> [ My AMI - Market Place - Community AMI ]
 -----------------------------
 Bundle of an OS and pre installed s/w for your virtual machine .
 It has a fixed state , so when you start , stop and start , they have a same data.
+An Amazon Machine Image (AMI) provides the information required to launch an instance. You must specify an AMI when you launch an instance.
+You can launch multiple instances from a single AMI when you need multiple instances with the same configuration.
+You can use different AMIs to launch instances when you need instances with different configurations.
 
 It is a template that contains a software configuration (for example, an operating system, an application server, and applications)
 From an AMI, you launch an instance, which is a copy of the AMI running as a virtual server in the cloud. You can also launch multiple instances of an AMI.
@@ -176,6 +312,34 @@ You can also create your own custom AMI or AMIs; doing so enables you to quickly
 -->AMIs that are backed by Amazon EBS snapshots can take advantage of Amazon EBS encryption.
    Snapshots of both data and root volumes can be encrypted and attached to an AMI.
 
+INSTANCE TYPES :
+====================
+1. General Purpose :
+   General purpose instances provide a balance of compute, memory and networking resources, and can be used for a variety of diverse workloads.
+   These instances are ideal for applications that use these resources in equal proportions such as web servers and code repositories.
+    t3.small - t3.medium - t3.micro
+
+2. Compute Optimized
+   Compute Optimized instances are ideal for compute bound applications that benefit from high performance processors.
+   Instances belonging to this family are well suited for batch processing workloads, media transcoding, high performance web servers, high performance computing (HPC), scientific modeling, dedicated gaming servers and ad server engines, machine learning inference and other compute intensive applications.
+    c4.large - c4.xlarge - c4.2xlarge
+
+3. Memory Optimized :
+   Memory optimized instances are designed to deliver fast performance for workloads that process large data sets in memory.
+    r5.large - r5.xlarge
+
+4. Storage Optimized :
+   Storage optimized instances are designed for workloads that require high, sequential read and write access to very large data sets on local storage.
+   They are optimized to deliver tens of thousands of low-latency, random I/O operations per second (IOPS) to applications.
+    i3.large - i3.xlarge - i3.2xlarge
+
+5. Accelerated Computing :
+   Accelerated computing instances use hardware accelerators, or co-processors, to perform functions, such as floating point number calculations, graphics processing, or data pattern matching, more efficiently than is possible in software running on CPUs.
+    p3.2xlarge - p3.8xlarge
+
+** Amazon EC2 allows you to choose between Fixed Performance Instances (e.g. M5, C5, and R5) and Burstable Performance Instances (e.g. T3).
+   Burstable Performance Instances provide a baseline level of CPU performance with the ability to burst above the baseline.
+
 
 INSTANCE PURCHASING OPTIONS :
 ====================================
@@ -191,10 +355,7 @@ You pay for compute capacity by the second with no long-term commitments. You ha
 The price per second for a running On-Demand Instance is fixed.
 Recommends that you use On-Demand Instances for applications with short-term, irregular workloads that cannot be interrupted.
 You can request a limit increase for each On-Demand Instance limit type from the Limits page or the vCPU limits calculator in the Amazon EC2 console
-On-Demand Instances would be billed for the number of seconds they are running.
-
-With On-Demand instances, you pay for compute capacity by the hour or the second depending on which instances you run.
-No longer-term commitments or upfront payments are needed.
+On-Demand Instances would be billed for the number of seconds they are running with a minimum of a minute , so for 20 sec you are billed 1 minute and for 3m 20 sec , you are billed for 3m 20sec.
 You can increase or decrease your compute capacity depending on the demands of your application and only pay the specified per hourly rates for the instance you use.
 
   On-Demand instances are recommended for:
@@ -202,7 +363,7 @@ You can increase or decrease your compute capacity depending on the demands of y
     --> Applications with short-term, spiky, or unpredictable workloads that cannot be interrupted
     --> Applications being developed or tested on Amazon EC2 for the first time
 
-    PER-SECOND BILLING :
+    PER-SECOND BILLING : // Not applicable for windows instances
     --------------------
     When using on-demand Linux instances, you are charged per second based on an hourly rate" .
     With per-second billing, you pay for only what you use.
@@ -212,6 +373,8 @@ You can increase or decrease your compute capacity depending on the demands of y
     - On-Demand, Reserved and Spot forms
     - All regions and Availability Zones
     - Amazon Linux and Ubuntu
+    - Not applicable for windows instances .
+    - A minimum of 1 minutes is billed always .
 
 • SPOT INSTANCES :
 ---------------------
@@ -222,6 +385,7 @@ The hourly price for a Spot Instance is called a Spot price. The Spot price of e
 Your Spot Instance runs whenever capacity is available and the maximum price per hour for your request exceeds the Spot price.
 Amazon EC2 terminates, stops, or hibernates your Spot Instance when the Spot price exceeds the maximum price for your request or capacity is no longer available.
 Amazon EC2 provides a Spot Instance interruption notice, which gives the instance a two-minute warning before it is interrupted.
+
 Spot Instances with a defined duration (also known as Spot blocks) are designed not to be interrupted and will run continuously for the duration you select.
 This makes them ideal for jobs that take a finite time to complete, such as batch processing, encoding and rendering, modeling and analysis, and continuous integration.
 You can use a duration of 1, 2, 3, 4, 5, or 6 hour.
@@ -246,7 +410,6 @@ A Dedicated Host is a physical EC2 server dedicated for your use.
 Dedicated Hosts can help you reduce costs by allowing you to use your existing server-bound software licenses, including Windows Server, SQL Server, and SUSE Linux Enterprise Server (subject to your license terms), and can also help you meet compliance requirements.
   --> Can be purchased On-Demand (hourly).
   --> Can be purchased as a Reservation for up to 70% off the On-Demand price.
-
 
 • Dedicated Instances – Pay, by the hour, for instances that run on single-tenant hardware.
   Dedicated instances can be used if you require your instance be physically isolated at the host hardware level from instances that belong to other AWS accounts.
@@ -334,7 +497,7 @@ You can sign up for Savings Plans in two simple steps using the AWS Cost Explore
   first, customize your Savings Plans recommendations based on your requirements and
   then add to the cart to purchase a plan.
 
-Savings Plans is a flexible pricing model that helps you save up to 72 percent on Amazon EC2, AWS Fargate, and AWS Lambda usage.
+Savings Plans is a flexible pricing model that helps you save up to 72% on Amazon EC2, AWS Fargate, and AWS Lambda usage.
 Savings Plans provides you lower prices for your Amazon EC2 usage, Fargate, and Lambda in exchange for a commitment to a consistent usage amount (measured in $/hour)for a one or three year term.
 Every type of compute usage has an On-Demand rate and a Savings Plans rate.
 For example, if you commit to $10/hour of compute usage, your usage is charged at your Savings Plans rate up to $10.
@@ -356,7 +519,7 @@ Any usage beyond your Savings Plans commitment is charged at your regular On-Dem
     Savings Plans are a flexible pricing model that offers low prices, just like Amazon EC2 RIs, but with added flexibility.
     With Savings Plans you can reduce your bill by committing to a consistent amount of compute usage (measured in $/hour), instead of specific instance configurations.
 
-    The first thing to point out in our comparison of Reserved Instances vs. AWS Saving Plans is that, at present, only EC2 instances and Fargate usage is eligible for AWS Saving Plans.
+    At present, only EC2 instances and Fargate usage is eligible for AWS Saving Plans.
     If your business is using Reserved Instances to save money on the cost of RDS instances, AWS Redshift, or ElastiCache services, you will have to continue using Reserved Instances until the new discount program is extended to these services.
 
     The second point to note is that, rather than committing to a specific amount of utilization - as you would with a Reserved Instance - when you purchase a AWS Saving Plans, you are committing to a minimum dollar per hour spend.
@@ -381,9 +544,9 @@ If you don't have any running instances that match the attributes of the Capacit
 In addition, you can use Savings Plans and regional Reserved Instances with your Capacity Reservations to benefit from billing discounts.
 AWS automatically applies your discount when the attributes of a Capacity Reservation match the attributes of a Savings Plan or regional Reserved Instance.
 
-You must create the Capacity Reservation with the correct platform to ensure that it properly matches with your instances. Capacity Reservations support the following platforms:
+You must create the Capacity Reservation with the correct platform to ensure that it properly matches with your instances.
+Capacity Reservations support the following platforms:
     --> Linux/UNIX - Linux with SQL Server Standard - Linux with SQL Server Web - Linux with SQL Server Enterprise - Red Hat Enterprise Linux -SUSE Linux
-
 
 DIFFERENTAITE RESERVED - SAVINGS - CAPACITY RESERVATIONS  :
 ------------------------------------------------------------
@@ -403,10 +566,9 @@ Instance Limits 	Your On-Demand Instance limits  	Default is 20 per Availability
 
 ==================================================================================================================================================================================
 ==================================================================================================================================================================================
-
 INSTANCE NAMING :
 ----------------------
-  T 2 . MICRO = T -  Instance Family
+  T 2 . MICRO = T - Instance Family
                 2 - Generation 2
                 Micro - Indicating Instance is very small.
                 1 CPU & 1 Gb Memory
@@ -417,7 +579,7 @@ INSTANCE NAMING :
                 2 CPU & 7.5 Gb Memory
 
  R 3 . LARGE = 2 CPU & 15 Gb Memory   -> Enterprise Servers .
- D2          = For high sequential Read / Write -> Data base operations .
+ D2  . *     = For high sequential Read / Write -> Data base operations .
 
 
 LIFECYCLE :
@@ -434,7 +596,8 @@ A Spot Instance runs as long as capacity is available and your maximum price is 
 CONNECTING TO A LINUX INSTANCE :
 ---------------------------------
 #### We can launch instances from : LAUNCH TEMPLATES , PARAMETERS FROM AN EXISTING INSTANCE , AWS CLI , WINDOWS POWERSHELL , EC2 FLEET as well .
-#### An EC2 Fleet contains the configuration information to launch a fleet—or group—of instances. In a singleAPI call, a fleet can launch multiple instance types across multiple Availability Zones, using the On-Demand Instance, Reserved Instance, and Spot Instance purchasing options together.
+#### An EC2 Fleet contains the configuration information to launch a fleet—or group—of instances.
+     In a single API call, a fleet can launch multiple instance types across multiple Availability Zones, using the On-Demand Instance, Reserved Instance, and Spot Instance purchasing options together.
 
 --> In EC2 dashboard --> Instances --> top right Launch Instances -> select free tier eligible --> Security group (pre create a SG and attach - check below steps INBOUND RULES , as by default inbound is not allowed )
 
@@ -446,7 +609,8 @@ CONNECTING TO A LINUX INSTANCE :
     The Linux system will look in the nominated user's .ssh/authorized_keypairs file and will attempt to find the matching public half of the keypair.
     If found, it will allow you to start the ssh session. Therefore, any keypair can be added to a user's .ssh/authorized_keys file.
     It can include multiple keypairs, all of which would be permitted to login as that user.
-    When you launch an instance, its initial state is pending. After the instance starts, its state changes to running and it receives a public DNS name.
+    When you launch an instance, its initial state is pending.
+    After the instance starts, its state changes to running and it receives a public DNS name.
 
 --> File format
       pem -- For use with OpenSSH
@@ -454,34 +618,34 @@ CONNECTING TO A LINUX INSTANCE :
       chmod 400 my-key-pair.pem -> change permissions so that only you can see it .
 
 --> If your local computer operating system is Linux or macOS X
-      •SSH client
-      •EC2 Instance Connect
-      •AWS Systems Manager Session Manager
+      • SSH client - ssh -i "Private-Key" username@DNS-name
+      • AWS Systems Manager Session Manager
+      • EC2 Instance Connect
 
 --> If your local computer operating system is Windows
-      •PuTTY ( free SSH client for Windows)
-      •SSH client
-      •AWS Systems Manager Session Manager
-      •Windows Subsystem for Linux (p. 620)
+      • SSH client - ssh -i "Private-Key" username@DNS-name
+      • AWS Systems Manager Session Manager
+      • PuTTY ( free SSH client for Windows)
+      • Windows Subsystem for Linux
 
 --> Get information about your instance
     --> Default USER NAMES :
-        •For Amazon Linux 2 or the Amazon Linux AMI, the user name is ec2-user.
-        •For a CentOS AMI, the user name is centos.
-        •For a Debian AMI, the user name is admin.
-        •For a Fedora AMI, the user name is ec2-user or fedora.
-        •For a RHEL AMI, the user name is ec2-user or root.
-        •For a SUSE AMI, the user name is ec2-user or root.
-        •For an Ubuntu AMI, the user name is ubuntu.
+      • For Amazon Linux 2 or the Amazon Linux AMI, the user name is ec2-user.
+      • For a CentOS AMI, the user name is centos.
+      • For a Debian AMI, the user name is admin.
+      • For a Fedora AMI, the user name is ec2-user or fedora.
+      • For a RHEL AMI, the user name is ec2-user or root.
+      • For a SUSE AMI, the user name is ec2-user or root.
+      • For an Ubuntu AMI, the user name is ubuntu.
 
 --> Enable inbound traffic to your instance
     --> Ensure that the security group associated with your instance allows incoming SSH traffic from your IP address.
         The default security group for the VPC does not allow incoming SSH traffic by default.
-        Security groups are specific to aRegion, so you should select the same Region in which you created your key pair.
+        Security groups are specific to a Region, so you should select the same Region in which you created your key pair.
         Inbound rules -> http & https --> 0.0.0.0/0 and ::/0
                          ssh -> My-Ip or do a custom and add IP using CIDR notation
    --> In security group selection , select both DEFAULT and the one you have created (check below details for rules before going next.)
-   If already created -> EC2 -> select instance -> security -> security groups -> select a group -> edit (add/delete)
+       If already created -> EC2 -> select instance -> security -> security groups -> select a group -> edit (add/delete)
 
 --> Locate the private key
     --> chmod 400 my-key-pair.pem -> change permissions so that only you can see it .
@@ -544,16 +708,18 @@ CONNECTING TO A LINUX INSTANCE :
 CONNECTING TO A WINDOWS INSTANCE :
 ---------------------------------
 Similar to LINUX but we need exta RDP instead of ssh :
-  --> Choose HTTP from the Type list, and make sure that Source is set to Anywhere (0.0.0.0/0).
+  --> Choose HTTP  from the Type list, and make sure that Source is set to Anywhere (0.0.0.0/0).
   --> Choose HTTPS from the Type list, and make sure that Source is set to Anywhere(0.0.0.0/0).
-  --> Choose RDP from the Type list. In the Source box, choose My IP to automatically populate the field with the public IPv4 address of your local computer.
+  --> Choose RDP   from the Type list, In the Source box, choose My IP to automatically populate the field with the public IPv4 address of your local computer.
+
   Alternatively, choose Custom and specify the public IPv4 address of your computer or network in CIDR notation.
   To specify an individual IP address in CIDR notation, add the routing suffix /32, for example,203.0.113.25/32.
   If your company allocates addresses from a range, specify the entire range, such as 203.0.113.0/24.
 
 To connect to a Windows instance, you must retrieve the initial administrator password and then specify this password when you connect to your instance using Remote Desktop.
 It takes a few minutes after instance launch before this password is available.
-The name of the administrator account depends on the language of the operating system. For example,for English, it's Administrator, for French it's Administrateur, and for Portuguese it's Administrador.
+The name of the administrator account depends on the language of the operating system.
+For example, for English, it's Administrator, for French it's Administrateur, and for Portuguese it's Administrador.
 
 Once we click CONNECT :
   --> Session Manager
@@ -567,51 +733,45 @@ Once we click CONNECT :
       --> Choose Download remote desktop file. Provide the Password upon opening the RDP.
 
 
-START AND STOP INSTANCES :
----------------------------
-  START & STOP : --> EBS  volume persists but RAM memory is lost , retains IP & ELASTIC IP addresses.
-    You can stop and start your instance if it has an Amazon EBS volume as its root device (Not Instance store based instances) --> retains instance ID .
-    While the instance is stopped, you can treat its root volume like any other volume, and modify it (for example, repair file system problems or update software).
-    You just detach the volume from the stopped instance, attach it to a running instance, make your changes, detach it from the running instance, and then reattach it to the stopped instance.
-    Make sure that you reattach it using the storage device name that's specified as the root device in the block device mapping for the instance.
-
-  TERMINATE :
-    If you decide that you no longer need an instance, you can terminate it.
-
-  HIBERNATION : --> You can't enable or disable hibernation for an instance after you launch it. , enable in configuration setting while launching.
-     Not all instances support Hybernation .
-     Hibernation saves the contents from the instance memory (RAM) to your Amazon Elastic Block Store (Amazon EBS) root volume.
-     •The EBS root volume is restored to its previous state
-     •The RAM contents are reloaded
-     •The processes that were previously running on the instance are resumed
-     •Previously attached data volumes are reattached and the instance retains its instance ID.
-
-  REBOOT :
-    An instance reboot is equivalent to an operating system reboot. In most cases, it takes only a few minutes to reboot your instance.
-    When you reboot an instance, it keeps its public DNS name (IPv4),private IPv4 address, IPv6 address (if applicable), and any data on its instance store volumes
-    We might schedule your instance for a reboot for necessary maintenance, such as to apply updates that require a reboot
-    Select the instance and choose Actions, Instance state, Reboot instance.
-
-  RETIREMENT :
-    An instance is scheduled to be retired when AWS detects irreparable failure of the underlying hardware that hosts the instance.
-    When an instance reaches its scheduled retirement date, it is stopped or terminated by AWS.
-    If your instance is scheduled for retirement, you receive an email prior to the event with the instanceID and retirement date.
-
 CLOUD WATCH ALARMS : --> Select the instance --> choose Actions -->Monitor and troubleshoot --> Manage CloudWatch alarms.
-------------------------       Alternatively, you can choose the plus sign ( + ) in the Alarm status column.
+------------------------ Alternatively, you can choose the plus sign ( + ) in the Alarm status column.
 
 Using Amazon CloudWatch alarm actions, you can create alarms that automatically stop, terminate, reboot, or recover your instances.
 You can use the stop or terminate actions to help you save money when you no longer need an instance to be running.
 You can use the reboot and recover actions to automatically reboot those instances or recover them onto new hardware if a system impairment occurs.
-You can add the stop, terminate, reboot, or recover actions to any alarm that is set on an Amazon EC2per-instance metric.
-We need to pre create an SNS Topic to recieve notification.
+You can add the stop, terminate, reboot, or recover actions to any alarm that is set on an Amazon EC2 per-instance metric.
+We need to pre create an SNS Topic to receive notification.
 --> we can make alarms to do the following : STOP - TERMINATE - REBOOT - RECOVER
 
+============================================================================================================
+############################################################################################################
+============================================================================================================
+###### SKIP THIS SECTION - just for my reference.
+
+[[ Instance - Instance types t2 - AMI market / custom - volumes ebs store - vpc subnet - security group firewall - tags - key pair - replication - ELB  ECS cloud formation ]]
+[[ start - hibernate - stop - terminate - retire - reboot - recover ]]
+[[ Regions - availability zones - local zones - outposts & Wavelengths - Edge locations ]]
+[[ instance store - from s3 - no stopping - conversion || EBS - boot volume from S3 - default terminate , can be changed - recovery upon failure // 5 steps ]]
+[[ instance types - general t - compute optimized c // gaming webservers scientific - memory r - storage i // high IO - accelerated computing p // graphics processing ]]
+[[ ON-DEMAND short term unpredictable apps & no upfront ]]
+[[ SPOT 90% off 2mint wait time ,for interrupted jobs feasible at low price  ]]
+[[ DEDICATED 70% off, physical server BYOL, per host billing - DEDICATED instances, per instance billing no-BYOL - ]]
+[[ RESERVED 75%off,for all ec2 resources , 1 to 3 years, commitment to configuration type region, apps with steady state & predictable usage , capacity reservation in an AZ, CONVIRTABLE reserved STANDARD reserved, ]]
+[[ SAVINGS 72%off,only EC2 Fargate Lambda, $0.001, consistent amount of usage $/hour, 1 to 3 years regardless of instance configuration, COMPUTE savings(flexible ) EC2 instance savings (commit to family) , ]]
+[[ EBS - block storage, to run a db, multiple EBS to single instance, persistent, attach detach, screenshots to S3, SSD HDD  ]]
+[[ EBS block level  - EFS block - S3 object level - EFS file level - Root storage for booting]]
+
+============================================================================================================
+############################################################################################################
+============================================================================================================
+
+
 NETWORKING IN EC2 : IP ADDRESSES ARE ALLOCATED USING DHCP !!
-----------------------
+============================================================
 Amazon EC2 and Amazon VPC support both the IPv4 and IPv6 addressing protocols. --> Default is IPv4 , you can not disable this behaviour .
 When you create a VPC, you must specify an IPv4 CIDR block (a range of private IPv4 addresses).
-You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign IPv6 addresses from that block to instances in your subnet.  IPv6 addresses are reachable over the Internet.
+You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign IPv6 addresses from that block to instances in your subnet.
+All IPv6 addresses are reachable over the Internet. So there is no concept of public and private IPV6.
 
   PRIVATE IPV4 - INTERNAL DNS : (By default IP is assigned)
         A private IPv4 address is an IP address that's not reachable over the Internet.
@@ -621,7 +781,7 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
 
         When you launch an instance, we allocate a primary private IPv4 address for the instance.
         Each instance is also given an internal DNS hostname that resolves to the primary private IPv4 address;
-         --> for example, ip-10-251-50-12.ec2.internal.
+         --> for example, ip-10-251-50-12.ec2.internal
         You can use the internal DNS hostname for communication between instances in the same VPC, but we can't resolve the internal DNS hostname outside of the VPC.
 
         Each instance has a default network interface (eth0) that is assigned the primary privateIPv4 address.
@@ -645,14 +805,17 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
 
         You can control whether your instance receives a public IP address as follows:
             • FOR NON-DEFAULT  :
-              Modifying the public IP addressing attribute of your subnet. ( https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip )
+              Modifying the public IP addressing attribute of your subnet.
+              ( https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip )
             • FOR DEFAULT/NON-DEFAULT :
               Enabling or disabling the public IP addressing feature during launch, which overrides the subnet's public IP addressing attribute
                 --> launch -> select -> in CONFIGURE INSTANCE -> Auto-assign Public IP -> enable/disable
 
         You cannot manually associate or disassociate a public IP address from your instance after launch. But it is released when :
-            --> Instance is stopped, hibernated, or terminated. Your stopped or hibernated instance receives a new public IP address when it is started.
-            --> Instance is associated with an Elastic IP address with it. When you disassociate the Elastic IP address from your instance, it receives a new public IP address.
+            --> Instance is stopped, hibernated, or terminated.
+                Your stopped or hibernated instance receives a new public IP address when it is started.
+            --> Instance is associated with an Elastic IP address with it.
+                When you disassociate the Elastic IP address from your instance, it receives a new public IP address.
             --> If the public IP address of your instance in a VPC has been released, it will not receive a new one if there is more than one network interface attached to your instance.
             --> Instance's public IP address is released while it has a secondary private IP address that is associated with an Elastic IP address, the instance does not receive a new public IP address
 
@@ -677,16 +840,14 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
            However, whether you assign a public IP address to your instance during launch or not, you can associate an Elastic IP address with your instance after it's launched.
            You can also modify your subnet's public IPv4 addressing behaviour.
 
-
   AMAZON DNS SERVER :
         Amazon provides a DNS server that resolves Amazon-provided IPv4 DNS hostnames to IPv4 addresses.
         The Amazon DNS server is located at the base of your VPC network range plus two.
 
   ELASTIC IP ADDRESS - IPV4: // AWS do not support Elastic IP addresses for IPv6.
-        An Elastic IP address is a public IPv4 address that you can allocate to your account.
+        An Elastic IP address is a static public IPv4 address that you can allocate to your account.
         You can associate it to and disassociate it from instances as you require. It's allocated to your account until you choose to release it.
-        AWS do not support Elastic IP addresses for IPv6.
-        The public IP addressing feature is only available during launch.
+        AWS do not support Elastic IP addresses for IPv6. The public IP addressing feature is only available during launch.
         However, whether you assign a public IP address to your instance during launch or not, you can associate an Elastic IP address with your instance after it's launched
 
   IPV6 ADDRESSES :
@@ -697,33 +858,32 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
         To  give an instance a public IP6
               --> launch -> select -> in CONFIGURE INSTANCE -> Auto-assign IPV6 -> enable/disable
         IPV6 is assigned to your instance if :
-          •Your subnet is configured to automatically assign an IPv6 address to an instance during launch.
-          •You assign an IPv6 address to your instance during launch.
-          •You assign an IPv6 address to the primary network interface of your instance after launch.
-          •You assign an IPv6 address to a network interface in the same subnet, and attach the network interface to your instance after launch
-       You can assign additional IPv6 addresses to your instance by assigning them to a network interface attached to your instance.
+          • Your subnet is configured to automatically assign an IPv6 address to an instance during launch.
+          • You assign an IPv6 address to your instance during launch.
+          • You assign an IPv6 address to the primary network interface of your instance after launch.
+          • You assign an IPv6 address to a network interface in the same subnet, and attach the network interface to your instance after launch
+        You can assign additional IPv6 addresses to your instance by assigning them to a network interface attached to your instance.
 
        An IPv6 address persists when you stop and start, or hibernate and start, your instance, and is released when you terminate your instance.
        You cannot reassign an IPv6 address while it's assigned to another network interface—you must first unassign it.
 
-
  MULTIPLE IP ADDRESSES :
- #### You can assign multiple IPV4/IPV6 addresses To a single network interface eth0 or You can add a device and add IP's
+ #### You can assign multiple IPV4/IPV6 addresses To a single network interface eth0 or You can add a device [ network interface ] and add IP's
  #### We can do this while launching -> launch -> configure Instance -> below Network Interfaces -> add device
  #### or after launching Instance  -> select ec2 -> instance -> actions -> networking -> manage Ip adresses .
 
-        •Host multiple websites on a single server by using multiple SSL certificates on a single server and associating each certificate with a specific IP address.
-        •Operate network appliances, such as firewalls or load balancers, that have multiple IP addresses for each network interface.
-        •Redirect internal traffic to a standby instance in case your instance fails, by reassigning the secondary IP address to the standby instance.
-        •You can assign a secondary private IPv4 address to any network interface. The network interface need not be attached to the instance .
-        •You can assign multiple IPv6 addresses to a network interface that's in a subnet that has an associatedIPv6 CIDR block.
+    • Host multiple websites on a single server by using multiple SSL certificates on a single server and associating each certificate with a specific IP address.
+    • Operate network appliances, such as firewalls or load balancers, that have multiple IP addresses for each network interface.
+    • Redirect internal traffic to a standby instance in case your instance fails, by reassigning the secondary IP address to the standby instance.
+    • You can assign a secondary private IPv4 address to any network interface. The network interface need not be attached to the instance .
+    • You can assign multiple IPv6 addresses to a network interface that's in a subnet that has an associatedIPv6 CIDR block.
 
-          -> launch -> configure Instance -> below Network Interfaces -> add device
-          When you add a second network interface, the system can no longer auto-assign a publicIPv4 address.
-          You will not be able to connect to the instance over IPv4 unless you assign an Elastic IP address to the primary network interface (eth0).
-          You can assign the Elastic IP address after you complete the Launch .
+    -> launch -> configure Instance -> below Network Interfaces -> add device
+    When you add a second network interface, the system can no longer auto-assign a publicIPv4 address.
+    You will not be able to connect to the instance over IPv4 unless you assign an Elastic IP address to the primary network interface (eth0).
+    You can assign the Elastic IP address after you complete the Launch .
 
- HOW MLTIPLE IP ADDRESSES WORK :
+ HOW MULTIPLE IP ADDRESSES WORK :
  --> You can assign a secondary private IPv4 address to any network interface. The network interface need not be attached to the instance.
  --> You can assign multiple IPv6 addresses to a network interface that's in a subnet that has an associated IPv6 CIDR block.
  --> You must choose a secondary IPv4 address from the IPv4 CIDR block range of the subnet for the network interface.
@@ -737,23 +897,24 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
  --> Primary private IPv4 addresses, secondary private IPv4 addresses, Elastic IP addresses, and IPv6 addresses remain with a secondary network interface when it is detached from an instance or attached to an instance.
  --> Although you can't detach the primary network interface from an instance, you can reassign the secondary private IPv4 address of the primary network interface to another network interface.
 
-                    | Primary   - N/W interface - 1 - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] , Public IPV4 , IPV6-1 , IPV6-2
-                    | Secondary - N/W interface - 2 - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] , Public IPV4 , IPV6-1 , IPV6-2
-        INSTANCE -->|     .
-                    |     .
-                    |     .     - N/W interface - n - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] , Public IPV4 , IPV6-1 , IPV6-2
+              | Primary-eth0  - N/W interface - 1 - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] . . . , Public IPV4 , IPV6-1 , IPV6-2... , Security Group-1 , Security Group-2... ,MAC address <===> Attached to a Network card
+              | Secondary     - N/W interface - 2 - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] . . . , Public IPV4 , IPV6-1 , IPV6-2... , Security Group-1 , Security Group-2... ,MAC address <===> Attached to a Network card
+  INSTANCE -->|     .
+              |     .
+              | Secondary     - N/W interface - n - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] . . . , Public IPV4 , IPV6-1 , IPV6-2... , Security Group-1 , Security Group-2... ,MAC address <===> Attached to a Network card
 
-                      ** You can assign a secondary private IPv4 address to an instance, associate an Elastic IPv4 address with a secondary private IPv4 address, and unassign a secondary private IPv4 address.
-                      ** There is no concept of public / private IPV6. They are globally reachable as they are unique.
-                      ** Secondary private IPv4 addresses that are assigned to a network interface can be reassigned to another one if you explicitly allow it.
-                      ** An IPv6 address cannot be reassigned to another network interface; you must first unassign the IPv6 address from the existing network interface.
-                      ** you can't detach the primary network interface from an instance
+        ****Scenario explained in Reference pic , Multiple-network_interface available at cloud_AWS/0_Reference_pics.
+
+      ** You can assign a secondary private IPv4 address to an instance, associate an Elastic IPv4 address with a secondary private IPv4 address, and unassign a secondary private IPv4 address.
+      ** There is no concept of public / private IPV6. They are globally reachable as they are unique.
+      ** Secondary private IPv4 addresses that are assigned to a network interface can be reassigned to another one if you explicitly allow it.
+      ** An IPv6 address cannot be reassigned to another network interface; you must first unassign the IPv6 address from the existing network interface.
+      ** you can't detach the primary network interface from an .
 
   The following list explains how multiple IP addresses work with Elastic IP addresses (IPv4 only):
   --> Each private IPv4 address can be associated with a single Elastic IP address, and vice versa.
   --> When a secondary private IPv4 address is reassigned to another interface, the secondary private IPv4 address retains its association with an Elastic IP address.
   --> When a secondary private IPv4 address is unassigned from an interface, an associated Elastic IP address is automatically disassociated from the secondary private IPv4 address.
-
 
  ELASTIC IP ADDRESSES :( public IPv4 address // no IPV6 ) -> EC2 -> navigational panel -> Elastic IP's [-> Actions -> associate/disassociate/Release etc;]
  --> If you require a persistent public IP address that can be associated to and from instances as you require, use an Elastic IP address instead.
@@ -783,7 +944,8 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
     --> We resolve a public DNS host name to the public IPv4 address or the Elastic IP address of the instance outside the network of the instance, and to the private IPv4 address of the instance from within the network of the instance.
     --> An Elastic IP address comes from Amazon's pool of IPv4 addresses, or from a custom IP address pool that you have brought to your AWS account.
     --> When you allocate an Elastic IP address from an IP address pool that you have brought to your AWS account, it does not count toward your Elastic IP address limits.
-    --> When you allocate the Elastic IP addresses, you can associate the Elastic IP addresses with a network border group. This is the location from which we advertise the CIDR block. Setting the network border group limits the CIDR block to this group.
+    --> When you allocate the Elastic IP addresses, you can associate the Elastic IP addresses with a network border group.
+        This is the location from which we advertise the CIDR block. Setting the network border group limits the CIDR block to this group.
         If you do not specify the network border group, we set the border group containing all of the Availability Zones in the Region (for example, us-west-2).
     --> An Elastic IP address is for use in a specific network border group only.
     --> An Elastic IP address is for use in a specific Region only, and cannot be moved to a different Region.
@@ -793,9 +955,11 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
 
 
   NETWORK INTERFACES / ELASTIC NETWORK INTERFACE :
-  Each instance has a default network interface, called the primary network interface.
+  --------------------------------------------------
+  Each instance has a default network interface, called the primary network interface eth0.
   You cannot detach a primary network interface from an instance. You can create and attach additional network interfaces.
-  If you have an Elastic IP address, you can associate it with one of the private IPv4 addresses for the network interface. You can associate one Elastic IP address with each private IPv4 address.
+  If you have an Elastic IP address, you can associate it with one of the private IPv4 addresses for the network interface.
+  You can associate one Elastic IP address with each private IPv4 address.
 
   While launching an instance , In the Network Interfaces section, do the following to add an secondary network interface.
    --> To add another network interface, choose Add Device.
@@ -805,11 +969,11 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
        You will not be able to connect to the instance over IPv4 unless you assign an Elastic IP address to the primary network interface (eth0).
        You can assign the Elastic IP address after you complete the Launch wizard.
    --> For each network interface, under Secondary IP addresses, choose Add IP, and then enter a private IP address from the subnet range, or accept the default Auto-assign value to let Amazon select an address.
-
    --> After you assign a secondary private IPv4 address to your instance, you need to configure the operating system on your instance to recognize the secondary private IP address.
        It is not done automatically .
 
-   An elastic network interface is a logical networking component in a VPC that represents a virtual network card. It can include the following attributes:
+   An elastic network interface is a logical networking component in a VPC that represents a virtual network card.
+   It can include the following attributes:
     - A primary private IPv4 address from the IPv4 address range of your VPC
     - One or more secondary private IPv4 addresses from the IPv4 address range of your VPC
     - One Elastic IP address (IPv4) per private IPv4 address
@@ -819,17 +983,27 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
     - A MAC address
     - A source/destination check flag
 
+
+              | Primary-eth0  - N/W interface - 1 - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] . . . , Public IPV4 , IPV6-1 , IPV6-2... , Security Group-1 , Security Group-2... ,MAC address <===> Attached to a Network card
+              | Secondary     - N/W interface - 2 - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] . . . , Public IPV4 , IPV6-1 , IPV6-2... , Security Group-1 , Security Group-2... ,MAC address <===> Attached to a Network card
+  INSTANCE -->|     .
+              |     .
+              | Secondary     - N/W interface - n - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] . . . , Public IPV4 , IPV6-1 , IPV6-2... , Security Group-1 , Security Group-2... ,MAC address <===> Attached to a Network card
+
+
    If you disassociate an Elastic IP address from a network interface, you can release it back to the address pool.
    This is the only way to associate an Elastic IP address with an instance in a different subnet or VPC, as network interfaces are specific to subnets.
    You can specify whether the network interface should be automatically deleted when you terminate the instance to which it's attached.
 
    Attaching multiple network interfaces to an instance is useful when you want to:
-   --> Create a management network. -> Scenario explained in Reference pic , Multiple-network_interface available at cloud_AWS/0_Reference_pics.
+   ****Scenario explained in Reference pic , Multiple-network_interface available at cloud_AWS/0_Reference_pics.
+   --> Create a management network.
    --> Use network and security appliances in your VPC.
    --> Create dual-homed instances with workloads/roles on distinct subnets.
    --> Create a low-budget, high-availability solution.
 
   REQUEST MANAGED NETWORK INTERFACE :
+  -------------------------------------
   A requester-managed network interface is a network interface that an AWS service creates in your VPC.
   This network interface can represent an instance for another service, such as an Amazon RDS instance, or it can enable you to access another service or resource, such as an AWS PrivateLink service, or an Amazon ECS task.
   You cannot modify or detach a requester-managed network interface.
@@ -837,6 +1011,7 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
   To change the security groups for a requester-managed network interface, you might have to use the console or command line tools for that service.
 
  NETWORK CARDS :
+ -----------------
    Instances with multiple network cards provide higher network performance, including bandwidth capabilities above 100 Gbps and improved packet rate performance.
    Each network interface is attached to a network card. The primary network interface must be assigned to network card index 0.
    If you enable Elastic Fabric Adapter (EFA) when you launch an instance that supports multiple network cards, all network cards are available.
@@ -846,16 +1021,20 @@ You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign
    EC2-CLASSIC :
     With EC2-Classic, your instances run in a single, flat network that you share with other customers.
     With Amazon VPC, your instances run in a virtual private cloud (VPC) that's logically isolated to your AWS account.
-    The EC2-Classic platform was introduced in the original release of Amazon EC2. If you created your AWS account after 2013-12-04, it does not support EC2-Classic, so you must launch your Amazon EC2instances in a VPC
+    The EC2-Classic platform was introduced in the original release of Amazon EC2.
+    If you created your AWS account after 2013-12-04, it does not support EC2-Classic, so you must launch your Amazon EC2instances in a VPC
 
  SECURITY GROUPS :
-    The rules of a security group control the inbound traffic that's allowed to reach the instances that are associated with the security group.
-    The rules also control the outbound traffic that's allowed to leave them.
-    •By default, security groups allow all outbound traffic.
-    •Security group rules are always permissive; you can't create rules that deny access.
-    •Security group rules enable you to filter traffic based on protocols and port numbers.
-    •You can add and remove rules at any time. Your changes are automatically applied to the instances that are associated with the security group.
-    •When you associate multiple security groups with an instance, the rules from each security groupare effectively aggregated to create one set of rules
+ ------------------
+ A security group is a set of firewall rules that control the traffic for your instance.
+ you can add rules to allow specific traffic to reach your instance.
+ For example, if you want to set up a web server and allow Internet traffic to reach your instance, add rules that allow unrestricted access to the HTTP and HTTPS ports.
+ The rules of a security group control the inbound traffic that's allowed to reach the instances that are associated with the security group.
+ The rules also control the outbound traffic that's allowed to leave them.
+    • By default, security groups allow all outbound traffic.
+    • Security group rules are always permissive. you can't create rules that deny access.
+    • Security group rules enable you to filter traffic based on protocols and port numbers.
+    • You can add and remove rules at any time and they are automatically applied to the instances that are associated with the security group.
 
 STORAGE EC2 :
 ---------------
@@ -866,12 +1045,36 @@ STORAGE EC2 :
     An EBS volume behaves like a raw, unformatted, external block device that you can attach to a single instance but  multiple volumes can be attached to an instance.
     The volume persists independently from the running life of an instance.
     You can also detach and attach EBS from one instance to other.
-    Regularly back up your EBS volumes using Amazon EBS snapshots , and create an Amazon Machine Image (AMI) from your instance to save the configuration as a template forlaunching future instances.
+    Regularly back up your EBS volumes using Amazon EBS snapshots , and create an Amazon Machine Image (AMI) from your instance to save the configuration as a template for launching future instances.
+
+    • Solid state drives (SSD)  :
+      Optimized for transactional workloads involving frequent read/write operations with small I/O size, where the dominant performance attribute is IOPS.
+      Solid state drives use flash memory to deliver superior performance and durability.
+      Solid state drives deliver faster load times for games, applications, and movies. Because of the technology they use, SSDs are lighter and better able to withstand movement and droppage.
+      Does not have moving parts.
+
+      // If you want to have faster-loading speed, you can choose an SSD.
+      // If your computer needs more space to store files, you can choose an HDD
+
+    • Hard disk drives (HDD) :
+      Optimized for large streaming workloads where the dominant performance attribute is throughput.
+      Throughput is defined as the amount of information or material passed put through or delivered in a specific period of time. An example of throughput is twenty screens of copy being printed within a five minute period.
+      HDDs rely on spinning disks, or platters, to read and write data.
+      Hard disk drives consist of one or more magnetically-sensitive platters, an actuator arm with a read/write head on it for each platter, and a motor to spin the platters and move the arms.
+      There is also an I/O controller and firmware that tells the hardware what to do and communicates with the rest of the system.
+      Each time you ask your computer to retrieve or update data, the I/O controller tells the actuator arm where that data is located, and the read/write head gathers the data by reading the presence or absence of a charge in each address.
+      If the request was to update the data, the read/write head changes the charge on the affected track and sector.
+      The time it takes for the platter to spin and the actuator arm to find the correct track and sector is known as latency
+      DRAWBACK is the mechanical parts and address searching
+
+                        Cost 	          Speed 	Durability 	  Highest capacity 	Energy efficiency
+                  HDD 	Cheaper 	      Slower 	Less durable 	10TB 	            Use more energy
+                  SSD 	More expensive 	Faster 	More durable 	4TB 	            Use less energy
 
 
-    •Solid state drives (SSD)  — Optimized for transactional workloads involving frequent read/write operations with small I/O size, where the dominant performance attribute is IOPS.
-    •Hard disk drives (HDD) — Optimized for large streaming workloads where the dominant performance attribute is throughput.
-    •Previous generation  — Hard disk drives that can be used for workloads with small data sets where data is accessed infrequently and performance is not of primary importance.
+    • Previous generation       — Hard disk drives that can be used for workloads with small data sets where data is accessed infrequently and performance is not of primary importance.
+
+ // You can also attach additional EBS volumes after launching an instance, but not instance store volumes.
 
   AMAZON INSTANCE STORE :
     Many instances can access storage from disks that are physically attached to the host computer.
