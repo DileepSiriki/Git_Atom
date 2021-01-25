@@ -17,7 +17,7 @@ NOTE :
 SERVICES COVERED :
 -------------------------------------------------------------------------------------------------------------------------------------------------
 Analytics*                |  Compute*            |   Data Base              |  Management & Governance       |  Satellite
-Application Integration   |  Containers          |   Developer Tools        |  Migration & Transfer          |  Security, Identity & Compliance
+Application Integration   |  Containers*         |   Developer Tools        |  Migration & Transfer          |  Security, Identity & Compliance
 AR & VR                   |  Cryptography & PKI  |   End User Computing     |  Networking & Content Delivery |  Storage
 Billing & Cost Management |  Customer Enablement |   Front-End Web & Mobile |  Quantum Computing             |
 Business Applications     |  Customer Engagement |   Game Development       |  Robotics                      |
@@ -174,6 +174,12 @@ Amazon App Flow is a fully-managed integration service that enables you to secur
 For example, you can ingest contact records from Salesforce to Amazon Redshift or pull support tickets from Zendesk to an Amazon S3 bucket.
 
 2. AMAZON ATHENA :  https://www.youtube.com/watch?v=M5ptG0YaqAs&t=1s
+Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL.
+Athena is serverless, so there is no infrastructure to setup or manage, and you can start analyzing data immediately.
+You don’t even need to load your data into Athena, it works directly with data stored in S3.
+To get started, just log into the Athena Management Console, define your schema, and start querying.
+Amazon Athena uses Presto with full standard SQL support and works with a variety of standard data formats, including CSV, JSON, ORC.
+
 Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL.
 With a few actions in the AWS Management Console, you can point Athena at your data stored in Amazon S3 and begin using standard SQL to run ad-hoc queries and get results in seconds.
 Athena is serverless, so there is no infrastructure to set up or manage, and you pay only for the queries you run.
@@ -218,6 +224,13 @@ Task Runner is installed and runs automatically on resources created by your pip
        EX : You can copy data from a database into s3 and send an SNS once the job is done.
 
 6. AMAZON ELASTIC-SEARCH SERVICE : https://www.youtube.com/watch?v=4Zw1IOxW-oA&t=26s
+// Elasticsearch ( basically an open source tool ) is a document oriented database. With a denormalized document database, every order with the product would have to be updated.
+// In other words, with document oriented databases like Elasticsearch, we design our mappings and store our documents such that it's optimized for search and retrieval.
+// Elastic search is different from the AWS Elastic search service...
+// Both support LOGSTASH and KIBANA which are also open source tools for collecting, parsing, and storing logs
+// Logstash is an open source tool for collecting, parsing, and storing logs for future use. Kibana 3 is a web interface that can be used to search and view the logs that Logstash has indexed. Both of these tools are based on Elasticsearch.
+// Elasticsearch, Logstash, and Kibana, when used together is known as an ELK stack.
+
 Used to analyse and get real time  insights on machine generated data at a peta byte scale. Supports Log stash , Kibana etc ;
 Amazon Elasticsearch Service (Amazon ES) is a managed service that makes it easy to deploy, operate, and scale Elasticsearch clusters in the AWS Cloud.
 Elasticsearch is a popular open-source search and analytics engine for use cases such as log analytics, real-time application monitoring, and click stream analysis.
@@ -227,6 +240,9 @@ With Amazon ES, you get direct access to the Elasticsearch APIs; existing code a
 // Apache spark and apache hadoop are used to store data from a datalake [ purchase info - social media - server logs ] similar to S3 ad process those logs.
 // Hadoop is designed to handle batch processing efficiently whereas Spark is designed to handle real-time data efficiently.
 // Hadoop is a high latency computing framework, which does not have an interactive mode whereas Spark is a low latency computing and can process data interactively.
+
+  [[  HADOOP & KAFKA  ]] ---> RECIEVERS ---> BATCHES --> SPARK --> [[ DATABASE-1 , DATABASE-2 ... ]]
+  |-- Message Brokers--|
 
 APACHE SPARK - APACHE HADOOP - CLUSTERS  --> Maintaining Hadoop and Spark is costly so EMR does this for  us .
 Amazon EMR is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.
@@ -242,6 +258,23 @@ Master node - Core Node - Task Node . Amazon EMR launches clusters in minutes.
 You don’t need to worry about node provisioning, infrastructure setup, Hadoop configuration, or cluster tuning.
 Amazon EMR takes care of these tasks so you can focus on analysis.
 
+// WAY OF WORKING :
+
+Amazon EMR is a web service that enables businesses, researchers, data analysts, and developers to easily and cost-effectively process vast amounts of data.
+It utilizes a hosted Hadoop framework running on the web-scale infrastructure of Amazon Elastic Compute Cloud (Amazon EC2) and Amazon Simple Storage Service (Amazon S3).
+
+You can upload your input data and a data processing application into Amazon S3.
+Amazon EMR then launches a number of Amazon EC2 instances that you specified.
+The service begins the cluster execution while pulling the input data from Amazon S3 using S3 URI scheme into the launched Amazon EC2 instances.
+Once the cluster is finished, Amazon EMR transfers the output data to Amazon S3, where you can then retrieve it or use as input in another cluster.
+
+Amazon EMR uses the Hadoop data processing engine to conduct computations implemented in the MapReduce programming model.
+The customer implements their algorithm in terms of map() and reduce() functions.
+The service starts a customer-specified number of Amazon EC2 instances, comprised of one master and multiple other nodes.
+Amazon EMR runs Hadoop software on these instances. The master node divides input data into blocks, and distributes the processing of the blocks to the other nodes.
+Each node then runs the map function on the data it has been allocated, generating intermediate data.
+
+
 8. AWS GLUE : https://www.youtube.com/watch?v=oAxvd547kMU&t=28s
 AWS Glue is a fully managed ETL (extract, transform, and load) service that makes it simple and cost-effective to categorize your data, clean it, enrich it, and move it reliably between various data stores and data streams.
 It is used to combine data [ Prepare a data lake ] from various sources and clean , normalize and prepare data to one common syntax and save to S3.
@@ -254,6 +287,19 @@ AWS Glue calls API operations to transform your data, create runtime logs, store
  ** Glue will identify type of data , generate a script in python to transform data. // We can modify the code as well .
     It also categories your data , clean it and enrich your data and is completely SERVERLESS [ Scales up and down ].
  ** If there is a new data in S3 -> trigger lambda -> trigger data pipeline -> Glue -> S3 .
+
+AWS Glue is a serverless data integration service that makes it easy to discover, prepare, and combine data for analytics, machine learning, and application development.
+AWS Glue provides all of the capabilities needed for data integration, so you can start analyzing your data and putting it to use in minutes instead of months.
+AWS Glue provides both visual and code-based interfaces to make data integration easier.
+Users can easily find and access data using the AWS Glue Data Catalog.
+Data engineers and ETL (extract, transform, and load) developers can visually create, run, and monitor ETL workflows with a few clicks in AWS Glue Studio.
+Data analysts and data scientists can use AWS Glue DataBrew to visually enrich, clean, and normalize data without writing code.
+With AWS Glue Elastic Views, application developers can use familiar Structured Query Language (SQL) to combine and replicate data across different data stores.
+
+Glue can automatically discover both structured and semi-structured data stored in your data lake on Amazon S3, data warehouse in Amazon Redshift, and various databases running on AWS.
+It provides a unified view of your data via the Glue Data Catalog that is available for ETL, querying and reporting using services like Amazon Athena, Amazon EMR, and Amazon Redshift Spectrum.
+Glue automatically generates Scala or Python code for your ETL jobs that you can further customize using tools you are already familiar with.
+
 
 9. AMAZON KINESIS : https://www.youtube.com/watch?v=MbEfiX4sMXc&t=19s      &&    https://www.youtube.com/watch?v=07iZOEl0knc&t=29s
 // Collect - storing - analyse high throughput information. -> Take action
@@ -331,8 +377,12 @@ It connects to your data in the cloud and combines data from many different sour
 In a single data dashboard, QuickSight can include AWS data, third-party data, big data, spreadsheet data, SaaS data, B2B data, and more.
 Securely push these dashboards to customers. Used to forecast future results and take decisions.
 
+Amazon QuickSight is a very fast, easy-to-use, cloud-powered business analytics service that makes it easy for all employees within an organization to build visualizations, perform ad-hoc analysis, and quickly get business insights from their data, anytime, on any device.
+Upload CSV and Excel files; connect to SaaS applications like Salesforce; access on-premises databases like SQL Server, MySQL, and PostgreSQL; and seamlessly discover your AWS data sources such as Amazon Redshift, Amazon RDS, Amazon Aurora, Amazon Athena, and Amazon S3.
+
 13. AMAZON REDSHIFT : // Documented in Database https://www.youtube.com/watch?v=_qKm6o1zK3U&t=9s
-Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud.
+Amazon Redshift is the most widely used & fully managed, petabyte-scale cloud data warehouse for only relational data.
+It makes it fast, simple and cost-effective to analyze all your data using standard SQL and your existing Business Intelligence (BI) tools.
 An Amazon Redshift data warehouse is a collection of computing resources called nodes, which are organized into a group called a cluster.
 Each cluster runs an Amazon Redshift engine and contains one or more databases.
 Redshift lets you easily save the results of your queries back to your S3 data lake using open formats, like Apache Parquet, so that you can do additional analytics from other analytics services like Amazon EMR, Amazon Athena, and Amazon SageMaker.
@@ -359,13 +409,29 @@ CONTAINERS   :
 ##################################################################################################################
 
 // DOCKER FILE  is a text document that contains commands that are used to assemble an image.
-   We can use any command that call on the command line.
    Docker builds images automatically by reading the instructions from the Dockerfile.
 
     $ docker build  /path/to/a/Dockerfile  --> To build an image.
 
+    Ex of a Docker file :
+    -----------------------
+    FROM ubuntu:18.04
+    COPY . /app
+    RUN make /app
+    CMD python /app/app.py
+
+    Each instruction creates one layer:
+    --> FROM creates a layer from the ubuntu:18.04 Docker image.
+    --> COPY adds files from your Docker client’s current directory.
+    --> RUN builds your application with make.
+    --> CMD specifies what command to run within the container.
+
 // DOCKER image is a read-only template with instructions for creating a Docker container.
    A docker image is described in text file called a Dockerfile, which has a simple, well-defined syntax.
+
+    $ docker run /path/to/docker_image
+
+    DOCKER FILE -- docker build ---> DOCKER IMAGE -- docker run ---> DOCKER CONTAINER
 
 // Docker container is a running instance of an image.
    You can use Command Line Interface (CLI) commands to run, start, stop, move, or delete a container.
@@ -381,10 +447,18 @@ CONTAINERS   :
 
 1. AMAZON ECR :  [ Amazon Elastic Container Registry ] // https://www.youtube.com/watch?v=H73uX0TOX9g&t=2s
 It is a fully managed Docker container registry that makes it easy for developers to store, manage, and deploy DOCKER CONTAINER IMAGES.
-Supports private container image repositories with resource-based permissions using AWS IAM. This is so that specified users or Amazon EC2 instances can access your container repositories and images.
-Sports public container image repositories as well.
+Supports private / public container image repositories with resource-based permissions using AWS IAM.
+This is so that specified users or Amazon EC2 instances can access your container repositories and images.
 A repository is where you store your Docker or Open Container Initiative (OCI) images in Amazon ECR.
 Each time you push or pull an image from Amazon ECR, you specify the repository and the registry location which informs where to push the image to or where to pull it from.
+Amazon ECR integrates with Amazon ECS, Amazon EKS, AWS Fargate, AWS Lambda, and the Docker CLI, allowing you to simplify your development and production workflows.
+Amazon ECR uses Amazon S3 for storage to make your container images highly available and accessible.
+Amazon ECR is a regional service . Pulling images between regions or out to the internet will have additional latency and data transfer costs.
+
+     -------------------------
+    |  [[ Repo-1 - IMAGES ]]  |
+    |  [[ Repo-2 - IMAGES ]]  | ---> Run CONTAINER from IMAGE in ECR using ECS .
+     -------------------------
 
 // Once an image is registered in the ECR , we can run that image as a container in the ECS service. -- ECS is a logical group of EC2 instances.
    ECS CLUSTER is a logical group of EC2 instances that you can place containers into .
@@ -395,15 +469,27 @@ Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast contain
 Amazon ECS enables you to launch and stop your container-based applications by using simple API calls.
 You can create Amazon ECS clusters within a new or existing VPC.
 After a cluster is up and running, you can create task definitions that define which container images run across your clusters.
-Your task definitions are used to run tasks or create services. Container images are stored in and pulled from container registries, for example, the Amazon Elastic Container Registry.
+Your task definitions are used to run tasks or create services.
+Container images are stored in and pulled from container registries, for example, the Amazon Elastic Container Registry.
+
+     -------------------------
+    |  [[ EC2 -1  ]]          |
+    |  [[ EC2 -2  ]]          | ---> ECS CLUSTER is a group of EC2 instances that can run/stop/manage CONTAINERS.
+     -------------------------
+
+With simple API calls, you can launch and stop container-enabled applications, query the complete state of your cluster, and access many familiar features like security groups, Elastic Load Balancing, EBS volumes and IAM roles.
+You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs and availability requirements.
 
 To prepare your application to run on Amazon ECS, you must create a task definition.
-The task definition is a text file (in JSON format) that describes one or more containers (up to a maximum of ten) that form your application.
+The task definition is a text file (in JSON format) that describes one or more containers ( up to a maximum of 10 ) that form your application.
 The task definition can be thought of as a blueprint for your application. It specifies various parameters for your application.
 For example, these parameters can be used to indicate which containers should be used, which ports should be opened for your application, and what data volumes should be used with the containers in the task.
 The specific parameters available for your task definition depend on the needs of your specific application.
 
-A task is the instantiation of a task definition within a cluster.
+   TASK-DEFINATION ----------- INSTANCE ---------------> Task - 1
+   [[ JSON -> Container data - ports - volumes ]]        Task - 2 etc;
+
+A task is the instance of a task definition within a cluster.
 After you have created a task definition for your application within Amazon ECS, you can specify the number of tasks to run on your cluster.
 The Amazon ECS task scheduler is responsible for placing tasks within your cluster. There are several different scheduling options available.
 
@@ -430,6 +516,22 @@ You only pay for the resources required to run your containers, so there is no o
 Fargate runs each task or pod in its own kernel providing the tasks and pods their own isolated compute environment.
 This enables your application to have workload isolation and improved security by design.
 This is why customers such as Vanguard, Accenture, Foursquare, and Ancestry have chosen to run their mission critical applications on Fargate.
+
+There are two major models for how to run your containers on AWS:
+Both are completely valid techniques for operating your containers in a scalable and reliable fashion.
+
+    --> EC2  // Deploy and manage your own cluster of EC2 instances for running the containers - For consistant demand of CPU cores.
+        With the EC2 launch type billing is based on the cost of the underlying EC2 instances.
+        This allows you to optimize price by taking advantage of billing models such as spot instances (bid a low price for an instance), or reserved instances .
+        If your workload has a consistent demand for many CPU cores and many gigabytes of memory, and you want to optimize for price you should consider running a cluster of reserved EC2 instances, or spot instances.
+        You will be responsible for maintaining this cluster and optimizing it, but you will be able to take advantage of EC2 instance saving strategies such as spot instances or reserved instances.
+
+    --> AWS Fargate // Run containers directly, without any EC2 instance - Need not manage compute - for tiny and infrequent workloads.
+        With the AWS Fargate launch type billing is based on how many CPU cores, and gigabytes of memory your task requires, per second.
+        Managing a large cluster of EC2 instances can be somewhat hard. You need to make sure they are all patched, secure, and updated to the latest version of Docker and the ECS agent.
+        If you don’t want to deal with any of this overhead AWS Fargate can be a great choice.
+        If your workload is small with the occasional burst, such as a website that has traffic during the day but low traffic at night, then AWS Fargate is a fantastic choice.
+
 
 5. AWS APP2CONTAINER :
 It is a command-line tool for modernizing .NET and Java applications into containerized applications.

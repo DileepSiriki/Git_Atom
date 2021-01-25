@@ -1,13 +1,32 @@
 ------------------------------
 AMAZON SIMPLE STORAGE SERVICE :
 ------------------------------
-
 #### S3 does not require region selection. --> S3 GLOBAL by default
 #### But BUCKETS are region specific. Select the closest region available for faster access.
-Cheaper: lifecycle policies, reduced redundancy, IA, Glacier
-Resilient: versioning, s3 replication, regional replication
-Performant: CloudFront (for web), regional S3 endpoints, hashing key names
-Secure: VPC endpoints, encryption at rest
+
+Amazon S3 provides a simple web service interface that you can use to store and retrieve any amount of data, at any time, from anywhere on the web.
+Using this web service, you can easily build applications that make use of Internet storage.
+Since Amazon S3 is highly scalable and you only pay for what you use, you can start small and grow your application as you wish, with no compromise on performance or reliability.
+Amazon S3 is also designed to be highly flexible.
+Store any type and amount of data that you want; read the same piece of data a million times or only for emergency disaster recovery; build a simple FTP application, or a sophisticated web application such as the Amazon.com retail web site.
+Amazon S3 frees developers to focus on innovation instead of figuring out how to store their data.
+Amazon S3 event notifications can be sent in response to actions in Amazon S3 like PUTs, POSTs, COPYs, or DELETEs. Notification messages can be sent through either Amazon SNS, Amazon SQS, or directly to AWS Lambda.
+
+
+CHEAPER       :     lifecycle policies, reduced redundancy, Infrequent Access, Glacier
+RESILIENT     :     versioning, s3 replication, regional replication
+PERFORMANT    :     Cloud Front (for web), regional S3 endpoints, hashing key names
+SECURE        :     VPC endpoints, encryption at rest
+
+Bits          :     8 bits     = 1 byte
+Bytes         : 		1024 bytes = 1 KB (1 to 3 digits)
+Kilobytes     : 		1024 KB    = 1 MB (4 to 6 digits)
+Megabytes     : 		1024 MB    = 1 GB (7 to 9 digits)
+Gigabytes     : 		1024 GB    = 1 TB (10 to 12 digits)
+Terabytes     : 		1024 TB    = 1 PB (13 to 15 digits)
+Petabytes     : 		1024 PB    = 1 EB (16 to 18 digits)
+Exabytes      : 		1024 EB    = 1 ZB (19 to 21 digits)
+Zettabytes    : 		1024 ZB    = 1 YB (22 to 24 digits)
 
 Amazon Simple Storage Service (Amazon S3) is storage for the internet.
 You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web.
@@ -16,24 +35,36 @@ To store a file in Amazon S3, you upload it to a bucket. When you upload a file 
 Buckets are containers for objects. You can have one or more buckets.
 You can control access for each bucket, deciding who can create, delete, and list objects in it.
 You can also choose the geographical Region where Amazon S3 will store the bucket and its contents and view access logs for the bucket and its objects.
+Amazon S3 is a simple key-based object store. When you store data, you assign a unique object key that can later be used to retrieve the data. Keys can be any string
 
           Create a Bucket -> Upload a file -> Aws Adds metadata -> Aws creates an OBJECT [ file + metadata ]
+          --> Before you can store data in Amazon S3, you must create a bucket.
+          --> You are not charged for creating a bucket.
+          --> You are charged only for storing objects in the bucket and for transferring objects in and out of the bucket.
+
           BUCKET = OBJECT 1 + OBJECT 2 + . . . . .
+          --> customers can provision up to 100 buckets per AWS account.
+          --> You can have a bucket that has different objects stored in S3 Standard, S3 Intelligent-Tiering, S3 Standard-IA, and S3 One Zone-IA.
+
           OBJECT = FILE + METADATA
-          ## Before you can store data in Amazon S3, you must create a bucket.
-          ## You are not charged for creating a bucket. You are charged only for storing objects in the bucket and for transferring objects in and out of the bucket.
+          --> 1 object can range in size from a minimum of 0 bytes to a maximum of 5 terabytes
+          --> But the number of objects per bucket is unlimited.
+          --> The largest object that can be uploaded in a single PUT is 5 gigabytes.
+          --> your objects are automatically stored across multiple devices spanning a minimum of three Availability Zones. (Except one zone IA)
+          --> For S3 on Outposts, your data is stored in your Outpost on-premises environment, unless you manually choose to transfer it to an AWS Region.
 
-S3 is used to :
-         • Backup and storage – Provide data backup and storage services for others.
-         • Application hosting – Provide services that deploy, install, and manage web applications.
-         • Media hosting – Build a redundant, scalable, and highly available infrastructure that hosts video, photo, or music uploads and downloads.
-         • Software delivery – Host your software applications that customers can download.
 
+S3 USES :
+-----------
+• Backup and storage  – Provide data backup and storage services for others.
+• Application hosting – Provide services that deploy, install, and manage web applications.
+• Media hosting       – Build a redundant, scalable, and highly available infrastructure that hosts video, photo, or music uploads and downloads.
+• Software delivery   – Host your software applications that customers can download.
 
 BUCKET :
 -----------
 Data is stored in key-value pairs .
-KEY : Sequence of UTF-8 chars up to 1024bytes long , it is the name of the file
+KEY   : Sequence of UTF-8 chars up to 1024bytes long , it is the name of the file
 VALUE : It is the actual data that you store .
 
 You can use buckets to group related objects in the same way that you use a directory to group files in a file system.
@@ -55,18 +86,18 @@ CREATE A BUCKET :
   --> Specify a unique name -->  region --> Public access --> Bucket versioning --> Encryption --> Object lock [ write once , read many , available if versioning is enabled]
 
 UPLOAD AN OBJECT :
-  --> Select Bucket --> Upload [ drag/drop or Addfiles/folders ] --> storage class -> Encryption --> ACL [ Permissions for other users / Accounts ] --> Upload
+  --> Select Bucket --> Upload [ drag/drop or Add files/folders ] --> storage class -> Encryption --> ACL [ Permissions for other users / Accounts ] --> Upload
 
 ACTIONS ON OBJECTS :
-  --> Select Bucket --> Select Object / Objects --> Actions [ open , copy , move, delet, download , rename, edit meta data/tags/encryption/storage class ]
+  --> Select Bucket --> Select Object / Objects --> Actions [ open , copy , move, delete, download , rename, edit meta data/tags/encryption/storage class ]
 
 DELETE BUCKET :
   --> If you plan to delete your bucket, you must first empty your bucket, which deletes all the objects in the bucket.
   --> Buckets --> select Bucket --> top --> first EMPTY --> then DELETE
 
 SERVER SIDE ENCRYPTION :
-  --> Amazon S3 key (SSE-S3 ) : encryption key that Amazon S3 creates, manages, and uses for you.
-  --> AWS Key Management Service key (SSE-KMS) : An encryption key protected by AWS Key Management Service (AWS KMS).
+  --> Amazon Simple storage Service key (SSE-S3 ) : encryption key that Amazon S3 creates, manages, and uses for you.
+  --> Amazon Key Management Service key (SSE-KMS) : An encryption key protected by AWS Key Management Service (AWS KMS).
 
 --> Select a bucket and check all options , Under MANAGEMENT we can write rules to replicate bucket to another region/account etc;
 
@@ -87,7 +118,7 @@ OBJECT :
 
 OBJECT : Photos/puppy.jpg
 BUCKET : Dileep
-URL : http://Dileep.s3.aws.com/photos/puppy.jpg
+URL    : http://Dileep.s3.aws.com/photos/puppy.jpg
 
 REPLICATION IN S3 :
 -------------------------
@@ -102,20 +133,23 @@ To enable object replication, you add a replication configuration to your source
 
 Replication can help you do the following:
 ------------------------------------------
-
-Replicate objects while retaining metadata :
+   --> Replicate objects while retaining metadata :
    You can use replication to make copies of your objects that retain all metadata, such as the original object creation time and version IDs.
    This capability is important if you need to ensure that your replica is identical to the source object.
-Replicate objects into different storage classes :
+
+   --> Replicate objects into different storage classes :
    You can use replication to directly put objects into S3 Glacier, S3 Glacier Deep Archive, or another storage class in the destination buckets.
    You can also replicate your data to the same storage class and use lifecycle policies on the destination buckets to move your objects to a colder storage class as it ages.
-Maintain object copies under different ownership :
+
+   --> Maintain object copies under different ownership :
    Regardless of who owns the source object, you can tell Amazon S3 to change replica ownership to the AWS account that owns the destination bucket.
    This is referred to as the owner override option. You can use this option to restrict access to object replicas.
-Keep objects stored over multiple AWS Regions :
+
+   --> Keep objects stored over multiple AWS Regions :
    You can set multiple destination buckets across different AWS Regions to ensure geographic differences in where your data is kept.
    This could be useful in meeting certain compliance requirements.
-Replicate objects within 15 minutes :
+
+   --> Replicate objects within 15 minutes :
    You can use S3 Replication Time Control (S3 RTC) to replicate your data in the same AWS Region or across different Regions in a predictable time frame.
    S3 RTC replicates 99.99 percent of new objects stored in Amazon S3 within 15 minutes (backed by a service level agreement).
 
@@ -142,19 +176,16 @@ Replicate objects within 15 minutes :
  REQUIREMENTS FOR REPLICATION :
  ------------------------------
  --> The source bucket owner must have the source and destination AWS Regions enabled for their account.
-     The destination bucket owner must have the destination Region-enabled for their account.
-     For more information about enabling or disabling an AWS Region, see AWS Service Endpoints in the AWS General Reference.
- --> Both source and destination buckets must have versioning enabled. For more information about versioning, see Using versioning.
+ --> The destination bucket owner must have the destination Region-enabled for their account.
+ --> Both source and destination buckets must have versioning enabled.
  --> Amazon S3 must have permissions to replicate objects from the source bucket to the destination bucket or buckets on your behalf.
  --> If the owner of the source bucket doesn't own the object in the bucket, the object owner must grant the bucket owner READ and READ_ACP permissions with the object access control list (ACL).
-     For more information, see Managing Access with ACLs.
- --> If the source bucket has S3 Object Lock enabled, the destination buckets must also have S3 Object Lock enabled. For more information, see Locking objects using S3 Object Lock.
+ --> If the source bucket has S3 Object Lock enabled, the destination buckets must also have S3 Object Lock enabled.
  --> To enable replication on a bucket that has Object Lock enabled, contact AWS Support.
 
  If you are setting the replication configuration in a cross-account scenario, where source and destination buckets are owned by different AWS accounts, the following additional requirement applies:
   --> The owner of the destination buckets must grant the owner of the source bucket permissions to replicate objects with a bucket policy.
-      For more information, see Granting permissions when source and destination buckets are owned by different AWS accounts.
-  --> The destination buckets cannot be configured as Requester Pays buckets. For more information, see Requester Pays buckets.
+  --> The destination buckets cannot be configured as Requester Pays buckets.
 
 
 STORAGE CLASSES : https://aws.amazon.com/s3/storage-classes/
@@ -179,7 +210,7 @@ STORAGE CLASSES : https://aws.amazon.com/s3/storage-classes/
    S3 Intelligent Tiering is an Amazon S3 storage class designed to optimize storage costs by automatically moving data to the most cost-effective access tier, without operational overhead.
    There are no retrieval fees when using the S3 Intelligent-Tiering storage class, and no additional tiering fees when objects are moved between access tiers within S3 Intelligent-Tiering.
 
-   It works by storing objects in the remaiming four access tiers.
+   It works by storing objects in the remaining four access tiers.
     --> two low latency access tiers optimized for frequent and infrequent access, and
     --> two opt-in archive access tiers designed for asynchronous access that are optimized for rare access.
 
@@ -265,8 +296,8 @@ the archive access and deep archive access tiers first byte latency is minutes o
                                                        Tiering                                                                              Deep_Archive
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Designed for durability 	      11 9’s                11 9’s                  11 9’s                11 9’s                11 9’s               11 9’s
-   (99.999999999%)
+Designed for durability 	      11 9’s | 99.99%       11 9’s                  11 9’s                11 9’s                11 9’s               11 9’s
+   (99.999999999%)                     | Reduced Redundancy
 
 Designed for availability     	99.99% 	              99.9% 	                99.9% 	               99.5% 	              99.99% 	             99.99%
 
@@ -288,8 +319,13 @@ Storage Type &                 YES                   YES                       Y
 Life Cycle Transition
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-STORAGE PRICES :
--------------------
+STORAGE PRICES : https://aws.amazon.com/s3/pricing/
+======================
+There is no Data Transfer charge for data transferred within an Amazon S3 Region via a COPY request.
+Data transferred via a COPY request between AWS Regions is charged at rates specified in the pricing section of the Amazon S3 detail page.
+There is no Data Transfer charge for data transferred between Amazon EC2 and Amazon S3 within the same region, for example, data transferred within the US East (Northern Virginia) Region.
+However, data transferred between Amazon EC2 and Amazon S3 across all other regions is charged at rates specified on the Amazon S3 pricing page
+
 S3 Standard - General purpose storage for any type of data, typically used for frequently accessed data	 :
 First 50 TB / Month	                                                              $0.023 per GB
 Next 450 TB / Month                                                             	$0.022 per GB
@@ -316,10 +352,61 @@ All Storage / Month                                                             
 S3 Glacier Deep Archive ** - For long-term data archiving that is accessed once or twice in a year and can be restored within 12 hours :
 All Storage / Month	                                                              $0.00099 per GB
 
+EXAMPLE PRICING FOR STORAGE :
+--------------------------------
+Assume you store 100GB (107,374,182,400 bytes) of data in Amazon S3 Standard in your bucket for 15 days in March, and 100TB (109,951,162,777,600 bytes) of data in Amazon S3 Standard for the final 16 days in March.
+At the end of March, you would have the following usage in Byte-Hours:
+Total Byte-Hour usage = [107,374,182,400 bytes x 15 days x (24 hours / day)] + [109,951,162,777,600 bytes x 16 days x (24 hours / day)]
+                      = 42,259,901,212,262,400 Byte-Hours.
+
+Let's convert this to GB-Months: 42,259,901,212,262,400 Byte-Hours / 1,073,741,824 bytes per GB / 744 hours per month = 52,900 GB-Months
+
+This usage volume crosses two different volume tiers.
+The monthly storage price is calculated below assuming the data is stored in the US East (Northern Virginia) Region:
+-->  50 TB Tier: 51,200 GB x $0.023 = $1,177.60 50 TB to 450 TB Tier: 1,700 GB x $0.022 = $37.40
+-->  Total Storage Fee = $1,177.60 + $37.40 = $1,215.00
+
+REQUEST & DATA RETRIEVAL PRICING :  https://aws.amazon.com/s3/pricing/
+-------------------------------------
+You pay for requests made against your S3 buckets and objects.
+S3 request costs are based on the request type, and are charged on the quantity of requests.
+When you use the Amazon S3 console to browse your storage, you incur charges for GET, LIST, and other requests that are made to facilitate browsing.
+Charges are accrued at the same rate as requests that are made using the API/SDK.
+Reference the S3 developer guide for technical details on the following request types: PUT, COPY, POST, LIST, GET, SELECT, Lifecycle Transition, and Data Retrievals.
+DELETE and CANCEL requests are free.
+LIST requests for any storage class are charged at the same rate as S3 Standard PUT, COPY, and POST requests.
+You pay for retrieving objects that are stored in S3 Standard – Infrequent Access, S3 One Zone – Infrequent Access, S3 Glacier, and S3 Glacier Deep Archive storage.
+Reference the S3 developer guide for technical details on Data Retrievals.
+
+DATA TRANSFER PRICING : https://aws.amazon.com/s3/pricing/
+-------------------------
+You pay for all bandwidth into and out of Amazon S3, except for the following:
+• Data transferred in from the internet.
+• Data transferred out to an Amazon Elastic Compute Cloud (Amazon EC2) instance, when the instance is in the same AWS Region as the S3 bucket (including to a different account in the same AWS region).
+• Data transferred out to Amazon CloudFront (CloudFront).
+
+The pricing below is based on data transferred "in" and "out" of Amazon S3 (over the public Internet).
+Transfers between S3 buckets or from Amazon S3 to any service(s) within the same AWS Region are free.
+You also pay a fee for any data transferred using Amazon S3 Transfer Acceleration
+
+MANAGEMENT & ANALYTICS PRICING : https://aws.amazon.com/s3/pricing/
+---------------------------------
+You pay for the storage management features and analytics (Amazon S3 Inventory, S3 Storage Class Analysis, S3 Storage Lens, and S3 Object Tagging) that are enabled on your account’s buckets.
+For pricing on Amazon CloudWatch Metrics, visit the Amazon CloudWatch pricing page.
+
+S3 REPLICATION PRICING : https://aws.amazon.com/s3/pricing/
+-----------------------------
+For S3 Replication (Cross-Region Replication and Same Region Replication), you pay the S3 charges for storage in the selected destination S3 storage classes, the storage charges for the primary copy, replication PUT requests, and applicable infrequent access storage retrieval fees.
+For CRR, you also pay for inter-region Data Transfer OUT from S3 to each destination region.
+When you use S3 Replication Time Control, you also pay a Replication Time Control Data Transfer fee and S3 Replication Metrics charges that are billed at the same rate as Amazon CloudWatch custom metrics.
+Storage and PUT request pricing for the replicated copy is based on the selected destination AWS Regions, while pricing for inter-region data transfers is based on the source AWS Region.
+
+              S3 Replication Time Control data transfer -	$0.015 per GB
+
 
 
 STATIC WEBSITE HOSTING :
--------------------------
+=============================
 STEP 1 : In route53 , register for a domain , say example.com
 
 STEP 2 :
@@ -371,7 +458,8 @@ STEP 4 :
       •  http://www.your-domain-name – Redirects your request to the your-domain-name bucket
 
 
-AWS S3 TRANSFER ACCELERATION :
+AWS S3 TRANSFER ACCELERATION : // The service is a paid service.
+-----------------------------------
 If you’re transferring your data to popular AWS storage platform S3 over long distances, AWS S3 Transfer Acceleration helps you do it faster 171% faster on average, according to AWS.
 Amazon S3 Transfer Acceleration is a service that allows you to upload data to an S3 bucket quickly and securely over the public Internet.
 If you’re uploading to a centralized bucket from different locations across the globe, S3 Transfer Acceleration can save a lot of transfer time.
@@ -382,12 +470,11 @@ Just turn on Transfer Acceleration for an S3 bucket using the Amazon S3 console,
 The service is available for both reading and writing data to Amazon S3, making it useful for recurring jobs like media uploads, backups, and local data processing.
 
 For your bucket to work with transfer acceleration, the bucket name must conform to DNS naming requirements and must not contain periods (".").
-The service is a paid service .
 
   WHY USE --> You might want to use Transfer Acceleration on a bucket for various reasons, including the following:
           --> You have customers that upload to a centralized bucket from all over the world.
-          -->You transfer gigabytes to terabytes of data on a regular basis across continents.
-          -->You are unable to utilize all of your available bandwidth over the Internet when uploading to Amazon S3.
+          --> You transfer gigabytes to terabytes of data on a regular basis across continents.
+          --> You are unable to utilize all of your available bandwidth over the Internet when uploading to Amazon S3.
 
 
 
@@ -508,17 +595,17 @@ But one instance can be connected more than one EBS .
             |            | <-------------------->   /_\   EBS-2
              -----------
 Amazon EBS provides durable, block-level storage volumes that you can attach to a running instance.
-You can use Amazon EBS as a primary storage device for data that requires frequent and granularupdates.
-For example, Amazon EBS is the recommended storage option when you run a database on aninstance.
-The volume persists independently from the running life of an instance. After an EBS volumeis attached to an instance, you can use it like any other physical hard drive.
-You can also detach an EBS volume from oneinstance and attach it to another instance. Y
-ou can dynamically change the configuration of a volumeattached to an instance.
-EBS volumes can also be created as encrypted volumes using the Amazon EBSencryption feature.
-To keep a backup copy of your data, you can create a snapshot of an EBS volume, which is stored inAmazon S3.
+You can use Amazon EBS as a primary storage device for data that requires frequent and granular updates.
+For example, Amazon EBS is the recommended storage option when you run a database on an instance.
+The volume persists independently from the running life of an instance. After an EBS volume is attached to an instance, you can use it like any other physical hard drive.
+You can also detach an EBS volume from one instance and attach it to another instance. Y
+You can dynamically change the configuration of a volume attached to an instance.
+EBS volumes can also be created as encrypted volumes using the Amazon EBS encryption feature.
+To keep a backup copy of your data, you can create a snapshot of an EBS volume, which is stored in Amazon S3.
 
-EBS volumes are created in a specific Availability Zone, and can then be attached to any instancesin that same Availability Zone.
-To make a volume available outside of the Availability Zone, you cancreate a snapshot and restore that snapshot to a new volume anywhere in that Region.
-You can copysnapshots to other Regions and then restore them to new volumes there.
+EBS volumes are created in a specific Availability Zone, and can then be attached to any instances in that same Availability Zone.
+To make a volume available outside of the Availability Zone, you can create a snapshot and restore that snapshot to a new volume anywhere in that Region.
+You can copy snapshots to other Regions and then restore them to new volumes there.
 You can increase the volumes of an instance at any time by attaching more EBS to it.
 
         Amazon EBS provides the following volume types: DEPENDS ON IPOS / THROUGHPUT / HDD / SDD
@@ -532,35 +619,35 @@ You can increase the volumes of an instance at any time by attaching more EBS to
             At a given time (per second) what's the amount(bit, kb, mb, ect) of water the jug can transfer into/out of the bucket continuously? This is throughput.
 
           SOLID STATE DRIVES SSD : costly --> Low latency - High IOPS
-              Used for BOOT volumes , transactional work loads [ enteprise apps , relational data bases, NOSQL data bases ]
+              Used for BOOT volumes , transactional work loads [ enterprise apps , relational data bases, NOSQL data bases ]
 
               General Purpose SSD :
-                General Purpose SSD volumes (gp2 and gp3) balance price and performance for a wide variety oftransactional workloads.
+                General Purpose SSD volumes (gp2 and gp3) balance price and performance for a wide variety of transactional workloads.
                 These volumes are ideal for a use cases such as boot volumes, medium-size single instance databases, and development and test environments.
 
               Provisioned IOPS SSD :
                 Provides high performance for mission-critical, low-latency, or high-throughput workloads.
-                Provisioned IOPS SSD volumes (io1 and io2) support up to 64,000 IOPS and 1,000 MiB/s ofthroughput.
+                Provisioned IOPS SSD volumes (io1 and io2) support up to 64,000 IOPS and 1,000 MiB/s of throughput.
                 This enables you to predictably scale to tens of thousands of IOPS per EC2 instance.
 
-         HARD DISK DRIVES HDD: Cheap --> Higest Throughput
-              For Straming IO , Big data , data ware housing , log processing applications
+         HARD DISK DRIVES HDD: Cheap --> Highest Throughput
+              For Streaming IO , Big data , data ware housing , log processing applications
               Throughput Optimized HDD :
                 Throughput Optimized HDD volumes (st1) provide low-cost magnetic storage that defines performance in terms of throughput rather than IOPS.
                 These volumes are ideal for large, sequential workloads such as Amazon EMR, ETL, data warehouses, and log processing.
 
               Cold HDD :
-                Cold HDD volumes (sc1) provide low-cost magnetic storage that defines performance in terms ofthroughput rather than IOPS.
+                Cold HDD volumes (sc1) provide low-cost magnetic storage that defines performance in terms of throughput rather than IOPS.
                 These volumes are ideal for large, sequential, cold-data workloads.
                 If you require infrequent access to your data and are looking to save costs, these volumes provides inexpensive block storage.
 
         USES OF EBS :
           Data availability :
-             These are  automatically replicated within its Availability Zone to prevent dataloss due to failure of any single hardware component.
-             You can attach an EBS volume to any EC2 instancein the same Availability Zone.
+             These are  automatically replicated within its Availability Zone to prevent data loss due to failure of any single hardware component.
+             You can attach an EBS volume to any EC2 instance in the same Availability Zone.
 
           Data persistence : --> Delete on Termination checkbox
-            EBS volumes that are attached to a running instance can automatically detach from the instance withtheir data intact when the instance is terminated.
+            EBS volumes that are attached to a running instance can automatically detach from the instance with their data intact when the instance is terminated.
             if you uncheck the Delete on Termination checkbox when you configure EBS volumes for your instance on the EC2 console
 
           Data encryption :
@@ -572,18 +659,18 @@ You can increase the volumes of an instance at any time by attaching more EBS to
                                           either from a volume  --> Single volume snapshot
                                           or instance --> Multi volume snapshot [ as instance contain more than 1 volume attached ]
 
-            Thevolume does not need to be attached to a running instance in order to take a snapshot.
+            The volume does not need to be attached to a running instance in order to take a snapshot.
             Snapshots of encrypted EBS volumes are automatically encrypted.
-            When you create a new volume from a snapshot, it's an exact copy of the original volume at the timethe snapshot was taken.
-            Snapshots are incremental backups, meaning that only the blocks on the volume that have changedafter your most recent snapshot are saved.
-            If you have a volume with 100 GiB of data, but only 5 GiB ofdata have changed since your last snapshot, only the 5 GiB of modified data is written to Amazon S3.
+            When you create a new volume from a snapshot, it's an exact copy of the original volume at the time the snapshot was taken.
+            Snapshots are incremental backups, meaning that only the blocks on the volume that have changed after your most recent snapshot are saved.
+            If you have a volume with 100 GiB of data, but only 5 GiB of data have changed since your last snapshot, only the 5 GiB of modified data is written to Amazon S3.
 
           Flexibility : ebs -> select a volume-> actions -> attach/detach
-            EBS volumes support live configuration changes while in production. You can modify volume type,volume size, and IOPS capacity without service interruptions.
+            EBS volumes support live configuration changes while in production. You can modify volume type, volume size, and IOPS capacity without service interruptions.
 
       Amazon Data Lifecycle Manager : SNAPSHOTS AUTOMATION  AWS -> Ebs -> life cycle manager
 
-        You can use Amazon Data Lifecycle Manager to automate the creation, retention, and deletion of EBSsnapshots and EBS-backed AMIs.
+        You can use Amazon Data Lifecycle Manager to automate the creation, retention, and deletion of EBS snapshots and EBS-backed AMIs.
         When you automate snapshot and AMI management, it helps you to ,
           •Protect valuable data by enforcing a regular backup schedule.
           •Create standardized AMIs that can be refreshed at regular intervals.
