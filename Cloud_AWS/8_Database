@@ -351,3 +351,36 @@ DynamoDB:
 {
     TableName: "Music"
 }
+
+=====================================================================================================
+=====================================================================================================
+=====================================================================================================
+
+--> Amazon Redshift vs. Amazon RDS :
+-----------------------------------------
+Both Amazon Redshift and Amazon RDS enable you to run traditional relational databases in the cloud while offloading database administration.
+Customers use Amazon RDS databases primarily for online-transaction processing (OLTP) workload while Redshift is used primarily for reporting and analytics.
+OLTP workloads require quickly querying specific information and support for transactions like insert, update, and delete and are best handled by Amazon RDS.
+Amazon Redshift harnesses the scale and resources of multiple nodes and uses a variety of optimizations to provide order of magnitude improvements over traditional databases for analytic and reporting workloads against very large data sets.
+
+--> Amazon Redshift or Redshift Spectrum vs. Amazon EMR :
+-----------------------------------------------------------
+You should use Amazon EMR if you use custom code to process and analyze extremely large datasets with big data processing frameworks such as Apache Spark, Hadoop, Presto, or Hbase. Amazon EMR gives you full control over the configuration of your clusters and the software you install on them.
+Data warehouses like Amazon Redshift are designed for a different type of analytics altogether.
+Data warehouses are designed to pull together data from lots of different sources, like inventory, financial, and retail sales systems.
+In order to ensure that reporting is consistently accurate across the entire company, data warehouses store data in a highly structured fashion.
+structure builds data consistency rules directly into the tables of the database.
+Amazon Redshift is the best service to use when you need to perform complex queries on massive collections of structured and semi-structured data and get fast performance.
+
+While the Redshift Spectrum feature is great for running queries against data in Amazon Redshift and S3, it really isn’t a fit for the types of use cases that enterprises typically ask from processing frameworks like Amazon EMR.
+Amazon EMR goes far beyond just running SQL queries.
+Amazon EMR is a managed service that lets you process and analyze extremely large data sets using the latest versions of popular big data processing frameworks, such as Spark, Hadoop, and Presto, on fully customizable clusters.
+
+--> Amazon Athena vs. Redshift Spectrum:
+-----------------------------------------
+Amazon Athena is the simplest way to give any employee the ability to run ad-hoc queries on data in Amazon S3.
+Athena is serverless, so there is no infrastructure to setup or manage, and you can start analyzing your data immediately.
+
+If you have frequently accessed data that needs to be stored in a consistent, highly structured format, then you should use a data warehouse like Amazon Redshift.
+This gives you the flexibility to store your structured, frequently accessed data in Amazon Redshift, and use Redshift Spectrum to extend your Amazon Redshift queries out to data in your Amazon S3 data lake.
+This gives you the freedom to store your data where you want, in the format you want, and have it available for processing when you need.

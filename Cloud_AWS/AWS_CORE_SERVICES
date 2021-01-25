@@ -16,7 +16,7 @@ NOTE :
 -------------------------------------------------------------------------------------------------------------------------------------------------
 SERVICES COVERED :
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Analytics                 |  Compute             |   Data Base              |  Management & Governance       |  Satellite
+Analytics*                |  Compute*            |   Data Base              |  Management & Governance       |  Satellite
 Application Integration   |  Containers          |   Developer Tools        |  Migration & Transfer          |  Security, Identity & Compliance
 AR & VR                   |  Cryptography & PKI  |   End User Computing     |  Networking & Content Delivery |  Storage
 Billing & Cost Management |  Customer Enablement |   Front-End Web & Mobile |  Quantum Computing             |
@@ -111,7 +111,7 @@ These features are all available for a low, predictable monthly price.
 --> Instead of creating 2 different applications and API to handle on premises and Cloud environments , outposts were created.
     So bring the cloud to on premises and job done . Now use same apps and API's for both on premises and cloud.
     We need to order from a fully integrated and pre validated outpost configurations specific for your use case.
-    Tell the required compute and memory and network and they are bundled and brought to your location. 
+    Tell the required compute and memory and network and they are bundled and brought to your location.
     Now we connect the outpost to the nearest REGION using a DIRECT CONNECT or VPN or use a local GW to connect to on premises resources.
     Also create a VPC and enable communication between your instances.
     Now launch EC2 in the outposts and other resources.
@@ -167,9 +167,9 @@ ANALYTICS :
 ##################################################################################################################
 
 1. AMAZON APP-FLOW :  https://www.youtube.com/watch?v=USzaWjjjOJI
-// We may have SAAS apps such as sales force - slack etc; . Sharing data b/w them and AWS for analytics and archiving and automatic workflow isimportant.
+// We may have SAAS apps such as sales force - slack etc; . App-flow helps sharing data b/w them and AWS for analytics and archiving and automatic workflow.
 // But managing the transfer is difficult which is handled by APP-FLOW.
-Bidirectional data transfer from SAAS Applications To AWS
+Bidirectional data transfer from SAAS Applications To AWS.
 Amazon App Flow is a fully-managed integration service that enables you to securely exchange data between software as a service (SaaS) applications, such as Salesforce, Slack and AWS services, such as Amazon Simple Storage Service (Amazon S3) and Amazon Redshift.
 For example, you can ingest contact records from Salesforce to Amazon Redshift or pull support tickets from Zendesk to an Amazon S3 bucket.
 
@@ -198,13 +198,24 @@ To promote a safe, secure, and trustworthy service for everyone, AWS Data Exchan
 Used by colleges, hospitals , scientists to get data from various data lakes .
 
 5. AWS DATA-PIPELINE :
+AWS Data Pipeline helps you move, integrate, and process data across AWS compute and storage resources, as well as your on-premises resources.
 AWS Data Pipeline is a web service that you can use to automate the movement and transformation of data.
 With AWS Data Pipeline, you can define data-driven workflows, so that tasks can be dependent on the successful completion of previous tasks.
 You define the parameters of your data transformations and AWS Data Pipeline enforces the logic that you've set up.
 A pipeline schedules and runs tasks by creating Amazon EC2 instances to perform the defined work activities.
 You upload your pipeline definition to the pipeline, and then activate the pipeline.
-Task Runner polls for tasks and then performs those tasks. For example, Task Runner could copy logfiles to Amazon S3 and launch Amazon EMR clusters.
+Task Runner polls for tasks and then performs those tasks.
+For example, Task Runner could copy logfiles to Amazon S3 and launch Amazon EMR clusters.
 Task Runner is installed and runs automatically on resources created by your pipeline definitions.
+
+    <<============ DATA PIPELINE ===============================================================================>
+                                        |                                            |
+                                        |--> Daily Task                              |--> Weekly Task
+                                        |                                            |
+       [[ EC-2 ]] -- Copy log files ----------> || S3 || --- Launch Data Analysis --------> [[ EMR - Map Reduce]]
+                        TASK-1                                    TASK-2
+
+       EX : You can copy data from a database into s3 and send an SNS once the job is done.
 
 6. AMAZON ELASTIC-SEARCH SERVICE : https://www.youtube.com/watch?v=4Zw1IOxW-oA&t=26s
 Used to analyse and get real time  insights on machine generated data at a peta byte scale. Supports Log stash , Kibana etc ;
@@ -213,27 +224,36 @@ Elasticsearch is a popular open-source search and analytics engine for use cases
 With Amazon ES, you get direct access to the Elasticsearch APIs; existing code and applications work seamlessly with the service.
 
 7. AMAZON ELASTIC MAP REDUCE - EMR : https://www.youtube.com/watch?v=QuwaBOESGiU
-APACHE SPARK - APACHE HADOOP - CLUSTERS - SPARK  --> Maintaining Hadoop and Spark is costly so EMR does this for  us .
+// Apache spark and apache hadoop are used to store data from a datalake [ purchase info - social media - server logs ] similar to S3 ad process those logs.
+// Hadoop is designed to handle batch processing efficiently whereas Spark is designed to handle real-time data efficiently.
+// Hadoop is a high latency computing framework, which does not have an interactive mode whereas Spark is a low latency computing and can process data interactively.
+
+APACHE SPARK - APACHE HADOOP - CLUSTERS  --> Maintaining Hadoop and Spark is costly so EMR does this for  us .
 Amazon EMR is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.
 By using these frameworks and related open-source projects, such as Apache Hive and Apache Pig, you can process data for analytics purposes and business intelligence workloads.
+
+    --> DATA to S3 -> Run CLUSTER in EMR -> Process data -> Output to S3 -> delete CLUSTER
+
+EMR now allows to save data in S3 and run compute as you need to process the data. // We can also monitor spark and hadoop as well.
 The central component of Amazon EMR is the cluster. A cluster is a collection of Amazon Elastic Compute Cloud (Amazon EC2) instances.
 Each instance in the cluster is called a node. Each node has a role within the cluster, referred to as the node type.
 Amazon EMR also installs different software components on each node type, giving each node a role in a distributed application like Apache Hadoop.
-Master node - Core Node - Task Node
-
-Amazon EMR launches clusters in minutes.
+Master node - Core Node - Task Node . Amazon EMR launches clusters in minutes.
 You don’t need to worry about node provisioning, infrastructure setup, Hadoop configuration, or cluster tuning.
 Amazon EMR takes care of these tasks so you can focus on analysis.
-DynamoDB is serverless with no servers to provision, patch, or manage and no software to install, maintain, or operate.
-DynamoDB automatically scales tables up and down to adjust for capacity and maintain performance.
-Availability and fault tolerance are built in, eliminating the need to architect your applications for these capabilities.
-
 
 8. AWS GLUE : https://www.youtube.com/watch?v=oAxvd547kMU&t=28s
 AWS Glue is a fully managed ETL (extract, transform, and load) service that makes it simple and cost-effective to categorize your data, clean it, enrich it, and move it reliably between various data stores and data streams.
 It is used to combine data [ Prepare a data lake ] from various sources and clean , normalize and prepare data to one common syntax and save to S3.
 It uses other AWS services to orchestrate your ETL jobs to build data warehouses and data lakes and generate output streams.
 AWS Glue calls API operations to transform your data, create runtime logs, store your job logic, and create notifications to help you monitor your job runs.
+
+      CSV  --
+      XML    | --- EXTRACT from various DB's -------------> [[ TRANSFORM to common DB ]] ----------------> LOAD to another DB .
+      YAML --
+ ** Glue will identify type of data , generate a script in python to transform data. // We can modify the code as well .
+    It also categories your data , clean it and enrich your data and is completely SERVERLESS [ Scales up and down ].
+ ** If there is a new data in S3 -> trigger lambda -> trigger data pipeline -> Glue -> S3 .
 
 9. AMAZON KINESIS : https://www.youtube.com/watch?v=MbEfiX4sMXc&t=19s      &&    https://www.youtube.com/watch?v=07iZOEl0knc&t=29s
 // Collect - storing - analyse high throughput information. -> Take action
@@ -319,6 +339,16 @@ Redshift lets you easily save the results of your queries back to your S3 data l
 
 Amazon Redshift is a data warehouse service that only supports relational data, NOT key-value data.
 Amazon Redshift is a fast, fully managed data warehouse service that is specifically designed for online analytic processing (OLAP) and business intelligence (BI) applications, which require complex queries against large datasets.
+
+It makes it fast, simple and cost-effective to analyze all your data using standard SQL and your existing Business Intelligence (BI) tools using standard ODBC and JDBC connections.
+It allows you to run complex analytic queries against terabytes to petabytes of structured and semi-structured data, using sophisticated query optimization, columnar storage on high-performance storage, and massively parallel query execution.
+Amazon Redshift also includes Amazon Redshift Spectrum, allowing you to run SQL queries directly against exabytes of unstructured data in Amazon S3 data lakes.
+No loading or transformation is required, and you can use open data formats, including Avro, CSV, Grok, Amazon Ion, JSON, ORC, Parquet, RCFile, RegexSerDe, Sequence, Text, Hudi, Delta and TSV.
+
+Redshift Spectrum is a feature of Amazon Redshift that enables you to run queries against exabytes of unstructured data in Amazon S3, with no loading or ETL required.
+When you issue a query, it goes to the Amazon Redshift SQL endpoint, which generates and optimizes a query plan.
+Amazon Redshift determines what data is local and what is in Amazon S3, generates a plan to minimize the amount of Amazon S3 data that needs to be read, requests Redshift Spectrum workers out of a shared resource pool to read and process data from Amazon S3.
+
 
 
 
@@ -554,6 +584,10 @@ Point-in-time recovery helps protect your tables from accidental write or delete
 With point-in-time recovery, you can restore a table to any point in time during the last 35 days
 Allows you to delete expired items from tables automatically to help you reduce storage usage and the cost of storing data that is no longer relevant.
 
+DynamoDB is serverless with no servers to provision, patch, or manage and no software to install, maintain, or operate.
+DynamoDB automatically scales tables up and down to adjust for capacity and maintain performance.
+Availability and fault tolerance are built in, eliminating the need to architect your applications for these capabilities.
+
 4. AMAZON ELASTIC CACHE FOR REDIS: -> https://www.youtube.com/watch?v=GoNsuTqeMto&t=18s
 --> Caching data and providing it to users quickly rather than getting it from Disks. // example for applications in mobile .
 Amazon ElastiCache makes it easy to set up, manage, and scale distributed in-memory cache environments in the AWS Cloud.
@@ -610,6 +644,15 @@ Amazon Redshift doesn’t support non-relational data. Amazon Redshift is a full
 
 Amazon Redshift is a data warehouse service that only supports relational data, NOT key-value data.
 Amazon Redshift is a fast, fully managed data warehouse service that is specifically designed for online analytic processing (OLAP) and business intelligence (BI) applications, which require complex queries against large datasets.
+
+It makes it fast, simple and cost-effective to analyze all your data using standard SQL and your existing Business Intelligence (BI) tools using standard ODBC and JDBC connections.
+It allows you to run complex analytic queries against terabytes to petabytes of structured and semi-structured data, using sophisticated query optimization, columnar storage on high-performance storage, and massively parallel query execution.
+Amazon Redshift also includes Amazon Redshift Spectrum, allowing you to run SQL queries directly against exabytes of unstructured data in Amazon S3 data lakes.
+No loading or transformation is required, and you can use open data formats, including Avro, CSV, Grok, Amazon Ion, JSON, ORC, Parquet, RCFile, RegexSerDe, Sequence, Text, Hudi, Delta and TSV.
+
+Redshift Spectrum is a feature of Amazon Redshift that enables you to run queries against exabytes of unstructured data in Amazon S3, with no loading or ETL required.
+When you issue a query, it goes to the Amazon Redshift SQL endpoint, which generates and optimizes a query plan.
+Amazon Redshift determines what data is local and what is in Amazon S3, generates a plan to minimize the amount of Amazon S3 data that needs to be read, requests Redshift Spectrum workers out of a shared resource pool to read and process data from Amazon S3.
 
 
 10. AMAZON TIMESTREAM :

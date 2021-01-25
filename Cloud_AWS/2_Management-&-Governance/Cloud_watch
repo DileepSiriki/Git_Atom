@@ -137,3 +137,9 @@ Once an alarm is set , we can create an SNS topic and subscribe to it for notifi
 
 Using Alarm , we can also send a notification , do an Ec2 action [stop,terminate,reboot] , do an autoscaling of instance.
 Also we can send email for billing costs if it exceeds some limit etc;.
+
+=====================
+You can retrieve metrics data for any Amazon EC2 instance up to 2 weeks from the time you started to monitor it.
+After 2 weeks, metrics data for an Amazon EC2 instance will not be available if monitoring was disabled for that Amazon EC2 instance.
+If you want to archive metrics beyond 2 weeks you can do so by calling mon-get-stats command from the command line and storing the results in Amazon S3 or Amazon SimpleDB.
+Amazon CloudWatch stores metrics for terminated Amazon EC2 instances or deleted Elastic Load Balancers for 2 weeks.

@@ -8,6 +8,16 @@ If you specify the desired capacity, either when you create the group or at any 
 If you specify scaling policies, then Amazon EC2 Auto Scaling can launch or terminate instances as demand on your application increases or decreases.
 Free of cost . You only pay for the AWS resources (for example, EC2 instances and CloudWatch alarms) that you use.
 
+Yes. Amazon EC2 Auto Scaling is a fully managed service designed to launch or terminate Amazon EC2 instances automatically to help ensure you have the correct number of Amazon EC2 instances available to handle the load for your application.
+EC2 Auto Scaling helps you maintain application availability through fleet management for EC2 instances, which detects and replaces unhealthy instances, and by scaling your Amazon EC2 capacity up or down automatically according to conditions you define.
+You can use EC2 Auto Scaling to automatically increase the number of Amazon EC2 instances during demand spikes to maintain performance and decrease capacity during lulls to reduce costs.
+Allocation strategies in EC2 Auto Scaling determines how Spot Instances in your fleet are fulfilled from Spot Instance pools.
+The capacity-optimized allocation strategy attempts to provision Spot Instances from the most available Spot Instance pools by analyzing capacity metrics.
+This strategy is a good choice for workloads that have a higher cost of interruption such as big data and analytics, image and media rendering, machine learning, and high performance computing.
+The lowest-price allocation strategy launches Spot Instances strictly based on diversification across ‘N’ lowest priced pools.
+
+
+
   • Better fault tolerance --> Amazon EC2 Auto Scaling can detect when an instance is unhealthy, terminate it, and launch an instance to replace it.
     You can also configure Amazon EC2 Auto Scaling to use multiple Availability Zones. If one Availability Zone becomes unavailable, Amazon EC2 Auto Scaling can launch instances in another one to compensate.
 

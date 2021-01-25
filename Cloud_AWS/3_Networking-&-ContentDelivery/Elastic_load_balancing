@@ -103,10 +103,13 @@ Elastic Load Balancing offers four types of load balancers that all feature the 
   Application Load Balancer : https://aws.amazon.com/elasticloadbalancing/application-load-balancer/
   Application Load Balancer is best suited for load balancing of HTTP and HTTPS traffic and provides advanced request routing targeted at the delivery of modern application architectures, including microservices and containers.
   Application Load Balancer routes traffic to targets within Amazon VPC based on the content of the request.
+  routes traffic based on advanced application level information that includes the content of the request.
+  ideal for applications needing advanced routing capabilities, microservices, and container-based architectures.
 
   Network Load Balancer : https://aws.amazon.com/elasticloadbalancing/network-load-balancer/
   Network Load Balancer is best suited for load balancing of Transmission Control Protocol (TCP), User Datagram Protocol (UDP), and Transport Layer Security (TLS) traffic where extreme performance is required.
   Network Load Balancer routes traffic to targets within Amazon VPC and is capable of handling millions of requests per second while maintaining ultra-low latencies.
+  For network/transport protocols (layer4 – TCP, UDP) load balancing, and for extreme performance/low latency applications
 
   Gateway Load Balancer : https://aws.amazon.com/elasticloadbalancing/gateway-load-balancer/
   Gateway Load Balancer makes it easy to deploy, scale, and run third-party virtual networking appliances.
@@ -114,5 +117,8 @@ Elastic Load Balancing offers four types of load balancers that all feature the 
   This capability makes it well suited for working with third-party appliances for security, network analytics, and other use cases.
 
   Classic Load Balancer : https://aws.amazon.com/elasticloadbalancing/classic-load-balancer/
+  If your application is built within the EC2 Classic network then you should use Classic Load Balancer.
   Classic Load Balancer provides basic load balancing across multiple Amazon EC2 instances and operates at both the request level and the connection level.
   Classic Load Balancer is intended for applications that were built within the EC2-Classic network.
+  routes traffic based on either application or network level information.
+  The Classic Load Balancer is ideal for simple load balancing of traffic across multiple EC2 instances,
