@@ -343,7 +343,7 @@ Monitoring and Automation, All Storage / Month	                                 
 S3 Standard - Infrequent Access * - For long lived but infrequently accessed data that needs millisecond access	:
 All Storage / Month	                                                              $0.0125 per GB
 
-S3 One Zone - Infrequent Access * - For re-createable infrequently accessed data that needs millisecond access	:
+S3 One Zone - Infrequent Access * - For re-creatable infrequently accessed data that needs millisecond access	:
 All Storage / Month                                                             	$0.01 per GB
 
 S3 Glacier ** - For long-term backups and archives with retrieval option from 1 minute to 12 hours	:
@@ -487,22 +487,51 @@ AWS STORAGE GATEWAY : https://www.youtube.com/watch?v=Spzdj1NUJbA -> VV.IMP --> 
 The AWS Storage Gateway is a service connecting an on-premises software appliance with cloud-based storage to provide seamless and secure integration
 between an organization's on-premises IT environment and AWS's storage infrastructure.
 
+AWS Storage Gateway is a hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage.
+Storage Gateway provides a standard set of storage protocols such as iSCSI, SMB, and NFS, which allow you to use AWS storage without rewriting your existing applications.
+Storage Gateway enables you to reduce your on-premises storage footprint and associated costs by leveraging Amazon S3 cloud storage.
+
+    USECASE :
+    -----------
+    (1) Move backups and archives to the cloud,
+    (2) Reduce on-premises storage with cloud-backed file shares, and
+    (3) Provide on-premises applications low latency access to data stored in AWS.
+
+ACTIVATION :
+--------------
+You use the AWS Management Console to download the virtual appliance gateway or purchase the hardware appliance, configure storage, and manage and monitor the service.
+The gateway connects your applications to AWS storage by providing standard storage interfaces.
+It provides transparent caching, efficient data transfer, and integration with AWS monitoring and security services.
+Once you’ve installed your gateway, you associate it with your AWS Account through our activation process.
+After activation, you configure the gateway to connect to the appropriate storage type.
+For File Gateway, you configure file shares that are mapped to selected S3 buckets, using IAM roles.
+For Volume Gateway, you create and mount volumes as iSCSI devices.
+For Tape Gateway, you connect your backup application to create and manage tapes.
+Once configured, you start using the gateway to write and read data to and from AWS storage. You can monitor the status of your data transfer and your storage interfaces through the AWS Management Console. Additionally, you can use the API or SDK to programmatically manage your application’s interaction with the gateway.
+
 Storage Gateway offers three different types of gateways – File Gateway, Tape Gateway, and Volume Gateway
 that seamlessly connect on-premises applications to cloud storage, caching data locally for low-latency access.
 Your applications connect to the service through a virtual machine or gateway hardware appliance using standard storage protocols, such as NFS, SMB, and iSCSI.
 The gateway connects to AWS storage services, such as Amazon S3, Amazon S3 Glacier, Amazon S3 Glacier Deep Archive, Amazon EBS, and AWS Backup, providing storage for files, volumes, snapshots, and virtual tapes in AWS.
 
-               -----------                                                       -----------
-              |            |                         --                         |           |
-              |    AWS     | <--------------------> |  | <--------------------> |   SITE    |
-              |            |                         --                         |           |
-               -----------                                                       -----------
-                            <------------ TAKES FREQUENT SNAPSHOTS ----------->
+                                                                 ---------------------------------------------------> CAN BE :
+                                                                |                                          |          1. An on-premises VM
+                          -----------                       STORAGE-GW                      -----------    |          2. A hardware appliance
+          S3             |            |                         --                         |           |   |          3. An EC2 instance in EC2
+          Glacier        |    AWS     | <--------------------> |  | <--------------------> |   SITE    |   |
+          Glacier Deep   |            |                         --                         |           |   ---------> CAN BE :
+          EBS, Backup     -----------                                                       -----------               1. FILE GW -> NFS / SMB , GW deployed on a VM running on Hyper-V / ESXi / KVM
+                       AWS SSTORAGE  <------------ TAKES FREQUENT SNAPSHOTS -----------> ON PREMISES IT SERVICES      2. VOLUME GW -> Cached - Stored
+                                                                                                                      3. TAPE GW -> GW deployed on a VM running on Hyper-V / ESXi / KVM
+
 
     File Gateway :  A file gateway supports a file interface into Amazon Simple Storage Service (AmazonS3) and combines a service and a virtual software appliance.
-    By using this combination, you can storeand retrieve objects in Amazon S3 using industry-standard file protocols such as Network File System(NFS) and Server Message Block (SMB).
-    The software appliance, or gateway, is deployed into your on-premises environment as a virtual machine (VM) running on VMware ESXi, Microsoft Hyper-V, or LinuxKernel-based Virtual Machine (KVM) hypervisor.
+    By using this combination, you can store and retrieve objects in Amazon S3 using industry-standard file protocols such as Network File System(NFS) and Server Message Block (SMB).
+    The software appliance, or gateway, is deployed into your on-premises environment as a virtual machine (VM) running on VMware ESXi, Microsoft Hyper-V, or Linux Kernel-based Virtual Machine (KVM) hypervisor.
     The gateway provides access to objects in S3 as files or file share mount points.
+
+    // Server Messaging protocol (SMB) is the native file sharing protocol implemented in Windows systems.
+       The Network File System (NFS) protocol is used by Linux systems to share files and folders.
 
     Volume Gateway : A volume gateway provides cloud-backed storage volumes that you can mount as Internet Small Computer System Interface (iSCSI) devices from your on-premises application servers.
     The volume gateway is deployed into your on-premises environment as a VM running on VMware ESXi,KVM, or Microsoft Hyper-V hypervisor.
@@ -512,10 +541,12 @@ The gateway connects to AWS storage services, such as Amazon S3, Amazon S3 Glaci
       • Stored volumes : If you need low-latency access to your entire dataset, first configure your on-premises gateway to store all your data locally.
                          Then asynchronously back up point-in-time snapshots of this data to Amazon S3.
 
+      **In either mode, you can take point-in-time snapshots of your volumes, which are stored as Amazon EBS Snapshots in AWS, enabling you to make space-efficient versioned copies of your volumes.
+        Used for data protection, recovery, migration and various other copy data needs.
+
    Tape Gateway : A tape gateway provides cloud-backed virtual tape storage.
    The tape gateway is deployed into your on-premises environment as a VM running on VMware ESXi, KVM, or Microsoft Hyper-V hypervisor.
-   With a tape gateway, you can cost-effectively and durably archive backup data in GLACIER orDEEP_ARCHIVE.
-   The tapes are moved to aws by trucks and are converted to objects to be stored in glacier storage / S3.
+   With a tape gateway, you can cost-effectively and durably archive backup data in GLACIER or DEEP_ARCHIVE.
 
 You can run AWS Storage Gateway either on-premises as a VM appliance, as a hardware appliance, or in AWS as an Amazon EC2 instance.
 
@@ -523,7 +554,7 @@ You can run AWS Storage Gateway either on-premises as a VM appliance, as a hardw
 AWS SNOW-FAMILY:
 -----------------
   -> Snow cone        - https://www.youtube.com/watch?v=X_8LM7E_hiE      -- 8 TB storage   --> 1 SMALL BOX [ uses opshub application for data transfer ]
-     Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80 TB storage  --> 1 SUITCASE  [ Snowball is a petabyte-scale data transport solution ]
+     Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80 TB storage  --> 1 SUITCASE  [ Snowball is a petabyte-scale data transport solution by cascading snow balls ]
      Snow Ball edge   - https://www.youtube.com/watch?v=bxSD1Nha2k8      -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
      Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1 Exabyte      --> 1 Truck     [ AWS Snowmobile is the exabyte-scale data migration service ]
 
@@ -531,30 +562,42 @@ AWS SNOW-FAMILY:
     Snow ball can be connected in series to have a Petabyte's storage  = 1 million GB = 1024 Terabytes
 
 
-AWS SNOWCONE : -  (8.94” x 5.85” x 3.25” / 227 mm x 148.6 mm x 82.65 mm),  WEighs about 4.5 lbs. (2 kg) ,run on a battery for up to approximately 6 hours
+AWS SNOWCONE : -  (8.94” x 5.85” x 3.25” / 227 mm x 148.6 mm x 82.65 mm),  Weighs about 4.5 lbs. (2 kg) ,run on a battery for up to approximately 6 hours
 ----------------
 AWS Snowcone is a portable, rugged, and secure device for edge computing and data transfer.
-You canuse Snowcone to collect, process, and move data to AWS, either offline by shipping the device to AWS, or online by using AWS DataSync.
-The Snowcone device supports data transfer fromon-premises Windows, Linux, and macOS servers and file-based applications through the NFS interface.
-Supports upto Dozens of TB. It can be used in space-constrained environments where Snowball Edge devices don't fit.
-    •  For edge computing applications, to collect data, process the data to gain immediate insight, and thentransfer the data online to AWS.
-    •  To transfer data that is continuously generated by sensors or machines online to AWS in a factory or atother edge locations.
-    •  To distribute media, scientific, or other content from AWS storage services to your partners andcustomers.
-    •  To aggregate content by transferring media, scientific, or other content from your edge locations toAWS.
-    •  For one-time data migration scenarios where your data is ready to be transferred, where Snowconeoffers a simple, quick, and low-cost way to transfer up to 8 TB of data into AWS by shipping the deviceback to AWS.
-
- The Amazon Simple Storage Service(Amazon S3) buckets, data, and Amazon Elastic Compute Cloud (Amazon EC2) AMIs that you choose areautomatically configured, encrypted, and pre-installed on your devices.
- The AWS DataSync agent is alsopre-installed before your devices are shipped to you.
- you connect it to your on-premises network and set the IP address eithermanually or automatically with DHCP.
- You must download and install AWS OpsHub for Snow Family, on a windows or mac lappy.
- When data is transferred , you can ship it back .
+You can use Snowcone to collect, process, and move data to AWS, either offline by shipping the device to AWS, or online by using AWS DataSync.
+The Snowcone device supports data transfer from on-premises Windows, Linux, and macOS servers and file-based applications through the NFS interface.
+Supports up to Dozens of TB. It can be used in space-constrained environments where Snowball Edge devices don't fit.
+    •  For edge computing applications, to collect data, process the data to gain immediate insight, and then transfer the data online to AWS.
+    •  To transfer data that is continuously generated by sensors or machines online to AWS in a factory or at other edge locations.
+    •  To distribute media, scientific, or other content from AWS storage services to your partners and customers.
+    •  To aggregate content by transferring media, scientific, or other content from your edge locations to AWS.
+    •  For one-time data migration scenarios where your data is ready to be transferred, where Snowcone offers a simple, quick, and low-cost way to transfer up to 8 TB of data into AWS by shipping the deviceback to AWS.
 
 
-AWS SNOWBALL :
----------------
+AWS SNOWBALL & EDGE : Edge is an extension to snowball
+-----------------------
 Snowball is a petabyte-scale data transport solution that uses secure appliances to transfer large amounts of data into and out of the AWS cloud.
 Using Snowball addresses common challenges with large-scale data transfers including high network costs, long transfer times, and security concerns.
+AWS Snowball is a service that provides secure, rugged devices, so you can bring AWS computing and storage capabilities to your edge environments, and transfer data into and out of AWS.
+Now the AWS Snowball service operates with Snowball Edge devices, which include on-board computing capabilities as well as storage.
+
+You can use Snowball Edge Storage Optimized if you have a large backlog of data to transfer or if you frequently collect data that needs to be transferred to AWS and your storage is in an area where high-bandwidth internet connections are not available or cost-prohibitive.
+You can also use Snowball Edge to run edge computing workloads, such as performing local analysis of data on a Snowball Edge cluster and writing it to the S3-compatible endpoint. You can streamline it into existing workflows leveraging built-in capabilities such as the NFS file interface and migrate files to the device while maintaining file metadata.
+Snowball Edge can operate in remote locations or harsh operating environments, such as factory floors, oil and gas rigs, mining sites, hospitals, and on moving vehicles. Snowball Edge is pre-configured and does not have to be connected to the internet, so processing and data collection can take place within isolated operating environments.
+Snowball Edge is intended to serve as a data transport solution for moving high volumes of data into and out of a designated AWS Region. For use cases that require data transfer between AWS Regions, we recommend using S3 Cross-Region Replication as an alternative.
+
+Snowball Edge is an edge computing and data transfer device provided by the AWS Snowball service.
+It has on-board storage and compute power that provides select AWS services for use in edge locations. Snowball Edge comes in two options, Storage Optimized and Compute Optimized, to support local data processing and collection in disconnected environments such as ships, windmills, and remote factories.
 Snowball is limited to 50 & 80Tb, Snowball Edge is limited to 100Tb but support a clustering feature.
+consider it for large-scale data transfers and migrations when bandwidth is not available for use of a high-speed online transfer service, such as AWS DataSync.
+
+The original Snowball devices were transitioned out of service and Snowball Edge Storage Optimized are now the primary devices used for data transfer. Snowballs are now out of order.
+The Amazon Simple Storage Service(Amazon S3) buckets, data, and Amazon Elastic Compute Cloud (Amazon EC2) AMIs that you choose are automatically configured, encrypted, and pre-installed on your devices.
+The AWS DataSync agent is also pre-installed before your devices are shipped to you.
+you connect it to your on-premises network and set the IP address either manually or automatically with DHCP.
+You must download and install AWS OpsHub for Snow Family, on a windows or mac laptop.
+When data is transferred , you can ship it back .
 
 How Pricing Works: Snowball pricing has four main cost components:
     (1) a service fee for each job you run,
@@ -609,6 +652,7 @@ You can copy snapshots to other Regions and then restore them to new volumes the
 You can increase the volumes of an instance at any time by attaching more EBS to it.
 
         Amazon EBS provides the following volume types: DEPENDS ON IPOS / THROUGHPUT / HDD / SDD
+        --------------------------------------------------------------------------------------------
         A hard disk drive (HDD) is an old-school storage device that uses mechanical platters and a moving read/write head to access data.
         A solid-state drive (SSD) is a newer, faster type of device that stores data on instantly-accessible memory chips.
 
@@ -642,6 +686,7 @@ You can increase the volumes of an instance at any time by attaching more EBS to
                 If you require infrequent access to your data and are looking to save costs, these volumes provides inexpensive block storage.
 
         USES OF EBS :
+        ---------------
           Data availability :
              These are  automatically replicated within its Availability Zone to prevent data loss due to failure of any single hardware component.
              You can attach an EBS volume to any EC2 instance in the same Availability Zone.
@@ -657,7 +702,7 @@ You can increase the volumes of an instance at any time by attaching more EBS to
           Snapshots : use Amazon Data Lifecycle Manager
             Ebs -> snapshots -> create ->
                                           either from a volume  --> Single volume snapshot
-                                          or instance --> Multi volume snapshot [ as instance contain more than 1 volume attached ]
+                                          or instance           --> Multi volume snapshot [ as instance contain more than 1 volume attached ]
 
             The volume does not need to be attached to a running instance in order to take a snapshot.
             Snapshots of encrypted EBS volumes are automatically encrypted.
@@ -670,13 +715,15 @@ You can increase the volumes of an instance at any time by attaching more EBS to
 
       Amazon Data Lifecycle Manager : SNAPSHOTS AUTOMATION  AWS -> Ebs -> life cycle manager
 
+ DATA LIFECYCLE MANAGER :
+ -------------------------
         You can use Amazon Data Lifecycle Manager to automate the creation, retention, and deletion of EBS snapshots and EBS-backed AMIs.
         When you automate snapshot and AMI management, it helps you to ,
-          •Protect valuable data by enforcing a regular backup schedule.
-          •Create standardized AMIs that can be refreshed at regular intervals.
-          •Retain backups as required by auditors or internal compliance.
-          •Reduce storage costs by deleting outdated backups.
-          •Create disaster recovery backup policies that back up data to isolated accounts.
+          • Protect valuable data by enforcing a regular backup schedule.
+          • Create standardized AMIs that can be refreshed at regular intervals.
+          • Retain backups as required by auditors or internal compliance.
+          • Reduce storage costs by deleting outdated backups.
+          • Create disaster recovery backup policies that back up data to isolated accounts.
 
 
 =============================================
@@ -691,6 +738,6 @@ You can increase the volumes of an instance at any time by attaching more EBS to
                                VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
 
 
-  --> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball / Snow Mobile ]
+  --> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball - Edge / Snow Mobile ]
 
   --> HYBRID DATA STORAGE   :  Access AWS storage from On-premisis          - AWS STORAGE GATEWAY

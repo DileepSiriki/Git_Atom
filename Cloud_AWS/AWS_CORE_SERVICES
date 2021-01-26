@@ -18,7 +18,7 @@ SERVICES COVERED :
 -------------------------------------------------------------------------------------------------------------------------------------------------
 Analytics*                |  Compute*            |   Data Base              |  Management & Governance       |  Satellite
 Application Integration   |  Containers*         |   Developer Tools        |  Migration & Transfer          |  Security, Identity & Compliance
-AR & VR                   |  Cryptography & PKI  |   End User Computing     |  Networking & Content Delivery |  Storage
+AR & VR                   |  Cryptography & PKI  |   End User Computing     |  Networking & Content Delivery |  Storage*
 Billing & Cost Management |  Customer Enablement |   Front-End Web & Mobile |  Quantum Computing             |
 Business Applications     |  Customer Engagement |   Game Development       |  Robotics                      |
 Blockchain                |                      |                          |                                |
@@ -579,10 +579,11 @@ Multiple Amazon EC2instances can access an Amazon EFS file system at the same ti
 Using Amazon EFS with Microsoft Windows–based Amazon EC2 instances is not supported.
 
                         EC2-a --
-                        EC2-b   | <---------->  |||||||||  -> EFS
-                        EC2-c --       NFS
+                        EC2-b   | <---------->  |||||||||  <---------->  On-Premises
+                        EC2-c --       NFS         EFS          NFS
+
             So multiple instances can access NFS at the same time using a standard NFSv4 Protocol .
-            Once EFS is create d, we can mount EC2 instances on EFS.
+            Once EFS is created, we can mount EC2 instances on EFS.
             Useful when application runs on multiple EC2.
 
 When you first create your file system, there is only one root directory at /.
@@ -609,7 +610,7 @@ Windows applications and workloads ideal for Amazon FSx include business applica
     Snow Ball edge   - https://www.youtube.com/watch?v=bxSD1Nha2k8      -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
     Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1 Exabyte      --> 1 Truck
 
-   1 Exabyte = 1000 petabytes
+   1 Exabyte = 1024 petabytes
    Snow ball can be connected in series to have a Petabyte's storage  = 1 million GB = 1024 Terabytes
 
 7. AMAZON STORAGE GATEWAY : < Has a separate detailed chapter - Storage_s3 > -- https://www.youtube.com/watch?v=DPyc0q4MYsM -- https://www.youtube.com/watch?v=Spzdj1NUJbA -- https://www.youtube.com/watch?v=2I4CKdNESoQ&t=8s --
@@ -620,6 +621,137 @@ Storage gateway keeps regular backups from S3 so that it can restore to on-premi
 
 The above process is needed until you are ready to move completely to cloud .
 Slowly we can also launch an EC2 and attach an EBS with data from S3 and migrate to cloud directly.
+
+
+
+#########################################################################################################################
+#########################################################################################################################
+CRYPTOGRAPHY AND PKI [ Public Key Infrastructure ]  SERVICES : // View chapter Cryptography_KMS_CMK for complete Details.
+#########################################################################################################################
+#########################################################################################################################
+
+1. AWS CLOUD-HSM :
+HARDWARE SECURITY MODULE is a computing device that performs cryptographic operations and provides secure storage for cryptographic keys.
+AWS CloudHSM organizes HSMs in clusters, which are automatically synchronized collections of HSMs within a given Availability Zone (AZ).
+If you want a managed service for creating and controlling encryption keys, but do not want or need tooperate your own HSM, consider using AWS Key Management Service.
+When you use an HSM from AWS CloudHSM, you can perform a variety of cryptographic tasks:
+    • Generate, store, import, export, and manage cryptographic keys, including symmetric keys and asymmetric key pairs.
+    • Use symmetric and asymmetric algorithms to encrypt and decrypt data.
+    • Use cryptographic hash functions to compute message digests and hash-based message authentication codes (HMACs).
+    • Cryptographically sign data (including code signing) and verify signatures.
+    • Generate cryptographically secure random data.
+
+    WHEN TO USE AWS-CLOUD HSM AND WHEN TO USE KMS :
+    Use AWS CloudHSM when you need to manage the HSMs that generate and store your encryption keys.
+    In AWS CloudHSM, you create and manage HSMs, including creating users and setting their permissions.
+    You also create the symmetric keys and asymmetric key pairs that the HSM stores.
+    If you need to secure your encryption keys in a service backed by FIPS-validated HSMs, but you do not need to manage the HSM, try AWS Key Management Service (p
+
+2. AWS KEY MANAGEMENT SERVICE :
+It provides tools for generating master keys and other data keys.
+AWS KMS also interacts with many other AWS services to encrypt their service-specific data.
+It is an AWS service that makes it easy for you to create and control the encryption keys that are used to encrypt your data.
+The customer master keys (CMKs) that you create in AWS KMS are protected by FIPS 140-2 validated cryptographic modules.
+They never leave AWS KMS unencrypted. To use or manage your CMKs, you interact with AWS KMS.
+AWS KMS is also integrated with AWS CloudTrail to deliver detailed logs of all cryptographic operations that use your CMKs and management operations that change their configuration.
+
+  ****VIMP :
+  AWS KMS protects the customer master keys that protect your data.
+  In the classic scenario, you encrypt your data using data key A. But you need to protect data key A, so you encrypt data key A by using data key B.
+  Now data key B is vulnerable, so you encrypt it by using data key C. And, so on.
+  This encryption technique, which is called envelope encryption, always leaves one last encryption key unencrypted so you can decrypt your encryption keys and data.
+  That last unencrypted (or plaintext) key is called a master key.
+
+AWS KMS customer master keys (CMKs) are 256-bit Advanced Encryption Standard (AES) symmetric keys that are not exportable. They spend their entire lifecycle entirely within AWS KMS.
+You can also create asymmetric RSA or elliptic curve (ECC) CMKs backed by asymmetric key pairs. The public key in each asymmetric CMK is exportable, but the private key remains within AWS KMS.
+You can use your CMKs to encrypt small amounts of data (up to 4096 bytes). However, CMKs are typically used to generate, encrypt, and decrypt the data keys that encrypt your data.
+Unlike CMKs, data keys can encrypt data of any size and format, including streamed data.
+
+AWS KMS does not store or manage data keys, and you cannot use KMS to encrypt or decrypt with data keys. To use data keys to encrypt and decrypt, use the AWS Encryption SDK.
+AWS KMS CMKs are backed by FIPS-validated hardware service modules (HSMs) that KMS manages. Tomanage your own HSMs, use AWS CloudHSM.
+
+3. AWS ENCRYPTION SDK :
+The AWS Encryption SDK is a client-side encryption library to help you implement best-practice encryption and decryption in any application even if you're not a cryptography expert.
+The AWS Encryption SDK works on all types of data. Every successful call to encrypt returns a single portable, formatted encrypted message that contains metadata and the message ciphertext.
+The AWS Encryption SDK is developed as an open source project.
+It is available in multiple programming languages, including a command line interface that is supported on Linux, macOS, and Windows.
+All implementations are interoperable. For example, you can encrypt your data with the Java library and decrypt it with the Python library. Or you can encrypt data with the C library and decrypt it with the CLI.
+
+4. AMAZON DYNAMO-DB ENCRYPTION CLIENT :
+The Amazon DynamoDB Encryption Client is a client-side encryption library that helps you to protect your table data before you send it to Amazon DynamoDB.
+Encrypting your sensitive data in transit and at rest helps ensure that your plaintext data isn’t available to any third party, including AWS.
+It encrypts the attribute values in each table item using a unique encryption key.
+It then signs the item to protect it against unauthorized changes, such as adding or deleting attributes or swapping encrypted values.
+It also verifies and decrypts them when you retrieve them.
+It is an open source project and is available in JAVA and python and is interoperable.
+
+5. AMAZON S3 CLIENT SIDE ENCRYPTION :
+  OPTION-1 : Using a CMK stored in AWS KMS :
+        When uploading an object —
+            Using the CMK ID, the client first sends a request to AWS KMS for a CMK that it can use to encrypt your object data.
+            The client obtains a unique data key for each object that it uploads.
+            AWS KMS returns two versions of a randomly generated data key:
+              --> A plaintext version of the data key that the client uses to encrypt the object data.
+              --> A cipher blob of the same data key that the client uploads to Amazon S3 as object metadata.
+
+        When downloading an object —
+        The client downloads the encrypted object from Amazon S3 along with the cipher blob version of the data key stored as object metadata.
+        The client then sends the cipher blob to AWS KMS to get the plaintext version of the data key so that it can decrypt the object data
+
+  OPTION-2 : Using a master key stored within your application
+        When uploading an object —
+            You provide a client-side master key to the Amazon S3 encryption client.
+            The client uses the master key only to encrypt the data encryption key that it generates randomly.
+              --> The Amazon S3 encryption client generates a one-time-use symmetric key (also known as a data encryption key or data key) locally.
+                  It uses the data key to encrypt the data of a single Amazon S3 object. The client generates a separate data key for each object.
+              --> The client encrypts the data encryption key using the master key that you provide.
+                  The client uploads the encrypted data key and its material description as part of the object metadata.
+                  The client uses the material description to determine which client-side master key to use for decryption.
+              --> The client uploads the encrypted data to Amazon S3 and saves the encrypted data key as object metadata (x-amz-meta-x-amz-key) in Amazon S3.
+
+        When downloading an object —
+        The client downloads the encrypted object from Amazon S3.
+        Using the material description from the object's metadata, the client determines which master key to use to decrypt the data key.
+        The client uses that master key to decrypt the data key and then uses the data key to decrypt the object.
+
+NOTE :
+Your client-side master keys and your unencrypted data are never sent to AWS. It's important that you safely manage your encryption keys. If you lose them, you can't decrypt your data.
+The client-side master key that you provide can be either a symmetric key or a public/private key pair. The following code examples show how to use each type of key.
+
+6. AWS SECRET MANAGER : Documented in SECURITY-IDENTITY-COMPLIANCE
+provides encryption and rotation of encrypted secrets used with AWS-supported databases.
+
+To protect DynamoDB table items before you send them to DynamoDB, use the DynamoDB Encryption Client.
+To protect Amazon S3 objects before you send them to an Amazon S3 bucket, use Amazon S3 client-side encryption. Amazon S3 also offers server-side encryption.
+To protect all other types of data at their source, use the AWS Encryption SDK.
+
+
+7. AWS CERTIFICATE MANAGER - ACM :
+AWS Certificate Manager is a service that lets you easily provision, manage, and deploy public and private Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificates for use with AWS services and your internal connected resources.
+It is used to generate, issue, and manage public and private SSL/TLS certificates for use with your AWS based websites and applications.
+These public certificates verify the identity and authenticity of your web server and the ownership of your public keys.
+In doing so, public certificates initiate a trusted, encrypted connection between you and your users.
+
+8. AWS CERTIFICATE MANAGER PRIVATE CERTIFICATE AUTHORITY - ACM PCA:
+is service is for enterprise customers building a public key infrastructure (PKI)inside the AWS cloud and intended for private use within an organization.
+It is a managed private certificate authority (CA) service with which you can manage your CA infrastructure and your private certificates.
+With private certificates you can authenticate resources inside an organization.
+Private certificates allow entities like users, web servers, VPN users, internal API endpoints, and IoT devices to prove their identity and establish encrypted communications channels.
+
+9. AWS SIGNER :
+AWS Signer is a fully managed code-signing service to ensure the trust and integrity of your code.
+Organizations validate code against a digital signature to confirm that the code is unaltered and from a trusted publisher.
+With AWS Signer, your security administrators have a single place to define your signing environment, including what AWS Identity and Access Management (IAM) role can sign code and in what regions.
+AWS Signer manages the code-signing certificate public and private keys and enables central management of the code-signing lifecycle.
+  --> With Code Signing for AWS Lambda, you can ensure that only trusted code runs in your Lambda functions.
+  --> With Code Signing for AWS IoT, you can sign code that you create for IoT devices supported by Amazon Free RTOS and AWS IoT device management.
+
+10. AWS CRYPTO TOOLS :
+Cryptography is hard to do safely and correctly.
+The AWS Crypto Tools libraries are designed to help everyone do cryptography right, even without special expertise.
+Our client-side encryption libraries help you to protect your sensitive data at its source using secure cryptographic algorithms, envelope encryption, and signing.
+It is a part of AWS ENCRYPTION SDK .
+
 
 
 
@@ -1029,135 +1161,6 @@ AWS Single Sign-On (AWS SSO) is a cloud-based service that simplifies managing S
 You can control SSO access and user permissions across all your AWS accounts in AWS Organizations.
 You can also administer access to popular business applications and custom applications that support Security Assertion Markup Language (SAML) 2.0.
 In addition, AWS SSO offers a user portal where your users can find all their assigned AWS accounts, business applications, and custom applications in one place.
-
-
-
-#########################################################################################################################
-#########################################################################################################################
-CRYPTOGRAPHY AND PKI [ Public Key Infrastructure ]  SERVICES : // View chapter Cryptography_KMS_CMK for complete Details.
-#########################################################################################################################
-#########################################################################################################################
-
-1. AWS CLOUD-HSM :
-HARDWARE SECURITY MODULE is a computing device that performs cryptographic operations and provides secure storage for cryptographic keys.
-AWS CloudHSM organizes HSMs in clusters, which are automatically synchronized collections of HSMs within a given Availability Zone (AZ).
-If you want a managed service for creating and controlling encryption keys, but do not want or need tooperate your own HSM, consider using AWS Key Management Service.
-When you use an HSM from AWS CloudHSM, you can perform a variety of cryptographic tasks:
-    • Generate, store, import, export, and manage cryptographic keys, including symmetric keys and asymmetric key pairs.
-    • Use symmetric and asymmetric algorithms to encrypt and decrypt data.
-    • Use cryptographic hash functions to compute message digests and hash-based message authentication codes (HMACs).
-    • Cryptographically sign data (including code signing) and verify signatures.
-    • Generate cryptographically secure random data.
-
-2. AWS KEY MANAGEMENT SERVICE :
-It provides tools for generating master keys and other data keys.
-AWS KMS also interacts with many other AWS services to encrypt their service-specific data.
-It is an AWS service that makes it easy for you to create and control the encryption keys that are used to encrypt your data.
-The customer master keys (CMKs) that you create in AWS KMS are protected by FIPS 140-2 validated cryptographic modules.
-They never leave AWS KMS unencrypted. To use or manage your CMKs, you interact with AWS KMS.
-AWS KMS is also integrated with AWS CloudTrail to deliver detailed logs of all cryptographic operations that use your CMKs and management operations that change their configuration.
-
-  ****VIMP :
-  AWS KMS protects the customer master keys that protect your data.
-  In the classic scenario, you encrypt your data using data key A. But you need to protect data key A, so you encrypt data key A by using data key B.
-  Now data key B is vulnerable, so you encrypt it by using data key C. And, so on.
-  This encryption technique, which is called envelope encryption, always leaves one last encryption key unencrypted so you can decrypt your encryption keys and data.
-  That last unencrypted (or plaintext) key is called a master key.
-
-AWS KMS customer master keys (CMKs) are 256-bit Advanced Encryption Standard (AES) symmetric keys that are not exportable. They spend their entire lifecycle entirely within AWS KMS.
-You can also create asymmetric RSA or elliptic curve (ECC) CMKs backed by asymmetric key pairs. The public key in each asymmetric CMK is exportable, but the private key remains within AWS KMS.
-You can use your CMKs to encrypt small amounts of data (up to 4096 bytes). However, CMKs are typically used to generate, encrypt, and decrypt the data keys that encrypt your data.
-Unlike CMKs, data keys can encrypt data of any size and format, including streamed data.
-
-AWS KMS does not store or manage data keys, and you cannot use KMS to encrypt or decrypt with data keys. To use data keys to encrypt and decrypt, use the AWS Encryption SDK.
-AWS KMS CMKs are backed by FIPS-validated hardware service modules (HSMs) that KMS manages. Tomanage your own HSMs, use AWS CloudHSM.
-
-3. AWS ENCRYPTION SDK :
-The AWS Encryption SDK is a client-side encryption library to help you implement best-practice encryption and decryption in any application even if you're not a cryptography expert.
-The AWS Encryption SDK works on all types of data. Every successful call to encrypt returns a single portable, formatted encrypted message that contains metadata and the message ciphertext.
-The AWS Encryption SDK is developed as an open source project.
-It is available in multiple programming languages, including a command line interface that is supported on Linux, macOS, and Windows.
-All implementations are interoperable. For example, you can encrypt your data with the Java library and decrypt it with the Python library. Or you can encrypt data with the C library and decrypt it with the CLI.
-
-4. AMAZON DYNAMO-DB ENCRYPTION CLIENT :
-The Amazon DynamoDB Encryption Client is a client-side encryption library that helps you to protect your table data before you send it to Amazon DynamoDB.
-Encrypting your sensitive data in transit and at rest helps ensure that your plaintext data isn’t available to any third party, including AWS.
-It encrypts the attribute values in each table item using a unique encryption key.
-It then signs the item to protect it against unauthorized changes, such as adding or deleting attributes or swapping encrypted values.
-It also verifies and decrypts them when you retrieve them.
-It is an open source project and is available in JAVA and python and is interoperable.
-
-5. AMAZON S3 CLIENT SIDE ENCRYPTION :
-  OPTION-1 : Using a CMK stored in AWS KMS :
-        When uploading an object —
-            Using the CMK ID, the client first sends a request to AWS KMS for a CMK that it can use to encrypt your object data.
-            The client obtains a unique data key for each object that it uploads.
-            AWS KMS returns two versions of a randomly generated data key:
-              --> A plaintext version of the data key that the client uses to encrypt the object data.
-              --> A cipher blob of the same data key that the client uploads to Amazon S3 as object metadata.
-
-        When downloading an object —
-        The client downloads the encrypted object from Amazon S3 along with the cipher blob version of the data key stored as object metadata.
-        The client then sends the cipher blob to AWS KMS to get the plaintext version of the data key so that it can decrypt the object data
-
-  OPTION-2 : Using a master key stored within your application
-        When uploading an object —
-            You provide a client-side master key to the Amazon S3 encryption client.
-            The client uses the master key only to encrypt the data encryption key that it generates randomly.
-              --> The Amazon S3 encryption client generates a one-time-use symmetric key (also known as a data encryption key or data key) locally.
-                  It uses the data key to encrypt the data of a single Amazon S3 object. The client generates a separate data key for each object.
-              --> The client encrypts the data encryption key using the master key that you provide.
-                  The client uploads the encrypted data key and its material description as part of the object metadata.
-                  The client uses the material description to determine which client-side master key to use for decryption.
-              --> The client uploads the encrypted data to Amazon S3 and saves the encrypted data key as object metadata (x-amz-meta-x-amz-key) in Amazon S3.
-
-        When downloading an object —
-        The client downloads the encrypted object from Amazon S3.
-        Using the material description from the object's metadata, the client determines which master key to use to decrypt the data key.
-        The client uses that master key to decrypt the data key and then uses the data key to decrypt the object.
-
-NOTE :
-Your client-side master keys and your unencrypted data are never sent to AWS. It's important that you safely manage your encryption keys. If you lose them, you can't decrypt your data.
-The client-side master key that you provide can be either a symmetric key or a public/private key pair. The following code examples show how to use each type of key.
-
-5. AWS SECRET MANAGER : Documented in SECURITY-IDENTITY-COMPLIANCE
-provides encryption and rotation of encrypted secrets used with AWS-supported databases.
-
-To protect DynamoDB table items before you send them to DynamoDB, use the DynamoDB Encryption Client.
-To protect Amazon S3 objects before you send them to an Amazon S3 bucket, use Amazon S3 client-side encryption. Amazon S3 also offers server-side encryption.
-To protect all other types of data at their source, use the AWS Encryption SDK.
-
-WHEN TO USE AWS-CLOUD HSM AND WHEN TO USE KMS :
-Use AWS CloudHSM when you need to manage the HSMs that generate and store your encryption keys.
-In AWS CloudHSM, you create and manage HSMs, including creating users and setting their permissions.
-You also create the symmetric keys and asymmetric key pairs that the HSM stores.
-If you need to secure your encryption keys in a service backed by FIPS-validated HSMs, but you do not need to manage the HSM, try AWS Key Management Service (p
-
-6. AWS CERTIFICATE MANAGER - ACM :
-AWS Certificate Manager is a service that lets you easily provision, manage, and deploy public and private Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificates for use with AWS services and your internal connected resources.
-It is used to generate, issue, and manage public and private SSL/TLS certificates for use with your AWS based websites and applications.
-These public certificates verify the identity and authenticity of your web server and the ownership of your public keys.
-In doing so, public certificates initiate a trusted, encrypted connection between you and your users.
-
-7. AWS CERTIFICATE MANAGER PRIVATE CERTIFICATE AUTHORITY - ACM PCA:
-is service is for enterprise customers building a public key infrastructure (PKI)inside the AWS cloud and intended for private use within an organization.
-It is a managed private certificate authority (CA) service with which you can manage your CA infrastructure and your private certificates.
-With private certificates you can authenticate resources inside an organization.
-Private certificates allow entities like users, web servers, VPN users, internal API endpoints, and IoT devices to prove their identity and establish encrypted communications channels.
-
-8. AWS SIGNER :
-AWS Signer is a fully managed code-signing service to ensure the trust and integrity of your code.
-Organizations validate code against a digital signature to confirm that the code is unaltered and from a trusted publisher.
-With AWS Signer, your security administrators have a single place to define your signing environment, including what AWS Identity and Access Management (IAM) role can sign code and in what regions.
-AWS Signer manages the code-signing certificate public and private keys and enables central management of the code-signing lifecycle.
-  --> With Code Signing for AWS Lambda, you can ensure that only trusted code runs in your Lambda functions.
-  --> With Code Signing for AWS IoT, you can sign code that you create for IoT devices supported by Amazon Free RTOS and AWS IoT device management.
-
-9. AWS CRYPTO TOOLS :
-Cryptography is hard to do safely and correctly.
-The AWS Crypto Tools libraries are designed to help everyone do cryptography right, even without special expertise.
-Our client-side encryption libraries help you to protect your sensitive data at its source using secure cryptographic algorithms, envelope encryption, and signing.
-It is a part of AWS ENCRYPTION SDK .
 
 
 
