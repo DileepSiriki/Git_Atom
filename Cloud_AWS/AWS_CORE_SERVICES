@@ -16,12 +16,12 @@ NOTE :
 -------------------------------------------------------------------------------------------------------------------------------------------------
 SERVICES COVERED :
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Analytics*                |  Compute*            |   Data Base              |  Management & Governance       |  Satellite
-Application Integration   |  Containers*         |   Developer Tools        |  Migration & Transfer          |  Security, Identity & Compliance
-AR & VR                   |  Cryptography & PKI  |   End User Computing     |  Networking & Content Delivery |  Storage*
-Billing & Cost Management |  Customer Enablement |   Front-End Web & Mobile |  Quantum Computing             |
-Business Applications     |  Customer Engagement |   Game Development       |  Robotics                      |
-Blockchain                |                      |                          |                                |
+Analytics*                 |  Compute*             |   Data Base*              |  Management & Governance        |  Satellite*
+Application Integration    |  Containers*          |   Developer Tools         |  Migration & Transfer           |  Security, Identity & Compliance
+AR & VR*                   |  Cryptography & PKI*  |   End User Computing      |  Networking & Content Delivery  |  Storage*
+Billing & Cost Management  |  Customer Enablement  |   Front-End Web & Mobile  |  Quantum Computing              |
+Business Applications      |  Customer Engagement  |   Game Development*       |  Robotics*                      |
+Blockchain*                |                       |                           |                                 |
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 SERVICES NOT COVERED :
@@ -733,7 +733,7 @@ These public certificates verify the identity and authenticity of your web serve
 In doing so, public certificates initiate a trusted, encrypted connection between you and your users.
 
 8. AWS CERTIFICATE MANAGER PRIVATE CERTIFICATE AUTHORITY - ACM PCA:
-is service is for enterprise customers building a public key infrastructure (PKI)inside the AWS cloud and intended for private use within an organization.
+Is service is for enterprise customers building a public key infrastructure (PKI)inside the AWS cloud and intended for private use within an organization.
 It is a managed private certificate authority (CA) service with which you can manage your CA infrastructure and your private certificates.
 With private certificates you can authenticate resources inside an organization.
 Private certificates allow entities like users, web servers, VPN users, internal API endpoints, and IoT devices to prove their identity and establish encrypted communications channels.
@@ -784,7 +784,7 @@ Ledger            Systems of record, supply chain, registrations,               
                   banking transactions
 ================================================================================================================================================
 
-1. AMAZON AURORA : < Has a separate detailed chapter - Database >  https://www.youtube.com/watch?v=eMzCI7S1P9M&t=19s
+1. AMAZON AURORA : AWS OWNED --> operates on clusters rather than a single instance. // https://www.youtube.com/watch?v=eMzCI7S1P9M&t=19s
 Amazon Aurora (Aurora) is a fully managed relational database engine that's compatible with MySQL and PostgreSQL.
 With some workloads, Aurora can deliver up to five times the throughput of MySQL and up to three times the throughput of PostgreSQL without requiring changes to most of your existing applications.
 Aurora is part of the managed database service Amazon Relational Database Service (Amazon RDS).
@@ -802,13 +802,14 @@ It is available through Amazon Relational Database Service (RDS), freeing you fr
 Amazon DocumentDB (with MongoDB compatibility) is a fast, reliable, and fully managed database service that makes it easy for you to set up, operate, and scale MongoDB-compatible databases.
 Typically, in the application tier, data is represented as a JSON document because it is more intuitive for developers to think of their data model as a document.
 The popularity of document databases has grown because they let you persist data in a database by using the same document model format that you use in your application code.
-Document databases are a practical solution to online profiles in which different users provide different types of information. Using a document database, you can store eachuser's profile efficiently by storing only the attributes that are specific to each user.
+Document databases are a practical solution to online profiles in which different users provide different types of information.
+Using a document database, you can store each user's profile efficiently by storing only the attributes that are specific to each user.
 Suppose that a user elects to add or remove information from their profile. In this case, their document could be easily replaced with an updated version that contains any recently added attributes anddata or omits any newly omitted attributes and data.
 
 Document databases are used for storing semi structured data as a document—rather than normalizing data across multiple tables, each with a unique and fixed structure, as in a relational database.
 Different types of documents can be stored in the same document database, thus meeting the requirement for processing similar data that is in different formats.
 
-3. AMAZON DYNAMO-DB : < Has a separate detailed chapter - Database >   https://www.youtube.com/watch?v=sI-zciHAh-4
+3. AMAZON DYNAMO-DB : < Has a separate detailed chapter - Database >   https://www.youtube.com/watch?v=sI-zciHAh-4  //  Tables-Items-Attributes -- DynamoDb Streams
 Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.
 You can use Amazon DynamoDB to create a database table that can store and retrieve any amount of data, and serve any level of request traffic.
 Amazon DynamoDB automatically spreads the data and traffic for the table over a sufficient number of servers to handle the request capacity specified by the customer and the amount of data stored, while maintaining consistent and fast performance.
@@ -822,18 +823,18 @@ DynamoDB is serverless with no servers to provision, patch, or manage and no sof
 DynamoDB automatically scales tables up and down to adjust for capacity and maintain performance.
 Availability and fault tolerance are built in, eliminating the need to architect your applications for these capabilities.
 
-4. AMAZON ELASTIC CACHE FOR REDIS: -> https://www.youtube.com/watch?v=GoNsuTqeMto&t=18s
+4. AMAZON ELASTIC CACHE FOR REDIS & MemCached : -> https://www.youtube.com/watch?v=GoNsuTqeMto&t=18s
+// queries that involve joins, we have to pay every time we query so we can cache such data and pay once.
 --> Caching data and providing it to users quickly rather than getting it from Disks. // example for applications in mobile .
 Amazon ElastiCache makes it easy to set up, manage, and scale distributed in-memory cache environments in the AWS Cloud.
 It provides a high performance, resizable, and cost-effective in-memory cache, while removing complexity associated with deploying and managing a distributed cache environment.
 ElastiCache works with both the Redis and Memcached engines.
-Amazon ElastiCache is a web service that makes it easy to deploy, operate, and scale an in-memory data store or cache in the cloud.
 The service improves the performance of web applications by allowing you to retrieve information from fast, managed, in-memory data stores, instead of relying entirely on slower disk-based databases.
 
   IN MEMEMORY vs ELASTICACHE :
   --------------------------------
   The most frequently accessed data be stored in elasticache so that the application’s response time is optimal.
-  The primary purpose of an in-memory data store is to provide ultrafast (submillisecond latency) and inexpensive access to copies of data.
+  The primary purpose of an in-memory data store is to provide ultrafast (sub millisecond latency) and inexpensive access to copies of data.
     Querying a database is always slower and more expensive than locating a copy of that data in a cache.
     Some database queries are especially expensive to perform.
     An example is queries that involve joins across multiple tables or queries with intensive calculations.
@@ -856,7 +857,7 @@ Amazon Quantum Ledger Database (Amazon QLDB) is a fully managed ledger database 
 You can use Amazon QLDB to track all application data changes, and maintain a complete and verifiable history of changes over time.
 Ex : Banks data -> keeps full history of changes. -- Immutable and Transparent.
 
-8. AMAZON RELSTIONAL DATABASE SERVICE -RDS : < Has a separate detailed chapter - Database >   https://www.youtube.com/watch?v=eMzCI7S1P9M&t=19s
+8. AMAZON RELATIONAL DATABASE SERVICE - RDS : < Has a separate detailed chapter - Database >   https://www.youtube.com/watch?v=eMzCI7S1P9M&t=19s
 It is a web service that makes it easier to set up, operate, and scale a relational database in the cloud.
 It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
 Amazon RDS can be used to host Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle, and SQL Server databases.
@@ -869,12 +870,14 @@ Amazon RDS can be used to host Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle
   • You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server.
   • In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management (IAM) to define users and permissions.
 
-9. AMAZON REDSHIFT :  https://www.youtube.com/watch?v=_qKm6o1zK3U&t=22s
+9. AMAZON REDSHIFT :  https://www.youtube.com/watch?v=_qKm6o1zK3U&t=22s // doesn’t support non-relational data
+//Amazon Redshift determines what data is local and what is in Amazon S3, generates a plan to minimize the amount of Amazon S3 data that needs to be read, requests Redshift Spectrum workers out of a shared resource pool to read and process data from Amazon S3.
 Amazon Redshift is not a MySQL database service. Amazon Redshift is a fully managed data warehouse.
 For data from BIG-DATA , enterprise applications //  used mainly for data analytics by quickly mining data .
 Amazon Redshift is a fast, fully managed, petabyte-scale data warehouse service that makes it simple and cost-effective to efficiently analyze all your data using your existing business intelligence tools.
 It is optimized for datasets ranging from a few hundred gigabytes to a petabyte or more and costs less than $1,000 per terabyte per year, a tenth the cost of most traditional data warehousing solutions.
-Amazon Redshift doesn’t support non-relational data. Amazon Redshift is a fully managed data warehouse service that allows you to run complex analytic queries against petabytes of structured data using standard SQL and your existing Business Intelligence (BI) tools.
+Amazon Redshift doesn’t support non-relational data.
+Amazon Redshift is a fully managed data warehouse service that allows you to run complex analytic queries against petabytes of structured data using standard SQL and your existing Business Intelligence (BI) tools.
 
 Amazon Redshift is a data warehouse service that only supports relational data, NOT key-value data.
 Amazon Redshift is a fast, fully managed data warehouse service that is specifically designed for online analytic processing (OLAP) and business intelligence (BI) applications, which require complex queries against large datasets.
@@ -886,19 +889,191 @@ No loading or transformation is required, and you can use open data formats, inc
 
 Redshift Spectrum is a feature of Amazon Redshift that enables you to run queries against exabytes of unstructured data in Amazon S3, with no loading or ETL required.
 When you issue a query, it goes to the Amazon Redshift SQL endpoint, which generates and optimizes a query plan.
-Amazon Redshift determines what data is local and what is in Amazon S3, generates a plan to minimize the amount of Amazon S3 data that needs to be read, requests Redshift Spectrum workers out of a shared resource pool to read and process data from Amazon S3.
 
 
-10. AMAZON TIMESTREAM :
+10. AMAZON TIMESTREAM : //IOT and User Interactions over time
 With Amazon Timestream, you can easily store and analyze sensor data for IoT applications, metrics for DevOps use cases, and telemetry for application monitoring scenarios such as clickstream data analysis.
 Used to store and analyze trillions of time series data points per day.
-Timestream saves you time and cost in managing the lifecycle of time series data by keeping recent data in memory and moving historical data to a cost optimized storage tier based upon user defined policies.
+Timestream saves your time and cost in managing the lifecycle of time series data by keeping recent data in memory and moving historical data to a cost optimized storage tier based upon user defined policies.
 Timestream’s purpose-built query engine lets you access and analyze recent and historical data together, without having to specify its location.
-Examples of a growing list of use cases for Timestream include:
+Examples of a growing list of use cases for Timestream include :
 --> Monitoring metrics to improve the performance and availability of your applications.
 --> Storage and analysis of industrial telemetry to streamline equipment management and maintenance.
 --> Tracking user interaction with an application over time.
 --> Storage and analysis of IoT sensor data
+
+
+
+
+##################################################################################################################
+##################################################################################################################
+DEVELOPER TOOLS :
+##################################################################################################################
+##################################################################################################################
+
+1. AWS CLOUD-9 : --> We get an IDE to work with online.
+AWS Cloud9 is a cloud-based integrated development environment (IDE) that you use to write, run, and debug code.
+The AWS Cloud9 IDE offers a rich code-editing experience with support for several programming languages and runtime debuggers, and a built-in terminal.
+It contains a collection of tools that you use to code, build, run, test, and debug software, and helps you release software to the cloud.
+sing the AWS Cloud9 IDE, you can:
+  •  Store your project's files locally on the instance or server.
+  •  Clone a remote code repository — such as a repo in AWS CodeCommit — into your environment.
+  •  Work with a combination of local and cloned files in the environment.
+
+In AWS Cloud9, a development environment (or just environment) is a place where you STORE your development project's files and where you run the tools to develop your applications.
+You can instruct AWS Cloud9 to create an Amazon EC2 instance, and then connect the environment to that newly created EC2 instance. This type of setup is called an EC2 environment.
+You can instruct AWS Cloud9 to connect an environment to an existing cloud compute instance or to your own server. This type of setup is called an SSH environment
+Free of cost but if you integrate an EC2 , compute is billed.
+
+2. AWS CLOUD-SHELL : --> We get a shell to work with online .
+AWS CloudShell is a browser-based shell that you can use to manage AWS services using the AWS Command Line Interface (AWS CLI) and a range of pre-installed development tools.
+AWS CloudShell is a browser-based, pre-authenticated shell that you can launch directly from the AWS Management Console.
+You can run AWS CLI commands against AWS services using your preferred shell (Bash, PowerShell, or Z shell).
+And you can do this without needing to download or install command line tools.
+
+3. AWS CODE-ARTIFACT :
+AWS CodeArtifact is a secure, scalable, and cost-effective artifact management service for software development.
+CodeArtifact is a fully managed artifact repository service that makes it easy for organizations to securely store, publish and share software packages used for application development.
+You can use CodeArtifact with popular build tools and package managers such as NuGet, Maven, Gradle, npm, yarn, pip, and twine.
+
+Artifacts refers to the collection of data, such as application source code, built applications, dependencies, definitions files, templates, and so on, that is worked on by pipeline actions.
+Artifacts are produced by some actions and consumed by others.
+In a pipeline, artifacts can be the set of files worked on by an action (input artifacts) or the updated output of a completed action (output artifacts).
+
+4. AWS CODE-BUILD : One of the steps in CodePipeline.
+AWS CodeBuild is a fully managed build service in the cloud.
+CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy.
+CodeBuild eliminates the need toprovision, manage, and scale your own build servers.
+It provides prepackaged build environments forpopular programming languages and build tools such as Apache Maven, Gradle, and more.
+You can use the AWS CodeBuild or AWS CodePipeline console to run CodeBuild.
+
+--> As input, you must provide CodeBuild with a build project.
+    A build project includes information about how to run a build, including where to get the source code, which build environment to use, which build commands to run, and where to store the build output.
+    A build environment represents a combination of operating system, programming language runtime, and tools that CodeBuild uses to run a build.
+--> CodeBuild uses the build project to create the build environment.
+--> CodeBuild downloads the source code into the build environment and then uses the build specification ( buildspec ), as defined in the build project or included directly in the source code.
+    A buildspec is a collection of build commands and related settings, in YAML format, that CodeBuild uses to run a build
+--> If there is any build output, the build environment uploads its output to an S3 bucket.
+    The build environment can also perform tasks that you specify in the buildspec (for example, sending build notifications to an Amazon SNS topic).
+--> While the build is running, the build environment sends information to CodeBuild and Amazon CloudWatch Logs.
+
+PROCESS :::
+ Source Code + BUILD PROJECT [ BUILD SPEC -> OS + Language + Run time + Build env + where to put output ] -> CODE BUILD creates a BUILD ENVIRONMENT  -> Send output to S3 ->  Send SNS if specified .
+
+**** If you use AWS CodePipeline to run builds, you can get limited build information from CodePipeline.
+     Hence we use codebuild seperately.
+
+5. AWS CODE-COMMIT : Similar to GITHUB and Versioning in S3.
+AWS CodeCommit is a version control service that enables you to privately store and manage Git repositories in the AWS Cloud.
+CodeCommit eliminates the need for you to manage your own source control system or worry about scaling its infrastructure. You can use CodeCommit to store anything from code to binaries and documents.
+    1. Use the AWS CLI or the CodeCommit console to create a CodeCommit repository.
+    2. From your development machine, use Git to run git clone, specifying the name of the CodeCommit repository. This creates a local repo that connects to the CodeCommit repository.
+    3. Use the local repo on your development machine to modify (add, edit, and delete) files, and then run git add to stage the modified files locally. Run git commit to commit the files locally, and then run git push to send the files to the CodeCommit repository.
+    4. Download changes from other users. Run git pull to synchronize the files in the CodeCommit repository with your local repo. This ensures you're working with the latest version of the files.
+
+CodeCommit is optimized for team software development. It manages batches of changes acrossmultiple files, which can occur in parallel with changes made by other developers.
+Amazon S3 versioning supports the recovery of past versions of files, but it's not focused on collaborative file tracking featuresthat software development teams need.
+You can use AWS Cloud9 to make code changes in a CodeCommit repository. You need to have an AWS Cloud9 EC2 development environment running on Amazon Linux.
+
+6. AWS CODE-DEPLOY : https://www.youtube.com/watch?v=Wx-ain8UryM&t=9s
+CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances, on-premises instances, serverless Lambda functions, or Amazon ECS services.
+CodeDeploy can deploy application content that runs on a server and is stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories.
+The service scales with your infrastructure so you can easily deploy to one instance or thousands.
+It Make sure that the patches are deployed in all instances equally. Free of cost and pay only for EC2.
+
+  • Rapidly release new features.
+  • Update AWS Lambda function versions.
+  • Avoid downtime during application deployment.
+  • Handle the complexity of updating your applications, without many of the risks associated with error-prone manual deployments.
+
+--> First, you create deployable content on your local development machine or similar environment, and then you add an application specification file (AppSpec file).
+    The AppSpec file is unique to CodeDeploy. It defines the deployment actions you want CodeDeploy to execute.
+    You bundle your deployable content and the AppSpec file into an archive file, and then upload it to an Amazon S3 bucket or aGitHub repository.
+    This archive file is called an application revision (or simply a revision).
+--> Next, you provide CodeDeploy with information about your deployment, such as which AmazonS3 bucket or GitHub repository to pull the revision from and to which set of Amazon EC2 instances to deploy its contents.
+    CodeDeploy calls a set of Amazon EC2 instances a deployment group.
+    A deployment group contains individually tagged Amazon EC2 instances, Amazon EC2 instances in Amazon EC2 Auto Scaling groups, or both.
+--> Next, the CodeDeploy agent on each instance polls CodeDeploy to determine what and when to pull from the specified Amazon S3 bucket or GitHub repositor.
+--> Finally, the CodeDeploy agent on each instance pulls the target revision from the Amazon S3 bucket or GitHub repository and, using the instructions in the AppSpec file, deploys the contents to theinstance.
+
+PROCESS :::
+ Deployable content [ from CODE BUILD ] + APPSPEC File -> S3 or GITHUB -> Tell CODE DEPLOY [ s3 url / guthub url && No; of instances ] -> CODE DEPLOY Agent in each instance pulls the revision .
+
+7. AWS CODE-PIPELINE :
+AWS CodePipeline is a continuous delivery service that enables you to model, visualize, and automate the steps required to release your software.
+You can quickly model and configure the different stages of a software release process. CodePipeline automates the steps required to release your software changes continuously.
+CodePipeline is a continuous delivery service that automates the building, testing, and deployment of your software into production.
+  --> Continuous delivery is a software development methodology where the release process is automated.
+      Every software change is automatically built, tested, and deployed to production.
+      Before the final push to production, a person, an automated test, or a business rule decides when the final push should occur.
+  --> Continuous integration is a software development practice where members of a team use a version control system and frequently integrate their work to the same location, such as a main branch.
+      Each change is built and verified to detect integration errors as quickly as possible.
+      Continuous integration is focused on automatically building and testing code, as compared to continuous delivery, which automates the entire software release process up to production.
+
+when developers commit changes to a source repository, CodePipeline automatically detects the changes. Those changes are built, and if any tests are configured, those tests are run.
+After the tests are complete, the built code is deployed to staging servers for testing.
+From the staging server, CodePipeline runs more tests, such as integration or load tests.
+Upon the successful completion of those tests, and after a manual approval action that was added to the pipeline is approved, CodePipeline deploys the tested and approved code to production instances.
+
+CodePipeline can deploy applications to EC2 instances by using CodeDeploy, AWS Elastic Beanstalk, or AWS OpsWorks Stacks.
+CodePipeline can also deploy container-based applications to services by using Amazon ECS.
+
+PROCESS ::: // Check_Diagram in Refrence pics .
+You can trigger an execution when you change your source code or manually start the pipeline.
+You can also trigger an execution through an Amazon CloudWatch Events rule that you schedule.
+For example, when a source code change is pushed to a repository configured as the pipeline's source action, the pipeline detects the change and starts an execution.
+
+--> The application source code is maintained in a repository configured as a GitHub source action in the pipeline.
+    When developers push commits to the repository, CodePipeline detects the pushed change, and a pipeline execution starts from the Source Stage.
+--> The GitHub source action completes successfully (that is, the latest changes have been downloaded and stored to the artifact bucket unique to that execution).
+    The output artifacts produced by the GitHub source action, which are the application files from the repository, are then used as the input artifacts to be worked on by the actions in the next stage.
+--> The pipeline execution transitions from the Source Stage to the Prod Stage.
+    The first action in the Prod Stage runs a build project created in CodeBuild and configured as a build action in the pipeline.
+    The build task pulls a build environment image and builds the web application in a virtual container.
+--> The next action in the Prod Stage is a unit test project created in CodeBuild and configured as a test action in the pipeline.
+--> The unit tested code is next worked on by a deploy action in the Prod Stage that deploys the application to a production environment.
+    After the deploy action completes successfully, the final action in the stage is an integration testing project created in CodeBuild and configured as a tes taction in the pipeline.
+    The test action calls to shell scripts that install and run a test tool, such as a link checker, on the web application.
+    After successful completion, the output is a built web application and a set of test results.
+
+To use the console to stop a pipeline execution, you can choose Stop execution on the pipeline visualization page.
+--> Stop and wait: All in-progress action executions are allowed to complete, and subsequent actions are not started.
+    The pipeline execution does not continue to subsequent stages.
+    You cannot use this option on an execution that is already in a Stopping state.
+--> Stop and abandon: All in-progress action executions are abandoned and do not complete, and subsequent actions are not started.
+    The pipeline execution does not continue to subsequent stages.
+    You can use this option on an execution that is already in a Stopping state.
+
+
+8. AWS CODE-STAR :
+AWS CodeStar lets you quickly develop, build, and deploy applications on AWS.
+An AWS CodeStar project creates and integrates AWS services for your project development toolchain.
+Depending on your choice of AWS CodeStar project template, that toolchain might include source control, build, deployment, virtual servers or serverless resources, and more.
+An AWS CodeStar project is a combination of source code and the resources created to deploy the code.
+The collection of resources that help you build, release, and deploy your code are called tool chain resources.
+At project creation, an AWS CloudFormation template provisions your toolchain resources in a continuous integration/continuous deployment (CI/CD) pipeline.
+You can create a project both from CLI and console .
+
+--> • Start new software projects on AWS in minutes using templates for web applications, web services, and more
+--> • Manage project access for your team
+--> • Visualize, operate, and collaborate on your projects in one place
+
+PROCESS :::
+Goto AWS -> Coe Star -> Select a Template -> Add team members -> create a repo for code -> Create a pipeline -> Deploy Project .
+
+A developer with the AWSCodeStarFullAccess policy applied that creates a project and adds team members to it.
+Together they write, build, test, and deploy code.
+The project dashboard provides tools that can be used in real time to view application activity and monitor builds, the flow of code through the deployment pipeline, and more.
+The team uses the team wiki tile to share information, best practices, and links.
+They integrate their issue-tracking software to help them track progress and tasks.
+As customers provide requests and feedback, the team adds this information to the project and integrates it into their project planning and development.
+As the project grows, the team adds more team members to support their code base.
+
+9. AWS X-RAY :
+AWS X-Ray makes it easy for developers to analyze the behavior of their distributed applications by providing request tracing, exception collection, and profiling capabilities.
+AWS X-Ray is a service that collects data about requests that your application serves, and provides tools you can use to view, filter, and gain insights into that data to identify issues and opportunities for optimization.
+For any traced request to your application, you can see detailed information not only about the request and response, but also about calls that your application makes to downstream AWS resources, microservices, databases and HTTP web APIs.
+
 
 
 
@@ -1161,178 +1336,6 @@ AWS Single Sign-On (AWS SSO) is a cloud-based service that simplifies managing S
 You can control SSO access and user permissions across all your AWS accounts in AWS Organizations.
 You can also administer access to popular business applications and custom applications that support Security Assertion Markup Language (SAML) 2.0.
 In addition, AWS SSO offers a user portal where your users can find all their assigned AWS accounts, business applications, and custom applications in one place.
-
-
-
-##################################################################################################################
-##################################################################################################################
-DEVELOPER TOOLS :
-##################################################################################################################
-##################################################################################################################
-
-
-1. AWS CLOUD-9 : --> We get an IDE to work with online.
-AWS Cloud9 is a cloud-based integrated development environment (IDE) that you use to write, run, and debug code.
-The AWS Cloud9 IDE offers a rich code-editing experience with support for several programming languages and runtime debuggers, and a built-in terminal.
-It contains a collection of tools that you use to code, build, run, test, and debug software, and helps you release software to the cloud.
-sing the AWS Cloud9 IDE, you can:
-  •  Store your project's files locally on the instance or server.
-  •  Clone a remote code repository — such as a repo in AWS CodeCommit — into your environment.
-  •  Work with a combination of local and cloned files in the environment.
-
-In AWS Cloud9, a development environment (or just environment) is a place where you STORE your development project's files and where you run the tools to develop your applications.
-You can instruct AWS Cloud9 to create an Amazon EC2 instance, and then connect the environment to that newly created EC2 instance. This type of setup is called an EC2 environment.
-You can instruct AWS Cloud9 to connect an environment to an existing cloud compute instance or to your own server. This type of setup is called an SSH environment
-Free of cost but if you integrate an EC2 , compute is billed.
-
-2. AWS CLOUD-SHELL : --> We get a shell to work with online .
-AWS CloudShell is a browser-based shell that you can use to manage AWS services using the AWS Command Line Interface (AWS CLI) and a range of pre-installed development tools.
-AWS CloudShell is a browser-based, pre-authenticated shell that you can launch directly from the AWS Management Console.
-You can run AWS CLI commands against AWS services using your preferred shell (Bash, PowerShell, or Z shell).
-And you can do this without needing to download or install command line tools.
-
-3. AWS CODE-ARTIFACT :
-AWS CodeArtifact is a secure, scalable, and cost-effective artifact management service for software development.
-CodeArtifact is a fully managed artifact repository service that makes it easy for organizations to securely store, publish and share software packages used for application development.
-You can use CodeArtifact with popular build tools and package managers such as NuGet, Maven, Gradle, npm, yarn, pip, and twine.
-
-Artifacts refers to the collection of data, such as application source code, built applications, dependencies, definitions files, templates, and so on, that is worked on by pipeline actions.
-Artifacts are produced by some actions and consumed by others.
-In a pipeline, artifacts can be the set of files worked on by an action (input artifacts) or the updated output of a completed action (output artifacts).
-
-4. AWS CODE-BUILD : One of the steps in CodePipeline.
-AWS CodeBuild is a fully managed build service in the cloud.
-CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy.
-CodeBuild eliminates the need toprovision, manage, and scale your own build servers.
-It provides prepackaged build environments forpopular programming languages and build tools such as Apache Maven, Gradle, and more.
-You can use the AWS CodeBuild or AWS CodePipeline console to run CodeBuild.
-
---> As input, you must provide CodeBuild with a build project.
-    A build project includes information about how to run a build, including where to get the source code, which build environment to use, which build commands to run, and where to store the build output.
-    A build environment represents a combination of operating system, programming language runtime, and tools that CodeBuild uses to run a build.
---> CodeBuild uses the build project to create the build environment.
---> CodeBuild downloads the source code into the build environment and then uses the build specification ( buildspec ), as defined in the build project or included directly in the source code.
-    A buildspec is a collection of build commands and related settings, in YAML format, that CodeBuild uses to run a build
---> If there is any build output, the build environment uploads its output to an S3 bucket.
-    The build environment can also perform tasks that you specify in the buildspec (for example, sending build notifications to an Amazon SNS topic).
---> While the build is running, the build environment sends information to CodeBuild and Amazon CloudWatch Logs.
-
-PROCESS :::
- Source Code + BUILD PROJECT [ BUILD SPEC -> OS + Language + Run time + Build env + where to put output ] -> CODE BUILD creates a BUILD ENVIRONMENT  -> Send output to S3 ->  Send SNS if specified .
-
-**** If you use AWS CodePipeline to run builds, you can get limited build information from CodePipeline.
-     Hence we use codebuild seperately.
-
-5. AWS CODE-COMMIT : Similar to GITHUB and Versioning in S3.
-AWS CodeCommit is a version control service that enables you to privately store and manage Git repositories in the AWS Cloud.
-CodeCommit eliminates the need for you to manage your own source control system or worry about scaling its infrastructure. You can use CodeCommit to store anything from code to binaries and documents.
-    1. Use the AWS CLI or the CodeCommit console to create a CodeCommit repository.
-    2. From your development machine, use Git to run git clone, specifying the name of the CodeCommit repository. This creates a local repo that connects to the CodeCommit repository.
-    3. Use the local repo on your development machine to modify (add, edit, and delete) files, and then run git add to stage the modified files locally. Run git commit to commit the files locally, and then run git push to send the files to the CodeCommit repository.
-    4. Download changes from other users. Run git pull to synchronize the files in the CodeCommit repository with your local repo. This ensures you're working with the latest version of the files.
-
-CodeCommit is optimized for team software development. It manages batches of changes acrossmultiple files, which can occur in parallel with changes made by other developers.
-Amazon S3 versioning supports the recovery of past versions of files, but it's not focused on collaborative file tracking featuresthat software development teams need.
-You can use AWS Cloud9 to make code changes in a CodeCommit repository. You need to have an AWS Cloud9 EC2 development environment running on Amazon Linux.
-
-6. AWS CODE-DEPLOY : https://www.youtube.com/watch?v=Wx-ain8UryM&t=9s
-CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances, on-premises instances, serverless Lambda functions, or Amazon ECS services.
-CodeDeploy can deploy application content that runs on a server and is stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories.
-The service scales with your infrastructure so you can easily deploy to one instance or thousands.
-It Make sure that the patches are deployed in all instances equally. Free of cost and pay only for EC2.
-
-  • Rapidly release new features.
-  • Update AWS Lambda function versions.
-  • Avoid downtime during application deployment.
-  • Handle the complexity of updating your applications, without many of the risks associated with error-prone manual deployments.
-
---> First, you create deployable content on your local development machine or similar environment, and then you add an application specification file (AppSpec file).
-    The AppSpec file is unique to CodeDeploy. It defines the deployment actions you want CodeDeploy to execute.
-    You bundle your deployable content and the AppSpec file into an archive file, and then upload it to an Amazon S3 bucket or aGitHub repository.
-    This archive file is called an application revision (or simply a revision).
---> Next, you provide CodeDeploy with information about your deployment, such as which AmazonS3 bucket or GitHub repository to pull the revision from and to which set of Amazon EC2 instances to deploy its contents.
-    CodeDeploy calls a set of Amazon EC2 instances a deployment group.
-    A deployment group contains individually tagged Amazon EC2 instances, Amazon EC2 instances in Amazon EC2 Auto Scaling groups, or both.
---> Next, the CodeDeploy agent on each instance polls CodeDeploy to determine what and when to pull from the specified Amazon S3 bucket or GitHub repositor.
---> Finally, the CodeDeploy agent on each instance pulls the target revision from the Amazon S3 bucket or GitHub repository and, using the instructions in the AppSpec file, deploys the contents to theinstance.
-
-PROCESS :::
- Deployable content [ from CODE BUILD ] + APPSPEC File -> S3 or GITHUB -> Tell CODE DEPLOY [ s3 url / guthub url && No; of instances ] -> CODE DEPLOY Agent in each instance pulls the revision .
-
-7. AWS CODE-PIPELINE :
-AWS CodePipeline is a continuous delivery service that enables you to model, visualize, and automate the steps required to release your software.
-You can quickly model and configure the different stages of a software release process. CodePipeline automates the steps required to release your software changes continuously.
-CodePipeline is a continuous delivery service that automates the building, testing, and deployment of your software into production.
-  --> Continuous delivery is a software development methodology where the release process is automated.
-      Every software change is automatically built, tested, and deployed to production.
-      Before the final push to production, a person, an automated test, or a business rule decides when the final push should occur.
-  --> Continuous integration is a software development practice where members of a team use a version control system and frequently integrate their work to the same location, such as a main branch.
-      Each change is built and verified to detect integration errors as quickly as possible.
-      Continuous integration is focused on automatically building and testing code, as compared to continuous delivery, which automates the entire software release process up to production.
-
-when developers commit changes to a source repository, CodePipeline automatically detects the changes. Those changes are built, and if any tests are configured, those tests are run.
-After the tests are complete, the built code is deployed to staging servers for testing.
-From the staging server, CodePipeline runs more tests, such as integration or load tests.
-Upon the successful completion of those tests, and after a manual approval action that was added to the pipeline is approved, CodePipeline deploys the tested and approved code to production instances.
-
-CodePipeline can deploy applications to EC2 instances by using CodeDeploy, AWS Elastic Beanstalk, or AWS OpsWorks Stacks.
-CodePipeline can also deploy container-based applications to services by using Amazon ECS.
-
-PROCESS ::: // Check_Diagram in Refrence pics .
-You can trigger an execution when you change your source code or manually start the pipeline.
-You can also trigger an execution through an Amazon CloudWatch Events rule that you schedule.
-For example, when a source code change is pushed to a repository configured as the pipeline's source action, the pipeline detects the change and starts an execution.
-
---> The application source code is maintained in a repository configured as a GitHub source action in the pipeline.
-    When developers push commits to the repository, CodePipeline detects the pushed change, and a pipeline execution starts from the Source Stage.
---> The GitHub source action completes successfully (that is, the latest changes have been downloaded and stored to the artifact bucket unique to that execution).
-    The output artifacts produced by the GitHub source action, which are the application files from the repository, are then used as the input artifacts to be worked on by the actions in the next stage.
---> The pipeline execution transitions from the Source Stage to the Prod Stage.
-    The first action in the Prod Stage runs a build project created in CodeBuild and configured as a build action in the pipeline.
-    The build task pulls a build environment image and builds the web application in a virtual container.
---> The next action in the Prod Stage is a unit test project created in CodeBuild and configured as a test action in the pipeline.
---> The unit tested code is next worked on by a deploy action in the Prod Stage that deploys the application to a production environment.
-    After the deploy action completes successfully, the final action in the stage is an integration testing project created in CodeBuild and configured as a tes taction in the pipeline.
-    The test action calls to shell scripts that install and run a test tool, such as a link checker, on the web application.
-    After successful completion, the output is a built web application and a set of test results.
-
-To use the console to stop a pipeline execution, you can choose Stop execution on the pipeline visualization page.
---> Stop and wait: All in-progress action executions are allowed to complete, and subsequent actions are not started.
-    The pipeline execution does not continue to subsequent stages.
-    You cannot use this option on an execution that is already in a Stopping state.
---> Stop and abandon: All in-progress action executions are abandoned and do not complete, and subsequent actions are not started.
-    The pipeline execution does not continue to subsequent stages.
-    You can use this option on an execution that is already in a Stopping state.
-
-
-8. AWS CODE-STAR :
-AWS CodeStar lets you quickly develop, build, and deploy applications on AWS.
-An AWS CodeStar project creates and integrates AWS services for your project development toolchain.
-Depending on your choice of AWS CodeStar project template, that toolchain might include source control, build, deployment, virtual servers or serverless resources, and more.
-An AWS CodeStar project is a combination of source code and the resources created to deploy the code.
-The collection of resources that help you build, release, and deploy your code are called tool chain resources.
-At project creation, an AWS CloudFormation template provisions your toolchain resources in a continuous integration/continuous deployment (CI/CD) pipeline.
-You can create a project both from CLI and console .
-
---> • Start new software projects on AWS in minutes using templates for web applications, web services, and more
---> • Manage project access for your team
---> • Visualize, operate, and collaborate on your projects in one place
-
-PROCESS :::
-Goto AWS -> Coe Star -> Select a Template -> Add team members -> create a repo for code -> Create a pipeline -> Deploy Project .
-
-A developer with the AWSCodeStarFullAccess policy applied that creates a project and adds team members to it.
-Together they write, build, test, and deploy code.
-The project dashboard provides tools that can be used in real time to view application activity and monitor builds, the flow of code through the deployment pipeline, and more.
-The team uses the team wiki tile to share information, best practices, and links.
-They integrate their issue-tracking software to help them track progress and tasks.
-As customers provide requests and feedback, the team adds this information to the project and integrates it into their project planning and development.
-As the project grows, the team adds more team members to support their code base.
-
-9. AWS X-RAY :
-AWS X-Ray makes it easy for developers to analyze the behavior of their distributed applications by providing request tracing, exception collection, and profiling capabilities.
-AWS X-Ray is a service that collects data about requests that your application serves, and provides tools you can use to view, filter, and gain insights into that data to identify issues and opportunities for optimization.
-For any traced request to your application, you can see detailed information not only about the request and response, but also about calls that your application makes to downstream AWS resources, microservices, databases and HTTP web APIs.
 
 
 

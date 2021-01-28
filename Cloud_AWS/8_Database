@@ -5,6 +5,18 @@ A relational database defines relationships in the form of tables.
 Ex : MySQL Database, Oracle, Ms SQL Server, Sybase, PostgreSQL etc.
 ACID --> Atomicity - Consistency - Isolation - Durability
 
+Atomicity   − This property states that a transaction must be treated as an atomic unit, that is, either all of its operations are executed or none.
+              There must be no state in a database where a transaction is left partially completed.
+              States should be defined either before the execution of the transaction or after the execution/abortion/failure of the transaction.
+Consistency − The database must remain in a consistent state after any transaction.
+              No transaction should have any adverse effect on the data residing in the database.
+              If the database was in a consistent state before the execution of a transaction, it must remain consistent after the execution of the transaction as well.
+Isolation   − In a database system where more than one transaction are being executed simultaneously and in parallel, the property of isolation states that all the transactions will be carried out and executed as if it is the only transaction in the system.
+              No transaction will affect the existence of any other transaction.
+Durability  − The database should be durable enough to hold all its latest updates even if the system fails or restarts.
+              If a transaction updates a chunk of data in a database and commits, then the database will hold the modified data.
+              If a transaction commits but the system fails before the data could be written on to the disk, then that data will be updated once the system springs back into action.
+
 
 Not only Structured Query language (NO-SQL) pronounced as "Not only SQL" or sometimes as "Not SQL" is the standard language for dealing with Non-Relational/Distributed  Databases.
 NoSQL is a non-relational DMS, that does not require a fixed schema, avoids joins, and is easy to scale.
@@ -12,6 +24,15 @@ NoSQL database is used for distributed data stores with humongous data storage n
 For example companies like Twitter, Facebook, Google that collect terabytes of user data every single day.
 Ex : MongoDB, Redis, , Neo4j, Cassandra, Hbase.
 BASE : Basically Available - Soft State - Eventually Consistent
+
+Basically Available   – Guarantees the availability of the data . There will be a response to any request (can be failure too).
+                        Rather than enforcing immediate consistency, BASE-modelled NoSQL databases will ensure availability of data by spreading and replicating it across the nodes of the database cluster.
+Soft State            – The state of the system could change over time.
+                        Due to the lack of immediate consistency, data values may change over time.
+                        The BASE model breaks off with the concept of a database which enforces its own consistency, delegating that responsibility to developers.
+Eventually Consistent – The system will eventually become consistent once it stops receiving input.
+                        The fact that BASE does not enforce immediate consistency does not mean that it never achieves it.
+                        However, until it does, data reads are still possible (even though they might not reflect the reality).
 
 --> SQL databases are table based databases whereas NoSQL databases can be document based, key-value pairs, graph databases.
 --> SQL databases have a predefined schema whereas NoSQL databases use dynamic schema for unstructured data.
@@ -22,8 +43,11 @@ BASE : Basically Available - Soft State - Eventually Consistent
 
 
 Postgre SQL is an object-relational database management system (ORDBMS).
-It offers support for SQL and NoSQL.
+It offers support for SQL and some support for NoSQL as well.
 PostgreSQL support modern applications feature like JSON, XML etc. while MySQL only supports JSON.
+SQL server is a database management system which is mainly used for e-commerce and providing different data warehousing solutions.
+PostgreSQL is an advanced version of SQL which provides support to different functions of SQL like foreign keys, subqueries, triggers, and different user-defined types and functions.
+
 
 #########################################################################################################################
 #########################################################################################################################
@@ -66,8 +90,10 @@ It provides cost-efficient, resizable capacity for an industry-standard relation
   • When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together. With AmazonRDS, these are split apart so that you can scale them independently.
     If you need more CPU, less IOPS, or more storage, you can easily allocate them.
   • Amazon RDS manages backups, software patching, automatic failure detection, and recovery.
-  • To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances. It also restricts access to certain system procedures and tables that require advanced privileges.
-  • You can have automated backups performed when you need them, or manually create your own backup snapshot. You can use these backups to restore a database. The Amazon RDS restore processworks reliably and efficiently.
+  • To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances.
+    It also restricts access to certain system procedures and tables that require advanced privileges.
+  • You can have automated backups performed when you need them, or manually create your own backup snapshot.
+    You can use these backups to restore a database. The Amazon RDS restore process works reliably and efficiently.
   • You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server.
   • In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management (IAM) to define users and permissions.
 
@@ -153,7 +179,7 @@ Open CLI -> mysql -h <endpoint> -P 3306 -u <mymasteruser>  -p
 #########################################################################################################################
 #########################################################################################################################
 
-AWS AURORA :
+AWS AURORA : // AWS OWNED --> operates on clusters rather than a single instance. // Tables-Items-Attributes
 ====================
 Amazon Aurora (Aurora) is a fully managed relational database engine that's compatible with MySQL and PostgreSQL.
 With some workloads, Aurora can deliver up to five times the throughput of MySQL and up to three times the throughput of PostgreSQL without requiring changes to most of your existing applications.
@@ -168,7 +194,9 @@ An Aurora cluster volume is a virtual database storage volume that spans multipl
 AWS DYNAMO DB :
 =====================
 Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.
-Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale. It is a fully managed cloud database and supports both document and key-value store models. Its flexible data model, reliable performance, and automatic scaling of throughput capacity, makes it a great fit for mobile, web, gaming, ad tech, IoT, and many other applications.
+Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
+It is a fully managed cloud database and supports both document and key-value store models.
+Its flexible data model, reliable performance, and automatic scaling of throughput capacity, makes it a great fit for mobile, web, gaming, ad tech, IoT, and many other applications.
 You can use Amazon DynamoDB to create a database table that can store and retrieve any amount of data, and serve any level of request traffic.
 Amazon DynamoDB automatically spreads the data and traffic for the table over a sufficient number of servers to handle the request capacity specified by the customer and the amount of data stored, while maintaining consistent and fast performance.
 DynamoDB lets you offload the administrative burdens of operating and scaling a distributed database so that you don't have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling.
