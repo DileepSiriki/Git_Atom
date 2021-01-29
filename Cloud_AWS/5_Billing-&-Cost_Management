@@ -1,14 +1,13 @@
 AWS BILLING :
 ---------------
-#### Cost Explorer - AWS Budgets - AWS Knowledge Centre
 
 AWS Billing and Cost Management is the service that you use to pay your AWS bill, monitor your usage, and analyze and control your costs.
 AWS automatically charges the credit card that you provided when you signed up for a new account with AWS. Charges appear on your monthly credit card bill.
 The Billing and Cost Management service provides features that you can use to do the following:
-  •Estimate and plan your AWS costs
-  •Receive alerts if your costs exceed a threshold that you set
-  •Assess your biggest investments in AWS resources
-  •Simplify your accounting if you work with multiple AWS accounts
+  • Estimate and plan your AWS costs
+  • Receive alerts if your costs exceed a threshold that you set
+  • Assess your biggest investments in AWS resources
+  • Simplify your accounting if you work with multiple AWS accounts
 
 The AWS Billing and Cost Management console includes the no-cost Cost Explorer tool for viewing your AWS cost data as a graph.
 With Cost Explorer, you can filter graphs by values such as :
@@ -21,15 +20,16 @@ Consolidated billing allows you to view, manage, and pay bills for multiple AWS 
 Volume discounts can be earned by combining the usage from all accounts your own.
 
 Open the Billing and Cost Management console athttps://console.aws.amazon.com/billing/ , we have the following :
-    --> Cost Explorer         : To track and analyze your AWS usage. Cost Explorer is free for all accounts.
-    --> Budgets               : To manage budgets for your account and to get notified
-    --> Budgets Reports       : Notifications from Budgets
-    --> Savings Plans         : Flexible pricing model that offer low prices on AWS usage, in exchange for a commitment to a consistent amount of usage (measured in $/hour) for a 1- or 3-year term.
+    --> Cost Explorer          : To track and analyze your AWS usage. Cost Explorer is free for all accounts.
+    --> Budgets                : To manage budgets for your account and to get notified
+    --> Budgets Reports        : Notifications from Budgets
+    --> Savings Plans          : Flexible pricing model that offer low prices on AWS usage, in exchange for a commitment to a consistent amount of usage (measured in $/hour) for a 1- or 3-year term.
     --> Cost & Usage Reports
     --> Cost Categories
     --> Cost allocation tags
-    --> Orders and Invoices   : To see your past payments and transactions.
-
+    --> Orders and Invoices    : To see your past payments and transactions.
+    --> Knowledge Centre       : You can find answers to your questions quickly by visiting the AWS Knowledge Center.
+    --> Cost Anamoly Detection : Analyze and determine the root cause of the anomaly, such as account, service, Region, or usage type that is driving the cost increase.
 
 CONSOLIDATED BILLING :
 -------------------------
@@ -45,8 +45,9 @@ Consolidated billing has the following benefits:
     --> No extra fee – Consolidated billing is offered at no additional cost.
 
 If you have access to the management account, you can see a combined view of the AWS charges that the member accounts incur. You also can get a cost report for each member account.
-When a member account leaves an organization, the member account can no longer access Cost Explorer data that was generated when the account was in the organization. The data isn't deleted, and the management account in the organization can still access the data.
-If the member account rejoins the organization, the member account can access the data again.
+When a member account leaves an organization, the member account can no longer access Cost Explorer data that was generated when the account was in the organization.
+The data isn't deleted, and the management account in the organization can still access the data.
+If the member account re-joins the organization, the member account can access the data again.
 
 The management account is billed for all charges of the member accounts.
 However, unless the organization is changed to support all features in the organization (not consolidated billing features only) and member accounts are explicitly restricted by policies, each member account is otherwise independent from the other member accounts.
@@ -87,7 +88,7 @@ For example, if Susan specifies us-west-2a when she purchases her Reserved Insta
 However, the actual locations of Availability Zones are independent from one account to another.
 For example, the us-west-2a Availability Zone for Bob's account might be in a different location than the location for Susan's account.
 
-NOTE : The management account of an organization can turn off Reserved Instance (RI) discount and Savings Plans discount sharing for any accounts in that organization, including the management account. 
+NOTE : The management account of an organization can turn off Reserved Instance (RI) discount and Savings Plans discount sharing for any accounts in that organization, including the management account.
 This means that RIs and Savings Plans discounts aren't shared between any accounts that have sharing turned off.
 To share an RI or Savings Plans discount with an account, both accounts must have sharing turned on.
 
@@ -99,18 +100,20 @@ You can contact support if you would like to reopen your account and you might b
 After the Post-Closure Period, we permanently close your AWS account, and you can't reopen it.
 Any content that you didn't delete is deleted, and any AWS services that you didn't terminate are terminated.
 
-Some services, such as Amazon EC2, Amazon RDS, and Elastic Load Balancing, charge for usage on an hourly basis.
-The AWS Free Tier for these services provides you with a monthly allotment of hours for the first 12 months.
 
 COST EXPLORER :
 ------------------
 Cost Explorer is a tool that enables you to view and analyze your costs and usage.
 You can explore your usage and costs using the main graph, the Cost Explorer cost and usage reports, or the Cost Explorer RI reports.
 You can view data for up to the last 12 months, forecast how much you're likely to spend for the next 12 months, and get recommendations for what Reserved Instances to purchase.
-You can use CostExplorer to identify areas that need further inquiry and see trends that you can use to understand your costs.
+You can use Cost Explorer to identify areas that need further inquiry and see trends that you can use to understand your costs.
 
 AWS BUDGETS :
 ------------------
+AWS Budgets gives you the ability to set custom budgets that alert you when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.
+You can also use AWS Budgets to set reservation utilization or coverage targets and receive alerts when your metrics drop below the threshold you define.
+Reservation alerts support Amazon EC2, Amazon RDS, Amazon Redshift, Amazon ElastiCache, and Elasticsearch reservations.
+You can send SNS topics when a budget exceeds your limit.
 You can use AWS Budgets to track and take action on your AWS cost and usage.
 You can use AWSBudgets to monitor your aggregate utilization and coverage metrics for your Reserved Instances (RIs) or Savings Plans.
   • Setting a monthly cost budget with a FIXED target amount
@@ -131,8 +134,7 @@ AWS PRICING CALCULATOR : -> Check costs before actually using and create an esti
 --------------------------
 AWS Pricing Calculator lets you explore AWS services and create an estimate for the cost of your use cases on AWS.
 You can model your solutions before building them, explore the price points and calculations behind your estimate, and find the available instance types and contract terms that meet your needs.
-This enables you to make informed decisions about using AWS.
-You can plan your AWS costs and usage or price out setting up a new set of instances and services.
+This enables you to make informed decisions about using AWS. You can plan your AWS costs and usage or price out setting up a new set of instances and services.
 
 SAVE & SHARE THE ESTIMATE YOU CREATE :
 You can save each estimate's unique link to share or revisit directly through your browser.

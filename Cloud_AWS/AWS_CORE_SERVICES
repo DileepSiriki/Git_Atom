@@ -17,9 +17,9 @@ NOTE :
 SERVICES COVERED :
 -------------------------------------------------------------------------------------------------------------------------------------------------
 Analytics*                 |  Compute*             |   Data Base*              |  Management & Governance        |  Satellite*
-Application Integration    |  Containers*          |   Developer Tools         |  Migration & Transfer           |  Security, Identity & Compliance
-AR & VR*                   |  Cryptography & PKI*  |   End User Computing      |  Networking & Content Delivery  |  Storage*
-Billing & Cost Management  |  Customer Enablement  |   Front-End Web & Mobile  |  Quantum Computing              |
+Application Integration    |  Containers*          |   Developer Tools*        |  Migration & Transfer*          |  Security, Identity & Compliance
+AR & VR*                   |  Cryptography & PKI*  |   End User Computing*     |  Networking & Content Delivery  |  Storage*
+Billing & Cost Management  |  Customer Enablement  |   Front-End Web & Mobile* |  Quantum Computing*             |
 Business Applications      |  Customer Engagement  |   Game Development*       |  Robotics*                      |
 Blockchain*                |                       |                           |                                 |
 
@@ -668,7 +668,7 @@ You can use your CMKs to encrypt small amounts of data (up to 4096 bytes). Howev
 Unlike CMKs, data keys can encrypt data of any size and format, including streamed data.
 
 AWS KMS does not store or manage data keys, and you cannot use KMS to encrypt or decrypt with data keys. To use data keys to encrypt and decrypt, use the AWS Encryption SDK.
-AWS KMS CMKs are backed by FIPS-validated hardware service modules (HSMs) that KMS manages. Tomanage your own HSMs, use AWS CloudHSM.
+AWS KMS CMKs are backed by FIPS-validated hardware service modules (HSMs) that KMS manages. To manage your own HSMs, use AWS CloudHSM.
 
 3. AWS ENCRYPTION SDK :
 The AWS Encryption SDK is a client-side encryption library to help you implement best-practice encryption and decryption in any application even if you're not a cryptography expert.
@@ -911,7 +911,7 @@ DEVELOPER TOOLS :
 ##################################################################################################################
 ##################################################################################################################
 
-1. AWS CLOUD-9 : --> We get an IDE to work with online.
+1. AWS CLOUD-9 : --> We get an IDE to work with online. // Can connect code and EC2.
 AWS Cloud9 is a cloud-based integrated development environment (IDE) that you use to write, run, and debug code.
 The AWS Cloud9 IDE offers a rich code-editing experience with support for several programming languages and runtime debuggers, and a built-in terminal.
 It contains a collection of tools that you use to code, build, run, test, and debug software, and helps you release software to the cloud.
@@ -940,11 +940,11 @@ Artifacts refers to the collection of data, such as application source code, bui
 Artifacts are produced by some actions and consumed by others.
 In a pipeline, artifacts can be the set of files worked on by an action (input artifacts) or the updated output of a completed action (output artifacts).
 
-4. AWS CODE-BUILD : One of the steps in CodePipeline.
+4. AWS CODE-BUILD : One of the steps in CodePipeline. // BuildSpec file
 AWS CodeBuild is a fully managed build service in the cloud.
 CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy.
-CodeBuild eliminates the need toprovision, manage, and scale your own build servers.
-It provides prepackaged build environments forpopular programming languages and build tools such as Apache Maven, Gradle, and more.
+CodeBuild eliminates the need to  provision, manage, and scale your own build servers.
+It provides pre packaged build environments for popular programming languages and build tools such as Apache Maven, Gradle, and more.
 You can use the AWS CodeBuild or AWS CodePipeline console to run CodeBuild.
 
 --> As input, you must provide CodeBuild with a build project.
@@ -965,21 +965,25 @@ PROCESS :::
 
 5. AWS CODE-COMMIT : Similar to GITHUB and Versioning in S3.
 AWS CodeCommit is a version control service that enables you to privately store and manage Git repositories in the AWS Cloud.
-CodeCommit eliminates the need for you to manage your own source control system or worry about scaling its infrastructure. You can use CodeCommit to store anything from code to binaries and documents.
+CodeCommit eliminates the need for you to manage your own source control system or worry about scaling its infrastructure.
+You can use CodeCommit to store anything from code to binaries and documents.
     1. Use the AWS CLI or the CodeCommit console to create a CodeCommit repository.
     2. From your development machine, use Git to run git clone, specifying the name of the CodeCommit repository. This creates a local repo that connects to the CodeCommit repository.
     3. Use the local repo on your development machine to modify (add, edit, and delete) files, and then run git add to stage the modified files locally. Run git commit to commit the files locally, and then run git push to send the files to the CodeCommit repository.
     4. Download changes from other users. Run git pull to synchronize the files in the CodeCommit repository with your local repo. This ensures you're working with the latest version of the files.
 
-CodeCommit is optimized for team software development. It manages batches of changes acrossmultiple files, which can occur in parallel with changes made by other developers.
-Amazon S3 versioning supports the recovery of past versions of files, but it's not focused on collaborative file tracking featuresthat software development teams need.
+CodeCommit is optimized for team software development. It manages batches of changes across multiple files, which can occur in parallel with changes made by other developers.
+Amazon S3 versioning supports the recovery of past versions of files, but it's not focused on collaborative file tracking features that software development teams need.
 You can use AWS Cloud9 to make code changes in a CodeCommit repository. You need to have an AWS Cloud9 EC2 development environment running on Amazon Linux.
 
-6. AWS CODE-DEPLOY : https://www.youtube.com/watch?v=Wx-ain8UryM&t=9s
+6. AWS CODE-DEPLOY : https://www.youtube.com/watch?v=Wx-ain8UryM&t=9s // Appspec file
 CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances, on-premises instances, serverless Lambda functions, or Amazon ECS services.
 CodeDeploy can deploy application content that runs on a server and is stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories.
 The service scales with your infrastructure so you can easily deploy to one instance or thousands.
 It Make sure that the patches are deployed in all instances equally. Free of cost and pay only for EC2.
+
+It can deploy applications to EC2 instances by using CodeDeploy, AWS Elastic Beanstalk, or AWS OpsWorks Stacks.
+It can also deploy container-based applications to services by using Amazon ECS.
 
   • Rapidly release new features.
   • Update AWS Lambda function versions.
@@ -988,18 +992,18 @@ It Make sure that the patches are deployed in all instances equally. Free of cos
 
 --> First, you create deployable content on your local development machine or similar environment, and then you add an application specification file (AppSpec file).
     The AppSpec file is unique to CodeDeploy. It defines the deployment actions you want CodeDeploy to execute.
-    You bundle your deployable content and the AppSpec file into an archive file, and then upload it to an Amazon S3 bucket or aGitHub repository.
+    You bundle your deployable content and the AppSpec file into an archive file, and then upload it to an Amazon S3 bucket or a GitHub repository.
     This archive file is called an application revision (or simply a revision).
 --> Next, you provide CodeDeploy with information about your deployment, such as which AmazonS3 bucket or GitHub repository to pull the revision from and to which set of Amazon EC2 instances to deploy its contents.
     CodeDeploy calls a set of Amazon EC2 instances a deployment group.
     A deployment group contains individually tagged Amazon EC2 instances, Amazon EC2 instances in Amazon EC2 Auto Scaling groups, or both.
---> Next, the CodeDeploy agent on each instance polls CodeDeploy to determine what and when to pull from the specified Amazon S3 bucket or GitHub repositor.
---> Finally, the CodeDeploy agent on each instance pulls the target revision from the Amazon S3 bucket or GitHub repository and, using the instructions in the AppSpec file, deploys the contents to theinstance.
+--> Next, the CodeDeploy agent on each instance polls CodeDeploy to determine what and when to pull from the specified Amazon S3 bucket or GitHub repository.
+--> Finally, the CodeDeploy agent on each instance pulls the target revision from the Amazon S3 bucket or GitHub repository and, using the instructions in the AppSpec file, deploys the contents to the instance.
 
 PROCESS :::
  Deployable content [ from CODE BUILD ] + APPSPEC File -> S3 or GITHUB -> Tell CODE DEPLOY [ s3 url / guthub url && No; of instances ] -> CODE DEPLOY Agent in each instance pulls the revision .
 
-7. AWS CODE-PIPELINE :
+7. AWS CODE-PIPELINE : // CI-CD PIPELINE
 AWS CodePipeline is a continuous delivery service that enables you to model, visualize, and automate the steps required to release your software.
 You can quickly model and configure the different stages of a software release process. CodePipeline automates the steps required to release your software changes continuously.
 CodePipeline is a continuous delivery service that automates the building, testing, and deployment of your software into production.
@@ -1009,6 +1013,11 @@ CodePipeline is a continuous delivery service that automates the building, testi
   --> Continuous integration is a software development practice where members of a team use a version control system and frequently integrate their work to the same location, such as a main branch.
       Each change is built and verified to detect integration errors as quickly as possible.
       Continuous integration is focused on automatically building and testing code, as compared to continuous delivery, which automates the entire software release process up to production.
+
+      CI - Contineous Integration
+      Code Commit -> Make changes using cloud-9 or local then push to master by any of team members -> this raises a Cloudwatch alarm -> Informs code-pipeline
+      CD - Contineous Deplpoyment
+      A change in Code -> Build code -> Test Code -> Deploy code into production [EC2 - BEANSTALK - ECS] -> Software release after a bunch of deployments.
 
 when developers commit changes to a source repository, CodePipeline automatically detects the changes. Those changes are built, and if any tests are configured, those tests are run.
 After the tests are complete, the built code is deployed to staging servers for testing.
@@ -1032,7 +1041,7 @@ For example, when a source code change is pushed to a repository configured as t
     The build task pulls a build environment image and builds the web application in a virtual container.
 --> The next action in the Prod Stage is a unit test project created in CodeBuild and configured as a test action in the pipeline.
 --> The unit tested code is next worked on by a deploy action in the Prod Stage that deploys the application to a production environment.
-    After the deploy action completes successfully, the final action in the stage is an integration testing project created in CodeBuild and configured as a tes taction in the pipeline.
+    After the deploy action completes successfully, the final action in the stage is an integration testing project created in CodeBuild and configured as a test action in the pipeline.
     The test action calls to shell scripts that install and run a test tool, such as a link checker, on the web application.
     After successful completion, the output is a built web application and a set of test results.
 
@@ -1059,7 +1068,7 @@ You can create a project both from CLI and console .
 --> • Visualize, operate, and collaborate on your projects in one place
 
 PROCESS :::
-Goto AWS -> Coe Star -> Select a Template -> Add team members -> create a repo for code -> Create a pipeline -> Deploy Project .
+Go to AWS -> Coe Star -> Select a Template -> Add team members -> create a repo for code -> Create a pipeline -> Deploy Project . // wiki tile or a issue-tracking software  can be added for recommendations.
 
 A developer with the AWSCodeStarFullAccess policy applied that creates a project and adds team members to it.
 Together they write, build, test, and deploy code.
@@ -1070,7 +1079,7 @@ As customers provide requests and feedback, the team adds this information to th
 As the project grows, the team adds more team members to support their code base.
 
 9. AWS X-RAY :
-AWS X-Ray makes it easy for developers to analyze the behavior of their distributed applications by providing request tracing, exception collection, and profiling capabilities.
+AWS X-Ray makes it easy for developers to analyze the behaviour of their distributed applications by providing request tracing, exception collection, and profiling capabilities.
 AWS X-Ray is a service that collects data about requests that your application serves, and provides tools you can use to view, filter, and gain insights into that data to identify issues and opportunities for optimization.
 For any traced request to your application, you can see detailed information not only about the request and response, but also about calls that your application makes to downstream AWS resources, microservices, databases and HTTP web APIs.
 
@@ -1550,7 +1559,7 @@ BENIFITS OF PERSONAL HEALTH DASHBOARD :
      Personal Health Dashboard gives you a personalized view of the status of the AWS services that power your applications, enabling you to quickly see when AWS is experiencing issues that may impact you.
      For example, in the event of a lost EBS volume associated with one of your EC2 instances, you would gain quick visibility into the status of the specific service you are using, helping save precious time troubleshooting to determine root cause.
 
-  ** PROACTIVE NOTIFICATIOPNS :
+  ** PROACTIVE NOTIFICATIONS :
      The dashboard also provides forward looking notifications, and you can set up alerts across multiple channels, including email and mobile notifications, so you receive timely and relevant information to help plan for scheduled changes that may affect you.
      In the event of AWS hardware maintenance activities that may impact one of your EC2 instances, for example, you would receive an alert with information to help you plan for, and proactively address any issues associated with the upcoming change.
 
@@ -1688,168 +1697,6 @@ Today, you can use AWS WA Tool to document and measure your workload using the b
 These best practices were developed by AWS Solutions Architects based on their years of experience building solutions across a wide variety of businesses.
 The frame work provides a consistent approach for measuring architectures and provides guidance for implementing designs that scale with your needs over time.
 
-
-
-##################################################################################################################
-##################################################################################################################
-MIGRATION & TRANSFER :
-##################################################################################################################
-##################################################################################################################
-
-// Classical way of DB migration can be time consuming, difficult and expensive . Users also can not use the DB while in transfer.
-// Also converting data into a new data base type is difficult .
-
---> NETWORK BASED SERVICES : Private Network Connectors to AWS            - AWS DIRECT CONNECT
-                             Edge Locations for S3 Enabled applications   - AMAZON S3 TRANSFER ACCELERATION
-
---> ONLINE  DATA TRANSFER :  Load stream Data into S3                     - AMAZON KINESIS
-                             Online transfer of active data               - AWS DATA SYNC
-                             SFTP transfer to S3                          - AWS TRANSFER FOR SFTP
-                             Database Transfer                            - AWS DATABSE MIGRATION
-                             VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
-
---> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball / Snow Mobile ]
-
---> HYBRID DATA STORAGE   :  Access AWS storage from On-premises          - AWS STORAGE GATEWAY
-
-
-1. AWS APPLICATION DISCOVERY SERVICE :  https://www.youtube.com/watch?v=TYiqPrCA4fc
---> Deploy Discovery Agent on resources  - Migrate to cloud // Integrated with MIGRATION HUB //
-It helps you plan your migration to the AWS cloud quickly and reliably plan application migration projects by automatically identifying applications running in on-premises data centres, their associated dependencies, and their performance profile.
-It is integrated with AWS Migration Hub, which simplifies your migration tracking as it aggregates your migration status information into a single console.
-You can view the discovered servers, group them into applications, and then track the migration status of each application from the Migration Hub console in your home region.
-Application Discovery Service integrates with application discovery solutions from AWS Partner Network(APN) partners.
-These third-party solutions can help you import details about your on-premises environment directly into Migration Hub, without using any discovery connector or discovery agent.
-
-The AWS Discovery Agent is AWS software that you install on on-premises servers and VMs targeted for discovery and migration.
-Agents capture system configuration, system performance, running processes, and details of the network connections between systems.
-Agents support most Linux and Windows operating systems, and you can deploy them on physical on-premises servers, Amazon EC2 instances, and virtual machines.
-After registration, it pings the service at 15-minute intervals for configuration information.
-
-You can get data about your servers and applications into the AWS Migration Hub console for migration tracking in three ways:
--->  Migration Hub import, the AWS Agentless Discovery Connector, and the AWS Application Discovery Agent.
-
-2. AWS DATABASE MIGRATION SERVICE - DMS : https://www.youtube.com/watch?v=ouia1Sc5QGo&t=16s // AWS SCHEMA CONVERSION TOOL
---> Migrate Data base to and from Cloud to on premises. // Bidirectional
-AWS Database Migration Service (AWS DMS) is a cloud service that makes it easy to migrate relational databases, data warehouses, NoSQL databases, and other types of data store.
-These services can include a database on Amazon RDS or a database on an Amazon EC2 instance. You can also migrate a database from an AWS service to an on-premises database.
-You can migrate data between heterogeneous or homogenous database engines.
-
-With AWS DMS, you can perform one-time migrations, and you can replicate ongoing changes to keep sources and targets in sync.
-If you want to change database engines, you can use the AWS Schema Conversion Tool (AWS SCT) to translate your database schema to the new platform.
-And then use AWS DMS to migrate to cloud . Any data that can not be converted is marked for review later .
-
-AWS Database Migration Service (AWS DMS) is a web service that you can use to migrate data from a source data store to a target data store.
-These two data stores are called endpoints. You can migrate between source and target endpoints that use the same database engine, such as from an Oracle database to an Oracle database.
-You can also migrate between source and target endpoints that use different database engines, such as from an Oracle database to a PostgreSQL database.
-The only requirement to use AWS DMS is that one of your endpoints must be on an AWS service.
-You can't use AWS DMS to migrate from an on-premises database to another on-premises database.
-
-At a high level, when using AWS DMS you do the following:
-  --> • Create a replication server.
-  --> • Create source and target endpoints that have connection information about your data stores.
-  --> • Create one or more migration tasks to migrate data between the source and target data stores.
-A task can consist of three major phases:
-  --> • The full load of existing data
-  --> • The application of cached changes
-  --> • Ongoing replication
-
-While the replication is going on , all the transactions are cached and the cached data is migrated at the end to not disturb the flow of business or miss any data transaction.
-
-// DMS is for DATA BASE migration
-// DATA SYNC is for DATA migration
-
-3. AWS DATA-SYNC : Online Transfer // https://www.youtube.com/watch?v=jPRquig6Nrw
-AWS DataSync is an online data transfer service that simplifies, automates, and accelerates moving data between on-premises storage systems and AWS storage services, and also among  AWS storage services themselves .
-DataSync can copy data between Network File System (NFS), Server Message Block (SMB) fileservers, self-managed object storage, AWS Snow cone, Amazon Simple Storage Service (Amazon S3)buckets, Amazon EFS file systems, and Amazon FSx for Windows File Server file systems.
-
-                     ON_PREMISIS                                                          AWS CLOUD
-                                                              TLS
-    Shared File system <----> AWS Data Sync agent  <========================> AWS Data Sync <----> AWS S3 / EFS
-
-4. AWS MIGRATION-HUB :
-AWS Migration Hub provides a single location to track migration tasks across multiple AWS tools and partner solutions.
-With Migration Hub, you can choose the AWS and partner migration tools that best fit your needs while providing visibility into the status of your migration projects.
-Migration Hub also provides key metrics and progress information for individual applications, regardless of which tools are used to migrate them.
-Migration Hub supports migration status updates from the following AWS services:
-  --> • AWS Database Migration Service
-  --> • AWS Server Migration Service
-  --> • AWS Cloud Endure Migration
-
-5. AWS SCHEMA CONVERSION TOOL : // USED BY AWS-DMS
-The AWS Schema Conversion Tool makes heterogeneous database migrations easy by automatically converting the source database schema and a majority of the custom code to a format compatible with the target database.
-The custom code that the tool converts includes views, stored procedures, and functions.
-Any code that the tool cannot convert automatically is clearly marked so that you can convert it yourself.
-You can convert relational OLTP schema, or data warehouse schema.
-Your converted schema is suitable for an Amazon Relational Database Service (Amazon RDS) MySQL, MariaDB, Oracle, SQL Server, PostgreSQL DB, an Amazon Aurora DB cluster, or an Amazon Redshift cluster.
-The converted schema can also be used with a database on an Amazon EC2 instance or stored as data on an Amazon S3 bucket.
-
-  SCT EINDOW : view Ref pic.
-  1. In the left panel, the schema from your source database is presented in a tree view. Your database schema is "lazy loaded."
-     In other words, when you select an item from the tree view, AWS SCT gets and displays the current schema from your source database.
-  2. In the top middle panel, action items appear for schema elements from the source database engine that couldn't be converted automatically to the target database engine.
-  3. In the right panel, the schema from your target DB instance is presented in a tree view. Your database schema is "lazy loaded."
-     That is, at the point when you select an item from the tree view, AWS SCT gets and displays the current schema from your target database.
-  4. In the lower left panel, when you choose a schema element, properties describing the source schema element and the SQL command to create that element in the source database are displayed.
-  5. In the lower right panel, when you choose a schema element, properties describing the target schema element and the SQL command to create that element in the target database are displayed.
-      You can edit this SQL command and save the updated command with your project.
-
-6. AWS SERVER MIGRATION SERVICE : Microsoft or Azure to AWS
-AWS Server Migration Service (AWS SMS) combines data collection tools with automated server replication to speed the migration of on-premises servers to AWS.
-AWS Server Migration Service automates the migration of your on-premises VMware vSphere, Microsoft Hyper-V/SCVMM, and Azure virtual machines to the AWS Cloud.
-AWS SMS incrementally replicates your server VMs as cloud-hosted Amazon Machine Images (AMIs) ready for deployment on Amazon EC2.
-Working with AMIs, you can easily test and update your cloud-based images before deploying them in production.
-
-The Server Migration Connector is a FreeBSD VM that you install in your on-premises virtualization environment.
-The supported platforms are VMware vSphere, Microsoft Hyper-V/SCVMM, and Microsoft Azure. We need to install this on the on premises / virtual VM.
-Now open the Server Migration Service on AWS and do the transfer.
-
-7. AWS SNOW FAMILY :
-The AWS Snow Family is a service that helps customers who need to run operations in austere, non-data centre environments, and in locations where there's no consistent network connectivity.
-You can use these devices to locally and cost-effectively access the storage and compute power of the AWS Cloud in places where an internet connection might not be an option.
-
-AWS Snowcone [2kg] is a portable, rugged, and secure device for edge computing and data transfer.
-You can use Snowcone to collect, process, and move data to AWS, either offline by shipping the device to AWS, or online by using AWS DataSync.
-With two CPUs and 8 TB of storage, Snowcone can run edge computing workloads that use Amazon Elastic Compute Cloud (Amazon EC2) instances, and store data securely.
-you can carry one in a backpack, use it with battery-based operation, and use the Wi-Fi interface to gather sensor data.
-Snowcone supports a file interface with NFS support. The Snowcone device supports data transfer from on-premises Windows, Linux, and macOS servers and file-based applications through the NFS interface.
-It can be used in space-constrained environments where Snowball Edge devices don't fit.
-
--> Snow cone        - https://www.youtube.com/watch?v=X_8LM7E_hiE      -- 8 TB storage   --> 1 SMALL BOX [ uses opshub application for data transfer ]
-   Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80 TB storage  --> 1 SUITCASE
-   Snow Ball edge   - https://www.youtube.com/watch?v=bxSD1Nha2k8      -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
-   Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1 Exabyte      --> 1 Truck
-
-  1 Exabyte = 1000 petabytes
-  Snow ball can be connected in series to have a Petabyte's storage  = 1 million GB = 1024 Terabytes
-
-8. AWS TRANSFER FAMILY :
-AWS Transfer Family is a secure transfer service that stores your data in Amazon S3 and simplifies the migration of :
-  --> Secure Shell File Transfer Protocol (SFTP),
-  --> File Transfer Protocol Secure (FTPS), and
-  --> File Transfer Protocol (FTP) workflows to AWS.
-
-AWS Transfer Family is a secure transfer service that enables you to transfer files into and out of AWSstorage services.
-Supports transferring data from the following :
-  --> Amazon Simple Storage Service (Amazon S3) storage.
-  --> Amazon Elastic File System (Amazon EFS) Network File System (NFS) file system
-
-You can get started with AWS Transfer Family by creating a file transfer protocol-enabled server and then assigning users to use the server.
-To service your AWS Transfer Family users' transfer requests, you create an AWS Identity and Access Management (IAM) role to access your Amazon S3 bucket or Amazon Elastic File System.
-AWS Transfer Family supports any standard file transfer protocol client. Some commonly used clients are the following:
-  -->  OpenSSH – A Macintosh and Linux command line utility.
-  -->  WinSCP – A Windows-only graphical client.
-  -->  Cyberduck – A Linux, Macintosh, and Microsoft Windows graphical client.
-  -->  FileZilla – A Linux, Macintosh, and Windows graphical client.
-
-STEP-1 : Sign into Aws - Transfer family
-STEP-2 : Create an SFTP enabled server
-         Secure Shell (SSH) File Transfer Protocol (SFTP) is a network protocol used for secure transfer of data over the internet.
-         The protocol supports the full security and authentication functionality of SSH.
-         It is widely used to exchange data, including sensitive information between business partners in a variety of industries such as financial services, healthcare, retail, and advertising.
-         create server -> SFTP
-STEP-3 : Add a user to the created server and provide an S3 bucket as home folder for the transferred files to be stored.
-STEP-4 : Open any client and initiate transfer.
 
 
 
@@ -2044,11 +1891,177 @@ To set up a Site-to-Site VPN connection, use the following steps:
 
 ##################################################################################################################
 ##################################################################################################################
+MIGRATION & TRANSFER :
+##################################################################################################################
+##################################################################################################################
+
+// Classical way of DB migration can be time consuming, difficult and expensive . Users also can not use the DB while in transfer.
+// Also converting data into a new data base type is difficult .
+
+--> NETWORK BASED SERVICES : Private Network Connectors to AWS            - AWS DIRECT CONNECT
+                             Edge Locations for S3 Enabled applications   - AMAZON S3 TRANSFER ACCELERATION
+
+--> ONLINE  DATA TRANSFER :  Load stream Data into S3                     - AMAZON KINESIS
+                             Online transfer of active data               - AWS DATA SYNC
+                             SFTP transfer to S3                          - AWS TRANSFER FOR SFTP
+                             Database Transfer                            - AWS DATABSE MIGRATION
+                             VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
+
+--> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball / Snow Mobile ]
+
+--> HYBRID DATA STORAGE   :  Access AWS storage from On-premises          - AWS STORAGE GATEWAY
+
+
+1. AWS MIGRATION-HUB :
+AWS Migration Hub provides a single location to track migration tasks across multiple AWS tools and partner solutions.
+With Migration Hub, you can choose the AWS and partner migration tools that best fit your needs while providing visibility into the status of your migration projects.
+Migration Hub also provides key metrics and progress information for individual applications, regardless of which tools are used to migrate them.
+Migration Hub supports migration status updates from the following AWS services:
+  --> • AWS Database Migration Service
+  --> • AWS Server Migration Service
+  --> • AWS Cloud Endure Migration
+
+2. AWS APPLICATION DISCOVERY SERVICE :  https://www.youtube.com/watch?v=TYiqPrCA4fc
+--> Deploy Discovery Agent on resources  - Migrate to cloud // Integrated with MIGRATION HUB //
+It helps you plan your migration to the AWS cloud quickly and reliably plan application migration projects by automatically identifying applications running in on-premises data centres, their associated dependencies, and their performance profile.
+It is integrated with AWS Migration Hub, which simplifies your migration tracking as it aggregates your migration status information into a single console.
+You can view the discovered servers, group them into applications, and then track the migration status of each application from the Migration Hub console in your home region.
+Application Discovery Service integrates with application discovery solutions from AWS Partner Network(APN) partners.
+These third-party solutions can help you import details about your on-premises environment directly into Migration Hub, without using any discovery connector or discovery agent.
+
+The AWS Discovery Agent is AWS software that you install on on-premises servers and VMs targeted for discovery and migration.
+Agents capture system configuration, system performance, running processes, and details of the network connections between systems.
+Agents support most Linux and Windows operating systems, and you can deploy them on physical on-premises servers, Amazon EC2 instances, and virtual machines.
+After registration, it pings the service at 15-minute intervals for configuration information.
+
+You can get data about your servers and applications into the AWS Migration Hub console for migration tracking in three ways:
+-->  Migration Hub import, the AWS Agentless Discovery Connector, and the AWS Application Discovery Agent.
+
+3. AWS DATABASE MIGRATION SERVICE - DMS : https://www.youtube.com/watch?v=ouia1Sc5QGo&t=16s // AWS SCHEMA CONVERSION TOOL
+--> Migrate Data base to and from Cloud to on premises. // Bidirectional
+AWS Database Migration Service (AWS DMS) is a cloud service that makes it easy to migrate relational databases, data warehouses, NoSQL databases, and other types of data store.
+These services can include a database on Amazon RDS or a database on an Amazon EC2 instance. You can also migrate a database from an AWS service to an on-premises database.
+You can migrate data between heterogeneous or homogenous database engines.
+
+With AWS DMS, you can perform one-time migrations, and you can replicate ongoing changes to keep sources and targets in sync.
+If you want to change database engines, you can use the AWS Schema Conversion Tool (AWS SCT) to translate your database schema to the new platform.
+And then use AWS DMS to migrate to cloud . Any data that can not be converted is marked for review later .
+
+AWS Database Migration Service (AWS DMS) is a web service that you can use to migrate data from a source data store to a target data store.
+These two data stores are called endpoints. You can migrate between source and target endpoints that use the same database engine, such as from an Oracle database to an Oracle database.
+You can also migrate between source and target endpoints that use different database engines, such as from an Oracle database to a PostgreSQL database.
+The only requirement to use AWS DMS is that one of your endpoints must be on an AWS service.
+You can't use AWS DMS to migrate from an on-premises database to another on-premises database.
+
+At a high level, when using AWS DMS you do the following:
+  --> • Create a replication server.
+  --> • Create source and target endpoints that have connection information about your data stores.
+  --> • Create one or more migration tasks to migrate data between the source and target data stores.
+A task can consist of three major phases:
+  --> • The full load of existing data
+  --> • The application of cached changes
+  --> • Ongoing replication
+
+While the replication is going on , all the transactions are cached and the cached data is migrated at the end to not disturb the flow of business or miss any data transaction.
+
+// DMS is for DATA BASE migration
+// DATA SYNC is for DATA migration
+
+
+4. AWS SCHEMA CONVERSION TOOL : // USED BY AWS-DMS
+The AWS Schema Conversion Tool makes heterogeneous database migrations easy by automatically converting the source database schema and a majority of the custom code to a format compatible with the target database.
+The custom code that the tool converts includes views, stored procedures, and functions.
+Any code that the tool cannot convert automatically is clearly marked so that you can convert it yourself.
+You can convert relational OLTP schema, or data warehouse schema.
+Your converted schema is suitable for an Amazon Relational Database Service (Amazon RDS) MySQL, MariaDB, Oracle, SQL Server, PostgreSQL DB, an Amazon Aurora DB cluster, or an Amazon Redshift cluster.
+The converted schema can also be used with a database on an Amazon EC2 instance or stored as data on an Amazon S3 bucket.
+
+  SCT WINDOW : view Ref pic.
+  1. In the left panel, the schema from your source database is presented in a tree view. Your database schema is "lazy loaded."
+     In other words, when you select an item from the tree view, AWS SCT gets and displays the current schema from your source database.
+  2. In the top middle panel, action items appear for schema elements from the source database engine that couldn't be converted automatically to the target database engine.
+  3. In the right panel, the schema from your target DB instance is presented in a tree view. Your database schema is "lazy loaded."
+     That is, at the point when you select an item from the tree view, AWS SCT gets and displays the current schema from your target database.
+  4. In the lower left panel, when you choose a schema element, properties describing the source schema element and the SQL command to create that element in the source database are displayed.
+  5. In the lower right panel, when you choose a schema element, properties describing the target schema element and the SQL command to create that element in the target database are displayed.
+      You can edit this SQL command and save the updated command with your project.
+
+
+5. AWS DATA-SYNC : Online Transfer // https://www.youtube.com/watch?v=jPRquig6Nrw
+AWS DataSync is an online data transfer service that simplifies, automates, and accelerates moving data between on-premises storage systems and AWS storage services, and also among  AWS storage services themselves .
+DataSync can copy data between Network File System (NFS), Server Message Block (SMB) file servers, self-managed object storage, AWS Snow cone, Amazon Simple Storage Service (Amazon S3)buckets, Amazon EFS file systems, and Amazon FSx for Windows File Server file systems.
+
+                     ON_PREMISIS                                                          AWS CLOUD
+                                                              TLS
+    Shared File system <----> AWS Data Sync agent  <========================> AWS Data Sync <----> AWS S3 / EFS
+
+6. AWS SERVER MIGRATION SERVICE : Microsoft or Azure to AWS
+AWS Server Migration Service (AWS SMS) combines data collection tools with automated server replication to speed the migration of on-premises servers to AWS.
+AWS Server Migration Service automates the migration of your on-premises VMware vSphere, Microsoft Hyper-V/SCVMM, and Azure virtual machines to the AWS Cloud.
+AWS SMS incrementally replicates your server VMs as cloud-hosted Amazon Machine Images (AMIs) ready for deployment on Amazon EC2.
+Working with AMIs, you can easily test and update your cloud-based images before deploying them in production.
+
+The Server Migration Connector is a FreeBSD VM that you install in your on-premises virtualization environment.
+The supported platforms are VMware vSphere, Microsoft Hyper-V/SCVMM, and Microsoft Azure. We need to install this on the on premises / virtual VM.
+Now open the Server Migration Service on AWS and do the transfer.
+
+7. AWS SNOW FAMILY :
+The AWS Snow Family is a service that helps customers who need to run operations in austere, non-data centre environments, and in locations where there's no consistent network connectivity.
+You can use these devices to locally and cost-effectively access the storage and compute power of the AWS Cloud in places where an internet connection might not be an option.
+
+AWS Snowcone [2kg] is a portable, rugged, and secure device for edge computing and data transfer.
+You can use Snowcone to collect, process, and move data to AWS, either offline by shipping the device to AWS, or online by using AWS DataSync.
+With two CPUs and 8 TB of storage, Snowcone can run edge computing workloads that use Amazon Elastic Compute Cloud (Amazon EC2) instances, and store data securely.
+you can carry one in a backpack, use it with battery-based operation, and use the Wi-Fi interface to gather sensor data.
+Snowcone supports a file interface with NFS support. The Snowcone device supports data transfer from on-premises Windows, Linux, and macOS servers and file-based applications through the NFS interface.
+It can be used in space-constrained environments where Snowball Edge devices don't fit.
+
+-> Snow cone        - https://www.youtube.com/watch?v=X_8LM7E_hiE      -- 8 TB storage   --> 1 SMALL BOX [ uses opshub application for data transfer ]
+   Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80 TB storage  --> 1 SUITCASE
+   Snow Ball edge   - https://www.youtube.com/watch?v=bxSD1Nha2k8      -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
+   Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1 Exabyte      --> 1 Truck
+
+  1 Exabyte = 1024 petabytes
+  Snow ball can be connected in series to have a Petabyte's storage  = 1 million GB = 1024 Terabytes
+
+8. AWS TRANSFER FAMILY : // To set up a sftp server for customers.
+AWS Transfer Family is a secure transfer service that stores your data in Amazon S3 and simplifies the migration of the following workflows to AWS:
+  --> Secure Shell File Transfer Protocol (SFTP),
+  --> File Transfer Protocol Secure (FTPS), and
+  --> File Transfer Protocol (FTP) .
+
+AWS Transfer Family is a secure transfer service that enables you to transfer files into and out of AWS storage services.
+Supports transferring data from the following :
+  --> Amazon Simple Storage Service (Amazon S3) storage.
+  --> Amazon Elastic File System (Amazon EFS) Network File System (NFS) file system
+
+You can get started with AWS Transfer Family by creating a file transfer protocol-enabled server and then assigning users to use the server.
+To service your AWS Transfer Family users' transfer requests, you create an AWS Identity and Access Management (IAM) role to access your Amazon S3 bucket or Amazon Elastic File System.
+AWS Transfer Family supports any standard file transfer protocol client. Some commonly used clients are the following:
+  -->  OpenSSH – A Macintosh and Linux command line utility.
+  -->  WinSCP – A Windows-only graphical client.
+  -->  Cyberduck – A Linux, Macintosh, and Microsoft Windows graphical client.
+  -->  FileZilla – A Linux, Macintosh, and Windows graphical client.
+
+STEP-1 : Sign into Aws - Transfer family
+STEP-2 : Create an SFTP enabled server
+         Secure Shell (SSH) File Transfer Protocol (SFTP) is a network protocol used for secure transfer of data over the internet.
+         The protocol supports the full security and authentication functionality of SSH.
+         It is widely used to exchange data, including sensitive information between business partners in a variety of industries such as financial services, healthcare, retail, and advertising.
+         create server -> SFTP
+STEP-3 : Add a user to the created server and provide an S3 bucket as home folder for the transferred files to be stored.
+STEP-4 : Open any client and initiate transfer.
+
+
+
+
+##################################################################################################################
+##################################################################################################################
 FRONT END WEB & MOBILE :
 ##################################################################################################################
 ##################################################################################################################
 
-1. AWS AMPLIFY :
+1. AWS AMPLIFY : // mobile & Web-apps - hosting & admin UI
 AWS Amplify enables developers to develop and deploy cloud-powered mobile and web apps.
 The Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation for client app development.
 The Amplify Console provides a continuous delivery and hosting service for web applications.
@@ -2061,11 +2074,11 @@ The Admin UI is a visual interface for frontend web and mobile developers to cre
 2. AWS APP-SYNC :
 AWS AppSync is an enterprise level, fully managed GraphQL service with real-time data synchronization and offline programming features.
 
-3. AWS DEVICE FARM :
+3. AWS DEVICE FARM : // Performing iOS, Android and Fire OS apps on real mobiles -- Live customer support using remote connection
 AWS Device Farm is an app testing service that enables you to test your iOS, Android and Fire OS apps on real, physical phones and tablets that are hosted by AWS.
 The service allows you to upload your own tests or use built-in, script-free compatibility tests.
     • Automated testing of apps using a variety of testing frameworks.
-    • Remote access of devices onto which you can load, run, and interact with apps in real time. -> Remotely work on someones phone
+    • Remote access of devices onto which you can load, run, and interact with apps in real time. -> Remotely work on someone's phone
     Note : Device Farm is only available in the us-west-2 (Oregon) region
 
 Device Farm allows you to upload your own tests or use built-in, script-free compatibility tests.
@@ -2078,14 +2091,14 @@ For example, customer service representatives can guide customers through the us
 They can also walk customers through the use of apps running on a specific device.
 You can install apps on a device running in a remote access session and then reproduce customer problems or reported bugs.
 
-4. AWS LOCATION SERVICE :
+4. AWS LOCATION SERVICE : // location-based services (LBS)
 With Amazon Location Service, you can easily and securely add maps, points of interest, geocoding, geofences, and tracking to your applications.
 Amazon Location provides cost-effective location-based services (LBS) using high-quality data from global, trusted providers Esri and HERE.
 Additionally, sensitive tracking and geofencing location information, such as facility, asset, and personnel locations, never leaves your AWS account at all.
 This helps you shield sensitive information from third parties, protect user privacy, and reduce your application’s security risks.
 With Amazon Location, neither Amazon nor third parties have rights to sell your data or use it for advertising.
 
-5. AMAZON PINPOINT :
+5. AMAZON PINPOINT : // promotions and campaign messages via  email, SMS and voice messages, and push notifications to customers and get campaign statistics.
 Amazon Pinpoint helps you engage your customers by sending them email, SMS and voice messages, and push notifications.
 You can use Amazon Pinpoint to send targeted messages (such as promotions and retention campaigns), as well as transactional messages (such as order confirmations and password reset messages).
 you have to add customer contact information into Amazon Pinpoint, and then create segments that target certain customers.
@@ -2093,10 +2106,10 @@ Next, you have to create your messages and schedule your campaigns.
 Finally, after you send your campaigns, you can use the analytics dashboards that are built into Amazon Pinpoint to see how well the campaigns performed.
 
 
-6. AMAZON SIMPLE NOTIFICATION SERVICE - SNS : < Has a separate detailed chapter >
+6. AMAZON SIMPLE NOTIFICATION SERVICE - SNS : < Has a separate detailed chapter > // group-id - duplication-id
 It is a web service that enables applications, end-users, and devices to instantly send and receive notifications from the cloud.
 We create topics and subscribe to the topic for messages .
-Clients can subscribe to the SNS topic and receive published messages usinga supported protocol, such as Amazon Kinesis Data Firehose, Amazon SQS, AWS Lambda, HTTP, email,mobile push notifications, and mobile text messages (SMS).
+Clients can subscribe to the SNS topic and receive published messages using a supported protocol, such as Amazon Kinesis Data Firehose, Amazon SQS, AWS Lambda, HTTP, email, mobile push notifications, and mobile text messages (SMS).
 
     • Application-to-application messaging
     • Application-to-person notifications
@@ -2126,7 +2139,7 @@ END USER COMPUTING :
    And sales leaders can use Amazon WorkLink to access internal web-based content, such as sales data, from their mobile devices.
 
 
-1. AMAZON WORKSPACES : https://www.youtube.com/watch?v=uCH04Mlg0yU&t=9s
+1. AMAZON WORKSPACES : https://www.youtube.com/watch?v=uCH04Mlg0yU&t=9s // virtual desktops
 Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows or Amazon Linux desktops for your users, known as WorkSpaces.
 Amazon WorkSpaces eliminates the need to procure and deploy hardware or install complex software.
 You can quickly add or remove users as your needs change. Users can access their virtual desktops from multiple devices or web browsers.
@@ -2146,7 +2159,8 @@ Users can connect from a PC, Mac desktop computer, iPad, Kindle, or Android tabl
 
 Each WorkSpace is associated with a virtual privatecloud (VPC), and a directory to store and manage information for your WorkSpaces and users.
 Directories are managed through the AWS Directory Service, which offers the following options: Simple AD, AD Connector, or AWS Directory Service for Microsoft Active Directory, also known as AWS Managed Microsoft AD.
-The login information is sent to an authentication gateway, which forwards the traffic to the directory for the WorkSpace. After the user is authenticated, streaming traffic is initiated through the streaming gateway.
+The login information is sent to an authentication gateway, which forwards the traffic to the directory for the WorkSpace.
+After the user is authenticated, streaming traffic is initiated through the streaming gateway.
 Client applications use HTTPS over port 443 for all authentication and session-related information.
 Client applications use port 4172 (PCoIP) and port 4195 (WSP) for pixel streaming to the WorkSpace and ports 4172 and 4195 for network health checks.
 Each WorkSpace has two elastic network interfaces associated with it: a network interface for management and streaming (eth0) and a primary network interface (eth1).
@@ -2157,7 +2171,7 @@ Example Computer names • Linux: A-1xxxxxxxxxxxx
                        • Windows: IP-Cxxxxxx or WSAMZN-xxxxxxx or EC2AMAZ-xxxxxxx
 
 
-2. AMAZON WORKSPACES APPLICATION MANAGER -WAM :
+2. AMAZON WORKSPACES APPLICATION MANAGER - WAM : // manage applications for Amazon WorkSpaces
 Amazon WorkSpaces Application Manager (Amazon WAM) offers a fast, flexible, and secure way for you to deploy and manage applications for Amazon WorkSpaces  with Windows.
 Amazon WAM accelerates software deployment, updates, patching, and retirement by packaging Microsoft Windows desktop applications into virtual containers that run as though they are installed natively.
 Amazon WAM is fully integrated with the AWS Management Console, and allows you to build an application catalog from your line-of-business applications, third-party applications that you own the license for, and applications purchased through the AWS Marketplace.
@@ -2168,7 +2182,7 @@ With Amazon WAM Standard, you can build your application catalog with line-of-bu
 With Amazon WAM, you pay only for the applications that are used, on a per-user basis.
 
 
-3. AMAZON APP-STREAM 2.0 :
+3. AMAZON APP-STREAM 2.0 : // add your existing desktop applications to AWS and enable your users to instantly stream them - Always-on & On-Demand .
 --> Amazon AppStream 2.0 is a fully managed application streaming service that provides users with instant access to their desktop applications from anywhere.
 Amazon AppStream 2.0 is a fully managed, secure application streaming service that lets you stream desktop applications to users without re writing applications.
 AppStream 2.0 provides users with instant access to the applications that they need with a responsive, fluid user experience on the device of their choice.
@@ -2180,7 +2194,8 @@ Your applications run on AWS compute resources, and data is never stored on user
 
 Choose the fleet type that meets your needs. There are two types of fleets:
     • Always-On — Your instances run all the time, even when no users are streaming applications. Use an Always-On fleet to provide your users with instant access to their applications.
-    • On-Demand — Your instances run only when users are streaming applications. Idle instances that are available for streaming are in a stopped state. Use an On-Demand fleet to optimize your streaming charges and provide your users with access to their applications after a 1-2 minute wait.
+    • On-Demand — Your instances run only when users are streaming applications. Idle instances that are available for streaming are in a stopped state.
+                  Use an On-Demand fleet to optimize your streaming charges and provide your users with access to their applications after a 1-2 minute wait.
 
 IMAGE BUILDER : It is a virtual machine that you use to create an image. You can launch and connect to an image builder by using the AppStream 2.0 console.
                 After you connect to an image builder, you can install, add, and test your applications, and then use the image builder to create an image.
@@ -2350,7 +2365,7 @@ Alexa for Business gives you the tools you need to manage Alexa devices, enroll 
 You can build your own context-aware voice skills using the Alexa Skills Kit, and the Alexa for Business APIs, and you can make these available as private skills for your organization.
 Alexa for Business also makes it easy to voice-enable your products and services, providing context-aware voice experiences for your customers.
 
-2. AMAZON CHIME :
+2. AMAZON CHIME : // Similar MS Teams
 Amazon Chime is a secure, real-time, unified communications service that transforms meetings by making them more efficient and easier to conduct.
 Amazon Chime is a communications service that transforms online meetings with an application that is secure and comprehensive. Amazon Chime works across your devices so that you can stay connected.
 You can use Amazon Chime for online meetings, video conferencing, calls, and chat. You can also share content inside and outside of your organization.
@@ -2361,9 +2376,9 @@ To continue using the Amazon Chime Pro version after the 30-day free trial perio
 The invited users receive email invitations to join the Amazon Chime Team account that you created.
 When they register their Amazon Chime user accounts, they receive Pro permissions by default, and their 30-day trial ends.
 If they have already signed up for an Amazon Chime user account with their work email address, they can continue to use that account.
-They can also download the Amazon Chime clientapp at any time by choosing Download Amazon Chime and signing in to their user account.
+They can also download the Amazon Chime client app at any time by choosing Download Amazon Chime and signing in to their user account.
 You are only charged for a user with Pro permissions when they host a meeting.
-There is no charge forusers with Basic permissions. Basic users cannot host meetings, but they can attend meetings and usechat.
+There is no charge for users with Basic permissions. Basic users cannot host meetings, but they can attend meetings and use chat.
 
 3. AMAZON HONEY-CODE : https://www.youtube.com/watch?v=vMR2KOJUEr8
 // Build a custom managed app using a visual editor .
@@ -2373,13 +2388,14 @@ There is no charge forusers with Basic permissions. Basic users cannot host meet
 // EX : A sale can be setup and the customer accepts it on his console and you get the response. once done you may delete the application.
 // You are redirected to a HONEYCODE application apart from AWS.
 
-Amazon Honeycode is a fully managed service that allows you to quickly build mobile and web apps for teams—without programming. Build Honeycode apps for managing almost anything, like projects, customers, operations, approvals, resources, and even your team.
+Amazon Honeycode is a fully managed service that allows you to quickly build mobile and web apps for teams—without programming.
+Build Honeycode apps for managing almost anything, like projects, customers, operations, approvals, resources, and even your team.
 When API activity occurs in Amazon Honeycode apps, the activity is recorded in a CloudTrail event.
 You can view, search, and download recent events in your AWS account.
-For an ongoing record of events in Amazon Honeycode, as well as your other AWS accounts, you cancreate a trail.
+For an ongoing record of events in Amazon Honeycode, as well as your other AWS accounts, you can create a trail.
 A trail enables CloudTrail to continuously deliver events as log files to an Amazon S3bucket.
 
-4. AMAZON WORK-MAIL : https://www.youtube.com/watch?v=3Wq-ghtB0XQ
+4. AMAZON WORK-MAIL : https://www.youtube.com/watch?v=3Wq-ghtB0XQ // business email and calendar service
 // Maintaining personal email service is tough !! -> Buy dedicated resources [ h/w and s/w ] -> hire staff to run the resources -> regular maintenance -> upgrades, security patches, backups , disaster recovery .
 // 3rd party apps have risk of encryption , mobile compatibility , latency etc ;
 
@@ -2415,7 +2431,8 @@ This Concept is completely different from the AWS MANAGED SERVICES which include
 AWS is responsible for performing all the operations needed to keep the above service running.
 
 2. AWS PROFESSIONAL SERVICES :
-The AWS Professional Services organization is a global team of experts that can help you realize your desired business outcomes when using the AWS Cloud. We work together with your team and your chosen member of the AWS Partner Network (APN) to execute your enterprise cloud computing initiatives.
+The AWS Professional Services organization is a global team of experts that can help you realize your desired business outcomes when using the AWS Cloud.
+We work together with your team and your chosen member of the AWS Partner Network (APN) to execute your enterprise cloud computing initiatives.
 The team provides assistance through a collection of offerings which help you achieve specific outcomes related to enterprise cloud adoption.
 They also deliver focused guidance through our global specialty practices, which cover a variety of solutions, technologies, and industries.
 
@@ -2477,9 +2494,9 @@ you have to add customer contact information into Amazon Pinpoint, and then crea
 Next, you have to create your messages and schedule your campaigns.
 Finally, after you send your campaigns, you can use the analytics dashboards that are built into Amazon Pinpoint to see how well the campaigns performed.
 
-3. AMAZON SIMPLE EMAIL SERVICE - SES :  < Has a separate detailed chapter >
+3. AMAZON SIMPLE EMAIL SERVICE - SES :  < Has a separate detailed chapter > // Add email-sending capabilities to any application
 Amazon Simple Email Service (Amazon SES) is an email sending and receiving service that provides an easy, cost-effective way for you to send email.
-  • Add email-sending capabilities to any application. If your application runs in Amazon Elastic ComputeCloud (Amazon EC2), you can use Amazon SES to send 62,000 emails every month at no additional charge.
+  • Add email-sending capabilities to any application. If your application runs in Amazon Elastic Compute Cloud (Amazon EC2), you can use Amazon SES to send 62,000 emails every month at no additional charge.
     You can send email from Amazon EC2 by using an AWS SDK, by using the Amazon SES SMTP interface, or by making calls directly to the Amazon SES API.
   • Use AWS Elastic Beanstalk to create an email-enabled application such as a program that uses Amazon SES to send a newsletter to customers.
   • Set up Amazon Simple Notification Service (Amazon SNS) to notify you of your emails that bounced, produced a complaint, or were successfully delivered to the recipient's mail server.
