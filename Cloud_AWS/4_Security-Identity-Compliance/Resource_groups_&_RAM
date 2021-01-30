@@ -52,7 +52,6 @@ The following list describes some of the cases in which resource grouping can he
   -> A set of AWS resources that you use together for a common project or that you want to manage or monitor as a group.
   -> A set of resources related to applications that run on a specific platform, such as Android or iOS.
 
-
   For example, you are developing a web application, and you are maintaining separate sets of resources for your alpha, beta, and release stages.
   Each version runs on Amazon EC2 with an Amazon Elastic Block Store storage volume.
   You use Elastic Load Balancing to manage traffic and Route 53 to manage your domain.

@@ -17,10 +17,10 @@ NOTE :
 SERVICES COVERED :
 -------------------------------------------------------------------------------------------------------------------------------------------------
 Analytics*                 |  Compute*             |   Data Base*              |  Management & Governance        |  Satellite*
-Application Integration    |  Containers*          |   Developer Tools*        |  Migration & Transfer*          |  Security, Identity & Compliance
+Application Integration*   |  Containers*          |   Developer Tools*        |  Migration & Transfer*          |  Security, Identity & Compliance
 AR & VR*                   |  Cryptography & PKI*  |   End User Computing*     |  Networking & Content Delivery  |  Storage*
-Billing & Cost Management  |  Customer Enablement  |   Front-End Web & Mobile* |  Quantum Computing*             |
-Business Applications      |  Customer Engagement  |   Game Development*       |  Robotics*                      |
+Billing & Cost Management* |  Customer Enablement* |   Front-End Web & Mobile* |  Quantum Computing*             |
+Business Applications*     |  Customer Engagement* |   Game Development*       |  Robotics*                      |
 Blockchain*                |                       |                           |                                 |
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1093,12 +1093,13 @@ SECURITY - IDENTITY - COMPLIANCE   :
 ##################################################################################################################
 
 1. AWS IDENTITY & ACCESS MANAGEMENT : < Has a separate detailed chapter - IAM >  https://www.youtube.com/watch?v=Ul6FW4UANGc
-It is a web service for securely controlling access to AWS services. You use IAM to control who is authenticated (signed in) and authorized (has permissions) to use resources.
+It is a web service for securely controlling access to AWS services.
+You use IAM to control who is authenticated (signed in) and authorized (has permissions) to use resources.
 With IAM, you can centrally manage users, security credentials such as access keys, and permissions that control which AWS resources users and applications can access.
 You can use IAM to control all the available ~180 services available in AWS. And using cloudtrail you can keep track of the activities .
 Users can focus on developing applications and IAM handles the security. And it is free of cost .
 
-2. AWS ARTIFACT : https://www.youtube.com/watch?v=ILEoLqpbfXM&t=5s
+2. AWS ARTIFACT : https://www.youtube.com/watch?v=ILEoLqpbfXM&t=5s // access compliance REPORTS from 3rd party auditors  & to review, accept, and terminate AGREEMENTS with AWS - use aws reports to evaluate your infrastructure.
 No cost, self-service portal for on-demand access to AWS compliance reports and for entering into select online agreements.
 Use AWS Artifact reports to access several compliance reports from third-party auditors who have tested and verified our compliance with a variety of global, regional, and industry specific security standards and regulations.
 Use AWS Artifact agreements to review, accept, and terminate agreements with AWS for an individual account, and for all accounts that are a part of your organization in AWS Organizations.
@@ -1106,22 +1107,23 @@ Use AWS Artifact agreements to review, accept, and terminate agreements with AWS
 AWS Artifact is a web service that enables you to download AWS security and compliance documents such as ISO certifications, , Payment Card Industry (PCI), and Service Organization Control (SOC) reports.
 You can submit the security and compliance documents (also known as audit artifacts) to your auditors or regulators to demonstrate the security and compliance of the AWS infrastructure and services that you use.
 You can also use these documents as guidelines to evaluate your own cloud architecture and assess the effectiveness of your company's internal controls.
-AWS Artifact provides documents about AWS only. You can also use AWS Artifact to review, accept, and track the status of AWS agreements such as theBusiness Associate Addendum (BAA).
+AWS Artifact provides documents about AWS only. You can also use AWS Artifact to review, accept, and track the status of AWS agreements such as the Business Associate Addendum (BAA).
 AWS customers are responsible for developing or obtaining documents that demonstrate the security and compliance of their companies.
 
-AWS Artifact is a self-service audit artifact retrieval portal that provides customers with on-demand access to AWS’ compliance documentation and AWS agreements. You can use AWS Artifact Agreements to review, accept, and track the status of AWS agreements such as the Business Associate Addendum (BAA).
+AWS Artifact is a self-service audit artifact retrieval portal that provides customers with on-demand access to AWS’ compliance documentation and AWS agreements.
+You can use AWS Artifact Agreements to review, accept, and track the status of AWS agreements such as the Business Associate Addendum (BAA).
 You can also use AWS Artifact Reports to download AWS security and compliance documents, such as AWS ISO certifications, Payment Card Industry (PCI), and System and Organization Control (SOC) reports.
 
-3. AWS AUDIT MANAGER :
+3. AWS AUDIT MANAGER : // build audit-ready reports
 When it is time for an audit, AWS Audit Manager helps you manage stakeholder reviews of your controls, which means you can build audit-ready reports with much less manual effort.
 AWS Audit Manager helps you continuously audit your AWS usage to simplify how you manage risk and compliance with regulations and industry standards.
 AWS Audit Manager makes it easier to evaluate whether your policies, procedures, and activities—also known as controls—are operating as intended.
 The service offers prebuilt frameworks with controls that are mapped to well-known industry standards and regulations, full customization of frameworks and controls, and automated collection and organization of evidence as designed by each control requirement.
 
-4. AWS COGNITO :
+4. AWS COGNITO : // user authentication and authorization for your web and mobile apps using user pools (provide sign-up and sign-in options) and identity pools (to grant your users access to other AWS services).
 Amazon Cognito handles user authentication and authorization for your web and mobile apps.
 With user pools, you can easily and securely add sign-up and sign-in functionality to your apps.
-Your users can sign in directly with a user name and password, or through a third party such asFacebook, Amazon, Google or Apple.
+Your users can sign in directly with a user name and password, or through a third party such as Facebook, Amazon, Google or Apple.
 The two main components of Amazon Cognito are user pools and identity pools.
   --> User pools are user directories that provide sign-up and sign-in options for your app users.
   --> Identity pools enable you to grant your users access to other AWS services.
@@ -1135,13 +1137,36 @@ The two main components of Amazon Cognito are user pools and identity pools.
 AWS Directory Service provides multiple ways to set up and run Microsoft Active Directory with other AWS services such as Amazon EC2, Amazon RDS for SQL Server, Amazon FSx for Windows File Server, and AWS Single-Sign On.
 AWS Directory Service for Microsoft Active Directory, also known as AWS Managed Microsoft AD, enables your directory-aware workloads and AWS resources to use a managed Active Directory in the AWS Cloud.
 
- // The below three services AWS WAF - AWS SHIELD - AWS FIREWALL MANAGER are interlinked. So which one to use ??
-    --> It all starts with AWS WAF. You can automate and then simplify AWS WAF management using AWSFirewall Manager.
+ // The below  services AWS WAF - AWS SHIELD - AWS FIREWALL MANAGER - AWS NETWORK FIREWALL are interlinked. So which one to use ??
+    --> It all starts with AWS WAF. You can automate and then simplify AWS WAF management using AWS Firewall Manager.
     --> Shield Advanced adds additional features on top of AWS WAF, such as dedicated support from the DDoS Response Team (DRT) and advanced reporting.
-    --> To use the services of the DRT, you must be subscribed to the Business Support plan or theEnterprise Support plan.
+    --> To use the services of the DRT, you must be subscribed to the Business Support plan or the Enterprise Support plan.
     --> If you want granular control over the protection that is added to your resources, AWS WAF alone is the right choice.
     --> If you want to use AWS WAF across accounts, accelerate your AWS WAF configuration, or automate protection of new resources, use Firewall Manager with AWS WAF.
     --> Finally, if you own high visibility websites or are otherwise prone to frequent DDoS attacks, you should consider purchasing the additional features that Shield Advanced provides.
+
+
+                                           ----------------------------------------------------------------------------
+                                          |                                                                            |
+                                          |          ----------------------------------                                |      APPLICATIONS CAN BE : // WAF USES WEB ACL'S
+                                          |         |                                   |                              |      Amazon Cloud Front, Amazon API Gateway, Application Load Balancer, or AWS AppSync
+                                          |         |          -------------            |                              |      Create ACL's and then add resources to it.
+                                          |         |         |             |           |                              |
+                                          |         |         |   [[ A ]]   |           |      AWS ACCOUNT - 1         |
+                                          |         |         |   [[ A ]]   |           |                              |
+                                          |         |         | APPLICATION |           |                              |
+                                          |         |          -------------            |                              |
+                                          |         |               WAF                 |                              |
+                                          |           ---------------------------------                                |
+                                          |       SHIELD STANDARD  - SHIELD ADVANCED  - DDOS                           |
+                                          |     |                                            |  AWS ACCOUNT - 2        |
+                                          |      --------------------------------------------                          |
+                                          |                                                                            |
+                                          |     |                                            |  AWS ACCOUNT - 3        |
+                                          |      --------------------------------------------                          |
+                                           ----------------------------------------------------------------------------
+                                                        FIREWALL MANAGER ---> CREATES A NETWORK FIREWALL --> Each for 1 VPC
+
 
 6. AWS WEB APPLICATION FIREWALL - WAF :
 A web application firewall (WAF) helps protect your web applications from common web exploits that could affect application availability, compromise security, or consume excessive resources.
@@ -1179,7 +1204,7 @@ AWS Shield Advanced incurs additional charges. You can add protection for any of
   • Amazon Elastic Compute Cloud (Amazon EC2) Elastic IP addresses
 
 8. AWS FIREWALL MANAGER :  --> Used to manage the above WAF and SHIELD .
-AWS Firewall Manager simplifies your administration and maintenance tasks across multiple accounts and resources for AWS WAF, AWS Shield Advanced, Amazon VPC security groups, and AWS NetworkFirewall.
+AWS Firewall Manager simplifies your administration and maintenance tasks across multiple accounts and resources for AWS WAF, AWS Shield Advanced, Amazon VPC security groups, and AWS Network Firewall.
 With Firewall Manager, you set up your AWS WAF firewall rules, Shield Advanced protections, Amazon VPC security groups, and Network Firewall firewalls just once.
 The service automatically applies your rules across your accounts and resources, even as you add new resources.
 
@@ -1196,19 +1221,20 @@ The service automatically applies your rules across your accounts and resources,
    Network firewall manager manages all netwrok firewalls , vpc's , subnets etc;
    Network firewall manages a particular VPC . You can create one for each VPC .
 
-9. AWS NETWORK FIREWALL : --> Supported by NETWORK FIREWALL MANAGER // https://aws.amazon.com/about-aws/whats-new/2020/11/aws-firewall-manager-supports-centralized-management-aws-network-firewall/
+9. AWS NETWORK FIREWALL : --> Supported by  FIREWALL MANAGER // https://aws.amazon.com/about-aws/whats-new/2020/11/aws-firewall-manager-supports-centralized-management-aws-network-firewall/
 AWS Network Firewall is a stateful, managed, network firewall and intrusion detection and prevention service for your virtual private cloud (VPC).
-With Network Firewall, you can filter traffic at the perimeter of your VPC. This includes filtering traffic going to and coming from an internet gateway, NAT gateway, or over VPN or AWS Direct Connect.
+With Network Firewall, you can filter traffic at the perimeter of your VPC.
+This includes filtering traffic going to and coming from an internet gateway, NAT gateway, or over VPN or AWS Direct Connect.
   • Pass traffic through only from known AWS service domains or IP address endpoints, such as AmazonS3.
   • Use custom lists of known bad domains to limit the types of domain names that your applications can access.
   • Perform deep packet inspection on traffic entering or leaving your VPC.
   • Use stateful protocol detection to filter protocols like HTTPS, independent of the port used.
 To enable Network Firewall for your VPC, you perform steps in both Amazon VPC and in Network Firewall.
 The firewall protects the subnets within your VPC by filtering traffic going between the subnets and locations outside of your VPC.
-To enable the firewall's protection, you modify your Amazon VPC route tables to send your networktraffic through the Network Firewall firewall endpoint.
+To enable the firewall's protection, you modify your Amazon VPC route tables to send your network traffic through the Network Firewall firewall endpoint.
 
 
-10. AWS CLOUD DIRECTORY :  https://www.youtube.com/watch?v=OhaGbCeNLs0&t=27s
+10. AWS CLOUD DIRECTORY :  https://www.youtube.com/watch?v=OhaGbCeNLs0&t=27s // hierarchical views based on its manufacturer, current owner, and physical location
 --> Graph-based directory -- Different from AWS DIRECTORY SERVICE above.
 --> Cloud Directory is NOT a directory service for IT Administrators who want to manage or migrate their directory infrastructure and do authentication and authorization.
 --> The concept is to generate a conceptual relationship between the objects .
@@ -1218,19 +1244,19 @@ With Cloud Directory, you can organize application data into multiple hierarchie
 For example, a directory of users may provide a hierarchical view based on reporting structure, location, and project affiliation.
 Similarly, a directory of devices may have multiple hierarchical views based on its manufacturer, current owner, and physical location.
 
-/// The below AWS DETECTIVE - AWS GUARD DUTY - AWS INSPECTOR - AWS MACIE are similar in concepts.
-    --> AWS DETECTIVE is mainly for the security findings in login attempts , API calls.
-    --> AWS GUARD DUTY does DETETIVE duty plus reports compromised EC2 instanes , compromised s3 instanes .
-    --> AWS INSPECTOR does an vulnerability assessment based on common security standards and vulnerability definitions updated frequently by AWS .
-    --> AWS MACIE is for protecting personal and financial data stored  in S3 across your organization.
-    --> All the services are free for 30 days .Pay from the next month!! During the 30-day free trial period, the cost estimation projects what your estimated costs will be after the free trial period.
 
+/// The below AWS DETECTIVE - AWS GUARD DUTY - AWS INSPECTOR - AWS MACIE are similar in concepts.
+    --> AWS DETECTIVE is mainly for the security findings in login attempts , API calls from AWS CloudTrail and Amazon VPC flow logs.
+    --> AWS GUARD DUTY does DETETIVE duty plus reports compromised EC2 instanes , compromised s3 instanes and compromised AWS credentials from VPC Flow Logs, AWS CloudTrail management event logs, Cloudtrail S3 data event logs, and DNS logs.
+    --> AWS INSPECTOR does an vulnerability assessment based on common security standards and vulnerability definitions updated frequently by AWS . Offers predefined software called an agent that you can install in EC2.
+    --> AWS MACIE is for protecting personal and financial data stored  in S3 across your organization and reports if a bucket is unencrypted .
+    --> All the services are free for 30 days .Pay from the next month!! During the 30-day free trial period, the cost estimation projects what your estimated costs will be after the free trial period.
 
 11. AMAZON DETECTIVE :
 Amazon Detective makes it easy to analyze, investigate, and quickly identify the root cause of security findings or suspicious activities.
 Detective automatically collects log data from your AWS resources and uses machine learning, statistical analysis, and graph theory to help you visualize and conduct faster and more efficient security investigations.
 Detective automatically extracts time-based events such as login attempts, API calls, and network traffic from AWS CloudTrail and Amazon VPC flow logs.
-It also ingests findings detected by GuardDuty. You can explore this behavior graph to examine disparate actions such as failed logon attempts or suspicious API calls.
+It also ingests findings detected by GuardDuty. You can explore this behaviour graph to examine disparate actions such as failed logon attempts or suspicious API calls.
 Free for 30days. Pay from the next month!! During the 30-day free trial period, the cost estimation projects what your estimated costs will be after the free trial period.
 
 12. AWS GUARD DUTY :  https://www.youtube.com/watch?v=ocZjGirQT9A&t=28s
@@ -1251,7 +1277,8 @@ Free for 30days. Pay from the next month!! During the 30-day free trial period, 
 
 13. AWS INSPECTOR : https://www.youtube.com/watch?v=xxvrmBPbNPs
 Amazon Inspector is a security vulnerability assessment service that helps improve the security and compliance of your AWS resources.
-It tests the network accessibility of your Amazon EC2 instances and the security state of your applications that run on those instances. Amazon Inspector assesses applications for exposure, vulnerabilities, and deviations from best practices.
+It tests the network accessibility of your Amazon EC2 instances and the security state of your applications that run on those instances.
+Amazon Inspector assesses applications for exposure, vulnerabilities, and deviations from best practices.
 Amazon Inspector also offers predefined software called an agent that you can optionally install in the operating system of the EC2 instances that you want to assess.
 Amazon Inspector automatically assesses resources for vulnerabilities or deviations from best practices, and then produces a detailed list of security findings prioritized by level of severity.
 Amazon Inspector includes a knowledge base of hundreds of rules mapped to common security standards and vulnerability definitions that are regularly updated by AWS security researchers.
@@ -1263,12 +1290,12 @@ To help get started quickly, Amazon Inspector includes a knowledge base of hundr
 Examples of built-in rules include checking for remote root login being enabled, or vulnerable software versions installed.
 These rules are regularly updated by AWS security researchers.
 
-
 14. AWS MACIE :
 Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover, classify, and help you protect your sensitive data in Amazon S3.
-Macie automates the discovery of sensitive data, such as personally identifiable information (PII) and financial data, to provide you with a better understanding of the data that your organization storesin Amazon Simple Storage Service (Amazon S3).
-Macie also provides you with an inventory of your S3buckets, and it automatically evaluates and monitors those buckets for security and access control.
+Macie automates the discovery of sensitive data, such as personally identifiable information (PII) and financial data, to provide you with a better understanding of the data that your organization stores in Amazon Simple Storage Service (Amazon S3).
+Macie also provides you with an inventory of your S3 buckets, and it automatically evaluates and monitors those buckets for security and access control.
 Within minutes, Macie can identify and report overly permissive or unencrypted buckets for your organization.
+
 
 15. AWS RESOURCE ACCESS MANAGER - RAM : < Has a separate detailed chapter - Resource_groups_&_RAM >
 AWS Resource Access Manager (AWS RAM) enables you to share your resources with any AWS account or organization in AWS Organizations.
@@ -1290,14 +1317,33 @@ The following sections list the services that integrate with AWS RAM, and the re
     • AWS Outposts     • AWS Resource Groups  • Amazon Route 53
     • Amazon VPC
 
-16. AWS RESOURCE GROUPS & TAG EDITOR : < Has a separate detailed chapter - Resource_groups_&_RAM >
+16. AWS RESOURCE GROUPS & TAG EDITOR : < Has a separate detailed chapter - Resource_groups_&_RAM > // use tags to organize projects
 AWS Resource Groups lets you organize AWS resources into groups, tag resources using virtually any criteria, and manage, monitor, and automate tasks on grouped resources.
 A resource group is a collection of AWS resources that are all in the same AWS region, and that match criteria provided in a query.
 Tags are words or phrases that act as metadata that you can use to identify and organize your AWS resources.
 With Tag Editor, you build a query to find resources in one or more AWS Regions that are available for tagging.
 You can choose up to 20 individual resource types, or build a query on All resource types.
+Examples of bulk actions include:
+    --> Applying updates or security patches.
+    --> Upgrading applications.
+    --> Opening or closing ports to network traffic.
+    --> Collecting specific log and monitoring data from your fleet of instances.
 
-17. AWS SECRETS MANAGER :
+The following list describes some of the cases in which resource grouping can help organize your resources.
+
+  -> An application that has different phases, such as development, staging, and production.
+  -> Projects managed by multiple departments or individuals.
+  -> A set of AWS resources that you use together for a common project or that you want to manage or monitor as a group.
+  -> A set of resources related to applications that run on a specific platform, such as Android or iOS.
+
+  For example, you are developing a web application, and you are maintaining separate sets of resources for your alpha, beta, and release stages.
+  Each version runs on Amazon EC2 with an Amazon Elastic Block Store storage volume.
+  You use Elastic Load Balancing to manage traffic and Route 53 to manage your domain.
+  Without Resource Groups, you might have to access multiple consoles just to check the status of your services or modify the settings for one version of your application.
+
+  Groups have unique Amazon Resource Names (ARNs) : arn:aws:resource-groups:region:account:group/group-name
+
+17. AWS SECRETS MANAGER : //securely encrypt, store, and retrieve credentials for your databases and other services and use them in your application instead of storing plain credentials.
 In the past, when you created a custom application to retrieve information from a database, you typically embedded the credentials, the secret, for accessing the database directly in the application.
 When the time came to rotate the credentials, you had to do more than just create new credentials. You had to invest time to update the application to use the new credentials.
 Then you distributed the updated application. If you had multiple applications with shared credentials and you missed updating one of them, the application failed.
@@ -1312,7 +1358,7 @@ You create roles and grant permissions to apps to use that role to access secret
 AWS Security Hub provides you with a comprehensive view of the security state of your AWS resources against security industry standards and best practices.
 Security Hub collects security data from across AWS accounts and services, and helps you analyze your security trends to identify and prioritize the security issues across your AWS environment.
 
-SINGLE-SIGN-ON :
+SINGLE-SIGN-ON :  // Service provider <---- TRUST ----> Identity provider
 ------------------
 Security Assertion Markup Language (SAML) is an open standard that allows identity providers (IdP) to pass authorization credentials to service providers (SP).
 What that jargon means is that you can use one set of credentials to log into many different websites.
@@ -1328,13 +1374,15 @@ The login flow usually looks like this:
   --> A user browses to the application or website they want access to, aka, the Service Provider.
   --> The Service Provider sends a token that contains some information about the user, like their email address, to the SSO system, aka, the Identity Provider, as part of a request to authenticate the user.
   --> The Identity Provider first checks to see whether the user has already been authenticated, in which case it will grant the user access to the Service Provider application and skip to step 5.
-  --> If the user hasn’t logged in, they will be prompted to do so by providing the credentials required by the Identity Provider. This could simply be a username and password or it might include some other form of authentication like a One-Time Password (OTP).
+  --> If the user hasn’t logged in, they will be prompted to do so by providing the credentials required by the Identity Provider.
+      This could simply be a username and password or it might include some other form of authentication like a One-Time Password (OTP).
   --> Once the Identity Provider validates the credentials provided, it will send a token back to the Service Provider confirming a successful authentication.
   --> This token is passed through the user’s browser to the Service Provider.
   --> The token that is received by the Service Provider is validated according to the trust relationship that was set up between the Service Provider and the Identity Provider during the initial configuration.
   --> The user is granted access to the Service Provider.
 
-  The use of SSO is a very popular method of allowing access with just a single sign in. LDAP, on the other hand, is the protocol used in authentication of the SSO systems.
+  The use of SSO is a very popular method of allowing access with just a single sign in.
+  LDAP, on the other hand, is the protocol used in authentication of the SSO systems.
   The Acronym LDAP refers to Lightweight Directory Access Protocol.
   LDAP is an Identity repository.
   SAML ( used by SSO ) is an Identity standard that could use LDAP as the repository. Or it could use something else like Active directory.
