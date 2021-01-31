@@ -1905,7 +1905,7 @@ You can use Route 53 to perform three main functions in any combination: domain 
   3. Check the health of your resources Route 53 sends automated requests over the internet to a resource, such as a web server, to verify that it's reachable, available, and functional.
      You also can choose to receive notifications when a resource becomes unavailable and choose to route internet traffic away from unhealthy resources.
 
-9. AMAZON VPC : < Has a separate detailed chapter >
+9. AMAZON VPC : < Has a separate detailed chapter > // --> IPV4 CIDR blocks -> Between /16 /28  & IPV6 CIDR blocks -> Fixed for /56 to subnet & /64 to VPC
 Amazon Virtual Private Cloud (Amazon VPC) enables you to provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you've defined.
 A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud.
 You can launch your AWS resources, such as Amazon EC2instances, into your VPC. You can specify an IP address range for the VPC, add subnets, associate security groups, and configure route tables.

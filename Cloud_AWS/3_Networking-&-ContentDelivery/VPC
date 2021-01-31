@@ -3,7 +3,7 @@
 NETWORKING  TUTORIAL : --> IPv6 addresses are globally unique, and are therefore public by default. There is no concept of private IPV6.
 ============================
 ####VIEW NETWORKING TUTORIALS BY RAVINDRA BABU RAVULA :: https://youtu.be/UXMIxCYZu8o
-IANA -> INTERNET ASSIGNED NUMBER AUTHORITY  --> Responsible for IP address allocations.
+IANA  --> INTERNET ASSIGNED NUMBER AUTHORITY  --> Responsible for IP address allocations.
 Classful  - IPV4 , IPV6
 Classless - CIDR
 
@@ -22,7 +22,7 @@ Both MAC Address and IP Address are used to uniquely identify a machine on the i
 
 STATEFUL [ FTP / TELNET ] VS STATELESS [ HTTP / DNS ] :
 ----------------------------------------------------------
-The difference between stateful vs. stateless is essentially whether or not an application or process stores data over time.
+The difference between stateful vs stateless is essentially whether or not an application or process stores data over time.
 Stateful applications store data, while stateless applications do not.
 These devices in stateful connections  track source and destination IP addresses, as well as protocol or port information in an active connections table, which handles statistics of a network's active connections.
 Stateful devices also inspect the packet payload to verify that the device contains the appropriate data.
@@ -36,15 +36,15 @@ Additionally, if communications restarted after the connection dropped from the 
 WAY OF WORKING OF WEB REQUESTS :
 ---------------------------------
 
-    Network-1                                           Network-2
- -------------------                                   ------------------
-|   HOST-1          |                                 |  HOST-2          |
-|                   |       www.google.com            |                  |
-|                   | ----------------------------> a | ---> b --> c [p] |  [ P = Process / port ]
- -------------------                                   ------------------
-          1                                                     2
-Network-1 = Your Network say AIRTEL                   Network-2 = Say a Network that hosts GOOGLE in Usage
-            It has your HOST-1                                    It has a HOST-2 that serves google pages
+        Network-1                                           Network-2
+     -------------------                                   ------------------
+    |   HOST-1          |                                 |  HOST-2          |
+    |                   |       www.google.com            |                  |
+    |                   | ----------------------------> a | ---> b --> c [p] |  [ P = Process / port ]
+     -------------------                                   ------------------
+              1                                                     2
+    Network-1 = Your Network say AIRTEL                   Network-2 = Say a Network that hosts GOOGLE in Usage
+                It has your HOST-1                                    It has a HOST-2 that serves google pages
 
 When you type in www.google.com , it has to first :
   a --> Go to the destination network (using Network-Id in IP)
@@ -205,14 +205,14 @@ BROAD casting  - one host to many hosts
                              Suppose we want to send a message from 11.1.2.3 to all hosts in same network 11 -> 11.x.x.x
                              since that for a class A , 2^16 hosts are there , it is practically not possible to send 2^16 data packets .
                              so the alternative is to put all 1's in destination IP part . --> [255.255.255.255]
-                             [ data - 11.1.2.3 - 255.255.255.255 ]
+                             [ data - 11.1.2.3 - 255.255.255.255 ] is the packet header.
                              So When a Network sees the destination IP as 255.255.255.255 , instead of routing it out if its network, it sends it inside to all hosts again.
 
                  DIRECTED -> sending messages from one host to all hosts in a different network
                              Suppose we want to send a message from 11.1.2.3 to all hosts in different network 12 -> 12.x.x.x
-                             We need to put all 1's in the host Id part . Since for above example we consider a class A Address.
+                             We need to put all 1's in the host Id part . For the above example we consider a class A Address.
                              So we put all 1's in the last 3 octets (Host Id part) and 1st octet is the N/W Id. --> [X.255.255.255]
-                             [ data - 11.1.2.3 - 20.255.255.255 ]
+                             [ data - 11.1.2.3 - 12.255.255.255 ] is the packet header.
 
 EXAMPLES :
 ------------
@@ -256,10 +256,11 @@ But now there is an extra overhead of searching for the subnet in  a network .
 Also every subnet wastes an extra of 2 IP addresses for DBA and N/W ID .
 
 Consider a N/W : 200.1.2.0 --> since its class C , we use the last 8 bits as Host ID , hence we use these 8 bits for subnetting as well.
-                           --> 200.1.2.X i.e. 200.1.2._ _ _ _ _ _ _ _
-                           --> If we want 2 subnets , we chose the 1st bit , if we want 4 subnets , we chose the 1st 2 bits.
+                           --> 200.1.2.X i.e. 200.1.2. _ _ _ _ _ _ _ _
+                           --> If we want 2 subnets , we chose the 1st 1 bit,  200.1.2. X _ _ _  _ _ _ _
+                           --> If we want 4 subnets , we chose the 1st 2 bits, 200.1.2. X X _ _  _ _ _ _
                            --> Say we want to create 2 subnets A and B :
-                           --> 200.1.2.0 _ _ _ _ _ _ _ _  and 200.1.2.1 _ _ _ _ _ _ _ _ (we chose the 1st bit of the last octant and gave it 0 and 1 respectively)
+                           --> 200.1.2. 0 _ _ _  _ _ _ _  and 200.1.2. 1 _ _ _   _ _ _ _ (we chose the 1st bit of the last octant and gave it 0 and 1 respectively)
                            --> When we have a subnet we need to have an internal route table to move traffic to respective subnets.
 
                                                      N/W Id = 200.1.2.0  <-- 200.1.2.0  -->  DBA = 200.1.2.255
@@ -274,7 +275,7 @@ Consider a N/W : 200.1.2.0 --> since its class C , we use the last 8 bits as Hos
                   RANGE =       200.1.2.0 to 200.1.2.127                       |                          200.1.2.128 to 200.1.2.255
     N/W ID or SUBNET-ID =       200.1.2.0                                    YYYYY                        200.1.2.128
                     DBA =       200.1.2.127                                                               200.1.2.255
-
+                    LBA =       255.255.255                                                               255.255.255
                                                                    XXXXX = Internal Route table
                                                                    YYYYY = External Route table
 
@@ -283,17 +284,19 @@ The confusion is that : The N/W ID for whole network =  N/W ID of subnet A
 --> This is eliminated by the route table that gets the request . The external route does not know about internal Subnets . It only sends data.
 --> If you are talking about 200.1.2.0 from outside , you mean for whole network , if you are talking from inside it is for Subnet-A .
 --> So there is  a packet 200.1.2.255
-    --> From outside : say from ecternal route table YYYYY to XXXXX , then it is sent to all hosts in the total network (for both subnets A and B)
+    --> From outside : say from external route table YYYYY to XXXXX , then it is sent to all hosts in the total network (for both subnets A and B)
     --> From inside  : say a packet from subnet A , then it will be routed to Subnet B (because its DBA is 200.1.2.255)
 
-SIMILARLY FOR 4 SUBNETS :
+SIMILARLY IF WE SPLIT 200.1.2.0 INTO 4 SUBNETS :
+---------------------------------------------------
     A --> 0   - 63     N/W ID : 200.1.2.0
     B --> 64  - 127    N/W ID : 200.1.2.64
     C --> 128 - 191    N/W ID : 200.1.2.128
     D --> 192 - 255    N/W ID : 200.1.2.192
 
 
-SUBNET MASK : [ Used by an internal route table for finding the NETWORK - ID i.e; the NETWORK the host belongs to ]
+SUBNET MASK : [ Used by an internal route table for finding the NETWORK - ID i.e.; the NETWORK the host belongs to ]
+// Do an AND operation for the IP ADDRESS with the SUBNET MASK.
 ----------------
 Subnet mask is a 32 bit number containing 0's and 1's .
         --> 1's : Represent N/W ID & Subnet ID part
@@ -336,12 +339,14 @@ Consider the below subnets and their interfaces :
     B --> 64  - 127    N/W ID : 200.1.2.64
     C --> 128 - 191    N/W ID : 200.1.2.128
     D --> 192 - 255    N/W ID : 200.1.2.192
-    E --> External Router to INTERNAL ROUTER LINK
+    E --> DEAFAULT GATEWAY
 
     --> When a router gets a request with a DESTINATION-IP , then it will do an "AND" with SUBNET-MASK.
     --> If the output matches with 1st NETWORK-ID , it will look at the INTERFACE and route the packet to that Interface.
     --> If the 1st entry is a mismatch , it will search with the 2nd entry and so on ....
     --> If none of the entries match , the default will always match , means the packet does not belong to this network .
+
+        Because 255.255.255.192 is the SUBNET-MASK for a Network 200.1.2.0 having 4 subnets,
 
                       NETWORK-ID          SUBNET-MASK       INTERFACE
                     -----------------------------------------------------
@@ -349,20 +354,31 @@ Consider the below subnets and their interfaces :
                       200.1.2.64        255.255.255.192         B
                       200.1.2.128       255.255.255.192         C
                       200.1.2.192       255.255.255.192         D
-                      0.0.0.0           0.0.0.0                 E    [  DEFAULT INTERFACE ]
+                      0.0.0.0           0.0.0.0                 E    [  DEFAULT INTERFACE -  Ex: igw-12345678901234567 ]
+
+    When there is no match for any networks, the default 0.0.0.0 is always matched. It means the packet is intended for a host outside this network.
+    The default route generally has a next-hop address like an internet gateway of another routing device, which performs the same process. The process repeats until a packet is delivered to the destination.
+    In AWS terms, E can be an internet gateway like : igw-12345678901234567
+    To enable your subnet to access the internet through an internet gateway, add the following route to your subnet route table.
+
+                    Destination	  Target
+                    0.0.0.0/0	    igw-12345678901234567
+
+    The destination for the route is 0.0.0.0/0, which represents all IPv4 addresses. The target is the internet gateway that's attached to your VPC.
+    CIDR blocks for IPv4 and IPv6 are treated separately. For example, a route with a destination CIDR of 0.0.0.0/0 does not automatically include all IPv6 addresses. You must create a route with a destination CIDR of ::/0 for all IPv6 addresses.
 
 
 CLASSLESS INTER DOMAIN ROUTING (CIDR) : (No concept of CLASSES)
 ------------------------------------------
-The issue with classfull addresses is that :
+The issue with classful addresses is that :
     --> Even though you want 100 IP's , you have to buy a class C IP.
     --> And if you want more than 256 , say 300 we need to buy a Class B IP , which has 2^16 IP's
     --> There is a huge wastage in IP addresses . Hence CIDR.
 
 In CIDR , we do not have a concept of CLASS. We have BLOCK concept.
-We are assigned the exact number of IP's we request for .
-So NETWORK ID is called as BLOCK ID in CIDR.
-The disadvantage of CIDR is that we do not know the number of N/W id and HoST ID bits in the IP assigned .
+We are assigned the exact or a near exact number of IP's we request for because we can only request a block power of 2, ex: /64 and not /50 .
+NETWORK ID is called as BLOCK ID in CIDR.
+The disadvantage of CIDR is that we do not know the number of N/W ID and HOST ID bits in the IP assigned .
 
 So to overcome this , CIDR = a.b.c.d /n [ where n = number of bits in N/W id. ]
   20.4.56.124 / 20  --> This means there are 20 N/W ID bits and (32-20) , 12 HOST Id bits. --> Block has 2^12 IP addresses
@@ -384,60 +400,69 @@ Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources in
 Amazon VPC is the networking layer for Amazon EC2.
 It is dedicated to your AWS account and is logically isolated from other virtual networks in the AWS Cloud.
 
-•  vpc              — A virtual network dedicated to your AWS account.
-•  Subnet           — A range of IP addresses in your VPC.
+•  VPC              — A virtual network dedicated to your AWS account.
+•  SUBNET           — A range of IP addresses in your VPC.
                       You can launch AWS resources into a specified subnet.
                       Use a public subnet for resources that must be connected to the internet, and
                       Use a private subnet for resources that won't be connected to the internet .
                       To protect the AWS resources in each subnet, you can use multiple layers of security, including security groups and network access control lists (ACL).
-•  Route table      — A set of rules, called routes, that are used to determine where network traffic is directed.
+•  ROUTE TABLE      — A set of rules, called routes, that are used to determine where network traffic is directed.
                       You can explicitly associate a subnet with a particular route table. Otherwise, the subnet is implicitly associated with the main route table.
-•  Internet gateway — A gateway that you attach to your VPC to enable communication between resources in your VPC and the internet.
-•  VPC endpoint     — Enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by Private Link without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
+•  INTERNET GATEWAY — A gateway that you attach to your VPC to enable communication between resources in your VPC and the internet.
+                      There can be only one IGW for a VPC.
+•  VPC ENDPOINT     — Enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by Private Link without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
                       Instances in your VPC do not require public IP addresses to communicate with resources in the service.
                       Traffic between your VPC and the other service does not leave the Amazon network.
-•  CIDR block       — Classless Inter-Domain Routing. An internet protocol address allocation and route aggregation methodology.
+•  CIDR BLOCK       — Classless Inter-Domain Routing. An internet protocol address allocation and route aggregation methodology.
 
-DEFAULT VPC & SUBNET : -> VPC spans across all Availability Zones . But you can create a Subnet in any AZ as you like.
+DEFAULT VPC & SUBNET : ->
 -----------------------
-    Our account  comes with a default VPC that has a default subnet in each Availability Zone.
-    Your default VPC includes an internet gateway, and each default subnet is a public subnet.
-    Each instance that you launch into a default subnet has a private IPv4 address and a public IPv4 address.
-    These instances can communicate with the internet through the internet gateway.
-    An internet gateway enables your instances to connect to the internet through the Amazon EC2 network edge.
-    The default subnets have a main route table which is connected to INTERNET Gateway
-    You can explicitly associate a subnet (default/non-default) with a particular route table.
-    Otherwise, the subnet is implicitly associated with the main route table.
+// VPC spans across all Availability Zones . But you can create a Subnet in any AZ as you like.
+// Our account  comes with a default VPC that has a default subnet in each Availability Zone.
 
-                     ---------------------------------------------------------------------------------- AWS ---------------
-                    |                                                                                                      |
-                    |     ----------------------------------------------------------------------------- VPC --------       |
-                    |    |                                                                                           |     |
-                    |    |        ------------------------------                 -----------------------------       |     |
-                    |    |       |       -----                  |      ---      |                   -----     |      |     |
-                    | A  |   B   |   C  |  X  |<-------------------> |  M  | <-------------------->|  Y  | D  |      |     |
-                    |    |       |       -----                  |      ---      |                   -----     |      |     |
-                    |    |        ----  DEFAULT SUBNET-1 -------        |        -------DEFAULT SUBNET-2 -----       |     |
-                    |    |   DEFAULT VPC                                |                                            |     |
-                    |     --------------------------------------------- | -------------------------------------------      |
-                    |    REGION                                        ----                                                |
-                     -------------------------------------------------| N  |-----------------------------------------------
-                                                                       ----
-                                                                        |
-                                                          =============================
-                                                                     INTERNET
+Your default VPC includes an internet gateway, and each default subnet is a public subnet.
+Each instance that you launch into a default subnet has a private IPv4 address and a public IPv4 address.
+These instances can communicate with the internet through the internet gateway.
+An internet gateway enables your instances to connect to the internet through the Amazon EC2 network edge.
+The default subnets have a main route table which is connected to INTERNET Gateway
+You can explicitly associate a subnet (default/non-default) with a particular route table.
+Otherwise, the subnet is implicitly associated with the main route table.
 
-            A = REGION                                                                                                   X = INSTANCE -1 -> Has Public & Private IP
-            B = DEFAULT VPC                                         DEFAULT VPC       : 172.31.0.0/16                    Y = INSTANCE -2 -> Has Public & Private IP
-            C = DEFAULT SUBNET -1                                   DEFAULT SUBNET -1 : 172.31.0.0/20                    M = ROUTE TABLE
-            D = DEFAULT SUBNET -2                                   DEFAULT SUBNET -2 : 172.31.16.0/20                   N = INTERNET GATEWAY
+         ---------------------------------------------------------------------------------- AWS ---------------
+        |                                                                                                      |
+        |     ----------------------------------------------------------------------------- VPC --------       |
+        |    |                                                                                           |     |
+        |    |                                                                                           |     |
+        |    |  |<<----------- AZ - 1 ------------------>> ||<<----------- AZ - 2 ------------------>> | |     |
+        |    |                                                                                           |     |
+        |    |        ------------------------------                 -----------------------------       |     |
+        |    |       |       -----                  |      ---      |                   -----     |      |     |
+        | A  |   B   |   C  |  X  |<-------------------> |  M  | <-------------------->|  Y  | D  |      |     |
+        |    |       |       -----                  |      ---      |                   -----     |      |     |
+        |    |        ------ DEFAULT SUBNET-1 ------        |        ------ DEFAULT SUBNET-2 -----       |     |
+        |    |                                              |                                            |     |
+        |    |    DEFAULT VPC                               |                                            |     |
+        |     --------------------------------------------- | -------------------------------------------      |
+        |    REGION                                        ----                                                |
+         -------------------------------------------------| N  |-----------------------------------------------
+                                                           ----
+                                                            |
+                                              =============================
+                                                         INTERNET
 
-            ROUTE TABLE :  DESTINATION         TARGET
-                           -------------------------------------
-                           172.31.0.0/16       Local
-                           0.0.0.0/0           Internet Gateway  --> Non default subnets do not have this entry , we need to specify.
+  A = REGION                                                                                                   X = INSTANCE -1 -> Has Public & Private IP
+  B = DEFAULT VPC                                         DEFAULT VPC       : 172.31.0.0/16                    Y = INSTANCE -2 -> Has Public & Private IP
+  C = DEFAULT SUBNET -1                                   DEFAULT SUBNET -1 : 172.31.0.0/20                    M = INTERNAL ROUTE TABLE
+  D = DEFAULT SUBNET -2                                   DEFAULT SUBNET -2 : 172.31.16.0/20                   N = INTERNET GATEWAY
 
-      *** C and D are in different AVAILABILITY ZONES , 1 and 2 // Not shown due to diagram complexity.
+  *** Subnets C and D are in different AVAILABILITY ZONES AZ-1 & AZ-2.
+
+  ROUTE TABLE :  DESTINATION         TARGET
+                 -------------------------------------
+                 172.31.0.0/16       Local
+                 0.0.0.0/0           Internet Gateway  --> Non default subnets do not have this entry , we need to specify.
+
+
 
 --> By default, each instance that you launch into a nondefault subnet has a private IPv4 address, but no public IPv4 address.
     You need to assign one at launch, or you modify the subnet's public IP address attribute.
@@ -447,50 +472,54 @@ DEFAULT VPC & SUBNET : -> VPC spans across all Availability Zones . But you can 
 NON-DEFAULT VPC & SUBNET : IPV4
 ---------------------------------
 ### Always create VPC using VPC DASHBOARD --> LAUNCH VPC WIZARD and not from MY VPC console.
+### The smallest CIDR block you can specify is /28, and the largest is /16. Preferable in the range of 10.0.0.0/16, or 192.168.0.0/16
+### Each subnet must reside entirely within one Availability Zone and cannot span zones.
 
 --> If a subnet's traffic is routed to an internet gateway, the subnet is known as a public subnet.
-    If you want your instance in a public subnet to communicate with the internet over IPv4, it must have a public IPv4 address or an Elastic IP address (IPv4)
+    If you want your instance in a public subnet to communicate with the internet over IPv4, it must have a public IPv4 address or an Elastic IP address (IPv4).
     If you want your instance in the public subnet to communicate with the internet over IPv6, it must have an IPv6 address.
-    If a subnet doesn't have a route to the internet gateway, the subnet is known as a private subnet.
+
+--> If a subnet doesn't have a route to the internet gateway, the subnet is known as a private subnet.
     If a subnet doesn't have a route to the internet gateway, but has its traffic routed to a virtual private gateway for a Site-to-Site VPN connection, the subnet is known as a VPN-only subnet.
     If you create more than one subnet in a VPC, the CIDR blocks of the subnets cannot overlap.
-    The smallest CIDR block you can specify is /28, and the largest is /16. Preferable in the range of 10.0.0.0/16, or 192.168.0.0/16
     Once created , we can later add extra CIDR blocks (non-overlapping only) AWS --> VPC --> Select VPC --> Actions --> edit CIDR blocks --> add new CIDR
     Similar steps to delete a CIDR as well. (Min 1 CIDR is required)
     We can delete a default VPC and default subnets as well.
 
---> The first four IP addresses and the last IP address in each subnet CIDR block are not available for you touse, and cannot be assigned to an instance.
-    •10.0.0.0: Network address.
-    •10.0.0.1: Reserved by AWS for the VPC router.
-    •10.0.0.2: Reserved by AWS as address of the DNS server
-    •10.0.0.3: Reserved by AWS for future use.•10.0.0.255: Network broadcast address.
-    So for a.b.c.d/n CIDR , the number of hosts available are 2^(32-2) and hosts we can actually use are [ (2^(32-n)) - 5 ]
+--> The first four IP addresses and the last IP address in each subnet CIDR block are not available for you to use, and cannot be assigned to an instance.
+    • 10.0.0.0   : Network address.
+    • 10.0.0.1   : Reserved by AWS for the VPC router.
+    • 10.0.0.2   : Reserved by AWS as address of the DNS server
+    • 10.0.0.3   : Reserved by AWS for future use.
+    • 10.0.0.255 : Directed broadcast address.
+
+    So for a.b.c.d/n CIDR , the number of hosts available are 2^(32-n) and hosts we can actually use are [ (2^(32-n)) - 5 ]
 
 --> You can associate secondary IPv4 CIDR blocks with your VPC.
     When you associate a CIDR block with your VPC, a route is automatically added to your VPC route tables to enable routing within the VPC .
 
---> The VPC that you created by default has two route tables — a main route table that all VPCs have by default, and a custom route table that was created by the wizard.
+--> The VPC that you created has two route tables by default — a main route table that all VPCs have by default, and a custom route table that was created by the wizard.
     The custom route table is associated with your subnet, which means that the routes in that table determine how the traffic for the subnet flows.
     If you add a new subnet to your VPC, it uses the main route table by default.
 
 --> You can enable internet access for an instance launched into a nondefault subnet by attaching an internet gateway to its VPC (if its VPC is not a default VPC)
-    and associating an Elastic IP address with the instance.
+    and associating an Elastic IP address with the instance or providing it a public IP while launching it directly.
 
 --> Say we have a NON-DEFAULT VPC : 10.0.0.0/16 and 2-NON_DEFAULT SUBNETS : 10.0.0.0/24  & 10.0.1.0/24
-    If you attach Elastic IP to one of the non-default subnet and leave other non-default subnet as it is , we then have 2 routing tables ,
+    If you attach Internet Gateway to the non-default subnet and leave other non-default subnet as it is , we then have 2 routing tables ,
     We have a custom route for the one attached to elastic IP's and the other subnet stays for internal communication.
 
-    CUSTOM ROUTE TABLE :  DESTINATION         TARGET                                 MAIN ROUTE TABLE :  DESTINATION         TARGET
+    CUSTOM ROUTE TABLE :    DESTINATION         TARGET                                 MAIN ROUTE TABLE :  DESTINATION         TARGET
                             -------------------------------------                                          -------------------------------------
-                            10.0.0.0/24       Local                                                        10.0.1.0/24       Local
-                            0.0.0.0/0         Internet Gateway
+                            10.0.0.0/24         Local                                                      10.0.1.0/24         Local
+                            0.0.0.0/0           Internet Gateway
 
 --> Public subnet means a subnet that has a route to Internet gateway .
     This does not mean the instances created in it will be able to connect to internet .
     By default the instance does not get an Public IP , so to be able to connect it to internet , we need to assign it an ELASTIC IP .
 
 --> Before you can delete a VPC, you must terminate any instances that are running in the VPC.
-    You can then delete the VPC and its components using the VPC console
+    You can then delete the VPC and its components using the VPC console.
 
 --> when you create a NON-DEFAULT VPC, you will be also needed to  provide the NON-DEFAULT SUBNET details .
     say VPC is 10.0.0.0/16 then SUBNET will be 10.0.0.0/24
@@ -503,7 +532,7 @@ NON-DEFAULT VPC & SUBNET : IPV4
     So now you will have both IPV4 and IPV6 CIDR blocks associated to VPC.
     Then we may or may not assign IPV6 to the subnet .
     So for instances launched in this VPC , we can also assign IPV6 addresses.
-    But we must make sure we configure the route table to allow IPV6 as well
+    But we must make sure we configure the route table to allow traffic to and from IPV6 as well.
 
 --> You can optionally add subnets in a Local Zone.
     It is an AWS infrastructure deployment that places compute, storage, database, and other select services closer to your end users.
@@ -512,7 +541,7 @@ NON-DEFAULT VPC & SUBNET : IPV4
 
 --> Each subnet must reside entirely within one Availability Zone and cannot span zones.
     Availability Zones are distinct locations that are engineered to be isolated from failures in other Availability Zones.
-    By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location
+    By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location.
 
 --> Your resources can communicate over IPv4, or IPv6, or both.
     IPv4 and IPv6 communication are independent of each other.
@@ -532,11 +561,12 @@ And you must adjust your security group rules to allow access over IPv4.
 If you associate an IPv6 CIDR block with your VPC and subnet, your route table must include separate routes for IPv6 traffic.
 The following table shows the custom route table for this scenario if you choose to enable IPv6 communication in your VPC.
 The second entry is the default route that's automatically added for local routing in the VPC over IPv6.
-The fourth entry routes all other IPv6 subnet traffic to the internetgateway.
+The fourth entry routes all other IPv6 subnet traffic to the internet gateway.
+
         Destination                            Target
         ----------------------------------------------
         10.0.0.0/16                            local
-        2001:db8:1234:1a00::/56                local [ Mandatory to put both IPV4 and IPv6 as well ]
+        2001:db8:1234:1a00::/56                local  [ Mandatory to put both IPV4 and IPv6 as well ]
         0.0.0.0/0                              igw-id
         ::/0                                   igw-id
 
@@ -547,13 +577,14 @@ The fourth entry routes all other IPv6 subnet traffic to the internetgateway.
         •  You assign an IPv6 address to a network interface in the same subnet, and attach the network interface to your instance after launch.
 
  --> When you delete a VPC using the VPC console, we also delete the following VPC components for you:
-        •  Subnets    •  Security groups   •  Network ACLs    •  Route tables
+        •  Subnets              •  Security groups     •  Network ACLs                   •  Route tables
         •  Gateway endpoints    •  Internet gateways   •  Egress-only internet gateways  •  DHCP options
- --> Before deleting , we need to make sure we :
-        • Terminate all EC2 instances in that VPCs
-        • VPC peering Connections
-        • Interface endpoints
-        • NAT gateways
+
+ --> Before deleting, we need to make sure we :
+        •  Terminate all EC2 instances in that VPCs
+        •  VPC peering Connections
+        •  Interface endpoints
+        •  NAT gateways
 
 
 DHCP :
@@ -572,7 +603,7 @@ An internet gateway serves two purposes:
 Internet Gateways (IGW) must be created and then attached to a VPC, be added to a route table, and then associated with the relevant subnet(s).
 You cannot have multiple Internet Gateways in a VPC.
 IGW performs NAT between private and public IPv4 addresses.
-IGWs must be detached before they can be deleted.
+IGW must be detached before they can be deleted.
 Can only attach 1 IGW to a VPC at a time.
 To use an internet gateway, attach it to your VPC and specify it as a target in your subnet route table for internet-routable IPv4 or IPv6 traffic.
 An internet gateway performs network address translation (NAT) for instances that have been assigned public IPv4 addresses.
@@ -585,19 +616,19 @@ Conversely, traffic that's destined for the public IPv4 address or Elastic IP ad
 To enable access to or from the Internet for instances in a VPC subnet, you must do the following:
 
     Attach an Internet Gateway to your VPC.
-    Ensure that your subnet’s route table points to the Internet Gateway (see below).
+    Ensure that your subnet’s route table points to the Internet Gateway.
     Ensure that instances in your subnet have a globally unique IP address (public IPv4 address, Elastic IP address, or IPv6 address).
     Ensure that your network access control and security group rules allow the relevant traffic to flow to and from your instance.
 
 Must update subnet route table to point to IGW, either:
 
-    To all destinations, e.g. 0.0.0.0/0 for IPv4 or ::/0for IPv6.
+    To all destinations, e.g. 0.0.0.0/0 for IPv4 or ::/0 for IPv6.
     To specific public IPv4 addresses, e.g. your company’s public endpoints outside of AWS.
 
 
 NETWORK ADDRESS TRANSLATOR (NAT): [Permit internet access to Instances in a private Subnet]
 ----------------------------------
-    HOW NAT WORKS :
+    HOW NAT WORKS : // NAT can be configured to advertise only one address [ ELASTIC IP ] for the entire network to the outside world.
     ---------------
     Network Address Translation (NAT) is designed for IP address conservation.
     It enables private IP networks that use unregistered IP addresses to connect to the Internet.
@@ -605,6 +636,8 @@ NETWORK ADDRESS TRANSLATOR (NAT): [Permit internet access to Instances in a priv
     As part of this capability, NAT can be configured to advertise only one address [ ELASTIC IP ] for the entire network to the outside world.
     This provides additional security by effectively hiding the entire internal network behind that address.
     NAT offers the dual functions of security and address conservation and is typically implemented in remote-access environments.
+
+  [[ Instance in a Private Subnet ]] <<--->>  [[ NAT ]] <<--->> [[ Internet Gateway ]]
 
 To allow an instance in your VPC to initiate outbound connections to the internet but prevent unsolicited inbound connections from the internet,
 you can use a network address translation(NAT) device for IPv4 traffic.
@@ -616,7 +649,7 @@ A Nat Gateway is an AWS managed instance that permits Internet traffic from inst
 NAT INSTANCE vs NAT GATEWAY : https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-comparison.html
 
 INTERNET GATEWAY vs NAT GATEWAY : say you have two subnets and you launch instances in both the subnets.
-    Now if you attach IGW in of the subnets, that subnet becomes public and now outside world can connect to that subnet.
+    Now if you attach IGW in one of the subnets, that subnet becomes public and now outside world can connect to that subnet.
     Means your instance is accessible from outside and your instance can connect to the outside world.
 
     But if you have a requirement that outside world will not able to connect to your instance, then that time you have to use NAT in your subnet and your subnet becomes private subnet.
@@ -627,10 +660,7 @@ INTERNET GATEWAY vs NAT GATEWAY : say you have two subnets and you launch instan
 ### To allow an instance in your VPC to initiate outbound connections to the internet but prevent unsolicited inbound connections from the internet.
 ### It has an ELASTIC IP associated with it that can be used by any number of Private IP's.
 
-Used for instances staying in private subnet but wants to connect to internet and also does not want internet to access them .
-A NAT gateway has its own Elastic IPv4 address.
 Instances in the private subnet can send requests to the Internet through the NAT gateway over IPv4 (for example, for software updates)
-
 Can be used if you have a public and private subnets in your VPC.
 Example if you want to run a public-facing web application, while maintaining back-end servers that aren't publicly accessible.
 The instances in the public subnet can send outbound traffic directly to the Internet, whereas the instances in the private subnet can't.
