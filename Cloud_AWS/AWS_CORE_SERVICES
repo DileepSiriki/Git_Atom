@@ -2847,3 +2847,122 @@ The Well-Architected Framework identifies a set of general design principles to 
   --> IMPROVE THROUGH GAME DAYS :
       Test how your architecture and processes perform by regularly scheduling game days to simulate events in production.
       This will help you understand where improvements can be made and can help develop organizational experience in dealing with events.
+
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+USEFUL POINTS FOR CERTIFICATION QUESTIONS :
+################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+To ensure that the application has the highest level of availability :
+-> Deploy across multiple regions and availability zones , not across availability zones & Subnets.
+In addition to replicating applications and data across multiple data centers in the same Region using Availability Zones, you can also choose to increase redundancy and fault tolerance further by replicating data between geographic Regions (especially if you are serving customers from all over the world).
+You can do so using both private, high speed networking and public internet connections to provide an additional layer of business continuity, or to provide low latency access across the globe.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+SECURITY is a shared resonsibility.
+Most (not all) data and network security are taken care of for you.
+When we talk about the data/network security, AWS has a “shared responsibility model” where AWS and the customer share the responsibility of securing them.
+For example, the customer is responsible for creating rules to secure their network traffic using the security groups and is also responsible for protecting data with encryption.
+
+Gaining complete control over the physical infrastructure" is incorrect.
+The Physical infrastructure is a responsibility of AWS, not the customer.
+
+The principle of least privilege is one of the most important security practices and it means granting users the required permissions to perform the tasks entrusted to them and nothing more.
+The security administrator determines what tasks users need to perform and then attaches the policies that allow them to perform only those tasks. You should start with a minimum set of permissions and grant additional permissions when necessary. Doing so is more secure than starting with permissions that are too lenient and then trying to tighten them down.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+AWS Personal Health Dashboard provides alerts and remediation guidance when AWS is experiencing events that may impact you.
+While the Service Health Dashboard displays the general status of AWS services, Personal Health Dashboard gives you a personalized view into the performance and availability of the AWS services underlying your AWS resources.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+Elastic Load Balancers do not scale resources.
+Elastic Load Balancers distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.
+
+Scaling resources is a function of AWS AUTO SCALING.
+AWS Auto Scaling is the feature that automates the process of adding/removing server capacity (based on demand).
+Autoscaling allows you to reduce your costs by automatically turning off resources that aren’t in use.
+On the other hand, Autoscaling ensures that your application runs effectively by provisioning more server capacity if required.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+What does AWS provide to deploy popular technologies - such as IBM MQ - on AWS with the least amount of effort and time?
+
+AWS Quick Start Reference Deployments outline the architectures for popular enterprise solutions on AWS and provide AWS CloudFormation templates to automate their deployment.
+Each Quick Start launches, configures, and runs the AWS compute, network, storage, and other services required to deploy a specific workload on AWS, using AWS best practices for security and availability.
+Quick Starts are built by AWS solutions architects and partners to help you deploy popular technologies on AWS, based on AWS best practices.
+These accelerators reduce hundreds of manual installation and configuration procedures into just a few steps, so you can build your production environment quickly and start using it immediately.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+Your customers complain that sometimes they can’t reach your application. Which AWS service allows you to monitor the performance of your EC2 instances to assist in troubleshooting these issues?
+ANS : CLOUD WATCH
+Amazon CloudWatch is a service that monitors AWS cloud resources and the applications you run on AWS.
+You can use Amazon CloudWatch to collect and track metrics, collect and monitor log files, set alarms, and automatically react to changes in your AWS resources.
+Amazon CloudWatch can monitor AWS resources such as Amazon EC2 instances, Amazon DynamoDB tables, and Amazon RDS DB instances, as well as custom metrics generated by your applications and services, and any log files your applications generate.
+You can use CloudWatch to detect anomalous behavior in your environments, take automated actions, troubleshoot issues, and discover insights to keep your applications running smoothly.
+
+AWS CloudTrail is an AWS service that can be used to monitor all user interactions with the AWS environment.
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+MARKETPLACE :
+AWS Marketplace is a curated digital catalog that makes it easy for customers to find, buy, deploy, and manage third-party software and services that customers need to build solutions and run their businesses.
+AWS Marketplace includes thousands of software listings from popular categories such as security, networking, storage, machine learning, business intelligence, database, and DevOps.
+AWS Marketplace also simplifies software licensing and procurement with flexible pricing options and multiple deployment methods.
+Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
+Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source, AWS.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+NOT ALL AWS Services are Global:
+AWS services are either Global, Regional or specific to an Availability Zone.
+Among all the services that AWS offers, only a few of them are considered global services.
+Examples of AWS global services include: Amazon CloudFront, AWS Identity and Access Management and Amazon Route 53.
+
+The only way to reduce latency for the US users is to provision new Amazon EC2 instances in a Region closer to or in the US,
+OR by using Amazon CloudFront to cache copies of the content in edge locations close to the US users.
+In both cases, user requests will travel a shorter distance over the network, and the performance will improve.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+IN MEMEMORY vs ELASTICACHE :
+--------------------------------
+The most frequently accessed data be stored in elasticache so that the application’s response time is optimal.
+The primary purpose of an in-memory data store is to provide ultrafast (submillisecond latency) and inexpensive access to copies of data.
+  Querying a database is always slower and more expensive than locating a copy of that data in a cache.
+  Some database queries are especially expensive to perform.
+  An example is queries that involve joins across multiple tables or queries with intensive calculations.
+  By caching (storing) such query results, you pay the price of the query only once.
+  Then you can quickly retrieve the data multiple times without having to re-execute the query.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+Included as part of the Enterprise Support plan, the Support Concierge Team are AWS billing and account experts that specialize in working with enterprise accounts. The Concierge team will quickly and efficiently assist you with your billing and account inquiries, and work with you to help implement billing and account best practices so that you can focus on running your business.
+Support Concierge service includes:
+** 24 x7 access to AWS billing and account inquires.
+** Guidance and best practices for billing allocation, reporting, consolidation of accounts, and root-level account security.
+** Access to Enterprise account specialists for payment inquiries, training on specific cost reporting, assistance with service limits, and facilitating bulk purchases.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+ IAAS - PAAS - SAAS are the three basic cloud computing models and they come under AWS.
+ NAAS - NETWORK AS A SERVICE is a part of IAAS and is not the basic one.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+--> NETWORK BASED SERVICES : Private Network Connectors to AWS            - AWS DIRECT CONNECT
+                             Edge Locations for S3 Enabled applications   - AMAZON S3 TRANSFER ACCELERATION
+
+--> ONLINE  DATA TRANSFER :  Load stream Data into S3                     - AMAZON KINESIS
+                             Online transfer of active data               - AWS DATA SYNC
+                             SFTP transfer to S3                          - AWS TRANSFER FOR SFTP
+                             Database Transfer                            - AWS DATABSE MIGRATION
+                             VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
+
+
+--> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball / Snow Mobile ]
+
+--> HYBRID DATA STORAGE   :  Access AWS storage from On-premisis          - AWS STORAGE GATEWAY

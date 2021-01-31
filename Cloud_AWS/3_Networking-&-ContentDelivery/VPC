@@ -3,20 +3,20 @@
 NETWORKING  TUTORIAL : --> IPv6 addresses are globally unique, and are therefore public by default. There is no concept of private IPV6.
 ============================
 ####VIEW NETWORKING TUTORIALS BY RAVINDRA BABU RAVULA :: https://youtu.be/UXMIxCYZu8o
-IANA -> INTERNET ASSIGNED NUMBER AUTHORITY. --> Responsible for IP address allocations.
-Classless - IPV4 , IPV6
-Classfull - CIDR
+IANA -> INTERNET ASSIGNED NUMBER AUTHORITY  --> Responsible for IP address allocations.
+Classful  - IPV4 , IPV6
+Classless - CIDR
 
 MAC vs IP : MEDIA-ACCESS-CONTROL ADDRESS  // INTERNET PROTOCOL ADDRESS
 --------------
 Both MAC Address and IP Address are used to uniquely identify a machine on the internet.
---> MAC address is provided by the chip
+--> MAC address is provided by the chip manufacturer.
     IP Address is provided by the Internet Service Provider.
---> MAC identifies the device participating in a network
-    IP identifies the network / connection participating
+--> MAC identifies the device participating in a network.
+    IP identifies the network / connection participating in a network.
 --> MAC is a 48-bit addresses
     IP is a 32 bit address ipv4 and 128 bits for IPV6
---> D8-D3-85-EB-12-E3 -> D8-D3-85 [ address of manufacturer ] EB-12-E3 [ system address ]
+--> D8-D3-85-EB-12-E3 ---> D8-D3-85 [ address of manufacturer ] EB-12-E3 [ system address ]
     10.1.2.3 , ::/0
 
 
@@ -33,44 +33,46 @@ The saved data in the connections table continuously updates as connections form
 If a stateful firewall no longer sees packets passing over an established connection, after a while, that connection will time out and drop from the established connections state table.
 Additionally, if communications restarted after the connection dropped from the table, the connection would need to go through the setup process over again.
 
+WAY OF WORKING OF WEB REQUESTS :
+---------------------------------
 
     Network-1                                           Network-2
----------------------                                 --------------------
+ -------------------                                   ------------------
 |   HOST-1          |                                 |  HOST-2          |
 |                   |       www.google.com            |                  |
 |                   | ----------------------------> a | ---> b --> c [p] |  [ P = Process / port ]
----------------------                                 --------------------
+ -------------------                                   ------------------
           1                                                     2
-1 = Your Network say AIRTEL                        2 = Say a Network that hosts GOOGLE in Usage
-    It has your HOST                                   It has a Host that serves google pages
+Network-1 = Your Network say AIRTEL                   Network-2 = Say a Network that hosts GOOGLE in Usage
+            It has your HOST-1                                    It has a HOST-2 that serves google pages
 
 When you type in www.google.com , it has to first :
   a --> Go to the destination network (using Network-Id in IP)
-  b --> from destination , it has to identify the host that serves webpages (using Host-Id in IP)
-  c --> from the host it has to identify the process to request for pages transfer (using Port number)
+  b --> From destination , it has to identify the host that serves webpages (using Host-Id in IP)
+  c --> From the host it has to identify the process to request for pages transfer (using Port number)
 
 So we need to somehow translate the domain name into IP address.
 IP ADDRESS = NETWORK-Id + HOST-Id
-             Network-Id is used to reach Network and then Host-Id is used to reach the destination host .
+             Network-Id is used to reach Network and then Host-Id is used to reach the destination host in that particular network.
 PORT       = This specifies the process running the desired web pages .
              Ex : for a webservice on HTTP -> Default is PORT-80 (we need not specify port for default ports)
                   ftp - 21 etc;
 
 For this Address translation, ISP (Internet Service Provider) will use a DNS (Domain Name Server).
-This DNS info is cached for not go to DNS all the time . That's why the first time it is rum , pages take time but from next time they are quick.
+This DNS info is cached for not go to DNS all the time . That's why the first time it is rum , pages take time but from next time they are quick due to the caching techniques.
 
 NUMBER SYSTEM:
 ---------------
 If the base of a number system is " n " :
 --> Then we have " n " symbols in that number system and they all start from 0 and then 1 2 3 4 5 ...... (n-1)
 
-UNARY NUMBER SYSTEM   :   0                   [ 1 = 0 && 2 = 00 && 3 = 000           ]
-BINARY NUMBER SYSTEM  :   0 1                 [ Computer language                    ]      base = 2
-OCTAL NUMBER SYSTEM   :   0 1 2 3 4 5 6 7                                                   base = 8
-DECIMAL NUMBER SYSTEM :   0 1 2 3 4 5 6 7 8 9 [ Everyday used                        ]      base = 10
-HEXA NUMBER SYSTEM    :   0 1 .... 9 A B .. f [ Since only 9 numbers , we use A to F ]      base = 16
-                                                --> A = 11, B = 12 .... F = 15
+UNARY NUMBER SYSTEM   :   0                                [ 1 = 0 && 2 = 00 && 3 = 000           ]      base = 1
+BINARY NUMBER SYSTEM  :   0 1                              [ Computer language                    ]      base = 2
+OCTAL NUMBER SYSTEM   :   0 1 2 3 4 5 6 7                                                                base = 8
+DECIMAL NUMBER SYSTEM :   0 1 2 3 4 5 6 7 8 9              [ Everyday used                        ]      base = 10
+HEXA NUMBER SYSTEM    :   0 1 2 3 4 5 6 7 8 9 A B C D E F  [ Since only 9 numbers , we use A to F ]      base = 16
 
+2^0 = 1
 2^1 = 2
 2^2 = 4
 .
@@ -88,7 +90,14 @@ HEXA NUMBER SYSTEM    :   0 1 .... 9 A B .. f [ Since only 9 numbers , we use A 
 So for a "n" bit number , we have 2^n numbers called the ADDRESS SPACE .
 So if we chose n bits as N/W ID             --> 2^n
 The other n-k bits will be for Host Id part --> 2^(n-k)
-IPV4 = 32 bits --> 4 blocks*8bits [ block-1 : block-2 : block-3 : block-4 ]
+
+IPV4 = 32 bits --> 4 blocks*8bits
+we have 8 octets of 4 bits each OR 4 blocks or 8 bits each
+
+[      Block-1     .       Block-2     .       Block-3     .      Block-4      ]
+[ Octet-1  Octet-2 .  Octet-3  Octet-4 .  Octet-5  Octet-6 .  Octet-7  Octet-8 ]
+[ - - - -  - - - - .  - - - -  - - - - .  - - - -  - - - - .  - - - -  - - - - ]
+
 
 CONVERT BINARY TO DECIMAL : ( n^0 = 1 )
 -----------------------------
@@ -98,22 +107,24 @@ CONVERT BINARY TO DECIMAL : ( n^0 = 1 )
 1000 0000 = 1*2^7 + 0*2^6 + 0*2^5 + 0*2^4 + 0*2^3 + 0*2^2 + 0*2^1 + 0*2^0 = 128
 1111 1111 = 1*2^7 + 1*2^6 + 1*2^5 + 1*2^4 + 1*2^3 + 1*2^2 + 1*2^1 + 1*2^0 = 255
 
-BINARY FORMAT :
+BINARY FORMAT : [ 0000 0000 . 0000 0000 . 0000 0000 . 0000 0000]
 -----------------
-Out of 32 bits , if the binary addresses starts with : [ 0000 0000 . 0000 0000 . 0000 0000 . 0000 0000]
-we have 8 octets of 4 bits each OR 4 blocks or 8 bits each . We consider the first OCTET for classification :
-
-    --> 0     - class A  -- Since 1 bit  is  fixed out of 32 , we have (2^31) IP-Addresses -- [ 1   to 126 ]
-    --> 10    - class B  -- Since 2 bits are fixed out of 32 , we have (2^30) IP-Addresses -- [ 128 to 191 ]
-    --> 110   - class c  -- Since 3 bits are fixed out of 32 , we have (2^29) IP-Addresses -- [ 192 to 223 ]
+we have 8 octets of 4 bits each OR 4 blocks or 8 bits each . We consider the FIRST OCTET for classification.
+Out of 32 bits , if the binary addresses starts with :
+                                                                                                                         BLOCKED ADDRESSES
+    --> 0     - class A  -- Since 1 bit  is  fixed out of 32 , we have (2^31) IP-Addresses -- [ 0   to 127 ] // 0.0.0.0/8 , 10.0.0.0/8 & 127.0.0.0/8
+    --> 10    - class B  -- Since 2 bits are fixed out of 32 , we have (2^30) IP-Addresses -- [ 128 to 191 ] // 172.16.0.0/12
+    --> 110   - class c  -- Since 3 bits are fixed out of 32 , we have (2^29) IP-Addresses -- [ 192 to 223 ] // 192.x.x.x
     --> 1110  - class D  -- Since 4 bits are fixed out of 32 , we have (2^28) IP-Addresses -- [ 224 to 231 ]
-    --> 1111  - class E  -- Since 4 bits are fixed out of 32 , we have (2^28) IP-Addresses -- [ 225 to 255 ]
+    --> 1111  - class E  -- Since 4 bits are fixed out of 32 , we have (2^28) IP-Addresses -- [ 225 to 255 ] // 255.255.255.255/32 as limited broadcast address.
 
 DECIMAL FORMAT :
 ------------------
 But if an IP is given in DOTTED DECIMAL NUMBER SYSTEM , consider the first OCTET [ 17.34.56.4 ] , consider 17
 and convert 17 to binary and classify based on first bits.
 
+CLASSIFICATION OF IPV4 :
+-------------------------
 CLASS A -->         -------------------------------------------------
                    |  8-bits |           24-bits                     |  --> 8-bits for N/W and 24-bits for HOST
                     -------------------------------------------------
@@ -141,7 +152,7 @@ CLASS B -->         -------------------------------------------------
 
     So we have 2^16  IP addresses for each of the 2^14 Networks. --> [ 128 to 191 ]
     So if we have an IP ADDRESS that starts with 128 - 191 , it is belonging to CLASS-B.
-    Companies such as Pentagon and SBI and IRCTC buy them .
+    Companies such as SBI and IRCTC buy them .
 
 
 CLASS C -->         -------------------------------------------------
@@ -168,16 +179,16 @@ NOTE : Even the first and last host IP's are reserved in every class . --> UNICA
        So for class A --> 16 million - 2
               class C --> 256 - 2
 
-       LIMITED BROADCAST ADDRESS  --> 255.255.255.255 --> used for limited broad casting , so not assigned to any host .
        NETWORK ID                 --> X.0.0.0         --> represents the whole Network X
        DIRECTED BROADCAST ADDRESS --> X.255.255.255   --> represent all hosts in network X
+       LIMITED  BROADCAST ADDRESS --> 255.255.255.255 --> used for limited broad casting , so not assigned to any host .
 
        Consider 11.0.0.0 , 25.0.0.0 , 221.0.0.0
            --> These are not used as IP addresses but used as NETWORK ID's to represent a NETWORK .
            --> So the first IP address is always reserved (X.0.0.0)
            --> 1st IP is used to represent the whole Network .
 
-RESERVED PRIVATE ADDRESSES :
+RESERVED PRIVATE ADDRESSES : https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
 -----------------------------
 10.0.0.0    - 10.255.255.255
 176.16.0.0  - 172.31.255.255
@@ -186,40 +197,46 @@ RESERVED PRIVATE ADDRESSES :
 CASTING :
 ------------
 UNI casting    - one host to one host    --   [ DATA - SOURCE_IP - DESTINATION_IP ]  <--> [ data - 11.1.2.3 - 12.1.2.3 ]
-                 MAC address is used for unicasting similar to the static private address.
+                 MAC (Media Access Control Address) address is used for unicasting similar to the static private address.
 
 BROAD casting  - one host to many hosts
 
                  LIMITED  -> sending messages from one host to all hosts in the same network
                              Suppose we want to send a message from 11.1.2.3 to all hosts in same network 11 -> 11.x.x.x
                              since that for a class A , 2^16 hosts are there , it is practically not possible to send 2^16 data packets .
-                             so the alternative is to put all 1's in destination Ip part . --> [255.255.255.255]
+                             so the alternative is to put all 1's in destination IP part . --> [255.255.255.255]
                              [ data - 11.1.2.3 - 255.255.255.255 ]
                              So When a Network sees the destination IP as 255.255.255.255 , instead of routing it out if its network, it sends it inside to all hosts again.
 
                  DIRECTED -> sending messages from one host to all hosts in a different network
                              Suppose we want to send a message from 11.1.2.3 to all hosts in different network 12 -> 12.x.x.x
-                             So we put all 1's in the last 3 octets and 1st octet is the N/W Id. --> [X.255.255.255]
+                             We need to put all 1's in the host Id part . Since for above example we consider a class A Address.
+                             So we put all 1's in the last 3 octets (Host Id part) and 1st octet is the N/W Id. --> [X.255.255.255]
                              [ data - 11.1.2.3 - 20.255.255.255 ]
 
 EXAMPLES :
 ------------
+STEP - 1  : Find if the address is valid or not, mainly if all the Blocks are a values between 0 to 255 .
+STEP - 2  : Find the class the address belongs to, based on the value in the 1st Block.
+STEP - 3  : Split the Address into Network part and Host Id part based on its class.
+STEP - 3  : Find the Network Id, Limited Broad Cast Address and Directed Broadcast Address.
+
 1.2.3.4            --> since starts with 1 , it is a CLASS A  -- 1st octet N/W id , next 3octets HOST Id.
-                       so split as [ 1  -  2.3.4 ]
+                       so split as [ 1.  -  2.3.4 ]
                        N/W id is the network the IP belongs = put all 0's in Host ID part
                        N/W ID = 1.0.0.0
                        DBA    = 1.255.255.255
                        LBA    = 255.255.255.255
 
 150.3.150.150      --> since starts with 150 , it is a CLASS B -- First 2 octets N/W id , next 2 octets HOST Id.
-                       so split as [ 150.3  - 150.150 ]
+                       so split as [ 150.3.  -  150.150 ]
                        N/W id = the network the IP belongs = put all 0's in Host ID part
                        N/W ID = 150.3.0.0
                        DBA    = 150.3.255.255
                        LBA    = 255.255.255.255
 
 220.15.1.10        --> since starts with 220 , it is a CLASS c -- First 3 octets N/W id , last octet is HOST Id.
-                       so split as [ 220.15.1 - 10 ]
+                       so split as [ 220.15.1. - 10 ]
                        N/W id = the network the IP belongs = put all 0's in Host ID part
                        N/W ID = 220.15.1.0
                        DBA    = 220.15.1.255
@@ -239,7 +256,7 @@ But now there is an extra overhead of searching for the subnet in  a network .
 Also every subnet wastes an extra of 2 IP addresses for DBA and N/W ID .
 
 Consider a N/W : 200.1.2.0 --> since its class C , we use the last 8 bits as Host ID , hence we use these 8 bits for subnetting as well.
-                           --> 200.1.2.X --> 200.1.2._ _ _ _ _ _ _ _
+                           --> 200.1.2.X i.e. 200.1.2._ _ _ _ _ _ _ _
                            --> If we want 2 subnets , we chose the 1st bit , if we want 4 subnets , we chose the 1st 2 bits.
                            --> Say we want to create 2 subnets A and B :
                            --> 200.1.2.0 _ _ _ _ _ _ _ _  and 200.1.2.1 _ _ _ _ _ _ _ _ (we chose the 1st bit of the last octant and gave it 0 and 1 respectively)
@@ -552,6 +569,11 @@ An internet gateway serves two purposes:
   --> To provide a target in your VPC route tables for internet-routable traffic, and
   --> To perform network address translation (NAT) for instances that have been assigned public IPv4 addresses.
 
+Internet Gateways (IGW) must be created and then attached to a VPC, be added to a route table, and then associated with the relevant subnet(s).
+You cannot have multiple Internet Gateways in a VPC.
+IGW performs NAT between private and public IPv4 addresses.
+IGWs must be detached before they can be deleted.
+Can only attach 1 IGW to a VPC at a time.
 To use an internet gateway, attach it to your VPC and specify it as a target in your subnet route table for internet-routable IPv4 or IPv6 traffic.
 An internet gateway performs network address translation (NAT) for instances that have been assigned public IPv4 addresses.
 
@@ -559,6 +581,18 @@ To enable communication over the internet for IPv4, your instance must have a pu
 Your instance is only aware of the private (internal) IP address space defined within the VPC and subnet.
 The internet gateway logically provides the one-to-one NAT on behalf of your instance, so that when traffic leaves your VPC subnet and goes to the internet, the reply address field is set to the public IPv4 address or Elastic IP address of your instance, and not its private IP address.
 Conversely, traffic that's destined for the public IPv4 address or Elastic IP address of your instance has its destination address translated into the instance's private IPv4 address before the traffic is delivered to the VPC.
+
+To enable access to or from the Internet for instances in a VPC subnet, you must do the following:
+
+    Attach an Internet Gateway to your VPC.
+    Ensure that your subnet’s route table points to the Internet Gateway (see below).
+    Ensure that instances in your subnet have a globally unique IP address (public IPv4 address, Elastic IP address, or IPv6 address).
+    Ensure that your network access control and security group rules allow the relevant traffic to flow to and from your instance.
+
+Must update subnet route table to point to IGW, either:
+
+    To all destinations, e.g. 0.0.0.0/0 for IPv4 or ::/0for IPv6.
+    To specific public IPv4 addresses, e.g. your company’s public endpoints outside of AWS.
 
 
 NETWORK ADDRESS TRANSLATOR (NAT): [Permit internet access to Instances in a private Subnet]
@@ -620,6 +654,16 @@ It prevents the internet from initiating an IPv6 connection with your instances.
 
 An egress-only internet gateway is stateful: it forwards traffic from the instances in the subnet to the internet or other AWS services, and then sends the response back to the instances.
 AWS --> VPC --> Egress only Gateways.
+
+Egress-only Internet Gateway:
+
+    Provides outbound Internet access for IPv6 addressed instances.
+    Prevents inbound access to those IPv6 instances.
+    IPv6 addresses are globally unique and are therefore public by default.
+    Stateful – forwards traffic from instance to Internet and then sends back the response.
+    Must create a custom route for ::/0 to the Egress-Only Internet Gateway.
+    Use Egress-Only Internet Gateway instead of NAT for IPv6.
+
 
 SECURITY GROUP :
 --------------------
