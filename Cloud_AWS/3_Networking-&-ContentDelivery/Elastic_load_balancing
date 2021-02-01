@@ -1,6 +1,6 @@
 ELASTIC LOAD BALANCING : AWS -> EC2 -> Elastic load balancers .
 ----------------------------
-It automatically distributes your incoming traffic across multiple targets, such asEC2 instances, containers, and IP addresses, in one or more Availability Zones.
+It automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.
 It monitors the health of its registered targets, and routes traffic only to the healthy targets.
 Elastic Load Balancing scales your load balancer as your incoming traffic changes over time.
 It can automatically scale to the vast majority of workloads.
@@ -36,8 +36,8 @@ WAY OF WORKING :
 -> It is configured with a protocol and port number for connections from clients to the load balancer.
 -> Likewise, it is configured with a protocol and port number for connections from the load balancer to the targets.
 
-->When you enable an Availability Zone for your load balancer, Elastic Load Balancing creates a load balancer node in the Availability Zone.
-  If you register targets in an Availability Zone but do not enable the Availability Zone, these registered targets do not receive traffic.
+-> When you enable an Availability Zone for your load balancer, Elastic Load Balancing creates a load balancer node in the Availability Zone.
+   If you register targets in an Availability Zone but do not enable the Availability Zone, these registered targets do not receive traffic.
 
 -> If you enable multiple availability zones and If one Availability Zone becomes unavailable or has no healthy targets, the load balancer can route traffic to the healthy targets in another Availability Zone.
    CROSS ZONE LOAD BALANCING needs to be enabled for this feature .

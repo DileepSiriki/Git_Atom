@@ -734,7 +734,7 @@ RECIEVER ACCEPTANCE :
     -> AWS -> vpc -> peering Connections -> pending Acceptance ->Accept
 
 
-SECURITY IN VPC : [ SECURITY GROUPS & N/W-ACL ]
+SECURITY IN VPC : [ SECURITY GROUPS & N/W-ACL ] // Security groups for INSTANCES while ACL's for SUBNETS.
 ------------------------------------------------
 AWS provides two features that you can use to increase security in your VPC: security groups and network ACLs.
 Security groups control inbound and outbound traffic for your instances, and network ACLs control inbound and outbound traffic for your subnets.
@@ -748,10 +748,6 @@ In most cases, security groups can meet your needs; however, you can also use ne
       When you create a security group, it has a single outbound rule that allows all traffic to leave the instance.
       You must modify the rules to enable inbound traffic and restrict the outbound traffic as needed .
       If there are IPV6 instances , we need to add IPV6 addresses and ranges as well .
-
-      Your VPC automatically comes with a default security group.
-      If you don't specify a different security group when you launch the instance, we associate the default security group with your instance.
-
 
             INBOUND :
             ---------
@@ -779,7 +775,7 @@ In most cases, security groups can meet your needs; however, you can also use ne
             ---------
             SOURCE                       PROTOCOL  PORTS  COMMENTS
             ------------------------------------------------------------------------------
-            0.0.0.0/0                    ALL       ALL     Default rule to allowall outbound access toany IPv4 address.
+            0.0.0.0/0                    ALL       ALL     Default rule to allow all outbound access to any IPv4 address.
             ::/0 [for IPV6]
 
 
@@ -808,7 +804,7 @@ VPC FLOW LOGS :
 ------------------
 VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC.
 Flow log data can be published to Amazon Cloud Watch Logs or AmazonS3.
-After you've created a flow log, you can retrieve and view its data in the chosen destination
+After you've created a flow log, you can retrieve and view its data in the chosen destination.
 You can create a flow log for a VPC, a subnet, or a network interface.
 If you create a flow log for a subnet or VPC, each network interface in that subnet or VPC is monitored.
 To create a flow log, you specify:
@@ -823,21 +819,42 @@ An elastic network interface  is a virtual network interface that can include th
   •  one or more secondary private IPv4 addresses
   •  one Elastic IP address per private IPv4 address
   •  one public IPv4 address, which can be auto-assigned to the network interface for eth0 when you launch an instance
-  •  one or more IPv6 addresses•  one or more security groups
+  •  one or more IPv6 addresses
+  •  one or more security groups
   •  a MAC address
-  •  a source/destination check flag•  a description
+  •  a source/destination check flag
+
 You can create a network interface, attach it to an instance, detach it from an instance, and attach it to another instance.
 A network interface's attributes follow it as it is attached or detached from an instance and reattached to another instance.
 When you move a network interface from one instance to another, network traffic is redirected to the new instance.
 Each instance in your VPC has a default network interface (the primary network interface) that is assigned a private IPv4 address from the IPv4 address range of your VPC.
 You cannot detach a primary network interface from an instance. You can create and attach an additional network interface to any instance in your VPC.
 
-ELASTIC IP's : -> Add more data. ENI vs EIP **
+ELASTIC IP's :
 ----------------
 Elastic IP of a server A can be attached to Server B and requests will now go from Server A to Server B.
-We can connect multiple Public Ip's to a server by attaching multiple Elastic Network Interfaces to it .
+We can connect multiple Public IP's to a server by attaching multiple Elastic Network Interfaces to it .
 Useful if we want to run multiple apps on the same port or if you want to host multiple websites using fixed public IP.
 Now a server can serve 2 websites because it has 2 public IP's . It serves website based on the IP present in the request packet.
+
+It can be useful to assign multiple IP addresses to an instance in your VPC to do the following:
+--> Host multiple websites on a single server by using multiple SSL certificates on a single server and associating each certificate with a specific IP address.
+--> Operate network appliances, such as firewalls or load balancers, that have multiple IP addresses for each network interface.
+--> Redirect internal traffic to a standby instance in case your instance fails, by reassigning the secondary IP address to the standby instance.
+
+The following list explains how multiple IP addresses work with Elastic IP addresses (IPv4 only):
+--> Each private IPv4 address can be associated with a single Elastic IP address, and vice versa.
+--> When a secondary private IPv4 address is reassigned to another interface, the secondary private IPv4 address retains its association with an Elastic IP address.
+--> When a secondary private IPv4 address is unassigned from an interface, an associated Elastic IP address is automatically disassociated from the secondary private IPv4 address.
+
+
+              | Primary-eth0  - N/W interface - 1 - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] . . . , Public IPV4 , IPV6-1 , IPV6-2... , Security Group-1 , Security Group-2... ,MAC address <===> Attached to a Network card
+              | Secondary ENI - N/W interface - 2 - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] . . . , Public IPV4 , IPV6-1 , IPV6-2... , Security Group-1 , Security Group-2... ,MAC address <===> Attached to a Network card
+  INSTANCE -->|     .
+              |     .
+              | Secondary ENI - N/W interface - n - [ Primary private IPV4 - Elastic IP ] , [ Secondary private IPV4 - Elastic IP ] . . . , Public IPV4 , IPV6-1 , IPV6-2... , Security Group-1 , Security Group-2... ,MAC address <===> Attached to a Network card
+
+        ****Scenario explained in Reference pic , Multiple-network_interface available at cloud_AWS/0_Reference_pics.
 
 ROUTE TABLES :
 -----------------
@@ -857,11 +874,14 @@ ROUTE TABLES :
 
 
 VPC ENDPOINT : [ An endpoint is a URL that is the entry point for a web service ]
+// https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-overview.html
 ----------------
 A virtual device that enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by AWS Private Link.
 It does not require an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
 Instances in your VPC do not require public IP addresses to communicate with resources in the service.
 Traffic between your VPC and the other service does not leave the Amazon network.
+
+Endpoint service : Your own application or service in your VPC. Other AWS principals can create an endpoint from their VPC to your endpoint service.
 
 VPC -> Endpoints -> create an end point -> service category -> service names
 In service names , in the TYPE field, we have interface and gateway endpoint selections .
@@ -901,7 +921,53 @@ we have gateway only for S3 and DYNAMO DB. [ check the TYPE filed column ]
         These endpoints will add an entry to your route table you selected and route the traffic to the supported services through Amazon’s private network.
         gateway endpoints and Gateway Load Balancer endpoints serve as a target for a route in your route table for traffic destined for the service.
 
-AWS VPN CONNECTIONS :
+
+DIRECT CONNECT : // Dedicated & Hosted
+----------------
+AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard Ethernet fibre-optic cable.
+One end of the cable is connected to your router, the other to an AWS Direct Connect router.
+With this connection, you can create virtual interfaces directly to public AWS services (for example, to Amazon S3) or to Amazon VPC, bypassing internet service providers in your network path.
+An AWS Direct Connect location provides access to AWS in the Region with which it is associated.
+You can use a single connection in a public Region or AWS GovCloud (US) to access public AWS services in all other public Regions.
+
+The following are the key components that you use for AWS Direct Connect:
+    Connections        :  Create a connection in an AWS Direct Connect location to establish a network connection from your premises to an AWS Region.
+    Virtual interfaces :  Create a virtual interface to enable access to AWS services.
+                          A public virtual interface enables access to public services, such as Amazon S3.
+                          A private virtual interface enables access to your VPC.
+
+A Direct Connect gateway is a globally available resource. You can create the Direct Connect gateway in any Region and access it from all other Regions.
+AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable.
+One end of the cable is connected to your router, the other to an AWS Direct Connect router.
+With this connection in place, you can create virtual interfaces directly to the AWS cloud and Amazon Virtual Private Cloud, bypassing Internet service providers in your network path.
+AWS Direct Connect has two billing elements: port hours and outbound data transfer.
+Port hour pricing is determined by capacity and connection type (dedicated connection or hosted connection).
+
+You can therefore use a single AWS Direct Connect connection to build multi-Region services.
+This connection an be configured to access a VPC in your account in any other public Region
+Accessing public services in a remote region :
+--> To access public resources in a remote Region, you must set up a public virtual interface and establish a Border Gateway Protocol (BGP) session.
+Accessing VPC's in a remote region :
+--> You can create a Direct Connect gateway in any public Region. Use it to connect your AWS Direct Connect connection over a private virtual interface to VPCs in your account that are located in different Regionsor to a transit gateway.
+
+There are two types of connections:
+• Dedicated Connection: A physical Ethernet connection associated with a single customer. Customers can request a dedicated connection through the AWS Direct Connect console, the CLI, or the API.
+    Speeds :  1Gbps and 10Gbps
+• Hosted Connection: A physical Ethernet connection that an AWS Direct Connect Partner provisions on behalf of a customer. Customers request a hosted connection by contacting a partner in the AWSDirect Connect Partner Program, who provisions the connection.
+    Speeds :  50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps,500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps.
+
+You must create one of the following virtual interfaces to begin using your AWS Direct Connect connection.
+• Private virtual interface : Access an Amazon VPC using private IP addresses.
+• Public virtual interface  : Access AWS services from your on-premises data center.
+  Allow AWS services, or AWS customers access to your public networks over the interface instead of traversing the internet.
+• Transit virtual interface : Access one or more Amazon VPC Transit Gateways associated with Direct Connect gateways.
+  You can use transit virtual interfaces with 1/2/5/10 Gbps AWS Direct Connect connections.
+
+Use AWS Direct Connect gateway to connect your VPCs. You associate an AWS Direct Connect gateway with either of the following gateways:
+• A transit gateway when you have multiple VPCs in the same Region
+• A virtual private gateway
+
+AWS VPN CONNECTIONS : // Accelerated VPN Connection
 -------------------------
 You can connect your Amazon VPC to remote networks and users using the following VPN connectivity options.
 By default, instances that you launch into an Amazon VPC can't communicate with your own (remote) network.
@@ -911,6 +977,9 @@ On the AWS side of the Site-to-Site VPN connection, a virtual private gateway or
 You configure your customer gateway device on the remote side of the Site-to-Site VPN connection.
 
 The following are the key concepts for Site-to-Site VPN:
+
+          VIRTUAL PRIVATE GATEWAY <----------------- VPN CONNECTION ---------------> CUSTOMER GATEWAY
+               or TRANSIT GATEWAY                                                    for CORPORATE NETWORK
 
   VPN connection          : A secure connection between your on-premises equipment and your VPCs.
   VPN tunnel              : An encrypted link where data can pass from the customer network to or from AWS.
@@ -926,68 +995,17 @@ View Reference pics -> NW_*** for more info available at cloud_AWS/0_Reference_p
 You can optionally enable acceleration for your Site-to-Site VPN connection.
 An accelerated Site-to-Site VPN connection (accelerated VPN connection) uses AWS GLOBAL ACCELERATOR to route traffic from your on-premises network to an AWS edge location that is closest to your customer gateway device.
 AWS Global Accelerator optimizes the network path, using the congestion-free AWS global network to route traffic to the endpoint that provides the best application performance.
-You can use an accelerated VPN connection to avoid network disruptions that might occu rwhen traffic is routed over the public internet.
-When you create an accelerated VPN connection, we create and manage two accelerators on your behalf,one for each VPN tunnel.
+You can use an accelerated VPN connection to avoid network disruptions that might occur when traffic is routed over the public internet.
+When you create an accelerated VPN connection, we create and manage two accelerators on your behalf, one for each VPN tunnel.
 
 To set up a Site-to-Site VPN connection, use the following steps:
-  •Step 1: Create a customer gateway
-  •Step 2: Create a target gateway --> Can be a virtual private gateway or transit gateway
-  •Step 3: Configure routing
-  •Step 4: Update your security group
-  •Step 5: Create a Site-to-Site VPN connection
-  •Step 6: Download the configuration file
-  •Step 7: Configure the customer gateway device using the configuration file.
-
-
-DIRECT CONNECT :
-----------------
-AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard Ethernet fibre-optic cable.
-One end of the cable is connected to your router, the other to an AWS Direct Connect router.
-With this connection, you can create virtual interfaces directly to public AWS services (for example, to Amazon S3) or to Amazon VPC, bypassing internet service providers in your network path.
-An AWS Direct Connect location provides access to AWS in the Region with which it is associated.
-You can use a single connection in a public Region or AWS GovCloud (US) to access public AWS services in all other public Regions.
-
-The following are the key components that you use for AWS Direct Connect:
-    Connections        :  Create a connection in an AWS Direct Connect location to establish a network connection from your premises to an AWS Region.
-    Virtual interfaces :  Create a virtual interface to enable access to AWS services.
-                          A public virtual interface enables access to public services, such as Amazon S3.
-                          A private virtual interface enables access to your VPC.
-
-
-      VIRTUAL PRIVATE GATEWAY <----------------- VPN CONNECTION ---------------> CUSTOMER GATEWAY
-           or TRANSIT GATEWAY                                                    for CORPORATE NETWORK
-
-
-A Direct Connect gateway is a globally available resource. You can create the Direct Connect gateway inany Region and access it from all other Regions.
-AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable.
-One end of the cable is connected to your router, the other to an AWS Direct Connect router.
-With this connection in place, you can create virtual interfaces directly to the AWS cloud and Amazon Virtual Private Cloud, bypassing Internet service providers in your network path.
-AWS Direct Connect has two billing elements: port hours and outbound data transfer. Port hour pricing is determined by capacity and connection type (dedicated connection or hosted connection).
-
-You can therefore use a single AWS Direct Connect connection to build multi-Region services. This connection an be configured to access a VPC in your account in any other public Region
-Accessing public services in a remote region :
---> To access public resources in a remote Region, you must set up a public virtual interface and establish a Border Gateway Protocol (BGP) session.
-Accessing VPC's in a remote region :
---> You can create a Direct Connect gateway in any public Region. Use it to connect your AWS Direct Connect connection over a private virtual interface to VPCs in your account that are located in different Regionsor to a transit gateway.
-
-There are two types of connections:
-• Dedicated Connection: A physical Ethernet connection associated with a single customer. Customers can request a dedicated connection through the AWS Direct Connect console, the CLI, or the API.
-    Speeds :  1Gbps and 10Gbps
-• Hosted Connection: A physical Ethernet connection that an AWS Direct Connect Partner provisionson behalf of a customer. Customers request a hosted connection by contacting a partner in the AWSDirect Connect Partner Program, who provisions the connection.
-    Speeds :  50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps,500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps.
-
-You must create one of the following virtual interfaces to begin using your AWS Direct Connect connection.
-• Private virtual interface: Access an Amazon VPC using private IP addresses.
-• Public virtual interface: Access AWS services from your on-premises data center.
-  Allow AWS services, or AWS customers access to your public networks over the interface instead of traversing the internet.
-• Transit virtual interface: Access one or more Amazon VPC Transit Gateways associated with DirectConnect gateways.
-  You can use transit virtual interfaces with 1/2/5/10 Gbps AWS Direct Connect connections.
-
-Use AWS Direct Connect gateway to connect your VPCs. You associate an AWS Direct Connect gateway with either of the following gateways:
-• A transit gateway when you have multiple VPCs in the same Region
-• A virtual private gateway
-
-
+  • Step 1: Create a customer gateway
+  • Step 2: Create a target gateway --> Can be a virtual private gateway or transit gateway
+  • Step 3: Configure routing
+  • Step 4: Update your security group
+  • Step 5: Create a Site-to-Site VPN connection
+  • Step 6: Download the configuration file
+  • Step 7: Configure the customer gateway device using the configuration file.
 
 AWS GATEWAYS : CONNECTING CORPORATE NETWORKS : [ VIRTUAL PRIVATE GATEWAY & DIRECT CONNECT GATEWAY & TRANSIT GATEWAY ]
 -----------------------------------------------
@@ -999,11 +1017,12 @@ A Site-to-Site VPN connection consists of two VPN tunnels between :
     --> A customer gateway device is a physical device or software appliance that you configure on your side of the Site-to-Site VPN connection.
 
                     -----------                                                       -----------
-                   |            |                         --                         |           |
-                   |    AWS     | <--------------------> |  | <--------------------> |   SITE    |
-                   |            |                         --                         |           |
+                   |            |     TUNNEL - 1                  TUNNEL - 1         |           |
+                   |    AWS     | <------------------------------------------------> |   SITE    |
+                   |            | <------------------------------------------------> |           |
+                   |            |     TUNNEL - 2                  TUNNEL - 2         |           |
                     -----------                                                       -----------
-
+                Transit / Virtual PGW                                                 Customer GW
 
     DIRECT CONNECT GATEWAY :   [2017]    [ CHECK DIAGRAM : 20 ]
     -------------------------------------------
@@ -1032,9 +1051,9 @@ A Site-to-Site VPN connection consists of two VPN tunnels between :
         Instead of an Internet Gateway , we use a VIRTUAL PRIVATE GATWAY.
         A Site-to-Site VPN connection consists of two VPN tunnels between a virtual private gateway or transit gateway on the AWS side, and a customer gateway device located in your data centre.
 
-        CUSTOM ROUTE TABLE :    DESTINATION         TARGET                                 MAIN ROUTE TABLE :  DESTINATION         TARGET
+        CUSTOM ROUTE TABLE :    DESTINATION       TARGET                                   MAIN ROUTE TABLE :  DESTINATION         TARGET
                                 -------------------------------------                                          -------------------------------------
-                                10.0.0.0/24       Local                                                        10.0.1.0/24       Local
+                                10.0.0.0/24       Local                                                        10.0.1.0/24         Local
                                 0.0.0.0/0         VIRTUAL PRIVATE Gateway
 
         A virtual private gateway is a logical, fully redundant distributed edge routing function that sits at the edge of your VPC.
@@ -1211,7 +1230,7 @@ VPC connectivity between VPCs is best achieved when using non-overlapping IP ran
 For example, if you’d like to connect multiple VPCs, make sure each VPC is configured with unique Classless Inter-Domain Routing (CIDR) ranges.
 Therefore, we advise you to allocate a single, contiguous, non-overlapping CIDR block to be used by each VPC.
 
-  A. VPC To VPV PEERING : VPC_Scenario-9
+  A. VPC To VPC PEERING : VPC_Scenario-9
      A VPC peering connection is a networking connection between two VPCs that enables routing using each VPC’s private IP addresses as if they were in the same network.
      VPC peering connections can be created between your own VPCs or with a VPC in another AWS account. VPC peering also supports inter-region peering.
      Traffic using inter-region VPC Peering always stays on the global AWS backbone and never traverses the public internet, thereby reducing threat vectors, such as common exploits and DDoS attacks.

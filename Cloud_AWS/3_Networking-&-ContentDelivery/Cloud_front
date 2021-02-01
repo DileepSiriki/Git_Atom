@@ -2,15 +2,16 @@ AWS CLOUD FRONT :
 ---------------
 Amazon Cloud Front is a web service that speeds up distribution of your static and dynamic web content, such as .html, .css, .js, and image files, to your users.
 Cloud Front delivers your content through a worldwide network of data centres called edge locations.
-When a user requests content that you're serving with  , the request is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.
-  •If the content is already in the edge location with the lowest latency, CloudFront delivers it immediately.
-  •If the content is not in that edge location, CloudFront retrieves it from an origin that you've defined—such as an Amazon S3 bucket, a Media Package channel,
+When a user requests content that you're serving with, the request is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.
+  • If the content is already in the edge location with the lowest latency, CloudFront delivers it immediately.
+  • If the content is not in that edge location, CloudFront retrieves it from an origin that you've defined—such as an Amazon S3 bucket, a Media Package channel,
+
 You also get increased reliability and availability because copies of your files (also known as objects) are now held (or cached) in multiple edge locations around the world.
 Keeps your objects in CloudFront edge locations for the default duration of 24 hours (the minimum duration is 0 seconds)
-    •Accelerate static website content delivery
-    •Serve video on demand or live streaming video
-    •Encrypt specific fields throughout system processing
-    •Customize at the edge
+    • Accelerate static website content delivery
+    • Serve video on demand or live streaming video
+    • Encrypt specific fields throughout system processing
+    • Customize at the edge
 
 USE-CASES :
 ------------------
@@ -31,7 +32,7 @@ Way of Working :
 --------------------
 1. You specify origin servers, like an Amazon S3 bucket or your own HTTP server, from which CloudFront gets your files which will then be distributed from CloudFront edge locations all over the world.
    The origin server can be an S3 if you are serving content over HTTP such as a webserver .
-2.You upload your files to your origin servers. Your files, also known as objects, typically include webpages, images, and media files .
+2. You upload your files to your origin servers. Your files, also known as objects, typically include webpages, images, and media files .
    If you're using an Amazon S3 bucket as an origin server, you can make the objects in your bucket publicly readable, so that anyone who knows the CloudFront URLs for your objects can access them.
 3. You create a CloudFront distribution, which tells CloudFront which origin servers to get your files from when users request the files through your web site or application.
 4. CloudFront assigns a domain name to your new distribution that you can see in the CloudFront console, or that is returned in the response to a programmatic request
@@ -42,11 +43,11 @@ Way of Working :
   --> You can use domain from cloudfront or you can set up CloudFront to use your own domain name with your distribution.
   --> Optionally, you can configure your origin server to add headers to the files, to indicate how long you want the files to stay in the cache in CloudFront edge locations.
 
-                -----------                                                       -----------
-               |            |                         --                         |           |
-               |    AWS     | <--------------------> |  | <--------------------> |   USER    |  POP = Point of presence
-               |            |                         --                         |           |
-                -----------                           POP                         -----------
+                -----------                                                          -----------
+               |            |                            --                         |           |
+               |    AWS     | <-----------------------> |  | <--------------------> |   USER    |  POP = Point of presence
+               |            |                            --                         |           |
+                -----------                              POP                         -----------
 
 REGIONAL EDGE CACHE:
 ---------------------

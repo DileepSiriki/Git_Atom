@@ -1766,14 +1766,14 @@ API Gateway creates RESTful APIs that:
  API Gateway handles all the tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls.
  These tasks include traffic management, authorization and access control, monitoring, and API version management.
  API Gateway acts as a "front door" for applications to access data, business logic, or functionality from your backend services, such as workloads running on Amazon Elastic Compute Cloud (Amazon EC2), code running on AWS Lambda, any web application, or real-time communication applications.
- <NEED TO ADD EXTRA INFORMATION , LINK IN NOTEPAD++>  -- https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-dg.pdf
+ < NEED TO ADD EXTRA INFORMATION , LINK IN NOTEPAD++ >  -- https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-dg.pdf
 
 2. AWS APP MESH :
 AWS App Mesh makes it easy to monitor and control microservices running on AWS.
 App Mesh standardizes how your services communicate, giving you end-to-end visibility and helping to ensure high availability for your applications.
 App Mesh gives you consistent visibility and network traffic controls for every service in an application.
 
-Say you have a serviceA sending requests to ServieB . Now if you create a new version of ServiceB anD ServiceB-V2 and you want to send 50% requests to ServiceB-V2 and the remaining 50% of traffic to ServiceB until you are confident that it is working good .
+Say you have a serviceA sending requests to ServieB . Now if you create a new version of ServiceB and ServiceB-V2 and you want to send 50% requests to ServiceB-V2 and the remaining 50% of traffic to ServiceB until you are confident that it is working good .
 This can be made posssible without making any application level changes using app mesh.
 // Refer to the pics NW_App-Mesh.* for the scenario.
 
@@ -1822,7 +1822,8 @@ CloudFront also adds the files to the cache in the POP for the next time someone
           •  Dynamic requests, as determined at request time, do not flow through regional edge caches, but go directly to the origin.
 
 5. ELASTIC LOAD BALANCING : < Has a separate detailed chapter >
-Elastic Load Balancers do not scale resources. Elastic Load Balancers distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.
+Elastic Load Balancers do not scale resources.
+Elastic Load Balancers distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.
 
 Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.
 It monitors the health of its registered targets and routes traffic only to the healthy targets.
@@ -1834,14 +1835,10 @@ If extreme performance and static IP is needed for your application, we recommen
 If you have an existing application that was built within the EC2-Classic network, then you should use a Classic Load Balancer.
 https://aws.amazon.com/elasticloadbalancing/features/#Product_comparisons
 
-// Elastic Load Balancers do not scale resources.
-// Elastic Load Balancers distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.
-
 // Scaling resources is a function of AWS AUTO SCALING.
 // AWS Auto Scaling is the feature that automates the process of adding/removing server capacity (based on demand).
 // Autoscaling allows you to reduce your costs by automatically turning off resources that aren’t in use.
 // On the other hand, Autoscaling ensures that your application runs effectively by provisioning more server capacity if required.
-
 
 6. AWS DIRECT CONNECT : < Has a separate detailed chapter >
 A Direct Connect gateway is a globally available resource. You can create the Direct Connect gateway in any Region and access it from all other Regions.
@@ -2966,3 +2963,32 @@ Support Concierge service includes:
 --> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball / Snow Mobile ]
 
 --> HYBRID DATA STORAGE   :  Access AWS storage from On-premisis          - AWS STORAGE GATEWAY
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+To achieve High Availability, you need the ability to redirect traffic in the case of instance failure. There are several options:
+
+1. USE ELASTIC LOAD BALANCER :
+   This is the preferred way to provide High Availability.
+   Run multiple Amazon EC2 instances, preferably in different Availability Zones (AZs).
+   Users connect to the ELB (via the supplied DNS name), which redirects traffic to the EC2 instances.
+   If an instance fails, ELB notices this via regular Health Checks, and will only direct traffic to the healthy instances.
+   Auto Scaling can be used to create these multiple instances across multiple Availability Zones, and it can also update the Load Balancing service when it adds/removes instances.
+
+2. REDIRECT AN ELASTIC IP ADDRESS :
+   Run multiple instances (preferably across multiple Availability Zones).
+   Point an Elastic IP address to the instance you desire. Users connect via the Elastic IP address and are directed to the instance.
+   If the instance fails, reassociate the Elastic IP address to a different instance, which will then start receiving the traffic immediately.
+   This method is not recommended because only one instance is receiving all the traffic while the other instance(s) are sitting idle.
+   It also requires a mechanism to detect failure and reassociate the Elastic IP (which you must do yourself).
+
+3. REASSIGN AN ELASTIC NETWORK INTERFACE :
+   All EC2 instances have a primary ENI. They can optionally have additional ENIs.
+   It is possible to direct traffic to a secondary ENI and then move that secondary ENI to another instance. This is similar to reassigning an Elastic IP address.
+   This method is not recommended for the same reason as reassociating an Elastic IP address (above), but also because an ENI can only be reassigned within the same AZ. It cannot be used to direct traffic to an EC2 instance in a different AZ.
+
+Bottom line: Use an Elastic Load Balancer. It provides true High Availability and can do it automatically.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################

@@ -20,7 +20,8 @@ You can use Route 53 to perform three main functions in any combination: domain 
 2. Route internet traffic to the resources for your domain
 --> When a user opens a web browser and enters your domain name (example.com) or subdomain name(acme.example.com) in the address bar, Route 53 helps connect the browser with your website orweb application.
     When the user enters an DNS name for you website ROUTE 53 translates it to a valid IP address
-    To route traffic to your resources, you create records, also known as resource record sets, in your hosted zone. Each record includes information about how you want to route traffic for your domain,
+    To route traffic to your resources, you create records, also known as resource record sets, in your hosted zone.
+    Each record includes information about how you want to route traffic for your domain.
 
 
 3. Check the health of your resources :
@@ -59,7 +60,7 @@ DNS RESOLUTION :
 
 
                              ------    3.WWW.EXAMPLE.COM             ---
-        2.WWW.EXAMPLE.COM   |  D   |  ----------------------------> |   | -->  DNA ROOT NAME SERVER
+        2.WWW.EXAMPLE.COM   |  D   |  ----------------------------> |   | -->  DNS ROOT NAME SERVER
                  ---------->|  N   |  <---------------------------- |   |
                 |           |  S   |   GO TO NAMESERVER FOR .COM     ---
                 |           |      |
