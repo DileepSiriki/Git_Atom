@@ -165,6 +165,12 @@ Amazon SQS stores messages until microservices and serverless applications proce
 So you cant request for a particular message , all you can do is poll for all messages .
 Amazon SQS begins to poll servers to find messages in the queue. The progress bar on the right side of the Receive messages section displays the polling duration.
 
+let say you have two components in your application, Component A & Component B.
+Component A sends messages (jobs) to component B to process.
+Now, what happens if component A sends a large number of messages at the same time? Component B will fail, and the entire application will fail.
+SQS act as a middleman, receives and stores messages from component A, and component B pull and process messages at its own pace.
+This way, both components run independently from each other.
+
 
 Dead-Letter queues :
 ----------------------

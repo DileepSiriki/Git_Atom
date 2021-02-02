@@ -306,6 +306,8 @@ FIVE PILLARS OF AWS :
 1. OPERATIONAL EXCELLENCE : -> Automation
    Focuses on how you can continuously improve your ability to run systems, create better procedures, and gain insights.
    Human error is the primary cause of defects and operational incidents. The more operations that can be automated, the less chance there is for human error.
+   The operational excellence pillar includes the ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures.
+
     Infrastructure as Code -> process of managing your infrastructure through machine-readable configuration files to automate your infrastructure -> CLOUD FORMATION
 
     Observability -> Observability is the process of measuring the internal state of your system.
@@ -313,22 +315,30 @@ FIVE PILLARS OF AWS :
 
 2. SECURITY : -> Policies (IAM) , Network Security (VPC) , Encryption (KMS)
    Focuses on how to secure your infrastructure on the cloud. Security and compliance is a shared responsibility between AWS and the customer.
+   The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
     AWS      -> responsible for physical infrastructure, software, and networking capabilities.
     CUSTOMER -> configuration of specific cloud services, the application software, and the management of sensitive data.
 
 3. RELIABILITY :
    Focuses on how you can build services that are resilient to both service and infrastructure disruptions.
+   The reliability pillar includes the ability of a system to recover from infrastructure or service disruptions, dynamically acquire computing resources to meet demand, and mitigate disruptions such as  misconfigurations or transient network issues.
    Fault Isolation -> Resource and Request , Availability Zone , Region
    Limits -> Limits are constraints that can be applied to protect your services from excessive load. (SERVICE QUOTAS)
 
 4. PERFORMANCE EFFICIENCY :
    Focuses on how you can run services efficiently and scalably in the cloud to handle any amount of traffic.
+   The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
+   Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
+   
    Selection -> Ability to choose the service that most closely aligns with your workload.
                 AWS has the broadest selection of services. (COMPUTE, STORAGE , DB ,N/W)
    Scaling   -> VERTICAL : say micro instance to a macro instance (increasing capacity of an instance)
                 HORIZONTAL : say 10 instances to 40 instances ( increasing number of instances)
 
 5. COST OPTIMIZATION : -> AWS Cost Explorer ,  AWS Cost & Usage Report
+The cost optimization pillar includes the ability to avoid or eliminate unneeded cost or sub-optimal resources.
+
+
    Focuses on achieving business outcomes while minimizing costs.
    OpEx is an ongoing pay-as-you-go model whereas CapEx is a one-time purchase model.
 

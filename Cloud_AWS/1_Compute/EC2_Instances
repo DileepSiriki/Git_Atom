@@ -573,6 +573,27 @@ Billing discount 	No billing discount                  |------------------------
 Instance Limits 	Your On-Demand Instance limits  	Default is 20 per Availability Zone.  	Default is 20 per Region.  	                   NO limit.
                   per Region apply.                 You can request a limit increase.       You can request a limit increase.
 
+
+
+Examples for Linux\Ubuntu based instances:
+--------------------------------------------------
+1- If you run a Linux instance for 4 seconds or 20 seconds or 59 seconds, you will be charged for one minute. (this is what we mean by minimum of 1 minute)
+2- If you run a Linux instance for 1 minute and 3 seconds, you will be charged for 1 minute and 3 seconds.
+3- If you run a Linux instance for 3 hours, 25 minutes and 7 seconds, you will be charged for 3 hours, 25 minutes and 7 seconds.
+
+Examples for non-Linux\Ubuntu instances:
+---------------------------------------------------
+1- If you run an instance for 4 seconds or 20 seconds or 59 seconds, you will be charged for one hour.
+2- If you run an instance for 1 minute and 3 seconds, you will be charged for one hour.
+3- If you run an instance for 3 hours, 25 minutes and 7 seconds, you will be charged for 4 hours.
+
+Per-second billing is available for instances launched in:
+-------------------------------------------------------------
+- On-Demand, Reserved and Spot forms
+- All regions and Availability Zones
+- Amazon Linux and Ubuntu
+
+
 ==================================================================================================================================================================================
 ==================================================================================================================================================================================
 INSTANCE NAMING :

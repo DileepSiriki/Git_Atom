@@ -86,6 +86,7 @@ RDS - Relational Database Service :
 -------------------------------------
 It is a web service that makes it easier to set up, operate, and scale a relational database in the cloud.
 It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
+DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store (Amazon EBS) volumes for database and log storage.
 
   • When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together. With AmazonRDS, these are split apart so that you can scale them independently.
     If you need more CPU, less IOPS, or more storage, you can easily allocate them.
