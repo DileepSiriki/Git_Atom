@@ -2394,6 +2394,12 @@ In Amazon SWF, a task represents a logical unit of work that is performed by a c
 Coordinating tasks across the application involves managing inter task dependencies, scheduling, and concurrency in accordance with the logical flow of the application.
 Amazon SWF gives you full control over implementing tasks and coordinating them without worrying about underlying complexities such as tracking their progress and maintaining their state.
 
+Amazon Simple Workflow Service (SWF) is a web service that makes it easy to coordinate work across distributed application components.
+Amazon SWF enables applications for a range of use cases, including media processing, web application back-ends, business process workflows, and analytics pipelines, to be designed as a coordination of tasks.
+You can think of Amazon SWF as a fully-managed state tracker and task coordinator in the cloud.
+If your application’s steps take more than 500 milliseconds to complete, you need to track the state of processing.
+If you need to recover or retry if a task fails, Amazon SWF can help you.
+
 When using Amazon SWF, you implement workers to perform tasks.
 These workers can run either on cloud infrastructure, such as Amazon Elastic Compute Cloud (Amazon EC2), or on your own premises.
 You can create tasks that are long-running, or that may fail, time out, or require restarts—or that may complete with varying throughput and latency.
@@ -2568,10 +2574,10 @@ BILLING & COST MANAGEMENT   :
 AWS Billing and Cost Management is the service that you use to pay your AWS bill, monitor your usage, and analyze and control your costs.
 AWS automatically charges the credit card that you provided when you signed up for a new account with AWS. Charges appear on your monthly credit card bill.
 The Billing and Cost Management service provides features that you can use to do the following:
-  •Estimate and plan your AWS costs
-  •Receive alerts if your costs exceed a threshold that you set
-  •Assess your biggest investments in AWS resources
-  •Simplify your accounting if you work with multiple AWS accounts
+  • Estimate and plan your AWS costs
+  • Receive alerts if your costs exceed a threshold that you set
+  • Assess your biggest investments in AWS resources
+  • Simplify your accounting if you work with multiple AWS accounts
 
 AWS COST & USAGE REPORT :
 ---------------------------
@@ -2714,7 +2720,7 @@ You create a custom AMI for your product, and buyers can use it to create EC2 in
 The AWS GovCloud (US) Regions are isolated AWS Regions designed to enable U.S. government agencies and customers to move sensitive workloads into the cloud by addressing their specific regulatory and compliance requirements.
 The AWS GovCloud (US) Regions adhere to U.S. International Traffic in Arms Regulations (ITAR) requirements.
 
-3. AWS MANAGED SERVICES & CUSTOMER MANAGED SERVICES:
+3. AWS MANAGED SERVICES & CUSTOMER MANAGED SERVICES & SHARED CONTROLS :
 --------------------------------------------------------
 
 AWS MANAGED :
@@ -2770,7 +2776,8 @@ AWS is responsible for patching the underlying hosts, upgrading the firmware, an
 
 Both client side and server side encryption is a responsibility of customer.
 AWS offers a lot of services and features that help AWS customers protect their data in the cloud.
-Customers can protect their data by encrypting it in transit and at rest. They can use Cloudtrail to log API and user activity, including who, what, and from where calls were made.
+Customers can protect their data by encrypting it in transit and at rest.
+They can use Cloudtrail to log API and user activity, including who, what, and from where calls were made.
 They can also use the AWS Identity and Access Management (IAM) to control who can access or edit their data.
 
 5. AWS MICROSERVICES vs MONOLITHIC :
@@ -3019,7 +3026,9 @@ Amazon Comprehend is fully managed, so there are no servers to provision, and no
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-Change management is defined as “the Process responsible for controlling the Lifecycle of all Changes. The primary objective of Change Management is to enable beneficial changes to be made, with minimum disruption to IT Services.
+CONFIG vs CLOUD TRAIL :
+Change management is defined as “the Process responsible for controlling the Lifecycle of all Changes.
+The primary objective of Change Management is to enable beneficial changes to be made, with minimum disruption to IT Services.
 Despite all of the investments in software and hardware, an erroneous configuration or misstep in a process can frequently undo these efforts and lead to failure.
 AWS Config and AWS CloudTrail are change management tools that help AWS customers audit and monitor all resource and configuration changes in their AWS environment
 Customers can use AWS Config to answer “What did my AWS resource look like?” at a point in time. Customers can use AWS CloudTrail to answer “Who made an API call to modify this resource?” For example, a customer can use the AWS Management Console for AWS Config to detect that the security group “Production-DB” was incorrectly configured in the past. Using the integrated AWS CloudTrail information, they can pinpoint which user misconfigured the “Production-DB” security group. In brief, AWS Config provides information about the changes made to a resource, and AWS CloudTrail provides information about who made those changes. These capabilities enable customers to discover any misconfigurations, fix them, and protect their workloads from failures.
@@ -3034,7 +3043,8 @@ Dedicated Hosts provide additional control over your instances and visibility in
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-TOTAL COST OF OWNERSHIP TCO :
+TOTAL COST OF OWNERSHIP - TCO :
+-----------------------------------
 Which of the following should be considered when performing a TCO analysis to compare the costs of running an application on AWS instead of on-premises?  --> PHYSICAL HARDWARE
 
 Weighing the financial considerations of owning and operating a data center facility versus employing a cloud infrastructure requires detailed and careful analysis.
@@ -3050,6 +3060,9 @@ Market research is a separate process that customers need to perform regardless 
 “Business analysis” is incorrect. Business analysis is a multistage process aimed at identifying business needs and determining solutions to business problems.
 Business analysis is a separate process that customers need to perform regardless of whether they will be using AWS or an on-premises data center.
 
+The AWS TCO (Total Cost of Ownership) Calculator is a free tool that provides directional guidance on possible realized savings when deploying AWS.
+This tool is built on an underlying calculation model, that generates a fair assessment of value that a customer may achieve given the data provided by the user which includes the number of servers migrated to AWS, the server type, the number of processors and so on.
+
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 "Save when you Reserve" For Customers that can commit to using EC2 over a 1 or 3-year term, it is better to use Amazon EC2 Reserved Instances. Reserved Instances provide a significant discount (up to 75%) compared to On-Demand instance pricing.
@@ -3059,12 +3072,57 @@ Business analysis is a separate process that customers need to perform regardles
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+CLOUD ADOPTION FRAMEWORK - CAF :
+----------------------------------
+AWS developed the AWS Cloud Adoption Framework (AWS CAF), which helps organizations understand how cloud adoption transforms the way they work.
+AWS CAF leverages our experiences assisting companies around the world with their Cloud Adoption Journey.
+Assessing migration readiness across key business and technical areas, referred to as Perspectives, helps determine the most effective approach to an enterprise cloud migration effort.
+First, let’s outline what we mean by perspective. AWS CAF is organized into six areas of focus, which span your entire organization.
+We describe these areas of focus as Perspectives: Business, People, Governance, Platform, Security, and Operations.
+For further reading, see the AWS CAF Whitepaper. AWS CAF provides a mental model to establish areas of focus in determining readiness to migrate and creating a set of migration execution workstreams.
+As these are key areas of the business impacted by cloud adoption, it’s important that we create a migration plan that considers and incorporates the necessary requirements across each area.
+
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+AWS MIGRATION PROGRAMME - MAP:
+------------------------------
+The AWS Migration Acceleration Program (MAP) is a comprehensive and proven cloud migration program based upon AWS’s experience of migrating a thousand enterprise customers to the cloud.
+The program packages best practices, tools, expertise, financial incentives, and a partner ecosystem to make cloud adoption easier.
+MAP consists of a three-phase journey that helps you achieve your migration goals by reducing migration complexity and costs.
+Leverage the performance, security, and reliability of the cloud
+
+  Step 1: Assess your readiness
+  Conduct a migration readiness assessment to identify and evaluate strengths, opportunities for improvement, and business benefits.
+  Create a TCO model to build business justification for your migration project.
+
+  Step 2: Mobilize your resources
+  Create a migration plan and detailed business case. Then, gain experience by migrating pilot workloads.
+  Build your capabilities and experience how easy it is to migrate to AWS.
+
+  Step 3: Migrate and modernize your workloads
+  Execute the large-scale migration plan developed during the mobilize phase with the help of migration-certified AWS Partners and the AWS ProServe team.
+
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+To enable HTTPS connections to your website or application in AWS, you need an SSL/TLS server certificate.
+You can use a server certificate provided by AWS Certificate Manager (ACM) or one that you obtained from an external provider.
+You can use ACM or IAM to store and deploy server certificates. Use IAM as a certificate manager only when you must support HTTPS connections in a region that is not supported by ACM.
+IAM supports deploying server certificates in all regions, but you must obtain your certificate from an external provider for use with AWS.
+Amazon Route 53 is used to register domain names or use your own domain name to route your end users to Internet applications.
+Route 53 is not responsible for creating SSL certifications.
+
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+AWS recommends some practices to help organizations avoid unexpected charges on their bill. Which of the following is NOT one of these practices?
+"Deleting unused AutoScaling launch configuration" will not help, and thus is the correct choice.
+The AutoScaling launch configuration does not incur any charges. Thus, it will not make any difference whether it is deleted or not.
+
+AWS will charge the user once the AWS resource is allocated (even if it is not used). Thus, it is advised that once the user's work is completed they should:
+1- Delete all Elastic Load Balancers.
+2- Terminate all unused EC2 instances.
+3- Delete the attached EBS volumes that they don’t need.
+4- Release any unused Elastic IPs.
+
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################

@@ -88,6 +88,14 @@ It is a web service that makes it easier to set up, operate, and scale a relatio
 It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
 DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store (Amazon EBS) volumes for database and log storage.
 
+Amazon RDS provides you with six widely-used database engines to choose from, including Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle Database, and SQL Server.
+The only RDS database that can scale instances automatically is Amazon Aurora.
+For RDS databases other than Aurora, RDS only supports storage auto-scaling, NOT instance auto-scaling.
+If you want to scale Amazon RDS instances (other than Aurora), you have two options:
+  1- Manual horizontal scaling (by adding read replicas)
+  2- Manual vertical scaling (by upgrading/downgrading an existing instance).
+
+
   • When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together. With AmazonRDS, these are split apart so that you can scale them independently.
     If you need more CPU, less IOPS, or more storage, you can easily allocate them.
   • Amazon RDS manages backups, software patching, automatic failure detection, and recovery.
@@ -97,6 +105,8 @@ DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsof
     You can use these backups to restore a database. The Amazon RDS restore process works reliably and efficiently.
   • You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server.
   • In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management (IAM) to define users and permissions.
+
+
 
 DB INSTANCE : [  Isolated database environment running in the cloud ]
 -------------------------------------------------------------------------

@@ -123,10 +123,10 @@ AWS SUPPORT // TRUSTED ADVISOR : --> AWS -> Support Centre -> Create a Case
 ==================================================================
 AWS Support offers four support plans: Basic, Developer, Business, and Enterprise
 https://console.aws.amazon.com/support/plans/home?#/ **V.IMP
-  --> Basic                 - Included
-  --> Current plan          - Starting at $29 per month       - https://aws.amazon.com/premiumsupport/plans/
-  --> Developer	Business    - Starting at $100 per month      - https://aws.amazon.com/premiumsupport/plans/
-  --> Enterprise            - Starting at $15,000 per month   - https://aws.amazon.com/premiumsupport/plans/
+  --> Basic         - Included
+  --> Developer     - Starting at $29 per month       - https://aws.amazon.com/premiumsupport/plans/
+  --> Business      - Starting at $100 per month      - https://aws.amazon.com/premiumsupport/plans/
+  --> Enterprise    - Starting at $15,000 per month   - https://aws.amazon.com/premiumsupport/plans/
 
 All AWS customers automatically have 24/7 access to these features of the Basic support plan:
 Basic Support is included for all AWS customers and includes:
@@ -143,8 +143,10 @@ Customers with a Developer support plan have access to these additional features
 • Best practice guidance
 • Building-block architecture support: guidance on how to use AWS products, features, and services together
 • AWS Identity and Access Management (IAM) to control user access to AWS Support
+Developer support plan provides business hours access to technical support associates via email only.
 
 In addition, customers with a Business or Enterprise support plan have access to these features:
+Each of the Business and Enterprise support plans provide 24x7 access to technical support engineers via phone, email, and chat.
 • Use-case guidance – What AWS products, features, and services to use to best support your specific needs.
 • AWS Trusted Advisor  – A feature of AWS Support, which inspects customer environments and identifies opportunities to save money, close security gaps, and improve system reliability and performance.
 • The AWS Support API to interact with Support Center and Trusted Advisor.
@@ -164,10 +166,27 @@ AWS Support Concierge Service assists customers with account and billing inquiri
   AWS Infrastructure Event Management partners with your technical and project resources to gain a deep understanding of your use case and provide architectural and scaling guidance for an event.
   Common use-case examples for AWS Event Management include advertising launches, new product launches, and infrastructure migrations to AWS.
 
+• The AWS Migration Acceleration Program (MAP) is a comprehensive and proven cloud migration program based upon AWS’s experience of migrating a thousand enterprise customers to the cloud.
+  The program packages best practices, tools, expertise, financial incentives, and a partner ecosystem to make cloud adoption easier.
+  MAP consists of a three-phase journey that helps you achieve your migration goals by reducing migration complexity and costs.
+  Leverage the performance, security, and reliability of the cloud
+
+  Step 1: Assess your readiness
+  Conduct a migration readiness assessment to identify and evaluate strengths, opportunities for improvement, and business benefits.
+  Create a TCO model to build business justification for your migration project.
+
+  Step 2: Mobilize your resources
+  Create a migration plan and detailed business case. Then, gain experience by migrating pilot workloads.
+  Build your capabilities and experience how easy it is to migrate to AWS.
+
+  Step 3: Migrate and modernize your workloads
+  Execute the large-scale migration plan developed during the mobilize phase with the help of migration-certified AWS Partners and the AWS ProServe team.
+
 • TECHNICAL ACCOUNT MANAGER - TAM : work with a technical account manager (TAM) for your specific use cases and applications.
 
 • White-glove case routing.
 • Management business reviews.
+
 
 ===================================================================================================
 ===================================================================================================
@@ -240,7 +259,9 @@ that plan and build data centers, design and source servers, and develop and sel
 ==================================================================
 AWS TRUSTED ADVISOR : Cost Optimization -  Performance -  Security - Fault Tolerance -  Service Limits
 ==================================================================
-AWS Trusted Advisor offers a rich set of best practice checks and recommendations across five categories: cost optimization, security, fault tolerance, performance, and service limits.
+AWS Trusted Advisor offers a rich set of best practice checks and recommendations across five categories:
+cost optimization, security, fault tolerance, performance, and service limits.
+
 AWS Trusted Advisor is your customized cloud expert! It helps you to observe best practices for the use of AWS by inspecting your AWS environment with an eye toward saving money, improving system performance and reliability, and closing security gaps.
 All AWS customers can start optimizing their cloud resources by using four of AWS Trusted Advisor’s most popular best-practice recommendations on service limits and security configurations.
 Access to the four free checks does not expire, and you can access the remaining 33 checks and additional features by upgrading to Business or Enterprise-level Support.

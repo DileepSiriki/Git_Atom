@@ -329,7 +329,7 @@ FIVE PILLARS OF AWS :
    Focuses on how you can run services efficiently and scalably in the cloud to handle any amount of traffic.
    The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
    Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
-   
+
    Selection -> Ability to choose the service that most closely aligns with your workload.
                 AWS has the broadest selection of services. (COMPUTE, STORAGE , DB ,N/W)
    Scaling   -> VERTICAL : say micro instance to a macro instance (increasing capacity of an instance)
@@ -577,6 +577,10 @@ The serverless model—as provided by services like AWS Lambda—makes it possib
 When, for instance, a video file is uploaded to a repository (like an AWS S3 bucket or even an on-premises FTP site), it can trigger a Lambda function that will convert the file to a new video format.
 There’s no need to maintain and pay for an actual instance running 24/7, just for the moments your code is actually running.
 And there’s no administration overhead to worry about.
+
+Serverless allows customers to shift more operational responsibilities to AWS.
+Serverless allows customers to build and run applications and services without thinking about servers.
+Serverless eliminates infrastructure management tasks such as server or cluster provisioning, patching, operating system maintenance, and capacity provisioning.
 
 Serverless computing (or serverless for short), is an execution model where the cloud provider (AWS, Azure, or Google Cloud) is responsible for executing a piece of code by dynamically allocating the resources.
 And only charging for the amount of resources used to run the code.

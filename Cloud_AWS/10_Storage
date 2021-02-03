@@ -12,6 +12,12 @@ Store any type and amount of data that you want; read the same piece of data a m
 Amazon S3 frees developers to focus on innovation instead of figuring out how to store their data.
 Amazon S3 event notifications can be sent in response to actions in Amazon S3 like PUTs, POSTs, COPYs, or DELETEs. Notification messages can be sent through either Amazon SNS, Amazon SQS, or directly to AWS Lambda.
 
+In S3, we can only host static websites, or static assets of a dynamic website (such as images, audio files, video files...etc).
+A dynamic website relies on server-side processing and it uses server-side scripts such as PHP, JSP, or ASP.NET.
+Amazon S3 does not support server-side scripting and cannot be used to host dynamic websites.
+AWS has computing resources for hosting dynamic websites such as Amazon EC2 or Lambda.
+Amazon S3 and Amazon EFS are storage services that scale automatically in storage capacity without any intervention to meet increased demand.
+
 
 CHEAPER       :     lifecycle policies, reduced redundancy, Infrequent Access, Glacier
 RESILIENT     :     versioning, s3 replication, regional replication
@@ -119,6 +125,39 @@ OBJECT :
 OBJECT : Photos/puppy.jpg
 BUCKET : Dileep
 URL    : http://Dileep.s3.aws.com/photos/puppy.jpg
+
+PRODUCT DATA AT REST :
+--------------------------
+Amazon S3 provides a number of security features for the protection of data at rest, which you can use or not depending on your threat profile.
+
+1- Permissions:
+   Use bucket-level or object-level permissions alongside IAM policies to protect resources from unauthorized access and to prevent information disclosure, data integrity compromise or deletion.
+
+2- Versioning:
+  Amazon S3 supports object versions. Versioning is disabled by default.
+  Enable versioning to store a new version for every modified or deleted object from which you can restore compromised objects if necessary.
+
+3- Replication:
+   Although Amazon S3 stores your data across multiple geographically diverse Availability Zones by default, compliance requirements might dictate that you store data at even greater distances.
+   Cross-region replication (CRR) allows you to replicate data between distant AWS Regions to help satisfy these requirements.
+   CRR enables automatic, asynchronous copying of objects across buckets in different AWS Regions.
+
+4- Encryption – server side:
+  Amazon S3 supports server-side encryption of user data. Server-side encryption is transparent to the end user.
+  AWS generates a unique encryption key for each object, and then encrypts the object using AES-256.
+
+5- Encryption – client side:
+  With client-side encryption you create and manage your own encryption keys. Keys you create are not exported to AWS in clear text.
+  Your applications encrypt data before submitting it to Amazon S3, and decrypt data after receiving it from Amazon S3.
+  Data is stored in an encrypted form, with keys and algorithms only known to you.
+
+6- AWS MACIE :
+  AWS also provides a fully managed security service called AWS Macie to help protect your sensitive data in Amazon S3.
+  Amazon Macie uses machine learning to automatically discover, classify, and protect sensitive data in Amazon S3.
+  Amazon Macie recognizes sensitive data such as personally identifiable information (PII) or intellectual property, and provides you with dashboards and alerts that give visibility into how this data is being accessed or moved.
+  The fully managed service continuously monitors data access activity for anomalies, and generates detailed alerts when it detects risk of unauthorized access or inadvertent data leaks.
+  Today, Amazon Macie is available to protect data stored in Amazon S3, with support for additional AWS data stores coming later this year.
+
 
 REPLICATION IN S3 :
 -------------------------
@@ -557,6 +596,7 @@ AWS SNOW-FAMILY:
      Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80 TB storage  --> 1 SUITCASE  [ Snowball is a petabyte-scale data transport solution by cascading snow balls ]
      Snow Ball edge   - https://www.youtube.com/watch?v=bxSD1Nha2k8      -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
      Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1 Exabyte      --> 1 Truck     [ AWS Snowmobile is the exabyte-scale data migration service ]
+                                                                            [100Pb per snow mobile]
 
     1 Exabyte = 1000 petabytes
     Snow ball can be connected in series to have a Petabyte's storage  = 1 million GB = 1024 Terabytes
