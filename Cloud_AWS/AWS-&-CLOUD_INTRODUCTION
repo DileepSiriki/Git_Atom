@@ -67,13 +67,14 @@ HYBRID CLOUD    : Is a mixture of public and private cloud.
 
 COMMUNITY CLOUD : Allows systems and services to be accessible by a group of organizations.
 
-// IAAS - PAAS - SAAS are the three basic cloud computing models and they come under AWS.
-// NAAS - NETWORK AS A SERVICE is a part of IAAS and is not the basic one.
+// IAAS - PAAS - SAAS are the only three basic cloud computing models and they come under AWS.
+// NAAS - NETWORK AS A SERVICE is a part of IAAS and is not the basic service in AWS.
+// Other Services are part of the basic IAAS, PAAS, SAAS and hence do not come under the basic services.
 
 IaaS : Infrastructure-as-a-service provides access to fundamental resources such as:
        IaaS businesses offer services such as pay-as-you-go storage, networking, and virtualization.
        IaaS gives users cloud-based alternatives to on-premise infrastructure, so businesses can avoid investing in expensive on-site resources.
-       physical machines, virtual machines, virtual storage, VLAN's, Load balancers, Ip addresses  etc.
+       physical machines, virtual machines, virtual storage, VLAN's, Load balancers, IP addresses  etc.
 
        IaaS gives you the highest level of flexibility and management control over your IT resources.
        It is most similar to the existing IT resources with which many IT departments and developers are familiar.
@@ -317,7 +318,7 @@ FIVE PILLARS OF AWS :
    Focuses on how to secure your infrastructure on the cloud. Security and compliance is a shared responsibility between AWS and the customer.
    The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
     AWS      -> responsible for physical infrastructure, software, and networking capabilities.
-    CUSTOMER -> configuration of specific cloud services, the application software, and the management of sensitive data.
+    CUSTOMER -> configuration of specific cloud services, the application software, and the management of sensitive data, client side and server side encryption.
 
 3. RELIABILITY :
    Focuses on how you can build services that are resilient to both service and infrastructure disruptions.
@@ -336,9 +337,7 @@ FIVE PILLARS OF AWS :
                 HORIZONTAL : say 10 instances to 40 instances ( increasing number of instances)
 
 5. COST OPTIMIZATION : -> AWS Cost Explorer ,  AWS Cost & Usage Report
-The cost optimization pillar includes the ability to avoid or eliminate unneeded cost or sub-optimal resources.
-
-
+   The cost optimization pillar includes the ability to avoid or eliminate unneeded cost or sub-optimal resources.
    Focuses on achieving business outcomes while minimizing costs.
    OpEx is an ongoing pay-as-you-go model whereas CapEx is a one-time purchase model.
 
@@ -372,7 +371,7 @@ It is provided by the below :
 AWS ACCEPTABLE USE POLICY :
 ----------------------------
 This Acceptable Use Policy (this “Policy”) describes prohibited uses of the web services offered by Amazon Web Services, Inc. and its affiliates (the “Services”) and the website located at http://aws.amazon.com (the “AWS Site”).
-The examples described in this Policy are not exhaustive.
+The examples described in this Policy are not exhaustive, meaning more can be added anytime.
 We may modify this Policy at any time by posting a revised version on the AWS Site.
 By using the Services or accessing the AWS Site, you agree to the latest version of this Policy.
 If you violate the Policy or authorize or help others to do so, we may suspend or terminate your use of the Services.
@@ -390,7 +389,7 @@ The customer assumes responsibility and management of the guest operating system
 Whereas the host operating system is software installed on a computer to interact with the hardware, the guest operating system is software installed onto and running on the virtual machine.
 Customers should carefully consider the services they choose as their responsibilities vary depending on the services used, the integration of those services into their IT environment, and applicable laws and regulations.
 The nature of this shared responsibility also provides the flexibility and customer control that permits the deployment.
-As shown in the chart below, this differentiation of responsibility is commonly referred to as Security “of” the Cloud versus Security “in” the Cloud.
+As shown below, this differentiation of responsibility is commonly referred to as Security “of” the Cloud versus Security “in” the Cloud.
 
 AWS      - Security of the cloud
            operates, manages and controls the components from the host operating system and virtualization layer down to the physical security of the AWS  facilities.
@@ -462,9 +461,6 @@ AVAILABILITY ZONES : --> 77 In Total
       You can also use Elastic IP addresses to mask the failure of an instance in one Availability Zone by rapidly remapping the address to an instance in another Availability Zone.
       we can also migrate instances to another AZ --> make an AMI --> launch an instance --> configure
 
-      The resources that you create in one Region do not exist in any other Region unless you explicitly use a replication feature offered by an AWS service.
-      For example, Amazon S3 and Amazon EC2 support cross-Region replication.
-      Some services, such as AWS Identity and Access Management (IAM), do not have Regional resources.
 
 LOCAL ZONES :
 ----------------
@@ -520,37 +516,7 @@ Amazon CloudFront, Amazon Route 53, AWS Firewall Manager, AWS Shield, and AWS WA
           D = EDGE LOCATIONS : Amazon CloudFront, Amazon Route 53, AWS Firewall Manager, AWS Shield, and AWS WAF services are offered at AWS Edge Locations.
 
 
-### List all regions and zones , edge locations , wavelengths , outposts for interview purpose // get a rough sketch
 
-
-============================================================================================================
-############################################################################################################
-============================================================================================================
-###### SKIP THIS SECTION - just for my reference.
-[ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
--> On-demand - IT resources compute db n/w apps - public / private - pay as you go -- Buy maintain own - from vendors like aws azure
--> Platform independent - no downloaded software
--> Small to large - backup / recovery / email / VM / web apps / big data analytics
--> hospitals - finance teams - gaming companies
--> USES :  A agile - c  cost effective - D deploy global in sec - E elastic - F trade capital expense for variable exp - G no engineers for maintenance
-           guessing capacity - no running data centres - serverless - scalable
--> TYPES : Service P P H C - deploy I P S
--> Virtualization
--> Hypervisor & Types
--> aws 175 services over 190 countries - 5 pillars P R O C S[security/shared responsibility ]
-============================================================================================================
-############################################################################################################
-============================================================================================================
-
-AWS SERVICE QUOTAS :
---------------------------
-Your AWS account has default quotas, formerly referred to as limits, for each AWS service.
-Unless otherwise noted, each quota is Region-specific. You can request increases for some quotas, and other quotas cannot be increased.
-Service Quotas is an AWS service that helps you manage your quotas for over 100 AWS services, from one location.
-Along with looking up the quota values, you can also request a quota increase from the Service Quotas console.
-You can request a quota increase using Service Quotas and AWS Support Center.
-If a service is not yet available in Service Quotas, use AWS Support Center instead.
-Increases are not granted immediately. It might take a couple of days for your increase to become effective.
 
 SCALABILITY :
 -------------------
@@ -598,7 +564,7 @@ Move from idea to market, faster
   Move from idea to market, faster  : By eliminating operational overhead, your teams can release quickly, get feedback, and iterate to get to market faster.
 
   COMPUTE                 : LAMBDA  -  FARGATE
-  APPLICATION INTEGRATION : SNA  - SQS - APPSYNC - API GATEWAY - EVENET BRIDGE - STEP FUNCTIONS
+  APPLICATION INTEGRATION : SNS  - SQS - APPSYNC - API GATEWAY - EVENET BRIDGE - STEP FUNCTIONS
   DATA STORE              : S3 - Dynamo DB - AURORA - RDS
 
 

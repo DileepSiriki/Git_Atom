@@ -1,0 +1,149 @@
+CLOUD :  [ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
+---------
+  DEFINE :
+    On-demand - IT resources compute db n/w apps - public / private - pay as you go -- Buy maintain own - from vendors like aws azure
+    Platform independent - no downloaded software
+    Small to large - backup / recovery / email / VM / web apps / big data analytics
+    hospitals - finance teams - gaming companies
+
+  USES :
+    A agile - c  cost effective - D deploy global in sec - E elastic - F trade capital expense for variable expenses - G no engineers for maintenance
+    Guessing capacity - no running data centres - pay as you go - serverless - scalable , shared responsibility.
+
+  TYPES          : Service Public Private Hybrid Community - Deploy IAAS Admins, PAAS Developers, SAAS Users & Diagram
+  VIRTUALIZATION : Technique of sharing 1 resource among many by assigning a logical name to resource and providing a pointer to physical resource when demanded.
+                   Server, Application, Hardware virtualization
+  HYPERVISOR     : Guest machines, Type-1 & Type-2 [ Bare metal & Hosted ] - Diagram
+
+*****************************************************************************************************************************************************************************************
+*****************************************************************************************************************************************************************************************
+
+AMAZON WEB SERVICES : ~25 regions & ~80 AZ's --  175 services over 190 countries - 5 pillars P R O C S  [security/shared responsibility ]
+-----------------------
+Secure cloud service offering a broad set of global cloud-based products. - ACDEFGS from Cloud usages
+5 PILLARS - PROCS
+    Performance Efficiency - > On how you can run services efficiently and scalably.
+                               // Horizontal & Vertical Scaling
+    Reliability            - > On how you can build services that are resilient to both service and infrastructure disruptions.
+                               // Availability Zone & Region
+    Operational excellence - > On how you can continuously improve your ability to run systems, create better procedures, and gain insights.
+                               // Automation to escape human errors - Cloud formation to automate
+    Cost optimization      - > On the ability to avoid or eliminate unneeded cost or sub-optimal resources. CAPEX to OPEX
+                               // cost explorer - Budgets - Cost usage
+    Security               - > Share Model.
+                               // Policies (IAM) , Network Security (VPC) , Encryption (KMS), IAM, KMS, MFA, Cloud Trail, Cloud Watch, SNS, Email.
+
+[ DIAGRAM ] --> Regions - Availability Zones - Local Zone (Similar to regions but closer to users), available only in 3 places - Outposts (Cloud in On-premises)- Wavelengths
+
+*****************************************************************************************************************************************************************************************
+*****************************************************************************************************************************************************************************************
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICES COVERED :
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Analytics                 |  Compute             |   Data Base              |  Management & Governance       |  Satellite
+Application Integration   |  Containers          |   Developer Tools        |  Migration & Transfer          |  Security, Identity & Compliance
+AR & VR                   |  Cryptography & PKI  |   End User Computing     |  Networking & Content Delivery |  Storage
+Billing & Cost Management |  Customer Enablement |   Front-End Web & Mobile |  Quantum Computing             |
+Business Applications     |  Customer Engagement |   Game Development       |  Robotics                      |
+Blockchain                |                      |                          |                                |
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+SERVICES NOT COVERED :
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Internet of Things (IoT)  |
+Machine Learning          |
+Media Services            |
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: ANALYTICS ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+1. APP FLOW       : Bidirectional data transfer from SAAS Applications ( Slack or Sales Force ) to AWS ( S3 or Redshift ) for analytics and archiving and automatic workflow.
+2. ATHENA         : Query service that makes it easy to analyze Structured, Unstructured, Semi Structured data (CSV, columnar, standard or JSON format) in Amazon S3 using standard SQL then store results from queries directly into another bucket in S3 or download then to local. Login to console, define your schema, and start querying.
+3. CLOUD SEARCH   : Add search capabilities to your website or application. Upload all data and documents and it will create a search index. Autocomplete suggestions - Geospatial search - Highlighting - Support for 34 languages.
+4. DATA EXCHANGE  : To securely exchange file-based data sets in the AWS Cloud from qualified data providers and then use the data across a variety of AWS analytics and machine learning service. AWS Data Exchange scans all data published by providers before it is made available to subscribers. Used by colleges, hospitals , scientists to get data from various data lakes .
+5. DATA PIPELINE  : To automate the movement and transformation of data across AWS compute and storage resources, as well as your on-premises resources. You upload your pipeline definition to the pipeline, and then activate the pipeline and it schedules and runs tasks by creating Amazon EC2 instances to perform the defined work activities. For example, Task Runner could copy logfiles to Amazon S3 and launch Amazon EMR clusters.
+                    Task Runner polls for tasks in pipeline and then performs those tasks. You can define data-driven workflows, so that tasks can be dependent on the successful completion of previous tasks.
+6. AWS KINESIS    : To collect, process, and analyze real-time, streaming data such as video, audio, application logs, website clickstreams, and IoT telemetry data for machine learning, analytics, and other applications. You can use Amazon Kinesis services for real-time application monitoring, fraud detection, and live leader-boards.
+                    KINESIS STREAMS --> Collect and store data streams     // KINESIS FIREHOSE --> Process and deliver data streams //  KINESIS ANALYTICS --> Analyze streaming data and get insights.
+
+7. AWS GLUE            : Fully managed ETL (extract, transform, and load) service used to categorize your data, clean it, enrich it, and move it reliably between various data stores and data streams.
+                         It is used to combine data [ Prepare a data lake ] from various sources and clean , normalize and prepare data to one common syntax and save to S3. EXTRACT from various DB's [CSV/JSON/XML]-------------> [[ TRANSFORM to common DB ]] ----------------> LOAD to another DB .
+                         Automatically identify type of data in S3/Redshift --> then provides a unified view of data as catalog that can be used with EMR/ATHENA. Glue automatically generates Scala or Python code for your ETL jobs that you can further customize.
+8. AWS LAKE FORMATION  : The data lake is your persistent data that is stored in Amazon S3 and managed by Lake Formation using a Data Catalog. AWS Lake Formation is a fully managed service that makes it easier for you to build, secure, and manage data lakes.
+                         Collect -> Clean -> Move to S3 -> make data available for Analytics. // Lake Formation simplifies and automates many of the complex manual steps that are usually required to create data lakes. These steps include collecting, cleansing, moving, and cataloging data, and securely making that data available for analytics and machine learning. Once a datalake is formed we can use EMR/Athena/Redshift for analytics.
+9. ELASTIC SEARCH      : Log stash is an open source tool for collecting, parsing, and storing logs for future use. Kibana 3 is a web interface that can be used to search and view the logs that Logstash has indexed. Both of these tools are based on Elasticsearch. Elasticsearch, Logstash, and Kibana, when used together is known as an ELK stack.
+                         Used to analyse and get real time  insights on machine generated data at a peta byte scale by deploying, operating, and scaling Elasticsearch clusters in the AWS Cloud.
+10. ELASTIC MAP REDUCE : Apache Spark and apache Hadoop are big data frameworks used to store data from a datalake [ purchase info - social media - server logs ] similar to S3 ad process those logs. Maintaining them is costly so EMR does this for  us . Master node - Core Node - Task Node . Amazon EMR launches clusters in minutes.
+                         Upload data to S3 --> EMR launches cluster with specified EC2 instances --> pull data from S3 into EC2 --> Store output in S3 --> Delete cluster. // EMR uses Hadoop engine and runs Hadoop software on the instances. The central component of Amazon EMR is the cluster. A cluster is a collection of Amazon Elastic Compute Cloud (Amazon EC2) instances. Each instance in the cluster is called a node. Each node has a role within the cluster, referred to as the node type.
+                         The customer implements their algorithm in terms of map() and reduce() functions. Clusters comprises of one master and multiple other nodes. The master node divides input data into blocks, and distributes the processing of the blocks to the other nodes. Each node runs MAP and REDUCE functions to break and join the data at the end.
+11. AWS QUCIK SIGHT    : Combines AWS data + 3rd party data + SaaS data --> Combine --> generate catalogs. // It is a cloud-scale business intelligence (BI) service that you can use to deliver easy-to-understand insights to the people who you work with, wherever they are. It connects to your data in the cloud and combines data from many different sources.
+                         In a single data dashboard, QuickSight can include AWS data, third-party data, big data, spreadsheet data, SaaS data, B2B data, and more.
+13. AMAZON REDSHIFT    : Petabyte-scale cloud data warehouse for only relational data that analyses all your data using standard SQL.
+    // SPECTRUM          It is specifically designed for online analytic processing (OLAP) and business intelligence (BI) applications, which require complex queries against large datasets.
+                         Amazon Redshift also includes Amazon Redshift Spectrum, allowing you to run SQL queries directly against exabytes of unstructured data in Amazon S3 data lakes.
+
+12. AMAZON  MANAGED STREAMING FOR KAFKA - MSK : Managed Streaming for Apache Kafka. Fully managed service that enables you to build and run applications that use Apache Kafka to process streaming data.
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: CONTAINERS ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+DOCKER FILE  is a text document that contains commands that are used to assemble an image.  Docker builds images automatically by reading the instructions from the Dockerfile. DOCKER image is a read-only template with instructions for creating a Docker container.
+DOCKER packages software into standardized units called CONTAINERS . They have everything your software needs to run including Libraries , system tools , code and run time .
+DOCKER FILE --> docker build ---> DOCKER IMAGE -- docker run ---> DOCKER CONTAINER.
+$ docker build  /path/to/a/Dockerfile  --> To build an image.
+$ docker run /path/to/docker_image     --> To create a container.
+
+Elastic container Registry - Elastic container Service -
+1. ECR  : It is a fully managed Docker container registry that makes it easy for developers to store, manage, and deploy DOCKER CONTAINER IMAGES. Supports both private / public container image repositories.
+          Amazon ECR integrates with Amazon ECS, Amazon EKS, AWS Fargate, AWS Lambda, and the Docker CLI, allowing you to simplify your development and production workflows. Uses S3 for storing.
+2. ECS  : Container service that makes it easy to run, stop, and manage containers on a cluster. You can create Amazon ECS clusters within a new or existing VPC.
+          After a cluster is up and running, you can create task definitions that define which container images run across your clusters. The task definition is a text file (in JSON format) that describes one or more containers ( up to a maximum of 10 ) that form your application.
+          The task definition can be thought of as a blueprint for your application that indicate which containers should be used, which ports should be opened for your application, and what data volumes should be used with the containers in the task.
+3. EKS  : KUBERNETIS also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications. It groups containers that make up an application into logical units for easy management and discovery.
+          It s a managed service that you can use to run Kubernetes on AWS without needing to install, operate, and maintain your own Kubernetes control plane or nodes. Amazon EKS automatically detects and replaces unhealthy control plane instances, and it provides automated version upgrades and patching for them.
+
+// EC2          : Deploy and manage your own cluster of EC2 instances for running the containers - For consistent demand of CPU cores.
+                  With the EC2 launch type billing is based on the cost of the underlying EC2 instances. This allows you to optimize price by taking advantage of billing models such as spot instances (bid a low price for an instance), or reserved instances .
+// FARGATE      : Run containers directly, without any EC2 instance - Need not manage compute - for tiny and infrequent workloads.
+                  If your workload is small with the occasional burst, such as a website that has traffic during the day but low traffic at night, then AWS Fargate is a fantastic choice.
+
+4. FARGATE       : A serverless compute engine for containers that works with both ECS and EKS. Fargate allocates the right amount of compute, eliminating the need to choose instances and scale cluster capacity unlike ECS.
+                   Fargate removes the need to provision and manage servers, lets you specify and pay for resources per application, and improves security through application isolation by design.
+5. APP2CONTAINER : It is a command-line tool for modernizing .NET and Java applications into containerized applications. Using A2C simplifies your migration tasks by performing inventory and analysis of your existing applications, creating Docker containers that include your application dependencies, and generating deployment templates.
+                   After you have reviewed your templates, A2C helps you register your containers to Amazon ECR, deploy to Amazon ECS or Amazon EKS, and build CI/CD pipelines using AWS CodeStar.
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: CONTAINERS ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-
