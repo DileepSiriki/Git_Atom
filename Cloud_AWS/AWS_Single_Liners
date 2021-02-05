@@ -63,31 +63,41 @@ Media Services            |
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
 1. APP FLOW       : Bidirectional data transfer from SAAS Applications ( Slack or Sales Force ) to AWS ( S3 or Redshift ) for analytics and archiving and automatic workflow.
-2. ATHENA         : Query service that makes it easy to analyze Structured, Unstructured, Semi Structured data (CSV, columnar, standard or JSON format) in Amazon S3 using standard SQL then store results from queries directly into another bucket in S3 or download then to local. Login to console, define your schema, and start querying.
-3. CLOUD SEARCH   : Add search capabilities to your website or application. Upload all data and documents and it will create a search index. Autocomplete suggestions - Geospatial search - Highlighting - Support for 34 languages.
-4. DATA EXCHANGE  : To securely exchange file-based data sets in the AWS Cloud from qualified data providers and then use the data across a variety of AWS analytics and machine learning service. AWS Data Exchange scans all data published by providers before it is made available to subscribers. Used by colleges, hospitals , scientists to get data from various data lakes .
-5. DATA PIPELINE  : To automate the movement and transformation of data across AWS compute and storage resources, as well as your on-premises resources. You upload your pipeline definition to the pipeline, and then activate the pipeline and it schedules and runs tasks by creating Amazon EC2 instances to perform the defined work activities. For example, Task Runner could copy logfiles to Amazon S3 and launch Amazon EMR clusters.
+2. DATA EXCHANGE  : To securely exchange file-based data sets in the AWS Cloud from qualified data providers and then use the data across a variety of AWS analytics and machine learning service. AWS Data Exchange scans all data published by providers before it is made available to subscribers. Used by colleges, hospitals , scientists to get data from various data lakes .
+3. DATA PIPELINE  : To automate the movement and transformation of data across AWS compute and storage resources, as well as your on-premises resources. You upload your pipeline definition to the pipeline, and then activate the pipeline and it schedules and runs tasks by creating Amazon EC2 instances to perform the defined work activities. For example, Task Runner could copy logfiles to Amazon S3 and launch Amazon EMR clusters.
                     Task Runner polls for tasks in pipeline and then performs those tasks. You can define data-driven workflows, so that tasks can be dependent on the successful completion of previous tasks.
-6. AWS KINESIS    : To collect, process, and analyze real-time, streaming data such as video, audio, application logs, website clickstreams, and IoT telemetry data for machine learning, analytics, and other applications. You can use Amazon Kinesis services for real-time application monitoring, fraud detection, and live leader-boards.
-                    KINESIS STREAMS --> Collect and store data streams     // KINESIS FIREHOSE --> Process and deliver data streams //  KINESIS ANALYTICS --> Analyze streaming data and get insights.
 
-7. AWS GLUE            : Fully managed ETL (extract, transform, and load) service used to categorize your data, clean it, enrich it, and move it reliably between various data stores and data streams.
+4. AWS GLUE            : Fully managed ETL (extract, transform, and load) service used to categorize your data, clean it, enrich it, and move it reliably between various data stores and data streams.
                          It is used to combine data [ Prepare a data lake ] from various sources and clean , normalize and prepare data to one common syntax and save to S3. EXTRACT from various DB's [CSV/JSON/XML]-------------> [[ TRANSFORM to common DB ]] ----------------> LOAD to another DB .
                          Automatically identify type of data in S3/Redshift --> then provides a unified view of data as catalog that can be used with EMR/ATHENA. Glue automatically generates Scala or Python code for your ETL jobs that you can further customize.
-8. AWS LAKE FORMATION  : The data lake is your persistent data that is stored in Amazon S3 and managed by Lake Formation using a Data Catalog. AWS Lake Formation is a fully managed service that makes it easier for you to build, secure, and manage data lakes.
+5. AWS LAKE FORMATION  : The data lake is your persistent data that is stored in Amazon S3 and managed by Lake Formation using a Data Catalog. AWS Lake Formation is a fully managed service that makes it easier for you to build, secure, and manage data lakes.
                          Collect -> Clean -> Move to S3 -> make data available for Analytics. // Lake Formation simplifies and automates many of the complex manual steps that are usually required to create data lakes. These steps include collecting, cleansing, moving, and cataloging data, and securely making that data available for analytics and machine learning. Once a datalake is formed we can use EMR/Athena/Redshift for analytics.
-9. ELASTIC SEARCH      : Log stash is an open source tool for collecting, parsing, and storing logs for future use. Kibana 3 is a web interface that can be used to search and view the logs that Logstash has indexed. Both of these tools are based on Elasticsearch. Elasticsearch, Logstash, and Kibana, when used together is known as an ELK stack.
-                         Used to analyse and get real time  insights on machine generated data at a peta byte scale by deploying, operating, and scaling Elasticsearch clusters in the AWS Cloud.
-10. ELASTIC MAP REDUCE : Apache Spark and apache Hadoop are big data frameworks used to store data from a datalake [ purchase info - social media - server logs ] similar to S3 ad process those logs. Maintaining them is costly so EMR does this for  us . Master node - Core Node - Task Node . Amazon EMR launches clusters in minutes.
-                         Upload data to S3 --> EMR launches cluster with specified EC2 instances --> pull data from S3 into EC2 --> Store output in S3 --> Delete cluster. // EMR uses Hadoop engine and runs Hadoop software on the instances. The central component of Amazon EMR is the cluster. A cluster is a collection of Amazon Elastic Compute Cloud (Amazon EC2) instances. Each instance in the cluster is called a node. Each node has a role within the cluster, referred to as the node type.
-                         The customer implements their algorithm in terms of map() and reduce() functions. Clusters comprises of one master and multiple other nodes. The master node divides input data into blocks, and distributes the processing of the blocks to the other nodes. Each node runs MAP and REDUCE functions to break and join the data at the end.
-11. AWS QUCIK SIGHT    : Combines AWS data + 3rd party data + SaaS data --> Combine --> generate catalogs. // It is a cloud-scale business intelligence (BI) service that you can use to deliver easy-to-understand insights to the people who you work with, wherever they are. It connects to your data in the cloud and combines data from many different sources.
+6. AWS QUCIK SIGHT     : Combines AWS data + 3rd party data + SaaS data --> Combine --> generate catalogs. // It is a cloud-scale business intelligence (BI) service that you can use to deliver easy-to-understand insights to the people who you work with, wherever they are. It connects to your data in the cloud and combines data from many different sources.
                          In a single data dashboard, QuickSight can include AWS data, third-party data, big data, spreadsheet data, SaaS data, B2B data, and more.
-13. AMAZON REDSHIFT    : Petabyte-scale cloud data warehouse for only relational data that analyses all your data using standard SQL.
+
+7. ATHENA              : Query service that makes it easy to analyze Structured, Unstructured, Semi Structured data (CSV, columnar, standard or JSON format) in Amazon S3 using standard SQL then store results from queries directly into another bucket in S3 or download then to local. Login to console, define your schema, and start querying.
+8. AWS KINESIS         : To collect, process, and analyze real-time, streaming data such as video, audio, application logs, website clickstreams, and IoT telemetry data for machine learning, analytics, and other applications. You can use Amazon Kinesis services for real-time application monitoring, fraud detection, and live leader-boards.
+                         KINESIS STREAMS --> Collect and store data streams     // KINESIS FIREHOSE --> Process and deliver data streams //  KINESIS ANALYTICS --> Analyze streaming data and get insights.
+9. ELASTIC MAP REDUCE  : Apache Spark and apache Hadoop are big data frameworks used to store data from a datalake [ purchase info - social media - server logs ] similar to S3 ad process those logs. Maintaining them is costly so EMR does this for  us . Master node - Core Node - Task Node . Amazon EMR launches clusters in minutes.
+    // EMR               Upload data to S3 --> EMR launches cluster with specified EC2 instances --> pull data from S3 into EC2 --> Store output in S3 --> Delete cluster. // EMR uses Hadoop engine and runs Hadoop software on the instances. The central component of Amazon EMR is the cluster. A cluster is a collection of Amazon Elastic Compute Cloud (Amazon EC2) instances. Each instance in the cluster is called a node. Each node has a role within the cluster, referred to as the node type.
+                         The customer implements their algorithm in terms of map() and reduce() functions. Clusters comprises of one master and multiple other nodes. The master node divides input data into blocks, and distributes the processing of the blocks to the other nodes. Each node runs MAP and REDUCE functions to break and join the data at the end.
+10. AMAZON REDSHIFT    : Petabyte-scale cloud data warehouse for only relational data that analyses all your data using standard SQL.
     // SPECTRUM          It is specifically designed for online analytic processing (OLAP) and business intelligence (BI) applications, which require complex queries against large datasets.
                          Amazon Redshift also includes Amazon Redshift Spectrum, allowing you to run SQL queries directly against exabytes of unstructured data in Amazon S3 data lakes.
 
-12. AMAZON  MANAGED STREAMING FOR KAFKA - MSK : Managed Streaming for Apache Kafka. Fully managed service that enables you to build and run applications that use Apache Kafka to process streaming data.
+You should use Amazon EMR if you use custom code to process and analyze extremely large datasets with big data processing frameworks such as Apache Spark, Hadoop, Presto, or Hbase. Amazon EMR gives you full control over the configuration of your clusters and the software you install on them.
+Data warehouses like Amazon Redshift are designed for a different type of analytics altogether.
+Data warehouses are designed to pull together data from lots of different sources, like inventory, financial, and retail sales systems.
+In order to ensure that reporting is consistently accurate across the entire company, data warehouses store data in a highly structured fashion.
+structure builds data consistency rules directly into the tables of the database.
+Amazon Redshift is the best service to use when you need to perform complex queries on massive collections of structured and semi-structured data and get fast performance.
+
+11. CLOUD SEARCH        : Add search capabilities to your website or application. Upload all data and documents and it will create a search index. Autocomplete suggestions - Geospatial search - Highlighting - Support for 34 languages.
+12. ELASTIC SEARCH      : Log stash is an open source tool for collecting, parsing, and storing logs for future use. Kibana 3 is a web interface that can be used to search and view the logs that Logstash has indexed. Both of these tools are based on Elasticsearch. Elasticsearch, Logstash, and Kibana, when used together is known as an ELK stack.
+                          Used to analyse and get real time  insights on machine generated data at a peta byte scale by deploying, operating, and scaling Elasticsearch clusters in the AWS Cloud.
+13. AMAZON  MANAGED STREAMING FOR KAFKA - MSK : Managed Streaming for Apache Kafka. Fully managed service that enables you to build and run applications that use Apache Kafka to process streaming data.
+
+// BIGDATA HADOOP SPARK - ELASTIC SEARCH LOG STATSH KIBANA - KAFKA
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
@@ -123,27 +133,222 @@ Elastic container Registry - Elastic container Service -
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
-:::: CONTAINERS ::::
+:::: STORAGE :::: // Object S3 - Block EBS  - File EFS, FSx
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+1. AWS S3 : 11 9's Durable - Backup Storage for internet - Static websites, FTP apps - virtually unlimited storage - media hosting - software delivery.... // Permissions - Versioning - Replication - Server side & client side encryption - Macie
+            Amazon S3 stores data as objects within buckets. An object is a file and any optional metadata that describes the file. Buckets are containers for objects. Max 100 buckets per account, max 5tb per object and unlimited objects per bucket. // OBJECT : Photos/puppy.jpg -- BUCKET : Dileep --> URL : http://Dileep.s3.aws.com/photos/puppy.jpg . Data is stored a key value pairs. Key is the name of the object and the value is the actual content of file.
+            S3 Cross-Region Replication (CRR) to replicate buckets into same or different regions using S3 Replication Time Control (S3 RTC) to replicate within 15minutes.
+            1. FOR FREQUENTLY ACCESSED OBJECTS   -->  S3 standard ( A-99.99% )& Reduced Redundancy (for reproduceable data, least durable of all classes ) --> Ideal for cloud applications, dynamic websites, content distribution, mobile and gaming applications, and big data analytics.
+            2. FOR AUTOMATICALLY OPTIMIZING DATA WITH CHANGING PATTERNS --> S3 Intelligent Tiering ( A-99.9%, min 128kb ) --> 30 (to infrequent), 90 (to archive), 180 (to deep archive) --> Ideal for new applications and data lakes
+            3. FOR INFREQUENTLY ACCESSED OBJECTS --> S3 Standard IA ( A-99.9% ) & S3 One zone IA ( A-99.5% , stores data in a single AZ and costs 20% less, not resilient to AZ destruction ) --> Ideal for long-term storage, backups, and as a data store for disaster recovery files.
+            4. FOR ARCHIVING OBJECTS --> S3 Glacier (A-99.99%, 1-5 mnt retrieval, 90days) & S3 Glacier Deep Archive (A-99.99%, 12 hrs retrieval, 180 days) --> Ideal for long-term archive. and the Glacier deep is Ideal for those in highly-regulated industries, such as the Financial Services, Healthcare, and Public Sectors — that retain data sets for 7-10 years or longer to meet regulatory compliance requirements.
+            PRICE : Standard [ 0.02300 0.02200 0.02100 ] - Infrequent [ 0.0125 0.01000 ] - glacier [ 0.00400 0.00099]
+            S3 TRANSFER ACCELERATION - Transferring your data to popular AWS storage platform S3 over long distances, AWS S3 Transfer Acceleration helps you do it faster 171% faster over the public Internet.
+
+2. ELASTIC BLOCK STORE : It is a hard drive to EC2 instances - Persists its data even after termination of an instance - EBS can be connected to only one Instance at a time - But one instance can be connected more than one EBS . As a primary storage device for data that requires frequent and granular updates.
+    ( HDD - SDD )        Detach and attach to different instance - change configuration any time - independent of lifecycle of instance - can encrypt and take periodic incremental snapshots.
+
+3. STORAGE GATEWAY     : Hybrid cloud storage service that seamlessly connect on-premises applications to cloud storage, caching data locally for low-latency access. This gives you on-premises access to virtually unlimited cloud storage.
+                         Download the virtual appliance gateway or purchase the hardware appliance, configure required storage, and manage and monitor the service. Once configured, you start using the gateway to write and read data to and from AWS storage. You can monitor the status of your data transfer and your storage interfaces through the AWS Management Console.
+                         Storage GW can be a --> VM on premises - EC2 instance - Hardware device.
+                         1. FILE GW   -> retrieve objects in S3 using Network File System - NFS (linux) / Server Messaging protocol- SMB (Windows), GW deployed on a VM running on Hyper-V / ESXi / KVM
+                         2. VOLUME GW -> On-premises applications can access these as Internet Small Computer System Interface (iSCSI)targets --> Cached (Store in s3 and retain freq. data as cache in on-premises)- Stored (Store in on-premises and save backups to S3)
+                         3. TAPE GW   -> Cost-effectively and durably archive backup data in GLACIER or DEEP_ARCHIVE -- GW deployed on a VM running on Hyper-V / ESXi / KVM
+
+4. SNOW FAMILY         : Snow cone      -- 8 TB storage   --> 1 SMALL BOX [ uses opshub application for data transfer ]
+                         Snow Ball      -- 80 TB storage  --> 1 SUITCASE  [ Snowball is a petabyte-scale data transport solution by cascading snow balls ]
+                         Snow Ball edge -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
+                         Snow Mobile    -- 1 Exabyte      --> 1 Truck     [ 100Pb per snow mobile --  AWS Snowmobile is the exabyte-scale data migration service ]
+    // For edge computing applications, to collect data, process the data to gain immediate insight, and then transfer the data online to AWS by shipping the device to AWS, or online by using AWS DataSync.
+    // The Snow cone device supports data transfer from on-premises Windows, Linux, and macOS servers and file-based applications through the NFS interface.
+    // Using Snowball addresses common challenges with large-scale data transfers including high network costs, long transfer times, and security concerns.
+    // S3 buckets, data, and EC2 AMIs that you choose are automatically configured, encrypted, and pre-installed on your devices. The AWS DataSync agent is also pre-installed before your devices are shipped to you. you connect it to your on-premises network and set the IP address either manually or automatically with DHCP. You must download and install AWS OpsHub for Snow Family, on a windows or mac laptop.
+
+5. AWS BACKUP : Automatic backups of our AWS resources using BAKUP PLANS. It automates and consolidates backup tasks that were previously performed service-by-service, and removes the need to create custom scripts and manual processes.
+                These features include Amazon Elastic Block Store (Amazon EBS) snapshots, Amazon Relational Database Service (Amazon RDS)snapshots, Amazon DynamoDB backups, AWS Storage Gateway snapshots, and others.
+6. AWS EFS    : Only for LINUX -- simple, scalable, fully managed elastic NFS file system for use with AWS Cloud services and on-premises resources. you can create a file system, mount the file system on your EC2 instances, and then read and write data from your EC2 instances to and from your file system.
+                Multiple Amazon EC2 instances can access an Amazon EFS file system at the same time, providing a common data source for workloads and applications running on more than one instance or server.
+
+                EC2-a --
+                EC2-b   | <---------->  |||||||||  <---------->  On-Premises
+                EC2-c --       NFS         EFS          NFS
+
+7. AWS FSX    : For WINDOWS -- Fully managed third-party file systems with the native compatibility and feature sets for workloads such as Microsoft Windows–based storage, high-performance computing, machine learning, and electronic design automation.
+                LUSTURE &  WINDOWS FILE SERVER ---- With file storage on Amazon FSx, the code, applications, and tools that Windows developers and administrators use today can continue to work unchanged.
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: CRYPTOGRAPHY AND PKI [ Public Key Infrastructure ]  SERVICES  ::::
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
+AWS provides multiple services that you can use to help protect your data at rest or in transit.
+Cryptography is the practice of protecting information through the use of coded algorithms, hashes, and signatures. Encryption -> Cipher text -> Decryption .
+Symmetric [ Share Key - Advanced Encryption Standard (AES) & Triple DES (3DES) ] -  Asymmetric [ Public key - Rivest Shamir Adleman (RSA) & Elliptic Curve Cryptography (ECC) ] - Client side - Server Side
+
+#### AWS OWNED CMK _ AWS MANAGED CMK _ CUSTOMER MANAGED CMK
+A customer master key (CMK) is a logical representation of a master key.
+The CMK includes metadata, such as the key ID, creation date, description, and key state.
+The CMK also contains the key material used to encrypt and decrypt data.
+AWS KMS supports symmetric and asymmetric CMKs.
+
+1. CLOUD HSM : HARDWARE SECURITY MODULE is a computing device that performs cryptographic operations and provides secure storage for cryptographic keys.
+               Used to Generate, store, import, export, and manage cryptographic keys, including symmetric keys and asymmetric key pairs -- Use symmetric and asymmetric algorithms to encrypt and decrypt data -- Use cryptographic hash functions to compute message digests and hash-based message authentication codes (HMACs) -- Cryptographically sign data (including code signing) and verify signatures.
+               // If you need to secure your encryption keys in a service backed by FIPS-validated HSMs, but you do not need to manage the HSM, try AWS Key Management Service.
+2. AWS KMS   : KEY MANAGEMENT SERVICE  provides tools for generating master keys and other data keys and also interacts with many other AWS services to encrypt their service-specific data.
+               The customer master keys (CMKs) that you create in AWS KMS are protected by FIPS 140-2 validated cryptographic modules. They never leave AWS KMS unencrypted. To use or manage your CMKs, you interact with AWS KMS.
+               CMK is a 256bit AES symmetric key used to encrypt and decrypt the DATA KEYS that encrypt the actual data. You can also create asymmetric RSA or elliptic curve (ECC) CMKs backed by asymmetric key pairs. The public key in each asymmetric CMK is exportable, but the private key remains within AWS KMS.
+               AWS KMS does not store or manage data keys, and you cannot use KMS to encrypt or decrypt with data keys. To use data keys to encrypt and decrypt, use the AWS Encryption SDK.
+               KMS -- Generate --> CMK -- Encrypt & Decrypt --> DATA KEYS -- Encrypt & Decrypt --> Actual Data
+               |____________________ KMS_________________________________| |_________ ENRYPTION SDK __________|
 
 
+3. ENCRYPTION SDK        : A client-side encryption library to help you implement best-practice encryption and decryption in any application even if you're not a cryptography expert.
+                           Every successful call to encrypt returns a single portable, formatted encrypted message that contains metadata and the message ciphertext.
+                           All implementations are interoperable. For example, you can encrypt your data with the Java library and decrypt it with the Python library. Or you can encrypt data with the C library and decrypt it with the CLI.
+4. DYNAMO DB ENC. CLIENT : A client-side encryption library that helps you to protect your table data before you send it to Amazon DynamoDB. INTEROPERABLE b/w java and python.
+                           It encrypts the attribute values in each table item using a unique encryption key. It then signs the item to protect it against unauthorized changes, such as adding or deleting attributes or swapping encrypted values. It also verifies and decrypts them when you retrieve them.
+5. S3 CLIENT SIDE ENCRYP : 1 -->  Using a CMK stored in AWS KMS : Client requests KMS for a CMK to generate Data keys. KMS sends two versions of plain and encrypted data key. Client encrypts data using plain key and embeds encrypted key as meta data.
+                                  Upon transfer , S3 gets plain key from encrypted key using KMS using CMK and decrypts the object . ONE KEY PER ONE OBJECT
+                           2 -->  Using a master key stored within your application  : You provide a client-side master key to the Amazon S3 encryption client. The client uses the master key only to encrypt the data encryption key that it generates randomly.
+                                  S3 client generates a plain text data key , encrypts the data and now the client-side master key encrypts the plain text data key and store it as meta data in object . while downloading first decrypt the data key using client-side master key and use it to decrypt the data.
+                                  It's important that you safely manage your client-side master encryption keys. If you lose them, you can't decrypt your data.
+
+// PKI : Public key Infrastructure is a system of hardware, software, people, policies, documents, and procedures.
+// It includes the creation, issuance, management, distribution, usage, storage, and revocation of digital certificates.
+
+7. AWS CERTIFICATE MANAGER : ACM - Service that lets you easily provision, manage, and deploy public and private Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificates for use with AWS services and your internal connected resources.
+                             These public certificates verify the identity and authenticity of your web server and the ownership of your public keys. In doing so, public certificates initiate a trusted, encrypted connection between you and your users.
+8. AWS ACM PRIVATE CERTIFICATE AUTHORITY : ACM PCAIs service is for enterprise customers building a public key infrastructure (PKI)inside the AWS cloud and intended for private use within an organization.
+                             With private certificates you can authenticate resources inside an organization. Private certificates allow entities like users, web servers, VPN users, internal API endpoints, and IoT devices to prove their identity and establish encrypted communications channels.
+
+                             Plain text     --> [[ cryptographic hash function - SHA (Secure HASH) ]]  --> Original Message Digest also called a HASH
+                             Message Digest --> [[ Plain text private key + Signing Algorithm      ]]  --> SIGNATURE also called DIGITAL SIGNATURE also called a CERTIFICATE
+
+                             ** We need to send both the Original Message Digest also called a HASH and the signature along with the message to the client .
+
+                             Signature   --> [[ Public key  + Decryption Algorithm ]]    --> Generated Message Digest also called a generated HASH
+                             Generated Message Digest + Original Message Digest  --> [[ Verification Algorithm ]] --> TRUE or FALSE
+
+6. AWS SECRET MANAGER      : Provides encryption and rotation of encrypted secrets used with AWS-supported databases. To protect all other types of data at their source, use the AWS Encryption SDK.
+9. AWS SIGNER              : Fully managed code-signing service to ensure the trust and integrity of your code. Organizations validate code against a digital signature to confirm that the code is unaltered and from a trusted publisher.
+                             For example With Code Signing for AWS Lambda, you can ensure that only trusted code runs in your Lambda functions.
+10. AWS CRYPTO TOOLS       : Part of the AWS ENCRYPTION SDK . The AWS Crypto Tools libraries are designed to help everyone do cryptography right, even without special expertise.
 
 
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: DATABASE  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
+Structured Query language (SQL) pronounced as "S-Q-L" or sometimes as "See-Quel" is the standard language for dealing with Relational Databases.
+A relational database defines relationships in the form of tables. Ex : MySQL Database, Oracle, Ms SQL Server, Sybase, PostgreSQL etc.
+ACID --> Atomicity (Either all of its operations are executed or none)                  - Consistency (The database must remain in a consistent state after any transaction)
+         Isolation (No transaction will affect the existence of any other transaction)  - Durability  (The database should be durable enough to hold all its latest updates even if the system fails or restarts.)
 
+Not only Structured Query language (NO-SQL) pronounced as "Not only SQL" or sometimes as "Not SQL" is the standard language for dealing with Non-Relational/Distributed  Databases.
+NoSQL is a non-relational DMS, that does not require a fixed schema, avoids joins, and is easy to scale. NoSQL database is used for distributed data stores with humongous data storage needs. NoSQL is used for Big data and real-time web apps
+Ex : MongoDB, Redis, , Neo4j, Cassandra, Hbase.
+BASE : Basically Available - Soft State - Eventually Consistent
 
+DATABASE TYPE     USE CASE                                                      AWS SERVICE
+================================================================================================================================================
+Relational        Traditional applications, ERP, CRM, e-commerce                Amazon Aurora - Amazon RDS -  Amazon Redshift
+================================================================================================================================================
+Key-value         High-traffic web apps, e-commerce systems,                    Amazon DynamoDB
+(JSON-like)       gaming applications
+================================================================================================================================================
+In-memory         Caching, session management, gaming leader boards,            Amazon ElastiCache for Memcached -  Amazon ElastiCache for Redis
+                  geospatial applications
+================================================================================================================================================
+Document          Content management, catalogs, user profiles                   Amazon DocumentDB (with MongoDB compatibility)
+================================================================================================================================================
+Wide column       High scale industrial apps for equipment maintenance,         Amazon Keyspaces (for Apache Cassandra)
+                  fleet management, and route optimization
+================================================================================================================================================
+Graph             Fraud detection, social networking, recommendation engines    Amazon Neptune
+================================================================================================================================================
+Time series       IoT applications, DevOps, industrial telemetry                Amazon Timestream
+================================================================================================================================================
+Ledger            Systems of record, supply chain, registrations,               Amazon QLDB
+                  banking transactions
+================================================================================================================================================
 
+REDSHIFT vs RDS :
+Both Amazon Redshift and Amazon RDS enable you to run traditional relational databases in the cloud while offloading database administration.
+Customers use Amazon RDS databases primarily for online-transaction processing (OLTP) workload while Redshift is used primarily for reporting and analytics.
+OLTP workloads require quickly querying specific information and support for transactions like insert, update, and delete and are best handled by Amazon RDS.
+Amazon Redshift harnesses the scale and resources of multiple nodes and uses a variety of optimizations to provide order of magnitude improvements over traditional databases for analytic and reporting workloads against very large data sets.
 
+1. RDS : It is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. DB instances use Amazon Elastic Block Store (Amazon EBS) volumes for database and log storage.
+         Amazon RDS provides you with six widely-used database engines to choose from, including Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle Database, and SQL Server.
+         The basic building block of Amazon RDS is the DB instance. Each DB instance runs a DB engine. The computation and memory capacity of a DB instance is determined by its DB instance class [ Magnetic, General Purpose (SSD), Provisioned IOPS(PIOPS) ] .
+         Your primary DB instance is synchronously replicated across Availability Zones to the secondary instance. A security group controls the access to a DB instance. It does so by allowing access to IP address ranges or Amazon EC2 instances that you specify. When you use Amazon RDS, you can choose to use on-demand DB instances or reserved DB instances.
+         You can have up to 40 Amazon RDS DB instances. Each DB instance has a DB instance identifier. The identifier is used as part of the DNS hostname allocated to your instance by RDS. For example, if you specify db1 as the DB instance identifier, then RDS will automatically allocate a DNS endpoint for your instance, such as db1.123456789012.us-east-1.rds.amazonaws.com
 
+    READ REPLICAS :
+    -----------------
+    Amazon RDS Read Replicas enable you to create one or more read-only copies of your database instance within the same AWS Region or in a different AWS Region.
+    Updates made to the source database are then asynchronously copied to your Read Replicas. In addition to providing scalability for read-heavy workloads, Read Replicas can be promoted to become a standalone database instance when needed.
+    Amazon RDS Multi-AZ deployments provide enhanced availability for database instances within a single AWS Region.
+    With Multi-AZ, your data is synchronously replicated to a standby in a different Availability Zone (AZ). In the event of an infrastructure failure, Amazon RDS performs an automatic failover to the standby, minimizing disruption to your applications.
 
+2. AURORA : Fully managed relational database engine that's compatible with MySQL(5 times throughput) and PostgreSQL(3 times throughput).
+            The only RDS database that can scale instances automatically is Amazon Aurora. For RDS databases other than Aurora, RDS only supports storage auto-scaling, NOT instance auto-scaling.
+            If you want to scale Amazon RDS instances (other than Aurora), you have two options:
+                  1- Manual horizontal scaling (by adding read replicas)
+                  2- Manual vertical scaling (by upgrading/downgrading an existing instance).
+    // AWS OWNED --> operates on clusters rather than a single instance.
 
+3. DYNAMO DB : Fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
+               With point-in-time recovery, you can restore a table to any point in time during the last 35 days. Point-in-time recovery helps protect your tables from accidental write or delete operations.
+               A table is a collection of items, and each item is a collection of attributes. DynamoDB uses primary keys to uniquely identify each item in a table and secondary indexes to provide more querying flexibility.
+               You can use DYNAMO DB STREAMS to capture data modification events in DynamoDB tables.
+               TABLE --> ITEM --> ATTRIBUTES . //For example, an item in a People table contains attributes called PersonID, LastName, FirstName, and so on.
 
+               DynamoDB Streams is an optional feature that captures data modification events in DynamoDB tables.
+               The data about these events appear in the stream in near-real time, and in the order that the events occurred.
+               Each event is represented by a stream record. Event can be an ADDITION - UPDATION - DELETION of an item.
 
+4. AMAZON ELASTIC CACHE FOR REDIS & MemCached :  // Set up in-memory cache environments in cloud .
+// Queries that involve joins, we have to pay every time we query so we can cache such data and pay once. --> Caching data and providing it to users quickly rather than getting it from Disks. // example for applications in mobile .
+Amazon ElastiCache makes it easy to set up, manage, and scale distributed in-memory cache environments in the AWS Cloud.
+It provides a high performance, resizable, and cost-effective in-memory cache, while removing complexity associated with deploying and managing a distributed cache environment.
+ElastiCache works with both the Redis and Memcached engines.
+The service improves the performance of web applications by allowing you to retrieve information from fast, managed, in-memory data stores, instead of relying entirely on slower disk-based databases.
 
+The most frequently accessed data be stored in elasticache so that the application’s response time is optimal.
+The primary purpose of an in-memory data store is to provide ultrafast (sub millisecond latency) and inexpensive access to copies of data.
 
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: DEVELOPER TOOLS  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
+1. CLOUD-9       : We get an IDE to work with online. The AWS Cloud9 IDE offers a rich code-editing experience with support for several programming languages and runtime debuggers, and a built-in terminal.
+                   // Can connect code and EC2. Store your project's files locally on the instance or server --> Clone a remote code repository — such as a repo in AWS CodeCommit — into your environment --> Work with a combination of local and cloned files in the environment.
+2. CLOUD-SHELL   : We get a shell to work with online similar to AWS CLI that you can use to manage AWS services.
+3. CODE-ARTIFACT : Service that makes it easy for organizations to securely store, publish and share software packages used for application development. Artifacts are produced by some actions and consumed by others.
+4. CODE-COMMIT   : Similar to GITHUB and Versioning in S3. It is a version control service that enables you to privately store and manage Git repositories in the AWS Cloud.
+                   You can use AWS Cloud9 to make code changes in a CodeCommit repository. CodeCommit is optimized for team software development. It manages batches of changes across multiple files, which can occur in parallel with changes made by other developers.
+5. CODE-STAR     : It lets you quickly develop, build, and deploy applications on AWS.
+                   Depending on your choice of AWS CodeStar project template, that toolchain might include source control, build, deployment, virtual servers or serverless resources, and more.
+                   Go to AWS -> Code Star -> Select a Template -> Add team members -> create a repo for code -> Create a pipeline -> Deploy Project . // wiki tile or a issue-tracking software  can be added for recommendations.
+6. X-RAY         : Makes it easy for developers to analyze the behaviour of their distributed applications (Micro Services) by providing request tracing, exception collection, and profiling capabilities.
+                   Is a service that collects data about requests that your application serves, and provides tools you can use to view, filter, and gain insights into that data to identify issues and opportunities for optimization.
 
+7. CODE-BUILD    : Compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. It provides pre packaged build environments for popular programming languages and build tools such as Apache Maven, Gradle, and more.
+                   BUILD PROJECT = Instructions on how to run Build + Source code repo + Build env. + Build commands + Output repo
+                   Source Code + BUILD PROJECT [ BUILD SPEC -> OS + Language + Run time + Build env + Build Tools + where to put output ] -> CODE BUILD creates a BUILD ENVIRONMENT  -> Send output to S3 ->  Send SNS if specified .
+
+8. CODE-DEPLOY   : A deployment service that automates application deployments to Amazon EC2 instances, on-premises instances, serverless Lambda functions, or Amazon ECS services.
+                   CodeDeploy can deploy application content that runs on a server and is stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories. It can deploy in one or 1000 instances.
+                   Deployable content [ from CODE BUILD ] + APPSPEC File -> upload to S3 or GITHUB -> Tell CODE DEPLOY [ s3 url / guthub url && No; of instances ] -> CODE DEPLOY Agent in each instance pulls the revision .
+
+9. CODE-PIPELINE : A continuous delivery [ CI-CD ] service that enables you to model, visualize, and automate [ automates the building, testing, and deployment of your software into production ] the steps required to release your software.
 
 -

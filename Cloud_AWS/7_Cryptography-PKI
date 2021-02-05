@@ -106,6 +106,9 @@ Unlike CMKs, data keys can encrypt data of any size and format, including stream
 AWS KMS does not store or manage data keys, and you cannot use KMS to encrypt or decrypt with data keys. To use data keys to encrypt and decrypt, use the AWS Encryption SDK.
 AWS KMS CMKs are backed by FIPS-validated hardware service modules (HSMs) that KMS manages. To manage your own HSMs, use AWS CloudHSM.
 
+KMS -- Generate --> CMK -- Encrypt & Decrypt --> DATA KEYS -- Encrypt & Decrypt --> Actual Data
+|____________________ KMS_________________________________| |_________ ENRYPTION SDK __________|
+
 
 3. AWS ENCRYPTION SDK :
 The AWS Encryption SDK is a client-side encryption library to help you implement best-practice encryption and decryption in any application even if you're not a cryptography expert.
@@ -260,7 +263,7 @@ AWS KEY MANAGEMENT SERVICE  & CUSTOMER MASTER KEYS  :
 
 KEY MANAGEMENT SERVICE : KMS <--> CUSTOMER MASTER KEYS [ CMK ]
 ---------------------------
-It is a managed service that makes it easy for you to create and control customer master keys (CMKs), the encryption keys used to encrypt your data.
+It is a managed service that makes it easy for you to create and control customer master keys (CMKs), the encryption keys used to encrypt your data keys that encrypt the actual data.
 AWS KMS CMKs are protected by hardware security modules (HSMs).
 AWS KMS is integrated with most other AWS services that encrypt your data.
 AWS KMS is also integrated with AWS CloudTrail to log use of your CMKs for auditing, regulatory, and compliance needs.
@@ -421,7 +424,7 @@ SHA Algorithm - SHA is the acronym for Secure Hash Algorithm, used for hashing d
                 The resulting digital signature is unique too as it depends on the hash that's generated out of the data.
 
               Plain text     --> [[ cryptographic hash function - SHA ]]           --> Original Message Digest also called a HASH
-              Message Digest --> [[ Plain text private key + Signing Algorithm ]]  --> Signature also called DIGITAL SIGNATURE also called a CERTIFICATE
+              Message Digest --> [[ Plain text private key + Signing Algorithm ]]  --> SIGNATURE also called DIGITAL SIGNATURE also called a CERTIFICATE
 
               ** We need to send both the Original Message Digest also called a HASH and the signature along with the message to the client .
 

@@ -17,7 +17,6 @@ Durability  − The database should be durable enough to hold all its latest upd
               If a transaction updates a chunk of data in a database and commits, then the database will hold the modified data.
               If a transaction commits but the system fails before the data could be written on to the disk, then that data will be updated once the system springs back into action.
 
-
 Not only Structured Query language (NO-SQL) pronounced as "Not only SQL" or sometimes as "Not SQL" is the standard language for dealing with Non-Relational/Distributed  Databases.
 NoSQL is a non-relational DMS, that does not require a fixed schema, avoids joins, and is easy to scale.
 NoSQL database is used for distributed data stores with humongous data storage needs. NoSQL is used for Big data and real-time web apps
@@ -95,8 +94,7 @@ If you want to scale Amazon RDS instances (other than Aurora), you have two opti
   1- Manual horizontal scaling (by adding read replicas)
   2- Manual vertical scaling (by upgrading/downgrading an existing instance).
 
-
-  • When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together. With AmazonRDS, these are split apart so that you can scale them independently.
+  • When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together. With Amazon RDS, these are split apart so that you can scale them independently.
     If you need more CPU, less IOPS, or more storage, you can easily allocate them.
   • Amazon RDS manages backups, software patching, automatic failure detection, and recovery.
   • To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances.
@@ -105,8 +103,6 @@ If you want to scale Amazon RDS instances (other than Aurora), you have two opti
     You can use these backups to restore a database. The Amazon RDS restore process works reliably and efficiently.
   • You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server.
   • In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management (IAM) to define users and permissions.
-
-
 
 DB INSTANCE : [  Isolated database environment running in the cloud ]
 -------------------------------------------------------------------------
@@ -186,6 +182,12 @@ CONNECTING :
 AWS -> RDS -> create a DB instance [ chose any type you want ]-> Easy create -> generate credentials -> save endpoint URl and ports
 Open CLI -> mysql -h <endpoint> -P 3306 -u <mymasteruser>  -p
 
+READ REPLICAS :
+-----------------
+Amazon RDS Read Replicas enable you to create one or more read-only copies of your database instance within the same AWS Region or in a different AWS Region.
+Updates made to the source database are then asynchronously copied to your Read Replicas. In addition to providing scalability for read-heavy workloads, Read Replicas can be promoted to become a standalone database instance when needed.
+Amazon RDS Multi-AZ deployments provide enhanced availability for database instances within a single AWS Region.
+With Multi-AZ, your data is synchronously replicated to a standby in a different Availability Zone (AZ). In the event of an infrastructure failure, Amazon RDS performs an automatic failover to the standby, minimizing disruption to your applications.
 
 #########################################################################################################################
 #########################################################################################################################
@@ -200,7 +202,7 @@ The automatic clustering, replication, and storage allocation make it simple and
 
 An Amazon Aurora DB cluster consists of one or more DB instances and a cluster volume that manages the data for those DB instances.
 An Aurora cluster volume is a virtual database storage volume that spans multiple Availability Zones, with each Availability Zone having a copy of the DB cluster data.
- --> Primary DB Instance and Aurora Replica
+ --> Primary DB Instance and Aurora Replicas.
 
 AWS DYNAMO DB :
 =====================
@@ -415,7 +417,7 @@ While the Redshift Spectrum feature is great for running queries against data in
 Amazon EMR goes far beyond just running SQL queries.
 Amazon EMR is a managed service that lets you process and analyze extremely large data sets using the latest versions of popular big data processing frameworks, such as Spark, Hadoop, and Presto, on fully customizable clusters.
 
---> Amazon Athena vs. Redshift Spectrum:
+--> Amazon Athena vs. Redshift Spectrum :
 -----------------------------------------
 Amazon Athena is the simplest way to give any employee the ability to run ad-hoc queries on data in Amazon S3.
 Athena is serverless, so there is no infrastructure to setup or manage, and you can start analyzing your data immediately.

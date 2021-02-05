@@ -1439,7 +1439,7 @@ It provides file storage for your Amazon EC2 instances.
 With Amazon EFS, you can create a file system, mount the file system on your EC2 instances, and then read and write data from your EC2 instances to and from your file system.
 It provides a simple, scalable, fully managed elastic NFS filesystem for use with AWS Cloud services and on-premises resources.
 Amazon EFS has a simple web services interface that allows you to create and configure file systems quickly and easily.
-Multiple Amazon EC2instances can access an Amazon EFS file system at the same time, providing a common data source for workloads and applications running on more than one instance or server.
+Multiple Amazon EC2 instances can access an Amazon EFS file system at the same time, providing a common data source for workloads and applications running on more than one instance or server.
 Using Amazon EFS with Microsoft Windows–based Amazon EC2 instances is not supported.
 
                         EC2-a --
@@ -1736,6 +1736,14 @@ Amazon RDS can be used to host Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle
   • You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server.
   • In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management (IAM) to define users and permissions.
 
+  READ REPLICAS :
+  -----------------
+  Amazon RDS Read Replicas enable you to create one or more read-only copies of your database instance within the same AWS Region or in a different AWS Region.
+  Updates made to the source database are then asynchronously copied to your Read Replicas. In addition to providing scalability for read-heavy workloads, Read Replicas can be promoted to become a standalone database instance when needed.
+  Amazon RDS Multi-AZ deployments provide enhanced availability for database instances within a single AWS Region.
+  With Multi-AZ, your data is synchronously replicated to a standby in a different Availability Zone (AZ). In the event of an infrastructure failure, Amazon RDS performs an automatic failover to the standby, minimizing disruption to your applications.
+
+
 9. AMAZON REDSHIFT :  https://www.youtube.com/watch?v=_qKm6o1zK3U&t=22s // doesn’t support non-relational data
 //Amazon Redshift determines what data is local and what is in Amazon S3, generates a plan to minimize the amount of Amazon S3 data that needs to be read, requests Redshift Spectrum workers out of a shared resource pool to read and process data from Amazon S3.
 Amazon Redshift is not a MySQL database service. Amazon Redshift is a fully managed data warehouse.
@@ -1824,7 +1832,8 @@ You can use the AWS CodeBuild or AWS CodePipeline console to run CodeBuild.
 --> While the build is running, the build environment sends information to CodeBuild and Amazon CloudWatch Logs.
 
 PROCESS :::
- Source Code + BUILD PROJECT [ BUILD SPEC -> OS + Language + Run time + Build env + where to put output ] -> CODE BUILD creates a BUILD ENVIRONMENT  -> Send output to S3 ->  Send SNS if specified .
+ BUILD PROJECT = Instructions on how to run Build + Source code repo + Build env. + Build commands + Output repo
+ Source Code + BUILD PROJECT [ BUILD SPEC -> OS + Language + Run time + Build envBuild Tools + where to put output ] -> CODE BUILD creates a BUILD ENVIRONMENT  -> Send output to S3 ->  Send SNS if specified .
 
 **** If you use AWS CodePipeline to run builds, you can get limited build information from CodePipeline.
      Hence we use codebuild seperately.
@@ -1867,7 +1876,7 @@ It can also deploy container-based applications to services by using Amazon ECS.
 --> Finally, the CodeDeploy agent on each instance pulls the target revision from the Amazon S3 bucket or GitHub repository and, using the instructions in the AppSpec file, deploys the contents to the instance.
 
 PROCESS :::
- Deployable content [ from CODE BUILD ] + APPSPEC File -> S3 or GITHUB -> Tell CODE DEPLOY [ s3 url / guthub url && No; of instances ] -> CODE DEPLOY Agent in each instance pulls the revision .
+ Deployable content [ from CODE BUILD ] + APPSPEC File -> upload to S3 or GITHUB -> Tell CODE DEPLOY [ s3 url / guthub url && No; of instances ] -> CODE DEPLOY Agent in each instance pulls the revision .
 
 7. AWS CODE-PIPELINE : // CI-CD PIPELINE
 AWS CodePipeline is a continuous delivery service that enables you to model, visualize, and automate the steps required to release your software.
@@ -1934,7 +1943,7 @@ You can create a project both from CLI and console .
 --> • Visualize, operate, and collaborate on your projects in one place
 
 PROCESS :::
-Go to AWS -> Coe Star -> Select a Template -> Add team members -> create a repo for code -> Create a pipeline -> Deploy Project . // wiki tile or a issue-tracking software  can be added for recommendations.
+Go to AWS -> Code Star -> Select a Template -> Add team members -> create a repo for code -> Create a pipeline -> Deploy Project . // wiki tile or a issue-tracking software  can be added for recommendations.
 
 A developer with the AWSCodeStarFullAccess policy applied that creates a project and adds team members to it.
 Together they write, build, test, and deploy code.
@@ -3142,6 +3151,20 @@ These accelerators reduce hundreds of manual installation and configuration proc
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+--> NETWORK BASED SERVICES : Private Network Connectors to AWS            - AWS DIRECT CONNECT
+                             Edge Locations for S3 Enabled applications   - AMAZON S3 TRANSFER ACCELERATION
+
+--> ONLINE  DATA TRANSFER :  Load stream Data into S3                     - AMAZON KINESIS
+                             Online transfer of active data               - AWS DATA SYNC
+                             SFTP transfer to S3                          - AWS TRANSFER FOR SFTP
+                             Database Transfer                            - AWS DATABSE MIGRATION
+                             VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
+
+
+--> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball - Edge / Snow Mobile ]
+
+--> HYBRID DATA STORAGE   :  Access AWS storage from On-premisis          - AWS STORAGE GATEWAY
+
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################

@@ -4,13 +4,14 @@ AMAZON SIMPLE STORAGE SERVICE :
 #### S3 does not require region selection. --> S3 GLOBAL by default
 #### But BUCKETS are region specific. Select the closest region available for faster access.
 
-Amazon S3 provides a simple web service interface that you can use to store and retrieve any amount of data, at any time, from anywhere on the web.
+Amazon S3 provides a simple web service interface that you can use to store and retrieve any amount of data, at any time, from anywhere on the web. Virtually you can store infinite amount of data.
 Using this web service, you can easily build applications that make use of Internet storage.
-Since Amazon S3 is highly scalable and you only pay for what you use, you can start small and grow your application as you wish, with no compromise on performance or reliability.
+Since Amazon S3 is highly scalable [ scales automatically ] and you only pay for what you use, you can start small and grow your application as you wish, with no compromise on performance or reliability.
 Amazon S3 is also designed to be highly flexible.
 Store any type and amount of data that you want; read the same piece of data a million times or only for emergency disaster recovery; build a simple FTP application, or a sophisticated web application such as the Amazon.com retail web site.
 Amazon S3 frees developers to focus on innovation instead of figuring out how to store their data.
-Amazon S3 event notifications can be sent in response to actions in Amazon S3 like PUTs, POSTs, COPYs, or DELETEs. Notification messages can be sent through either Amazon SNS, Amazon SQS, or directly to AWS Lambda.
+Amazon S3 event notifications can be sent in response to actions in Amazon S3 like PUTs, POSTs, COPYs, or DELETEs.
+Notification messages can be sent through either Amazon SNS, Amazon SQS, or directly to AWS Lambda.
 
 In S3, we can only host static websites, or static assets of a dynamic website (such as images, audio files, video files...etc).
 A dynamic website relies on server-side processing and it uses server-side scripts such as PHP, JSP, or ASP.NET.
@@ -41,7 +42,7 @@ To store a file in Amazon S3, you upload it to a bucket. When you upload a file 
 Buckets are containers for objects. You can have one or more buckets.
 You can control access for each bucket, deciding who can create, delete, and list objects in it.
 You can also choose the geographical Region where Amazon S3 will store the bucket and its contents and view access logs for the bucket and its objects.
-Amazon S3 is a simple key-based object store. When you store data, you assign a unique object key that can later be used to retrieve the data. Keys can be any string
+Amazon S3 is a simple key-based object store. When you store data, you assign a unique object key that can later be used to retrieve the data. Keys can be any string.
 
           Create a Bucket -> Upload a file -> Aws Adds metadata -> Aws creates an OBJECT [ file + metadata ]
           --> Before you can store data in Amazon S3, you must create a bucket.
@@ -548,19 +549,18 @@ For Volume Gateway, you create and mount volumes as iSCSI devices.
 For Tape Gateway, you connect your backup application to create and manage tapes.
 Once configured, you start using the gateway to write and read data to and from AWS storage. You can monitor the status of your data transfer and your storage interfaces through the AWS Management Console. Additionally, you can use the API or SDK to programmatically manage your application’s interaction with the gateway.
 
-Storage Gateway offers three different types of gateways – File Gateway, Tape Gateway, and Volume Gateway
-that seamlessly connect on-premises applications to cloud storage, caching data locally for low-latency access.
+Storage Gateway offers three different types of gateways – File Gateway, Tape Gateway, and Volume Gateway that seamlessly connect on-premises applications to cloud storage, caching data locally for low-latency access.
 Your applications connect to the service through a virtual machine or gateway hardware appliance using standard storage protocols, such as NFS, SMB, and iSCSI.
 The gateway connects to AWS storage services, such as Amazon S3, Amazon S3 Glacier, Amazon S3 Glacier Deep Archive, Amazon EBS, and AWS Backup, providing storage for files, volumes, snapshots, and virtual tapes in AWS.
 
-                                                                 ---------------------------------------------------> CAN BE :
+                                                                 ---------------------------------------------------> CAN BE -
                                                                 |                                          |          1. An on-premises VM
                           -----------                       STORAGE-GW                      -----------    |          2. A hardware appliance
           S3             |            |                         --                         |           |   |          3. An EC2 instance in EC2
           Glacier        |    AWS     | <--------------------> |  | <--------------------> |   SITE    |   |
-          Glacier Deep   |            |                         --                         |           |   ---------> CAN BE :
-          EBS, Backup     -----------                                                       -----------               1. FILE GW -> NFS / SMB , GW deployed on a VM running on Hyper-V / ESXi / KVM
-                       AWS SSTORAGE  <------------ TAKES FREQUENT SNAPSHOTS -----------> ON PREMISES IT SERVICES      2. VOLUME GW -> Cached - Stored
+          Glacier Deep   |            |                         --                         |           |   ---------> CAN BE -
+          EBS, Backup     -----------                                                       -----------               1. FILE GW -> retrieve objects in S3 using NFS / SMB , GW deployed on a VM running on Hyper-V / ESXi / KVM
+                       AWS STORAGE      <--------- TAKES FREQUENT SNAPSHOTS -------------> ON PREMISES IT SERVICES    2. VOLUME GW -> Cached - Stored
                                                                                                                       3. TAPE GW -> GW deployed on a VM running on Hyper-V / ESXi / KVM
 
 
@@ -681,7 +681,7 @@ Amazon EBS provides durable, block-level storage volumes that you can attach to 
 You can use Amazon EBS as a primary storage device for data that requires frequent and granular updates.
 For example, Amazon EBS is the recommended storage option when you run a database on an instance.
 The volume persists independently from the running life of an instance. After an EBS volume is attached to an instance, you can use it like any other physical hard drive.
-You can also detach an EBS volume from one instance and attach it to another instance. Y
+You can also detach an EBS volume from one instance and attach it to another instance.
 You can dynamically change the configuration of a volume attached to an instance.
 EBS volumes can also be created as encrypted volumes using the Amazon EBS encryption feature.
 To keep a backup copy of your data, you can create a snapshot of an EBS volume, which is stored in Amazon S3.
