@@ -205,12 +205,9 @@ AWS KMS supports symmetric and asymmetric CMKs.
                |____________________ KMS_________________________________| |_________ ENRYPTION SDK __________|
 
 
-3. ENCRYPTION SDK        : A client-side encryption library to help you implement best-practice encryption and decryption in any application even if you're not a cryptography expert.
-                           Every successful call to encrypt returns a single portable, formatted encrypted message that contains metadata and the message ciphertext.
-                           All implementations are interoperable. For example, you can encrypt your data with the Java library and decrypt it with the Python library. Or you can encrypt data with the C library and decrypt it with the CLI.
-4. DYNAMO DB ENC. CLIENT : A client-side encryption library that helps you to protect your table data before you send it to Amazon DynamoDB. INTEROPERABLE b/w java and python.
+3. DYNAMO DB ENC. CLIENT : A client-side encryption library that helps you to protect your table data before you send it to Amazon DynamoDB. INTEROPERABLE b/w java and python.
                            It encrypts the attribute values in each table item using a unique encryption key. It then signs the item to protect it against unauthorized changes, such as adding or deleting attributes or swapping encrypted values. It also verifies and decrypts them when you retrieve them.
-5. S3 CLIENT SIDE ENCRYP : 1 -->  Using a CMK stored in AWS KMS : Client requests KMS for a CMK to generate Data keys. KMS sends two versions of plain and encrypted data key. Client encrypts data using plain key and embeds encrypted key as meta data.
+4. S3 CLIENT SIDE ENCRYP : 1 -->  Using a CMK stored in AWS KMS : Client requests KMS for a CMK to generate Data keys. KMS sends two versions of plain and encrypted data key. Client encrypts data using plain key and embeds encrypted key as meta data.
                                   Upon transfer , S3 gets plain key from encrypted key using KMS using CMK and decrypts the object . ONE KEY PER ONE OBJECT
                            2 -->  Using a master key stored within your application  : You provide a client-side master key to the Amazon S3 encryption client. The client uses the master key only to encrypt the data encryption key that it generates randomly.
                                   S3 client generates a plain text data key , encrypts the data and now the client-side master key encrypts the plain text data key and store it as meta data in object . while downloading first decrypt the data key using client-side master key and use it to decrypt the data.
@@ -219,9 +216,9 @@ AWS KMS supports symmetric and asymmetric CMKs.
 // PKI : Public key Infrastructure is a system of hardware, software, people, policies, documents, and procedures.
 // It includes the creation, issuance, management, distribution, usage, storage, and revocation of digital certificates.
 
-7. AWS CERTIFICATE MANAGER : ACM - Service that lets you easily provision, manage, and deploy public and private Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificates for use with AWS services and your internal connected resources.
+5. AWS CERTIFICATE MANAGER : ACM - Service that lets you easily provision, manage, and deploy public and private Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificates for use with AWS services and your internal connected resources.
                              These public certificates verify the identity and authenticity of your web server and the ownership of your public keys. In doing so, public certificates initiate a trusted, encrypted connection between you and your users.
-8. AWS ACM PRIVATE CERTIFICATE AUTHORITY : ACM PCAIs service is for enterprise customers building a public key infrastructure (PKI)inside the AWS cloud and intended for private use within an organization.
+6. AWS ACM PRIVATE CERTIFICATE AUTHORITY : ACM PCAIs service is for enterprise customers building a public key infrastructure (PKI)inside the AWS cloud and intended for private use within an organization.
                              With private certificates you can authenticate resources inside an organization. Private certificates allow entities like users, web servers, VPN users, internal API endpoints, and IoT devices to prove their identity and establish encrypted communications channels.
 
                              Plain text     --> [[ cryptographic hash function - SHA (Secure HASH) ]]  --> Original Message Digest also called a HASH
@@ -232,7 +229,10 @@ AWS KMS supports symmetric and asymmetric CMKs.
                              Signature   --> [[ Public key  + Decryption Algorithm ]]    --> Generated Message Digest also called a generated HASH
                              Generated Message Digest + Original Message Digest  --> [[ Verification Algorithm ]] --> TRUE or FALSE
 
-6. AWS SECRET MANAGER      : Provides encryption and rotation of encrypted secrets used with AWS-supported databases. To protect all other types of data at their source, use the AWS Encryption SDK.
+7. ENCRYPTION SDK          : A client-side encryption library to help you implement best-practice encryption and decryption in any application even if you're not a cryptography expert.
+                             Every successful call to encrypt returns a single portable, formatted encrypted message that contains metadata and the message ciphertext.
+                             All implementations are interoperable. For example, you can encrypt your data with the Java library and decrypt it with the Python library. Or you can encrypt data with the C library and decrypt it with the CLI.
+8. AWS SECRET MANAGER      : Provides encryption and rotation of encrypted secrets used with AWS-supported databases. To protect all other types of data at their source, use the AWS Encryption SDK.
 9. AWS SIGNER              : Fully managed code-signing service to ensure the trust and integrity of your code. Organizations validate code against a digital signature to confirm that the code is unaltered and from a trusted publisher.
                              For example With Code Signing for AWS Lambda, you can ensure that only trusted code runs in your Lambda functions.
 10. AWS CRYPTO TOOLS       : Part of the AWS ENCRYPTION SDK . The AWS Crypto Tools libraries are designed to help everyone do cryptography right, even without special expertise.
@@ -303,8 +303,11 @@ Amazon Redshift harnesses the scale and resources of multiple nodes and uses a v
                   2- Manual vertical scaling (by upgrading/downgrading an existing instance).
     // AWS OWNED --> operates on clusters rather than a single instance.
 
+// DB Instance - Horiz/Verti scaling - DB identifier (DNS endpoint) - Read replicas
+// Point in time recovery - 35 days - table - item - attributes - Dynamo Db Streams
+
 3. DYNAMO DB : Fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
-               With point-in-time recovery, you can restore a table to any point in time during the last 35 days. Point-in-time recovery helps protect your tables from accidental write or delete operations.
+               With POINT IN TIME RECOVERY  feature, you can restore a table to any point in time during the last 35 days. Point-in-time recovery helps protect your tables from accidental write or delete operations.
                A table is a collection of items, and each item is a collection of attributes. DynamoDB uses primary keys to uniquely identify each item in a table and secondary indexes to provide more querying flexibility.
                You can use DYNAMO DB STREAMS to capture data modification events in DynamoDB tables.
                TABLE --> ITEM --> ATTRIBUTES . //For example, an item in a People table contains attributes called PersonID, LastName, FirstName, and so on.
@@ -331,24 +334,101 @@ The primary purpose of an in-memory data store is to provide ultrafast (sub mill
 
 1. CLOUD-9       : We get an IDE to work with online. The AWS Cloud9 IDE offers a rich code-editing experience with support for several programming languages and runtime debuggers, and a built-in terminal.
                    // Can connect code and EC2. Store your project's files locally on the instance or server --> Clone a remote code repository — such as a repo in AWS CodeCommit — into your environment --> Work with a combination of local and cloned files in the environment.
-2. CLOUD-SHELL   : We get a shell to work with online similar to AWS CLI that you can use to manage AWS services.
+2. CLOUD-SHELL   : We get a shell to work with online similar to AWS CLI that you can use to manage AWS services. We need not download a separate CLI.
+
 3. CODE-ARTIFACT : Service that makes it easy for organizations to securely store, publish and share software packages used for application development. Artifacts are produced by some actions and consumed by others.
 4. CODE-COMMIT   : Similar to GITHUB and Versioning in S3. It is a version control service that enables you to privately store and manage Git repositories in the AWS Cloud.
                    You can use AWS Cloud9 to make code changes in a CodeCommit repository. CodeCommit is optimized for team software development. It manages batches of changes across multiple files, which can occur in parallel with changes made by other developers.
 5. CODE-STAR     : It lets you quickly develop, build, and deploy applications on AWS.
                    Depending on your choice of AWS CodeStar project template, that toolchain might include source control, build, deployment, virtual servers or serverless resources, and more.
                    Go to AWS -> Code Star -> Select a Template -> Add team members -> create a repo for code -> Create a pipeline -> Deploy Project . // wiki tile or a issue-tracking software  can be added for recommendations.
+
 6. X-RAY         : Makes it easy for developers to analyze the behaviour of their distributed applications (Micro Services) by providing request tracing, exception collection, and profiling capabilities.
                    Is a service that collects data about requests that your application serves, and provides tools you can use to view, filter, and gain insights into that data to identify issues and opportunities for optimization.
 
 7. CODE-BUILD    : Compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. It provides pre packaged build environments for popular programming languages and build tools such as Apache Maven, Gradle, and more.
                    BUILD PROJECT = Instructions on how to run Build + Source code repo + Build env. + Build commands + Output repo
                    Source Code + BUILD PROJECT [ BUILD SPEC -> OS + Language + Run time + Build env + Build Tools + where to put output ] -> CODE BUILD creates a BUILD ENVIRONMENT  -> Send output to S3 ->  Send SNS if specified .
-
 8. CODE-DEPLOY   : A deployment service that automates application deployments to Amazon EC2 instances, on-premises instances, serverless Lambda functions, or Amazon ECS services.
                    CodeDeploy can deploy application content that runs on a server and is stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories. It can deploy in one or 1000 instances.
                    Deployable content [ from CODE BUILD ] + APPSPEC File -> upload to S3 or GITHUB -> Tell CODE DEPLOY [ s3 url / guthub url && No; of instances ] -> CODE DEPLOY Agent in each instance pulls the revision .
-
 9. CODE-PIPELINE : A continuous delivery [ CI-CD ] service that enables you to model, visualize, and automate [ automates the building, testing, and deployment of your software into production ] the steps required to release your software.
+                   CodePipeline can deploy applications to EC2 instances by using CodeDeploy, AWS Elastic Beanstalk, or AWS OpsWorks Stacks. CodePipeline can also deploy container-based applications to services by using Amazon ECS.
+                   You can trigger an execution when you change your source code (like in code commit) or manually start the pipeline. You can also trigger an execution through an Amazon CloudWatch Events rule that you schedule.
+                   [[ SOURCE STAGE ]] -> Code change/cloud watch alarm --> Code Build --> Virtual env (EC2 / ECS) --> Unit Tests --> Code Deploy --> Integration tests --> [[ PROD STAGE ]]
+                   TO STOP A PIPELINE : Stop & Wait OR Stop & Abandon .
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: MIGRATION & TRANSFER  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+1. APPLICATION DISCOVERY SERVICE :  Deploy Discovery Agent on resources  - To Migrate to cloud // Integrated with MIGRATION HUB //
+                   It helps you plan your migration to the AWS cloud quickly and reliably plan application migration projects by automatically identifying applications running in on-premises data centres, their associated dependencies, and their performance profile. Integrates with application discovery solutions from AWS Partner Network(APN) partners.
+                   The AWS Discovery Agent is AWS software that you install on on-premises servers and VMs targeted for discovery and migration. Agents capture system configuration, system performance, running processes, and details of the network connections between systems.
+                   After registration, it pings the service at 15-minute intervals for configuration information.
+
+2. MIGRATION-HUB : Provides a single location to track [ Database / Server ] migration tasks across multiple AWS tools and partner solutions. With Migration Hub, you can choose the AWS and partner migration tools that best fit your needs while providing visibility into the status of your migration projects.
+                   Also provides key metrics and progress information for individual applications, regardless of which tools are used to migrate them.
+
+3. SERVER MIGRATION SERVICE : Migrate from On-Premises or Microsoft or Azure Servers to AWS. AWS SMS incrementally replicates your server VMs as cloud-hosted Amazon Machine Images (AMIs) ready for deployment on Amazon EC2.
+                   The Server Migration Connector is a FreeBSD VM that you install in your on-premises virtualization environment. We need to install this on the on premises / virtual VM. Now open the Server Migration Service on AWS and do the transfer.
+
+4. DATABASE MIGRATION SERVICE - DMS : Service to migrate relational databases, data warehouses, NoSQL databases, and other types of data store bidirectionally from on-premises to cloud.
+                   you can perform one-time migrations, and you can replicate ongoing changes to keep sources and targets in sync. If you want to change database engines, you can use the AWS Schema Conversion Tool (AWS SCT) to translate your database schema to the new platform.
+                   And then use AWS DMS to migrate to cloud . Any data that can not be converted is marked for review later . The only requirement to use AWS DMS is that one of your endpoints must be on an AWS service. You can't use AWS DMS to migrate from an on-premises database to another on-premises database.
+                   A task can consist of three major phases:   --> • The full load of existing data   --> • The application of cached changes   --> • Ongoing replication
+                   While the replication is going on , all the transactions are cached and the cached data is migrated at the end to not disturb the flow of business or miss any data transaction.
+// DMS is for DATA BASE migration -- // DATA SYNC is for DATA migration
+
+5. AWS SCHEMA CONVERSION TOOL : // USED BY AWS-DMS. Makes heterogeneous database migrations easy by automatically converting the source database schema and a majority of the custom code to a format compatible with the target database.
+                   Any code that the tool cannot convert automatically is clearly marked so that you can convert it yourself. Your converted schema is suitable for an Amazon Relational Database Service (Amazon RDS) MySQL, MariaDB, Oracle, SQL Server, PostgreSQL DB, an Amazon Aurora DB cluster, or an Amazon Redshift cluster.
+                   The converted schema can also be used with a database on an Amazon EC2 instance or stored as data on an Amazon S3 bucket.
+
+6. AWS DATA-SYNC : Online Transfer of data. It is an online data transfer service that simplifies, automates, and accelerates moving data between on-premises storage systems and AWS storage services, and also among  AWS storage services themselves .
+                   DataSync can copy data between Network File System (NFS), Server Message Block (SMB) file servers, self-managed object storage, AWS Snow cone, Amazon Simple Storage Service (Amazon S3)buckets, Amazon EFS file systems, and Amazon FSx for Windows File Server file systems.
+
+                     ON_PREMISIS                                                          AWS CLOUD
+                                                              TLS
+    Shared File system <----> AWS Data Sync agent  <========================> AWS Data Sync <----> AWS S3 / EFS / FSx
+
+
+7. SNOW FAMILY         : Snow cone      -- 8 TB storage   --> 1 SMALL BOX [ uses opshub application for data transfer ]
+                         Snow Ball      -- 80 TB storage  --> 1 SUITCASE  [ Snowball is a petabyte-scale data transport solution by cascading snow balls ]
+                         Snow Ball edge -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
+                         Snow Mobile    -- 1 Exabyte      --> 1 Truck     [ 100Pb per snow mobile --  AWS Snowmobile is the exabyte-scale data migration service ]
+
+8. AWS TRANSFER FAMILY : // To set up a sftp server for customers. AWS Transfer Family is a secure transfer service that stores your data in Amazon S3 and simplifies the migration of the following workflows to AWS:
+                         --> Secure Shell File Transfer Protocol (SFTP),   --> File Transfer Protocol Secure (FTPS), and   --> File Transfer Protocol (FTP) .
+                         It is a secure transfer service that enables you to transfer files into and out of AWS storage services. Supports transferring data from the following :
+                                  --> Amazon Simple Storage Service (Amazon S3) storage.
+                                  --> Amazon Elastic File System (Amazon EFS) Network File System (NFS) file system
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: MIGRATION & TRANSFER  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -

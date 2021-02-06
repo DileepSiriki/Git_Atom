@@ -1265,7 +1265,6 @@ Amazon Redshift determines what data is local and what is in Amazon S3, generate
 
 
 
-
 ##################################################################################################################
 ##################################################################################################################
 CONTAINERS   :
@@ -1920,6 +1919,8 @@ For example, when a source code change is pushed to a repository configured as t
     The test action calls to shell scripts that install and run a test tool, such as a link checker, on the web application.
     After successful completion, the output is a built web application and a set of test results.
 
+[[ SOURCE STAGE ]] -> Code change/cloud watch alarm --> Code Build --> Virtual env (EC2 / ECS) --> Unit Tests --> Code Deploy --> Integration tests --> [[ PROD STAGE ]]
+
 To use the console to stop a pipeline execution, you can choose Stop execution on the pipeline visualization page.
 --> Stop and wait: All in-progress action executions are allowed to complete, and subsequent actions are not started.
     The pipeline execution does not continue to subsequent stages.
@@ -1957,7 +1958,6 @@ As the project grows, the team adds more team members to support their code base
 AWS X-Ray makes it easy for developers to analyze the behaviour of their distributed applications by providing request tracing, exception collection, and profiling capabilities.
 AWS X-Ray is a service that collects data about requests that your application serves, and provides tools you can use to view, filter, and gain insights into that data to identify issues and opportunities for optimization.
 For any traced request to your application, you can see detailed information not only about the request and response, but also about calls that your application makes to downstream AWS resources, microservices, databases and HTTP web APIs.
-
 
 
 
@@ -2088,10 +2088,10 @@ you can carry one in a backpack, use it with battery-based operation, and use th
 Snowcone supports a file interface with NFS support. The Snowcone device supports data transfer from on-premises Windows, Linux, and macOS servers and file-based applications through the NFS interface.
 It can be used in space-constrained environments where Snowball Edge devices don't fit.
 
--> Snow cone        - https://www.youtube.com/watch?v=X_8LM7E_hiE      -- 8 TB storage   --> 1 SMALL BOX [ uses opshub application for data transfer ]
-   Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80 TB storage  --> 1 SUITCASE
-   Snow Ball edge   - https://www.youtube.com/watch?v=bxSD1Nha2k8      -- 100 TB storage --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
-   Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1 Exabyte      --> 1 Truck
+-> Snow cone        - https://www.youtube.com/watch?v=X_8LM7E_hiE      -- 8   TB storage   --> 1 SMALL BOX [ uses opshub application for data transfer ]
+   Snow Ball        - https://www.youtube.com/watch?v=9uc2DSZ1wL8&t=9s -- 80  TB storage   --> 1 SUITCASE
+   Snow Ball edge   - https://www.youtube.com/watch?v=bxSD1Nha2k8      -- 100 TB storage   --> 1 SUITCASE  [ Embedded Ec2 - Lambda for running jobs in remote areas like ships , hills for an immediate results. ]
+   Snow Mobile      - https://www.youtube.com/watch?v=8vQmTZTq7nw      -- 1   Exabyte      --> 1 Truck
 
   1 Exabyte = 1024 petabytes
   Snow ball can be connected in series to have a Petabyte's storage  = 1 million GB = 1024 Terabytes
