@@ -62,7 +62,7 @@ Media Services            |
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
-1. APP FLOW       : Bidirectional data transfer from SAAS Applications ( Slack or Sales Force ) to AWS ( S3 or Redshift ) for analytics and archiving and automatic workflow.
+1. APP-FLOW       : Bidirectional data transfer from SAAS Applications ( Slack or Sales Force ) to AWS ( S3 or Redshift ) for analytics and archiving and automatic workflow.
 2. DATA EXCHANGE  : To securely exchange file-based data sets in the AWS Cloud from qualified data providers and then use the data across a variety of AWS analytics and machine learning service. AWS Data Exchange scans all data published by providers before it is made available to subscribers. Used by colleges, hospitals , scientists to get data from various data lakes .
 3. DATA PIPELINE  : To automate the movement and transformation of data across AWS compute and storage resources, as well as your on-premises resources. You upload your pipeline definition to the pipeline, and then activate the pipeline and it schedules and runs tasks by creating Amazon EC2 instances to perform the defined work activities. For example, Task Runner could copy logfiles to Amazon S3 and launch Amazon EMR clusters.
                     Task Runner polls for tasks in pipeline and then performs those tasks. You can define data-driven workflows, so that tasks can be dependent on the successful completion of previous tasks.
@@ -407,9 +407,149 @@ The primary purpose of an in-memory data store is to provide ultrafast (sub mill
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
-:::: MIGRATION & TRANSFER  ::::
+:::: FRONT END WEB & MOBILE  ::::
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+1. AMPLIFY  : Set of SDKs, libraries, tools, and documentation to develop mobile & Web-apps. Provides two main services, hosting and the Admin UI.
+              Provides a git-based workflow for hosting fullstack serverless web apps with continuous deployment. The Admin UI is a visual interface for frontend web and mobile developers to create and manage app backends outside the AWS console.
+
+2. APP-SYNC : GraphQL is a query language and server-side runtime for application programming interfaces (APIs) that prioritizes giving clients exactly the data they request and no more.
+              As an alternative to REST, GraphQL lets developers construct requests that pull data from multiple data sources in a single API call. App-Sync is an Enterprise level, fully managed GraphQL service with real-time data synchronization and offline programming features.
+
+3. AWS DEVICE FARM  : Performing iOS, Android and Fire OS apps on real mobiles -- Live customer support using remote connection --> Remote access of devices onto which you can load, run, and interact with apps in real time. -> Remotely work on someone's phone
+                      Because testing is performed in parallel, tests on multiple devices begin in minutes. As tests are completed, a test report that contains high-level results, low-level logs, pixel-to-pixel screenshots, and performance data is updated.
+                      Remote access allows you to swipe, gesture, and interact with a device through your web browser in real time. Install apps for them and explain them on how to use apps and solve any issues they are facing.
+
+4. LOCATION SERVICE : Add maps, points of interest, geocoding, geofences, and tracking to your applications. AWS uses high-quality data from global, trusted providers Esri and HERE.
+                      Tracking data and geofencing location information, such as facility, asset, and personnel locations, never leaves your AWS account at all. With Amazon Location, neither Amazon nor third parties have rights to sell your data or use it for advertising.
+
+
+5. AMAZON PINPOINT : Send promotions, transactional (Order confirmations and password resets) and campaign messages via  email, SMS and voice messages, and push notifications to customers and get campaign statistics.
+                     Add customer contact information and then create segments that target certain customers. Next, you have to create your messages and schedule your campaigns. Finally, you can use the analytics dashboards see how well the campaigns performed.
+6. AMAZON SIMPLE NOTIFICATION SERVICE - SNS : It is a web service that enables applications, end-users, and devices to instantly send and receive notifications from the cloud. We create topics and subscribe to the topic for messages .
+                     Clients can subscribe to the SNS topic and receive published messages using a supported protocol, such as Amazon Kinesis Data Firehose, Amazon SQS, AWS Lambda, HTTP, email, mobile push notifications, and mobile text messages (SMS).
+
+    • Application-to-application messaging  -- HTTP/S - Lambda - SQS
+    • Application-to-person notifications   -- SMS - Notifications - SES
+    • Standard and FIFO topics
+    • Message delivery retry               • Message attributes -- we can provide arbitrary metadata .
+    • Message security                     • Message filtering based on policies
+    • Dead-letter queues -- an Amazon SQS queue for messages that can't be delivered successfully due to client errors or server error.
+
+SNS : IS A TOPIC Service.  // publishers to subscribers OR Producers to Consumers
+SQS : IS A QUEUE Service.
+      Unlimited Throughput , minimum one delivery , Best effort ordering - STANDARD QUEUE
+      High Throughput , Exactly one delivery , First in First OUT - FIFO QUESES
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: END USER COMPUTING  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+// The following are used if you have a corporate N/W or if you are an enterprise and you want to provide services to your end users. All the services are monitored by an admin and he provides / revokes accesses to users .
+   Mainly used by employees working remotely. This also makes sure that the main organizational information is not stored on users local machine.
+
+// software developers in an organization can use Amazon WorkSpaces to access all desktop resources from any computer or tablet.
+   Engineers can use AppStream 2.0 to stream GPU intensive apps.
+   And sales leaders can use Amazon WorkLink to access internal web-based content, such as sales data, from their mobile devices.
+
+1. WORKSPACES : Enables you to provision virtual, cloud-based Microsoft Windows or Amazon Linux desktops for your users, known as WorkSpaces. You can quickly add or remove users as your needs change. Users can access their virtual desktops from multiple devices or web browsers.
+                As an admin you have the rights to remove add users and assign applications to users using WAM. As a user you pick up from right where you left off with a persistent desktop experience.
+                you can bring your own licenses and applications, or purchase them from the AWS Marketplace for Desktop Apps. From any Operating system , use any other operating system
+
+2. WORKSPACES APPLICATION MANAGER - WAM : Offers a fast, flexible, and secure way for you to deploy, manage, update, patching, and retire Microsoft Windows desktop applications into virtual containers that run as though they are installed natively for Amazon WorkSpaces  with Windows.
+                VERSION-1 : With Amazon WAM Lite, you can manage and deliver applications from the AWS Marketplace free of charge. You pay only for the applications that your users activate.
+                VERSION-2 : With Amazon WAM Standard, you can build your application catalog with line-of-business applications, third-party applications for which you own licenses, and applications from the AWS Marketplace for Desktop Apps.
+
+3. APP-STREAM 2.0 : Add your existing desktop applications to AWS and enable your users to instantly stream them - Always-on & On-Demand .
+                A fully managed application streaming service that provides users with instant access to their desktop applications from anywhere. Your applications run on AWS compute resources, and data is never stored on users' devices, which means they always get a high performance, secure experience.
+                • Always-On — Your instances run all the time, even when no users are streaming applications. Use an Always-On fleet to provide your users with instant access to their applications.
+                • On-Demand — Your instances run only when users are streaming applications. Idle instances that are available for streaming are in a stopped state. Use an On-Demand fleet to optimize your streaming charges and provide your users with access to their applications after a 1-2 minute wait.
+
+4. WORK-DOCS :  --> STORE - SYNC - SHARE FILES from anywhere to anywhere. --> Directly edit docs online. Users can share their files with other members of your organization for collaboration or review.
+                Files are stored in the cloud, safely and securely. Your user's files are only visible to them, and their designated contributors and viewers. Other members of your organization do not have access to other user's files unless they are specifically granted access.
+
+5. WORK-LINK : Similar to UX-Apps TCS . Used to give secure access to internal websites and web apps through mobile phones , since using a VPN is not a feasible solution. Users need to install the work-link application .
+               In a single step, your users, such as employees, can access internal websites as efficiently as they access any other public website. In addition, all cached content is deleted from AWS when users end their browsing session.
+               users enter a URL in their web browser, or choose a link to an internal website in an email. Because website data is never stored or cached locally on mobile browsers, Amazon WorkLink reduces the risk of information loss or theft.
+               After initial setup, the Amazon WorkLink app works in the background while employees browse internal websites using Safari on iOS phones and Google Chrome on Android phones.
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: APPLICATION INTEGRATION  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: BUISENES APPLICATION  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+1. ALEXA FOR BUSINESS : Similar to your Alexa in house , you can set up 100's of alexa in an organization and sync data between users.
+                        schedule  meetings , check available rooms for booking , join meetings , get sales reports for your specific company .
+2. CHIME        : Similar MS Teams (Download AmazonChime APP). Communications service that transforms meetings by making them more efficient and easier to conduct.
+                  You can use Amazon Chime for online meetings, video conferencing, calls, and chat. You can also share content inside and outside of your organization.
+                  You pay only for the users with Pro permissions that host meetings, and only on the days that those meetings are hosted. There is no charge for users with Basic permissions. Basic users cannot host meetings, but they can attend meetings and use chat.
+3. HONEY-CODE   : Fully managed service that allows you to quickly build mobile and web apps for teams—without programming. Build a custom managed app using a visual editor . First setup data in tables , tables work like spread sheets but have database capabilities.
+                  Next build the apps layout . Now link app and the tables, set personalization for specific users to see what they can see or not see. Set specific actions to be done on an event such as when data is updated .
+4. WORK-MAIL    : Business email and calendar service. Maintaining personal email service is tough !! -> Buy dedicated resources [ h/w and s/w ] -> hire staff to run the resources -> regular maintenance -> upgrades, security patches, backups , disaster recovery .
+                  support for existing desktop and mobile clients. Can access mail and calendar from multiple devices mobile - tablet - desktop - all OS - windows - IOS and has compatibility with OUTLOOK and other popular services .
+                  Amazon WorkMail has a web-based client that you use to access your Amazon WorkMail account from a web browser.
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: CUSTOMER ENABLEMENT SERVICES  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+1. AWS MANAGED SERVICES      : 3Rd party partners providing full life cycle solutions for ENTERPRISE Customers . An enterprise service that provides ongoing management of your AWS infrastructure operations.
+                Provides full-lifecycle services to provision, run, and support your infrastructure, and automates common activities such as change requests, monitoring, patch management, security, and backup services.
+                Enterprises want to adopt AWS at scale but often the skills that have served them well in traditional IT do not always translate to success in the cloud. AMS enables them to migrate to AWS at scale more quickly, reduce their operating costs, improve security and compliance and focus on their differentiating business priorities.
+
+2. AWS PROFESSIONAL SERVICES : A global team of experts that can help you realize your desired business outcomes when using the AWS Cloud.
+                We work together with your team and your chosen member of the AWS Partner Network (APN) to execute your enterprise cloud computing initiatives.
+
+3. AWS IQ     : Submit request -> review responses -> select expert -> work securely -> Pay directly from AWS billing. Enables customers to quickly find, engage, and pay AWS Certified third-party experts for on-demand project work.
+                AWS IQ enables AWS Certified experts to help customers and get paid for their AWS Certification expertise. AWS IQ is a good choice when you're stuck on one or more tasks and need someone to do the work for you.
+
+4. AWS SUPPORT :  There are multiple SUPPORT PLANS available. All AWS customers automatically have 24/7 access to features of the Basic support plan.
+                  --> Basic         - Included
+                  --> Developer     - Starting at $29 per month       - https://aws.amazon.com/premiumsupport/plans/
+                  --> Business      - Starting at $100 per month      - https://aws.amazon.com/premiumsupport/plans/
+                  --> Enterprise    - Starting at $15,000 per month   - https://aws.amazon.com/premiumsupport/plans/
+
+4. AWS TRAINING & CERTIFICATION : TRAINING : https://aws.amazon.com/training/?id=docs_gateway
+                                  DOCS     : https://docs.aws.amazon.com/
+
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: CUSTOMER ENGAGEMENT  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+1. AMAZON CONNECT : Set up a Customer care centre. Add agents who are located anywhere, and start engaging with your customers.
+                    Voice and Chat channels and support tickets tracking . All support channel data is logged in S3. It uses Machine Learning (ML) and Artificial Intelligence (AI) for analytics .
+
+2. AMAZON PINPOINT : Send promotions, transactional (Order confirmations and password resets) and campaign messages via  email, SMS and voice messages, and push notifications to customers and get campaign statistics.
+                     Add customer contact information and then create segments that target certain customers. Next, you have to create your messages and schedule your campaigns. Finally, you can use the analytics dashboards see how well the campaigns performed.
+
+3. AMAZON SIMPLE EMAIL SERVICE - SES : Add email-sending capabilities to any application. If your application runs in EC2, you can use Amazon SES to send 62,000 emails every month at no additional charge.
+                    Use AWS Elastic Beanstalk to create an email-enabled application such as a program that uses Amazon SES to send a newsletter to customers.  Set up SNS to notify you of your emails that bounced, produced a complaint, or were successfully delivered to the recipient's mail server.
+                    When you use Amazon SES to receive emails, your email content can be published to Amazon SNS topics.
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: BILLING & COST MANAGEMENT  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+
+
+
 
 
 

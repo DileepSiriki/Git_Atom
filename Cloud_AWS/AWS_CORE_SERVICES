@@ -2144,6 +2144,8 @@ Amplify Console hosting provides a git-based workflow for hosting fullstack serv
 The Admin UI is a visual interface for frontend web and mobile developers to create and manage app backends outside the AWS console.
 
 2. AWS APP-SYNC :
+GraphQL is a query language and server-side runtime for application programming interfaces (APIs) that prioritizes giving clients exactly the data they request and no more.
+As an alternative to REST, GraphQL lets developers construct requests that pull data from multiple data sources in a single API call.
 AWS AppSync is an enterprise level, fully managed GraphQL service with real-time data synchronization and offline programming features.
 
 3. AWS DEVICE FARM : // Performing iOS, Android and Fire OS apps on real mobiles -- Live customer support using remote connection
@@ -2303,7 +2305,7 @@ You must have an AWS account to create or administer an Amazon WorkDocs site. Us
 
 
 5. AMAZON WORK-LINK : Similar to UX-Apps TCS // https://www.youtube.com/watch?v=Si2q7rhinMo
---> Give secure access to internal websites and web apps through mobile phones , since using a VPN is not a feasiblee solution .
+--> Give secure access to internal websites and web apps through mobile phones , since using a VPN is not a feasible solution .
 --> we need to install the work-link application .
 
 Amazon WorkLink is a fully managed, cloud-based service that enables secure, one-click access to internal websites and web apps from mobile devices.
@@ -2522,12 +2524,12 @@ On behalf of our customers, we are focused on solving some of the toughest chall
 Sometimes that means helping you troubleshoot an issue, but more often, it involves "looking around corners" to find ways for you to better utilize AWS services, answer best practices questions, and provide guidance on configuration.
 We focus on helping you achieve the outcomes you need to make your business successful. It is our approach to Support that sets AWS apart.
 
-There are multiple SUPPORT PLANS available. All AWS customers automatically have 24/7 access to these features of the Basic support plan:
+There are multiple SUPPORT PLANS available. All AWS customers automatically have 24/7 access to the features of the Basic support plan:
 https://console.aws.amazon.com/support/plans/home?#/ **V.IMP
-  --> Basic                 - Included
-  --> Current plan          - Starting at $29 per month
-  --> Developer	Business    - Starting at $100 per month
-  --> Enterprise            - Starting at $15,000 per month
+  --> Basic         - Included
+  --> Developer     - Starting at $29 per month       - https://aws.amazon.com/premiumsupport/plans/
+  --> Business      - Starting at $100 per month      - https://aws.amazon.com/premiumsupport/plans/
+  --> Enterprise    - Starting at $15,000 per month   - https://aws.amazon.com/premiumsupport/plans/
 
 4. AWS TRAINING & CERTIFICATION :
 We have a separate directory containing Dumps and PDF's required for the certifications .
@@ -2543,9 +2545,9 @@ Once you agree to an expert's proposal including project milestones, maximum pay
 If necessary, you grant project appropriate permission to your AWS account for the expert to perform the work.
 After project milestones are completed, you pay the expert directly from your AWS account.
 
-AWS IQ is a good choice when you're stuck on one or more tasks and need someone to do thework for you.
+AWS IQ is a good choice when you're stuck on one or more tasks and need someone to do the work for you.
 AWS IQ is also a good choice for projects that are outside your area of expertise.
-With AWSIQ, you get help from an expert to move your project forward.
+With AWS IQ, you get help from an expert to move your project forward.
 
 
 ##################################################################################################################
