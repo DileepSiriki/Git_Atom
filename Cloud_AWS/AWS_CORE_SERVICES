@@ -2590,7 +2590,7 @@ BILLING & COST MANAGEMENT   :
 ##################################################################################################################
 ##################################################################################################################
 
-1. AWS BOLLING & COST MANAGEMENT : < Has a separate detailed chapter >
+1. AWS BILLING & COST MANAGEMENT : < Has a separate detailed chapter >
 AWS Billing and Cost Management is the service that you use to pay your AWS bill, monitor your usage, and analyze and control your costs.
 AWS automatically charges the credit card that you provided when you signed up for a new account with AWS. Charges appear on your monthly credit card bill.
 The Billing and Cost Management service provides features that you can use to do the following:
@@ -2656,7 +2656,7 @@ You can model your solutions before building them, explore the price points and 
 This enables you to make informed decisions about using AWS.
 You can plan your AWS costs and usage or price out setting up a new set of instances and services.
 
-3. SAVINGS PLAN : < Has a separate detailed chapter >
+3. SAVINGS PLAN : < Has a separate detailed chapter in EC2>
 Savings Plans is a flexible pricing model that helps you save up to 72 percent on Amazon EC2, AWS Fargate, and AWS Lambda usage.
 Savings Plans provides you lower prices for your Amazon EC2 usage, Fargate, and Lambda in exchange for a commitment to a consistent usage amount (measured in $/hour)for a one or three year term.
 Every type of compute usage has an On-Demand rate and a Savings Plans rate.

@@ -24,7 +24,7 @@ Open the Billing and Cost Management console athttps://console.aws.amazon.com/bi
     --> Budgets                : To manage budgets for your account and to get notified
     --> Budgets Reports        : Notifications from Budgets
     --> Savings Plans          : Flexible pricing model that offer low prices on AWS usage, in exchange for a commitment to a consistent amount of usage (measured in $/hour) for a 1- or 3-year term.
-    --> Cost & Usage Reports
+    --> Cost & Usage Reports   : Detailed description about the billing from each hour and each resource.
     --> Cost Categories
     --> Cost allocation tags
     --> Orders and Invoices    : To see your past payments and transactions.
@@ -121,7 +121,7 @@ This means that RIs and Savings Plans discounts aren't shared between any accoun
 To share an RI or Savings Plans discount with an account, both accounts must have sharing turned on.
 
 
-POST -CLOSURE PERIOD : - 90 DAYS
+POST - CLOSURE PERIOD : - 90 DAYS
 -------------------------
 After you close an AWS account in accordance with the process above, you can no longer use it to access AWS services, but for 90 days after your account is closed (the "Post-Closure Period"), you can view your AWS account's past billing information and access AWS Support.
 You can contact support if you would like to reopen your account and you might be charged for any resources that are not terminated .

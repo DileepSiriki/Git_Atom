@@ -482,6 +482,42 @@ SQS : IS A QUEUE Service.
 :::: APPLICATION INTEGRATION  ::::
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+1. APP-FLOW       : Bidirectional data transfer from SAAS Applications ( Slack or Sales Force ) to AWS ( S3 or Redshift ) for analytics and archiving and automatic workflow.
+
+2. EVENT-BRIDGE   : // Formerly CloudWatch Events -- Bridge b/w your apps - SAAS - AWS apps.
+                    serverless event bus service that makes it easy to connect your applications with data from a variety of sources to targets such as AWS Lambda.
+                    You can set up routing rules to determine where to send your data to build application architectures that react in real time to all of your data sources.
+
+3. AMAZON MANAGED MESSAGE BROKER - MQ : A message broker is an intermediary computer program module that translates a message from the formal messaging protocol of the sender to the formal messaging protocol of the receiver.
+                    Amazon MQ is a managed message broker service that makes it easy to set up and operate message brokers in the cloud.
+
+4. SIMPLE NOTIFICATION SERVICE - SNS  : It is a web service that enables applications, end-users, and devices to instantly send and receive notifications from the cloud. We create topics and subscribe to the topic for messages .
+                     Clients can subscribe to the SNS topic and receive published messages using a supported protocol, such as Amazon Kinesis Data Firehose, Amazon SQS, AWS Lambda, HTTP, email, mobile push notifications, and mobile text messages (SMS).
+
+    • Application-to-application messaging  -- HTTP/S - Lambda - SQS
+    • Application-to-person notifications   -- SMS - Notifications - SES
+    • Standard and FIFO topics
+    • Message delivery retry               • Message attributes -- we can provide arbitrary metadata .
+    • Message security                     • Message filtering based on policies
+    • Dead-letter queues -- an Amazon SQS queue for messages that can't be delivered successfully due to client errors or server error.
+
+5. AMAZON SQS : Fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.
+                You can send, store, and receive messages between software components at any volume, without losing messages or requiring other services to be available.
+                Multiple copies of every message are stored redundantly across multiple availability zones so that they are available whenever needed.
+
+6. STEP FUNCTIONS : Makes it easy to coordinate the components of distributed applications as a series of steps in a visual workflow. Service that lets you combine AWS Lambda functions and other AWS services to build business-critical applications.
+                    Through Step Functions' graphical console, you see your application’s workflow as a series of event-driven steps. Step Functions is based on state machines and tasks. A state machine is a workflow. A task is a state in a workflow that represents a single unit of work that another AWS service performs. Each step in aworkflow is a state.
+                    With Step Functions' built-in controls, you examine the state of each step in your workflow to make sure that your application runs in order and as expected.
+                    CHECK 6 USECASES AND PICTURES .
+
+7. SIMPLE WORK FLOW - SWF : Makes it easy to build applications that coordinate work across distributed components. A Task represents a logical unit of work that is performed by a component of your application.
+                            Coordinating tasks across the application involves managing inter task dependencies, scheduling, and concurrency in accordance with the logical flow of the application.
+                            SWF gives you full control over implementing tasks and coordinating them without worrying about underlying complexities such as tracking their progress and maintaining their state.
+                            When using Amazon SWF, you implement workers to perform tasks. These workers can run either on cloud infrastructure, such as Amazon Elastic Compute Cloud (Amazon EC2), or on your own premises.
+                            Amazon SWF stores tasks and assigns them to workers when they are ready, tracks their progress, and maintains their state, including details on their completion.
+                            To coordinate tasks, you write a program that gets the latest state of each task from Amazon SWF and uses it to initiate subsequent tasks.
+                            Amazon SWF maintains an application's execution state durably so that the application is resilient to failures in individual components.
+                            With Amazon SWF, you can implement, deploy, scale, and modify these application components independently.
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
@@ -524,8 +560,6 @@ SQS : IS A QUEUE Service.
 4. AWS TRAINING & CERTIFICATION : TRAINING : https://aws.amazon.com/training/?id=docs_gateway
                                   DOCS     : https://docs.aws.amazon.com/
 
-
-
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 :::: CUSTOMER ENGAGEMENT  ::::
@@ -544,6 +578,28 @@ SQS : IS A QUEUE Service.
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 :::: BILLING & COST MANAGEMENT  ::::
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+1. BILLING & COST MANAGEMENT : Service that you use to pay your AWS bill, monitor your usage, and analyze and control your costs.
+   AWS COST & USAGE REPORT   : one-stop shop for accessing the most detailed information available about your AWS costs and usage. Lists AWS usage for each service category used by an account and its IAM users in hourly or daily line items, as well as any tags that you have activated for cost allocation purposes.
+   AWS CONSOLIDATED BILLING  : Enables an organization to consolidate payments for multiple Amazon Web Services (AWS) accounts within a single organization by making a single paying account.
+   AWS COST EXPLORER         : Is a free tool that you can use to view your costs and usage up to the last 13 months, forecast how much you are likely to spend for the next three months, and get recommendations for what Reserved Instances to purchase..
+   AWS BUDGETS               : Gives you the ability to set custom budgets that alert you when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.
+                                   Cost budgets – Plan how much you want to spend on a service.
+                                   Usage budgets – Plan how much you want to use one or more services.
+                                   RI utilization budgets – Define a utilization threshold and receive alerts when your RI usage falls below that threshold.
+   ORDERS & INVOICES         : To see your past payments and transactions.
+   KNOWLEDGE CENTRE          : You can find answers to your questions quickly by visiting the AWS Knowledge Center.
+   COST ANAMOLY DETECTION    : Analyze and determine the root cause of the anomaly, such as account, service, Region, or usage type that is driving the cost increase.
+
+2. AWS PRICING CALCULATOR    : Lets you explore AWS services and create an estimate for the cost of your use cases on AWS. You can model your solutions before building them, explore the price points and calculations behind your estimate, and find the available instance types and contract terms that meet your needs.
+
+3. AWS SAVINGS PLAN          : Flexible pricing model that helps you save up to 72 percent on Amazon EC2, AWS Fargate, and AWS Lambda usage. Provides you lower prices in exchange for a commitment to a consistent usage amount (measured in $/hour)for a one or three year term.
+                               Every type of compute usage has an On-Demand rate and a Savings Plans rate. If you commit to $10/hour of compute usage, your usage is charged at your Savings Plans rate up to $10. Any usage beyond your Savings Plans commitment is charged at your regular On-Demand rates.
+
+
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 

@@ -150,7 +150,7 @@ Each of the Business and Enterprise support plans provide 24x7 access to technic
 • Use-case guidance – What AWS products, features, and services to use to best support your specific needs.
 • AWS Trusted Advisor  – A feature of AWS Support, which inspects customer environments and identifies opportunities to save money, close security gaps, and improve system reliability and performance.
 • The AWS Support API to interact with Support Center and Trusted Advisor.
-  You can use the AWSSupport API to automate support case management and Trusted Advisor operations.
+  You can use the AWS Support API to automate support case management and Trusted Advisor operations.
 • Third-party software support – Help with Amazon Elastic Compute Cloud (Amazon EC2) instance operating systems and configuration.
 
 In addition, customers with an Enterprise support plan have access to these features:
@@ -166,7 +166,7 @@ AWS Support Concierge Service assists customers with account and billing inquiri
   AWS Infrastructure Event Management partners with your technical and project resources to gain a deep understanding of your use case and provide architectural and scaling guidance for an event.
   Common use-case examples for AWS Event Management include advertising launches, new product launches, and infrastructure migrations to AWS.
 
-• The AWS Migration Acceleration Program (MAP) is a comprehensive and proven cloud migration program based upon AWS’s experience of migrating a thousand enterprise customers to the cloud.
+• The AWS Migration Acceleration Program - MAP : A comprehensive and proven cloud migration program based upon AWS’s experience of migrating a thousand enterprise customers to the cloud.
   The program packages best practices, tools, expertise, financial incentives, and a partner ecosystem to make cloud adoption easier.
   MAP consists of a three-phase journey that helps you achieve your migration goals by reducing migration complexity and costs.
   Leverage the performance, security, and reliability of the cloud
