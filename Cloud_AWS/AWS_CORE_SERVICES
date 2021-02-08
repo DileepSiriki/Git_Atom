@@ -664,6 +664,10 @@ When you automate snapshot and AMI management, it helps you to:
 When combined with the monitoring features of Amazon CloudWatch Events and AWS CloudTrail, Amazon Data Lifecycle Manager provides a complete backup solution for Amazon EC2 instances and individual EBS volumes at no additional cost.
 
 14. AWS HEALTH : // Personal Health Dashboard + Service Health Board
+
+//AWS Personal Health Dashboard provides alerts and remediation guidance when AWS is experiencing events that may impact you.
+//While the Service Health Dashboard displays the general status of AWS services, Personal Health Dashboard gives you a personalized view into the performance and availability of the AWS services underlying your AWS resources.
+
 AWS Health provides personalized information about events that can affect your AWS infrastructure, guides you through scheduled changes, and accelerates the troubleshooting of issues that affect your AWS resources and accounts.
 All customers can use the Personal Health Dashboard (PHD), powered by the AWS Health API. The dashboard requires no setup, and it's ready to use for authenticated AWS users.
 The Personal Health Dashboard organizes issues in three groups: open issues, scheduled changes, and other notifications.
@@ -2728,7 +2732,7 @@ Customers can quickly launch preconfigured software with just a few clicks, and 
 Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source.
 The product can be free to use or it can have an associated charge. AWS handles billing and payments, and charges appear on customers’ AWS bill.
 
-SELLER :  seller can be an independent software vendor (ISV), consulting partner, managed services provider (MSP), or individual who has something to offer that works with AWS products and services.
+SELLER : seller can be an independent software vendor (ISV), consulting partner, managed services provider (MSP), or individual who has something to offer that works with AWS products and services.
 
 One way of delivering your products to buyers is with Amazon Machine Images (AMIs) - Docker Images - SAAS Apps.
 An AMI provides the information required to launch an Amazon Elastic Compute Cloud (Amazon EC2) instance.
@@ -2741,13 +2745,12 @@ The AWS GovCloud (US) Regions are isolated AWS Regions designed to enable U.S. g
 The AWS GovCloud (US) Regions adhere to U.S. International Traffic in Arms Regulations (ITAR) requirements.
 
 3. AWS MANAGED SERVICES & CUSTOMER MANAGED SERVICES & SHARED CONTROLS :
---------------------------------------------------------
+------------------------------------------------------------------------
 
 AWS MANAGED :
 -----------------
-AWS Lambda, Amazon RDS, Amazon Redshift, Amazon CloudFront, Elastic Map Reduce -EMR , Dynamo DB
-For managed services such as Amazon Elastic MapReduce (Amazon EMR) and DynamoDB etc ;
-AWS is responsible for performing all the operations needed to keep the service running.
+--> AWS Lambda, Amazon RDS, Amazon Redshift, Amazon CloudFront, Elastic Map Reduce, Dynamo DB
+For managed services shown above, AWS is responsible for performing all the operations needed to keep the service running.
 The AWS-managed services automate time-consuming administration tasks such as hardware provisioning, software setup, patching and backups. The AWS-managed services free customers to focus on their applications so they can give them the fast performance, high availability, security and compatibility they need.
 Examples of AWS-managed services include Amazon RDS, Amazon DynamoDB, Amazon Redshift, Amazon WorkSpaces, Amazon CloudFront, Amazon CloudSearch, and several other services.
 AWS is responsible for patching the underlying hosts, upgrading the firmware, and fixing flaws within the infrastructure for all services, including Amazon EC2.
@@ -2786,9 +2789,9 @@ For example, when using Amazon EC2, you are responsible for applying operating s
 Shared Controls are controls which apply to both the infrastructure layer and customer layers, but in completely separate contexts or perspectives.
 In a shared control, AWS provides the requirements for the infrastructure and the customer must provide their own control implementation within their use of AWS services.
 Examples include:
-** Patch Management – AWS is responsible for patching the underlying hosts and fixing flaws within the infrastructure, but customers are responsible for patching their guest OS and applications.
+** Patch Management         – AWS is responsible for patching the underlying hosts and fixing flaws within the infrastructure, but customers are responsible for patching their guest OS and applications.
 ** Configuration Management – AWS maintains the configuration of its infrastructure devices, but a customer is responsible for configuring their own guest operating systems, databases, and applications.
-** Awareness & Training - AWS trains AWS employees, but a customer must train their own employees.
+** Awareness & Training     - AWS trains AWS employees, but a customer must train their own employees.
 
 Patching the guest operating system is the responsibility of AWS for the managed services only (such as Amazon RDS).
 The customer is responsible for patching the guest OS for other services (such as Amazon EC2).
@@ -2844,7 +2847,7 @@ This is a great way to build Internet-scale applications that leverage the elast
 
 VERTICAL -> Add specifications to a single resource.
 Scaling vertically takes place through an increase in the specifications of an individual resource (e.g., upgrading a server with a larger hard drive, adding more memory, or provisioning a faster CPU).
-On Amazon EC2, this can easily be achieved by stopping an instance and resizing it to an instance type that has more RAM, CPU, I/O,or networking capabilities. This way of scaling can eventually hit a limit and it is not always a cost efficient or highly available approach. However, it is very easy to implement and can be sufficient for many use cases especially as a short term solution.
+On Amazon EC2, this can easily be achieved by stopping an instance and resizing it to an instance type that has more RAM, CPU, I/O, or networking capabilities. This way of scaling can eventually hit a limit and it is not always a cost efficient or highly available approach. However, it is very easy to implement and can be sufficient for many use cases especially as a short term solution.
 A "vertically scalable" system is constrained to running its processes on only one computer; in such systems, the only way to increase performance is to add more resources into one computer in the form of faster (or more) CPUs, memory, or storage.
 Vertical scaling may improve performance, but not fault-tolerance; because if this "one computer" fails, the whole system will fail.
 
@@ -2898,7 +2901,7 @@ You can do so using both private, high speed networking and public internet conn
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-SECURITY is a shared resonsibility.
+SECURITY is a shared responsibility.
 Most (not all) data and network security are taken care of for you.
 When we talk about the data/network security, AWS has a “shared responsibility model” where AWS and the customer share the responsibility of securing them.
 For example, the customer is responsible for creating rules to secure their network traffic using the security groups and is also responsible for protecting data with encryption.
@@ -2907,12 +2910,8 @@ Gaining complete control over the physical infrastructure" is incorrect.
 The Physical infrastructure is a responsibility of AWS, not the customer.
 
 The principle of least privilege is one of the most important security practices and it means granting users the required permissions to perform the tasks entrusted to them and nothing more.
-The security administrator determines what tasks users need to perform and then attaches the policies that allow them to perform only those tasks. You should start with a minimum set of permissions and grant additional permissions when necessary. Doing so is more secure than starting with permissions that are too lenient and then trying to tighten them down.
-
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-AWS Personal Health Dashboard provides alerts and remediation guidance when AWS is experiencing events that may impact you.
-While the Service Health Dashboard displays the general status of AWS services, Personal Health Dashboard gives you a personalized view into the performance and availability of the AWS services underlying your AWS resources.
+The security administrator determines what tasks users need to perform and then attaches the policies that allow them to perform only those tasks.
+You should start with a minimum set of permissions and grant additional permissions when necessary. Doing so is more secure than starting with permissions that are too lenient and then trying to tighten them down.
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
@@ -2944,52 +2943,20 @@ Amazon CloudWatch can monitor AWS resources such as Amazon EC2 instances, Amazon
 You can use CloudWatch to detect anomalous behavior in your environments, take automated actions, troubleshoot issues, and discover insights to keep your applications running smoothly.
 
 AWS CloudTrail is an AWS service that can be used to monitor all user interactions with the AWS environment.
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-MARKETPLACE :
-AWS Marketplace is a curated digital catalog that makes it easy for customers to find, buy, deploy, and manage third-party software and services that customers need to build solutions and run their businesses.
-AWS Marketplace includes thousands of software listings from popular categories such as security, networking, storage, machine learning, business intelligence, database, and DevOps.
-AWS Marketplace also simplifies software licensing and procurement with flexible pricing options and multiple deployment methods.
-Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
-Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source, AWS.
-
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-NOT ALL AWS Services are Global:
-AWS services are either Global, Regional or specific to an Availability Zone.
-Among all the services that AWS offers, only a few of them are considered global services.
-Examples of AWS global services include: Amazon CloudFront, AWS Identity and Access Management and Amazon Route 53.
-
-The only way to reduce latency for the US users is to provision new Amazon EC2 instances in a Region closer to or in the US,
-OR by using Amazon CloudFront to cache copies of the content in edge locations close to the US users.
-In both cases, user requests will travel a shorter distance over the network, and the performance will improve.
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 IN MEMEMORY vs ELASTICACHE :
 --------------------------------
 The most frequently accessed data be stored in elasticache so that the application’s response time is optimal.
-The primary purpose of an in-memory data store is to provide ultrafast (submillisecond latency) and inexpensive access to copies of data.
+The primary purpose of an in-memory data store is to provide ultrafast (sub millisecond latency) and inexpensive access to copies of data.
   Querying a database is always slower and more expensive than locating a copy of that data in a cache.
   Some database queries are especially expensive to perform.
   An example is queries that involve joins across multiple tables or queries with intensive calculations.
   By caching (storing) such query results, you pay the price of the query only once.
   Then you can quickly retrieve the data multiple times without having to re-execute the query.
 
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-Included as part of the Enterprise Support plan, the Support Concierge Team are AWS billing and account experts that specialize in working with enterprise accounts. The Concierge team will quickly and efficiently assist you with your billing and account inquiries, and work with you to help implement billing and account best practices so that you can focus on running your business.
-Support Concierge service includes:
-** 24 x7 access to AWS billing and account inquires.
-** Guidance and best practices for billing allocation, reporting, consolidation of accounts, and root-level account security.
-** Access to Enterprise account specialists for payment inquiries, training on specific cost reporting, assistance with service limits, and facilitating bulk purchases.
-
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
- IAAS - PAAS - SAAS are the three basic cloud computing models and they come under AWS.
- NAAS - NETWORK AS A SERVICE is a part of IAAS and is not the basic one.
-
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+#################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 --> NETWORK BASED SERVICES : Private Network Connectors to AWS            - AWS DIRECT CONNECT
                              Edge Locations for S3 Enabled applications   - AMAZON S3 TRANSFER ACCELERATION
@@ -2999,7 +2966,6 @@ Support Concierge service includes:
                              SFTP transfer to S3                          - AWS TRANSFER FOR SFTP
                              Database Transfer                            - AWS DATABSE MIGRATION
                              VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
-
 
 --> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball / Snow Mobile ]
 
@@ -3047,7 +3013,7 @@ Amazon Comprehend is fully managed, so there are no servers to provision, and no
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-CONFIG vs CLOUD TRAIL :
+CONFIG vs CLOUD TRAIL - Change Management Tools :
 Change management is defined as “the Process responsible for controlling the Lifecycle of all Changes.
 The primary objective of Change Management is to enable beneficial changes to be made, with minimum disruption to IT Services.
 Despite all of the investments in software and hardware, an erroneous configuration or misstep in a process can frequently undo these efforts and lead to failure.

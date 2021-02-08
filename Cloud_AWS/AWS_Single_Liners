@@ -555,7 +555,8 @@ SQS : IS A QUEUE Service.
                   --> Basic         - Included
                   --> Developer     - Starting at $29 per month       - https://aws.amazon.com/premiumsupport/plans/
                   --> Business      - Starting at $100 per month      - https://aws.amazon.com/premiumsupport/plans/
-                  --> Enterprise    - Starting at $15,000 per month   - https://aws.amazon.com/premiumsupport/plans/
+                  --> Enterprise    - Starting at $15,000 per month   - INFRASTRUCTURE EVENT MANAGEMENT - MIGRATION ACCELERATION PROGRAM - TECHNICAL ACCOUNT MANAGER -  TOTAL COST OF OWNERSHIP
+                                      TAM - MAP - IEM - TCO
 
 4. AWS TRAINING & CERTIFICATION : TRAINING : https://aws.amazon.com/training/?id=docs_gateway
                                   DOCS     : https://docs.aws.amazon.com/
@@ -602,14 +603,82 @@ SQS : IS A QUEUE Service.
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+CLOUD ADOPTION FRAMEWORK - CAF :
+Helps organizations understand how cloud adoption transforms the way they work. Helps determine the most effective approach to an enterprise cloud migration effort.
+We describe these areas of focus as Perspectives: Business, People, Governance, Platform, Security, and Operations.
 
+AMAZON COMPREHEND :
+It is a natural language processing (NLP) service that uses machine learning to find insights and relationships in text. No machine learning experience required.
+There is a treasure trove of potential sitting in your unstructured data. Customer emails, support tickets, product reviews, social media, even advertising copy represents insights into customer sentiment that can be put to work for your business.
 
+AWS QUICK STARTS :
+AWS Quick Start Reference Deployments outline the architectures for popular enterprise solutions on AWS and provide AWS CloudFormation templates to automate their deployment.
+Each Quick Start launches, configures, and runs the AWS compute, network, storage, and other services required to deploy a specific workload on AWS, using AWS best practices for security and availability.
+Quick Starts are built by AWS solutions architects and partners to help you deploy popular technologies on AWS, based on AWS best practices.
+These accelerators reduce hundreds of manual installation and configuration procedures into just a few steps, so you can build your production environment quickly and start using it immediately.
+Each Quick Start includes AWS CloudFormation templates that automate the deployment and a guide that discusses the architecture and provides step-by-step deployment instructions.
 
+AWS MARKET-PLACE :  Buy & Sell - Paid or Free AWS Software Solutions .
+AWS Marketplace is an online store where you can buy or sell software that runs on Amazon Web Services (AWS).
+AWS Marketplace is a curated digital catalog customers can use to find, buy, deploy, and manage third-party software, data, and services that customers need to build solutions and run their businesses.
+AWS Marketplace includes thousands of software listings from popular categories such as security, networking, storage, machine learning, business intelligence, database, as well as related professional services to help you manage and support those solutions.
+AWS Marketplace also simplifies software licensing and procurement with flexible pricing options and multiple deployment methods.
+Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
+Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source, AWS.
 
+TECHNICAL ACCOUNT MANAGER - TAM :
+Specific to Enterprise customers. work with a technical account manager (TAM) for your specific use cases and applications. Technical account managers play an important role in winning sales.
+They are responsible for analyzing prospects' business and technical requirements and developing solutions that meet those needs.
+In some cases, they may work with product development teams to customize products for individual customers.
+A Technical Account Manager (TAM) is your designated technical point of contact who helps you onboard, provides advocacy and guidance to help plan and build solutions using best practices, coordinates access to subject matter experts, assists with case management, presents insights and recommendations on your AWS spend
 
+The AWS Migration Acceleration Program - MAP :
+A comprehensive and proven cloud migration program based upon AWS’s experience of migrating a thousand enterprise customers to the cloud.
+The program packages best practices, tools, expertise, financial incentives, and a partner ecosystem to make cloud adoption easier.
+MAP consists of a three-phase journey that helps you achieve your migration goals by reducing migration complexity and costs.
+Leverage the performance, security, and reliability of the cloud
 
+INFRASTRUCTURE EVENT MANAGEMENT - IEM :
+Short-term engagement with AWS Support to get a deep understanding of your use case.
+After analysis, provide architectural and scaling guidance for an event.
+AWS Infrastructure Event Management is a short-term engagement with AWS Support, included in the Enterprise-level Support product offering, and available for additional purchase for Business-level Support subscribers.
+AWS Infrastructure Event Management partners with your technical and project resources to gain a deep understanding of your use case and provide architectural and scaling guidance for an event.
+Common use-case examples for AWS Event Management include advertising launches, new product launches, and infrastructure migrations to AWS.
 
+TOTAL COST OF OWNERSHIP - TCO  :
+The Total Cost of Ownership (TCO) is often the financial metric used to estimate and compare costs of a product or a service.
+When comparing AWS with on-premises TCO, customers should consider all costs of owning and operating a data center. Examples of these costs include facilities, physical servers, storage devices, networking equipment, cooling and power consumption, data center space, and Labor IT cost.
+The AWS TCO (Total Cost of Ownership) Calculator is a free tool that provides directional guidance on possible realized savings when deploying AWS.
+This tool is built on an underlying calculation model, that generates a fair assessment of value that a customer may achieve given the data provided by the user which includes the number of servers migrated to AWS, the server type, the number of processors and so on.
 
+AWS ABUSE TEAM :
+AWS Support can't assist with reports of abuse or questions about notifications from the AWS Abuse team.
+The AWS Abuse team can assist you when AWS resources are used to engage in the following types of abusive behaviour :
+  --> Spam  : You are receiving unwanted emails from an AWS-owned IP address, or AWS resources are used to spam websites or forums.
+  --> Port scanning: Your logs show that one or more AWS-owned IP addresses are sending packets to multiple ports on your server, and you believe this is an attempt to discover unsecured ports.
+  --> DOS attacks: Your logs show that one or more AWS-owned IP addresses are used to flood ports on your resources with packets, and you believe that this is an attempt to overwhelm or crash your server or the software running on your server.
+  --> Intrusion attempts: Your logs show that one or more AWS-owned IP addresses are used to attempt to log in to your resources.
+  --> Hosting objectionable or copyrighted content: You have evidence that AWS resources are used to host or distribute illegal content or distribute copyrighted content without the consent of the copyright holder.
+  --> Distributing malware: You have evidence that AWS resources are used to distribute software that was knowingly created to compromise or cause harm to computers or machines on which it is installed.
+If you suspect that AWS resources are used for abusive purposes, contact the AWS Abuse team using the Report Amazon AWS abuse form, or by contacting abuse@amazonaws.com.
+Provide all the necessary information, including logs in plaintext, email headers, and so on, when you submit your request.
+The AWS Abuse team doesn't open attachments under any circumstance. You must provide any necessary information in plaintext.
+
+AWS TRUSTED ADVISOR :
+Cost Optimization -  Performance -  Security - Fault Tolerance -  Service Limits
+AWS Trusted Advisor offers a rich set of best practice checks and recommendations across five categories: cost optimization, security, fault tolerance, performance, and service limits.
+AWS Trusted Advisor is your customized cloud expert! It helps you to observe best practices for the use of AWS by inspecting your AWS environment with an eye toward saving money, improving system performance and reliability, and closing security gaps.
+All AWS customers can start optimizing their cloud resources by using four of AWS Trusted Advisor’s most popular best-practice recommendations on service limits and security configurations.
+Access to the four free checks does not expire, and you can access the remaining 33 checks and additional features by upgrading to Business or Enterprise-level Support.
+
+The four free checks include : Security Groups - Specific Ports Unrestricted, Service Limits, IAM Use, and MFA on Root Account
+You can also subscribe to Business and Enterprise-level support to access the full suite of Trusted Advisor best-practice checks, API access, and a host of other support features, such as phone and chat access to support personnel, architecture guidance, API access, and help with third-party software configuration.
+AWS Trusted Advisor is an online tool that provides you real time guidance to help you provision your resources following AWS best practices.
+Trusted Advisor checks help optimize your AWS infrastructure, increase security and performance, reduce your overall costs, and monitor service limits.
+Whether establishing new workflows, developing applications, or as part of ongoing improvement, take advantage of the recommendations provided by Trusted Advisor on a regular basis to help keep your solutions provisioned optimally.
+
+AWS Basic Support and AWS Developer Support customers get access to 6 security checks (S3 Bucket Permissions, Security Groups - Specific Ports Unrestricted, IAM Use, MFA on Root Account, EBS Public Snapshots, RDS Public Snapshots) and 50 service limit checks.
+AWS Business Support and AWS Enterprise Support customers get access to all 115 Trusted Advisor checks (14 cost optimization, 17 security, 24 fault tolerance, 10 performance, and 50 service limits) and recommendations.
 
 
 

@@ -291,7 +291,6 @@ The core security checks include: (Important)
 You can configure Trusted Advisor notifications to receive weekly email about any changes in their check results.
 You can also subscribe to Business and Enterprise-level support to access the full suite of Trusted Advisor best-practice checks, API access, and a host of other support features, such as phone and chat access to support personnel, architecture guidance, API access, and help with third-party software configuration.
 
-
 AWS Trusted Advisor draws upon best practices learned from serving hundreds of thousands of AWS customers.
 Trusted Advisor inspects your AWS environment, and then makes recommendations when opportunities exist to save money, improve system availability and performance, or help close security gaps.
 All AWS customers have access to five Trusted Advisor checks.
