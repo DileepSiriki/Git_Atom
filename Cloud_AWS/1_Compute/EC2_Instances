@@ -459,6 +459,12 @@ You can purchase a Reserved Instance for a one-year or three-year commitment, wi
 Reserved Instances do not renew automatically; when they expire, you can continue using the EC2instance without interruption, but you are charged On-Demand rates.
 In nav bar (left) -> find option "RESERVED INSTANCES"
 
+There are three payment options available when purchasing reserved instances:
+The general rule is: “the more you spend upfront, the more discounts you get." With the All Upfront option, you pay for the entire Reserved Instance term with one upfront payment.
+1- No up-front
+2- Partial up-front
+3- All up-front.
+
 Reserved Instances provide you with a significant discount (up to 75%) compared to On-Demand instance pricing.
 In addition, when Reserved Instances are assigned to a specific Availability Zone, they provide a capacity reservation, giving you additional confidence in your ability to launch instances when you need them.
 For applications that have steady state or predictable usage, Reserved Instances can provide significant savings compared to using On-Demand instances.

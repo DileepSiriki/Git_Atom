@@ -56,6 +56,35 @@ For example, healthcare companies are using the cloud to develop more personaliz
           --> SERVICE MODELS
             Cloud computing is based on service models : IAAS , PAAS , SAAS.
 
+
+Advantages of Cloud Computing include:  (IMPORTANT)
+-------------------------------------------------------
+
+1- Trade capital for variable expense:
+   Instead of having to invest heavily in data centers and servers before you know how you’re going to use them, you can only pay when you consume computing resources, and only pay for how much you consume.
+   By using AWS, infrastructure costs are converted to a pay-as-you-go model, where customers are charged for the resources that they consume, and those costs are incurred as operating costs instead of as capital expenditures.
+
+2- Benefit from massive economies of scale:
+   By using cloud computing, you can achieve a lower variable cost than you can get on your own.
+   Because usage from hundreds of thousands of customers are aggregated in the cloud, providers such as Amazon Web Services can achieve higher economies of scale which translates into lower pay as you go prices.
+
+3- Stop guessing capacity:
+   Eliminate guessing on your infrastructure capacity needs.
+   When you make a capacity decision prior to deploying an application, you often either end up sitting on expensive idle resources or dealing with limited capacity.
+   With cloud computing, these problems go away. You can access as much or as little as you need, and scale up and down as required with only a few minutes notice.
+
+4- Increase speed and agility:
+   In a cloud computing environment, new IT resources are only ever a click away, which means you reduce the time it takes to make those resources available to your developers from weeks to just minutes.
+   This results in a dramatic increase in agility for the organization, since the cost and time it takes to experiment and develop is significantly lower.
+
+5- Stop spending money on running and maintaining data centers:
+   Focus on projects that differentiate your business, not the infrastructure.
+   Cloud computing lets you focus on your own customers, rather than on the heavy lifting of racking, stacking and powering servers.
+
+6- Go global in minutes:
+   Easily deploy your application in multiple regions around the world with just a few clicks.
+   This means you can provide a lower latency and better experience for your customers simply and at minimal cost.
+
 PUBLIC CLOUD    : Allows systems and services to be easily accessible to the general public.
   (BUS)           Public cloud may be less secure because of its openness. -> CHEAP & LESS SECURE & LOCATION INDEPENDENCE
 
@@ -283,12 +312,34 @@ Since we need not install any software locally , it is platform independent.
 
 A cloud services platform such as Amazon Web Services or Azure owns and maintains the network-connected hardware required for these application services.
 while you provision and use what you need via a web application.
+Advantages of Cloud Computing include:  (IMPORTANT)
 
-• Trade capital expense for variable expense
-• Stop guessing capacity
-• Increase speed and agility
-• Stop spending money running and maintaining data centers
-• Go global in minutes
+1- Trade capital for variable expense:
+   Instead of having to invest heavily in data centers and servers before you know how you’re going to use them, you can only pay when you consume computing resources, and only pay for how much you consume.
+   By using AWS, infrastructure costs are converted to a pay-as-you-go model, where customers are charged for the resources that they consume, and those costs are incurred as operating costs instead of as capital expenditures.
+
+2- Benefit from massive economies of scale:
+   By using cloud computing, you can achieve a lower variable cost than you can get on your own.
+   Because usage from hundreds of thousands of customers are aggregated in the cloud, providers such as Amazon Web Services can achieve higher economies of scale which translates into lower pay as you go prices.
+
+3- Stop guessing capacity:
+   Eliminate guessing on your infrastructure capacity needs.
+   When you make a capacity decision prior to deploying an application, you often either end up sitting on expensive idle resources or dealing with limited capacity.
+   With cloud computing, these problems go away. You can access as much or as little as you need, and scale up and down as required with only a few minutes notice.
+
+4- Increase speed and agility:
+   In a cloud computing environment, new IT resources are only ever a click away, which means you reduce the time it takes to make those resources available to your developers from weeks to just minutes.
+   This results in a dramatic increase in agility for the organization, since the cost and time it takes to experiment and develop is significantly lower.
+
+5- Stop spending money on running and maintaining data centers:
+   Focus on projects that differentiate your business, not the infrastructure.
+   Cloud computing lets you focus on your own customers, rather than on the heavy lifting of racking, stacking and powering servers.
+
+6- Go global in minutes:
+   Easily deploy your application in multiple regions around the world with just a few clicks.
+   This means you can provide a lower latency and better experience for your customers simply and at minimal cost.
+
+
 
 EX : Netflix in Aws
 

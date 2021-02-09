@@ -7,8 +7,11 @@ CLOUD :  [ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
     hospitals - finance teams - gaming companies
 
   USES :
-    A agile - c  cost effective - D deploy global in sec - E elastic - F trade capital expense for variable expenses - G no engineers for maintenance
+    A agile - c cost effective - D deploy global in sec - E elastic - F trade capital expense for variable expenses - G no engineers for maintenance
     Guessing capacity - no running data centres - pay as you go - serverless - scalable , shared responsibility.
+
+  ADVANTAGES :
+  Trade capital for variable expense, Benefit from massive economies of scale, Stop guessing capacity, Increase speed and agility, Stop spending money on running and maintaining data centers, Go global in minutes.
 
   TYPES          : Service Public Private Hybrid Community - Deploy IAAS Admins, PAAS Developers, SAAS Users & Diagram
   VIRTUALIZATION : Technique of sharing 1 resource among many by assigning a logical name to resource and providing a pointer to physical resource when demanded.
@@ -747,11 +750,140 @@ AWS Business Support and AWS Enterprise Support customers get access to all 115 
     ALEXA-FOR-BUSINESS     CHIME     HONEY-CODE     WORK-MAIL
 
 12. CUSTOMER ENABLEMENT SERVICES
-    AWS-MANAGED-SERVICES    AWS-PROFESSIONAL-SERVICES     AWS-IQ      AWS-SUPPORT             TRAINING-&-CERTIFICATION
+    AWS-MANAGED-SERVICES    AWS-PROFESSIONAL-SERVICES     AWS-IQ      AWS-SUPPORT      TRAINING-&-CERTIFICATION
+    https://aws.amazon.com/premiumsupport/plans/
 
 13. CUSTOMER ENGAGEMENT
     AMAZON-CONNECT          AMAZON-PINPOINT       SES -- SIMPLE-EMAIL-SERVICE
 
 14.  BILLING & COST MANAGEMENT
-     BILLING & COST MANAGEMENT --> [ COST-&-USAGE-REPORT --  CONSOLIDATED-BILLING  -- COST-EXPLORER -- BUDGETS -- ORDERS-&-INVOICES -- KNOWLEDGE-CENTRE -- COST-ANAMOLY-DETECTION ]
+     BILLING & COST MANAGEMENT --> [ COST-&-USAGE-REPORT --  CONSOLIDATED-BILLING  -- COST-EXPLORER -- BUDGETS -- ORDERS-&-INVOICES -- KNOWLEDGE-CENTRE -- COST-ANAMOLY-DETECTION -- Simple Monthly Calculator  ]
      PRICING CALCULATOR           SAVINGS PLAN
+
+15. SATELLITE            -- AWS GROUND STATION
+16. ROBOTICS             -- AWS ROBO MAKER
+17. QUANTUM COMPUTING    -- AMAZON BRAKET
+18. BLOCKCHAIN           -- AMAZON MANAGED BLOCK CHAIN
+19. AR & VR              -- AMAZON SUMERIAN
+20. GAME DEVELOPMENT     -- AMAZON GAME-LIFT  &&  AMAZON LUMBER-YARD
+
+
+21. COMPUTE
+    ELASTIC-COMPUTE-CLOUD       ELASTIC-BEANSTALK        BATCH          EC2-IMAGE-BUILDER        LAMBDA          LIGHT-SAIL
+    OUTPOSTS                    WAVELENGTHS
+    // LAUNCH-WIZARD               PARALLEL-CLUSTERS        SAM -- SERVERLESS-APPLICATION-MODEL   SERVERLESS-APPLICATION-REPOSITORY
+
+
+2. AWS BATCH : https://www.youtube.com/watch?v=j_iI1DzSi5g      &&   https://www.youtube.com/watch?v=T4aAWrGHmxQ&t=29s
+AWS Batch enables you to run batch computing workloads on the AWS Cloud.
+Batch computing is a common way for developers, scientists, and engineers to access large amounts of compute resources.
+AWS Batch removes the undifferentiated heavy lifting of configuring and managing the required infrastructure.
+AWS Batch automatically provisions compute resources and optimizes the workload distribution based on the quantity and scale of the workloads.
+With AWS Batch, there is no need to install or manage batch computing software, which allows you to focus on analysing results and solving problems.
+After a compute environment is up and associated with a job queue, you can define job definitions that specify which Docker container images to run your jobs.
+
+  --> Break work into batches and tell AWS which batch needs which resources are required and when to execute a batch
+  --> Integrates with fargate to provide the exact amount of CPU-GPU-MEMORY the job requests.
+  --> Scientists-Developers-Engineers  to run 100's of batch processing jobs
+
+Queue-1  ->     | Batch Job-1 | -->| Batch Job-2 | -->| Batch Job-3 | -->| Batch Job-4 | -->| Batch Job-5 | --> OUTPUT
+prio-1          |---------------------------------- SCHEDULER---------------------------------------------|
+
+Queue-2  ->     |                    Batch Job-1                    | -->| Batch Job-2 | -->| Batch Job-3 | --> OUTPUT
+prio-2          |---------------------------------- SCHEDULER---------------------------------------------|
+
+--> When there are enough compute to run Batch Job-1 , it is run and then the next job and then next....
+--> Compute environment dynamically provision and scale compute resources based on volume and resource requirements of submitted jobs.
+--> We can place the batch jobs on the queues and provide the priority.
+--> The scheduler will evaluate when where to execute a specific batch job. It picks batch job from a queue.
+--> We can also specify for a queue to only use spot instances for batch processing by providing it a lower priority.
+--> We can also tell Queue-2 to run queue-1 jobs first and then do queue-2 jobs only if queue-1 jobs are all finished called priority queuing.
+
+
+3. AWS ELASTIC BEANSTALK :  < Has a separate detailed chapter > https://www.youtube.com/watch?v=SrwxAScdyT0&t=28s
+--> Focus on your code --> Write it --> Upload it -->  AWS takes care of required resources .
+With AWS Elastic Beanstalk, you can quickly deploy and manage applications in the AWS Cloud without worrying about the infrastructure that runs those applications.
+AWS Elastic Beanstalk reduces management complexity without restricting choice or control.
+You simply upload your application, and AWS Elastic Beanstalk automatically handles the details of capacity provisioning, load balancing, scaling, and application health monitoring.
+
+4. AMAZON EC2 IMAGE BUILDER : https://www.youtube.com/watch?v=K5d2VdByohs&t=151s
+The image pipeline in Image Builder defines all aspects of the process to customize images. It consists of the image recipe, infrastructure configuration, distribution, and test settings.
+It's a fully-managed AWS service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date “golden” server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.
+Crete a custom image based on required parameters and share the AMI across accounts or for instances in your account .
+--> You can also write a cron job to create an image from an instance at a point of time.
+--> And also schedule the cron to run weekly or daily etc;
+--> The output GOLDEN image can be an AMI or a docker image.
+
+ ------------------------         -------------------------------        ---------------------------         ---------------------------------         ---------------------------------------
+| Start with Source image | --> | Customize software in the image | --> | Secure image with templates | --> | Test with pre defined / own tests | --> | Distribute golden IMAGE to any region. |
+ ------------------------         -------------------------------         ---------------------------         ---------------------------------        ---------------------------------------
+
+5. AWS LAMBDA :  < Has a separate detailed chapter >
+--> Do something in response to events such as an api call / SNS / a data change in S3 /etc ;
+With AWS Lambda, you can run code without provisioning or managing servers.
+You pay only for the compute time that you consume—there’s no charge when your code isn’t running.
+You can run code for virtually any type of application or backend service—all with zero administration.
+Just upload your code and Lambda takes care of everything required to run and scale your code with high availability.
+You can set up your code to automatically trigger from other AWS services or call it directly from any web or mobile app.
+The Lambda free tier includes 1M free requests per month and 400,000 GB-seconds of compute time per month.
+Past this, it costs $0.20 per 1 million requests and $0.00001667 for every GB-seconds. The GB-seconds is based on the memory consumption of the Lambda function.
+
+6. AMAZON LIGHT SAIL : https://www.youtube.com/watch?v=wzhTAwRbdXw
+--> Deploying a word press site etc ;
+--> Will be taken to a new website where you can just select the instance / container / db type and directly launch a wordpress / Drupal etc;
+--> You can directly launch instance / db / networking / memory etc; in the site
+Amazon Lightsail helps developers get started using AWS to build websites or web applications.
+It includes the features that you need to launch your project.
+Including - instances (virtual private servers), managed databases, SSD-based block storage, static IP addresses, load balancers, content delivery network (CDN) distributions, DNS management of registered domains, and snapshots (backups).
+These features are all available for a low, predictable monthly price.
+
+7. AWS OUTPOSTS : https://www.youtube.com/watch?v=ppG2FFB0mMQ&t=9s
+--> To start running AWS cloud services on premises.
+--> Instead of creating 2 different applications and API to handle on premises and Cloud environments , outposts were created.
+    So bring the cloud to on premises and job done . Now use same apps and API's for both on premises and cloud.
+    We need to order from a fully integrated and pre validated outpost configurations specific for your use case.
+    Tell the required compute and memory and network and they are bundled and brought to your location.
+    Now we connect the outpost to the nearest REGION using a DIRECT CONNECT or VPN or use a local GW to connect to on premises resources.
+    Also create a VPC and enable communication between your instances.
+    Now launch EC2 in the outposts and other resources.
+--> Even though we can use cloud , some applications still need to be on premises for latency issues . Hence OUTPOSTS.
+    So instead of changing applications to meet both cloud and on premises apps , we can use same API's to access resources in both.
+    AWS Technician comes and set up all the resources needed to connect resources in cloud and resources in on-premises.
+An Outpost is a pool of AWS compute and storage capacity deployed at a customer site.
+AWS Outposts brings native AWS services, infrastructure, and operating models to virtually any data centre, co-location space, or on-premises facility.
+You can use the same services, tools, and partner solutions to develop for the cloud and on premises .
+
+8. AWS WAVE LENGTH : To fully utilize 5G capabilities . // https://www.youtube.com/watch?v=EhMqwPqPzcY&t=6s
+AWS Wavelength allows developers to build applications that deliver ultra-low latencies to mobile devices and end users.
+Wavelength deploys standard AWS compute and storage services to the edge of telecommunication carriers' 5G networks.
+Developers can extend an Amazon Virtual Private Cloud (VPC) to one or more Wavelength Zones.
+Then use AWS resources like Amazon Elastic Compute Cloud (EC2) instances to run applications that require ultra-low latency and a connection to AWS services in the Region.
+To help 5G --> Gaming experience - smart cities - robotics - autonomous driving cars
+
+============================================
+BELOW ARE CONCEPTUAL TOPICS  IN COMPUTE
+============================================
+
+9. AWS LAUNCH WIZARD :
+--> Used by enterprise applications .
+AWS Launch Wizard reduces the time it takes to deploy application and domain-controller solutions to the cloud by providing easy step-by-step guidance.
+You input your application or domain controller requirements, and AWS Launch Wizard identifies the right AWS resources to deploy and run your solution.
+AWS Launch Wizard provides an estimated cost of deployment, and gives you the ability to modify your resources and instantly view the updated cost assessment.
+When you approve, AWS Launch Wizard provisions and configures the selected resources in a few hours to create fully-functioning, production-ready applications or domain controllers.
+It also creates custom AWS CloudFormation templates, which can be reused and customized for subsequent deployments.
+
+10. AWS PARALLEL CLUSTER : // extends AWS BATCH // HPC  1000's of CPU or GPU .   https://www.youtube.com/watch?v=r4RxT-IMtFY
+AWS Parallel Cluster is an AWS supported open source cluster management tool that helps you to deploy and manage high performance computing (HPC) clusters in the AWS Cloud.
+You can use AWSParallelCluster with batch schedulers, such as AWS Batch and Slurm.
+AWS Parallel Cluster facilitates quick start proof of concept deployments and production deployments.
+You can also build higher level workflows, such as a genomics portal that automates an entire DNA sequencing workflow, on top of AWSParallelCluster.
+
+11. AWS SERVERLESS APPLICATION MODEL - SAM : /// extends AWS CLOUD FORMATION
+The AWS Serverless Application Model (AWS SAM) is an open-source framework that you can use to build serverless applications on AWS.
+You can use AWS SAM to define your serverless applications.
+It is an extension of CLOUD FORMATION
+
+12. AWS SERVERLESS APPLICATION REPOSITORY :
+The AWS Serverless Application Repository is a managed repository for serverless applications.
+It enables teams, organizations, and individual developers to find, deploy, publish, share, store, and easily assemble serverless architectures.
+Using SAM from above , we can publish and deploy applications to the public or to our team.
