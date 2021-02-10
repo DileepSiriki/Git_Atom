@@ -143,7 +143,7 @@ It also creates custom AWS CloudFormation templates, which can be reused and cus
 
 10. AWS PARALLEL CLUSTER : // extends AWS BATCH // HPC  1000's of CPU or GPU .   https://www.youtube.com/watch?v=r4RxT-IMtFY
 AWS Parallel Cluster is an AWS supported open source cluster management tool that helps you to deploy and manage high performance computing (HPC) clusters in the AWS Cloud.
-You can use AWSParallelCluster with batch schedulers, such as AWS Batch and Slurm.
+You can use AWS ParallelCluster with batch schedulers, such as AWS Batch and Slurm.
 AWS Parallel Cluster facilitates quick start proof of concept deployments and production deployments.
 You can also build higher level workflows, such as a genomics portal that automates an entire DNA sequencing workflow, on top of AWSParallelCluster.
 
@@ -3215,8 +3215,54 @@ For example, if an application is developed in Japan but is primarily accessed b
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+LOCAL ZONES vs OUTPOSTS :
+--------------------------
+Local zones are availability zones closure to large population, industry or an IT centre.
+AWS Local Zones are a type of AWS infrastructure deployment that places AWS compute, storage, database, and other select services close to large population, industry, and IT centers.
+With AWS Local Zones, you can easily run applications that need single-digit millisecond latency closer to end-users in a specific geography.
+AWS Local Zones are ideal for use cases such as media & entertainment content creation, real-time gaming, live video streaming, and machine learning inference.
+
+Even though we can use cloud , some applications still need to be on premises for latency issues . Hence OUTPOSTS.
+So instead of changing applications to meet both cloud and on premises apps , we can use same API's to access resources in both.
+AWS Technician comes and set up all the resources needed to connect resources in cloud and resources in on-premises.
+Now we connect the outpost to the nearest REGION using a DIRECT CONNECT or VPN or use a local GW to connect to on premises resources.
+Also create a VPC and enable communication between your instances.
+An Outpost is a pool of AWS compute and storage capacity deployed at a customer site.
+AWS Outposts brings native AWS services, infrastructure, and operating models to virtually any data centre, co-location space, or on-premises facility.
+You can use the same services, tools, and partner solutions to develop for the cloud and on premises .
+
+RESERVED INSTANCES : For EC2, FARGATE, RDS, REDSHIFT, ELASTICAHE
+SAVINGS PLAN       : Only for EC2 & FARGATE
+
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+BEANSTALK vs CLOUD FORMATION : https://stackoverflow.com/questions/14422151/what-is-the-difference-between-elastic-beanstalk-and-cloudformation-for-a-net-p
+---------------------------------------
+They're actually pretty different.
+Elastic Beanstalk is intended to make developers' lives easier.
+Cloud Formation is intended to make systems engineers' lives easier.
+
+Elastic Beanstalk is a PaaS-like layer on top of AWS's IaaS services which abstracts away the underlying EC2 instances, Elastic Load Balancers, auto scaling groups, etc.
+This makes it a lot easier for developers, who don't want to be dealing with all the systems stuff, to get their application quickly deployed on AWS.
+It's very similar to other PaaS products such as Heroku, EngineYard, Google App Engine, etc.
+With Elastic Beanstalk, you don't need to understand how any of the underlying magic works.
+
+CloudFormation, on the other hand, doesn't automatically do anything.
+It's simply a way to define all the resources needed for deployment in a huge JSON file.
+So a CloudFormation template might actually create two ElasticBeanstalk environments (production and staging), a couple of Elastic Cache clusters, a DyanmoDB table, and then the proper DNS in Route53.
+I then upload this template to AWS, walk away, and 45 minutes later everything is ready and waiting.
+Since it's just a plain-text JSON file, I can stick it in my source control which provides a great way to version my application deployments.
+It also ensures that I have a repeatable, "known good" configuration that I can quickly deploy in a different region.
+
+Behind the scenes, Elastic Beanstalk uses CloudFormation to create and maintain resources.
+If your application requirements dictate more custom control, the additional functionality of CloudFormation gives you more options to control your workloads.
+
+AWS CloudFormation supports Elastic Beanstalk application environments as one of the AWS resource types.
+This allows you, for example, to create and manage an AWS Elastic Beanstalk–hosted application along with an RDS database to store the application data.
+In addition to RDS instances, any other supported AWS resource can be added to the group as well.
+
+Tools used for quicker app deployments --> [[ lightsail - quick start references - cloud formation - bean stalk - serverless application models - launch wizard ]
+
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################

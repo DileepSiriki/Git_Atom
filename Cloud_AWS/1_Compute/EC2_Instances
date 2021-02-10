@@ -6,6 +6,11 @@ You can use Amazon EC2 to launch as many or as few virtual servers as you need, 
 
   • Virtual computing environments, known as instances.
   • Preconfigured templates for your instances, known as Amazon Machine Images (AMIs), that package the bits you need for your server (including the operating system and additional software)
+    // An AMI includes the following:
+       A template for the root volume for the instance (for example, an operating system, an application server, and applications)
+       Launch permissions that control which AWS accounts can use the AMI to launch instances.
+       A block device mapping that specifies the volumes to attach to the instance when it's launched.
+
   • Various configurations of CPU, memory, storage, and networking capacity for your instances, known as instance types
   • Secure login information for your instances using key pairs (AWS stores the public key, and you store the private key in a secure place)
   • Storage volumes for temporary data that's deleted when you stop, hibernate, or terminate your instance, known as instance store volumes
@@ -35,7 +40,7 @@ TYPES OF INSTANCES :
 
 INSTANCE LIFECYCLE :
 ------------------------
-Is a virtual server in the cloud. Its configuration at launch is a copy of the AMI that you specified when you launched the instance.
+Instance is a virtual server in the cloud. Its configuration at launch is a copy of the AMI that you specified when you launched the instance.
 An instance type essentially determines the hardware of the host computer used for your instance.
 Each instance type offers different compute and memory capabilities.
 Select an instance type based on the amount of memory and computing power that you need for the application or software that you plan to run on the instance.
@@ -219,6 +224,23 @@ LOCAL ZONES :
       A Local Zone is represented by an AWS Region code followed by an identifier that indicates the location, for example us-west-2-lax-1a.
       Resources created in a Local Zone can serve local users with very low-latency communications.
 
+OUTPOSTS :
+-------------
+--> To start running AWS services on premises.
+--> Instead of creating 2 different applications and API to handle on premises and Cloud environments , outposts were created.
+    So bring the cloud to on premises and job done . Now use same apps and API's for both on premises and cloud.
+    We need to order from a fully integrated and pre validated outpost configurations specific for your use case.
+    Tell the required compute and memory and network and they are bundled and brought to your location.
+    Now we connect the outpost to the nearest REGION using a DIRECT CONNECT or VPN or use a local GW to connect to on premises resources.
+    Also create a VPC and enable communication between your instances.
+    Now launch EC2 in the outposts and other resources.
+--> Even though we can use cloud , some applications still need to be on premises for latency issues . Hence OUTPOSTS.
+    So instead of changing applications to meet both cloud and on premises apps , we can use same API's to access resources in both.
+    AWS Technician comes and set up all the resources needed to connect resources in cloud and resources in on-premises.
+An Outpost is a pool of AWS compute and storage capacity deployed at a customer site.
+AWS Outposts brings native AWS services, infrastructure, and operating models to virtually any data centre, co-location space, or on-premises facility.
+You can use the same services, tools, and partner solutions to develop for the cloud and on premises .
+
 OUTPOSTS & WAVELENGTHS :
 --------------------------
     • AWS Outposts is a fully managed service that extends AWS infrastructure, services, APIs, and tools to customer premises.
@@ -227,6 +249,7 @@ OUTPOSTS & WAVELENGTHS :
     • Wavelength Zones allow developers to build applications that deliver ultra-low latencies to 5G devices and end users.
       Wavelength deploys standard AWS compute and storage services to the edge of telecommunication carriers' 5G networks.
       A Wavelength Zone is represented by a Region code followed by an identifier that indicates the Wavelength Zone, for example, us-east-1-wl1-bos-wlz-1.
+      To help 5G --> Gaming experience - smart cities - robotics - autonomous driving cars
 
 EDGE LOCATIONS : - Content Delivery Network
 ------------------
@@ -252,7 +275,7 @@ Amazon CloudFront, Amazon Route 53, AWS Firewall Manager, AWS Shield, and AWS WA
           C = AVAILABILITY ZONE
           D = EDGE LOCATIONS
 
-EC2 ROOT DEVICE VOLUME : [ AMIs backed by Amazon EC2 instance store (OLDER) <===> AMIs backed by Amazon EBS.(LATEST) ]
+EC2 ROOT DEVICE VOLUME : [ AMIs backed by Amazon EC2 instance store (OLDER) <===> AMIs backed by Amazon EBS (LATEST) ]
 -------------------------
     INSTANCE STRORE BACKED INSTANCES : (Do not support the Stop action)  --> Template stored in Amazon S3
         Instances that use instance stores for the root device automatically have one or more instance store volumes available, with one volume serving as the root device volume.
@@ -296,6 +319,11 @@ EC2 ROOT DEVICE VOLUME : [ AMIs backed by Amazon EC2 instance store (OLDER) <===
 
 AMAZON MACHIENE IMAGE : AMI --> [ My AMI - Market Place - Community AMI ]
 -----------------------------
+// An AMI includes the following:
+   A template for the root volume for the instance (for example, an operating system, an application server, and applications)
+   Launch permissions that control which AWS accounts can use the AMI to launch instances.
+   A block device mapping that specifies the volumes to attach to the instance when it's launched.
+
 Bundle of an OS and pre installed s/w for your virtual machine .
 It has a fixed state , so when you start , stop and start , they have a same data.
 An Amazon Machine Image (AMI) provides the information required to launch an instance. You must specify an AMI when you launch an instance.
@@ -311,7 +339,7 @@ You can also create your own custom AMI or AMIs; doing so enables you to quickly
 
 --> An AMI includes the following:
    • One or more Amazon Elastic Block Store (Amazon EBS) snapshots, or,
-        for instance-store-backed AMIs,a template for the root volume of the instance (for example, an operating system, an applicationserver, and applications).
+     For instance-store-backed AMIs,a template for the root volume of the instance (for example, an operating system, an applicationserver, and applications).
    • Launch permissions that control which AWS accounts can use the AMI to launch instances.
    • A block device mapping that specifies the volumes to attach to the instance when it's launched.
 
@@ -319,8 +347,8 @@ You can also create your own custom AMI or AMIs; doing so enables you to quickly
       You can launch an instance from an existing AMI, customize the instance (for example, install software on the instance), and then save this updated configuration as a custom AMI.
       Instances launched from this new custom AMI include the customizations that you made when you created the AMI.
 
--->AMIs that are backed by Amazon EBS snapshots can take advantage of Amazon EBS encryption.
-   Snapshots of both data and root volumes can be encrypted and attached to an AMI.
+--> AMIs that are backed by Amazon EBS snapshots can take advantage of Amazon EBS encryption.
+    Snapshots of both data and root volumes can be encrypted and attached to an AMI.
 
 INSTANCE TYPES :
 ====================
@@ -443,12 +471,12 @@ Dedicated Hosts can help you reduce costs by allowing you to use your existing s
 
     Automatic instance recovery          Supported                                                     Supported
 
-    Bring your OWN licenses              Supported                                                     Not   Supported
+    Bring your OWN licenses              Supported                                                     Not Supported
     BYOL
   ---------------------------------------------------------------------------------------------------------------------------------------
 
 
-• RESERVED INSTANCES :   // Relates topics -> [ RESERVED _ SAVINGS _ CAPACITY RESERVATIONS]
+• RESERVED INSTANCES :   // For EC2, FARGATE, RDS, REDSHIFT, ELASTICAHE
 -------------------------
 // The shortest reservation length is one year. So for application to run for a day or month this is not useful .Go for ON_DEMAND instances.
 // There is no difference in performance between On-demand and Reserved instances of the same type.
@@ -456,7 +484,7 @@ Dedicated Hosts can help you reduce costs by allowing you to use your existing s
 
 Reduce your Amazon EC2 costs by making a commitment to a consistent instance configuration, including instance type and Region, for a term of 1 or 3 years.
 You can purchase a Reserved Instance for a one-year or three-year commitment, with the three-year commitment offering a bigger discount.
-Reserved Instances do not renew automatically; when they expire, you can continue using the EC2instance without interruption, but you are charged On-Demand rates.
+Reserved Instances do not renew automatically; when they expire, you can continue using the EC2 instance without interruption, but you are charged On-Demand rates.
 In nav bar (left) -> find option "RESERVED INSTANCES"
 
 There are three payment options available when purchasing reserved instances:
@@ -499,7 +527,7 @@ For applications that have steady state or predictable usage, Reserved Instances
     You can't exchange Standard Reserved Instances, but you can modify them.
     Standard RIs provide the most significant discount (up to 72% off On-Demand) and are best suited for steady-state usage.
 
-• SAVINGS PLAN  :
+• SAVINGS PLAN  : // Only for EC2 & FARGATE
 --------------------
 Savings Plans are a flexible pricing model that offer low prices on EC2 and Fargate usage, in exchange for a commitment to a consistent amount of usage (measured in $/hour) for a 1 or 3 year term.
 Savings Plans is a flexible pricing model that provides savings of up to 72% on your AWS compute usage.
@@ -774,7 +802,7 @@ Once we click CONNECT :
       --> Choose Download remote desktop file. Provide the Password upon opening the RDP.
 
 
-CLOUD WATCH ALARMS : --> Select the instance --> choose Actions -->Monitor and troubleshoot --> Manage CloudWatch alarms.
+CLOUD WATCH ALARMS : --> Select the instance --> choose Actions --> Monitor and troubleshoot --> Manage CloudWatch alarms.
 ------------------------ Alternatively, you can choose the plus sign ( + ) in the Alarm status column.
 
 Using Amazon CloudWatch alarm actions, you can create alarms that automatically stop, terminate, reboot, or recover your instances.
@@ -789,7 +817,7 @@ We need to pre create an SNS Topic to receive notification.
 ============================================================================================================
 ###### SKIP THIS SECTION - just for my reference.
 
-[[ Instance - Instance types t2 - AMI market / custom - volumes ebs store - vpc subnet - security group firewall - tags - key pair - replication - ELB  ECS cloud formation ]]
+[[ Instance - Instance types t2 - AMI market / custom - volumes ebs store - vpc subnet - security group firewall - tags - key pair - replication - ELB  ECS cloud formation - cloud watch for logs ]]
 [[ start - hibernate - stop - terminate - retire - reboot - recover ]]
 [[ Regions - availability zones - local zones - outposts & Wavelengths - Edge locations ]]
 [[ instance store - from s3 - no stopping - conversion || EBS - boot volume from S3 - default terminate , can be changed - recovery upon failure // 5 steps ]]
@@ -816,7 +844,7 @@ All IPv6 addresses are reachable over the Internet. So there is no concept of pu
 
   PRIVATE IPV4 - INTERNAL DNS : (By default IP is assigned)
         A private IPv4 address is an IP address that's not reachable over the Internet.
-        You can use private IPv4addresses for communication between instances in the same VPC.
+        You can use private IPv4 addresses for communication between instances in the same VPC.
         we can't resolve the internal DNS hostname outside of the VPC.
         An instance receives a primary private IP address from the IPv4 address range of the subnet.
 
@@ -863,7 +891,7 @@ All IPv6 addresses are reachable over the Internet. So there is no concept of pu
         So if you require a persistent public IP address that can be associated to and from instances as you require, use an Elastic IP address instead.
         To assign additional public IPv4 addresses to an instance, you must allocate Elastic IP addresses and associate them with the instance or its network interfaces.
 
-        When you add a second network interface, the system can no longer auto-assign a publicIPv4 address.
+        When you add a second network interface, the system can no longer auto-assign a public IPv4 address.
         You will not be able to connect to the instance over IPv4 unless you assign an Elastic IP address to the primary network interface (eth0).
         You can assign the Elastic IPaddress after you complete the Launch.
         The public IPv4 address is displayed as a property of the network interface in the console, but it's mapped to the primary private IPv4 address through NAT.
@@ -911,13 +939,13 @@ All IPv6 addresses are reachable over the Internet. So there is no concept of pu
  MULTIPLE IP ADDRESSES :
  #### You can assign multiple IPV4/IPV6 addresses To a single network interface eth0 or You can add a device [ network interface ] and add IP's
  #### We can do this while launching -> launch -> configure Instance -> below Network Interfaces -> add device
- #### or after launching Instance  -> select ec2 -> instance -> actions -> networking -> manage Ip adresses .
+ #### or after launching Instance  -> select ec2 -> instance -> actions -> networking -> manage Ip addresses .
 
     • Host multiple websites on a single server by using multiple SSL certificates on a single server and associating each certificate with a specific IP address.
     • Operate network appliances, such as firewalls or load balancers, that have multiple IP addresses for each network interface.
     • Redirect internal traffic to a standby instance in case your instance fails, by reassigning the secondary IP address to the standby instance.
     • You can assign a secondary private IPv4 address to any network interface. The network interface need not be attached to the instance .
-    • You can assign multiple IPv6 addresses to a network interface that's in a subnet that has an associatedIPv6 CIDR block.
+    • You can assign multiple IPv6 addresses to a network interface that's in a subnet that has an associated IPv6 CIDR block.
 
     -> launch -> configure Instance -> below Network Interfaces -> add device
     When you add a second network interface, the system can no longer auto-assign a publicIPv4 address.
@@ -950,7 +978,7 @@ All IPv6 addresses are reachable over the Internet. So there is no concept of pu
       ** There is no concept of public / private IPV6. They are globally reachable as they are unique.
       ** Secondary private IPv4 addresses that are assigned to a network interface can be reassigned to another one if you explicitly allow it.
       ** An IPv6 address cannot be reassigned to another network interface; you must first unassign the IPv6 address from the existing network interface.
-      ** you can't detach the primary network interface from an .
+      ** you can't detach the primary network interface from an instance.
 
   The following list explains how multiple IP addresses work with Elastic IP addresses (IPv4 only):
   --> Each private IPv4 address can be associated with a single Elastic IP address, and vice versa.
@@ -1147,7 +1175,7 @@ STORAGE EC2 :
   Snapshots are incremental backups, which means that only the blocks on the device that have changed after your most recent snapshot are saved.
   This minimizes the time required to create the snapshot and saves on storage costs by not duplicating data.
   you can copy it from one AWS Region to another, or within the same Region. -> Snapshots -> Actions -> copy
-  Amazon S3server-side encryption (256-bit AES) protects a snapshot's data in transit during a copy operation
+  Amazon S3 server-side encryption (256-bit AES) protects a snapshot's data in transit during a copy operation.
   Regularly back up your EBS volumes using Amazon EBS snapshots , and create an Amazon Machine Image (AMI) from your instance to save the configuration as a template forlaunching future instances.
 
 

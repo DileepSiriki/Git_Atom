@@ -36,7 +36,7 @@ BEANSTALK vs CLOUD FORMATION : https://stackoverflow.com/questions/14422151/what
 ---------------------------------------
 They're actually pretty different.
 Elastic Beanstalk is intended to make developers' lives easier.
-CloudFormation is intended to make systems engineers' lives easier.
+Cloud Formation is intended to make systems engineers' lives easier.
 
 Elastic Beanstalk is a PaaS-like layer on top of AWS's IaaS services which abstracts away the underlying EC2 instances, Elastic Load Balancers, auto scaling groups, etc.
 This makes it a lot easier for developers, who don't want to be dealing with all the systems stuff, to get their application quickly deployed on AWS.
@@ -52,7 +52,7 @@ It also ensures that I have a repeatable, "known good" configuration that I can 
 
 Behind the scenes, Elastic Beanstalk uses CloudFormation to create and maintain resources.
 If your application requirements dictate more custom control, the additional functionality of CloudFormation gives you more options to control your workloads.
- 
+
 AWS CloudFormation supports Elastic Beanstalk application environments as one of the AWS resource types.
 This allows you, for example, to create and manage an AWS Elastic Beanstalk–hosted application along with an RDS database to store the application data.
 In addition to RDS instances, any other supported AWS resource can be added to the group as well.
