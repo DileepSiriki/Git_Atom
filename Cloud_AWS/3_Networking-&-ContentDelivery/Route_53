@@ -18,7 +18,7 @@ You can use Route 53 to perform three main functions in any combination: domain 
 
 
 2. Route internet traffic to the resources for your domain
---> When a user opens a web browser and enters your domain name (example.com) or subdomain name(acme.example.com) in the address bar, Route 53 helps connect the browser with your website orweb application.
+--> When a user opens a web browser and enters your domain name (example.com) or subdomain name(acme.example.com) in the address bar, Route 53 helps connect the browser with your website or web application.
     When the user enters an DNS name for you website ROUTE 53 translates it to a valid IP address
     To route traffic to your resources, you create records, also known as resource record sets, in your hosted zone.
     Each record includes information about how you want to route traffic for your domain.
@@ -33,7 +33,7 @@ You can use Route 53 to perform three main functions in any combination: domain 
       --> How often you want Route 53 to send a request to the endpoint. This is the request interval.
       --> How many consecutive times the endpoint must fail to respond to requests before Route 53considers it unhealthy. This is the failure threshold
       --> Optionally, how you want to be notified when Route 53 detects that the endpoint is unhealthy.
-      -->  Route 53 automatically sets a CloudWatch alarm. CloudWatch uses Amazon SNS to notify users that an endpoint is unhealthy.
+      --> Route 53 automatically sets a CloudWatch alarm. CloudWatch uses Amazon SNS to notify users that an endpoint is unhealthy.
 
     Route 53 starts to send requests to the endpoint at the interval that you specified in the health check.
     If the endpoint responds to the requests, Route 53 considers the endpoint to be healthy
@@ -54,7 +54,7 @@ DNS RESOLUTION :
       6--> The Route 53 name server looks in the example.com hosted zone for the www.example.com record, gets the associated value, such as the IP address for a web server, 192.0.2.44.
            It returns the IP address to the DNS resolver.
       7--> The DNS resolver finally has the IP address that the user needs. The resolver returns that value to the web browser.
-           The DNS resolver also caches the IP address for example.com for an amount of time that you specify so that it can respond more quickly the next ti
+           The DNS resolver also caches the IP address for example.com for an amount of time that you specify so that it can respond more quickly the next time.
       8--> The web browser sends a request for www.example.com to the IP address that it got from the DNS resolver.
       9--> The web server or other resource at 192.0.2.44 returns the web page for www.example.com to the web browser.
 
@@ -66,7 +66,7 @@ DNS RESOLUTION :
                 |           |      |
                 |           |  R   |
                 |           |  E   |   4.WWW.EXAMPLE.COM             ---
-          WEBSERVER         |  S   | ---------------------------->  |   | -->  NAME SERVER FOR .COM TLD [ Top level Domain ]
+          WEBBROWSER        |  S   | ---------------------------->  |   | -->  NAME SERVER FOR .COM TLD [ Top level Domain ]
        -------------        |  O   | <----------------------------  |   |
       |  1. USER    |       |  L   |   GO TO ROUTE53 NAME SERVER     ---
        -------------        |  V   |
@@ -91,7 +91,7 @@ DOMAIN REGISTRY   : A company that owns the right to sell domains that have a sp
 TOP LEVEL DOMAIN  : The last part of a domain name, such as .com, .org, or .ninja.
 HOSTED ZONE       : A container for records, which include information about how you want to route traffic for a domain(such as example.com) and all of its subdomains (such as www.example.com, retail.example.com, and seattle.accounting.example.com).
                     A hosted zone has the same name as the corresponding domain.
-                    For example , www.example.com 's record might have info about the IP address and another record abut its mail server etc;
+                    For example , www.example.com 's record might have info about the IP address and another record about its mail server etc;
 NAME SERVER       : Servers in the Domain Name System (DNS) that help to translate domain names into the IP addresses that computers use to communicate with one another.
 SUB DOMAIN        : A domain name that has one or more labels prepended to the registered domain name.
                     For example, if you register the domain name example.com, then www.example.com is a sub domain.

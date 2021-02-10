@@ -10,7 +10,8 @@ Once your browser receives the response, it interprets the code and displays the
 To the browser, also known as the client, Facebook’s server is an API.
 This means that every time you visit a page on the Web, you interact with some remote server’s API.
 An API isn’t the same as the remote server — rather it is the part of the server that receives requests and sends responses.
-To summarize, when a company offers an API to their customers, it just means that they’ve built a set of dedicated URLs that return pure data responses — meaning the responses won’t contain the kind of presentational overhead that you would expect in a graphical user interface like a website.
+To summarize, when a company offers an API to their customers, it just means that they’ve built a set of dedicated URLs that return pure data responses
+  — meaning the responses won’t contain the kind of presentational overhead that you would expect in a graphical user interface like a website.
 
                                                                             -----
      -------                                                               |     |                    -------            ---------

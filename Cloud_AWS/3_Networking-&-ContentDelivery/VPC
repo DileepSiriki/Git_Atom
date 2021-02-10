@@ -107,7 +107,7 @@ CONVERT BINARY TO DECIMAL : ( n^0 = 1 )
 1000 0000 = 1*2^7 + 0*2^6 + 0*2^5 + 0*2^4 + 0*2^3 + 0*2^2 + 0*2^1 + 0*2^0 = 128
 1111 1111 = 1*2^7 + 1*2^6 + 1*2^5 + 1*2^4 + 1*2^3 + 1*2^2 + 1*2^1 + 1*2^0 = 255
 
-BINARY FORMAT : [ 0000 0000 . 0000 0000 . 0000 0000 . 0000 0000]
+BINARY FORMAT : [ 0000 0000 . 0000 0000 . 0000 0000 . 0000 0000 ] To [ 1111 1111 . 1111 1111 . 1111 1111 . 1111 1111  ]
 -----------------
 we have 8 octets of 4 bits each OR 4 blocks or 8 bits each . We consider the FIRST OCTET for classification.
 Out of 32 bits , if the binary addresses starts with :

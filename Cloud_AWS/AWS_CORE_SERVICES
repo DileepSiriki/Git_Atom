@@ -161,6 +161,192 @@ Using SAM from above , we can publish and deploy applications to the public or t
 
 ##################################################################################################################
 ##################################################################################################################
+NETWORKING & CONTENT DELIVERY :
+##################################################################################################################
+##################################################################################################################
+
+1. AMAZON API GATEWAY :
+Amazon API Gateway is an AWS service for creating, publishing, maintaining, monitoring, and securing REST, HTTP, and Web Socket APIs at any scale.
+You can create robust, secure, and scalable APIs that access AWS or other web services, as well as data that’s stored in the AWS Cloud.
+You can create APIs to use in your own client applications, or you can make your APIs available to third-party app developers.
+API Gateway creates RESTful APIs that:
+  • Are HTTP-based.
+  • Enable stateless client-server communication.
+  • Implement standard HTTP methods such as GET, POST, PUT, PATCH, and DELETE.
+
+ API Gateway handles all the tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls.
+ These tasks include traffic management, authorization and access control, monitoring, and API version management.
+ API Gateway acts as a "front door" for applications to access data, business logic, or functionality from your backend services, such as workloads running on Amazon Elastic Compute Cloud (Amazon EC2), code running on AWS Lambda, any web application, or real-time communication applications.
+ < NEED TO ADD EXTRA INFORMATION , LINK IN NOTEPAD++ >  -- https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-dg.pdf
+
+2. AWS APP MESH :
+AWS App Mesh makes it easy to monitor and control microservices running on AWS.
+App Mesh standardizes how your services communicate, giving you end-to-end visibility and helping to ensure high availability for your applications.
+App Mesh gives you consistent visibility and network traffic controls for every service in an application.
+
+Say you have a serviceA sending requests to ServieB . Now if you create a new version of ServiceB and ServiceB-V2 and you want to send 50% requests to ServiceB-V2 and the remaining 50% of traffic to ServiceB until you are confident that it is working good .
+This can be made posssible without making any application level changes using app mesh.
+// Refer to the pics NW_App-Mesh.* for the scenario.
+
+3. AWS CLOUD MAP :
+AWS Cloud Map is a fully managed service that you can use to create and maintain a map of the backend services and resources that your applications depend on.
+  1. You create a namespace that identifies the name that you want to use to locate your resources and also specifies how you want to locate resources: using AWS Cloud Map DiscoverInstances API calls, DNS queries in a VPC, or public DNS queries.
+     Typically, a namespace contains all the services for an application, such as a billing application.
+  2. You create an AWS Cloud Map service for each type of resource for which you want to use AWS CloudMap to locate endpoints.
+     For example, you might create services for web servers and database servers.
+     A service is a template that AWS Cloud Map uses when your application adds another resource, such as another web server.
+  3. When your application adds a resource, it can call the AWS Cloud Map RegisterInstance API action, which creates a service instance.
+     The service instance contains information about how your application can locate the resource, whether using DNS or using the AWS Cloud Map DiscoverInstances API action.
+  4. When your application needs to connect to a resource, it calls DiscoverInstances and specifies the namespace and service that are associated with the resource.
+     AWS Cloud Map returns information about how to locate one or more resources.
+
+  AWS Cloud Map is tightly integrated with Amazon Elastic Container Service (Amazon ECS).
+  As new container tasks spin up or down, they automatically register with AWS Cloud Map.
+
+4. AMAZON CLOUD-FRONT : < Has a separate detailed chapter >  https://www.youtube.com/watch?v=AT-nHW3_SVI&t=9s
+Amazon CloudFront speeds up distribution of your static and dynamic web content, such as .html, .css, .php, image, and media files.
+When users request your content, CloudFront delivers it through a worldwide network of edge locations that provide low latency and high performance.
+When a user requests content that you're serving with CloudFront, the request is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.
+If the content is not present then cloudfront stores of copy of it in cache after retrieving it from origin .
+--> POP Point of Presence // another name for an edge location
+--> Along with EDGE LOCATIONS , it also maintains a REGIONAL EDGE CACHES.
+
+Amazon CloudFront is a global content delivery network (CDN) service that gives businesses and web application developers an easy and cost effective way to distribute content (such as videos, data, applications, and APIs) with low latency and high data transfer speeds.
+Like other AWS services, Amazon CloudFront is a self-service, pay-per-use offering, requiring no long term commitments or minimum fees.
+With CloudFront, your files are delivered to end-users using a global network of edge locations.
+CloudFront is integrated with other AWS services such as AWS Shield for DDoS mitigation, Amazon S3, Elastic Load Balancing or Amazon EC2 as origins for your applications, and Lambda@Edge to run custom code close to your viewers.
+
+CloudFront also has regional edge caches that bring more of your content closer to your viewers, even when the content is not popular enough to stay at a POP, to help improve performance for that content.
+Regional edge caches are CloudFront locations that are deployed globally, close to your viewers.
+They'r elocated between your origin server and the POPs—global edge locations that serve content directly to viewers. As objects become less popular, individual POPs might remove those objects to make roomfor more popular content.
+Regional edge caches have a larger cache than an individual POP, so objects remain in the cache longer at the nearest regional edge cache location.
+This helps keep more of your content closer to your viewers, reducing the need for CloudFront to go back to your origin server, and improving overall performance for viewers.
+When a viewer makes a request on your website or through your application, DNS routes the request to the POP that can best serve the user’s request.
+This location is typically the nearest CloudFront edge location in terms of latency. In the POP, CloudFront checks its cache for the requested files. If the files are in the cache, CloudFront returns them to the user.
+If the files are not in the cache, the POPs go to the nearest regional edge cache to fetch the object. In the regional edge cache location, CloudFront again checks its cache for the requested files.
+If the files are in the cache, CloudFront forwards the files to the POP that requested them. As soon as the first byte arrives from regional edge cache location, CloudFront begins to forward the files to the user.
+CloudFront also adds the files to the cache in the POP for the next time someone requests those files.
+
+            ORIGIN [ S3 ] <----------> [ REGIONAL EDGE CACHE ] <-------> [ POP - EDGE LOCATION ] <---------> VIEWERS
+
+          •  Proxy methods PUT/POST/PATCH/OPTIONS/DELETE go directly to the origin from the POPs and do not proxy through the regional edge caches.
+          •  Dynamic requests, as determined at request time, do not flow through regional edge caches, but go directly to the origin.
+
+5. ELASTIC LOAD BALANCING : < Has a separate detailed chapter >
+Elastic Load Balancers do not scale resources.
+Elastic Load Balancers distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.
+
+Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.
+It monitors the health of its registered targets and routes traffic only to the healthy targets.
+You can add and remove compute resources from your load balancer as your needs change, without disrupting the overall flow of requests to your applications.
+
+Application Load Balancers - Network Load Balancers - Gateway Load Balancers - Classic Load Balancers.
+If you need flexible application management, we recommend that you use an Application Load Balancer.
+If extreme performance and static IP is needed for your application, we recommend that you use a Network Load Balancer.
+If you have an existing application that was built within the EC2-Classic network, then you should use a Classic Load Balancer.
+https://aws.amazon.com/elasticloadbalancing/features/#Product_comparisons
+
+// Scaling resources is a function of AWS AUTO SCALING.
+// AWS Auto Scaling is the feature that automates the process of adding/removing server capacity (based on demand).
+// Autoscaling allows you to reduce your costs by automatically turning off resources that aren’t in use.
+// On the other hand, Autoscaling ensures that your application runs effectively by provisioning more server capacity if required.
+
+6. AWS DIRECT CONNECT : < Has a separate detailed chapter >
+A Direct Connect gateway is a globally available resource. You can create the Direct Connect gateway in any Region and access it from all other Regions.
+AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable.
+One end of the cable is connected to your router, the other to an AWS Direct Connect router.
+With this connection in place, you can create virtual interfaces directly to the AWS cloud and Amazon Virtual Private Cloud, bypassing Internet service providers in your network path.
+AWS Direct Connect has two billing elements: port hours and outbound data transfer. Port hour pricing is determined by capacity and connection type (dedicated connection or hosted connection).
+
+You can therefore use a single AWS Direct Connect connection to build multi-Region services. This connection an be configured to access a VPC in your account in any other public Region
+Accessing public services in a remote region :
+--> To access public resources in a remote Region, you must set up a public virtual interface and establish a Border Gateway Protocol (BGP) session.
+Accessing VPC's in a remote region :
+--> You can create a Direct Connect gateway in any public Region. Use it to connect your AWS Direct Connect connection over a private virtual interface to VPCs in your account that are located in different Regionsor to a transit gateway.
+
+There are two types of connections:
+• Dedicated Connection: A physical Ethernet connection associated with a single customer. Customers can request a dedicated connection through the AWS Direct Connect console, the CLI, or the API.
+    Speeds :  1Gbps and 10Gbps
+• Hosted Connection: A physical Ethernet connection that an AWS Direct Connect Partner provisions on behalf of a customer. Customers request a hosted connection by contacting a partner in the AWSDirect Connect Partner Program, who provisions the connection.
+    Speeds :  50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps,500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps.
+
+You must create one of the following virtual interfaces to begin using your AWS Direct Connect connection.
+• Private virtual interface: Access an Amazon VPC using private IP addresses.
+• Public virtual interface: Access AWS services from your on-premises data center.
+  Allow AWS services, or AWS customers access to your public networks over the interface instead of traversing the internet.
+• Transit virtual interface: Access one or more Amazon VPC Transit Gateways associated with DirectConnect gateways.
+  You can use transit virtual interfaces with 1/2/5/10 Gbps AWS Direct Connect connections.
+
+Use AWS Direct Connect gateway to connect your VPCs. You associate an AWS Direct Connect gateway with either of the following gateways:
+• A transit gateway when you have multiple VPCs in the same Region
+• A virtual private gateway
+
+
+7. AWS GLOBAL ACCELERATOR :
+AWS Global Accelerator is a service in which you create accelerators to improve the performance of your applications for local and global users.
+• By using a standard accelerator, you can improve availability of your internet applications that are used by a global audience.
+  With a standard accelerator, Global Accelerator directs traffic over the AWS global network to endpoints in the nearest Region to the client.
+  Endpoints for standard accelerators can be Network Load Balancers, Application Load Balancers, Amazon EC2 instances, or Elastic IP addresses that are located in one AWS Region or multiple Regions.
+• By using a custom routing accelerator, you can map one or more users to a specific destination among many destinations.
+  custom routing accelerators only support virtual private cloud (VPC) subnet endpoint types and route traffic to private IP addresses in that subnet.
+
+The static IP addresses provided by AWS Global Accelerator serve as single fixed entry points for your clients.
+When you set up your accelerator with Global Accelerator, you associate the static IP addresses to regional endpoints in one or more AWS Regions.
+From the edge location, traffic for your application is routed based on the type of accelerator that you configure.
+  • For standard accelerators, traffic is routed to the optimal AWS endpoint based on several factors, including the user’s location, the health of the endpoint, and the endpoint weights that you configure.
+  • For custom routing accelerators, each client is routed to a specific Amazon EC2 instance and port in a VPC subnet, based on the external static IP address and listener port that you provide
+
+Traffic travels over the well-monitored, congestion-free, redundant AWS global network to the endpoint.
+By maximizing the time that traffic is on the AWS network, Global Accelerator ensures that traffic is always routed over the optimum network path.
+Global Accelerator terminates TCP connections from clients at AWS edge locations and, almost concurrently, establishes a new TCP connection with your endpoints. This gives clients faster response times (lower latency) and increased throughput.
+
+In standard accelerators, Global Accelerator continuously monitors the health of all endpoints, and instantly begins directing traffic to another available endpoint when it determines that an active endpoint is unhealthy.
+This allows you to create a high-availability architecture for your applications on AWS.
+Health checks aren't used with custom routing accelerators and there is no failover, because you specify the destination to route traffic to.
+
+8. AMAZON ROUTE 53 : < Has a separate detailed chapter >  https://www.youtube.com/watch?v=RGWgfhZByAI
+Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web service.
+You can use Route 53 to perform three main functions in any combination: domain registration, DNS routing, and health checking.
+  1. Register domain names : Your website needs a name, such as example.com.
+    Route 53 lets you register a name for your website or web application, known as a domain name.
+  2. Route internet traffic to the resources for your domain When a user opens a web browser and enters your domain name (example.com) or subdomain name(acme.example.com) in the address bar, Route 53 helps connect the browser with your website or web application
+  3. Check the health of your resources Route 53 sends automated requests over the internet to a resource, such as a web server, to verify that it's reachable, available, and functional.
+     You also can choose to receive notifications when a resource becomes unavailable and choose to route internet traffic away from unhealthy resources.
+
+9. AMAZON VPC : < Has a separate detailed chapter > // --> IPV4 CIDR blocks -> Between /16 /28  & IPV6 CIDR blocks -> Fixed for /56 to subnet & /64 to VPC
+Amazon Virtual Private Cloud (Amazon VPC) enables you to provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you've defined.
+A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud.
+You can launch your AWS resources, such as Amazon EC2instances, into your VPC. You can specify an IP address range for the VPC, add subnets, associate security groups, and configure route tables.
+A subnet is a range of IP addresses in your VPC. You can launch AWS resources into a specified subnet.
+Use a public subnet for resources that must be connected to the internet, and a private subnet for resources that won't be connected to the internet .
+To protect the AWS resources in each subnet, you can use multiple layers of security, including security groups and network access control lists (ACL).
+
+   ***REFER THE CHAPTER FOR MORE CLEAR DETAILS .
+
+10. AWS VPN : < Has a separate detailed chapter >
+AWS Virtual Private Network (AWS VPN) lets you establish a secure and private tunnel from your network or device to the AWS Cloud.
+You can extend your existing on-premises network into a VPC, or connect to other AWS resources from a client.
+AWS VPN offers two types of private connectivity that feature the high availability and robust security necessary for your data.
+
+By default, instances that you launch into an Amazon VPC can't communicate with your own (remote)network.
+You can enable access to your remote network from your VPC by creating an AWS Site-to-Site VPN (Site-to-Site VPN) connection, and configuring routing to pass traffic through the connection.
+A virtual private gateway is the VPN concentrator on the Amazon side of the Site-to-Site VPN connection.
+You create a virtual private gateway and attach it to the VPC from which you want to create the Site-to-Site VPN connection.
+
+To set up a Site-to-Site VPN connection, use the following steps:
+  •Step 1: Create a customer gateway
+  •Step 2: Create a target gateway --> Can be a virtual private gateway or transit gateway
+  •Step 3: Configure routing
+  •Step 4: Update your security group
+  •Step 5: Create a Site-to-Site VPN connection
+  •Step 6: Download the configuration file
+  •Step 7: Configure the customer gateway device using the configuration file.
+
+
+
+
+##################################################################################################################
+##################################################################################################################
 SECURITY - IDENTITY - COMPLIANCE   :
 ##################################################################################################################
 ##################################################################################################################
@@ -845,191 +1031,6 @@ The frame work provides a consistent approach for measuring architectures and pr
 
 ##################################################################################################################
 ##################################################################################################################
-NETWORKING & CONTENT DELIVERY :
-##################################################################################################################
-##################################################################################################################
-
-1. AMAZON API GATEWAY :
-Amazon API Gateway is an AWS service for creating, publishing, maintaining, monitoring, and securing REST, HTTP, and Web Socket APIs at any scale.
-You can create robust, secure, and scalable APIs that access AWS or other web services, as well as data that’s stored in the AWS Cloud.
-You can create APIs to use in your own client applications, or you can make your APIs available to third-party app developers.
-API Gateway creates RESTful APIs that:
-  • Are HTTP-based.
-  • Enable stateless client-server communication.
-  • Implement standard HTTP methods such as GET, POST, PUT, PATCH, and DELETE.
-
- API Gateway handles all the tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls.
- These tasks include traffic management, authorization and access control, monitoring, and API version management.
- API Gateway acts as a "front door" for applications to access data, business logic, or functionality from your backend services, such as workloads running on Amazon Elastic Compute Cloud (Amazon EC2), code running on AWS Lambda, any web application, or real-time communication applications.
- < NEED TO ADD EXTRA INFORMATION , LINK IN NOTEPAD++ >  -- https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-dg.pdf
-
-2. AWS APP MESH :
-AWS App Mesh makes it easy to monitor and control microservices running on AWS.
-App Mesh standardizes how your services communicate, giving you end-to-end visibility and helping to ensure high availability for your applications.
-App Mesh gives you consistent visibility and network traffic controls for every service in an application.
-
-Say you have a serviceA sending requests to ServieB . Now if you create a new version of ServiceB and ServiceB-V2 and you want to send 50% requests to ServiceB-V2 and the remaining 50% of traffic to ServiceB until you are confident that it is working good .
-This can be made posssible without making any application level changes using app mesh.
-// Refer to the pics NW_App-Mesh.* for the scenario.
-
-3. AWS CLOUD MAP :
-AWS Cloud Map is a fully managed service that you can use to create and maintain a map of the backend services and resources that your applications depend on.
-  1. You create a namespace that identifies the name that you want to use to locate your resources and also specifies how you want to locate resources: using AWS Cloud Map DiscoverInstances API calls, DNS queries in a VPC, or public DNS queries.
-     Typically, a namespace contains all the services for an application, such as a billing application.
-  2. You create an AWS Cloud Map service for each type of resource for which you want to use AWS CloudMap to locate endpoints.
-     For example, you might create services for web servers and database servers.
-     A service is a template that AWS Cloud Map uses when your application adds another resource, such as another web server.
-  3. When your application adds a resource, it can call the AWS Cloud Map RegisterInstance API action, which creates a service instance.
-     The service instance contains information about how your application can locate the resource, whether using DNS or using the AWS Cloud Map DiscoverInstances API action.
-  4. When your application needs to connect to a resource, it calls DiscoverInstances and specifies the namespace and service that are associated with the resource.
-     AWS Cloud Map returns information about how to locate one or more resources.
-
-  AWS Cloud Map is tightly integrated with Amazon Elastic Container Service (Amazon ECS).
-  As new container tasks spin up or down, they automatically register with AWS Cloud Map.
-
-4. AMAZON CLOUD-FRONT : < Has a separate detailed chapter >  https://www.youtube.com/watch?v=AT-nHW3_SVI&t=9s
-Amazon CloudFront speeds up distribution of your static and dynamic web content, such as .html, .css, .php, image, and media files.
-When users request your content, CloudFront delivers it through a worldwide network of edge locations that provide low latency and high performance.
-When a user requests content that you're serving with CloudFront, the request is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.
-If the content is not present then cloudfront stores of copy of it in cache after retrieving it from origin .
---> POP Point of Presence // another name for an edge location
---> Along with EDGE LOCATIONS , it also maintains a REGIONAL EDGE CACHES.
-
-Amazon CloudFront is a global content delivery network (CDN) service that gives businesses and web application developers an easy and cost effective way to distribute content (such as videos, data, applications, and APIs) with low latency and high data transfer speeds.
-Like other AWS services, Amazon CloudFront is a self-service, pay-per-use offering, requiring no long term commitments or minimum fees.
-With CloudFront, your files are delivered to end-users using a global network of edge locations.
-CloudFront is integrated with other AWS services such as AWS Shield for DDoS mitigation, Amazon S3, Elastic Load Balancing or Amazon EC2 as origins for your applications, and Lambda@Edge to run custom code close to your viewers.
-
-CloudFront also has regional edge caches that bring more of your content closer to your viewers, even when the content is not popular enough to stay at a POP, to help improve performance for that content.
-Regional edge caches are CloudFront locations that are deployed globally, close to your viewers.
-They'r elocated between your origin server and the POPs—global edge locations that serve content directly to viewers. As objects become less popular, individual POPs might remove those objects to make roomfor more popular content.
-Regional edge caches have a larger cache than an individual POP, so objects remain in the cache longer at the nearest regional edge cache location.
-This helps keep more of your content closer to your viewers, reducing the need for CloudFront to go back to your origin server, and improving overall performance for viewers.
-When a viewer makes a request on your website or through your application, DNS routes the request to the POP that can best serve the user’s request.
-This location is typically the nearest CloudFront edge location in terms of latency. In the POP, CloudFront checks its cache for the requested files. If the files are in the cache, CloudFront returns them to the user.
-If the files are not in the cache, the POPs go to the nearest regional edge cache to fetch the object. In the regional edge cache location, CloudFront again checks its cache for the requested files.
-If the files are in the cache, CloudFront forwards the files to the POP that requested them. As soon as the first byte arrives from regional edge cache location, CloudFront begins to forward the files to the user.
-CloudFront also adds the files to the cache in the POP for the next time someone requests those files.
-
-            ORIGIN [ S3 ] <----------> [ REGIONAL EDGE CACHE ] <-------> [ POP - EDGE LOCATION ] <---------> VIEWERS
-
-          •  Proxy methods PUT/POST/PATCH/OPTIONS/DELETE go directly to the origin from the POPs and do not proxy through the regional edge caches.
-          •  Dynamic requests, as determined at request time, do not flow through regional edge caches, but go directly to the origin.
-
-5. ELASTIC LOAD BALANCING : < Has a separate detailed chapter >
-Elastic Load Balancers do not scale resources.
-Elastic Load Balancers distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.
-
-Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.
-It monitors the health of its registered targets and routes traffic only to the healthy targets.
-You can add and remove compute resources from your load balancer as your needs change, without disrupting the overall flow of requests to your applications.
-
-Application Load Balancers - Network Load Balancers - Gateway Load Balancers - Classic Load Balancers.
-If you need flexible application management, we recommend that you use an Application Load Balancer.
-If extreme performance and static IP is needed for your application, we recommend that you use a Network Load Balancer.
-If you have an existing application that was built within the EC2-Classic network, then you should use a Classic Load Balancer.
-https://aws.amazon.com/elasticloadbalancing/features/#Product_comparisons
-
-// Scaling resources is a function of AWS AUTO SCALING.
-// AWS Auto Scaling is the feature that automates the process of adding/removing server capacity (based on demand).
-// Autoscaling allows you to reduce your costs by automatically turning off resources that aren’t in use.
-// On the other hand, Autoscaling ensures that your application runs effectively by provisioning more server capacity if required.
-
-6. AWS DIRECT CONNECT : < Has a separate detailed chapter >
-A Direct Connect gateway is a globally available resource. You can create the Direct Connect gateway in any Region and access it from all other Regions.
-AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable.
-One end of the cable is connected to your router, the other to an AWS Direct Connect router.
-With this connection in place, you can create virtual interfaces directly to the AWS cloud and Amazon Virtual Private Cloud, bypassing Internet service providers in your network path.
-AWS Direct Connect has two billing elements: port hours and outbound data transfer. Port hour pricing is determined by capacity and connection type (dedicated connection or hosted connection).
-
-You can therefore use a single AWS Direct Connect connection to build multi-Region services. This connection an be configured to access a VPC in your account in any other public Region
-Accessing public services in a remote region :
---> To access public resources in a remote Region, you must set up a public virtual interface and establish a Border Gateway Protocol (BGP) session.
-Accessing VPC's in a remote region :
---> You can create a Direct Connect gateway in any public Region. Use it to connect your AWS Direct Connect connection over a private virtual interface to VPCs in your account that are located in different Regionsor to a transit gateway.
-
-There are two types of connections:
-• Dedicated Connection: A physical Ethernet connection associated with a single customer. Customers can request a dedicated connection through the AWS Direct Connect console, the CLI, or the API.
-    Speeds :  1Gbps and 10Gbps
-• Hosted Connection: A physical Ethernet connection that an AWS Direct Connect Partner provisions on behalf of a customer. Customers request a hosted connection by contacting a partner in the AWSDirect Connect Partner Program, who provisions the connection.
-    Speeds :  50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps,500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps.
-
-You must create one of the following virtual interfaces to begin using your AWS Direct Connect connection.
-• Private virtual interface: Access an Amazon VPC using private IP addresses.
-• Public virtual interface: Access AWS services from your on-premises data center.
-  Allow AWS services, or AWS customers access to your public networks over the interface instead of traversing the internet.
-• Transit virtual interface: Access one or more Amazon VPC Transit Gateways associated with DirectConnect gateways.
-  You can use transit virtual interfaces with 1/2/5/10 Gbps AWS Direct Connect connections.
-
-Use AWS Direct Connect gateway to connect your VPCs. You associate an AWS Direct Connect gateway with either of the following gateways:
-• A transit gateway when you have multiple VPCs in the same Region
-• A virtual private gateway
-
-
-7. AWS GLOBAL ACCELERATOR :
-AWS Global Accelerator is a service in which you create accelerators to improve the performance of your applications for local and global users.
-• By using a standard accelerator, you can improve availability of your internet applications that are used by a global audience.
-  With a standard accelerator, Global Accelerator directs traffic over the AWS global network to endpoints in the nearest Region to the client.
-  Endpoints for standard accelerators can be Network Load Balancers, Application Load Balancers, Amazon EC2 instances, or Elastic IP addresses that are located in one AWS Region or multiple Regions.
-• By using a custom routing accelerator, you can map one or more users to a specific destination among many destinations.
-  custom routing accelerators only support virtual private cloud (VPC) subnet endpoint types and route traffic to private IP addresses in that subnet.
-
-The static IP addresses provided by AWS Global Accelerator serve as single fixed entry points for your clients.
-When you set up your accelerator with Global Accelerator, you associate the static IP addresses to regional endpoints in one or more AWS Regions.
-From the edge location, traffic for your application is routed based on the type of accelerator that you configure.
-  • For standard accelerators, traffic is routed to the optimal AWS endpoint based on several factors, including the user’s location, the health of the endpoint, and the endpoint weights that you configure.
-  • For custom routing accelerators, each client is routed to a specific Amazon EC2 instance and port in a VPC subnet, based on the external static IP address and listener port that you provide
-
-Traffic travels over the well-monitored, congestion-free, redundant AWS global network to the endpoint.
-By maximizing the time that traffic is on the AWS network, Global Accelerator ensures that traffic is always routed over the optimum network path.
-Global Accelerator terminates TCP connections from clients at AWS edge locations and, almost concurrently, establishes a new TCP connection with your endpoints. This gives clients faster response times (lower latency) and increased throughput.
-
-In standard accelerators, Global Accelerator continuously monitors the health of all endpoints, and instantly begins directing traffic to another available endpoint when it determines that an active endpoint is unhealthy.
-This allows you to create a high-availability architecture for your applications on AWS.
-Health checks aren't used with custom routing accelerators and there is no failover, because you specify the destination to route traffic to.
-
-8. AMAZON ROUTE 53 : < Has a separate detailed chapter >  https://www.youtube.com/watch?v=RGWgfhZByAI
-Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web service.
-You can use Route 53 to perform three main functions in any combination: domain registration, DNS routing, and health checking.
-  1. Register domain names : Your website needs a name, such as example.com.
-    Route 53 lets you register a name for your website or web application, known as a domain name.
-  2. Route internet traffic to the resources for your domain When a user opens a web browser and enters your domain name (example.com) or subdomain name(acme.example.com) in the address bar, Route 53 helps connect the browser with your website or web application
-  3. Check the health of your resources Route 53 sends automated requests over the internet to a resource, such as a web server, to verify that it's reachable, available, and functional.
-     You also can choose to receive notifications when a resource becomes unavailable and choose to route internet traffic away from unhealthy resources.
-
-9. AMAZON VPC : < Has a separate detailed chapter > // --> IPV4 CIDR blocks -> Between /16 /28  & IPV6 CIDR blocks -> Fixed for /56 to subnet & /64 to VPC
-Amazon Virtual Private Cloud (Amazon VPC) enables you to provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you've defined.
-A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud.
-You can launch your AWS resources, such as Amazon EC2instances, into your VPC. You can specify an IP address range for the VPC, add subnets, associate security groups, and configure route tables.
-A subnet is a range of IP addresses in your VPC. You can launch AWS resources into a specified subnet.
-Use a public subnet for resources that must be connected to the internet, and a private subnet for resources that won't be connected to the internet .
-To protect the AWS resources in each subnet, you can use multiple layers of security, including security groups and network access control lists (ACL).
-
-   ***REFER THE CHAPTER FOR MORE CLEAR DETAILS .
-
-10. AWS VPN : < Has a separate detailed chapter >
-AWS Virtual Private Network (AWS VPN) lets you establish a secure and private tunnel from your network or device to the AWS Cloud.
-You can extend your existing on-premises network into a VPC, or connect to other AWS resources from a client.
-AWS VPN offers two types of private connectivity that feature the high availability and robust security necessary for your data.
-
-By default, instances that you launch into an Amazon VPC can't communicate with your own (remote)network.
-You can enable access to your remote network from your VPC by creating an AWS Site-to-Site VPN (Site-to-Site VPN) connection, and configuring routing to pass traffic through the connection.
-A virtual private gateway is the VPN concentrator on the Amazon side of the Site-to-Site VPN connection.
-You create a virtual private gateway and attach it to the VPC from which you want to create the Site-to-Site VPN connection.
-
-To set up a Site-to-Site VPN connection, use the following steps:
-  •Step 1: Create a customer gateway
-  •Step 2: Create a target gateway --> Can be a virtual private gateway or transit gateway
-  •Step 3: Configure routing
-  •Step 4: Update your security group
-  •Step 5: Create a Site-to-Site VPN connection
-  •Step 6: Download the configuration file
-  •Step 7: Configure the customer gateway device using the configuration file.
-
-
-
-##################################################################################################################
-##################################################################################################################
 ANALYTICS :
 ##################################################################################################################
 ##################################################################################################################
@@ -1585,8 +1586,17 @@ NOTE :
 Your client-side master keys and your unencrypted data are never sent to AWS. It's important that you safely manage your encryption keys. If you lose them, you can't decrypt your data.
 The client-side master key that you provide can be either a symmetric key or a public/private key pair. The following code examples show how to use each type of key.
 
-6. AWS SECRET MANAGER : Documented in SECURITY-IDENTITY-COMPLIANCE
-provides encryption and rotation of encrypted secrets used with AWS-supported databases.
+6. AWS SECRETS MANAGER : Documented in SECURITY-IDENTITY-COMPLIANCE
+Provides encryption and rotation of encrypted secrets used with AWS-supported databases.
+In the past, when you created a custom application to retrieve information from a database, you typically embedded the credentials, the secret, for accessing the database directly in the application.
+When the time came to rotate the credentials, you had to do more than just create new credentials. You had to invest time to update the application to use the new credentials.
+Then you distributed the updated application. If you had multiple applications with shared credentials and you missed updating one of them, the application failed.
+
+AWS Secrets Manager helps you to securely encrypt, store, and retrieve credentials for your databases and other services.
+This helps ensure the secret can't be compromised by someone examining your code, because the secret no longer exists in the code.
+Instead of hardcoding credentials in your apps, you can make calls to Secrets Manager to retrieve your credentials whenever needed.
+Secrets Manager helps you protect access to your IT resources and data by enabling you to rotate and manage access to your secrets.
+You create roles and grant permissions to apps to use that role to access secret manager.
 
 To protect DynamoDB table items before you send them to DynamoDB, use the DynamoDB Encryption Client.
 To protect Amazon S3 objects before you send them to an Amazon S3 bucket, use Amazon S3 client-side encryption. Amazon S3 also offers server-side encryption.

@@ -63,7 +63,7 @@ Say a client is sending traffic (100%) , Router sends 50% data to each X and Y .
                                           A      B               C    D    E   F    G    H    I    J    K    L
                                         10%     10%             10%  10%  10% 10%  10%  10%  10%  10%  10%  10%
 
-          -
+
           CROSS ZONE LOAD BALANCING DISABLED :
           [ since DISABLED, X and Y can not route traffic equally to all 10 instances and share their share of 50% traffic with instances in their availability zones.]
 

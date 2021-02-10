@@ -772,3 +772,8 @@ AWS Business Support and AWS Enterprise Support customers get access to all 115 
     ELASTIC-COMPUTE-CLOUD       ELASTIC-BEANSTALK        BATCH [parallel-Clusters HPC(1000 cpu's)]    EC2-IMAGE-BUILDER        LAMBDA          LIGHT-SAIL [launch-wizard]
     OUTPOSTS                    WAVELENGTHS
  // LAUNCH-WIZARD               PARALLEL-CLUSTERS        SAM -- SERVERLESS-APPLICATION-MODEL (cloud-Formation)    SERVERLESS-APPLICATION-REPOSITORY
+                                                         (Open-Source framework)
+
+22. NETWORKING & CONTENT DELIVERY   [ 10 --> 6 + 4 ]
+    CLOUD-FRONT     DIRECT-CONNECT      VIRTUAL-PRIVATE-CLOUD    VIRTUAL-PRIVATE-NETWORK      ROUTE-53(8 STEPS)    ELASTIC-LOAD-BALANCING( 3-Types & Cross Zone Load Balancing)
+    API-GATEWAY     APP-MESH            CLOUD-MAP                GLOBAL-ACCELERATOR
