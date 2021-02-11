@@ -604,8 +604,679 @@ SQS : IS A QUEUE Service.
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+:::: TOTAL SERVICES :::: // Total = 27 <--> Left-Out = 3 <--> Remaining = 24 <--> [ 4 Important + 14 Regular + 6 Singles ]
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+1. ANALYTICS  [ 13  -->  3 + 3 + 3 + 4 ]
+   APP-FLOW         DATA-EXCHANGE         DATA-PIPELINE
+   GLUE             LAKE-FORMATION        QUCIK-SIGHT
+   CLOUD-SEARCH     ELASTIC-SEARCH        MANAGED-STREAMING-FOR-KAFKA
+   ATHENA           KINESIS               EMR -- ELASTIC-MAP-REDUCE  / EMR-SPECTRUM       REDSHIFT
+
+2. CONTAINERS = 5
+   //  DOCKER FILE --> docker build ---> DOCKER IMAGE -- docker run ---> DOCKER CONTAINER.
+   ECR -- ELASTIC-CONTAINER-REGISTERY    ECS -- ELASTIC-CONTAINER-SERVICES      EKS -- ELASTIC-KUBERNETIS-SERVICE     FARGATE     APP2CONTAINER
+
+3. STORAGE  [ 7 --> 3 + 4 ]
+   SIMPLE-STORAGE-GATEWAT       EBS -- ELASTIC-BLOCK-STORE                    STORAGE-GATEWAY
+   SNOW-FAMILY                  FSx -- MICROSOFT-FLIGHT-SIMULATORE x          EFS -- ELASTIC-FILE-SYSTEM       BACKUP
+
+4. CRYPTOGRAPHY AND PKI - Public Key Infrastructure SERVICES : [ 10 --> 2 + 2 + 2 + 4 ]
+   // Symmetric [ Share Key - Advanced Encryption Standard (AES) & Triple DES (3DES) ] -  Asymmetric [ Public key - Rivest Shamir Adleman (RSA) & Elliptic Curve Cryptography (ECC) ] - Hashing [ Secure hash Algorithm (SHA) ]
+   HSM -- HARDWARE-SECURITY-MODELS     KMS -- KEY-MANAGEMENT-SERVICE
+   DYNAMO-DB-ENCRYPTION-CLIENT         S3-CLIENT-SIDE-ENCRYPTION
+   ACM -- AWS-CERTIFICATE-MANAGER      ACM-PCA --  ACM-PRIVATE-CERTIFICATE-AUTHORITY
+   ENCRYPTION-SDK                      SECRETS-MANAGER                                       CRYPTO-TOOLS                   SIGNER
+
+5. DATABASE [ 10 --> 5 + 5 ]
+   // ACID -- BASE
+   RDS -- RELATIONAL-DATABASE-SERVICES   AURORA    REDSHIFT    DYNAMO-DB     ELASTICAHE-FOR-(MEMCAHCED/REDIS)
+   DOCUMENT-DB                           NEPTUNE   KEYSPACES   TIME-STREAM   QLDB -- QUANTUM-LEDGER-DATABASE
+
+6. DEVELOPER TOOLS   [ 10 --> 2 + 3 + 3 + 1 ]
+   CLOUD-9         CLOUD-SHELL
+   CODE-ARTIFACT   CODE-COMMIT   CODE-STAR
+   CODE-BUILD      CODE-DEPLOY   CODE-PIPELINE
+   X-RAY
+
+7. MIGRATION & TRANSFER  [ 8 --> 6 + 2 ]
+   APPLICATION-DISCOVERY-SERVICE    MIGRATION-HUB     SERVER-MIGRATION-SERVICE    DATABASE-MIGRATION-SERVICE     SCHEMA-CONVERSION-TOOL     DATA-SYNC
+   SNOW-FAMILY                      TRANSFER-FAMILY
+
+8. FRONT END WEB & MOBILE [ 6 --> 4 + 2 ]
+   AMPLIFY   APP-SYNC   DEVICE-FARM    LOCATION-SERVICES
+   PINPOINT  SNS -- SIMPLE-NOTIFICATION-SERVICES
+
+9. END USER COMPUTING
+   WORKSPACES    WAM -- WORKSPACES-APPLICATION-MANAGER     WORK-DOCS    WORK-LINK    APP-STREAM-2.0
+
+10. APPLICATION INTEGRATION  [ 7 --> 4 + 3 ]
+    APP-FLOW                         EVENT-BRIDGE                          STEP-FUNCTIONS                 SWF -- SIMPLE-WORK-FLOW
+    MQ -- MANAGED-MESSAGE-BROKER     SNS -- SIMPLE-NOTIFICATION-SERVICES   SQS -- SIMPLE-QUEUE-SERVICE
+
+11. BUISENES APPLICATION
+    ALEXA-FOR-BUSINESS     CHIME     HONEY-CODE     WORK-MAIL
+
+12. CUSTOMER ENABLEMENT SERVICES
+    AWS-MANAGED-SERVICES    AWS-PROFESSIONAL-SERVICES     AWS-IQ      AWS-SUPPORT      TRAINING-&-CERTIFICATION
+    https://aws.amazon.com/premiumsupport/plans/
+
+13. CUSTOMER ENGAGEMENT
+    AMAZON-CONNECT          AMAZON-PINPOINT       SES -- SIMPLE-EMAIL-SERVICE
+
+14.  BILLING & COST MANAGEMENT
+     BILLING & COST MANAGEMENT --> [ COST-&-USAGE-REPORT --  CONSOLIDATED-BILLING  -- COST-EXPLORER -- BUDGETS -- ORDERS-&-INVOICES -- KNOWLEDGE-CENTRE -- COST-ANAMOLY-DETECTION -- Simple Monthly Calculator  ]
+     PRICING CALCULATOR           SAVINGS PLAN
+
+15. SATELLITE            -- AWS GROUND STATION
+16. ROBOTICS             -- AWS ROBO MAKER
+17. QUANTUM COMPUTING    -- AMAZON BRAKET
+18. BLOCKCHAIN           -- AMAZON MANAGED BLOCK CHAIN
+19. AR & VR              -- AMAZON SUMERIAN
+20. GAME DEVELOPMENT     -- AMAZON GAME-LIFT  &&  AMAZON LUMBER-YARD
+
+
+21. COMPUTE   [ 8 --> 6 + 2 ]
+    ELASTIC-COMPUTE-CLOUD       ELASTIC-BEANSTALK        BATCH [parallel-Clusters HPC(1000 cpu's)]    EC2-IMAGE-BUILDER        LAMBDA          LIGHT-SAIL [launch-wizard]
+    OUTPOSTS                    WAVELENGTHS
+ // LAUNCH-WIZARD               PARALLEL-CLUSTERS        SAM -- SERVERLESS-APPLICATION-MODEL          SERVERLESS-APPLICATION-REPOSITORY
+                                                         (Open-Source framework - cloud-Formation)
+
+22. NETWORKING & CONTENT DELIVERY   [ 10 --> 6 + 4 ]
+    CLOUD-FRONT                  DIRECT-CONNECT(Interfaces + Gw's + Dedicated/Hosted)      VIRTUAL-PRIVATE-CLOUD
+    VIRTUAL-PRIVATE-NETWORK      ROUTE-53(DOmain + Routing + Health + 8 STEPS)             ELASTIC-LOAD-BALANCING( 3-Types & Cross Zone Load Balancing)
+    API-GATEWAY                  APP-MESH                                                  CLOUD-MAP                                                              GLOBAL-ACCELERATOR
+
+23. SECURITY - IDENTITY & COMPLIANCE  [ 19 --> 2 + 2 + 2 + 2 + 4 + 4 + 3 ]
+    IDENTITY-ACCESS-MANAGEMENT                                                    COGNITO (fb, insta // authentication -- user pools and  authorization -- identity pools)
+    RESOURCE-GROUPS-&-TAG-EDITOR (group resources & perform bulk actions )        RAM --  RESOURCE-ACCESS-MANAGER ( share resources across principles such as AWS accounts, organizational units, or an entire organization from AWS Organizations.)
+    ARTIFACT (Sec, compliance reports and online agreements)                      AUDIT-MANAGER (audit your AWS usage)
+    DIRETORY-SERVICE (To use Microsoft Active Directory - SSO)                    CLOUD-DIRECTORY (generate a conceptual relationship between the objects & Control access)
+
+    WEB-APPLICATION-FIREWALL         SHIELD (Standard(free)/Advanced)         FIREWALL-MANAGER          NETWORK-FIREWALL
+    AWS-DETECTIVE                    AWS-GUARD-DUTY                           AWS-INSPECTOR             AWS-MACIE
+    SECRETS-MANAGER                  SECURITY-HUB                             SINGLE-SIGN-ON (Service provider <---- TRUST ----> Identity provider // SAML // 8 STEPS)
+
+    // services AWS WAF - AWS SHIELD - AWS FIREWALL MANAGER - AWS NETWORK FIREWALL are interlinked. So which one to use ??
+       --> It all starts with AWS WAF. You can automate and then simplify AWS WAF management using AWS Firewall Manager. // (DDOS, HTTP/S to cloud front, SQL inj, cross-site scripting)
+       --> Shield offers free standard services and  Shield Advanced which adds additional features on top of AWS WAF, such as dedicated support from the DDoS Response Team (DRT) and advanced reporting, this requires a business or enterprise support plan.
+       --> To use the services of the DRT, you must be subscribed to the Business Support plan or the Enterprise Support plan.
+       --> If you want granular control over the protection that is added to your resources, AWS WAF alone is the right choice.
+       --> If you want to use AWS WAF across accounts, accelerate your AWS WAF configuration, or automate protection of new resources, use Firewall Manager with AWS WAF.  Network firewall manager manages all netwrok firewalls , vpc's , subnets etc; Network firewall manages a particular VPC . You can create one for each VPC .
+       --> Finally, if you own high visibility websites or are otherwise prone to frequent DDoS attacks, you should consider purchasing the additional features that Shield Advanced provides.
+
+    /// AWS DETECTIVE - AWS GUARD DUTY - AWS INSPECTOR - AWS MACIE are similar in concepts.
+        --> AWS DETECTIVE is mainly for the security findings in login attempts , API calls from AWS CloudTrail and Amazon VPC flow logs. It also ingests findings detected by GuardDuty.
+        --> AWS GUARD DUTY does DETETIVE duty plus reports compromised EC2 instanes , compromised s3 instanes and compromised AWS credentials from VPC Flow Logs, AWS CloudTrail management event logs, Cloudtrail S3 data event logs, and DNS logs.
+            It also monitors AWS account access behaviour for signs of compromise, such as unauthorized infrastructure deployments, like instances deployed in a Region that has never been used, or unusual API calls, like a password policy change to reduce password strength.
+        --> AWS INSPECTOR does an vulnerability assessment based on common security standards and vulnerability definitions updated frequently by AWS . Offers predefined software called an agent that you can install in EC2. Examples of built-in rules include checking for remote root login being enabled, or vulnerable software versions installed.
+        --> AWS MACIE is for protecting personal and financial data stored  in S3 across your organization and reports if a bucket is unencrypted .
+        --> All the services are free for 30 days .Pay from the next month!! During the 30-day free trial period, the cost estimation projects what your estimated costs will be after the free trial period.
+
+24. MANAGEMENT & GOVERNANCE :
+
+
+
+
+
+##################################################################################################################
+##################################################################################################################
+ADDITIONAL RESOURCES  :
+##################################################################################################################
+##################################################################################################################
+
+1. AWS MARKET-PLACE :  https://www.youtube.com/watch?v=RxCRHsAqiWs
+---------------------------------------------------------------------
+// Buy & Sell - Paid or Free AWS Software Solutions .
+AWS Marketplace is an online store where you can buy or sell software that runs on Amazon Web Services (AWS).
+AWS Marketplace is a curated digital catalog customers can use to find, buy, deploy, and manage third-party software, data, and services that customers need to build solutions and run their businesses.
+AWS Marketplace includes thousands of software listings from popular categories such as security, networking, storage, machine learning, business intelligence, database, as well as related professional services to help you manage and support those solutions.
+AWS Marketplace also simplifies software licensing and procurement with flexible pricing options and multiple deployment methods.
+Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
+Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source, AWS.
+
+Customers can quickly launch preconfigured software with just a few clicks, and choose software solutions in Amazon Machine Images (AMIs), software as a service (SaaS),
+Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source.
+The product can be free to use or it can have an associated charge. AWS handles billing and payments, and charges appear on customers’ AWS bill.
+
+SELLER : seller can be an independent software vendor (ISV), consulting partner, managed services provider (MSP), or individual who has something to offer that works with AWS products and services.
+
+One way of delivering your products to buyers is with Amazon Machine Images (AMIs) - Docker Images - SAAS Apps.
+An AMI provides the information required to launch an Amazon Elastic Compute Cloud (Amazon EC2) instance.
+You create a custom AMI for your product, and buyers can use it to create EC2 instances with your product already installed and ready to use.
+
+
+2. AWS GOVCLOUD - United States :
+----------------------------------
+The AWS GovCloud (US) Regions are isolated AWS Regions designed to enable U.S. government agencies and customers to move sensitive workloads into the cloud by addressing their specific regulatory and compliance requirements.
+The AWS GovCloud (US) Regions adhere to U.S. International Traffic in Arms Regulations (ITAR) requirements.
+
+3. AWS MANAGED SERVICES & CUSTOMER MANAGED SERVICES & SHARED CONTROLS :
+------------------------------------------------------------------------
+
+AWS MANAGED :
+-----------------
+--> AWS Lambda, Amazon RDS, Amazon Redshift, Amazon CloudFront, Elastic Map Reduce, Dynamo DB
+For managed services shown above, AWS is responsible for performing all the operations needed to keep the service running.
+The AWS-managed services automate time-consuming administration tasks such as hardware provisioning, software setup, patching and backups. The AWS-managed services free customers to focus on their applications so they can give them the fast performance, high availability, security and compatibility they need.
+Examples of AWS-managed services include Amazon RDS, Amazon DynamoDB, Amazon Redshift, Amazon WorkSpaces, Amazon CloudFront, Amazon CloudSearch, and several other services.
+AWS is responsible for patching the underlying hosts, upgrading the firmware, and fixing flaws within the infrastructure for all services, including Amazon EC2.
+
+Amazon EMR launches clusters in minutes.
+You don’t need to worry about node provisioning, infrastructure setup, Hadoop configuration, or cluster tuning.
+Amazon EMR takes care of these tasks so you can focus on analysis.
+DynamoDB is serverless with no servers to provision, patch, or manage and no software to install, maintain, or operate.
+DynamoDB automatically scales tables up and down to adjust for capacity and maintain performance.
+Availability and fault tolerance are built in, eliminating the need to architect your applications for these capabilities.
+
+CUSTOMER MANAGED :
+------------------------
+On the other hand, customer-managed services are services that are completely managed by the customer.
+For example, a service such as Amazon Elastic Compute Cloud (Amazon EC2), Amazon VPC, and Amazon S3 are categorized as Infrastructure as a Service (IaaS) and, as such, requires the customer to perform all of the necessary security configuration and management tasks.
+Customers that deploy an Amazon EC2 instance are responsible for the management of the guest operating system (including updates and security patches), any application software or utilities installed by the customer on the instances, and the configuration of the AWS-provided firewall (called a security group) on each instance.
+The customer is responsible for securing their network by configuring Security Groups, Network Access control Lists (NACLs), and Routing Tables. The customer is also responsible for setting a password policy on their AWS account that specifies the complexity and mandatory rotation periods for their IAM users' passwords.
+Examples of customer-managed services include Amazon Elastic Compute Cloud (Amazon EC2), Amazon Virtual Private Cloud (Amazon VPC), and AWS Identity And Access Management (AWS IAM).
+Patching the guest operating system is the responsibility of AWS for the managed services only (such as Amazon RDS). The customer is responsible for patching the guest OS for other services (such as Amazon EC2).
+Data encryption is the responsibility of the customer. Both SERVER SIDE & CLIENT SIDE encryption comes under client responsibility.
+  NOTE :
+  The AWS managed services we mentioned above are different than the AWS Managed Services (AMS) service.
+  AMS is an AWS service that operates AWS on behalf of enterprise customers and partners.
+  Enterprises want to adopt AWS at scale but often the skills that have served them well in traditional IT do not always translate to success in the cloud.
+  AWS Managed Services (AMS) enables them to migrate to AWS at scale more quickly, reduce their operating costs, improve security and compliance and focus on their differentiating business priorities.
+
+AWS is responsible for physical controls and environmental controls. Customers inherit these controls from AWS.
+Inherited Controls are controls which a customer fully inherits from AWS such as physical controls and environmental controls.
+
+
+4. AWS SHARED CONTROLS - AWS & CUSTOMER:
+--------------------------------------------------
+Responsibilities depends on the service used .
+For example, when using Amazon EC2, you are responsible for applying operating system and application security patches regularly. However, such patches are applied automatically when using Amazon RDS.
+
+Shared Controls are controls which apply to both the infrastructure layer and customer layers, but in completely separate contexts or perspectives.
+In a shared control, AWS provides the requirements for the infrastructure and the customer must provide their own control implementation within their use of AWS services.
+Examples include:
+** Patch Management         – AWS is responsible for patching the underlying hosts and fixing flaws within the infrastructure, but customers are responsible for patching their guest OS and applications.
+** Configuration Management – AWS maintains the configuration of its infrastructure devices, but a customer is responsible for configuring their own guest operating systems, databases, and applications.
+** Awareness & Training     - AWS trains AWS employees, but a customer must train their own employees.
+
+Patching the guest operating system is the responsibility of AWS for the managed services only (such as Amazon RDS).
+The customer is responsible for patching the guest OS for other services (such as Amazon EC2).
+AWS is responsible for patching the underlying hosts, upgrading the firmware, and fixing flaws within the infrastructure for all services, including Amazon EC2.
+
+Both client side and server side encryption is a responsibility of customer.
+AWS offers a lot of services and features that help AWS customers protect their data in the cloud.
+Customers can protect their data by encrypting it in transit and at rest.
+They can use Cloudtrail to log API and user activity, including who, what, and from where calls were made.
+They can also use the AWS Identity and Access Management (IAM) to control who can access or edit their data.
+
+5. AWS MICROSERVICES vs MONOLITHIC :
+--------------------------------------
+AWS recommends adopting microservices architecture, not monolithic architecture. With monolithic architectures, application components are tightly coupled and run as a single service.
+With a microservices architecture, an application is built as loosely coupled components.
+Benefits of microservices architecture include:
+  1- Microservices allow each service to be independently scaled to meet demand for the application feature it support.
+  2- Teams are empowered to work more independently and more quickly.
+  3- Microservices enable continuous integration and continuous delivery, making it easy to try out new ideas and to roll back if something doesn’t work.
+  4- Service independence increases an application’s resistance to failure.
+     In a monolithic architecture, if a single component fails, it can cause the entire application to fail.
+     With microservices, applications handle total service failure by degrading functionality and not crashing the entire application.
+
+6.  AWS PENETRATION TESTING : https://aws.amazon.com/security/penetration-testing/
+-------------------------------
+AWS customers are welcome to carry out security assessments and penetration tests against their AWS infrastructure without prior approval for 8 services:
+So Penetration testing can be done by customers on their own instances without prior authorization from AWS.
+
+      PERMITTED ACTIVITIES :                        PROHIBITED ACTIVITIES :
+  ---------------------------------------------------------------------------------------------------------------------------------------------
+      1- Amazon EC2 instances, NAT Gateways,        1. DNS zone walking via Amazon Route 53 Hosted Zones
+         and Elastic Load Balancers.
+      2- Amazon RDS.                                2. Denial of Service (DoS), Distributed Denial of Service (DDoS), Simulated DoS, Simulated DDoS
+      3- Amazon CloudFront.                         3. Port flooding
+      4- Amazon Aurora.                             4. Protocol flooding
+      5- Amazon API Gateways.                       5. Request flooding  (login request flooding, API request flooding)
+      6- AWS Lambda and Lambda Edge functions.
+      7- Amazon Lightsail resources.
+      8- Amazon Elastic Beanstalk environments.
+
+The AWS customers are responsible for performing penetration tests against their AWS infrastructure.
+AWS customers are allowed to perform penetration tests against their AWS infrastructure, but they must ensure that their activities are aligned with AWS policies.
+AWS customers are allowed to perform penetration testing on both AWS-managed services such as Amazon RDS and customer-managed services such as Amazon EC2.
+
+Note: Customers are not permitted to conduct any security assessments of AWS infrastructure, or the AWS services themselves.
+      If you discover a security issue within any AWS services in the course of your security assessment, please contact AWS Security immediately.
+
+7. HORIZONTAL & VERTICAL SCALING :
+-------------------------------------
+HORIZONTAL -> Adding more EC2 instances
+Scaling horizontally takes place through an increase in the number of resources (e.g., adding more hard drives to a storage array or adding more servers to support an application).
+This is a great way to build Internet-scale applications that leverage the elasticity of cloud computing.
+
+VERTICAL -> Add specifications to a single resource.
+Scaling vertically takes place through an increase in the specifications of an individual resource (e.g., upgrading a server with a larger hard drive, adding more memory, or provisioning a faster CPU).
+On Amazon EC2, this can easily be achieved by stopping an instance and resizing it to an instance type that has more RAM, CPU, I/O, or networking capabilities. This way of scaling can eventually hit a limit and it is not always a cost efficient or highly available approach. However, it is very easy to implement and can be sufficient for many use cases especially as a short term solution.
+A "vertically scalable" system is constrained to running its processes on only one computer; in such systems, the only way to increase performance is to add more resources into one computer in the form of faster (or more) CPUs, memory, or storage.
+Vertical scaling may improve performance, but not fault-tolerance; because if this "one computer" fails, the whole system will fail.
+
+Vertical-scaling is often limited to the capacity constraints of a single machine, scaling beyond that capacity often involves downtime and comes with an upper limit.
+With horizontal-scaling it is often easier to scale dynamically by adding more machines in parallel. Hence, in most cases, horizontal-scaling is recommended over vertical-scaling.
+Horizontally scalable systems are oftentimes able to outperform vertically scalable systems by enabling parallel execution of workloads and distributing those across many different computers.
+
+8. AWS WELL ARCHITECTURED FRAMEWORK : https://d1.awsstatic.com/whitepapers/architecture/AWS_Well-Architected_Framework.pdf
+---------------------------------------
+The Well-Architected Framework identifies a set of general design principles to facilitate good design in the cloud:
+
+  --> STOP GUESSING YOUR CAPACITY NEEDS :
+      Eliminate guessing about your infrastructure capacity needs.
+      When you make a capacity decision before you deploy a system, you might end up sitting on expensive idle resources or dealing with the performance implications of limited capacity.
+      With cloud computing, these problems can go away.
+      You can use as much or as little capacity as you need, and scale up and down automatically.
+
+  --> TEST SYSTEMS AT PRODUCTION SCALE :
+      In the cloud, you can create a production-scale test environment on demand, complete your testing, and then decommission the resources.
+      Because you only pay for the test environment when it's running, you can simulate your live environment for a fraction of the cost of testing on premises.
+
+  --> AUTOMATE TO MAKE YOUR ARCHIECTURAL EXPERIMENTATION EASIER :
+      Automation allows you to create and replicate your systems at low cost and avoid the expense of manual effort.
+      You can track changes to your automation, audit the impact, and revert to previous parameters when necessary.
+
+  --> ALLOW FOR EVOLUTIONARY ARCHITECTURES :
+      In a traditional environment, architectural decisions are often implemented as static, one-time events, with a few major versions of a system during its lifetime.
+      As a business and its context continue to change, these initial decisions might hinder the system's ability to deliver changing business requirements.
+      In the cloud, the capability to automate and test on demand lowers the risk of impact from design changes.
+      This allows systems to evolve over time so that businesses can take advantage of innovations as a standard practice.
+
+  --> DRIVE ARCHITECTURES USING DATA :
+      In the cloud you can collect data on how your architectural choices affect the behaviour of your workload.
+      This lets you make fact-based decisions on how to improve your workload.
+      Your cloud infrastructure is code, so you can use that data to inform your architecture choices and improvements over time.
+
+  --> IMPROVE THROUGH GAME DAYS :
+      Test how your architecture and processes perform by regularly scheduling game days to simulate events in production.
+      This will help you understand where improvements can be made and can help develop organizational experience in dealing with events.
+
+The AWS Well-Architected Tool helps customers review the state of their workloads and compares them to the latest AWS architectural best practices.
+The tool is based on the AWS Well-Architected Framework, developed to help cloud architects build secure, high-performing, resilient, and efficient application infrastructure.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+USEFUL POINTS FOR CERTIFICATION QUESTIONS :
+################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+To ensure that the application has the highest level of availability :
+-> Deploy across multiple regions and availability zones , not across availability zones & Subnets.
+In addition to replicating applications and data across multiple data centers in the same Region using Availability Zones, you can also choose to increase redundancy and fault tolerance further by replicating data between geographic Regions (especially if you are serving customers from all over the world).
+You can do so using both private, high speed networking and public internet connections to provide an additional layer of business continuity, or to provide low latency access across the globe.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+SECURITY is a shared responsibility.
+Most (not all) data and network security are taken care of for you.
+When we talk about the data/network security, AWS has a “shared responsibility model” where AWS and the customer share the responsibility of securing them.
+For example, the customer is responsible for creating rules to secure their network traffic using the security groups and is also responsible for protecting data with encryption.
+
+Gaining complete control over the physical infrastructure" is incorrect.
+The Physical infrastructure is a responsibility of AWS, not the customer.
+
+The principle of least privilege is one of the most important security practices and it means granting users the required permissions to perform the tasks entrusted to them and nothing more.
+The security administrator determines what tasks users need to perform and then attaches the policies that allow them to perform only those tasks.
+You should start with a minimum set of permissions and grant additional permissions when necessary. Doing so is more secure than starting with permissions that are too lenient and then trying to tighten them down.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+Elastic Load Balancers do not scale resources.
+Elastic Load Balancers distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions.
+
+Scaling resources is a function of AWS AUTO SCALING.
+AWS Auto Scaling is the feature that automates the process of adding/removing server capacity (based on demand).
+Autoscaling allows you to reduce your costs by automatically turning off resources that aren’t in use.
+On the other hand, Autoscaling ensures that your application runs effectively by provisioning more server capacity if required.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+What does AWS provide to deploy popular technologies - such as IBM MQ - on AWS with the least amount of effort and time?
+
+AWS Quick Start Reference Deployments outline the architectures for popular enterprise solutions on AWS and provide AWS CloudFormation templates to automate their deployment.
+Each Quick Start launches, configures, and runs the AWS compute, network, storage, and other services required to deploy a specific workload on AWS, using AWS best practices for security and availability.
+Quick Starts are built by AWS solutions architects and partners to help you deploy popular technologies on AWS, based on AWS best practices.
+These accelerators reduce hundreds of manual installation and configuration procedures into just a few steps, so you can build your production environment quickly and start using it immediately.
+Each Quick Start includes AWS CloudFormation templates that automate the deployment and a guide that discusses the architecture and provides step-by-step deployment instructions.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+Your customers complain that sometimes they can’t reach your application. Which AWS service allows you to monitor the performance of your EC2 instances to assist in troubleshooting these issues?
+ANS : CLOUD WATCH
+Amazon CloudWatch is a service that monitors AWS cloud resources and the applications you run on AWS.
+You can use Amazon CloudWatch to collect and track metrics, collect and monitor log files, set alarms, and automatically react to changes in your AWS resources.
+Amazon CloudWatch can monitor AWS resources such as Amazon EC2 instances, Amazon DynamoDB tables, and Amazon RDS DB instances, as well as custom metrics generated by your applications and services, and any log files your applications generate.
+You can use CloudWatch to detect anomalous behavior in your environments, take automated actions, troubleshoot issues, and discover insights to keep your applications running smoothly.
+
+AWS CloudTrail is an AWS service that can be used to monitor all user interactions with the AWS environment.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+IN MEMEMORY vs ELASTICACHE :
+--------------------------------
+The most frequently accessed data be stored in elasticache so that the application’s response time is optimal.
+The primary purpose of an in-memory data store is to provide ultrafast (sub millisecond latency) and inexpensive access to copies of data.
+  Querying a database is always slower and more expensive than locating a copy of that data in a cache.
+  Some database queries are especially expensive to perform.
+  An example is queries that involve joins across multiple tables or queries with intensive calculations.
+  By caching (storing) such query results, you pay the price of the query only once.
+  Then you can quickly retrieve the data multiple times without having to re-execute the query.
+
+#################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+--> NETWORK BASED SERVICES : Private Network Connectors to AWS            - AWS DIRECT CONNECT
+                             Edge Locations for S3 Enabled applications   - AMAZON S3 TRANSFER ACCELERATION
+
+--> ONLINE  DATA TRANSFER :  Load stream Data into S3                     - AMAZON KINESIS
+                             Online transfer of active data               - AWS DATA SYNC
+                             SFTP transfer to S3                          - AWS TRANSFER FOR SFTP
+                             Database Transfer                            - AWS DATABSE MIGRATION
+                             VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
+
+--> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball / Snow Mobile ]
+
+--> HYBRID DATA STORAGE   :  Access AWS storage from On-premisis          - AWS STORAGE GATEWAY
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+To achieve High Availability, you need the ability to redirect traffic in the case of instance failure. There are several options:
+
+1. USE ELASTIC LOAD BALANCER :
+   This is the preferred way to provide High Availability.
+   Run multiple Amazon EC2 instances, preferably in different Availability Zones (AZs).
+   Users connect to the ELB (via the supplied DNS name), which redirects traffic to the EC2 instances.
+   If an instance fails, ELB notices this via regular Health Checks, and will only direct traffic to the healthy instances.
+   Auto Scaling can be used to create these multiple instances across multiple Availability Zones, and it can also update the Load Balancing service when it adds/removes instances.
+
+2. REDIRECT AN ELASTIC IP ADDRESS :
+   Run multiple instances (preferably across multiple Availability Zones).
+   Point an Elastic IP address to the instance you desire. Users connect via the Elastic IP address and are directed to the instance.
+   If the instance fails, reassociate the Elastic IP address to a different instance, which will then start receiving the traffic immediately.
+   This method is not recommended because only one instance is receiving all the traffic while the other instance(s) are sitting idle.
+   It also requires a mechanism to detect failure and reassociate the Elastic IP (which you must do yourself).
+
+3. REASSIGN AN ELASTIC NETWORK INTERFACE :
+   All EC2 instances have a primary ENI. They can optionally have additional ENIs.
+   It is possible to direct traffic to a secondary ENI and then move that secondary ENI to another instance. This is similar to reassigning an Elastic IP address.
+   This method is not recommended for the same reason as reassociating an Elastic IP address (above), but also because an ENI can only be reassigned within the same AZ. It cannot be used to direct traffic to an EC2 instance in a different AZ.
+
+Bottom line: Use an Elastic Load Balancer. It provides true High Availability and can do it automatically.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+AMAZON COMPREHEND :
+-----------------------
+It is a natural language processing (NLP) service that uses machine learning to find insights and relationships in text. No machine learning experience required.
+There is a treasure trove of potential sitting in your unstructured data. Customer emails, support tickets, product reviews, social media, even advertising copy represents insights into customer sentiment that can be put to work for your business.
+The question is how to get at it? As it turns out, Machine learning is particularly good at accurately identifying specific items of interest inside vast swathes of text (such as finding company names in analyst reports), and can learn the sentiment hidden inside language (identifying negative reviews, or positive customer interactions with customer service agents), at almost limitless scale.
+
+Amazon Comprehend uses machine learning to help you uncover the insights and relationships in your unstructured data. The service identifies the language of the text; extracts key phrases, places, people, brands, or events; understands how positive or negative the text is; analyzes text using tokenization and parts of speech; and automatically organizes a collection of text files by topic. You can also use AutoML capabilities in Amazon Comprehend to build a custom set of entities or text classification models that are tailored uniquely to your organization’s needs.
+
+For extracting complex medical information from unstructured text, you can use Amazon Comprehend Medical. The service can identify medical information, such as medical conditions, medications, dosages, strengths, and frequencies from a variety of sources like doctor’s notes, clinical trial reports, and patient health records. Amazon Comprehend Medical also identifies the relationship among the extracted medication and test, treatment and procedure information for easier analysis. For example, the service identifies a particular dosage, strength, and frequency related to a specific medication from unstructured clinical notes.
+
+Amazon Comprehend is fully managed, so there are no servers to provision, and no machine learning models to build, train, or deploy. You pay only for what you use, and there are no minimum fees and no upfront commitments.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+CONFIG vs CLOUD TRAIL - Change Management Tools :
+Change management is defined as “the Process responsible for controlling the Lifecycle of all Changes.
+The primary objective of Change Management is to enable beneficial changes to be made, with minimum disruption to IT Services.
+Despite all of the investments in software and hardware, an erroneous configuration or misstep in a process can frequently undo these efforts and lead to failure.
+AWS Config and AWS CloudTrail are change management tools that help AWS customers audit and monitor all resource and configuration changes in their AWS environment
+Customers can use AWS Config to answer “What did my AWS resource look like?” at a point in time. Customers can use AWS CloudTrail to answer “Who made an API call to modify this resource?” For example, a customer can use the AWS Management Console for AWS Config to detect that the security group “Production-DB” was incorrectly configured in the past. Using the integrated AWS CloudTrail information, they can pinpoint which user misconfigured the “Production-DB” security group. In brief, AWS Config provides information about the changes made to a resource, and AWS CloudTrail provides information about who made those changes. These capabilities enable customers to discover any misconfigurations, fix them, and protect their workloads from failures.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+BYOL - Dedicated HOSTS :
+You have a variety of options for using new and existing Microsoft software licenses on the AWS Cloud. By purchasing Amazon Elastic Compute Cloud (Amazon EC2) or Amazon Relational Database Service (Amazon RDS) license-included instances, you get new, fully compliant Windows Server and SQL Server licenses from AWS.
+The BYOL model enables AWS customers to use their existing server-bound software licenses, including Windows Server, SQL Server, and SUSE Linux Enterprise Server.
+Your existing licenses may be used on AWS with Amazon EC2 Dedicated Hosts, Amazon EC2 Dedicated Instances or EC2 instances with default tenancy using Microsoft License Mobility through Software Assurance.
+Dedicated Hosts provide additional control over your instances and visibility into Host level resources and tooling that allows you to manage software that consumes licenses on a per-core or per-socket basis, such as Windows Server and SQL Server. This is why most BYOL scenarios are supported through the use of Dedicated Hosts, while only certain scenarios are supported by Dedicated Instances.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+TOTAL COST OF OWNERSHIP - TCO :
+-----------------------------------
+Which of the following should be considered when performing a TCO analysis to compare the costs of running an application on AWS instead of on-premises?  --> PHYSICAL HARDWARE
+
+Weighing the financial considerations of owning and operating a data center facility versus employing a cloud infrastructure requires detailed and careful analysis.
+The Total Cost of Ownership (TCO) is often the financial metric used to estimate and compare costs of a product or a service.
+When comparing AWS with on-premises TCO, customers should consider all costs of owning and operating a data center. Examples of these costs include facilities, physical servers, storage devices, networking equipment, cooling and power consumption, data center space, and Labor IT cost.
+
+“Application development” is incorrect. Application development is the process of creating a program or a set of programs to perform the different tasks that a business requires.
+Application development is a separate process that customers need to perform regardless of whether they will be using AWS or an on-premises data center. Application development is not part of the total cost of owning and operating a data center (TCO), and thus is an incorrect answer.
+
+“Market Research” is incorrect. Market research is an organized effort to gather information about target audience and customers to determine how viable a product or service might be.
+Market research is a separate process that customers need to perform regardless of whether they will be using AWS or an on-premises data center.
+
+“Business analysis” is incorrect. Business analysis is a multistage process aimed at identifying business needs and determining solutions to business problems.
+Business analysis is a separate process that customers need to perform regardless of whether they will be using AWS or an on-premises data center.
+
+The AWS TCO (Total Cost of Ownership) Calculator is a free tool that provides directional guidance on possible realized savings when deploying AWS.
+This tool is built on an underlying calculation model, that generates a fair assessment of value that a customer may achieve given the data provided by the user which includes the number of servers migrated to AWS, the server type, the number of processors and so on.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+"Save when you Reserve" For Customers that can commit to using EC2 over a 1 or 3-year term, it is better to use Amazon EC2 Reserved Instances. Reserved Instances provide a significant discount (up to 75%) compared to On-Demand instance pricing.
+"Pay as you go" . Reserved Instances provide a significant discount (up to 75%) compared to On-Demand (pay-as-you-go) instance pricing.
+"Pay less as AWS grows" . Pay less as AWS grows refers to the discounts that you get over time as AWS grows. This sometimes called “AWS Economies of Scale”. For example, AWS has reduced the per GB storage price of S3 by 80% since the service was first introduced in 2006.
+"Pay less by using more". “Pay less by using more” means that you get volume based discounts and as your usage increases.  For services such as S3, pricing is tiered, meaning the more you use, the less you pay per GB.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+CLOUD ADOPTION FRAMEWORK - CAF :
+----------------------------------
+AWS developed the AWS Cloud Adoption Framework (AWS CAF), which helps organizations understand how cloud adoption transforms the way they work.
+AWS CAF leverages our experiences assisting companies around the world with their Cloud Adoption Journey.
+Assessing migration readiness across key business and technical areas, referred to as Perspectives, helps determine the most effective approach to an enterprise cloud migration effort.
+First, let’s outline what we mean by perspective. AWS CAF is organized into six areas of focus, which span your entire organization.
+We describe these areas of focus as Perspectives: Business, People, Governance, Platform, Security, and Operations.
+For further reading, see the AWS CAF Whitepaper. AWS CAF provides a mental model to establish areas of focus in determining readiness to migrate and creating a set of migration execution workstreams.
+As these are key areas of the business impacted by cloud adoption, it’s important that we create a migration plan that considers and incorporates the necessary requirements across each area.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+AWS MIGRATION PROGRAMME - MAP:
+------------------------------
+The AWS Migration Acceleration Program (MAP) is a comprehensive and proven cloud migration program based upon AWS’s experience of migrating a thousand enterprise customers to the cloud.
+The program packages best practices, tools, expertise, financial incentives, and a partner ecosystem to make cloud adoption easier.
+MAP consists of a three-phase journey that helps you achieve your migration goals by reducing migration complexity and costs.
+Leverage the performance, security, and reliability of the cloud
+
+  Step 1: Assess your readiness
+  Conduct a migration readiness assessment to identify and evaluate strengths, opportunities for improvement, and business benefits.
+  Create a TCO model to build business justification for your migration project.
+
+  Step 2: Mobilize your resources
+  Create a migration plan and detailed business case. Then, gain experience by migrating pilot workloads.
+  Build your capabilities and experience how easy it is to migrate to AWS.
+
+  Step 3: Migrate and modernize your workloads
+  Execute the large-scale migration plan developed during the mobilize phase with the help of migration-certified AWS Partners and the AWS ProServe team.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+To enable HTTPS connections to your website or application in AWS, you need an SSL/TLS server certificate.
+You can use a server certificate provided by AWS Certificate Manager (ACM) or one that you obtained from an external provider.
+You can use ACM or IAM to store and deploy server certificates. Use IAM as a certificate manager only when you must support HTTPS connections in a region that is not supported by ACM.
+IAM supports deploying server certificates in all regions, but you must obtain your certificate from an external provider for use with AWS.
+Amazon Route 53 is used to register domain names or use your own domain name to route your end users to Internet applications.
+Route 53 is not responsible for creating SSL certifications.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+AWS recommends some practices to help organizations avoid unexpected charges on their bill. Which of the following is NOT one of these practices?
+"Deleting unused AutoScaling launch configuration" will not help, and thus is the correct choice.
+The AutoScaling launch configuration does not incur any charges. Thus, it will not make any difference whether it is deleted or not.
+
+AWS will charge the user once the AWS resource is allocated (even if it is not used). Thus, it is advised that once the user's work is completed they should:
+1- Delete all Elastic Load Balancers.
+2- Terminate all unused EC2 instances.
+3- Delete the attached EBS volumes that they don’t need.
+4- Release any unused Elastic IPs.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+AWS Quick Start Reference Deployments outline the architectures for popular enterprise solutions on AWS and provide AWS CloudFormation templates to automate their deployment.
+Each Quick Start launches, configures, and runs the AWS compute, network, storage, and other services required to deploy a specific workload on AWS, using AWS best practices for security and availability.
+Quick Starts are built by AWS solutions architects and partners to help you deploy popular technologies on AWS, based on AWS best practices.
+These accelerators reduce hundreds of manual installation and configuration procedures into just a few steps, so you can build your production environment quickly and start using it immediately.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+--> NETWORK BASED SERVICES : Private Network Connectors to AWS            - AWS DIRECT CONNECT
+                             Edge Locations for S3 Enabled applications   - AMAZON S3 TRANSFER ACCELERATION
+
+--> ONLINE  DATA TRANSFER :  Load stream Data into S3                     - AMAZON KINESIS
+                             Online transfer of active data               - AWS DATA SYNC
+                             SFTP transfer to S3                          - AWS TRANSFER FOR SFTP
+                             Database Transfer                            - AWS DATABSE MIGRATION
+                             VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
+
+
+--> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball - Edge / Snow Mobile ]
+
+--> HYBRID DATA STORAGE   :  Access AWS storage from On-premisis          - AWS STORAGE GATEWAY
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+If you suspect that your account has been compromised, or if you have received a notification from AWS that the account has been compromised, perform the following tasks:
+1- Change your AWS root account password and the passwords of any IAM users.
+2- Delete or rotate all root and AWS Identity and Access Management (IAM) access keys.
+3- Delete any potentially compromised IAM users.
+4- Delete any resources on your account you didn’t create, such as EC2 instances and AMIs, EBS volumes and snapshots, and IAM users.
+5- Respond to any notifications you received from AWS Support through the AWS Support Center.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+AWS Serverless Services include:
+
+Compute: AWS Lambda, AWS Fargate
+Messaging: Amazon SNS, Amazon SQS
+Database: Amazon DynamoDB, Amazon Aurora Serverless
+Orchestration: AWS Step Functions
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+How does AWS notify customers about security and privacy events pertaining to AWS services? -- Security Bulletins page -- https://aws.amazon.com/security/security-bulletins/
+AWS supports several MFA device options including Virtual MFA devices, Universal 2nd Factor (U2F) security key, and Hardware MFA devices.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+Amazon Cloud Directory and AWS Directory Service are two different services.
+AWS Directory Service is the service that provides single sign-on (SSO) to applications and services on AWS.
+AWS Directory Service uses secure Windows trusts to enable users to sign in to the AWS Management Console and the AWS Command Line Interface (CLI) using their existing corporate Microsoft Active Directory credentials
+
+Amazon Cloud Directory is a cloud-native, highly scalable, high-performance directory service that provides web-based directories to make it easy for you to organize and manage all your application resources such as users, groups, locations, devices, and policies, and the rich relationships between them.
+Unlike existing traditional directory systems, Cloud Directory does not limit organizing directory objects in a single fixed hierarchy.
+In Cloud Directory, you can organize directory objects into multiple hierarchies to support multiple organizational pivots and relationships across directory information.
+For example, a directory of users may provide a hierarchical view based on reporting structure, location, and project affiliation.
+Similarly, a directory of devices may have multiple hierarchical views based on its manufacturer, current owner, and physical location. With Cloud Directory, you can create directories for a variety of use cases, such as organizational charts, course catalogs, and device registries.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+PLOT LIGHT :
+-----------
+A pilot light scenario is a disaster recover / business continuity scenario wherein a minimal amount of services are kept running in a failover location to enable the business to meet their Recovery
+Time Objective (RTO) and Recovery Point Objective (RPO) in the event of a disaster.
+By nature, a pilot light scenario will take some time to spin up and promote to production (as opposed to an active-active DR scenario) and will therefore not mitigate the per-minute losses that will be experienced by the company in the event of an outage.
+
+Additional information: Recovery time objective (RTO) and recovery point objective (RPO) are two key metrics to consider when developing a disaster recover (DR) plan. RTO represents how many hours it takes customers to return to a working state after a disaster. RPO, which is also expressed in hours, represents how much data customers could lose when a disaster happens.
+For example, an RPO of 1 hour means that customers could lose up to 1 hour’s worth of data when a disaster occurs.
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+DynamoDB global tables are ideal for massively scaled applications with globally dispersed users. Global tables provide automatic replication to AWS Regions world-wide. They enable you to deliver low-latency data access to your users no matter where they are located.
+DynamoDB Accelerator (DynamoDB DAX) is an in-memory cache for DynamoDB that reduces response times from milliseconds to microseconds.
+DynamoDB point-in-time recovery (PITR) is used to back up your data with per-second granularity and restore to any single second from the time it was enabled up to the prior 35 days. DynamoDB PITR works as additional insurance against accidental loss of data.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+Which of the following factors should be considered when determining the region in which AWS Resources will be deployed?
+--> Per AWS Best Practices, proximity to your end users, regulatory compliance, data residency constraints, and cost are all factors you have to consider when choosing the most suitable AWS Region.
+
+The other options are incorrect:
+The planned number of VPCs" is incorrect. The number of VPCs a customer can have in a given region is the same irrespective of which AWS Region the customer is using.
+The AWS Region’s security level" is incorrect. The level of security is almost identical for all AWS regions.
+​Geographic proximity to the company's location" is incorrect.
+To achieve the lowest network latency and the quickest response, the best practice is to choose the closest AWS region to the end-users (not to the company's location).
+For example, if an application is developed in Japan but is primarily accessed by users in North America, the customers will have a better experience (lower application latency) if the application is deployed to AWS Regions in North America than if it were deployed to the Tokyo Region.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+LOCAL ZONES vs OUTPOSTS :
+--------------------------
+Local zones are availability zones closure to large population, industry or an IT centre.
+AWS Local Zones are a type of AWS infrastructure deployment that places AWS compute, storage, database, and other select services close to large population, industry, and IT centers.
+With AWS Local Zones, you can easily run applications that need single-digit millisecond latency closer to end-users in a specific geography.
+AWS Local Zones are ideal for use cases such as media & entertainment content creation, real-time gaming, live video streaming, and machine learning inference.
+
+Even though we can use cloud , some applications still need to be on premises for latency issues . Hence OUTPOSTS.
+So instead of changing applications to meet both cloud and on premises apps , we can use same API's to access resources in both.
+AWS Technician comes and set up all the resources needed to connect resources in cloud and resources in on-premises.
+Now we connect the outpost to the nearest REGION using a DIRECT CONNECT or VPN or use a local GW to connect to on premises resources.
+Also create a VPC and enable communication between your instances.
+An Outpost is a pool of AWS compute and storage capacity deployed at a customer site.
+AWS Outposts brings native AWS services, infrastructure, and operating models to virtually any data centre, co-location space, or on-premises facility.
+You can use the same services, tools, and partner solutions to develop for the cloud and on premises .
+
+RESERVED INSTANCES : For EC2, FARGATE, RDS, REDSHIFT, ELASTICAHE
+SAVINGS PLAN       : Only for EC2 & FARGATE
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+BEANSTALK vs CLOUD FORMATION : https://stackoverflow.com/questions/14422151/what-is-the-difference-between-elastic-beanstalk-and-cloudformation-for-a-net-p
+---------------------------------------
+They're actually pretty different.
+Elastic Beanstalk is intended to make developers' lives easier.
+Cloud Formation is intended to make systems engineers' lives easier.
+
+Elastic Beanstalk is a PaaS-like layer on top of AWS's IaaS services which abstracts away the underlying EC2 instances, Elastic Load Balancers, auto scaling groups, etc.
+This makes it a lot easier for developers, who don't want to be dealing with all the systems stuff, to get their application quickly deployed on AWS.
+It's very similar to other PaaS products such as Heroku, EngineYard, Google App Engine, etc.
+With Elastic Beanstalk, you don't need to understand how any of the underlying magic works.
+
+CloudFormation, on the other hand, doesn't automatically do anything.
+It's simply a way to define all the resources needed for deployment in a huge JSON file.
+So a CloudFormation template might actually create two ElasticBeanstalk environments (production and staging), a couple of Elastic Cache clusters, a DyanmoDB table, and then the proper DNS in Route53.
+I then upload this template to AWS, walk away, and 45 minutes later everything is ready and waiting.
+Since it's just a plain-text JSON file, I can stick it in my source control which provides a great way to version my application deployments.
+It also ensures that I have a repeatable, "known good" configuration that I can quickly deploy in a different region.
+
+Behind the scenes, Elastic Beanstalk uses CloudFormation to create and maintain resources.
+If your application requirements dictate more custom control, the additional functionality of CloudFormation gives you more options to control your workloads.
+
+AWS CloudFormation supports Elastic Beanstalk application environments as one of the AWS resource types.
+This allows you, for example, to create and manage an AWS Elastic Beanstalk–hosted application along with an RDS database to store the application data.
+In addition to RDS instances, any other supported AWS resource can be added to the group as well.
+
+Tools used for quicker app deployments --> [[ lightsail - quick start references - cloud formation - bean stalk - serverless application models - launch wizard ]
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+VPC Peering vs PrivateLink:
+
+These 2 developed separately, but have more recently found themselves intertwined.
+VPC Peering - applies to VPC
+PrivateLink - applies to Application/Service
+
+With VPC Peering you connect your VPC to another VPC. Both VPC owners are involved in setting up this connection.
+When one VPC, (the visiting) wants to access a resource on the other (the visited), the connection need not go through the internet.
+
+PrivateLink provides a convenient way to connect to applications/services by name with added security.
+You configure your application/service in your VPC as an AWS PrivateLink-powered service (referred to as an endpoint service).
+AWS generates a specific DNS hostname for the service. Other AWS principals can create a connection to your endpoint service after you grant them permission.
+
+VPC Peering + PrivateLink :
+As of March 7, 2019, applications in a VPC can now securely access AWS PrivateLink endpoints across VPC peering connections.
+AWS PrivateLink endpoints can now be accessed across both intra- and inter-region VPC peering connections
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
 CLOUD ADOPTION FRAMEWORK - CAF :
 ---------------------------------
 Helps organizations understand how cloud adoption transforms the way they work. Helps determine the most effective approach to an enterprise cloud migration effort.
@@ -694,86 +1365,5 @@ AWS Basic Support and AWS Developer Support customers get access to 6 security c
 AWS Business Support and AWS Enterprise Support customers get access to all 115 Trusted Advisor checks (14 cost optimization, 17 security, 24 fault tolerance, 10 performance, and 50 service limits) and recommendations.
 
 
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
-:::: TOTAL SERVICES :::: // Total = 27 <--> Left-Out = 3 <--> Remaining = 24 <--> [ 4 Important + 14 Regular + 6 Singles ]
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
-**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
-1. ANALYTICS  [ 13  -->  3 + 3 + 3 + 4 ]
-   APP-FLOW         DATA-EXCHANGE         DATA-PIPELINE
-   GLUE             LAKE-FORMATION        QUCIK-SIGHT
-   CLOUD-SEARCH     ELASTIC-SEARCH        MANAGED-STREAMING-FOR-KAFKA
-   ATHENA           KINESIS               EMR -- ELASTIC-MAP-REDUCE  / EMR-SPECTRUM       REDSHIFT
-
-2. CONTAINERS = 5
-   //  DOCKER FILE --> docker build ---> DOCKER IMAGE -- docker run ---> DOCKER CONTAINER.
-   ECR -- ELASTIC-CONTAINER-REGISTERY    ECS -- ELASTIC-CONTAINER-SERVICES      EKS -- ELASTIC-KUBERNETIS-SERVICE     FARGATE     APP2CONTAINER
-
-3. STORAGE  [ 7 --> 3 + 4 ]
-   SIMPLE-STORAGE-GATEWAT       EBS -- ELASTIC-BLOCK-STORE                    STORAGE-GATEWAY
-   SNOW-FAMILY                  FSx -- MICROSOFT-FLIGHT-SIMULATORE x          EFS -- ELASTIC-FILE-SYSTEM       BACKUP
-
-4. CRYPTOGRAPHY AND PKI - Public Key Infrastructure SERVICES : [ 10 --> 2 + 2 + 2 + 4 ]
-   // Symmetric [ Share Key - Advanced Encryption Standard (AES) & Triple DES (3DES) ] -  Asymmetric [ Public key - Rivest Shamir Adleman (RSA) & Elliptic Curve Cryptography (ECC) ] - Hashing [ Secure hash Algorithm (SHA) ]
-   HSM -- HARDWARE-SECURITY-MODELS     KMS -- KEY-MANAGEMENT-SERVICE
-   DYNAMO-DB-ENCRYPTION-CLIENT         S3-CLIENT-SIDE-ENCRYPTION
-   ACM -- AWS-CERTIFICATE-MANAGER      ACM-PCA --  ACM-PRIVATE-CERTIFICATE-AUTHORITY
-   ENCRYPTION-SDK                      SECRETS-MANAGER                                       CRYPTO-TOOLS                   SIGNER
-
-5. DATABASE [ 10 --> 5 + 5 ]
-   // ACID -- BASE
-   RDS -- RELATIONAL-DATABASE-SERVICES   AURORA    REDSHIFT    DYNAMO-DB     ELASTICAHE-FOR-(MEMCAHCED/REDIS)
-   DOCUMENT-DB                           NEPTUNE   KEYSPACES   TIME-STREAM   QLDB -- QUANTUM-LEDGER-DATABASE
-
-6. DEVELOPER TOOLS   [ 10 --> 2 + 3 + 3 + 1 ]
-   CLOUD-9         CLOUD-SHELL
-   CODE-ARTIFACT   CODE-COMMIT   CODE-STAR
-   CODE-BUILD      CODE-DEPLOY   CODE-PIPELINE
-   X-RAY
-
-7. MIGRATION & TRANSFER  [ 8 --> 6 + 2 ]
-   APPLICATION-DISCOVERY-SERVICE    MIGRATION-HUB     SERVER-MIGRATION-SERVICE    DATABASE-MIGRATION-SERVICE     SCHEMA-CONVERSION-TOOL     DATA-SYNC
-   SNOW-FAMILY                      TRANSFER-FAMILY
-
-8. FRONT END WEB & MOBILE [ 6 --> 4 + 2 ]
-   AMPLIFY   APP-SYNC   DEVICE-FARM    LOCATION-SERVICES
-   PINPOINT  SNS -- SIMPLE-NOTIFICATION-SERVICES
-
-9. END USER COMPUTING
-   WORKSPACES    WAM -- WORKSPACES-APPLICATION-MANAGER     WORK-DOCS    WORK-LINK    APP-STREAM-2.0
-
-10. APPLICATION INTEGRATION  [ 7 --> 4 + 3 ]
-    APP-FLOW                         EVENT-BRIDGE                          STEP-FUNCTIONS                 SWF -- SIMPLE-WORK-FLOW
-    MQ -- MANAGED-MESSAGE-BROKER     SNS -- SIMPLE-NOTIFICATION-SERVICES   SQS -- SIMPLE-QUEUE-SERVICE
-
-11. BUISENES APPLICATION
-    ALEXA-FOR-BUSINESS     CHIME     HONEY-CODE     WORK-MAIL
-
-12. CUSTOMER ENABLEMENT SERVICES
-    AWS-MANAGED-SERVICES    AWS-PROFESSIONAL-SERVICES     AWS-IQ      AWS-SUPPORT      TRAINING-&-CERTIFICATION
-    https://aws.amazon.com/premiumsupport/plans/
-
-13. CUSTOMER ENGAGEMENT
-    AMAZON-CONNECT          AMAZON-PINPOINT       SES -- SIMPLE-EMAIL-SERVICE
-
-14.  BILLING & COST MANAGEMENT
-     BILLING & COST MANAGEMENT --> [ COST-&-USAGE-REPORT --  CONSOLIDATED-BILLING  -- COST-EXPLORER -- BUDGETS -- ORDERS-&-INVOICES -- KNOWLEDGE-CENTRE -- COST-ANAMOLY-DETECTION -- Simple Monthly Calculator  ]
-     PRICING CALCULATOR           SAVINGS PLAN
-
-15. SATELLITE            -- AWS GROUND STATION
-16. ROBOTICS             -- AWS ROBO MAKER
-17. QUANTUM COMPUTING    -- AMAZON BRAKET
-18. BLOCKCHAIN           -- AMAZON MANAGED BLOCK CHAIN
-19. AR & VR              -- AMAZON SUMERIAN
-20. GAME DEVELOPMENT     -- AMAZON GAME-LIFT  &&  AMAZON LUMBER-YARD
-
-
-21. COMPUTE   [ 8 --> 6 + 2 ]
-    ELASTIC-COMPUTE-CLOUD       ELASTIC-BEANSTALK        BATCH [parallel-Clusters HPC(1000 cpu's)]    EC2-IMAGE-BUILDER        LAMBDA          LIGHT-SAIL [launch-wizard]
-    OUTPOSTS                    WAVELENGTHS
- // LAUNCH-WIZARD               PARALLEL-CLUSTERS        SAM -- SERVERLESS-APPLICATION-MODEL (cloud-Formation)    SERVERLESS-APPLICATION-REPOSITORY
-                                                         (Open-Source framework)
-
-22. NETWORKING & CONTENT DELIVERY   [ 10 --> 6 + 4 ]
-    CLOUD-FRONT     DIRECT-CONNECT      VIRTUAL-PRIVATE-CLOUD    VIRTUAL-PRIVATE-NETWORK      ROUTE-53(8 STEPS)    ELASTIC-LOAD-BALANCING( 3-Types & Cross Zone Load Balancing)
-    API-GATEWAY     APP-MESH            CLOUD-MAP                GLOBAL-ACCELERATOR
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################

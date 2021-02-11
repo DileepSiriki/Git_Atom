@@ -115,8 +115,8 @@ Out of 32 bits , if the binary addresses starts with :
     --> 0     - class A  -- Since 1 bit  is  fixed out of 32 , we have (2^31) IP-Addresses -- [ 0   to 127 ] // 0.0.0.0/8 , 10.0.0.0/8 & 127.0.0.0/8
     --> 10    - class B  -- Since 2 bits are fixed out of 32 , we have (2^30) IP-Addresses -- [ 128 to 191 ] // 172.16.0.0/12
     --> 110   - class c  -- Since 3 bits are fixed out of 32 , we have (2^29) IP-Addresses -- [ 192 to 223 ] // 192.x.x.x
-    --> 1110  - class D  -- Since 4 bits are fixed out of 32 , we have (2^28) IP-Addresses -- [ 224 to 231 ]
-    --> 1111  - class E  -- Since 4 bits are fixed out of 32 , we have (2^28) IP-Addresses -- [ 225 to 255 ] // 255.255.255.255/32 as limited broadcast address.
+    --> 1110  - class D  -- Since 4 bits are fixed out of 32 , we have (2^28) IP-Addresses -- [ 224 to 239 ]
+    --> 1111  - class E  -- Since 4 bits are fixed out of 32 , we have (2^28) IP-Addresses -- [ 240 to 255 ] // 255.255.255.255/32 as limited broadcast address.
 
 DECIMAL FORMAT :
 ------------------
@@ -171,8 +171,8 @@ CLASS C -->         -------------------------------------------------
 
 CLASS D and CLASS E :
     There is no concept of N/W ID and HOST ID here . All the addresses are simple IP addresses.
-    But the range of CLASS D is : 224 to 231 --> used for multi casting
-    And the range of CLASS E is : 232 to 255 --> Reserved for secure purposes such as military .
+    But the range of CLASS D is : 224 to 239 --> used for multi casting
+    And the range of CLASS E is : 240 to 255 --> Reserved for secure purposes such as military .
 
 NOTE : Even the first and last host IP's are reserved in every class . --> UNICASTING and MULTICASTING
        So practically we have hosts as (total hosts - 2 )
@@ -202,7 +202,7 @@ UNI casting    - one host to one host    --   [ DATA - SOURCE_IP - DESTINATION_I
 BROAD casting  - one host to many hosts
 
                  LIMITED  -> sending messages from one host to all hosts in the same network
-                             Suppose we want to send a message from 11.1.2.3 to all hosts in same network 11 -> 11.x.x.x
+                             Suppose we want to send a message from 11.1.2.3 to all hosts in same network 11 -> 11.x.x.x  --> [It belongs to class A]
                              since that for a class A , 2^16 hosts are there , it is practically not possible to send 2^16 data packets .
                              so the alternative is to put all 1's in destination IP part . --> [255.255.255.255]
                              [ data - 11.1.2.3 - 255.255.255.255 ] is the packet header.
@@ -218,10 +218,11 @@ EXAMPLES :
 ------------
 STEP - 1  : Find if the address is valid or not, mainly if all the Blocks are a values between 0 to 255 .
 STEP - 2  : Find the class the address belongs to, based on the value in the 1st Block.
-STEP - 3  : Split the Address into Network part and Host Id part based on its class.
-STEP - 3  : Find the Network Id, Limited Broad Cast Address and Directed Broadcast Address.
+STEP - 3  : If the IP belongs to CLASS D and E, there is no concept of Host & Network ID.
+STEP - 4  : Split the Address into Network part and Host Id part based on its class.
+STEP - 5  : Find the Network Id, Limited Broad Cast Address and Directed Broadcast Address.
 
-1.2.3.4            --> since starts with 1 , it is a CLASS A  -- 1st octet N/W id , next 3octets HOST Id.
+1.2.3.4            --> since starts with 1 , it is a CLASS A  -- 1st octet N/W id , next 3 octets HOST Id.
                        so split as [ 1.  -  2.3.4 ]
                        N/W id is the network the IP belongs = put all 0's in Host ID part
                        N/W ID = 1.0.0.0
@@ -329,7 +330,7 @@ STEP 2 : [ Convert IP into Binary and do an AND operation ] --> If we have 4 SUB
             --> SUBNET MASK    :  255.255.255.192  = 1111 1111 . 1111 1111 . 1111 1111 . 1100 0000  (4 subnets)
             --> DESTINATION IP :  200.1.2.10       = 1100 1000 . 0000 0001 . 0000 0010 . 0000 1010
                                                    -----------------------------------------------
-                                  AND OPERATION    = 1100 1000 . 0000 0001 . 0000 0010 . 0000 0000   = 200.1.2.0 --> NETWORK ID // SUBNET ID
+                                  AND OPERATION    = 1100 1000 . 0000 0001 . 0000 0010 . 0000 0000   = 200.1.2.0    --> NETWORK ID // SUBNET ID
                                                    ------------------------------------------------
 
 ROUTE TABLE FOR A SUBNET :
@@ -380,11 +381,11 @@ We are assigned the exact or a near exact number of IP's we request for because 
 NETWORK ID is called as BLOCK ID in CIDR.
 The disadvantage of CIDR is that we do not know the number of N/W ID and HOST ID bits in the IP assigned .
 
-So to overcome this , CIDR = a.b.c.d /n [ where n = number of bits in N/W id. ]
+So to overcome this, a CIDR block is represented as  a.b.c.d /n [ where n = number of bits in N/W id. ]
   20.4.56.124 / 20  --> This means there are 20 N/W ID bits and (32-20) , 12 HOST Id bits. --> Block has 2^12 IP addresses
   10.45.56.102 / 12 --> This means there are 12 N/W ID bits and (32-12) , 20 HOST Id bits. --> Block has 2^20 IP addresses
 
-So for an IP , a.b.c.d / n -> N/W Id bits  = n
+So for an IP , a.b.c.d / n -> N/W  Id bits = n
                               HOST Id bits = 32-n
                               IP Addresses = 2^(32-n)
 Rules for forming a CIDR :
@@ -452,8 +453,8 @@ Otherwise, the subnet is implicitly associated with the main route table.
 
   A = REGION                                                                                                   X = INSTANCE -1 -> Has Public & Private IP
   B = DEFAULT VPC                                         DEFAULT VPC       : 172.31.0.0/16                    Y = INSTANCE -2 -> Has Public & Private IP
-  C = DEFAULT SUBNET -1                                   DEFAULT SUBNET -1 : 172.31.0.0/20                    M = INTERNAL ROUTE TABLE
-  D = DEFAULT SUBNET -2                                   DEFAULT SUBNET -2 : 172.31.16.0/20                   N = INTERNET GATEWAY
+  C = DEFAULT SUBNET -1 in AZ-1                           DEFAULT SUBNET -1 : 172.31.0.0/20                    M = INTERNAL ROUTE TABLE
+  D = DEFAULT SUBNET -2 in AZ-2                           DEFAULT SUBNET -2 : 172.31.16.0/20                   N = INTERNET GATEWAY
 
   *** Subnets C and D are in different AVAILABILITY ZONES AZ-1 & AZ-2.
 
@@ -601,10 +602,9 @@ An internet gateway serves two purposes:
   --> To perform network address translation (NAT) for instances that have been assigned public IPv4 addresses.
 
 Internet Gateways (IGW) must be created and then attached to a VPC, be added to a route table, and then associated with the relevant subnet(s).
-You cannot have multiple Internet Gateways in a VPC.
+You cannot have multiple Internet Gateways in a VPC. Can only attach 1 IGW to a VPC at a time.
 IGW performs NAT between private and public IPv4 addresses.
 IGW must be detached before they can be deleted.
-Can only attach 1 IGW to a VPC at a time.
 To use an internet gateway, attach it to your VPC and specify it as a target in your subnet route table for internet-routable IPv4 or IPv6 traffic.
 An internet gateway performs network address translation (NAT) for instances that have been assigned public IPv4 addresses.
 
@@ -637,7 +637,7 @@ NETWORK ADDRESS TRANSLATOR (NAT): [Permit internet access to Instances in a priv
     This provides additional security by effectively hiding the entire internal network behind that address.
     NAT offers the dual functions of security and address conservation and is typically implemented in remote-access environments.
 
-  [[ Instance in a Private Subnet ]] <<--->>  [[ NAT ]] <<--->> [[ Internet Gateway ]]
+  [[ IPV4 - Instance in a Private Subnet ]] <<--->>  [[ NAT ]] <<--->> [[ IGW ]] <<--->> [[ Open Internet ]]
 
 To allow an instance in your VPC to initiate outbound connections to the internet but prevent unsolicited inbound connections from the internet,
 you can use a network address translation(NAT) device for IPv4 traffic.
@@ -683,7 +683,7 @@ An egress-only internet gateway  VPC component that allows outbound communicatio
 It prevents the internet from initiating an IPv6 connection with your instances.
 
 An egress-only internet gateway is stateful: it forwards traffic from the instances in the subnet to the internet or other AWS services, and then sends the response back to the instances.
-AWS --> VPC --> Egress only Gateways.
+[[ IPV6 - Instance in a Private Subnet ]] <<--->>  [[ EGRESS-igw ]] <<--->> [[ IGW ]] <<--->> [[ Open Internet ]]
 
 Egress-only Internet Gateway:
 
