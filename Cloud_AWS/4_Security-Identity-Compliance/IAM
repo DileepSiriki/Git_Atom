@@ -10,7 +10,7 @@ AWS Identity and Access Management (IAM) is a web service that helps you securel
 You use IAM to control who is authenticated (signed in) and authorized (has permissions)to use resources.
   -> Share access to your account without sharing your credentials
   -> Provide granular permissions to either an ec2 or S3 (to both users and tools)
-  -> Also use MFA along with credential-
+  -> Also use MFA along with credential.
   -> Temporary creds to users using federations and Cross Account access
 
          -------------------------------------------------------------------------
@@ -217,7 +217,7 @@ AWS uses JSON extensively for templates and policies .
 Both JSON , YAML and XML can be used to receive data from a web server.
 Comments are not allowed in JSON. JSON is a user-friendly substitute to XML as it is light weight and easy to read.
 JSON - Java Script Object Notation
-XML - Extensible Markup Language
+XML  - Extensible Markup Language
 YAML - Ain't Markup Language
 
       Json Example :

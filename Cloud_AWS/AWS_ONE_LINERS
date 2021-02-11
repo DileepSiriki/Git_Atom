@@ -688,10 +688,10 @@ SQS : IS A QUEUE Service.
     API-GATEWAY                  APP-MESH                                                  CLOUD-MAP                                                              GLOBAL-ACCELERATOR
 
 23. SECURITY - IDENTITY & COMPLIANCE  [ 19 --> 2 + 2 + 2 + 2 + 4 + 4 + 3 ]
-    IDENTITY-ACCESS-MANAGEMENT                                                    COGNITO (fb, insta // authentication -- user pools and  authorization -- identity pools)
-    RESOURCE-GROUPS-&-TAG-EDITOR (group resources & perform bulk actions )        RAM --  RESOURCE-ACCESS-MANAGER ( share resources across principles such as AWS accounts, organizational units, or an entire organization from AWS Organizations.)
-    ARTIFACT (Sec, compliance reports and online agreements)                      AUDIT-MANAGER (audit your AWS usage)
-    DIRETORY-SERVICE (To use Microsoft Active Directory - SSO)                    CLOUD-DIRECTORY (generate a conceptual relationship between the objects & Control access)
+    IDENTITY-ACCESS-MANAGEMENT (Identity [Managed[aws, customer], Inline] & Resource)    COGNITO (fb, insta // authentication -- user pools and  authorization -- identity pools)
+    RESOURCE-GROUPS-&-TAG-EDITOR (group resources & perform bulk actions )               RAM --  RESOURCE-ACCESS-MANAGER ( share resources across principles such as AWS accounts, organizational units, or an entire organization from AWS Organizations.)
+    ARTIFACT (Sec, compliance reports and online agreements)                             AUDIT-MANAGER (audit your AWS usage)
+    DIRETORY-SERVICE (To use Microsoft Active Directory - SSO)                           CLOUD-DIRECTORY (generate a conceptual relationship between the objects & Control access)
 
     WEB-APPLICATION-FIREWALL         SHIELD (Standard(free)/Advanced)         FIREWALL-MANAGER          NETWORK-FIREWALL
     AWS-DETECTIVE                    AWS-GUARD-DUTY                           AWS-INSPECTOR             AWS-MACIE
