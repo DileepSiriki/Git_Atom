@@ -25,7 +25,9 @@ AMAZON WEB SERVICES : ~25 regions & ~80 AZ's --  175 services over 190 countries
 -----------------------
 Secure cloud service offering a broad set of global cloud-based products. - ACDEFGS from Cloud usages
 5 PILLARS - PROCS
-    Performance Efficiency - > On how you can run services efficiently and scalably.
+    Performance Efficiency - > The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
+                               Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
+                               On how you can run services efficiently and scalably.
                                // Horizontal & Vertical Scaling
     Reliability            - > On how you can build services that are resilient to both service and infrastructure disruptions.
                                // Availability Zone & Region
@@ -751,7 +753,7 @@ SQS : IS A QUEUE Service.
                                 Group AWS resources together by any purpose or activity you choose, such as application, environment, region, project, campaign, business unit, or software lifecycle.
 
 
-            
+
 
 
 ##################################################################################################################
@@ -769,16 +771,22 @@ AWS Marketplace includes thousands of software listings from popular categories 
 AWS Marketplace also simplifies software licensing and procurement with flexible pricing options and multiple deployment methods.
 Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
 Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source, AWS.
+AWS Marketplace is designed for Independent Software Vendors (ISVs), Value-Added Resellers (VARs), and Systems Integrators (SIs) who have software products they want to offer to customers in the cloud. Partners use AWS Marketplace to be up and running in days and offer their software products to customers around the world.
 
 Customers can quickly launch preconfigured software with just a few clicks, and choose software solutions in Amazon Machine Images (AMIs), software as a service (SaaS),
 Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL, and get billed from one source.
 The product can be free to use or it can have an associated charge. AWS handles billing and payments, and charges appear on customers’ AWS bill.
 
 SELLER : seller can be an independent software vendor (ISV), consulting partner, managed services provider (MSP), or individual who has something to offer that works with AWS products and services.
-
 One way of delivering your products to buyers is with Amazon Machine Images (AMIs) - Docker Images - SAAS Apps.
 An AMI provides the information required to launch an Amazon Elastic Compute Cloud (Amazon EC2) instance.
 You create a custom AMI for your product, and buyers can use it to create EC2 instances with your product already installed and ready to use.
+
+The AWS Marketplace provides value to buyers in several ways:
+1- It simplifies software licensing and procurement with flexible pricing options and multiple deployment methods. Flexible pricing options include free trial, hourly, monthly, annual, multi-year, and BYOL.
+2- Customers can quickly launch pre-configured software with just a few clicks, and choose software solutions in AMI and SaaS formats, as well as other formats.
+3- It ensures that products are scanned periodically for known vulnerabilities, malware, default passwords, and other security-related concerns.
+
 
 
 2. AWS GOVCLOUD - United States :
@@ -859,6 +867,7 @@ Benefits of microservices architecture include:
 
 6.  AWS PENETRATION TESTING : https://aws.amazon.com/security/penetration-testing/
 -------------------------------
+Penetration testing is the practice of testing a network or web application to find security vulnerabilities that an attacker could exploit.
 AWS customers are welcome to carry out security assessments and penetration tests against their AWS infrastructure without prior approval for 8 services:
 So Penetration testing can be done by customers on their own instances without prior authorization from AWS.
 
@@ -1009,7 +1018,9 @@ The primary purpose of an in-memory data store is to provide ultrafast (sub mill
                              Online transfer of active data               - AWS DATA SYNC
                              SFTP transfer to S3                          - AWS TRANSFER FOR SFTP
                              Database Transfer                            - AWS DATABSE MIGRATION
-                             VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
+                             VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES  // ENDURE
+
+  // AWS ENDURE : CloudEndure Migration is a highly automated solution that simplifies the process of migrating applications from physical, virtual, and cloud-based infrastructure, ensuring that they are fully operational in any AWS Region without compatibility issues.
 
 --> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball / Snow Mobile ]
 
@@ -1161,21 +1172,6 @@ Each Quick Start launches, configures, and runs the AWS compute, network, storag
 Quick Starts are built by AWS solutions architects and partners to help you deploy popular technologies on AWS, based on AWS best practices.
 These accelerators reduce hundreds of manual installation and configuration procedures into just a few steps, so you can build your production environment quickly and start using it immediately.
 
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
---> NETWORK BASED SERVICES : Private Network Connectors to AWS            - AWS DIRECT CONNECT
-                             Edge Locations for S3 Enabled applications   - AMAZON S3 TRANSFER ACCELERATION
-
---> ONLINE  DATA TRANSFER :  Load stream Data into S3                     - AMAZON KINESIS
-                             Online transfer of active data               - AWS DATA SYNC
-                             SFTP transfer to S3                          - AWS TRANSFER FOR SFTP
-                             Database Transfer                            - AWS DATABSE MIGRATION
-                             VM Image transfer - Live applications        - AWS SERVER MIGRATION SERVICES // AWS ENDURE
-
-
---> OFFLINE DATA TRANSFER :  Ship Static data in and out of AWS           - AWS SNOW FAMILY [ Snow cone / Snow Ball - Edge / Snow Mobile ]
-
---> HYBRID DATA STORAGE   :  Access AWS storage from On-premisis          - AWS STORAGE GATEWAY
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
@@ -1402,3 +1398,275 @@ AWS Business Support and AWS Enterprise Support customers get access to all 115 
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+A policy is an object in AWS that, when associated with an identity or resource, defines their permissions.
+AWS evaluates these policies when an IAM principal (user or role) makes a request. Permissions in the policies determine whether the request is allowed or denied.
+
+Each policy consists of:
+
+1- Principal: Who needs access.
+2- Action: What action to allow or deny.
+3- Resource: Which resource to allow or deny the action on.
+4- Effect: What will be the effect when the user requests access - either allow or deny.
+5- Condition: Which conditions must be present for the policy to take effect.
+              For example, you might allow access only to the specific S3 buckets if the user is connecting from a specific IP range or has used multi-factor authentication at login.
+Note:Permissions are granted to IAM identities (users, groups, and roles) to determine whether they are authorized to perform an action or not.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+Chef and Puppet are automation platforms that allow you to use code to automate the configurations of your servers.
+OpsWorks lets you use Chef and Puppet to automate how servers are configured, deployed, and managed across your Amazon EC2 instances or on-premises compute environments.
+
+Placement Groups are logical groupings or clusters of EC2 instances within a single Availability Zone.
+Placement groups are recommended for applications that require low network latency, high network throughput, or both.
+
+S3 pricing is based on four factors:
+1) Total amount of data (in GB) stored on S3
+2) Storage class (S3 Standard, S3 Intelligent-Tiering, S3 Standard-Infrequent Access, S3 One Zone-IA, S3 Glacier, or S3 Glacier Deep Archive)
+3) Amount of data transferred out of AWS from S3. // data transferred in to S3 is not at all a factor, it is free of cost
+4) Number of requests to S3
+
+Data protection refers to protecting data while in-transit (as it travels to and from Amazon S3) and at rest (while it is stored on disks in Amazon data centers).
+You can protect data in transit by using SSL/TLS or by using client-side encryption.
+Also, you have the following options of protecting data at rest in Amazon S3.
+
+1- Use Server-Side Encryption – You configure Amazon S3 to encrypt your object before saving it on disks in its data centers and decrypt it when you download the objects. ( by encrypting data prior to uploading it )
+2- Use Client-Side Encryption – You can encrypt your data on the client-side and upload the encrypted data to Amazon S3. In this case, you manage the encryption process, the encryption keys, and related tools. ( by using s3 encryption while at rest )
+
+Amazon DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory cache for DynamoDB that delivers performance improvements from milliseconds to microseconds – even at millions of requests per second.
+DAX adds in-memory acceleration to your DynamoDB tables without requiring you to manage cache invalidation, data population, or cluster management.
+Multi-AZ and Read Replica are Amazon RDS features not for Dynamo Db.
+
+AWS Directory Service is a managed Microsoft Active Directory in the AWS Cloud.
+Customers can use it to manage users and groups, provide single sign-on (SSO) to applications and services, as well as create and apply group policies.
+Note: What is Single sign-on (SSO)? AWS Single sign-on (AWS SSO) enables a company’s employees to sign in to AWS using their existing corporate Microsoft Active Directory credentials.
+
+Amazon EBS pricing has two factors:
+1- Volumes: Volume storage for all EBS volume types is charged by the amount of GB you provision per month, until you release the storage.
+2- Snapshots: Snapshot storage is based on the amount of space your data consumes in Amazon S3.
+   Because Amazon EBS does not save empty blocks, it is likely that the snapshot size will be considerably less than your volume size.
+   Copying EBS snapshots is charged based on the volume of data transferred across regions.
+   For the first snapshot of a volume, Amazon EBS saves a full copy of your data to Amazon S3.
+   For each incremental snapshot, only the changed part of your Amazon EBS volume is saved.
+   After the snapshot is copied, standard EBS snapshot charges apply for storage in the destination region.
+
+  When you want to reduce the costs of Amazon EBS consider the following:
+  1- Delete Unattached Amazon EBS Volumes: An easy way to reduce wasted spend is to find and delete unattached volumes. However, when EC2 instances are stopped or terminated, attached EBS volumes are not automatically deleted and will continue to accrue charges since they are still operating.
+  2- Resize or Change the EBS Volume Type: Another way to optimize storage costs is to identify volumes that are underutilized and downsize them or change the volume type.
+  3- Delete Stale Amazon EBS Snapshots: If you have a backup policy that takes EBS volume snapshots daily or weekly, you will quickly accumulate snapshots. Check for stale snapshots that are over 30 days old and delete them to reduce storage costs.
+
+AWS Virtual Private Network (AWS VPN) provides an internet-based connection that enables customers to connect their on-premises network or branch office site to AWS.
+Internet-based connectivity can have unpredictable performance and despite being encrypted, can present security concerns.
+AWS Direct Connect bypasses the public Internet and uses a standard Ethernet fiber-optic cable to establish a secure, dedicated, and more consistent connectivity from on-premises data centers into AWS.
+AWS VPN is incorrect because transferring large data sets over the Internet can be time consuming and expensive.
+Additionally, AWS VPN is an internet-based connection and does not meet the requirement of consistent connectivity.
+But Unlike AWS Direct Connect, VPN Connections can be configured in minutes and are a good solution if customers have an immediate need, have low to modest bandwidth requirements, and can tolerate the inherent variability in Internet-based connectivity.
+
+
+AWS Global Accelerator is a networking service that improves the availability and performance of the applications that you offer to your global users.
+Today, if you deliver applications to your global users over the public internet, your users might face inconsistent availability and performance as they traverse through multiple public networks to reach your application.
+These public networks can be congested and each hop can introduce availability and performance risk.
+AWS Global Accelerator uses the highly available and congestion-free AWS global network to direct internet traffic from your users to your applications on AWS, making your users’ experience more consistent.
+To improve the availability of your application, you must monitor the health of your application endpoints and route traffic only to healthy endpoints.
+AWS Global Accelerator improves application availability by continuously monitoring the health of your application endpoints and routing traffic to the closest healthy endpoints.
+
+Amazon S3 Transfer Acceleration is used to enable fast transfers of files over long distances between your client and an S3 bucket.
+You might want to use Transfer Acceleration on a bucket for various reasons, including the following:
+1- You have customers that upload to a centralized bucket from all over the world.
+2- You transfer gigabytes to terabytes of data on a regular basis across continents.
+3- You are unable to utilize all of your available bandwidth over the Internet when uploading to Amazon S3.
+
+AWS has eliminated "bidding" in the new AWS Spot instance pricing model.
+The way the new pricing model works is that you just pay the Spot price that’s in effect for the current hour for the instances that you launch.
+It’s that simple. Now you can request Spot capacity just like you would request On-Demand capacity, without having to spend time analyzing market prices or setting a bid price.
+In the new model, the Spot prices are more predictable, updated less frequently, and are determined by the long-term supply and demand for Amazon EC2 spare capacity, not bid prices.
+Your Spot Instance runs whenever capacity is available and the maximum price per hour for your request exceeds the Spot price.
+An example to illustrate: If the current AWS Spot price is $0.08 per hour and you set a maximum price of $0.17, you’ll pay $0.08 and you will lose the instances if the AWS Spot price rises above $0.17 or if capacity is no longer available.
+
+Reserved instance types include:
+- Standard RIs: These provide the most significant discount (up to 72% off On-Demand) and are best suited for steady-state usage.
+- Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value.
+Therefore, Standard RIs provides more discounts than Convertible RIs.
+
+
+AWS Snowball is a petabyte-scale data transport solution that uses secure appliances to transfer large amounts of data into and out of the AWS cloud.
+Using Snowball addresses common challenges with large-scale data transfers, including high network costs, long transfer times, and security concerns.
+Transferring data with Snowball is simple, fast, secure, and can cost as little as one-fifth the cost of using high-speed internet.
+ --> Additionally, With AWS Snowball, you can access the compute power of the AWS Cloud locally and cost-effectively in places where connecting to the internet might not be an option. AWS Snowball is a perfect choice if you need to run computing in rugged, austere, mobile, or disconnected (or intermittently connected) environments.
+ --> With AWS Snowball, you have the choice of two devices, Snowball Edge Compute Optimized with more computing capabilities, suited for higher performance workloads, or Snowball Edge Storage Optimized with more storage, which is suited for large-scale data migrations and capacity-oriented workloads.
+Snowball Edge Storage Optimized devices provides up to 80 TB of usable storage.
+
+
+AWS Cost Explorer has an easy-to-use interface that lets you visualize, understand, and manage your AWS costs and usage over time.
+Cost Explorer’s cost forecast capabilities use machine learning to learn each customer’s historical spend patterns and use that information to forecast expected costs.
+Cost Explorer’s forecasting enables you to get a better idea of what your costs and usage may look like in the future, so that you can plan ahead.
+Forecasting capabilities have been enhanced to support twelve month forecasts (previously forecasts were limited to three months) for multiple cost metrics, including unblended and amortized costs.
+AWS Cost Explorer forecasts your future costs based on your past usage; NOT based on your expected usage.
+The AWS tool that can provide accurate estimates of AWS service costs based on your expected usage is the AWS Simple Monthly Calculator.
+For example, if you are planning to use 500 GB of S3 storage, you can input this value directly in the AWS Simple Monthly Calculator interface and the calculator provides an estimate of what you will pay monthly for this amount of storage.
+
+
+When you launch instances on a Dedicated Host, the instances run on a physical server that is dedicated for your use.
+While Dedicated instances also run on dedicated hardware, Dedicated Hosts provide further visibility and control by allowing you to place your instances on a specific, physical server.
+This enables you to deploy instances using configurations that help address corporate compliance and regulatory requirements.
+Note:   Amazon EC2 purchasing options include: On-Demand, Savings Plans, Reserved Instances, Spot Instances, Dedicated Hosts and Dedicated instances.
+        Dedicated Instances also provides Hardware isolation. Dedicated Instances are Amazon EC2 instances that run in a virtual private cloud (VPC) on hardware that's dedicated to a single customer.
+        Your Dedicated instances are physically isolated at the host hardware level from instances that belong to other AWS accounts. However, Dedicated Instances may share hardware with other instances from the same AWS account that are not Dedicated Instances.
+
+The difference between Dedicated Hosts and Dedicated Instances:
+1- Dedicated Instances guarantee that the instances will run on hardware that's dedicated to a single AWS account.
+   But, as we mentioned above, Dedicated Instances may share hardware with other instances from the same AWS account that are not Dedicated Instances.
+   That is not the case with Dedicated Hosts. Dedicated Hosts allow you to control how instances are placed on a specific physical server, and you can consistently deploy your instances to the same physical server over time.
+   For that reason, Dedicated Hosts is a better option to handle compliance and regulatory requirements in most scenarios.
+2- Dedicated Hosts enable you to benefit from the Bring Your Own License (BYOL) model for almost every BYOL scenario, while only certain scenarios are supported by Dedicated Instances.
+   The BYOL model enables AWS customers to use their existing server-bound software licenses, including Windows Server, SQL Server, and SUSE Linux Enterprise Server.
+   Dedicated Hosts provide additional control over your instances and visibility into Host level resources and tooling that allows you to manage software that consumes licenses on a per-core or per-socket basis, such as Windows Server and SQL Server.
+   This is why most BYOL scenarios are supported through the use of Dedicated Hosts, while only certain scenarios are supported by Dedicated Instances.
+
+
+When you enable Multi-AZ, Amazon Relational Database Service (Amazon RDS) maintains a redundant and consistent standby copy of your data.
+If you encounter problems with the primary copy, Amazon RDS automatically switches to the standby copy (or to a read replica in the case of Amazon Aurora) to provide continued availability to the data.
+The two copies are maintained in different Availability Zones (AZs), hence the name “Multi-AZ.” Each AZ runs on its own physically distinct, independent infrastructure, and is engineered to be highly reliable.
+Having separate Availability Zones greatly reduces the likelihood that both copies will concurrently be affected by most types of disturbances.
+
+Federation is an AWS feature that enables users to access and use AWS resources using their existing corporate credentials.
+Federation uses open standards, such as Security Assertion Markup Language 2.0 (SAML), to exchange identity and security information between an identity provider (IdP) and an application.
+AWS offers multiple options for federating your identities in AWS:
+1- AWS Identity and Access Management (IAM): You can use AWS Identity and Access Management (IAM) to enable users to sign in to their AWS accounts with their existing corporate credentials.
+2- AWS Directory Service: AWS Directory Service for Microsoft Active Directory, also known as AWS Microsoft AD, uses secure Windows trusts to enable users to sign in to the AWS Management Console, AWS Command Line Interface (CLI), and Windows applications running on AWS using their existing corporate Microsoft Active Directory credentials.
+3- AWS Single-Sign-On (AWS SSO) Service: You can use the AWS SSO service to federate your identities into your AWS environment.
+
+
+CREDENTIAL REPORT :
+You can generate and download a credential report that lists all users in your account and the status of their various credentials, including passwords, access keys, and MFA devices.
+You can get a credential report from the AWS Management Console, the AWS SDKs, and Command Line Tools.
+You can use credential reports to assist in your auditing and compliance efforts.
+You can use the report to audit the effects of credential lifecycle requirements, such as password and access key rotation.
+You can provide the report to an external auditor, or grant permissions to an auditor so that he or she can download the report directly.
+
+
+In relation to Amazon RDS databases:
+  AWS is responsible for:
+      1- Managing the underlying infrastructure and foundation services.
+      2- Managing the operating system.
+      3- Database setup.
+      4- Patching and backups.
+  The customer is still responsible for:
+      1- Protecting the data stored in databases (through encryption and IAM access control).
+      2- Managing the database settings that are specific to the application.
+      3- Building the relational schema.
+      4- Network traffic protection.
+
+
+AWS Cost Governance Best Practices:
+1- Resource controls (policy-based and automated) govern who can deploy resources and the process for identifying, monitoring, and categorizing these new resources. These controls can use tools such as AWS Service Catalog, AWS Identity and Access Management (IAM) roles and permissions, and AWS Organizations, as well as third-party tools such as ServiceNow.
+2- Cost allocation applies to teams using resources, shifting the emphasis from the IT-as-cost-center mentality to one of shared responsibility.
+3- Budgeting processes include reviewing budgets and realized costs, and then acting on them.
+4- Architecture optimization focuses on the need to continually refine workloads to be more cost-conscious to create better architected systems.
+5- Tagging and tagging enforcement ensure cost tracking and visibility across organization lines.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+AWS environments are continuously audited, and its infrastructure and services are approved to operate under several compliance standards and industry certifications across geographies and industries, including PCI DSS, ISO 2700, ISO 9001, and HIPAA.
+You can use these certifications to validate the implementation and effectiveness of AWS security controls.
+For example, AWS companies that use AWS products and services to handle credit card information can rely on AWS technology infrastructure as they manage their PCI DSS compliance certification.
+AWS services are assessed regularly to comply with common compliance standards NOT with local laws and regulations.
+
+The Payment Card Industry Data Security Standard (PCI DSS) helps ensure that companies maintain a secure environment for storing, processing, and transmitting credit card information or sensitive authentication data (SAD).
+AWS customers who use AWS services to store, process, or transmit cardholder data can rely on AWS infrastructure as they manage their own PCI DSS compliance certification.
+Security and compliance are important shared responsibilities between AWS and the customer.
+It is the customer’s responsibility to maintain their PCI DSS cardholder data environment (CDE) and scope, and be able to demonstrate compliance of all PCI controls, but customers are not alone in this journey.
+The use of PCI DSS compliant AWS services can facilitate customer compliance, and the AWS Security Assurance Services team can assist customers with additional information specific to demonstrating the PCI DSS compliance of their AWS workloads.
+AWS Services listed as PCI DSS compliant means that they have the ability to be configured by customers to meet their PCI DSS requirements. It does not mean that any use of that service is automatically compliant.
+A good rule-of-thumb is that if a customer can set a particular configuration, they are responsible for setting it appropriately to meet PCI DSS requirements.
+AWS customers are also responsible for creating a policy that addresses information security for all personnel, and implementing strong access controls to restrict any access to cardholder data.
+
+
+There are seven design principles for security in the cloud:
+1- Implement a strong identity foundation: Implement the principle of least privilege and enforce separation of duties with appropriate authorization for each interaction with your AWS resources. Centralize privilege management and reduce or even eliminate reliance on long-term credentials.
+2- Enable traceability: Monitor, alert, and audit actions and changes to your environment in real time. Integrate logs and metrics with systems to automatically respond and take action.
+3- Apply security at all layers: Rather than just focusing on protection of a single outer layer, apply a defense-in-depth approach with other security controls. Apply to all layers (e.g., edge network, VPC, subnet, load balancer, every instance, operating system, and application).
+4- Automate security best practices: Automated software-based security mechanisms improve your ability to securely scale more rapidly and cost effectively. Create secure architectures, including the implementation of controls that are defined and managed as code in version-controlled templates.
+5- Protect data in transit and at rest: Classify your data into sensitivity levels and use mechanisms, such as encryption, tokenization, and access control where appropriate.
+6- Keep people away from data: Create mechanisms and tools to reduce or eliminate the need for direct access or manual processing of data. This reduces the risk of loss or modification and human error when handling sensitive data.
+7- Prepare for security events: Prepare for an incident by having an incident management process that aligns to your organizational requirements. Run incident response simulations and use tools with automation to increase your speed for detection, investigation, and recovery.
+
+
+AWS Service Control Policies (SCPs):
+AWS Service Control Policies (SCPs) or AWS Organizations Policies are a type of organization policy that you can use to manage permissions for all accounts in your organization.
+SCPs offer central control over the maximum available permissions for all member accounts in your organization. SCPs help you to ensure member accounts stay within your organization's access control guidelines.
+In SCPs, you can restrict which AWS services, resources, and individual API actions the users and roles in each member account can access.
+When AWS Organizations blocks access to a service, resource, or API action for a member account, a user or role in that account can't access it.
+This block remains in effect even if an administrator of a member account explicitly grants such permissions in an IAM policy.
+
+    Additional information:  What's the difference between an AWS Organizations service control policy (SCP) and an IAM policy?
+    An IAM policy provides granular control over what users and roles in individual accounts can do. AWS Organizations expands that control to the account level by giving you control over what users and roles in an account or a group of accounts can do.
+    The resulting permissions are the logical intersection of what is allowed by AWS Organizations at the account level and the permissions that are explicitly granted by IAM at the user or role level within that account.
+    In other words, the user can access only what is allowed by both the AWS Organizations policies and IAM policies. If either blocks an operation, the user can't access that operation.
+    For example, if an SCP applied to an account states that the only actions allowed are Amazon EC2 actions, and the permissions on a principal (IAM user or role) in the same AWS account allow both EC2 actions and Amazon S3 actions, the principal is able to access only the EC2 actions.
+
+5 PILLARS :
+-------------
+    Performance Efficiency - >   // Horizontal & Vertical Scaling
+    The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
+    Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
+    On how you can run services efficiently and scalably.
+
+    Reliability            - >  // Availability Zone & Region
+    The reliability pillar includes the ability of a system to recover from infrastructure or service disruptions, dynamically acquire computing resources to meet demand, and mitigate disruptions such as misconfigurations or transient network issues.
+    A resilient workload quickly recovers from failures to meet business and customer demand.
+    Key topics include distributed system design, recovery planning, and how to handle change.
+    On how you can build services that are resilient to both service and infrastructure disruptions.
+
+    Operational excellence - >   // Automation to escape human errors - Cloud formation to automate
+    The operational excellence pillar includes the ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures.
+    Key topics include automating changes, responding to events, and defining standards to manage daily operations.
+    On how you can continuously improve your ability to run systems, create better procedures, and gain insights.
+
+    Cost optimization      - >   // cost explorer - Budgets - Cost usage
+    On the ability to avoid or eliminate unneeded cost or sub-optimal resources. CAPEX to OPEX
+
+    Security               - >  Shared Model // Policies (IAM) , Network Security (VPC) , Encryption (KMS), IAM, KMS, MFA, Cloud Trail, Cloud Watch, SNS, Email.
+    The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
+    Key topics include confidentiality and integrity of data, identifying and managing who can do what with privilege management, protecting systems, and establishing controls to detect security events.
+
+
+Amazon Elastic Transcoder is a media transcoding service.
+It is designed to be a highly scalable, easy-to-use, and cost-effective way to convert (or transcode) media files from their source format into versions that will play back on devices like smartphones, tablets, and PCs.
+Amazon Rekognition allows you to add image and video analysis to your applications. For example, you can use it detect faces in millions of images uploaded to S3.
+
+
+To protect your AWS infrastructure in this situation you should lock down your root user account and all IAM user accounts that the administrator had access to.
+To protect your AWS infrastructure you should:
+1- Change the email address and the password of the root user account
+2- Enable MFA on the root user account
+3- Rotate (change) all access keys for all accounts
+4- Change the user name and password of all IAM users
+5- Enable MFA on all IAM user accounts
+
+
+Amazon CloudFront charges are based on the data transfer out of AWS and requests used to deliver content to your customers.
+There are no upfront payments or fixed platform fees, no long-term commitments, no premiums for dynamic content, and no requirements for professional services to get started.
+To estimate the costs of an Amazon CloudFront distribution consider the following:
+  - Traffic Distribution: Data transfer and request pricing varies across geographic regions, and pricing is based on the edge location through which your content is served.
+  - Requests: The number and type of requests (HTTP or HTTPS) made and the geographic region in which the requests are made.
+  - Data Transfer OUT: The amount of data transferred out of your Amazon CloudFront edge locations.
+Note: Data Transfer IN is free. There is no charge for inbound data transferred from AWS services such as Amazon S3 or Elastic Load Balancing.
+
+
+Durability refers to the ability of a system to assure data is stored and data remains consistent in the system as long as it is not changed by legitimate access.
+This means that data should not become corrupted or disappear due to a system malfunction.
+Durability is used to measure the likelihood of data loss. For example, assume you have confidential data stored in your Laptop.
+If you make a copy of it and store it in a secure place, you have just improved the durability of that data. It is much less likely that all copies will be simultaneously destroyed.
+Amazon EBS volume data is replicated across multiple servers in an Availability Zone to prevent the loss of data from the failure of any single component. The replication of data makes EBS volumes 20 times more durable than typical commodity disk drives, which fail with an AFR (annual failure rate) of around 4%. For example, if you have 1,000 EBS volumes running for 1 year, you should expect 1 to 2 will have a failure.
+Additional information :  Amazon S3 is also considered a durable storage service. Amazon S3 is designed for 99.999999999% (11 9’s) durability. This means that if you store 100 billion objects in S3, you will lose one object at most.
+
+AWS Organizations has five main benefits:
+1) Centrally manage access polices across multiple AWS accounts.
+2) Automate AWS account creation and management.
+3) Control access to AWS services.
+4) Consolidate billing across multiple AWS accounts.
+5) Configure AWS services across multiple accounts.
+** Control access to AWS services: AWS Organizations allows you to restrict what services and actions are allowed in your accounts. You can use Service Control Policies (SCPs) to apply permission guardrails on AWS Identity and Access Management (IAM) users and roles. For example, you can apply an SCP that restricts users in accounts in your organization from launching any resources in regions that you do not explicitly allow.
+** Consolidate billing across multiple AWS accounts: You can use AWS Organizations to set up a single payment method for all the AWS accounts in your organization through consolidated billing. With consolidated billing, you can see a combined view of charges incurred by all your accounts, as well as take advantage of pricing benefits from aggregated usage, such as volume discounts for Amazon EC2 and Amazon S3.
