@@ -1,7 +1,7 @@
 CLOUD :  [ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
 ---------
   DEFINE :
-    On-demand - IT resources compute db n/w apps - public / private - pay as you go -- Buy maintain own - from vendors like AWS & Azure
+    On-demand - IT resources compute DB n/w apps - public / private - pay as you go -- Buy maintain own - from vendors like AWS & Azure
     Platform independent - no downloaded software
     Small to large - backup / recovery / email / VM / web apps / big data analytics
     hospitals - finance teams - gaming companies
@@ -698,7 +698,7 @@ SQS : IS A QUEUE Service.
     SECRETS-MANAGER                  SECURITY-HUB                             SINGLE-SIGN-ON (Service provider <---- TRUST ----> Identity provider // SAML // 8 STEPS)
 
     // services AWS WAF - AWS SHIELD - AWS FIREWALL MANAGER - AWS NETWORK FIREWALL are interlinked. So which one to use ??
-       --> It all starts with AWS WAF. You can automate and then simplify AWS WAF management using AWS Firewall Manager. // (DDOS, HTTP/S to cloud front, SQL inj, cross-site scripting)
+       --> It all starts with AWS WAF. You can automate and then simplify AWS WAF management using AWS Firewall Manager. // (DDOS, HTTP/S to cloud front, SQL injection, cross-site scripting)
        --> Shield offers free standard services and  Shield Advanced which adds additional features on top of AWS WAF, such as dedicated support from the DDoS Response Team (DRT) and advanced reporting, this requires a business or enterprise support plan.
        --> To use the services of the DRT, you must be subscribed to the Business Support plan or the Enterprise Support plan.
        --> If you want granular control over the protection that is added to your resources, AWS WAF alone is the right choice.
@@ -707,16 +707,51 @@ SQS : IS A QUEUE Service.
 
     /// AWS DETECTIVE - AWS GUARD DUTY - AWS INSPECTOR - AWS MACIE are similar in concepts.
         --> AWS DETECTIVE is mainly for the security findings in login attempts , API calls from AWS CloudTrail and Amazon VPC flow logs. It also ingests findings detected by GuardDuty.
-        --> AWS GUARD DUTY does DETETIVE duty plus reports compromised EC2 instanes , compromised s3 instanes and compromised AWS credentials from VPC Flow Logs, AWS CloudTrail management event logs, Cloudtrail S3 data event logs, and DNS logs.
+        --> AWS GUARD DUTY does DETETIVE duty plus reports compromised EC2 instances , compromised s3 instances and compromised AWS credentials from VPC Flow Logs, AWS CloudTrail management event logs, Cloudtrail S3 data event logs, and DNS logs.
             It also monitors AWS account access behaviour for signs of compromise, such as unauthorized infrastructure deployments, like instances deployed in a Region that has never been used, or unusual API calls, like a password policy change to reduce password strength.
         --> AWS INSPECTOR does an vulnerability assessment based on common security standards and vulnerability definitions updated frequently by AWS . Offers predefined software called an agent that you can install in EC2. Examples of built-in rules include checking for remote root login being enabled, or vulnerable software versions installed.
         --> AWS MACIE is for protecting personal and financial data stored  in S3 across your organization and reports if a bucket is unencrypted .
         --> All the services are free for 30 days .Pay from the next month!! During the 30-day free trial period, the cost estimation projects what your estimated costs will be after the free trial period.
 
 24. MANAGEMENT & GOVERNANCE :
+    AWS BACKINT AGENT FOR SAP HANA    AMAZON MANAGED SERVICE FOR GRAFANA        MANAGED SERVICE FOR PROMETHEUS            TOOLS FOR POWER-SHELL     DATA LIFE CYCLE MANAGER      WELL-ARCHITECTURED TOOL
+    COMMAND LINE INTERFACE            AWS MANAGEMENT CONSOLE                    CONSOLE MOBILE APPLICATION                COMPUTE OPTIMIZER
 
 
+    CLOUD-FORMATION
+    CLOUD-TRAIL              -- past 90 days of activity in your AWS account, save trail to S3.
+    CLOUD-WATCH              -- collect and track metrics, collect and monitor log files, set alarms, and automatically react to changes in your AWS resources. Create custom dashboards
+    CONFIG                   -- To assess , audit and evaluate the configuration of your resources . And to make sure resources are compliant with industry standards. We get notified if a resource is non-compliant or matches a rule against compliance. This includes how the resources are related to one another and how they were configured in the past so that you can see how the configurations and relationships change over time.
+    OPSWORKS                 -- configuration management service that helps you configure and operate applications in a cloud enterprise by using Puppet or Chef.
+    TRUSTED ADVISOR          -- online tool that provides you real time guidance to help you provision your resources following AWS best practices.
+    AWS HEALTH               -- PERSONALIZED VIEW OF SERVICE HEALTH -- PROACTIVE NOTIFICATIONS DETAILED -- TROUBLESHOOTING GUIDANCE // Personal Health Dashboard + Service Health Board. While the Service Health Dashboard displays the general status of AWS services, Personal Health Dashboard gives you a personalized view into the performance and availability of the AWS services underlying your AWS resources.
+    AUTO-SCALING             -- enabled by cloud-watch -- auto scaling groups (min/max)
 
+    AWS CHATBOT              -- Slack or Amazon Chime -- AWS Chatbot processes AWS service notifications from Amazon Simple Notification Service (Amazon SNS), and forwards them to Slack or Amazon Chime chat rooms so teams can analyze and act on them.
+    SERVICE QUOTAS / LIMITS  --  Service Quotas is a service for viewing and managing your quotas easily and at scale as your AWS workloads grow.  Quotas, also referred to as limits, are the maximum number of resources that you can create in an AWS account.
+    SERVICE CATALOG          -- enables IT administrators to create, manage, and distribute portfolios of approved products to end users, who can then access the products they need in a personalized portal.
+    LICENSE MANAGER          --  Bring Your Own License - BYOL // Sends SNS if a license is expiring. streamlines the process of bringing software vendor licenses ( for example, Microsoft, SAP, Oracle, and IBM) to the cloud.
+
+    AWS CONTROL TOWER        -- Organizations + SSO + Service Catalog // a service that enables you to enforce and manage governance rules for security, operations, and compliance at scale across all your organizations and accounts in the AWS Cloud.
+                                provides the easiest way to set up and govern a secure, compliant, multi-account AWS environment based on best practices established by working with thousands of enterprises.
+    AWS ORGANIZATIONS        -- Account management service that lets you consolidate multiple AWS accounts into an organization that you create and centrally manage.
+                                Includes account management and consolidated billing capabilities that enable you to better meet the budgetary, security, and compliance needs of your business.
+                                Basic organization that consists of "n" accounts can be  organized into "m" organizational units (OUs) under the root.
+                                The organization also has several policies that are attached to some of the OUs or directly to accounts.
+
+    AWS PROTON               -- As an administrator, you can create service templates to provide standardized infrastructure and deployment tooling for serverless and container-based applications.
+                                Then developers on your team, in turn, can select from the available service templates to automate their application or service deployments.
+                                platform teams can use AWS Proton to define and manage standard application stacks that contain the architecture, infrastructure resources, and the CI/CD software deployment pipeline.
+    APP-CONFIG               -- Automation -- Capability of AWS Systems Manager, to create, manage, and quickly deploy application configurations, includes built-in validation checks and monitoring.
+
+    AWS SYSTEMS MANAGER      -- Use AWS Systems Manager to organize, monitor, and automate management tasks on your AWS resources and also use to view and control your infrastructure on AWS. AWS Systems Manager gives you visibility and control of your infrastructure on AWS.
+                                Systems Manager provides a unified user interface so you can view operational data from multiple AWS services and enables you to automate operational tasks across your AWS resources.
+                                After tagging the required resources in a region , you can view a consolidated dashboard in Systems Manager that reports the status of all the resources that are part of the region. If a problem arises with any of these resources, you can take corrective action immediately.
+                                --> Operations Management, Application Management, Change Management, Node Management, and Shared Resources
+                                Group AWS resources together by any purpose or activity you choose, such as application, environment, region, project, campaign, business unit, or software lifecycle.
+
+
+            
 
 
 ##################################################################################################################
