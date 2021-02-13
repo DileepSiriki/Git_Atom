@@ -2674,7 +2674,7 @@ Some services, such as Amazon EC2 and Amazon S3 have volume pricing tiers across
 AWS COST EXPLORER :
 --------------------
 AWS COST EXPLORER  is a free tool that you can use to view your costs and usage.
-You can view data up to the last 13 months, forecast how much you are likely to spend for the next three months, and get recommendations for what Reserved Instances to purchase.
+You can view data up to the last 13 months, forecast how much you are likely to spend for the next twelve months (used to be three months), and get recommendations for what Reserved Instances to purchase.
 You can use AWS Cost Explorer to see patterns in how much you spend on AWS resources over time, identify areas that need further inquiry, and see trends that you can use to understand your costs.
 You can also specify time ranges for the data, and view time data by day or by month.
 

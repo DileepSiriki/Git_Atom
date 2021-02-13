@@ -13,7 +13,7 @@ CLOUD :  [ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
   ADVANTAGES :
   Trade capital for variable expense, Benefit from massive economies of scale, Stop guessing capacity, Increase speed and agility, Stop spending money on running and maintaining data centers, Go global in minutes.
 
-  TYPES          : Service Public Private Hybrid Community - Deploy IAAS Admins, PAAS Developers, SAAS Users & Diagram
+  TYPES          : DEPLOYMENT MODELS :  Public Private Hybrid Community --- SERVICE MODELS : IAAS Admins, PAAS Developers, SAAS Users & Diagram
   VIRTUALIZATION : Technique of sharing 1 resource among many by assigning a logical name to resource and providing a pointer to physical resource when demanded.
                    Server, Application, Hardware virtualization
   HYPERVISOR     : Guest machines, Type-1 & Type-2 [ Bare metal & Hosted ] - Diagram
@@ -24,19 +24,30 @@ CLOUD :  [ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
 AMAZON WEB SERVICES : ~25 regions & ~80 AZ's --  175 services over 190 countries - 5 pillars P R O C S  [security/shared responsibility ]
 -----------------------
 Secure cloud service offering a broad set of global cloud-based products. - ACDEFGS from Cloud usages
-5 PILLARS - PROCS
-    Performance Efficiency - > The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
-                               Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
-                               On how you can run services efficiently and scalably.
-                               // Horizontal & Vertical Scaling
-    Reliability            - > On how you can build services that are resilient to both service and infrastructure disruptions.
-                               // Availability Zone & Region
-    Operational excellence - > On how you can continuously improve your ability to run systems, create better procedures, and gain insights.
-                               // Automation to escape human errors - Cloud formation to automate
-    Cost optimization      - > On the ability to avoid or eliminate unneeded cost or sub-optimal resources. CAPEX to OPEX
-                               // cost explorer - Budgets - Cost usage
-    Security               - > Share Model.
-                               // Policies (IAM) , Network Security (VPC) , Encryption (KMS), IAM, KMS, MFA, Cloud Trail, Cloud Watch, SNS, Email.
+5 PILLARS - PROCS :
+
+      Performance Efficiency - >   // Horizontal & Vertical Scaling
+      The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
+      Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
+      On how you can run services efficiently and scalably.
+
+      Reliability            - >  // Availability Zone & Region
+      The reliability pillar includes the ability of a system to recover from infrastructure or service disruptions, dynamically acquire computing resources to meet demand, and mitigate disruptions such as misconfigurations or transient network issues.
+      A resilient workload quickly recovers from failures to meet business and customer demand.
+      Key topics include distributed system design, recovery planning, and how to handle change.
+      On how you can build services that are resilient to both service and infrastructure disruptions.
+
+      Operational excellence - >   // Automation to escape human errors - Cloud formation to automate
+      The operational excellence pillar includes the ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures.
+      Key topics include automating changes, responding to events, and defining standards to manage daily operations.
+      On how you can continuously improve your ability to run systems, create better procedures, and gain insights.
+
+      Cost optimization      - >   // cost explorer - Budgets - Cost usage
+      On the ability to avoid or eliminate unneeded cost or sub-optimal resources. CAPEX to OPEX
+
+      Security               - >  Shared Model // Policies (IAM) , Network Security (VPC) , Encryption (KMS), IAM, KMS, MFA, Cloud Trail, Cloud Watch, SNS, Email.
+      The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
+      Key topics include confidentiality and integrity of data, identifying and managing who can do what with privilege management, protecting systems, and establishing controls to detect security events.
 
 [ DIAGRAM ] --> Regions - Availability Zones - Local Zone (Similar to regions but closer to users), available only in 3 places - Outposts (Cloud in On-premises)- Wavelengths
 
@@ -80,7 +91,7 @@ Media Services            |
 6. AWS QUCIK SIGHT     : Combines AWS data + 3rd party data + SaaS data --> Combine --> generate catalogs. // It is a cloud-scale business intelligence (BI) service that you can use to deliver easy-to-understand insights to the people who you work with, wherever they are. It connects to your data in the cloud and combines data from many different sources.
                          In a single data dashboard, QuickSight can include AWS data, third-party data, big data, spreadsheet data, SaaS data, B2B data, and more.
 
-7. ATHENA              : Query service that makes it easy to analyze Structured, Unstructured, Semi Structured data (CSV, columnar, standard or JSON format) in Amazon S3 using standard SQL then store results from queries directly into another bucket in S3 or download then to local. Login to console, define your schema, and start querying.
+7. ATHENA              : Query service that makes it easy to analyze Structured, Unstructured, Semi Structured data (CSV, columnar, standard or JSON format) in Amazon S3 using standard SQL then store results from queries directly into another bucket in S3 or download then to local. Login to console, define your schema, and start querying directly on S3 buckets.
 8. AWS KINESIS         : To collect, process, and analyze real-time, streaming data such as video, audio, application logs, website clickstreams, and IoT telemetry data for machine learning, analytics, and other applications. You can use Amazon Kinesis services for real-time application monitoring, fraud detection, and live leader-boards.
                          KINESIS STREAMS --> Collect and store data streams     // KINESIS FIREHOSE --> Process and deliver data streams //  KINESIS ANALYTICS --> Analyze streaming data and get insights.
 9. ELASTIC MAP REDUCE  : Apache Spark and apache Hadoop are big data frameworks used to store data from a datalake [ purchase info - social media - server logs ] similar to S3 ad process those logs. Maintaining them is costly so EMR does this for  us . Master node - Core Node - Task Node . Amazon EMR launches clusters in minutes.
@@ -99,7 +110,7 @@ Amazon Redshift is the best service to use when you need to perform complex quer
 
 11. CLOUD SEARCH        : Add search capabilities to your website or application. Upload all data and documents and it will create a search index. Autocomplete suggestions - Geospatial search - Highlighting - Support for 34 languages.
 12. ELASTIC SEARCH      : Log stash is an open source tool for collecting, parsing, and storing logs for future use. Kibana 3 is a web interface that can be used to search and view the logs that Logstash has indexed. Both of these tools are based on Elasticsearch. Elasticsearch, Logstash, and Kibana, when used together is known as an ELK stack.
-                          Used to analyse and get real time  insights on machine generated data at a peta byte scale by deploying, operating, and scaling Elasticsearch clusters in the AWS Cloud.
+    ( ELK Stash)          Used to analyse and get real time  insights on machine generated data at a peta byte scale by deploying, operating, and scaling Elasticsearch clusters in the AWS Cloud.
 13. AMAZON  MANAGED STREAMING FOR KAFKA - MSK : Managed Streaming for Apache Kafka that enables you to build and run applications that use Apache Kafka to process streaming data.
 
 // BIGDATA HADOOP SPARK - ELASTIC SEARCH, LOG STATSH, KIBANA - KAFKA
@@ -151,7 +162,8 @@ Elastic container Registry - Elastic container Service -
             PRICE : Standard [ 0.02300 0.02200 0.02100 ] - Infrequent [ 0.0125 0.01000 ] - glacier [ 0.00400 0.00099]
             S3 TRANSFER ACCELERATION - Transferring your data to popular AWS storage platform S3 over long distances, AWS S3 Transfer Acceleration helps you do it faster 171% faster over the public Internet.
 
-2. ELASTIC BLOCK STORE : It is a hard drive to EC2 instances - Persists its data even after termination of an instance - EBS can be connected to only one Instance at a time - But one instance can be connected more than one EBS . As a primary storage device for data that requires frequent and granular updates.
+2. ELASTIC BLOCK STORE : It is a hard drive to EC2 instances - Persists its data even after termination of an instance - EBS can be connected to only one Instance at a time - But one instance can be connected more than one EBS .
+                         As a primary storage device for data that requires frequent and granular updates.
     ( HDD - SDD )        Detach and attach to different instance - change configuration any time - independent of lifecycle of instance - can encrypt and take periodic incremental snapshots.
 
 3. STORAGE GATEWAY     : Hybrid cloud storage service that seamlessly connect on-premises applications to cloud storage, caching data locally for low-latency access. This gives you on-premises access to virtually unlimited cloud storage.
@@ -171,7 +183,7 @@ Elastic container Registry - Elastic container Service -
     // S3 buckets, data, and EC2 AMIs that you choose are automatically configured, encrypted, and pre-installed on your devices. The AWS DataSync agent is also pre-installed before your devices are shipped to you. you connect it to your on-premises network and set the IP address either manually or automatically with DHCP. You must download and install AWS OpsHub for Snow Family, on a windows or mac laptop.
 
 5. AWS BACKUP : Automatic backups of our AWS resources using BAKUP PLANS. It automates and consolidates backup tasks that were previously performed service-by-service, and removes the need to create custom scripts and manual processes.
-                These features include Amazon Elastic Block Store (Amazon EBS) snapshots, Amazon Relational Database Service (Amazon RDS)snapshots, Amazon DynamoDB backups, AWS Storage Gateway snapshots, and others.
+                These features include Amazon Elastic Block Store (Amazon EBS) snapshots, Amazon Relational Database Service (Amazon RDS) snapshots, Amazon DynamoDB backups, AWS Storage Gateway snapshots, and others.
 6. AWS EFS    : Only for LINUX -- simple, scalable, fully managed elastic NFS file system for use with AWS Cloud services and on-premises resources. you can create a file system, mount the file system on your EC2 instances, and then read and write data from your EC2 instances to and from your file system.
                 Multiple Amazon EC2 instances can access an Amazon EFS file system at the same time, providing a common data source for workloads and applications running on more than one instance or server.
 
@@ -200,7 +212,8 @@ The CMK also contains the key material used to encrypt and decrypt data.
 AWS KMS supports symmetric and asymmetric CMKs.
 
 1. CLOUD HSM : HARDWARE SECURITY MODULE is a computing device that performs cryptographic operations and provides secure storage for cryptographic keys.
-               Used to Generate, store, import, export, and manage cryptographic keys, including symmetric keys and asymmetric key pairs -- Use symmetric and asymmetric algorithms to encrypt and decrypt data -- Use cryptographic hash functions to compute message digests and hash-based message authentication codes (HMACs) -- Cryptographically sign data (including code signing) and verify signatures.
+               Used to Generate, store, import, export, and manage cryptographic keys, including symmetric keys and asymmetric key pairs
+               -- Use symmetric and asymmetric algorithms to encrypt and decrypt data -- Use cryptographic hash functions to compute message digests and hash-based message authentication codes (HMACs) -- Cryptographically sign data (including code signing) and verify signatures.
                // If you need to secure your encryption keys in a service backed by FIPS-validated HSMs, but you do not need to manage the HSM, try AWS Key Management Service.
 2. AWS KMS   : KEY MANAGEMENT SERVICE  provides tools for generating master keys and other data keys and also interacts with many other AWS services to encrypt their service-specific data.
                The customer master keys (CMKs) that you create in AWS KMS are protected by FIPS 140-2 validated cryptographic modules. They never leave AWS KMS unencrypted. To use or manage your CMKs, you interact with AWS KMS.
@@ -302,14 +315,14 @@ Amazon Redshift harnesses the scale and resources of multiple nodes and uses a v
     With Multi-AZ, your data is synchronously replicated to a standby in a different Availability Zone (AZ). In the event of an infrastructure failure, Amazon RDS performs an automatic failover to the standby, minimizing disruption to your applications.
 
 2. AURORA : Fully managed relational database engine that's compatible with MySQL(5 times throughput) and PostgreSQL(3 times throughput).
-            The only RDS database that can scale instances automatically is Amazon Aurora. For RDS databases other than Aurora, RDS only supports storage auto-scaling, NOT instance auto-scaling.
+            The only RDS database that can scale instances automatically is Amazon Aurora. For RDS databases other than Aurora, they only support storage auto-scaling, NOT instance auto-scaling.
             If you want to scale Amazon RDS instances (other than Aurora), you have two options:
                   1- Manual horizontal scaling (by adding read replicas)
                   2- Manual vertical scaling (by upgrading/downgrading an existing instance).
-    // AWS OWNED --> operates on clusters rather than a single instance.
+    // AURORA is AWS OWNED --> operates on clusters rather than a single instance.
 
-// DB Instance - Horiz/Verti scaling - DB identifier (DNS endpoint) - Read replicas
-// Point in time recovery - 35 days - table - item - attributes - Dynamo Db Streams
+// DB Instance - Horiz/Verti scaling - DB identifier (DNS endpoint) -- Read replicas -- Multi AZ
+// Table - item - attributes - Dynamo Db Streams -- DynamoDB Accelerator (DynamoDB DAX) -- DynamoDB point-in-time recovery (PITR)
 
 3. DYNAMO DB : Fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
                With POINT IN TIME RECOVERY  feature, you can restore a table to any point in time during the last 35 days. Point-in-time recovery helps protect your tables from accidental write or delete operations.
@@ -445,7 +458,7 @@ The primary purpose of an in-memory data store is to provide ultrafast (sub mill
 SNS : IS A TOPIC Service.  // publishers to subscribers OR Producers to Consumers
 SQS : IS A QUEUE Service.
       Unlimited Throughput , minimum one delivery , Best effort ordering - STANDARD QUEUE
-      High Throughput , Exactly one delivery , First in First OUT - FIFO QUESES
+      High Throughput , Exactly one delivery , First in First OUT - FIFO QUEUES
 
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
@@ -506,23 +519,24 @@ SQS : IS A QUEUE Service.
     • Message security                     • Message filtering based on policies
     • Dead-letter queues -- an Amazon SQS queue for messages that can't be delivered successfully due to client errors or server error.
 
-5. AMAZON SQS : Fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.
-                You can send, store, and receive messages between software components at any volume, without losing messages or requiring other services to be available.
-                Multiple copies of every message are stored redundantly across multiple availability zones so that they are available whenever needed.
+5. AMAZON SQS     : Fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.
+                    You can send, store, and receive messages between software components at any volume, without losing messages or requiring other services to be available.
+                    Multiple copies of every message are stored redundantly across multiple availability zones so that they are available whenever needed.
 
 6. STEP FUNCTIONS : Makes it easy to coordinate the components of distributed applications as a series of steps in a visual workflow. Service that lets you combine AWS Lambda functions and other AWS services to build business-critical applications.
-                    Through Step Functions' graphical console, you see your application’s workflow as a series of event-driven steps. Step Functions is based on state machines and tasks. A state machine is a workflow. A task is a state in a workflow that represents a single unit of work that another AWS service performs. Each step in aworkflow is a state.
+                    Through Step Functions' graphical console, you see your application’s workflow as a series of event-driven steps.
+                    Step Functions is based on state machines and tasks. A state machine is a workflow. A task is a state in a workflow that represents a single unit of work that another AWS service performs. Each step in aworkflow is a state.
                     With Step Functions' built-in controls, you examine the state of each step in your workflow to make sure that your application runs in order and as expected.
                     CHECK 6 USECASES AND PICTURES .
 
 7. SIMPLE WORK FLOW - SWF : Makes it easy to build applications that coordinate work across distributed components. A Task represents a logical unit of work that is performed by a component of your application.
-                            Coordinating tasks across the application involves managing inter task dependencies, scheduling, and concurrency in accordance with the logical flow of the application.
-                            SWF gives you full control over implementing tasks and coordinating them without worrying about underlying complexities such as tracking their progress and maintaining their state.
-                            When using Amazon SWF, you implement workers to perform tasks. These workers can run either on cloud infrastructure, such as Amazon Elastic Compute Cloud (Amazon EC2), or on your own premises.
-                            Amazon SWF stores tasks and assigns them to workers when they are ready, tracks their progress, and maintains their state, including details on their completion.
-                            To coordinate tasks, you write a program that gets the latest state of each task from Amazon SWF and uses it to initiate subsequent tasks.
-                            Amazon SWF maintains an application's execution state durably so that the application is resilient to failures in individual components.
-                            With Amazon SWF, you can implement, deploy, scale, and modify these application components independently.
+                    Coordinating tasks across the application involves managing inter task dependencies, scheduling, and concurrency in accordance with the logical flow of the application.
+                    SWF gives you full control over implementing tasks and coordinating them without worrying about underlying complexities such as tracking their progress and maintaining their state.
+                    When using Amazon SWF, you implement workers to perform tasks. These workers can run either on cloud infrastructure, such as Amazon Elastic Compute Cloud (Amazon EC2), or on your own premises.
+                    Amazon SWF stores tasks and assigns them to workers when they are ready, tracks their progress, and maintains their state, including details on their completion.
+                    To coordinate tasks, you write a program that gets the latest state of each task from Amazon SWF and uses it to initiate subsequent tasks.
+                    Amazon SWF maintains an application's execution state durably so that the application is resilient to failures in individual components.
+                    With Amazon SWF, you can implement, deploy, scale, and modify these application components independently.
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
@@ -531,14 +545,14 @@ SQS : IS A QUEUE Service.
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 1. ALEXA FOR BUSINESS : Similar to your Alexa in house , you can set up 100's of alexa in an organization and sync data between users.
                         schedule  meetings , check available rooms for booking , join meetings , get sales reports for your specific company .
-2. CHIME        : Similar MS Teams (Download AmazonChime APP). Communications service that transforms meetings by making them more efficient and easier to conduct.
-                  You can use Amazon Chime for online meetings, video conferencing, calls, and chat. You can also share content inside and outside of your organization.
-                  You pay only for the users with Pro permissions that host meetings, and only on the days that those meetings are hosted. There is no charge for users with Basic permissions. Basic users cannot host meetings, but they can attend meetings and use chat.
-3. HONEY-CODE   : Fully managed service that allows you to quickly build mobile and web apps for teams—without programming. Build a custom managed app using a visual editor . First setup data in tables , tables work like spread sheets but have database capabilities.
-                  Next build the apps layout . Now link app and the tables, set personalization for specific users to see what they can see or not see. Set specific actions to be done on an event such as when data is updated .
-4. WORK-MAIL    : Business email and calendar service. Maintaining personal email service is tough !! -> Buy dedicated resources [ h/w and s/w ] -> hire staff to run the resources -> regular maintenance -> upgrades, security patches, backups , disaster recovery .
-                  support for existing desktop and mobile clients. Can access mail and calendar from multiple devices mobile - tablet - desktop - all OS - windows - IOS and has compatibility with OUTLOOK and other popular services .
-                  Amazon WorkMail has a web-based client that you use to access your Amazon WorkMail account from a web browser.
+2. CHIME              : Similar MS Teams (Download Amazon Chime APP). Communications service that transforms meetings by making them more efficient and easier to conduct.
+                        You can use Amazon Chime for online meetings, video conferencing, calls, and chat. You can also share content inside and outside of your organization.
+                        You pay only for the users with Pro permissions that host meetings, and only on the days that those meetings are hosted. There is no charge for users with Basic permissions. Basic users cannot host meetings, but they can attend meetings and use chat.
+3. HONEY-CODE         : Fully managed service that allows you to quickly build mobile and web apps for teams—without programming. Build a custom managed app using a visual editor . First setup data in tables , tables work like spread sheets but have database capabilities.
+                        Next build the apps layout . Now link app and the tables, set personalization for specific users to see what they can see or not see. Set specific actions to be done on an event such as when data is updated .
+4. WORK-MAIL          : Business email and calendar service. Maintaining personal email service is tough !! -> Buy dedicated resources [ h/w and s/w ] -> hire staff to run the resources -> regular maintenance -> upgrades, security patches, backups , disaster recovery .
+                        support for existing desktop and mobile clients. Can access mail and calendar from multiple devices mobile - tablet - desktop - all OS - windows - IOS and has compatibility with OUTLOOK and other popular services .
+                        Amazon WorkMail has a web-based client that you use to access your Amazon WorkMail account from a web browser.
 
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
@@ -589,7 +603,7 @@ SQS : IS A QUEUE Service.
 1. BILLING & COST MANAGEMENT : Service that you use to pay your AWS bill, monitor your usage, and analyze and control your costs.
    AWS COST & USAGE REPORT   : one-stop shop for accessing the most detailed information available about your AWS costs and usage. Lists AWS usage for each service category used by an account and its IAM users in hourly or daily line items, as well as any tags that you have activated for cost allocation purposes.
    AWS CONSOLIDATED BILLING  : Enables an organization to consolidate payments for multiple Amazon Web Services (AWS) accounts within a single organization by making a single paying account.
-   AWS COST EXPLORER         : Is a free tool that you can use to view your costs and usage up to the last 13 months, forecast how much you are likely to spend for the next three months, and get recommendations for what Reserved Instances to purchase..
+   AWS COST EXPLORER         : Is a free tool that you can use to view your costs and usage up to the last 13 months, forecast how much you are likely to spend for the next twelve months (used to be three months), and get recommendations for what Reserved Instances to purchase..
    AWS BUDGETS               : Gives you the ability to set custom budgets that alert you when your costs or usage exceed (or are forecasted to exceed) your budgeted amount.
                                    Cost budgets – Plan how much you want to spend on a service.
                                    Usage budgets – Plan how much you want to use one or more services.
@@ -670,6 +684,7 @@ SQS : IS A QUEUE Service.
      BILLING & COST MANAGEMENT --> [ COST-&-USAGE-REPORT --  CONSOLIDATED-BILLING  -- COST-EXPLORER -- BUDGETS -- ORDERS-&-INVOICES -- KNOWLEDGE-CENTRE -- COST-ANAMOLY-DETECTION -- Simple Monthly Calculator  ]
      PRICING CALCULATOR           SAVINGS PLAN
 
+// [[ BAGS-QR ]]
 15. SATELLITE            -- AWS GROUND STATION
 16. ROBOTICS             -- AWS ROBO MAKER
 17. QUANTUM COMPUTING    -- AMAZON BRAKET
@@ -1223,6 +1238,12 @@ For example, an RPO of 1 hour means that customers could lose up to 1 hour’s w
 DynamoDB global tables are ideal for massively scaled applications with globally dispersed users. Global tables provide automatic replication to AWS Regions world-wide. They enable you to deliver low-latency data access to your users no matter where they are located.
 DynamoDB Accelerator (DynamoDB DAX) is an in-memory cache for DynamoDB that reduces response times from milliseconds to microseconds.
 DynamoDB point-in-time recovery (PITR) is used to back up your data with per-second granularity and restore to any single second from the time it was enabled up to the prior 35 days. DynamoDB PITR works as additional insurance against accidental loss of data.
+DynamoDb Streams is an optional feature that captures data modification events in DynamoDB tables.
+
+Amazon RDS Read Replicas enable you to create one or more read-only copies of your database instance within the same AWS Region or in a different AWS Region.
+Updates made to the source database are then asynchronously copied to your Read Replicas. In addition to providing scalability for read-heavy workloads, Read Replicas can be promoted to become a standalone database instance when needed.
+Amazon RDS Multi-AZ deployments provide enhanced availability for database instances within a single AWS Region.
+With Multi-AZ, your data is synchronously replicated to a standby in a different Availability Zone (AZ). In the event of an infrastructure failure, Amazon RDS performs an automatic failover to the standby, minimizing disruption to your applications.
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
@@ -1670,3 +1691,6 @@ AWS Organizations has five main benefits:
 5) Configure AWS services across multiple accounts.
 ** Control access to AWS services: AWS Organizations allows you to restrict what services and actions are allowed in your accounts. You can use Service Control Policies (SCPs) to apply permission guardrails on AWS Identity and Access Management (IAM) users and roles. For example, you can apply an SCP that restricts users in accounts in your organization from launching any resources in regions that you do not explicitly allow.
 ** Consolidate billing across multiple AWS accounts: You can use AWS Organizations to set up a single payment method for all the AWS accounts in your organization through consolidated billing. With consolidated billing, you can see a combined view of charges incurred by all your accounts, as well as take advantage of pricing benefits from aggregated usage, such as volume discounts for Amazon EC2 and Amazon S3.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
