@@ -35,7 +35,7 @@ Advantages of Cloud Computing include:  (IMPORTANT)
 
 2- Benefit from massive economies of scale:
    By using cloud computing, you can achieve a lower variable cost than you can get on your own.
-   Because usage from hundreds of thousands of customers are aggregated in the cloud, providers such as Amazon Web Services can achieve higher economies of scale which translates into lower pay as you go prices.
+   Because usage from hundreds of thousands of customers are aggregated in the cloud, providers such as Amazon Web Services can achieve higher economies of scale which translates into lower pay as you go.
 
 3- Stop guessing capacity:
    Eliminate guessing on your infrastructure capacity needs.
@@ -55,7 +55,7 @@ Advantages of Cloud Computing include:  (IMPORTANT)
    This means you can provide a lower latency and better experience for your customers simply and at minimal cost.
 
 
-  BENIFITS OF CLOUD COMPUTING : // ACDE
+  SOME MORE BENIFITS OF CLOUD COMPUTING : // ACDE
   -------------------------------
   1. AGILITY :
      The cloud gives you easy access to a broad range of technologies so that you can innovate faster and build nearly anything that you can imagine.
@@ -76,14 +76,15 @@ Advantages of Cloud Computing include:  (IMPORTANT)
      For example, AWS has infrastructure all over the world, so you can deploy your application in multiple physical locations with just a few clicks.
      Putting applications in closer proximity to end users reduces latency and improves their experience.
 
-          It can be classified to two types :
+  CLASSIFICATION OF CLOUD  :
+---------------------------------
 
-          --> DEPLOYMENT MODELS
-            Deployment models define the type of access to the cloud, i.e., how the cloud is located?
-            Cloud can have any of the four types of access: PUBLIC, PRIVATE, HYBRID, COMMUNITY.
+    --> DEPLOYMENT MODELS
+        Deployment models define the type of access to the cloud, i.e., how the cloud is located?
+        Cloud can have any of the four types of access: PUBLIC, PRIVATE, HYBRID, COMMUNITY.
 
-          --> SERVICE MODELS
-            Cloud computing is based on service models : IAAS , PAAS , SAAS.
+    --> SERVICE MODELS
+        Cloud computing is based on service models : IAAS , PAAS , SAAS.
 
 
 PUBLIC CLOUD    : Allows systems and services to be easily accessible to the general public.

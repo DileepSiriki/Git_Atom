@@ -722,13 +722,28 @@ SQS : IS A QUEUE Service.
        --> If you want to use AWS WAF across accounts, accelerate your AWS WAF configuration, or automate protection of new resources, use Firewall Manager with AWS WAF.  Network firewall manager manages all netwrok firewalls , vpc's , subnets etc; Network firewall manages a particular VPC . You can create one for each VPC .
        --> Finally, if you own high visibility websites or are otherwise prone to frequent DDoS attacks, you should consider purchasing the additional features that Shield Advanced provides.
 
+   // All AWS customers benefit from the automatic protections of AWS Shield Standard, at no additional charge. AWS Shield Standard defends against most common, frequently occurring network and transport layer DDoS attacks that target your web site or applications.
+      When you use AWS Shield Standard with Amazon CloudFront and Amazon Route 53, you receive comprehensive availability protection against all known infrastructure (Layer 3 and 4) attacks.
+      For higher levels of protection against attacks targeting your applications running on Amazon Elastic Compute Cloud (EC2), Elastic Load Balancing (ELB), Amazon CloudFront, AWS Global Accelerator and Amazon Route 53 resources, you can subscribe to AWS Shield Advanced.
+      In addition to the network and transport layer protections that come with Standard, AWS Shield Advanced provides additional detection and mitigation against large and sophisticated DDoS attacks, near real-time visibility into attacks, and integration with AWS WAF, a web application firewall.
+
+
+       // Layer 7 : AWS WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to an Amazon API Gateway API, Amazon CloudFront or an Application Load Balancer.
+                    HTTP and HTTPS requests are part of the Application layer, which is layer 7.
+          Layer 3 - Layer 3 is the Network layer and this layer decides which physical path data will take when it moves on the network.
+                    AWS Shield offers protection at this layer. WAF does not offer protection at this layer.
+          Layer 4 - Layer 4 is the Transport layer and this layer data transmission occurs using TCP or UDP protocols.
+                    AWS Shield offers protection at this layer. WAF does not offer protection at this layer.
+
     /// AWS DETECTIVE - AWS GUARD DUTY - AWS INSPECTOR - AWS MACIE are similar in concepts.
         --> AWS DETECTIVE is mainly for the security findings in login attempts , API calls from AWS CloudTrail and Amazon VPC flow logs. It also ingests findings detected by GuardDuty.
         --> AWS GUARD DUTY does DETETIVE duty plus reports compromised EC2 instances , compromised s3 instances and compromised AWS credentials from VPC Flow Logs, AWS CloudTrail management event logs, Cloudtrail S3 data event logs, and DNS logs.
             It also monitors AWS account access behaviour for signs of compromise, such as unauthorized infrastructure deployments, like instances deployed in a Region that has never been used, or unusual API calls, like a password policy change to reduce password strength.
+            GuardDuty is a threat detection service that monitors malicious activity and unauthorized behavior to protect your AWS account. GuardDuty analyzes billions of events across your AWS accounts from AWS CloudTrail (AWS user and API activity in your accounts), Amazon VPC Flow Logs (network traffic data), and DNS Logs (name query patterns). Security findings are retained and made available through the Amazon GuardDuty console and APIs for 90-days.
         --> AWS INSPECTOR does an vulnerability assessment based on common security standards and vulnerability definitions updated frequently by AWS . Offers predefined software called an agent that you can install in EC2. Examples of built-in rules include checking for remote root login being enabled, or vulnerable software versions installed.
         --> AWS MACIE is for protecting personal and financial data stored  in S3 across your organization and reports if a bucket is unencrypted .
         --> All the services are free for 30 days .Pay from the next month!! During the 30-day free trial period, the cost estimation projects what your estimated costs will be after the free trial period.
+
 
 24. MANAGEMENT & GOVERNANCE :
     AWS BACKINT AGENT FOR SAP HANA    AMAZON MANAGED SERVICE FOR GRAFANA        MANAGED SERVICE FOR PROMETHEUS            TOOLS FOR POWER-SHELL     DATA LIFE CYCLE MANAGER      WELL-ARCHITECTURED TOOL
@@ -982,6 +997,8 @@ Scaling resources is a function of AWS AUTO SCALING.
 AWS Auto Scaling is the feature that automates the process of adding/removing server capacity (based on demand).
 Autoscaling allows you to reduce your costs by automatically turning off resources that aren’t in use.
 On the other hand, Autoscaling ensures that your application runs effectively by provisioning more server capacity if required.
+Auto Scaling helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application. You create collections of EC2 instances, called Auto Scaling groups. 
+You can specify the minimum number of instances in each Auto Scaling group, and Amazon EC2 Auto Scaling ensures that your group never goes below this size.
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
@@ -1205,6 +1222,14 @@ Amazon RDS Read Replicas enable you to create one or more read-only copies of yo
 Updates made to the source database are then asynchronously copied to your Read Replicas. In addition to providing scalability for read-heavy workloads, Read Replicas can be promoted to become a standalone database instance when needed.
 Amazon RDS Multi-AZ deployments provide enhanced availability for database instances within a single AWS Region.
 With Multi-AZ, your data is synchronously replicated to a standby in a different Availability Zone (AZ). In the event of an infrastructure failure, Amazon RDS performs an automatic failover to the standby, minimizing disruption to your applications.
+For RDS, You can use Read Replicas for both improved read performance as well as Disaster Recovery (using cross-region read replicas), however, by itself, multi-AZ cannot be used for disaster recovery.
+
+
+When you provision a Multi-AZ DB Instance, Amazon RDS automatically creates a primary DB Instance and synchronously replicates the data to a standby instance in a different Availability Zone (AZ).
+In case of an infrastructure failure, Amazon RDS performs an automatic failover to the standby (or to a read replica in the case of Amazon Aurora), so that you can resume database operations as soon as the failover is complete.
+Since the endpoint for your DB Instance remains the same after a failover, your application can resume database operation without the need for manual administrative intervention.
+For RDS, Read replicas allow you to create read-only copies that are synchronized with your master database.  There is no standby available while using read replicas.
+In case of infrastructure failure, you have to manually promote the read replica to be its own standalone DB Instance, which means that the database endpoint would change.
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
@@ -1348,6 +1373,14 @@ AWS Infrastructure Event Management is a short-term engagement with AWS Support,
 AWS Infrastructure Event Management partners with your technical and project resources to gain a deep understanding of your use case and provide architectural and scaling guidance for an event.
 Common use-case examples for AWS Event Management include advertising launches, new product launches, and infrastructure migrations to AWS.
 
+AWS PARTNER NETWORK - APN :  // APN Consulting partners & APN Technology Partners
+----------------------------
+The AWS Partner Network (APN) is the global partner program for technology and consulting businesses that leverage Amazon Web Services to build solutions and services for customers.
+The startup can work with experts from APN to build a custom solution for this infrastructure migration.
+
+     CONSULTING : professional services firms that help customers of all types and sizes design, architect, build, migrate, and manage their workloads and applications on AWS, accelerating their migration to AWS cloud.
+     TECHNOLOGY : provide hardware, connectivity services, or software solutions that are either hosted on or integrated with, the AWS Cloud. APN Technology Partners cannot help in migrating to AWS and managing applications on AWS Cloud.
+
 TOTAL COST OF OWNERSHIP - TCO  :
 ------------------------------------
 The Total Cost of Ownership (TCO) is often the financial metric used to estimate and compare costs of a product or a service.
@@ -1445,7 +1478,7 @@ Amazon EBS pricing has two factors:
   2- Resize or Change the EBS Volume Type: Another way to optimize storage costs is to identify volumes that are underutilized and downsize them or change the volume type.
   3- Delete Stale Amazon EBS Snapshots: If you have a backup policy that takes EBS volume snapshots daily or weekly, you will quickly accumulate snapshots. Check for stale snapshots that are over 30 days old and delete them to reduce storage costs.
 
-AWS Virtual Private Network (AWS VPN) provides an internet-based connection that enables customers to connect their on-premises network or branch office site to AWS.
+AWS Virtual Private Network (AWS VPN connection goes over the public internet) provides an internet-based connection that enables customers to connect their on-premises network or branch office site to AWS.
 Internet-based connectivity can have unpredictable performance and despite being encrypted, can present security concerns.
 AWS Direct Connect bypasses the public Internet and uses a standard Ethernet fiber-optic cable to establish a secure, dedicated, and more consistent connectivity from on-premises data centers into AWS.
 AWS VPN is incorrect because transferring large data sets over the Internet can be time consuming and expensive.
@@ -1620,12 +1653,6 @@ This block remains in effect even if an administrator of a member account explic
     The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
     Key topics include confidentiality and integrity of data, identifying and managing who can do what with privilege management, protecting systems, and establishing controls to detect security events.
 
-
-Amazon Elastic Transcoder is a media transcoding service.
-It is designed to be a highly scalable, easy-to-use, and cost-effective way to convert (or transcode) media files from their source format into versions that will play back on devices like smartphones, tablets, and PCs.
-Amazon Rekognition allows you to add image and video analysis to your applications. For example, you can use it detect faces in millions of images uploaded to S3.
-
-
 To protect your AWS infrastructure in this situation you should lock down your root user account and all IAM user accounts that the administrator had access to.
 To protect your AWS infrastructure you should:
 1- Change the email address and the password of the root user account
@@ -1660,6 +1687,163 @@ AWS Organizations has five main benefits:
 5) Configure AWS services across multiple accounts.
 ** Control access to AWS services: AWS Organizations allows you to restrict what services and actions are allowed in your accounts. You can use Service Control Policies (SCPs) to apply permission guardrails on AWS Identity and Access Management (IAM) users and roles. For example, you can apply an SCP that restricts users in accounts in your organization from launching any resources in regions that you do not explicitly allow.
 ** Consolidate billing across multiple AWS accounts: You can use AWS Organizations to set up a single payment method for all the AWS accounts in your organization through consolidated billing. With consolidated billing, you can see a combined view of charges incurred by all your accounts, as well as take advantage of pricing benefits from aggregated usage, such as volume discounts for Amazon EC2 and Amazon S3.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+You can remove an account from your organization only if the account has the information that is required for it to operate as a standalone account.
+For each account that you want to make standalone, you must accept the AWS Customer Agreement, choose a support plan, provide and verify the required contact information, and provide a current payment method.
+AWS uses the payment method to charge for any billable (not AWS Free Tier) AWS activity that occurs while the account isn't attached to an organization.
+The AWS account must not have any Service Control Policies (SCPs) attached to it ( IS INCORRECT ). This is not a pre-requisite to remove the AWS account.
+The principals in the AWS account are no longer affected by any service control policies (SCPs) that were defined in the organization.
+This means that restrictions imposed by those SCPs are gone, and the users and roles in the account might have more permissions than they had before.
+
+AMAZON POLLY      - Amazon Polly is a service that turns text into lifelike speech, allowing you to create applications that talk, and build entirely new categories of speech-enabled products.
+                    Polly's Text-to-Speech (TTS) service uses advanced deep learning technologies to synthesize natural sounding human speech. It cannot be used to discover and protect your sensitive data in AWS.
+                    Polly's Text-to-Speech (TTS) service uses advanced deep learning technologies to synthesize natural sounding human speech.
+AMAZON TRANSLATE  - Amazon Translate is used for language translation.
+                    Amazon Translate uses neural machine translation via deep learning models to deliver more accurate and more natural-sounding translation than traditional statistical and rule-based translation algorithms.
+AMAZON TRANSCRIBE - You can use Amazon Transcribe to add speech-to-text capability to your applications.
+                    Amazon Transcribe uses a deep learning process called automatic speech recognition (ASR) to convert speech to text quickly and accurately.
+                    Amazon Transcribe can be used to transcribe customer service calls, to automate closed captioning and subtitling, and to generate metadata for media assets.
+
+ELASTIC TRANSCODER - Is a media transcoding service.
+                     It is designed to be a highly scalable, easy-to-use, and cost-effective way to convert (or transcode) media files from their source format into versions that will play back on devices like smartphones, tablets, and PCs.
+REKOGNITION        - With Amazon Rekognition, you can identify objects, people, text, scenes, and activities in images and videos, as well as detect any inappropriate content.
+                     Amazon Rekognition also provides highly accurate facial analysis and facial search capabilities that you can use to detect, analyze, and compare faces for a wide variety of user verification, people counting, and public safety use cases.
+
+SQS & SNS --> Can be used to decouple components of a microservices based application on AWS Cloud.
+Each AWS Region consists of two or more Availability Zones & Each Availability Zone (AZ) consists of one or more discrete data centers
+
+You are not charged for data transfer IN into AWS and data transfer B/W services within a same region (S3 to EC2 etc;)
+There are three fundamental drivers of cost with AWS: compute, storage, and outbound data transfer.
+In most cases, there is no charge for inbound data transfer or data transfer between other AWS services within the same region.
+Outbound data transfer is aggregated across services and then charged at the outbound data transfer rate.
+Per AWS pricing, data transfer between S3 and EC2 instances within the same region is not charged, so there would be no data transfer charge for moving 500 GB of data from an EC2 instance to an S3 bucket in the same region.
+You are also not charged for data retrieval from S3 Standard and S3 Intelligent Tiering storage types.
+
+
+When you create a record, you choose a routing policy, which determines how Amazon Route 53 responds to queries:
+Simple routing policy – Use for a single resource that performs a given function for your domain, for example, a web server that serves content for the example.com website.
+Failover routing policy – Use when you want to configure active-passive failover.
+Geolocation routing policy – Use when you want to route traffic based on the location of your users.
+Geoproximity routing policy – Use when you want to route traffic based on the location of your resources and, optionally, shift traffic from resources in one location to resources in another.
+Latency routing policy – Use when you have resources in multiple AWS Regions and you want to route traffic to the region that provides the best latency.
+Multivalue answer routing policy – Use when you want Route 53 to respond to DNS queries with up to eight healthy records selected at random.
+Weighted routing policy – Use to route traffic to multiple resources in proportions that you specify.
+
+PRICES COMPARED TO ON-DEMAND INSTANCES ----- > SPOT - 90%, RESERVED STANDARD - 75%, DEDICATED HOSTS - 70%, RESERVED CONVERTABLE -50%
+The percentage savings for each Reserved option is as follows:
+    All you need to remember is that a 3 years term would always be more cost-effective than a 1-year term.
+    Then within a term, "all upfront" is better than "partial upfront" which in turn is better than "no upfront" from a cost savings perspective.
+
+          "No upfront payment option with the standard 1-year term"       - 36%
+          "Partial upfront payment option with the standard 3-years term" - 39%
+          "All upfront payment option with the standard 1-year term"      - 40%
+
+          "No upfront payment option with the standard 3-years term"      - 56%
+          "Partial upfront payment option with the standard 3-years term" - 59%
+          "All upfront payment option with the standard 1-year term       - 62%
+
+A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by AWS PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
+Instances in your VPC do not require public IP addresses to communicate with resources in the service. Traffic between your VPC and the other service does not leave the Amazon network.
+There are two types of VPC endpoints: INTERFACE ENDPOINTS & GATEWAY ENDPOINTS.
+INTERFACE ENDPOINTS : An elastic network interface with a private IP address from the IP address range of your subnet that serves as an entry point for traffic destined to a supported service.
+                      Interface endpoints are powered by AWS Private Link, a technology that enables you to privately access services by using private IP addresses.
+GATEWAY ENDPOINTS   : A gateway endpoint is a gateway that you specify as a target for a route in your route table for traffic destined to a supported AWS service.
+                      The following AWS services are supported: AMAZON S3 & DYNAMO DB.
+
+https://aws.amazon.com/premiumsupport/plans/
+
+#READ QUESTION CAREFULLY -- REGIONAL vs GLOBAL SERVICES
+Most of the services that AWS offers are Region specific.
+But few services, by definition, need to be in a global scope because of the underlying service they offer. AWS IAM, Amazon CloudFront, Route 53 and WAF are some of the global services.
+Amazon S3 is a unique service in the sense that it follows a global namespace but the buckets are regional. You specify an AWS Region when you create your Amazon S3 bucket. This is a regional service.
+
+AWS services can be accessed in three different ways: // API GATEWAY IS INCORRECT
+AWS Management Console - This is a simple web interface for accessing AWS services.
+AWS Command Line Interface (CLI) - You can access AWS services from the command line and automate service management with scripts.
+AWS Software Developer Kit (SDK) - You can also access via AWS SDK that provides language-specific abstracted APIs for AWS services.
+
+A research lab wants to optimize the caching capabilities for its scientific computations application running on EC2 instances. Which EC2 storage option is best suited for this use-case?
+--> AMAZON EC2 INSTANCE STORE // question about scientific data -> instance store is correct option.
+
+An Amazon Machine Image (AMI) provides the information required to launch an instance. You must specify an AMI when you launch an instance. You can launch multiple instances from a single AMI when you need multiple instances with the same configuration.
+
+The AMI must be in the same region as that of the EC2 instance to be launched.
+If the AMI exists in a different region, you can copy that AMI to the region where you want to launch the EC2 instance.
+The region of AMI has no bearing on the performance of the EC2 instance.
+
+Amazon EFS is a regional service storing data within and across multiple Availability Zones (AZs) for high availability and durability.
+Amazon EC2 instances can access your file system across AZs, regions, and VPCs, while on-premises servers can access using AWS Direct Connect or AWS VPN.
+EFS is highly available and durable . Data is replicated across AZ's by default.
+
+DEVELOPER : provides general architectural guidance on how services can be used for various use-cases, workloads, or applications
+BUISENESS : Contextual to your use-cases
+ENTERPRISE : Consultative review and guidance based on your applications
+
+Create separate AWS accounts for development and production environments to receive separate invoices". Every AWS account provides its own invoice end of the month.
+You can get separate invoices for development and production environments by setting up separate AWS accounts for each environment.
+You cannot create separate invoices based on tags. A Cost Allocation Tag is a label that you or AWS assigns to an AWS resource.
+Each tag consists of a key and a value. For each resource, each tag key must be unique, and each tag key can have only one value.
+You can use tags to organize your resources, and cost allocation tags to track your AWS costs on a detailed level.
+AWS provides two types of cost allocation tags, an AWS generated tags and user-defined tags.
+AWS defines, creates, and applies the AWS generated tags for you, and you define, create, and apply user-defined tags.
+You must activate both types of tags separately before they can appear in Cost Explorer or on a cost allocation report.
+
+// BY DEFAULT ENCRYPTION IS ENABLED FOR :
+Amazon S3 Glacier - Amazon S3 Glacier (S3 Glacier), is a storage service optimized for infrequently used data, or "cold data. Data at rest stored in S3 Glacier is automatically server-side encrypted using 256-bit Advanced Encryption Standard (AES-256) with keys maintained by AWS.
+AWS Storage Gateway - AWS Storage Gateway is a hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage. All data transferred between the gateway and AWS storage is encrypted using SSL (for all three types of gateways - File, Volume and Tape Gateways).
+
+// LAMBDA PRICING IS BASED ON :
+Number of requests for the lambda function
+The time it takes for the lambda function to execute
+
+SELECT TWO
+SELECT THREE
+SELECT TWO
+SELECT THREE
+SELECT TWO
+SELECT THREE
+SELECT TWO
+SELECT THREE
+SELECT TWO
+SELECT THREE
+SELECT TWO
+SELECT THREE
+SELECT TWO
+SELECT THREE
+SELECT TWO
+SELECT THREE
+SELECT TWO
+SELECT THREE
+SELECT TWO
+SELECT THREE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
