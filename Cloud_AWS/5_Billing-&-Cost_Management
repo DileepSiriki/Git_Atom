@@ -30,7 +30,9 @@ Open the Billing and Cost Management console athttps://console.aws.amazon.com/bi
     --> Orders and Invoices    : To see your past payments and transactions.
     --> Knowledge Centre       : You can find answers to your questions quickly by visiting the AWS Knowledge Center.
     --> Cost Anamoly Detection : Analyze and determine the root cause of the anomaly, such as account, service, Region, or usage type that is driving the cost increase.
-
+    --> Simple Monthly Calculator : provide accurate estimates of AWS service costs based on your expected usage
+        [pricing calculator ]
+        
     AWS SIMPLE MONTHLY CALCULATOR :
     ----------------------------------
     The AWS Simple Monthly Calculator helps you estimate your monthly AWS bill more efficiently.
