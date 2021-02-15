@@ -849,7 +849,7 @@ When you automate snapshot and AMI management, it helps you to:
     •  Create disaster recovery backup policies that back up data to isolated accounts.
 When combined with the monitoring features of Amazon CloudWatch Events and AWS CloudTrail, Amazon Data Lifecycle Manager provides a complete backup solution for Amazon EC2 instances and individual EBS volumes at no additional cost.
 
-14. AWS HEALTH : // Personal Health Dashboard + Service Health Board
+14. AWS HEALTH : // Personal Health Dashboard + Service Health Board ( offers the possibility to subscribe to an RSS feed to be notified of interruptions to each service.)
 
 //AWS Personal Health Dashboard provides alerts and remediation guidance when AWS is experiencing events that may impact you.
 //While the Service Health Dashboard displays the general status of AWS services, Personal Health Dashboard gives you a personalized view into the performance and availability of the AWS services underlying your AWS resources.

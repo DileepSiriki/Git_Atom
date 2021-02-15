@@ -32,7 +32,7 @@ Open the Billing and Cost Management console athttps://console.aws.amazon.com/bi
     --> Cost Anamoly Detection : Analyze and determine the root cause of the anomaly, such as account, service, Region, or usage type that is driving the cost increase.
     --> Simple Monthly Calculator : provide accurate estimates of AWS service costs based on your expected usage
         [pricing calculator ]
-        
+
     AWS SIMPLE MONTHLY CALCULATOR :
     ----------------------------------
     The AWS Simple Monthly Calculator helps you estimate your monthly AWS bill more efficiently.
@@ -45,6 +45,7 @@ Open the Billing and Cost Management console athttps://console.aws.amazon.com/bi
     ---------------------------
     The AWS Cost & Usage Report is your one-stop shop for accessing the most detailed information available about your AWS costs and usage.
     The AWS Cost & Usage Report lists AWS usage for each service category used by an account and its IAM users in hourly or daily line items, as well as any tags that you have activated for cost allocation purposes.
+    It does not provide Savings Plan recommendations.
 
     AWS COST EXPLORER :
     --------------------
@@ -52,6 +53,7 @@ Open the Billing and Cost Management console athttps://console.aws.amazon.com/bi
     You can view data up to the last 13 months, forecast how much you are likely to spend for the next three months, and get recommendations for what Reserved Instances to purchase.
     You can use AWS Cost Explorer to see patterns in how much you spend on AWS resources over time, identify areas that need further inquiry, and see trends that you can use to understand your costs.
     You can also specify time ranges for the data, and view time data by day or by month.
+    Customers can receive Savings Plan recommendations at the member (linked) account level in addition to the existing AWS organization-level recommendations in AWS Cost Explorer.
 
     AWS BUDGETS :
     -----------------

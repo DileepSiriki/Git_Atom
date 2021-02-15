@@ -24,30 +24,32 @@ CLOUD :  [ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
 AMAZON WEB SERVICES : ~25 regions & ~80 AZ's --  175 services over 190 countries - 5 pillars P R O C S  [security/shared responsibility ]
 -----------------------
 Secure cloud service offering a broad set of global cloud-based products. - ACDEFGS from Cloud usages
-5 PILLARS - PROCS :
 
-      Performance Efficiency - >   // Horizontal & Vertical Scaling
-      The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
-      Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
-      On how you can run services efficiently and scalably.
+  5 PILLARS - PROCS :
+  -----------------------
 
-      Reliability            - >  // Availability Zone & Region
-      The reliability pillar includes the ability of a system to recover from infrastructure or service disruptions, dynamically acquire computing resources to meet demand, and mitigate disruptions such as misconfigurations or transient network issues.
-      A resilient workload quickly recovers from failures to meet business and customer demand.
-      Key topics include distributed system design, recovery planning, and how to handle change.
-      On how you can build services that are resilient to both service and infrastructure disruptions.
+    Performance Efficiency - >   // Horizontal & Vertical Scaling & Serverless architecture -- Experiment more often
+    The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
+    Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
+    On how you can run services efficiently and scalably.
 
-      Operational excellence - >   // Automation to escape human errors - Cloud formation to automate
-      The operational excellence pillar includes the ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures.
-      Key topics include automating changes, responding to events, and defining standards to manage daily operations.
-      On how you can continuously improve your ability to run systems, create better procedures, and gain insights.
+    Reliability            - >  // Availability Zone & Region -- Stop guessing about capacity
+    The reliability pillar includes the ability of a system to recover from infrastructure or service disruptions, dynamically acquire computing resources to meet demand, and mitigate disruptions such as misconfigurations or transient network issues.
+    A resilient workload quickly recovers from failures to meet business and customer demand.
+    Key topics include distributed system design, recovery planning, and how to handle change.
+    On how you can build services that are resilient to both service and infrastructure disruptions.
 
-      Cost optimization      - >   // cost explorer - Budgets - Cost usage
-      On the ability to avoid or eliminate unneeded cost or sub-optimal resources. CAPEX to OPEX
+    Operational excellence - >   // Automation to escape human errors - Cloud formation to automate -- Anticipate failure -- Make frequent, small, reversible changes
+    The operational excellence pillar includes the ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures.
+    Key topics include automating changes, responding to events, and defining standards to manage daily operations.
+    On how you can continuously improve your ability to run systems, create better procedures, and gain insights.
 
-      Security               - >  Shared Model // Policies (IAM) , Network Security (VPC) , Encryption (KMS), IAM, KMS, MFA, Cloud Trail, Cloud Watch, SNS, Email.
-      The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
-      Key topics include confidentiality and integrity of data, identifying and managing who can do what with privilege management, protecting systems, and establishing controls to detect security events.
+    Cost optimization      - >   // cost explorer - Budgets - Cost usage
+    On the ability to avoid or eliminate unneeded cost or sub-optimal resources. CAPEX to OPEX
+
+    Security               - >  Shared Model // Policies (IAM) , Network Security (VPC) , Encryption (KMS), IAM, KMS, MFA, Cloud Trail, Cloud Watch, SNS, Email. -- Enable traceability
+    The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
+    Key topics include confidentiality and integrity of data, identifying and managing who can do what with privilege management, protecting systems, and establishing controls to detect security events.
 
 [ DIAGRAM ] --> Regions - Availability Zones - Local Zone (Similar to regions but closer to users), available only in 3 places - Outposts (Cloud in On-premises)- Wavelengths
 
@@ -716,6 +718,9 @@ SQS : IS A QUEUE Service.
 
     // services AWS WAF - AWS SHIELD - AWS FIREWALL MANAGER - AWS NETWORK FIREWALL are interlinked. So which one to use ??
        --> It all starts with AWS WAF. You can automate and then simplify AWS WAF management using AWS Firewall Manager. // (DDOS, HTTP/S to cloud front, SQL injection, cross-site scripting)
+           AWS WAF is a web application firewall that helps protect web applications from attacks by allowing you to configure rules that allow, block, or monitor (count) web requests based on conditions that you define. These conditions include IP addresses, HTTP headers, HTTP body, URI strings, SQL injection and cross-site scripting.
+           AWS WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content.
+           When you use AWS WAF on Amazon CloudFront, your rules run in all AWS Edge Locations, located around the world close to your end-users. This means security doesn’t come at the expense of performance. Blocked requests are stopped before they reach your web servers.
        --> Shield offers free standard services and  Shield Advanced which adds additional features on top of AWS WAF, such as dedicated support from the DDoS Response Team (DRT) and advanced reporting, this requires a business or enterprise support plan.
        --> To use the services of the DRT, you must be subscribed to the Business Support plan or the Enterprise Support plan.
        --> If you want granular control over the protection that is added to your resources, AWS WAF alone is the right choice.
@@ -997,7 +1002,7 @@ Scaling resources is a function of AWS AUTO SCALING.
 AWS Auto Scaling is the feature that automates the process of adding/removing server capacity (based on demand).
 Autoscaling allows you to reduce your costs by automatically turning off resources that aren’t in use.
 On the other hand, Autoscaling ensures that your application runs effectively by provisioning more server capacity if required.
-Auto Scaling helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application. You create collections of EC2 instances, called Auto Scaling groups. 
+Auto Scaling helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application. You create collections of EC2 instances, called Auto Scaling groups.
 You can specify the minimum number of instances in each Auto Scaling group, and Amazon EC2 Auto Scaling ensures that your group never goes below this size.
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
@@ -1630,18 +1635,18 @@ This block remains in effect even if an administrator of a member account explic
 
 5 PILLARS :
 -------------
-    Performance Efficiency - >   // Horizontal & Vertical Scaling
+    Performance Efficiency - >   // Horizontal & Vertical Scaling & Serverless architecture -- Experiment more often
     The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
     Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
     On how you can run services efficiently and scalably.
 
-    Reliability            - >  // Availability Zone & Region
+    Reliability            - >  // Availability Zone & Region -- Stop guessing about capacity
     The reliability pillar includes the ability of a system to recover from infrastructure or service disruptions, dynamically acquire computing resources to meet demand, and mitigate disruptions such as misconfigurations or transient network issues.
     A resilient workload quickly recovers from failures to meet business and customer demand.
     Key topics include distributed system design, recovery planning, and how to handle change.
     On how you can build services that are resilient to both service and infrastructure disruptions.
 
-    Operational excellence - >   // Automation to escape human errors - Cloud formation to automate
+    Operational excellence - >   // Automation to escape human errors - Cloud formation to automate -- Anticipate failure -- Make frequent, small, reversible changes
     The operational excellence pillar includes the ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures.
     Key topics include automating changes, responding to events, and defining standards to manage daily operations.
     On how you can continuously improve your ability to run systems, create better procedures, and gain insights.
@@ -1649,7 +1654,7 @@ This block remains in effect even if an administrator of a member account explic
     Cost optimization      - >   // cost explorer - Budgets - Cost usage
     On the ability to avoid or eliminate unneeded cost or sub-optimal resources. CAPEX to OPEX
 
-    Security               - >  Shared Model // Policies (IAM) , Network Security (VPC) , Encryption (KMS), IAM, KMS, MFA, Cloud Trail, Cloud Watch, SNS, Email.
+    Security               - >  Shared Model // Policies (IAM) , Network Security (VPC) , Encryption (KMS), IAM, KMS, MFA, Cloud Trail, Cloud Watch, SNS, Email. -- Enable traceability
     The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
     Key topics include confidentiality and integrity of data, identifying and managing who can do what with privilege management, protecting systems, and establishing controls to detect security events.
 
@@ -1711,6 +1716,10 @@ ELASTIC TRANSCODER - Is a media transcoding service.
                      It is designed to be a highly scalable, easy-to-use, and cost-effective way to convert (or transcode) media files from their source format into versions that will play back on devices like smartphones, tablets, and PCs.
 REKOGNITION        - With Amazon Rekognition, you can identify objects, people, text, scenes, and activities in images and videos, as well as detect any inappropriate content.
                      Amazon Rekognition also provides highly accurate facial analysis and facial search capabilities that you can use to detect, analyze, and compare faces for a wide variety of user verification, people counting, and public safety use cases.
+AMAZON LEX         - Amazon Lex is a service for building conversational interfaces using voice and text.  ( To build a chatbot using NATURAL LANGUAGE UNDERSTAND -- NLU )
+                     Powered by the same conversational engine as Alexa, Amazon Lex provides high-quality speech recognition and language understanding capabilities, enabling the addition of sophisticated, natural language ‘chatbots’ to new and existing applications.
+SAGEMAKER          - Amazon SageMaker is a fully-managed platform that enables developers and data scientists to quickly and easily build, train, and deploy machine learning models at any scale.
+                     Amazon SageMaker removes all the barriers that typically slow down developers who want to use machine learning.
 
 SQS & SNS --> Can be used to decouple components of a microservices based application on AWS Cloud.
 Each AWS Region consists of two or more Availability Zones & Each Availability Zone (AZ) consists of one or more discrete data centers
@@ -1798,6 +1807,31 @@ AWS Storage Gateway - AWS Storage Gateway is a hybrid cloud storage service that
 // LAMBDA PRICING IS BASED ON :
 Number of requests for the lambda function
 The time it takes for the lambda function to execute
+
+Examples for Linux\Ubuntu based instances:
+--------------------------------------------------
+1- If you run a Linux instance for 4 seconds or 20 seconds or 59 seconds, you will be charged for one minute. (this is what we mean by minimum of 1 minute)
+2- If you run a Linux instance for 1 minute and 3 seconds, you will be charged for 1 minute and 3 seconds.
+3- If you run a Linux instance for 3 hours, 25 minutes and 7 seconds, you will be charged for 3 hours, 25 minutes and 7 seconds.
+
+Examples for non-Linux\Ubuntu instances:
+---------------------------------------------------
+1- If you run an instance for 4 seconds or 20 seconds or 59 seconds, you will be charged for one hour.
+2- If you run an instance for 1 minute and 3 seconds, you will be charged for one hour.
+3- If you run an instance for 3 hours, 25 minutes and 7 seconds, you will be charged for 4 hours.
+
+For transferring 50PB of data , the cost efficient transport is SNOW MOBILE, not SNOW BALL.
+Snow mobile can transport 100pb at once, while snow ball can do 100TB.
+
+An engineering team is new to the AWS Cloud and it would like to launch a dev/test environment with low monthly pricing. Which AWS service can address this use-case --> LIGHT SAIL, not CLOUD FORMATION as it requires experience in working with AWS.
+When using EBS Volumes, the volume and the instance must be in the same Availability Zone.
+
+IAM ACCESS ADVISOR    : Shows the service permissions granted to a user and when those services were last accessed.
+                        You can use this information to revise your policies. To summarize, you can identify unnecessary permissions so that you can revise your IAM policies accordingly.
+IAM CREDENTIAL REPORT : You can generate and download a credential report that lists all users in your account and the status of their various credentials, including passwords, access keys, and MFA devices.
+                        It is not used to review permissions granted to a user.
+
+
 
 SELECT TWO
 SELECT THREE
