@@ -25,7 +25,7 @@ AMAZON WEB SERVICES : ~25 regions & ~80 AZ's --  175 services over 190 countries
 -----------------------
 Secure cloud service offering a broad set of global cloud-based products. - ACDEFGS from Cloud usages
 
-  5 PILLARS - PROCS :
+  5 PILLARS - PROCS : https://aws.amazon.com/blogs/apn/the-5-pillars-of-the-aws-well-architected-framework/
   -----------------------
 
     Performance Efficiency - >   // Horizontal & Vertical Scaling & Serverless architecture -- Experiment more often
@@ -1635,7 +1635,7 @@ This block remains in effect even if an administrator of a member account explic
     In other words, the user can access only what is allowed by both the AWS Organizations policies and IAM policies. If either blocks an operation, the user can't access that operation.
     For example, if an SCP applied to an account states that the only actions allowed are Amazon EC2 actions, and the permissions on a principal (IAM user or role) in the same AWS account allow both EC2 actions and Amazon S3 actions, the principal is able to access only the EC2 actions.
 
-5 PILLARS :
+5 PILLARS : https://aws.amazon.com/blogs/apn/the-5-pillars-of-the-aws-well-architected-framework/
 -------------
     Performance Efficiency - >   // Horizontal & Vertical Scaling & Serverless architecture -- Experiment more often
     The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
@@ -1769,7 +1769,12 @@ GATEWAY ENDPOINTS   : A gateway endpoint is a gateway that you specify as a targ
                       The following AWS services are supported: AMAZON S3 & DYNAMO DB.
 
 https://aws.amazon.com/premiumsupport/plans/
+https://aws.amazon.com/s3/storage-classes/
+https://aws.amazon.com/blogs/apn/the-5-pillars-of-the-aws-well-architected-framework/
 https://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html#aws_tasks-that-require-root
+AWS Trusted Advisor provides real-time guidance to help customers provision resources following AWS best practices.
+The service offers guidance for cost optimization, performance, security, fault tolerance, and service limits.
+
 
 #READ QUESTION CAREFULLY -- REGIONAL vs GLOBAL SERVICES
 Most of the services that AWS offers are Region specific.
@@ -1877,6 +1882,44 @@ AWS offers two types of Savings Plans:
 COMPUTE SAVINGS PLAN  provide the most flexibility and help to reduce your costs by up to 66%.
 These plans automatically apply to EC2 instance usage regardless of instance family, size, AZ, region, OS or tenancy, and also apply to Fargate and Lambda usage. For example, with Compute Savings Plans, you can change from C4 to M5 instances, shift a workload from EU (Ireland) to EU (London), or move a workload from EC2 to Fargate or Lambda at any time and automatically continue to pay the Savings Plans price.
 EC2 INSTANCE SAVINGS PLAN  Plans provide the lowest prices, offering savings up to 72% in exchange for a commitment to the usage of individual instance families in a region (e.g. M5 usage in N. Virginia). This automatically reduces your cost on the selected instance family in that region regardless of AZ, size, OS or tenancy. EC2 Instance Savings Plans give you the flexibility to change your usage between instances within a family in that region. For example, you can move from c5.xlarge running Windows to c5.2xlarge running Linux and automatically benefit from the Savings Plans prices.
+
+Tape Gateway is formerly known as Gateway Virtual Tape Library.
+AWS enables covered entities and their business associates subject to the U.S. Health Insurance Portability and Accountability Act of 1996 (HIPAA) to use the secure AWS environment to process, maintain, and store protected health information.
+"HIPAA"      is related to  U.S. Health Insurance Portability and Accountability Act
+"ISO 27001"  is an information security standard.
+"PCI DSS"    is related to the security of credit card payments.
+"SOC 1"      is related to financial reporting.
+
+SCHEDULED RIs: These are available to launch within the time windows you reserve.
+This option allows you to match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month.
+Other types include, STANDARD & CONVERTABLE>
+
+Which AWS dashboard displays relevant and timely information to help users manage events in progress, and provides proactive notifications to help plan for scheduled activities? -- AWS Personal Health Dashboard
+AWS Personal Health Dashboard provides alerts and remediation guidance when AWS is experiencing events that may impact you.
+While the Service Health Dashboard displays the general status of AWS services, Personal Health Dashboard gives you a personalized view into the performance and availability of the AWS services underlying your AWS resources.
+The dashboard displays relevant and timely information to help you manage events in progress, and provides proactive notification to help you plan for scheduled activities.
+With Personal Health Dashboard, alerts are triggered by changes in the health of AWS resources, giving you event visibility, and guidance to help quickly diagnose and resolve issues.
+
+A resource group is a collection of resources that share one or more tags or portions of tags.
+To create a resource group, you simply identify the tags that contain the items that members of the group should have in common.
+
+An IAM policy is a policy document that is used to define permissions that can be applied to users, groups and roles. You don’t apply the policy to the service, you apply it to the role. The role is then used to assign permissions to the AWS service.
+With IAM Roles you can delegate permissions to resources for users and services without using permanent credentials (e.g. username and password). To do so you can create a role and assign an IAM policy to the role that has the permissions required.
+
+Which of the below AWS services supports automated backups as a default configuration? -- RDS , // S3 replicates but not backup
+AWS Elastic Beanstalk and AWS CloudFormation are both examples of automation. Beanstalk is a platform service that leverages the automation capabilities of CloudFormation to build out application architectures.
+
+Supported authentication methods for an IAM USER include console passwords, access keys and server certificates.
+Access keys are a combination of an access key ID and a secret access key and can be used to make programmatic calls to AWS.
+Server certificates are SSL/TLS certificates that you can use to authenticate with some AWS services.
+
+When using AWS Organizations with consolidated billing, best practices include:
+– Always enable multi-factor authentication (MFA) on the root account.
+– Always use a strong and complex password on the root account.
+– The Paying account should be used for billing purposes only. Do not deploy resources into the Paying account.
+
+You need to run a production process that will use several EC2 instances and run constantly on an ongoing basis. The process cannot be interrupted or restarted without issue. What EC2 pricing model would be best for this workload? --> RESERVED INSTANCES. , Not ON-DEMAND
+
 
 SELECT TWO
 SELECT THREE
