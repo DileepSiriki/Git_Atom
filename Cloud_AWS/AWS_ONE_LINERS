@@ -28,7 +28,7 @@ Secure cloud service offering a broad set of global cloud-based products. - ACDE
   5 PILLARS - PROCS : https://aws.amazon.com/blogs/apn/the-5-pillars-of-the-aws-well-architected-framework/
   -----------------------
 
-    Performance Efficiency - >   // Horizontal & Vertical Scaling & Serverless architecture -- Experiment more often
+    Performance Efficiency - >   // Horizontal, Vertical Scaling & Serverless architecture -- Experiment more often
     The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
     Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
     On how you can run services efficiently and scalably.
@@ -709,7 +709,7 @@ SQS : IS A QUEUE Service.
 23. SECURITY - IDENTITY & COMPLIANCE  [ 19 --> 2 + 2 + 2 + 2 + 4 + 4 + 3 ]
     IDENTITY-ACCESS-MANAGEMENT (Identity [Managed[aws, customer], Inline] & Resource)    COGNITO (fb, insta // authentication -- user pools and  authorization -- identity pools)
     RESOURCE-GROUPS-&-TAG-EDITOR (group resources & perform bulk actions )               RAM --  RESOURCE-ACCESS-MANAGER ( share resources across principles such as AWS accounts, organizational units, or an entire organization from AWS Organizations.)
-    ARTIFACT (Sec, compliance reports and online agreements)                             AUDIT-MANAGER (audit your AWS usage)
+    ARTIFACT (Security, compliance reports and online agreements)                        AUDIT-MANAGER (audit your AWS usage)
     DIRETORY-SERVICE (To use Microsoft Active Directory - SSO)                           CLOUD-DIRECTORY (generate a conceptual relationship between the objects & Control access)
 
     WEB-APPLICATION-FIREWALL         SHIELD (Standard(free)/Advanced)         FIREWALL-MANAGER          NETWORK-FIREWALL
@@ -1231,7 +1231,6 @@ Amazon RDS Multi-AZ deployments provide enhanced availability for database insta
 With Multi-AZ, your data is synchronously replicated to a standby in a different Availability Zone (AZ). In the event of an infrastructure failure, Amazon RDS performs an automatic failover to the standby, minimizing disruption to your applications.
 For RDS, You can use Read Replicas for both improved read performance as well as Disaster Recovery (using cross-region read replicas), however, by itself, multi-AZ cannot be used for disaster recovery.
 
-
 When you provision a Multi-AZ DB Instance, Amazon RDS automatically creates a primary DB Instance and synchronously replicates the data to a standby instance in a different Availability Zone (AZ).
 In case of an infrastructure failure, Amazon RDS performs an automatic failover to the standby (or to a read replica in the case of Amazon Aurora), so that you can resume database operations as soon as the failover is complete.
 Since the endpoint for your DB Instance remains the same after a failover, your application can resume database operation without the need for manual administrative intervention.
@@ -1267,9 +1266,6 @@ Also create a VPC and enable communication between your instances.
 An Outpost is a pool of AWS compute and storage capacity deployed at a customer site.
 AWS Outposts brings native AWS services, infrastructure, and operating models to virtually any data centre, co-location space, or on-premises facility.
 You can use the same services, tools, and partner solutions to develop for the cloud and on premises .
-
-RESERVED INSTANCES : For EC2, FARGATE, RDS, REDSHIFT, ELASTICAHE
-SAVINGS PLAN       : Only for EC2 & FARGATE
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
@@ -1451,12 +1447,6 @@ OpsWorks lets you use Chef and Puppet to automate how servers are configured, de
 Placement Groups are logical groupings or clusters of EC2 instances within a single Availability Zone.
 Placement groups are recommended for applications that require low network latency, high network throughput, or both.
 
-S3 pricing is based on four factors:
-1) Total amount of data (in GB) stored on S3
-2) Storage class (S3 Standard, S3 Intelligent-Tiering, S3 Standard-Infrequent Access, S3 One Zone-IA, S3 Glacier, or S3 Glacier Deep Archive)
-3) Amount of data transferred out of AWS from S3. // data transferred in to S3 is not at all a factor, it is free of cost
-4) Number of requests to S3
-
 Data protection refers to protecting data while in-transit (as it travels to and from Amazon S3) and at rest (while it is stored on disks in Amazon data centers).
 You can protect data in transit by using SSL/TLS or by using client-side encryption.
 Also, you have the following options of protecting data at rest in Amazon S3.
@@ -1470,20 +1460,6 @@ Multi-AZ and Read Replica are Amazon RDS features not for Dynamo Db.
 AWS Directory Service is a managed Microsoft Active Directory in the AWS Cloud.
 Customers can use it to manage users and groups, provide single sign-on (SSO) to applications and services, as well as create and apply group policies.
 Note: What is Single sign-on (SSO)? AWS Single sign-on (AWS SSO) enables a company’s employees to sign in to AWS using their existing corporate Microsoft Active Directory credentials.
-
-Amazon EBS pricing has two factors:
-1- Volumes: Volume storage for all EBS volume types is charged by the amount of GB you provision per month, until you release the storage.
-2- Snapshots: Snapshot storage is based on the amount of space your data consumes in Amazon S3.
-   Because Amazon EBS does not save empty blocks, it is likely that the snapshot size will be considerably less than your volume size.
-   Copying EBS snapshots is charged based on the volume of data transferred across regions.
-   For the first snapshot of a volume, Amazon EBS saves a full copy of your data to Amazon S3.
-   For each incremental snapshot, only the changed part of your Amazon EBS volume is saved.
-   After the snapshot is copied, standard EBS snapshot charges apply for storage in the destination region.
-
-  When you want to reduce the costs of Amazon EBS consider the following:
-  1- Delete Unattached Amazon EBS Volumes: An easy way to reduce wasted spend is to find and delete unattached volumes. However, when EC2 instances are stopped or terminated, attached EBS volumes are not automatically deleted and will continue to accrue charges since they are still operating.
-  2- Resize or Change the EBS Volume Type: Another way to optimize storage costs is to identify volumes that are underutilized and downsize them or change the volume type.
-  3- Delete Stale Amazon EBS Snapshots: If you have a backup policy that takes EBS volume snapshots daily or weekly, you will quickly accumulate snapshots. Check for stale snapshots that are over 30 days old and delete them to reduce storage costs.
 
 AWS Virtual Private Network (AWS VPN connection goes over the public internet) provides an internet-based connection that enables customers to connect their on-premises network or branch office site to AWS.
 Internet-based connectivity can have unpredictable performance and despite being encrypted, can present security concerns.
@@ -1513,8 +1489,9 @@ Your Spot Instance runs whenever capacity is available and the maximum price per
 An example to illustrate: If the current AWS Spot price is $0.08 per hour and you set a maximum price of $0.17, you’ll pay $0.08 and you will lose the instances if the AWS Spot price rises above $0.17 or if capacity is no longer available.
 
 Reserved instance types include:
-- Standard RIs: These provide the most significant discount (up to 72% off On-Demand) and are best suited for steady-state usage.
-- Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value.
+- Standard RIs    : These provide the most significant discount (up to 72% off On-Demand) and are best suited for steady-state usage.
+- Convertible RIs : These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value.
+- Schedules RI's
 Therefore, Standard RIs provides more discounts than Convertible RIs.
 
 
@@ -1565,15 +1542,6 @@ AWS offers multiple options for federating your identities in AWS:
 2- AWS Directory Service: AWS Directory Service for Microsoft Active Directory, also known as AWS Microsoft AD, uses secure Windows trusts to enable users to sign in to the AWS Management Console, AWS Command Line Interface (CLI), and Windows applications running on AWS using their existing corporate Microsoft Active Directory credentials.
 3- AWS Single-Sign-On (AWS SSO) Service: You can use the AWS SSO service to federate your identities into your AWS environment.
 
-
-CREDENTIAL REPORT :
-You can generate and download a credential report that lists all users in your account and the status of their various credentials, including passwords, access keys, and MFA devices.
-You can get a credential report from the AWS Management Console, the AWS SDKs, and Command Line Tools.
-You can use credential reports to assist in your auditing and compliance efforts.
-You can use the report to audit the effects of credential lifecycle requirements, such as password and access key rotation.
-You can provide the report to an external auditor, or grant permissions to an auditor so that he or she can download the report directly.
-
-
 In relation to Amazon RDS databases:
   AWS is responsible for:
       1- Managing the underlying infrastructure and foundation services.
@@ -1585,7 +1553,6 @@ In relation to Amazon RDS databases:
       2- Managing the database settings that are specific to the application.
       3- Building the relational schema.
       4- Network traffic protection.
-
 
 AWS Cost Governance Best Practices:
 1- Resource controls (policy-based and automated) govern who can deploy resources and the process for identifying, monitoring, and categorizing these new resources. These controls can use tools such as AWS Service Catalog, AWS Identity and Access Management (IAM) roles and permissions, and AWS Organizations, as well as third-party tools such as ServiceNow.
@@ -1621,20 +1588,6 @@ There are seven design principles for security in the cloud:
 6- Keep people away from data: Create mechanisms and tools to reduce or eliminate the need for direct access or manual processing of data. This reduces the risk of loss or modification and human error when handling sensitive data.
 7- Prepare for security events: Prepare for an incident by having an incident management process that aligns to your organizational requirements. Run incident response simulations and use tools with automation to increase your speed for detection, investigation, and recovery.
 
-
-AWS Service Control Policies (SCPs):
-AWS Service Control Policies (SCPs) or AWS Organizations Policies are a type of organization policy that you can use to manage permissions for all accounts in your organization.
-SCPs offer central control over the maximum available permissions for all member accounts in your organization. SCPs help you to ensure member accounts stay within your organization's access control guidelines.
-In SCPs, you can restrict which AWS services, resources, and individual API actions the users and roles in each member account can access.
-When AWS Organizations blocks access to a service, resource, or API action for a member account, a user or role in that account can't access it.
-This block remains in effect even if an administrator of a member account explicitly grants such permissions in an IAM policy.
-
-    Additional information:  What's the difference between an AWS Organizations service control policy (SCP) and an IAM policy?
-    An IAM policy provides granular control over what users and roles in individual accounts can do. AWS Organizations expands that control to the account level by giving you control over what users and roles in an account or a group of accounts can do.
-    The resulting permissions are the logical intersection of what is allowed by AWS Organizations at the account level and the permissions that are explicitly granted by IAM at the user or role level within that account.
-    In other words, the user can access only what is allowed by both the AWS Organizations policies and IAM policies. If either blocks an operation, the user can't access that operation.
-    For example, if an SCP applied to an account states that the only actions allowed are Amazon EC2 actions, and the permissions on a principal (IAM user or role) in the same AWS account allow both EC2 actions and Amazon S3 actions, the principal is able to access only the EC2 actions.
-
 5 PILLARS : https://aws.amazon.com/blogs/apn/the-5-pillars-of-the-aws-well-architected-framework/
 -------------
     Performance Efficiency - >   // Horizontal & Vertical Scaling & Serverless architecture -- Experiment more often
@@ -1669,15 +1622,6 @@ To protect your AWS infrastructure you should:
 5- Enable MFA on all IAM user accounts
 
 
-Amazon CloudFront charges are based on the data transfer out of AWS and requests used to deliver content to your customers.
-There are no upfront payments or fixed platform fees, no long-term commitments, no premiums for dynamic content, and no requirements for professional services to get started.
-To estimate the costs of an Amazon CloudFront distribution consider the following:
-  - Traffic Distribution: Data transfer and request pricing varies across geographic regions, and pricing is based on the edge location through which your content is served.
-  - Requests: The number and type of requests (HTTP or HTTPS) made and the geographic region in which the requests are made.
-  - Data Transfer OUT: The amount of data transferred out of your Amazon CloudFront edge locations.
-Note: Data Transfer IN is free. There is no charge for inbound data transferred from AWS services such as Amazon S3 or Elastic Load Balancing.
-
-
 Durability refers to the ability of a system to assure data is stored and data remains consistent in the system as long as it is not changed by legitimate access.
 This means that data should not become corrupted or disappear due to a system malfunction. Durability is used to measure the likelihood of data loss.
 For example, assume you have confidential data stored in your Laptop.
@@ -1698,28 +1642,57 @@ AWS Organizations has five main benefits:
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 
+AWS Service Control Policies (SCPs):
+AWS Service Control Policies (SCPs) or AWS Organizations Policies are a type of organization policy that you can use to manage permissions for all accounts in your organization.
+SCPs offer central control over the maximum available permissions for all member accounts in your organization. SCPs help you to ensure member accounts stay within your organization's access control guidelines.
+In SCPs, you can restrict which AWS services, resources, and individual API actions the users and roles in each member account can access.
+When AWS Organizations blocks access to a service, resource, or API action for a member account, a user or role in that account can't access it.
+This block remains in effect even if an administrator of a member account explicitly grants such permissions in an IAM policy.
+
+    Additional information:  What's the difference between an AWS Organizations service control policy (SCP) and an IAM policy?
+    An IAM policy provides granular control over what users and roles in individual accounts can do. AWS Organizations expands that control to the account level by giving you control over what users and roles in an account or a group of accounts can do.
+    The resulting permissions are the logical intersection of what is allowed by AWS Organizations at the account level and the permissions that are explicitly granted by IAM at the user or role level within that account.
+    In other words, the user can access only what is allowed by both the AWS Organizations policies and IAM policies. If either blocks an operation, the user can't access that operation.
+    For example, if an SCP applied to an account states that the only actions allowed are Amazon EC2 actions, and the permissions on a principal (IAM user or role) in the same AWS account allow both EC2 actions and Amazon S3 actions, the principal is able to access only the EC2 actions.
+
 You can remove an account from your organization only if the account has the information that is required for it to operate as a standalone account.
 For each account that you want to make standalone, you must accept the AWS Customer Agreement, choose a support plan, provide and verify the required contact information, and provide a current payment method.
 AWS uses the payment method to charge for any billable (not AWS Free Tier) AWS activity that occurs while the account isn't attached to an organization.
-The AWS account must not have any Service Control Policies (SCPs) attached to it ( IS INCORRECT ). This is not a pre-requisite to remove the AWS account.
+The AWS account can have any Service Control Policies (SCPs) attached to it.
 The principals in the AWS account are no longer affected by any service control policies (SCPs) that were defined in the organization.
 This means that restrictions imposed by those SCPs are gone, and the users and roles in the account might have more permissions than they had before.
 
-AMAZON POLLY      - Amazon Polly is a service that turns text into lifelike speech, allowing you to create applications that talk, and build entirely new categories of speech-enabled products.
-                    Polly's Text-to-Speech (TTS) service uses advanced deep learning technologies to synthesize natural sounding human speech. It cannot be used to discover and protect your sensitive data in AWS.
-                    Polly's Text-to-Speech (TTS) service uses advanced deep learning technologies to synthesize natural sounding human speech.
-AMAZON TRANSLATE  - Amazon Translate is used for language translation.
-                    Amazon Translate uses neural machine translation via deep learning models to deliver more accurate and more natural-sounding translation than traditional statistical and rule-based translation algorithms.
-AMAZON TRANSCRIBE - You can use Amazon Transcribe to add speech-to-text capability to your applications.
-                    Amazon Transcribe uses a deep learning process called automatic speech recognition (ASR) to convert speech to text quickly and accurately.
-                    Amazon Transcribe can be used to transcribe customer service calls, to automate closed captioning and subtitling, and to generate metadata for media assets.
+SCPs don't affect users or roles in the management account. They affect only the member accounts in your organization.
+Service control policies (SCPs) are a type of organization policy that you can use to manage permissions in your organization.
+SCPs offer central control over the maximum available permissions for all accounts in your organization.
+SCPs help you to ensure your accounts stay within your organization’s access control guidelines. SCPs are available only in an organization that has all features enabled.
+SCPs aren't available if your organization has enabled only the consolidated billing features.
+SCPs alone are not sufficient to grant permissions to the accounts in your organization.
+No permissions are granted by an SCP. An SCP defines a guardrail, or sets limits, on the actions that the account's administrator can delegate to the IAM users and roles in the affected accounts.
+The administrator must still attach identity-based or resource-based policies to IAM users or roles, or to the resources in your accounts to actually grant permissions.
+The effective permissions are the logical intersection between what is allowed by the SCP and what is allowed by the IAM and resource-based policies.
 
+When using AWS Organizations with consolidated billing, best practices include:
+– Always enable multi-factor authentication (MFA) on the root account.
+– Always use a strong and complex password on the root account.
+– The Paying account should be used for billing purposes only. Do not deploy resources into the Paying account.
+
+
+AMAZON POLLY       - Amazon Polly is a service that turns text into lifelike speech, allowing you to create applications that talk, and build entirely new categories of speech-enabled products.
+                     Polly's Text-to-Speech (TTS) service uses advanced deep learning technologies to synthesize natural sounding human speech. It cannot be used to discover and protect your sensitive data in AWS.
+AMAZON TRANSCRIBE  - You can use Amazon Transcribe to add speech-to-text capability to your applications.
+                     Amazon Transcribe uses a deep learning process called Automatic speech recognition (ASR) to convert speech to text quickly and accurately.
+                     Amazon Transcribe can be used to transcribe customer service calls, to automate closed captioning and subtitling, and to generate metadata for media assets.
+AMAZON TRANSLATE   - Amazon Translate is used for language translation.
+                     Amazon Translate uses neural machine translation via deep learning models to deliver more accurate and more natural-sounding translation than traditional statistical and rule-based translation algorithms.
 ELASTIC TRANSCODER - Is a media transcoding service.
                      It is designed to be a highly scalable, easy-to-use, and cost-effective way to convert (or transcode) media files from their source format into versions that will play back on devices like smartphones, tablets, and PCs.
-REKOGNITION        - With Amazon Rekognition, you can identify objects, people, text, scenes, and activities in images and videos, as well as detect any inappropriate content.
-                     Amazon Rekognition also provides highly accurate facial analysis and facial search capabilities that you can use to detect, analyze, and compare faces for a wide variety of user verification, people counting, and public safety use cases.
 AMAZON LEX         - Amazon Lex is a service for building conversational interfaces using voice and text.  ( To build a chatbot using NATURAL LANGUAGE UNDERSTAND -- NLU )
                      Powered by the same conversational engine as Alexa, Amazon Lex provides high-quality speech recognition and language understanding capabilities, enabling the addition of sophisticated, natural language ‘chatbots’ to new and existing applications.
+
+
+REKOGNITION        - With Amazon Rekognition, you can identify objects, people, text, scenes, and activities in images and videos, as well as detect any inappropriate content.
+                     Amazon Rekognition also provides highly accurate facial analysis and facial search capabilities that you can use to detect, analyze, and compare faces for a wide variety of user verification, people counting, and public safety use cases.
 SAGEMAKER          - Amazon SageMaker is a fully-managed platform that enables developers and data scientists to quickly and easily build, train, and deploy machine learning models at any scale.
                      Amazon SageMaker removes all the barriers that typically slow down developers who want to use machine learning.
 AWS IoT Core       - AWS IoT Core lets you connect IoT devices to the AWS cloud without the need to provision or manage servers.
@@ -1728,9 +1701,9 @@ AWS IoT Core       - AWS IoT Core lets you connect IoT devices to the AWS cloud 
                      AWS IoT Core also makes it easy to use AWS and Amazon services like AWS Lambda, Amazon Kinesis, Amazon S3, Amazon SageMaker, Amazon DynamoDB, Amazon CloudWatch, AWS CloudTrail, Amazon QuickSight, and Alexa Voice Service to build IoT applications that gather, process, analyze and act on data generated by connected devices, without having to manage any infrastructure.
 
 SQS & SNS --> Can be used to decouple components of a microservices based application on AWS Cloud.
-Each AWS Region consists of two or more Availability Zones & Each Availability Zone (AZ) consists of one or more discrete data centers
+Each AWS Region consists of two or more Availability Zones & Each Availability Zone (AZ) consists of one or more discrete data centers.
 
-You are not charged for data transfer IN into AWS and data transfer B/W services within a same region (S3 to EC2 etc;)
+You are not charged for data transfer IN into AWS and data transfer B/W services within a same region (S3 to EC2 residing in same region etc;)
 There are three fundamental drivers of cost with AWS: compute, storage, and outbound data transfer.
 In most cases, there is no charge for inbound data transfer or data transfer between other AWS services within the same region.
 Outbound data transfer is aggregated across services and then charged at the outbound data transfer rate.
@@ -1739,15 +1712,23 @@ You are also not charged for data retrieval from S3 Standard and S3 Intelligent 
 
 
 When you create a record, you choose a routing policy, which determines how Amazon Route 53 responds to queries:
-Simple routing policy – Use for a single resource that performs a given function for your domain, for example, a web server that serves content for the example.com website.
-Failover routing policy – Use when you want to configure active-passive failover.
-Geolocation routing policy – Use when you want to route traffic based on the location of your users.
+Simple routing policy       – Use for a single resource that performs a given function for your domain, for example, a web server that serves content for the example.com website.
+Failover routing policy     – Use when you want to configure active-passive failover.
+Geolocation routing policy  – Use when you want to route traffic based on the location of your users.
 Geoproximity routing policy – Use when you want to route traffic based on the location of your resources and, optionally, shift traffic from resources in one location to resources in another.
-Latency routing policy – Use when you have resources in multiple AWS Regions and you want to route traffic to the region that provides the best latency.
-Multivalue answer routing policy – Use when you want Route 53 to respond to DNS queries with up to eight healthy records selected at random.
-Weighted routing policy – Use to route traffic to multiple resources in proportions that you specify.
+Latency routing policy      – Use when you have resources in multiple AWS Regions and you want to route traffic to the region that provides the best latency.
+Multivalue answer routing   – Use when you want Route 53 to respond to DNS queries with up to eight healthy records selected at random.
+Weighted routing policy     – Use to route traffic to multiple resources in proportions that you specify.
 
-PRICES COMPARED TO ON-DEMAND INSTANCES ----- > SPOT - 90%, RESERVED STANDARD - 75%, DEDICATED HOSTS - 70%, RESERVED CONVERTABLE -50%
+PRICES COMPARED TO ON-DEMAND INSTANCES ----- >
+SPOT - 90%,
+RESERVED-STANDARD - 75%, RESERVED-CONVERTABLE -50
+EC2 INSTANCE SAVINGS PLAN - 72%, COMPUTE SAVINGS PLAN - 66%
+DEDICATED-HOSTS - 70%,
+
+RESERVED INSTANCES : For EC2, FARGATE, RDS, REDSHIFT, ELASTICAHE
+SAVINGS PLAN       : Only for EC2 & FARGATE
+
 The percentage savings for each Reserved option is as follows:
     All you need to remember is that a 3 years term would always be more cost-effective than a 1-year term.
     Then within a term, "all upfront" is better than "partial upfront" which in turn is better than "no upfront" from a cost savings perspective.
@@ -1775,32 +1756,27 @@ https://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html#aws_tasks-that-re
 AWS Trusted Advisor provides real-time guidance to help customers provision resources following AWS best practices.
 The service offers guidance for cost optimization, performance, security, fault tolerance, and service limits.
 
-
-#READ QUESTION CAREFULLY -- REGIONAL vs GLOBAL SERVICES
-Most of the services that AWS offers are Region specific.
-But few services, by definition, need to be in a global scope because of the underlying service they offer. AWS IAM, Amazon CloudFront, Route 53 and WAF are some of the global services.
-Amazon S3 is a unique service in the sense that it follows a global namespace but the buckets are regional. You specify an AWS Region when you create your Amazon S3 bucket. This is a regional service.
-
 AWS services can be accessed in three different ways: // API GATEWAY IS INCORRECT
-AWS Management Console - This is a simple web interface for accessing AWS services.
+AWS Management Console           - This is a simple web interface for accessing AWS services.
 AWS Command Line Interface (CLI) - You can access AWS services from the command line and automate service management with scripts.
 AWS Software Developer Kit (SDK) - You can also access via AWS SDK that provides language-specific abstracted APIs for AWS services.
 
 A research lab wants to optimize the caching capabilities for its scientific computations application running on EC2 instances. Which EC2 storage option is best suited for this use-case?
 --> AMAZON EC2 INSTANCE STORE // question about scientific data -> instance store is correct option.
 
-An Amazon Machine Image (AMI) provides the information required to launch an instance. You must specify an AMI when you launch an instance. You can launch multiple instances from a single AMI when you need multiple instances with the same configuration.
-
+An Amazon Machine Image (AMI) provides the information required to launch an instance. You must specify an AMI when you launch an instance.
+You can launch multiple instances from a single AMI when you need multiple instances with the same configuration.
 The AMI must be in the same region as that of the EC2 instance to be launched.
 If the AMI exists in a different region, you can copy that AMI to the region where you want to launch the EC2 instance.
 The region of AMI has no bearing on the performance of the EC2 instance.
+When using EBS Volumes with EC2, the volume and the instance must be in the same Availability Zone.
 
 Amazon EFS is a regional service storing data within and across multiple Availability Zones (AZs) for high availability and durability.
-Amazon EC2 instances can access your file system across AZs, regions, and VPCs, while on-premises servers can access using AWS Direct Connect or AWS VPN.
+Amazon EC2 instances can access your file system (EFS) across AZs, regions, and VPCs, while on-premises servers can access using AWS Direct Connect or AWS VPN.
 EFS is highly available and durable . Data is replicated across AZ's by default.
 
-DEVELOPER : provides general architectural guidance on how services can be used for various use-cases, workloads, or applications
-BUISENESS : Contextual to your use-cases
+DEVELOPER  : Provides general architectural guidance on how AWS services can be used for various use-cases, workloads, or applications
+BUISENESS  : Contextual to your use-cases
 ENTERPRISE : Consultative review and guidance based on your applications
 
 Create separate AWS accounts for development and production environments to receive separate invoices". Every AWS account provides its own invoice end of the month.
@@ -1813,12 +1789,59 @@ AWS defines, creates, and applies the AWS generated tags for you, and you define
 You must activate both types of tags separately before they can appear in Cost Explorer or on a cost allocation report.
 
 // BY DEFAULT ENCRYPTION IS ENABLED FOR :
-Amazon S3 Glacier - Amazon S3 Glacier (S3 Glacier), is a storage service optimized for infrequently used data, or "cold data. Data at rest stored in S3 Glacier is automatically server-side encrypted using 256-bit Advanced Encryption Standard (AES-256) with keys maintained by AWS.
+Amazon S3 Glacier   - Amazon S3 Glacier, is a storage service optimized for infrequently used data, or "cold data. Data at rest stored in S3 Glacier is automatically server-side encrypted using 256-bit Advanced Encryption Standard (AES-256) with keys maintained by AWS.
 AWS Storage Gateway - AWS Storage Gateway is a hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage. All data transferred between the gateway and AWS storage is encrypted using SSL (for all three types of gateways - File, Volume and Tape Gateways).
+
+// BY DEFAULT BACKUP IS ENABLED FOR :
+Which of the below AWS services supports automated backups as a default configuration? -- RDS , // S3 replicates but not backup
+BACKUP is online <--> Offline  && REPLICATION is online <--> online
 
 // LAMBDA PRICING IS BASED ON :
 Number of requests for the lambda function
 The time it takes for the lambda function to execute
+
+// RDS PRICING IS BASED ON :
+Size of database, the uptime,
+Any additional storage of backup (above the DB size),
+Requests made to RDS and data transfer outbound.
+Deployment type (e.g. you pay for multi AZ).
+
+// EBS PRICING IS BASED ON :
+Amount of data provisioned (not consumed) per month. This means you can have empty space within a volume and you still pay for it. With provisioned IOPS volumes you are also charged for the amount you provision in IOPS
+  INCORRECT: "The amount of data storage consumed" is incorrect as you pay for the amount provisioned.
+  INCORRECT: "Number of snapshots" is incorrect. You pay for the storage consumed by snapshots, not by the number of snapshots.
+
+  Amazon EBS pricing has two factors:
+  1- Volumes: Volume storage for all EBS volume types is charged by the amount of GB you provision per month, until you release the storage.
+  2- Snapshots: Snapshot storage is based on the amount of space your data consumes in Amazon S3.
+     Because Amazon EBS does not save empty blocks, it is likely that the snapshot size will be considerably less than your volume size.
+     Copying EBS snapshots is charged based on the volume of data transferred across regions.
+     For the first snapshot of a volume, Amazon EBS saves a full copy of your data to Amazon S3.
+     For each incremental snapshot, only the changed part of your Amazon EBS volume is saved.
+     After the snapshot is copied, standard EBS snapshot charges apply for storage in the destination region.
+
+    When you want to reduce the costs of Amazon EBS consider the following:
+    1- Delete Unattached Amazon EBS Volumes: An easy way to reduce wasted spend is to find and delete unattached volumes. However, when EC2 instances are stopped or terminated, attached EBS volumes are not automatically deleted and will continue to accrue charges since they are still operating.
+    2- Resize or Change the EBS Volume Type: Another way to optimize storage costs is to identify volumes that are underutilized and downsize them or change the volume type.
+    3- Delete Stale Amazon EBS Snapshots: If you have a backup policy that takes EBS volume snapshots daily or weekly, you will quickly accumulate snapshots. Check for stale snapshots that are over 30 days old and delete them to reduce storage costs.
+
+
+// CLOUD FRONT PRICING IS BASED ON :
+Traffic Distribution : Data transfer and request pricing varies across geographic regions, and pricing is based on the edge location through which your content is served.
+Requests             : The number and type of requests (HTTP or HTTPS) made and the geographic region in which the requests are made.
+Data Transfer OUT    : The amount of data transferred out of your Amazon CloudFront edge locations.
+
+//S3 PRICING IS BASED ON :
+Total amount of data (in GB) stored on S3
+Storage class (S3 Standard, S3 Intelligent-Tiering, S3 Standard-Infrequent Access, S3 One Zone-IA, S3 Glacier, or S3 Glacier Deep Archive)
+Amount of data transferred out of AWS from S3. // data transferred in to S3 is not at all a factor, it is free of cost
+Number of requests to S3
+
+
+// #READ QUESTION CAREFULLY -- REGIONAL vs GLOBAL SERVICES
+But few services, by definition, need to be in a global scope because of the underlying service they offer. AWS IAM, Amazon CloudFront, Route 53, WorkSpaces and WAF are some of the global services.
+Amazon S3 is a unique service in the sense that it follows a global namespace but the buckets are regional. You specify an AWS Region when you create your Amazon S3 bucket. This is a regional service.
+
 
 Examples for Linux\Ubuntu based instances:
 --------------------------------------------------
@@ -1836,42 +1859,35 @@ For transferring 50PB of data , the cost efficient transport is SNOW MOBILE, not
 Snow mobile can transport 100pb at once, while snow ball can do 100TB.
 
 An engineering team is new to the AWS Cloud and it would like to launch a dev/test environment with low monthly pricing. Which AWS service can address this use-case --> LIGHT SAIL, not CLOUD FORMATION as it requires experience in working with AWS.
-When using EBS Volumes, the volume and the instance must be in the same Availability Zone.
 
 IAM ACCESS ADVISOR    : Shows the service permissions granted to a user and when those services were last accessed.
                         You can use this information to revise your policies. To summarize, you can identify unnecessary permissions so that you can revise your IAM policies accordingly.
 IAM CREDENTIAL REPORT : You can generate and download a credential report that lists all users in your account and the status of their various credentials, including passwords, access keys, and MFA devices.
                         It is not used to review permissions granted to a user.
+                        You can get a credential report from the AWS Management Console, the AWS SDKs, and Command Line Tools.
+                        You can use credential reports to assist in your auditing and compliance efforts.
+                        You can use the report to audit the effects of credential lifecycle requirements, such as password and access key rotation.
+                        You can provide the report to an external auditor, or grant permissions to an auditor so that he or she can download the report directly.
 
 AWS CLOUDTRAIL INSIGHTS : AWS CloudTrail Insights helps AWS users identify and respond to unusual activity associated with write API calls by continuously analyzing CloudTrail management events.
                           Insights events are logged when CloudTrail detects unusual write management API activity in your account. If you have CloudTrail Insights enabled, and CloudTrail detects unusual activity, Insights events are delivered to the destination S3 bucket for your trail.
 
-Memory Optimized instance types - Memory optimized instances are designed to deliver fast performance for workloads that process large data sets in memory. Memory-optimized instances offer large memory size for memory intensive applications including in-memory applications, in-memory databases, in-memory analytics solutions, High Performance Computing (HPC), scientific computing, and other memory-intensive applications.
+Memory Optimized instance types  - Memory optimized instances are designed to deliver fast performance for workloads that process large data sets in memory. Memory-optimized instances offer large memory size for memory intensive applications including in-memory applications, in-memory databases, in-memory analytics solutions, High Performance Computing (HPC), scientific computing, and other memory-intensive applications.
 Compute Optimized instance types - Compute Optimized instances are designed for applications that benefit from high compute power. These applications include compute-intensive applications like high-performance web servers, high-performance computing (HPC), scientific modelling, distributed analytics, and machine learning inference.
 Storage Optimized instance types - Dense-storage instances are designed for workloads that require high sequential read and write access to very large data sets, such as Hadoop distributed computing, massively parallel processing data warehousing, and log processing applications. The Dense-storage instances offer the best price/GB-storage and price/disk-throughput across other EC2 instances.
 Accelerated computing instance types - Accelerated Computing instance family is a family of instances that use hardware accelerators, or co-processors, to perform some functions, such as floating-point number calculation and graphics processing, more efficiently than is possible in software running on CPUs. Amazon EC2 provides three types of Accelerated Computing instances – GPU compute instances for general-purpose computing,
 
 In CLOUDTRAIL, by default only MANAGEMENT events are logged.
 DATA EVENTS & INSIGHT EVENTS are available for extra cost.
-EFS is a regional service.
-WORKSPACES is a global service.
 
-AWS Elastic Beanstalk - AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS. You can simply upload your code and Elastic Beanstalk automatically handles the deployment, from capacity provisioning, load balancing, auto-scaling to application health monitoring.
+AWS Elastic Beanstalk - AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS.
+You can simply upload your code or ZIP file  and Elastic Beanstalk automatically handles the deployment, from capacity provisioning, load balancing, auto-scaling to application health monitoring.
 At the same time, you retain full control over the AWS resources powering your application and can access the underlying resources at any time.
 
-Control Tower is an AWS native service providing a pre-defined set of blueprints and guardrails to help customers implement a landing zone for new AWS accounts - Control Tower is an AWS native service providing a pre-defined set of blueprints and guardrails to help customers implement a landing zone for new AWS accounts.
+Control Tower is an AWS native service providing a pre-defined set of blueprints and guardrails to help customers implement a landing zone for new AWS accounts.
 Control Tower is designed to provide an easy, self-service setup experience and an interactive user interface for ongoing governance with guardrails.
-While Control Tower automates creation of a new landing zone with pre-configured blueprints (e.g., AWS SSO for directory and access), the AWS Landing Zone solution provides a configurable setup of a landing zone with rich customization options through custom add-ons (e.g., Active Directory, Okta Directory) and ongoing modifications through a code deployment and configuration pipeline.
-
-SCPs don't affect users or roles in the management account. They affect only the member accounts in your organization.
-Service control policies (SCPs) are a type of organization policy that you can use to manage permissions in your organization.
-SCPs offer central control over the maximum available permissions for all accounts in your organization.
-SCPs help you to ensure your accounts stay within your organization’s access control guidelines. SCPs are available only in an organization that has all features enabled.
-SCPs aren't available if your organization has enabled only the consolidated billing features.
-SCPs alone are not sufficient to grant permissions to the accounts in your organization.
-No permissions are granted by an SCP. An SCP defines a guardrail, or sets limits, on the actions that the account's administrator can delegate to the IAM users and roles in the affected accounts.
-The administrator must still attach identity-based or resource-based policies to IAM users or roles, or to the resources in your accounts to actually grant permissions.
-The effective permissions are the logical intersection between what is allowed by the SCP and what is allowed by the IAM and resource-based policies.
+While Control Tower automates creation of a new landing zone with pre-configured blueprints (e.g., AWS SSO for directory and access),
+   the AWS Landing Zone solution provides a configurable setup of a landing zone with rich customization options through custom add-ons (e.g., Active Directory, Okta Directory) and ongoing modifications through a code deployment and configuration pipeline.
 
 Amazon Quantum Ledger Database - Amazon QLDB is a fully managed ledger database that provides a transparent, immutable, and cryptographically verifiable transaction log ‎owned by a central trusted authority.
 Amazon QLDB can be used to track each and every application data change and maintains a complete and verifiable history of changes over time.
@@ -1892,7 +1908,7 @@ AWS enables covered entities and their business associates subject to the U.S. H
 
 SCHEDULED RIs: These are available to launch within the time windows you reserve.
 This option allows you to match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month.
-Other types include, STANDARD & CONVERTABLE>
+Other types include, STANDARD & CONVERTABLE.
 
 Which AWS dashboard displays relevant and timely information to help users manage events in progress, and provides proactive notifications to help plan for scheduled activities? -- AWS Personal Health Dashboard
 AWS Personal Health Dashboard provides alerts and remediation guidance when AWS is experiencing events that may impact you.
@@ -1903,20 +1919,17 @@ With Personal Health Dashboard, alerts are triggered by changes in the health of
 A resource group is a collection of resources that share one or more tags or portions of tags.
 To create a resource group, you simply identify the tags that contain the items that members of the group should have in common.
 
-An IAM policy is a policy document that is used to define permissions that can be applied to users, groups and roles. You don’t apply the policy to the service, you apply it to the role. The role is then used to assign permissions to the AWS service.
-With IAM Roles you can delegate permissions to resources for users and services without using permanent credentials (e.g. username and password). To do so you can create a role and assign an IAM policy to the role that has the permissions required.
+An IAM policy is a policy document that is used to define permissions that can be applied to users, groups and roles.
+You don’t apply the policy to the service, you apply it to the role. The role is then used to assign permissions to the AWS service.
+With IAM Roles you can delegate permissions to resources for users and services without using permanent credentials (e.g. username and password).
+To do so you can create a role and assign an IAM policy to the role that has the permissions required.
 
-Which of the below AWS services supports automated backups as a default configuration? -- RDS , // S3 replicates but not backup
-AWS Elastic Beanstalk and AWS CloudFormation are both examples of automation. Beanstalk is a platform service that leverages the automation capabilities of CloudFormation to build out application architectures.
+AWS Elastic Beanstalk and AWS CloudFormation are both examples of automation.
+Beanstalk is a platform service that leverages the automation capabilities of CloudFormation to build out application architectures.
 
 Supported authentication methods for an IAM USER include console passwords, access keys and server certificates.
 Access keys are a combination of an access key ID and a secret access key and can be used to make programmatic calls to AWS.
 Server certificates are SSL/TLS certificates that you can use to authenticate with some AWS services.
-
-When using AWS Organizations with consolidated billing, best practices include:
-– Always enable multi-factor authentication (MFA) on the root account.
-– Always use a strong and complex password on the root account.
-– The Paying account should be used for billing purposes only. Do not deploy resources into the Paying account.
 
 You need to run a production process that will use several EC2 instances and run constantly on an ongoing basis. The process cannot be interrupted or restarted without issue. What EC2 pricing model would be best for this workload? --> RESERVED INSTANCES. , Not ON-DEMAND
 Amazon Route 53 features include domain registration, DNS, traffic flow, health checking, and failover. Route 53 does not support DHCP, IP routing or caching.
@@ -1931,16 +1944,13 @@ The 6 advantages of cloud computing are:
 
 The AWS Storage Gateway service enables hybrid cloud storage between on-premises environments and the AWS Cloud. It seamlessly integrates on-premises enterprise applications and workflows with Amazon’s block and object cloud storage services through industry standard storage protocols.
 Amazon Elastic File System (EFS)" is incorrect. Amazon EFS is not a hybrid cloud storage solution. With EFS you can mount file systems from on-premises servers, however it does not offer a local cache or method of moving data into the cloud.
-With Amazon RDS you are charged for the type and size of database, the uptime, any additional storage of backup (above the DB size), requests, deployment type (e.g. you pay for multi AZ), and data transfer outbound.
-
-With EBS volumes you are charged for the amount of data provisioned (not consumed) per month. This means you can have empty space within a volume and you still pay for it. With provisioned IOPS volumes you are also charged for the amount you provision in IOPS
-  INCORRECT: "The amount of data storage consumed" is incorrect as you pay for the amount provisioned.
-  INCORRECT: "Number of snapshots" is incorrect. You pay for the storage consumed by snapshots, not by the number of snapshots.
 
 A company has deployed several relational databases on Amazon RDS. Every month, the database software vendor releases new security patches that need to be applied to the database. What is the MOST efficient way to apply the security patches?
   --> Enable automatic patching for the instances using the Amazon RDS console
-  Periodically, Amazon RDS performs maintenance on Amazon RDS resources. Maintenance most often involves updates to the DB instance's underlying hardware, underlying operating system (OS), or database engine version. Updates to the operating system most often occur for security issues and should be done as soon as possible.
-  Required patching is automatically scheduled only for patches that are related to security and instance reliability. Such patching occurs infrequently (typically once every few months) and seldom requires more than a fraction of your maintenance window.
+  Periodically, Amazon RDS performs maintenance on Amazon RDS resources. Maintenance most often involves updates to the DB instance's underlying hardware, underlying operating system (OS), or database engine version.
+  Updates to the operating system most often occur for security issues and should be done as soon as possible.
+  Required patching is automatically scheduled only for patches that are related to security and instance reliability.
+  Such patching occurs infrequently (typically once every few months) and seldom requires more than a fraction of your maintenance window.
 
 An Elastic IP Address can be remapped between EC2 instances across which boundaries? -- AVAILABILITY ZONES
 Elastic IP addresses are for use in a specific region only and can therefore only be remapped between instances within that region. You can use Elastic IP addresses to mask the failure of an instance in one Availability Zone by rapidly remapping the address to an instance in another Availability Zone.
@@ -1951,8 +1961,15 @@ The TCO calculator asks for the number of servers (Physical or VMs) you are runn
 Use this new calculator to compare the cost of your applications in an on-premises or traditional hosting environment to AWS. Describe your on-premises or hosting environment configuration to produce a detailed cost comparison with AWS.
 "The number of storage systems in your company" is incorrect. You don’t need to specify the number of storage systems, you just need to specify the raw capacity.
 
-Amazon LightSail provides an easy, low cost way to consume cloud services without needing the skill set for using VPC resources. The product set includes virtual private servers (instances), managed MySQL databases, HA storage, and load balancing
+Amazon LightSail provides an easy, low cost way to consume cloud services without needing the skill set for using VPC resources.
+The product set includes virtual private servers (instances), managed MySQL databases, HA storage, and load balancing
 You can connect to other AWS services such as S3, DynamoDB, and CloudFront, however these are not part of the LightSail product range
+
+DATA BACKUP      --> Copies necessary files and applications to a secondary location such as a hosted or offsite server. // ONLINE SERVER <---> OFFLINE SERVER
+DATA REPLICATION --> Mirrors the data stored on a server to another server. // ONLINE SERVER <---> ONLINE SERVER
+
+Standard retrievals in archive access tier and deep archive access tier are free.
+Using the S3 console, you can pay for expedited retrievals if you need faster access to your data from the archive access tiers.
 
 SELECT TWO
 SELECT THREE

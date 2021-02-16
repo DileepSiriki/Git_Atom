@@ -342,9 +342,6 @@ Advantages of Cloud Computing include:  (IMPORTANT)
    This means you can provide a lower latency and better experience for your customers simply and at minimal cost.
 
 
-
-EX : Netflix in Aws
-
 AMAZON WEB SERVICES  : Since 2006 -
 --------------------------
 Amazon Web Services is a secure cloud service offering a broad set of global cloud-based products including compute, storage, databases, analytics, networking, mobile, developer tools, management tools, IoT, security, and enterprise applications: on-demand, available in seconds, with pay-as-you-go pricing.
@@ -363,45 +360,81 @@ FIVE PILLARS OF AWS : https://aws.amazon.com/blogs/apn/the-5-pillars-of-the-aws-
    The operational excellence pillar includes the ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures.
 
     Infrastructure as Code -> process of managing your infrastructure through machine-readable configuration files to automate your infrastructure -> CLOUD FORMATION
+    Observability          -> Observability is the process of measuring the internal state of your system. This is usually done to optimize it to some desired end state.
 
-    Observability -> Observability is the process of measuring the internal state of your system.
-                     This is usually done to optimize it to some desired end state.
+    There are five design principles for operational excellence in the cloud:
+    • Perform operations as code
+    • Make frequent, small, reversible changes
+    • Refine operations procedures frequently
+    • Anticipate failure
+    • Learn from all operational failures
 
 2. SECURITY : -> Policies (IAM) , Network Security (VPC) , Encryption (KMS)
    Focuses on how to secure your infrastructure on the cloud. Security and compliance is a shared responsibility between AWS and the customer.
    The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
+
     AWS      -> responsible for physical infrastructure, software, and networking capabilities.
     CUSTOMER -> configuration of specific cloud services, the application software, and the management of sensitive data, client side and server side encryption.
+
+    There are seven design principles for security in the cloud:
+    • Implement a strong identity foundation
+    • Enable traceability
+    • Apply security at all layers
+    • Automate security best practices
+    • Protect data in transit and at rest
+    • Keep people away from data
+    • Prepare for security events
 
 3. RELIABILITY :
    Focuses on how you can build services that are resilient to both service and infrastructure disruptions.
    The reliability pillar includes the ability of a system to recover from infrastructure or service disruptions, dynamically acquire computing resources to meet demand, and mitigate disruptions such as  misconfigurations or transient network issues.
+
    Fault Isolation -> Resource and Request , Availability Zone , Region
-   Limits -> Limits are constraints that can be applied to protect your services from excessive load. (SERVICE QUOTAS)
+   Limits          -> Limits are constraints that can be applied to protect your services from excessive load. (SERVICE QUOTAS)
+
+   There are five design principles for reliability in the cloud:
+    •  Automatically recover from failure
+    •  Test recovery procedures
+    •  Scale horizontally to increase aggregate workload availability
+    •  Stop guessing capacity
+    •  Manage change in automation
 
 4. PERFORMANCE EFFICIENCY :
    Focuses on how you can run services efficiently and scalably in the cloud to handle any amount of traffic.
    The performance efficiency pillar includes the ability to use computing resources efficiently to meet system requirements.
    Key topics include selecting the right resource types and sizes based on workload requirements, monitoring performance, and making informed decisions to maintain efficiency as business needs evolve.
 
-   Selection -> Ability to choose the service that most closely aligns with your workload.
-                AWS has the broadest selection of services. (COMPUTE, STORAGE , DB ,N/W)
-   Scaling   -> VERTICAL : say micro instance to a macro instance (increasing capacity of an instance)
+   Selection -> Ability to choose the service that most closely aligns with your workload. AWS has the broadest selection of services. (COMPUTE, STORAGE , DB ,N/W)
+   Scaling   -> VERTICAL : say micro instance to a macro instance (increasing capacity of an instance) .
                 HORIZONTAL : say 10 instances to 40 instances ( increasing number of instances)
+
+   There are five design principles for performance efficiency in the cloud:
+   •  Democratize advanced technologies
+   •  Go global in minutes
+   •  Use serverless architectures
+   •  Experiment more often
+   •  Consider mechanical sympathy
 
 5. COST OPTIMIZATION : -> AWS Cost Explorer ,  AWS Cost & Usage Report
    The cost optimization pillar includes the ability to avoid or eliminate unneeded cost or sub-optimal resources.
    Focuses on achieving business outcomes while minimizing costs.
    OpEx is an ongoing pay-as-you-go model whereas CapEx is a one-time purchase model.
 
+   There are five design principles for cost optimization in the cloud:
+    •  Implement cloud financial management
+    •  Adopt a consumption model
+    •  Measure overall efficiency
+    •  Stop spending money on undifferentiated heavy lifting
+    •  Analyze and attribute expenditure
 
 WAYS TO COMMUNICATE WITH AWS :
 -------------------------------
 
   WEB CONSOLE                     ----
-  CLI                                 |------- API --------------- AWS
-  SDK for java,python etc ;           |------- API --------------- SERVICES
+  CLI                                 |------- API < Access Keys > --------------- AWS
+  SDK for java, python etc ;          |------- API < Access Keys > --------------- SERVICES
   Blue-Prints                     ----
+  ** Access Keys = Access Key ID + Secret Access Key
 
   WEB CONSOLE is the actual AWS Page
   CLI is used to automate tasks similar to JENKINS . It is written in python.
