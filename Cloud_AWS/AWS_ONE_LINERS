@@ -1919,7 +1919,40 @@ When using AWS Organizations with consolidated billing, best practices include:
 – The Paying account should be used for billing purposes only. Do not deploy resources into the Paying account.
 
 You need to run a production process that will use several EC2 instances and run constantly on an ongoing basis. The process cannot be interrupted or restarted without issue. What EC2 pricing model would be best for this workload? --> RESERVED INSTANCES. , Not ON-DEMAND
+Amazon Route 53 features include domain registration, DNS, traffic flow, health checking, and failover. Route 53 does not support DHCP, IP routing or caching.
 
+The 6 advantages of cloud computing are:
+– Trade capital expense for variable expense.
+– Benefit from massive economies of scale.
+– Stop guessing about capacity.
+– Increase speed and agility.
+– Stop spending money running and maintaining data centers.
+– Go global in minutes.
+
+The AWS Storage Gateway service enables hybrid cloud storage between on-premises environments and the AWS Cloud. It seamlessly integrates on-premises enterprise applications and workflows with Amazon’s block and object cloud storage services through industry standard storage protocols.
+Amazon Elastic File System (EFS)" is incorrect. Amazon EFS is not a hybrid cloud storage solution. With EFS you can mount file systems from on-premises servers, however it does not offer a local cache or method of moving data into the cloud.
+With Amazon RDS you are charged for the type and size of database, the uptime, any additional storage of backup (above the DB size), requests, deployment type (e.g. you pay for multi AZ), and data transfer outbound.
+
+With EBS volumes you are charged for the amount of data provisioned (not consumed) per month. This means you can have empty space within a volume and you still pay for it. With provisioned IOPS volumes you are also charged for the amount you provision in IOPS
+  INCORRECT: "The amount of data storage consumed" is incorrect as you pay for the amount provisioned.
+  INCORRECT: "Number of snapshots" is incorrect. You pay for the storage consumed by snapshots, not by the number of snapshots.
+
+A company has deployed several relational databases on Amazon RDS. Every month, the database software vendor releases new security patches that need to be applied to the database. What is the MOST efficient way to apply the security patches?
+  --> Enable automatic patching for the instances using the Amazon RDS console
+  Periodically, Amazon RDS performs maintenance on Amazon RDS resources. Maintenance most often involves updates to the DB instance's underlying hardware, underlying operating system (OS), or database engine version. Updates to the operating system most often occur for security issues and should be done as soon as possible.
+  Required patching is automatically scheduled only for patches that are related to security and instance reliability. Such patching occurs infrequently (typically once every few months) and seldom requires more than a fraction of your maintenance window.
+
+An Elastic IP Address can be remapped between EC2 instances across which boundaries? -- AVAILABILITY ZONES
+Elastic IP addresses are for use in a specific region only and can therefore only be remapped between instances within that region. You can use Elastic IP addresses to mask the failure of an instance in one Availability Zone by rapidly remapping the address to an instance in another Availability Zone.
+
+Object lifecycle management can be used with objects so that they are stored cost effectively throughout their lifecycle. Objects can be transitioned to another storage class or expired.
+
+The TCO calculator asks for the number of servers (Physical or VMs) you are running on-premises. You also need to supply the resource information (CPU, RAM) and specify whether the server is a DB or non-DB.
+Use this new calculator to compare the cost of your applications in an on-premises or traditional hosting environment to AWS. Describe your on-premises or hosting environment configuration to produce a detailed cost comparison with AWS.
+"The number of storage systems in your company" is incorrect. You don’t need to specify the number of storage systems, you just need to specify the raw capacity.
+
+Amazon LightSail provides an easy, low cost way to consume cloud services without needing the skill set for using VPC resources. The product set includes virtual private servers (instances), managed MySQL databases, HA storage, and load balancing
+You can connect to other AWS services such as S3, DynamoDB, and CloudFront, however these are not part of the LightSail product range
 
 SELECT TWO
 SELECT THREE
