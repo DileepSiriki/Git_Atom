@@ -674,6 +674,43 @@ CONNECTING TO A LINUX INSTANCE :
     You specify the name of the key pair when you launch your instance, then provide the private key when you log in using SSH.
     You can use the same keypair on multiple instances and you can also use multiple keypairs on the same user on an instance.
 
+    NOTE : // Adding extra key-pairs to an instance https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    --------
+    Initially when you launch an instance, you generate or specify an already existing keypair that you want to use to connect to that instance.
+    If you will use an SSH client on a macOS or Linux computer to connect to your Linux instance, use the following command to set the permissions of your private key file so that only you can read it.
+    --> chmod 400 my-key-pair.pem
+
+    KEYPAIR --> Private half is stored by you in the form of .pem or .ppk file. // .pem for OpenSSH & .ppk for Putty.
+                Public half is stored in the path " .ssh/authorized_keys " in that instance .
+                We can generate any number of key-pairs and add them to an instance afterwards.
+
+     STEP-1 : ssh -i "Private-Key/path" username@DNS-name
+     STEP-2 : open .ssh/authorized_keys
+     STEP-3 : You will find the default public key of the key-pair that you specified in the form of " ssh-rsa <publci-key> <keypair-name>
+     STEP-4 : In the EC2 console, create a new key-pair that you want to add to that instance.
+              In a linux terminal , do " ssh-keygen -y -f /path_to_key_pair/my-key-pair "
+              This will generate the public half of the key-pair.
+              Copy it.
+     STEP-5 : Now in the already connected session, open the file " .ssh/authorized_keys " file and add an entry in the form " <generated-public-key> <keypair-name> " using a text editor.
+              Keypair-name is optional and is for reference purpose only, and used incase we want to delete the access to a key pair in future.
+
+              [ ec2-user@ip-172-31-40-203 ]$ cat .ssh/authorized_keys
+              ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCTCrYHTl/5It/KrXMLN7BUDKskVE4PpApkCgd6dV12HljvAhXpl66zdPDiN9NHVB+3jmxmF8ZBJN ec2-linux
+              ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+twbxxGzNfaghfjny88GFt/EnULmZhRVwpb9Ln0G0A3hbNGPgDt8tjOpACAk1usOwSyN4RJg0Cv ec2-linux_1
+
+     CONNECT TO AN INSTANCE IF PRIVATE KEY IS  :
+     ---------------------------------------------
+      Step 1: Create a new key pair
+      Step 2: Get information about the original instance and its root volume
+      Step 3: Stop the original instance
+      Step 4: Launch a temporary instance
+      Step 5: Detach the root volume from the original instance and attach it to the temporary instance
+      Step 6: Add the new public key to authorized_keys on the original volume mounted to the temporary instance
+      Step 7: Unmount and detach the original volume from the temporary instance, and reattach it to the original instance
+      Step 8: Connect to the original instance using the new key pair
+      Step 9: Clean ups
+
+
 --> When you ssh into a Linux instance, you supply a username and the private half of a keypair.
     The Linux system will look in the nominated user's .ssh/authorized_keypairs file and will attempt to find the matching public half of the keypair.
     If found, it will allow you to start the ssh session. Therefore, any keypair can be added to a user's .ssh/authorized_keys file.
@@ -686,13 +723,13 @@ CONNECTING TO A LINUX INSTANCE :
       ppk -- For use with PuTTY
       chmod 400 my-key-pair.pem -> change permissions so that only you can see it .
 
---> If your local computer operating system is Linux or macOS X
-      • SSH client - ssh -i "Private-Key" username@DNS-name
+--> If your local computer operating system is Linux or macOS X // --> i stands for IDENTITY FILE
+      • SSH client --> ssh -i "/path/to/Private-Key" username@DNS-name
       • AWS Systems Manager Session Manager
       • EC2 Instance Connect
 
 --> If your local computer operating system is Windows
-      • SSH client - ssh -i "Private-Key" username@DNS-name
+      • SSH client - ssh -i "Private-Key" username@DNS-name    // WSL
       • AWS Systems Manager Session Manager
       • PuTTY ( free SSH client for Windows)
       • Windows Subsystem for Linux
@@ -733,7 +770,7 @@ CONNECTING TO A LINUX INSTANCE :
         1. Download Latest putty version -> putty + putty Key Gen
         2. Convert your private key using PuTTYgen : (Skip if you already have key in ppk format)
               PuTTY does not natively support the private key format for SSH keys.
-              PuTTY provides a tool namedPuTTYgen, which converts keys to the required format for PuTTY.
+              PuTTY provides a tool named PuTTYgen, which converts keys to the required format for PuTTY.
               You must convert your private key(.pem file) into this format (.ppk file)
         3. STEP A : Type of key to generate : RSA
            STEP B : Chose load , by default it shows only ppk files . change to (.* all files)
@@ -767,12 +804,26 @@ CONNECTING TO A LINUX INSTANCE :
                         If these fingerprints don't match, someone might be attempting a "man-in-the-middle" attack. If they match, continue to the next step
                     --> Choose Yes. A window opens and you are connected to your instance.
 
+--> CONNECT USING POWERSHELL : // To connect to LINUX instances using SSH instead of PUTTY for WINDOWS_version > 10 .
+          Type in SSH in Powershell or cmd in WINDOWS  and if it says SSH is not installed, then you have to use PUTTY.
+          chmod 400 <keyfile> does not work in windows . You need to go to file settings and then change settings.
+          --> https://tcsglobal.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/16560336#overview
+
 --> CONNECT USING SESSION MANAGER :
           Session Manager is a fully managed AWS Systems Manager capability that lets you manage your AmazonEC2 instances through an interactive one-click browser-based shell or through the AWS CLI.
           You can use Session Manager to start a session with an instance in your account.
           After the session is started, you can run bash commands as you would through any other connection type.
           ///ly for WSL -> download , copy private key to WSL , do an ssh command to connect .
 
+--> EC2-Instance-Connect is only available for LINUX based Instances .
+    For windows we have RDP & SESSION MANAGER 
+
+
+NOTE :
+--------
+Question --> I was able to connect yesterday to an Instance , but today I can't ?
+This is probably because you have stopped your EC2 instance and then started it again today.
+When you do so, the public IP of your EC2 instance will change. Therefore, in your command, or Putty configuration, please make sure to edit and save the new public IP.
 
 CONNECTING TO A WINDOWS INSTANCE :
 ---------------------------------
