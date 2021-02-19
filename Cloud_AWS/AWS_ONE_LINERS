@@ -1104,6 +1104,7 @@ Customers can use AWS Config to answer “What did my AWS resource look like?”
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 BYOL - Dedicated HOSTS :
+// We have access to physical cores of hardware and underlying sockets that we can use with licenses.
 You have a variety of options for using new and existing Microsoft software licenses on the AWS Cloud. By purchasing Amazon Elastic Compute Cloud (Amazon EC2) or Amazon Relational Database Service (Amazon RDS) license-included instances, you get new, fully compliant Windows Server and SQL Server licenses from AWS.
 The BYOL model enables AWS customers to use their existing server-bound software licenses, including Windows Server, SQL Server, and SUSE Linux Enterprise Server.
 Your existing licenses may be used on AWS with Amazon EC2 Dedicated Hosts, Amazon EC2 Dedicated Instances or EC2 instances with default tenancy using Microsoft License Mobility through Software Assurance.
@@ -1518,6 +1519,7 @@ For example, if you are planning to use 500 GB of S3 storage, you can input this
 
 
 When you launch instances on a Dedicated Host, the instances run on a physical server that is dedicated for your use.
+// We have access to physical cores of hardware and underlying sockets that we can use with licenses.
 While Dedicated instances also run on dedicated hardware, Dedicated Hosts provide further visibility and control by allowing you to place your instances on a specific, physical server.
 This enables you to deploy instances using configurations that help address corporate compliance and regulatory requirements.
 Note:   Amazon EC2 purchasing options include: On-Demand, Savings Plans, Reserved Instances, Spot Instances, Dedicated Hosts and Dedicated instances.
@@ -1525,15 +1527,17 @@ Note:   Amazon EC2 purchasing options include: On-Demand, Savings Plans, Reserve
         Your Dedicated instances are physically isolated at the host hardware level from instances that belong to other AWS accounts. However, Dedicated Instances may share hardware with other instances from the same AWS account that are not Dedicated Instances.
 
 The difference between Dedicated Hosts and Dedicated Instances:
+// We have access to physical cores of hardware and underlying sockets that we can use with licenses.
 1- Dedicated Instances guarantee that the instances will run on hardware that's dedicated to a single AWS account.
    But, as we mentioned above, Dedicated Instances may share hardware with other instances from the same AWS account that are not Dedicated Instances.
    That is not the case with Dedicated Hosts. Dedicated Hosts allow you to control how instances are placed on a specific physical server, and you can consistently deploy your instances to the same physical server over time.
    For that reason, Dedicated Hosts is a better option to handle compliance and regulatory requirements in most scenarios.
+   PER INSTANCE BILLING.
 2- Dedicated Hosts enable you to benefit from the Bring Your Own License (BYOL) model for almost every BYOL scenario, while only certain scenarios are supported by Dedicated Instances.
    The BYOL model enables AWS customers to use their existing server-bound software licenses, including Windows Server, SQL Server, and SUSE Linux Enterprise Server.
    Dedicated Hosts provide additional control over your instances and visibility into Host level resources and tooling that allows you to manage software that consumes licenses on a per-core or per-socket basis, such as Windows Server and SQL Server.
    This is why most BYOL scenarios are supported through the use of Dedicated Hosts, while only certain scenarios are supported by Dedicated Instances.
-
+   PER HOST BILLING.
 
 When you enable Multi-AZ, Amazon Relational Database Service (Amazon RDS) maintains a redundant and consistent standby copy of your data.
 If you encounter problems with the primary copy, Amazon RDS automatically switches to the standby copy (or to a read replica in the case of Amazon Aurora) to provide continued availability to the data.
@@ -1976,13 +1980,26 @@ DATA REPLICATION --> Mirrors the data stored on a server to another server. // O
 Standard retrievals in archive access tier and deep archive access tier are free.
 Using the S3 console, you can pay for expedited retrievals if you need faster access to your data from the archive access tiers.
 
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+                                                                          :::: SOLUTIONS ARCHITECT ASSOCIATE - EXAM TIPS ::::
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+:::: EC2 ::::
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
 Question --> I was able to connect yesterday to an Instance , but today I can't ?
 This is probably because you have stopped your EC2 instance and then started it again today.
 When you do so, the public IP of your EC2 instance will change. Therefore, in your command, or Putty configuration, please make sure to edit and save the new public IP.
 
+A vCPU stands for virtual central processing unit. One or more vCPUs are assigned to every Virtual Machine (VM) within a cloud environment. Each vCPU is seen as a single physical CPU core by the VM's operating system.
+
 EC2 -- TIMEOUT is an security group issue .
        CONNECTION REFUSED is an application issue inside an EC2.
-
 
 INSTALLING APACHE WEBSERVER ON LINUX EC2 : // https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html
 ---------------------------------------------------
@@ -2000,34 +2017,151 @@ sudo systemctl enable httpd
 [root@ip-172-31-40-203 ec2-user]# echo "HELLO WORLD from $(hostname -f)" > /var/www/html/index.html
 Now refresh the page again.
 
+EC2-UserData :
+----------------
+Used to boot-strap an instance. // Launch custom scripts when system starts.
+The script is only run once at the instance first start, useful for " Installing updates, download common files from internet etc;"
+Runs only with root user so all commands have sudo permissions and more the script, more the start time of instance.
+Option available at STEP-3 : CONFIGURE INSTANCE DETAILS.
+
+ EXAMPLE :
+ #!/bin/sh
+ sudo yum update -y
+ sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+ cat /etc/system-release // Should give the output Amazon linux 2
+ sudo yum install -y httpd
+ sudo systemctl start httpd
+ sudo systemctl enable httpd
+
+Reserved Instances are used  for steady state usage applications such as a DATABASE.
+GREAT COMBO : Use a mix of Reserved instances for a baseline such as a web server which will run continuously and On demand instance for un-predictable workloads.
+
+SPOT BLOCKS : you can request a spot instance for a specified time frame - 1 to 6 years.
+SPOT REQUEST = maximum price + Desired number of instances + launch specification + Requirement type : one-time / Persistent + Valid from + Valid Until
+
+                                 ---Terminate / Interrupt (Persistent) ---
+                                |       (until specified interval)         |
+                                V                                          ^
+ Create a request -------> Spot Request  ----> Launch Instance ------> [[*****]] ----->Terminate / Interrupt (One-time)
+                          (specification)                             (Instances)
+
+SPOT REQUESTS can be of 2 types :
+   1. One-time    : Spot request is deleted once an instance is assigned.  So this is a onetime request.
+   2. Persistent  : If a spot instance is terminated then the request keeps on requesting for another set of specified spot instance with the max price we defined and until the Valid-from & Valid-to time. This is a consistant request.
+
+You can only cancel spot instance requests that are in OPEN / ACTIVE / DISABLED state.
+Cancelling a spot request does not terminate instances.
+So to terminate a spot request, you must first cancel a spot request and then terminate the associated spot instances.
+Because if we directly terminate and the instance type is persistent, then the instances will be launched again.
+
+// Spot instance, if we know the exact instance or capacity and AZ
+// Spot fleet, if we can specify that AWS can chose all these instance types and all the AZ to meet our requirement.
+
+SPOT FLEET : set of spot instances + Optional On-Demand Instances . // we define multiple launch pools , multiple instance types
+spot fleets allow us to automatically request spot instances with the lowest price.
+Spot fleet will try to meet the target capacity with price constraints.
+ --> Define possible launch pools: Instance type, OS , AZ
+ --> Can have multiple launch pools, so that the fleet can Choose
+ --> spot fleet stops launching instances when reaching capacity or max cost.
+
+STRATEGIES TO ALLOCATE SPOT INSTANCES :
+ --> Lowest price : from the pool with the lowest price (cost optimization, short workload)
+ --> Diversified  : distributed across all pools        (great for availability, long workloads) // if one pool goes away, then other pools will be active.
+ --> Capacity Optimized : pool with the optimal capacity for number of instances
+
+
+R - Applications that need a lot of RAM - in-memory caches
+C - Applications that need a good CPU - compute/databases
+M - Applications that are balanced - general / web app
+I - Applications that need good local I/O instance storage - databases
+G - Applications that need a GPU - video rendering/machine learning
+T2/T3 - Burstable instances  // Burst is the BOOST of a CPU.
+T2/T3 - Unlimited : unlimited bursts
+
+A CPU core is a CPU’s processor. In the old days, every processor had just one core that could focus on one task at a time. Today, CPUs have been two and 18 cores, each of which can work on a different task.
+Bursts has BURST CREDITS, that gets used by spikes in load. If there is high spike then all credits gets used up and CPU goes down.
+Again when the load gets low, Credits gets accumulated back.
+
+EBS SNAPSHOT vs AMI Images :
+------------------------------
+An EBS snapshot is a backup of a single EBS volume. The EBS snapshot contains all the data stored on the EBS volume at the time the EBS snapshot was created.
+An AMI image is a backup of an entire EC2 instance. Associated with an AMI image are EBS snapshots. Those EBS snapshots are the backups of the individual EBS volumes attached to the EC2 instance at the time the AMI image was created.
+
+As a Backup Strategy, Should You Create AMI Images or EBS Snapshots?
+The answer to this depends on many factors, including your restore time objective, desired restore procedure, and many other business-related factors.
+If your restore objective is to create a fresh EC2 instance quickly to replace a failed EC2 instance, then creating AMI images is definitely the way to go.
+If your EC2 instance contains a mix of static EBS volumes (for example, a non-changing root volume) and dynamic EBS volumes (for example, a data volume), then creating EBS snapshots may be better.
+Since EBS snapshots can be thought of as incremental, you only pay for the storage of the changed data. So creating multiple EBS snapshots of a non-changing EBS volume will not incur high charges.
+The process of creating an AMI image will also create EBS snapshots. So even if you need to restore a single EBS volume, you can do so from the individual EBS snapshot.
+For these reasons, unless there are business factors weighing against it, we recommend creating AMI images instead of just EBS snapshots.
+
+CROSS ACCOUNT AMI COPY :
+---------------------------
+Your AMI take space and they live in Amazon S3
+• Amazon S3 is a durable, cheap and resilient storage where most of your backups will live (but you won’t see them in the S3 console)
+• By default, your AMIs are private, and locked for your account / region
+• You can also make your AMIs public and share them with other AWS accounts or sell them on the AMI Marketplace
+
+You can share an AMI with another AWS account.
+• Sharing an AMI does not affect the ownership of the AMI.
+• If you copy an AMI that has been shared with your account, you are the owner of the target AMI in your account.
+• To copy an AMI that was shared with you from another account, the owner of the source AMI must grant you read permissions for the storage that backs the AMI, either the associated EBS snapshot (for an Amazon EBS-backed AMI) or an associated S3 bucket (for an instance store-backed AMI).
+
+LIMITS:
+• You can't copy an encrypted AMI that was shared with you from another account.
+  Instead, if the underlying snapshot and encryption key were shared with you, you can copy the snapshot while re- encrypting it with a key of your own.
+  You own the copied snapshot, and can register it as a new AMI.
+• You can't copy an AMI with an associated billing Product code that was shared with you from another account. This includes Windows AMIs and AMIs from the AWS Marketplace.
+  To copy a shared AMI with a billing Product code, launch an EC2 instance in your account using the shared AMI and then create an AMI from the instance.
+
+PLACEMENT GROUPS :
+---------------------
+Sometimes you want control over the EC2 Instance placement strategy , because we cannot directly access infrastructure and launch as we wish.
+• That strategy can be defined using placement groups
+• When you create a placement group, you specify one of the following strategies for the group:
+    • Cluster    — clusters instances into a low-latency group in a single Availability Zone, instances are on same hardware in same AZ.
+                   • Pros : Great network (10 Gbps bandwidth between instances)
+                   • Cons : If the rack fails, all instances fails at the same time
+                   • Use case: Big Data job that needs to complete fast or an application that needs extremely low latency and high network throughput
+
+    • Spread     — spreads instances across underlying hardware (max 7 instances per group per AZ)
+                   • Pros : Can span across Availability Zones (AZ) - Reduced risk is simultaneous failure - EC2 Instances are on different physical hardware
+                   • Cons : Limited to 7 instances per AZ per placement group
+                   • Use case: Application that needs to maximize high availability & Critical Applications where each instance must be isolated from failure from each other
+
+    • Partition  — spreads instances across many different partitions (which rely on different sets of racks) within an AZ. Scales to 100s of EC2 instances per group (Hadoop, Cassandra, Kafka)
+                   • Up to 7 partitions per AZ • Up to 100s of EC2 instances • The instances in a partition do not share racks with the instances in the other partitions
+                   • A partition failure can affect many EC2 but won’t affect other partitions
+                   • EC2 instances get access to the partition information as metadata
+                   • Use cases: HDFS, HBase, Cassandra, Kafka
+
+EC2 HIBERNATE :
+-----------------
+• We know we can stop, terminate instances
+  • Stop: the data on disk (EBS) is kept intact in the next start
+  • Terminate: any EBS volumes (root) also set-up to be destroyed is lost
+• On start, the following happens:
+  • First start: the OS boots & the EC2 User Data script is run
+  • Following starts: the OS boots up
+  • Then your application starts, caches get warmed up, and that can take time!
+• Introducing EC2 Hibernate:
+  • The in-memory (RAM) state is preserved
+  • The instance boot is much faster!  (the OS is not stopped / restarted)
+  • Under the hood: the RAM state is written to a file in the root EBS volume
+  • The root EBS volume must be encrypted
+• Use cases: long-running processing - saving the RAM state - services that take time to initialize
+• Supported instance families - C3, C4, C5, M3, M4, M5, R3, R4, and R5.
+• Instance RAM size - must be less than 150 GB.
+• Instance size     - not supported for bare metal instances.
+• AMI : Amazon Linux 2, Linux AMI, Ubuntu & Windows…
+• Root Volume: must be EBS, encrypted, not instance store, and large
+• Available for On-Demand and Reserved Instances and not Spot Instances.
+• An instance cannot be hibernated more than 60 days
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+:::: EC2 ::::
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
