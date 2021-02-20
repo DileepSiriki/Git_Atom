@@ -1846,11 +1846,18 @@ Storage class (S3 Standard, S3 Intelligent-Tiering, S3 Standard-Infrequent Acces
 Amount of data transferred out of AWS from S3. // data transferred in to S3 is not at all a factor, it is free of cost
 Number of requests to S3
 
-
 // #READ QUESTION CAREFULLY -- REGIONAL vs GLOBAL SERVICES
 But few services, by definition, need to be in a global scope because of the underlying service they offer. AWS IAM, Amazon CloudFront, Route 53, WorkSpaces and WAF are some of the global services.
 Amazon S3 is a unique service in the sense that it follows a global namespace but the buckets are regional. You specify an AWS Region when you create your Amazon S3 bucket. This is a regional service.
 
+// EBS is locked to an AZ.
+   An EBS in us-east-1a can not be attached to us-east-1b.
+   To move volumes across , You need to make snapshots.
+   But EBS is redundant, saying it is replicated across a single AZ.
+
+   To share an EBS snapshot, select the snapshot and then goto permissions, change it to PUBLIC or in PRIVATE, add the account number to which to share it.
+   The reviever now changes the filter to private and then can access the snapshot.
+   To share an encrypted snapshots, we must use the KMS-CMK service.
 
 Examples for Linux\Ubuntu based instances:
 --------------------------------------------------
@@ -2158,10 +2165,134 @@ EC2 HIBERNATE :
 • Available for On-Demand and Reserved Instances and not Spot Instances.
 • An instance cannot be hibernated more than 60 days
 
+--> We need to have one classic load balancer infront of each application ,
+    But with application load balancer, we can have one AL infront of multiple applications.
 
+--> SSL – Server Name Indication (SNI)
+• SNI solves the problem of loading multiple SSL certificates onto one web server (to serve multiple websites)
+• It’s a “newer” protocol, and requires the client to indicate the hostname of the target server in the initial SSL handshake
+• The server will then find the correct certificate, or return the default one
+Note:  • Only works for ALB & NLB (newer generation), CloudFront -- • Does not work for CLB (older gen)
+
+--> ELB – Connection Draining // Waiting for existing connections to complete while an EC2 is getting deregistered / unhealthy -- terminated or stopped.
+• Feature naming: • CLB: Connection Draining -- • Target Group: Deregistration Delay (for ALB & NLB)
+• Time to complete “in-flight requests” while the instance is de-registering or unhealthy
+• Stops sending new requests to the instance which is de-registering
+• Between 1 to 3600 seconds, default is 300 seconds
+• Can be disabled (set value to 0)
+• Set to a low value if your requests are short and high value say 1000sec, if instance is slow to process requests.
+  If you set it to 0, then the inflight requests will get an error, and upon refresh by user, the new requests will be routed to other ELB's.
+
+AUTO SCALING GROUPS have the following attributes :
+• A launch configuration • AMI + Instance Type • EC2 User Data • EBS Volumes • Security Groups • SSH Key Pair • Min Size / Max Size / Initial Capacity • Network + Subnets Information
+• Load Balancer Information ( which load balancer to attach the ASG to) • Scaling Policies (what will scale out and what will scale in)
+--> We trigger based on alarms from cloudwatch
+
+EBS VOLUME TYPES : // Only GP2 and IO1 can be used as boot volumes
+• EBS Volumes come in 4 types
+• GP2 (SSD): General purpose SSD volume that balances price and performance for a wide variety of workloads
+• IO1 (SSD): Highest-performance SSD volume for mission-critical low-latency or high- throughput workloads
+• ST1 (HDD): Low cost HDD volume designed for frequently accessed, throughput- intensive workloads
+• SC1 (HDD): Lowest cost HDD volume designed for less frequently accessed workloads
+--> command lsblk will show the attached volumes .
+--> To attach a volume to instance in another AZ, create a snapshot of volume,  then make a volume from that snapshot which asks where to store the volume, specify the required AZ , now attach it to the instance.
+    // Snapshot is not attached to an AZ. So to attach volume to instance in another region, copy the snap to required region , then make a volume from it in the required AZ in the required region.
+
+EBS VS INSTANCE STORE : For Heigher IPOS , say in millions the solution is instance store, not EBS.
+---------------------------------------
+• Some instance do not come with Root EBS volumes, Instead, they come with “Instance Store” (= ephemeral storage)
+• Instance store is physically attached to the INSTANCE (EBS is a network drive)
+• Pros:  Better I/O performance (EBS gp2 has an max IOPS of 16000, io1 of 64000) -- Good for buffer / cache / scratch data / temporary content -- Data survives reboots
+• Cons:  On stop or termination, the instance store is lost -- You can’t resize the instance store -- Backups must be operated by the user
+
+EBS RAID OPERATIONS : // To get more IOPS or performance with EBS. // 0 and 1 are recommended, 5 and 6 are not.
+-------------------------
+Amazon EBS volume data is replicated across multiple servers within the same availability zone to prevent the loss of data from the failure of any single component.
+This replication makes Amazon EBS volumes more reliable, which means customers who follow the guidance found on the Amazon EBS and Amazon EC2 product detail pages typically achieve good performance out of the box.
+However, there are certain scenarios where it is necessary to achieve a higher network throughput with much better IOPS.
+
+One way to accomplish this is by configuring a software level RAID array.
+RAID is supported by almost all operating systems and is used to boost the IOPS and network throughput of volumes of EBS in AWS.
+Before configuring RAID, it is important to know how large your RAID array should be and how many IOPS are required.
+In the most basic terms, configuring a RAID array works by using two volumes as one, using the combined IOPS and network throughput of both volumes.
+
+Things to Remember When Configuring RAID on Amazon EBS:
+   Typically, RAIDS types such as 0, 1, 5 and 6 can be configured on AWS.
+   As per AWS, the ideal RAID configuration is RAID 0 and 1: the reason for this is because in RAID 0 users can stripe across multiple volumes to gain a better distribution of I/O and therefore better performance.
+   In the same way, RAID 1 is used to achieve better availability and fault-tolerant behaviour as two volumes are mirrored, with one acting as backup copy for the other in case of a failure.
+   Different types of instance resources such as General Purpose, Provisioned IOPS, Throughput Optimized, Cold HDD volumes can be combined together in a RAID 0 configuration.
+   This uses the accumulated available bandwidth of all the volumes to achieve higher throughput and IOPS.
+
+RAID - 0 : // way to increase performance. --> For data [a + b + c + d ],  EBS-1 [ a + b] EBS-2 [ c + d]
+   LOGICAL VOLUME to an instance = EBS-1 + EBS-2
+   But one disk fails, all the data is failed
+   • Use cases would be: An application that needs a lot of IOPS and doesn’t need fault-tolerance, A database that has replication already built-in
+   • Using this, we can have a very big disk with a lot of IOPS
+   • For example: Two 500 GiB Amazon EBS io1 volumes with 4,000 provisioned IOPS each will create  1000 GiB RAID 0 array with an available bandwidth of 8,000 IOPS and 1,000 MB/s of throughput
+
+RAID - 1 : // To increase fault tolerance. --> For data [a + b + c + d ],  EBS-1 [ a + b + c + d ] EBS-2 [ a + b + c + d] --> EBS-1 is a mirror of EBS-2
+   • If one disk fails, our logical volume is still working
+   • We have to send the data to two EBS volume at the same time (2x network)
+   • Use case: Application that need increase volume fault tolerance -- Application where you need to service disks
+   • For example: Two 500 GiB Amazon EBS io1 volumes with 4,000 provisioned IOPS each will create  500 GiB RAID 1 array with an available bandwidth of 4,000 IOPS and 500 MB/s of throughput
+
+EFS elastic File System : // EBS is locked to single AZ, hence EFS but so costly and pay for what you use unlike provisioned disk in EBS.
+----------------------------
+• Managed NFS (network file system) that can be mounted on many EC2
+• EFS works with EC2 instances in multi-AZ
+• Highly available, scalable, expensive (3x gp2), pay per use
+--> EFS has a lifecycle management : Storage Tiers (lifecycle management feature – move file after N days)
+    • Standard: for frequently accessed files
+    • Infrequent access (EFS-IA): cost to retrieve files, lower price to store
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
-:::: EC2 ::::
+:::: DATABASE ::::
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+READ REPLICAS : // ASYNCHRONOUS // RDS Read Replicas for read scalability
+----------------
+Up to 5 Read Replicas Within AZ, Cross AZ or Cross Region
+• Replication is ASYNC, so reads are eventually consistent
+• Replicas can be promoted to their own DB
+--> Read replicas are used for SELECT (=read) only kind of statements (not INSERT, UPDATE, DELETE)
+--> Creating a READ REPLICA in another AZ will cost us money, so create it in the same AZ.
+
+RDS Multi AZ : // SYNCHRONOUS // (Disaster Recovery)
+------------------------------------------
+One DNS name – automatic app failover to standby --> ONE DNS NAME , So automatic failover to the standby and because it is synchronous.
+• Increase availability
+• Failover in case of loss of AZ, loss of network, instance or storage failure
+• No manual intervention in apps and  Not used for scaling
+• Note:The Read Replicas be setup as Multi AZ for Disaster Recovery (DR)
+--> Unlike read replicas, no one can read/write to the standby database instance.
+
+RDS ENCRYPTION :
+-------------------------
+--> Encrypting RDS backups
+    • Snapshots of un-encrypted RDS databases are un-encrypted
+    • Snapshots of encrypted RDS databases are encrypted
+    • Can copy a snapshot into an encrypted one
+--> To encrypt an un-encrypted RDS database:
+    • Create a snapshot of the un-encrypted database
+    • Copy the snapshot and enable encryption for the snapshot
+    • Restore the database from the encrypted snapshot
+    • Migrate applications to the new database, and delete the old database
+
+AURORA --> Writer & Reader ENdpoints.
+
+REDIS      :  • Multi AZ with Auto-Failover -- • Read Replicas to scale reads and have high availability -- • Data Durability using AOF persistence -- • Backup and restore features
+MEMCACHED  :  • Multi-node for partitioning of data (sharding) -- • Non persistent  • No backup and restore -- • Multi-threaded architecture
+Storing Session Data in ElastiCache is a common pattern to ensuring different instances can retrieve your user's state if needed.
+Logging in one application will replicate login credentials to other apps using session data.
+// REDIS AUTH
+
+Important ports:  FTP: 21 - SSH: 22 - SFTP: 22 (same as SSH) - HTTP: 80 - HTTPS: 443
+RDS Databases ports: PostgreSQL: 5432 - MySQL: 3306 - Oracle RDS: 1521 - MSSQL Server: 1433 - MariaDB: 3306 (same as MySQL) - Aurora: 5432 (if PostgreSQL compatible) or 3306 (if MySQL compatible)
+
+Which database technology does NOT support TDE (Transparent Data Encryption) on RDS? -- PostgreSQL
+Which RDS database technology does NOT support IAM authentication? -- Oracle
+How can you enhance the security of your Redis cache to force users to enter a password? -- REDIS AUTH
+To save costs, enable Read Replicas in the Same AZ.
+To create a disaster recovery strategy for your RDS PostgreSQL database so that in case of a regional outage, a database can be quickly made available for Read and Write workload in another region. -- Create a Read Replica in a different Region and enable Multi-Az  on main Db.
+PostgreSQL for RDS can be used to obtain short-lived credentials.
