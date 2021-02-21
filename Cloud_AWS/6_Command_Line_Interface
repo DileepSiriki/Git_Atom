@@ -8,15 +8,15 @@ Install the AWS-CLI - Version : 2.0
 Once done open WIN -> cmd -> execute aws commands in the Windows Command Line .
 
 $ aws configure
-AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
-AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+AWS Access Key ID [None]: AKIAXK7QGYUTLRNF7QGK
+AWS Secret Access Key [None]: wJalrXUtnFEMIskefbsjncilwufwfnewinf
 Default region name [None]: us-west-2
 Default output format [None]: json
 
 $ aws configure list --> list configuration details from (C:\Users\DileepKumar\.aws)
 The AWS CLI stores this information in a profile (a collection of settings) named default in the credentials file
 ~/.aws/credentials
-~/.aws/config
+~/.aws/
 
   ACCESS KEY-ID & SECRET ACCESS KEY :
             Generated while creating a user or afterwards using SECURITY CREDENTIALS tab in USERS.
@@ -36,9 +36,9 @@ The AWS CLI stores this information in a profile (a collection of settings) name
   PROFILE : A collection of settings is called a profile. By default, the AWS CLI uses the default profile.
             You can create and use additional named profiles with varying credentials and settings by specifying the --profile option and assigning a name.
 
-          $ aws configure --profile produser
+          $ aws configure --profile admin
           AWS Access Key ID [None]: AKIAI44QH8DHBEXAMPLE
-          AWS Secret Access Key [None]: je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY
+          AWS Secret Access Key [None]: drkjghkjsfblwfwniuwhefwuwelwjnfiufqfn
           Default region name [None]: us-east-1
           Default output format [None]: text
 
@@ -47,7 +47,7 @@ The AWS CLI stores this information in a profile (a collection of settings) name
                             aws_access_key_id = AKIAXK7QGYUTLRNF7QGK
                             aws_secret_access_key = <secret-access-key> #deleted to push this page into github
                             [admin]
-                            aws_access_key_id = AKIAXK7QGYUTLRNF7QGK
+                            aws_access_key_id = AKIAI44QH8DHBEXAMPLE
                             aws_secret_access_key = <secret-access-key>  #deleted to push this page into github
 
             config file : [default]
@@ -55,12 +55,14 @@ The AWS CLI stores this information in a profile (a collection of settings) name
                           output = table
                           [profile admin]
                           region = us-east-1
-                          output = table
+                          output = text
 
-            This file keeps on updating upon providing profiles and we can use the profile name as alias for a particular user  in future.
-            To use a named profile, add the --profile profile-name option to your command .
-            EX: $ aws ec2 describe-instances --profile user1 (to list ec2 instances for user1)
-            To make a profile as default : WINDOWS : setx AWS_PROFILE  user1  (set for that particular shell & setx if for all shells)
+NOTE :
+----------------
+    This file keeps on updating upon providing profiles and we can use the profile name as alias for a particular user  in future.
+    To use a named profile, add the " --profile profile-name " option to your command .
+    EX: $ aws ec2 describe-instances --profile user1 (to list ec2 instances for user1)
+    To make a profile as default : WINDOWS : setx AWS_PROFILE  user1  (set for that particular shell & setx if for all shells)
                                            LINUX   : export AWS_PROFILE=user1
 
            aws configure get/set <> --profile <> --> get/set values

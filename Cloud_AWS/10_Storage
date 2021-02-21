@@ -235,7 +235,7 @@ STORAGE CLASSES : https://aws.amazon.com/s3/storage-classes/
 
     --> S3 STANDARD         —  The default storage class If you don't specify the storage class when you upload an object, Amazon S3 assigns the S3 Standard storage class.
     --> REDUCED REDUNDANCY  —  The Reduced Redundancy Storage (RRS) storage class is designed for noncritical, reproducible data that can be stored with less redundancy than the S3 Standard storage class.
-                               The reduced redundancy storage class has the lowest durability of all the storage classes.
+        [DEPRICATED]           The reduced redundancy storage class has the lowest durability of all the storage classes.
                                This means object stored in this storage class have the highest probability of being lost.
                                So you should only store objects in this storage class if they can be easily reproduced.
                                In exchange for the lower durability, the cost is lower than the standard storage class.
