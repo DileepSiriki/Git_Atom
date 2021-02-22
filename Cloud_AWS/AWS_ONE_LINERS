@@ -2670,3 +2670,350 @@ So if the 1st API call has 2ms and it failed, then the 2nd API call will have 4m
 :::: CLOUDFRONT & AWS-GLOBAL ACCELERATOR ::::
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+Nearly 210 Point Of Presence Globally as of now.
+The following can be acted as an origin for CLOUDFRONT :
+    -->  S3 bucket             : • For distributing files and caching them at the edge • Enhanced security with CloudFront Origin Access Identity (OAI) • CloudFront can be used as an ingress (to upload files to S3)
+    -->  Custom Origin (HTTP)  : • Application Load Balancer (can have private ec2 that talks to only ELB) • EC2 instance (must be public) • S3 website (must first enable the bucket as a static S3 website) • Any HTTP backend you want
+// CloudFront accesses data from an S3 Bucket using the Origin Access Identity (OAI).
+
+CloudFront Geo Restriction :
+You can restrict who can access your distribution
+    • Whitelist: Allow your users to access your content only if they're in one of the countries on a list of approved countries.
+    • Blacklist: Prevent your users from accessing your content if they're in one of the countries on a blacklist of banned countries.
+
+CloudFront vs S3 Cross Region Replication :
+--> CloudFront:
+    • Global Edge network
+    • Files are cached for a TTL (maybe a day)
+    • Great for static content that must be available everywhere
+--> S3 Cross Region Replication:
+    • Must be setup for each region you want replication to happen
+    • Files are updated in near real-time
+    • Read only
+    • Great for dynamic content that needs to be available at low-latency in few regions
+
+CLOOUDFRONT SIGNED URLS / SIGNED COOKIES :
+---------------------------------------------
+You want to distribute paid shared content to premium users over the world
+We can use CloudFront Signed URL / Cookie. We attach a policy with:
+        • Includes URL expiration
+        • Includes IP ranges to access the data from
+        • Trusted signers (which AWS accounts can create signed URLs)
+How long should the URL be valid for?
+        • Shared content (movie, music): make it short (a few minutes)
+        • Private content (private to the user): you can make it last for years
+
+• Signed URL = access to individual files (one signed URL per file)
+• Signed Cookies = access to multiple files (one signed cookie for many files)
+
+CloudFront Signed URL vs S3 Pre-Signed URL :
+------------------------------------------------
+CloudFront Signed URL:                                                             S3 Pre-Signed URL:
+• Allow access to a path, no matter the origin                                     • Issue a request as the person who pre-signed the URL
+• Account wide key-pair, only the root can manage it                               • Uses the IAM key of the signing IAM principal
+• Can filter by IP, path, date, expiration                                         • Limited lifetime
+• Can leverage caching features
+
+Unicast IP: one server holds one IP address
+Anycast IP: all servers hold the same IP address and the client is routed to the nearest one
+
+AWS GLOBAL ACCELERATOR :
+-------------------------------
+• Leverage the AWS internal network to route to your application
+• 2 Anycast IP are created for your application
+• The Anycast IP send traffic directly to Edge Locations
+• The Edge locations send the traffic to your application
+
+• Works with Elastic IP, EC2 instances, ALB, NLB, public or private
+• Global Accelerator performs a health check of your applications
+• Helps make your application global (failover less than 1 minute for unhealthy)
+• Great for disaster recovery (thanks to the health checks)
+• only 2 external IP need to be whitelisted
+• DDoS protection thanks to AWS Shield
+
+AWS Global Accelerator vs CloudFront :
+------------------------------------------
+• They both use the AWS global network and its edge locations around the world
+• Both services integrate with AWS Shield for DDoS protection.
+--> CloudFront
+      • Improves performance for both cacheable content (such as images and videos)
+      • Dynamic content (such as API acceleration and dynamic site delivery)
+      • Content is served at the edge
+--> Global Accelerator
+      • Improves performance for a wide range of applications over TCP or UDP
+      • Proxying packets at the edge to applications running in one or more AWS Regions.
+      • Good fit for non-HTTP use cases, such as gaming (UDP), IoT (MQTT), or Voice over IP
+      • Good for HTTP use cases that require static IP addresses
+      • Good for HTTP use cases that required deterministic, fast regional failover
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+:::: STORAGE EXTRAS ::::
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+• Snowball cannot import to Glacier directly
+• You have to use Amazon S3 first, and an S3 lifecycle policy TO TRANSFER DATA TO GLACIER.
+SNOW BALL EDGE = SNOW BALL + SOME COMPUTATIONAL CAPACITY .
+
+FILE GATEWAY : // Backed by S3
+• Configured S3 buckets are accessible using the NFS and SMB protocol
+• Supports S3 standard, S3 IA, S3 One Zone IA
+• Bucket access using IAM roles for each File Gateway
+• Most recently used data is cached in the file gateway
+• Can be mounted on many servers
+
+     Application <-- NFS --> File Gateway <=== HTTPS ===> AWS
+
+     NOTE :
+     --------
+     • Using a file gateway means you need Virtualization…
+     • Otherwise, you can use a File Gateway Hardware Appliance
+     • You can buy it on amazon.com • Helpful for daily NFS backups in small data centers which does not have a virtualization capability.
+
+VOLUME GATEWAY : // Backed by S3 with EBS snaps
+• Block storage using iSCSI protocol backed by S3
+• Backed by EBS snapshots which can help restore on-premise volumes!
+• Cached volumes: low latency access to most recent data
+• Stored volumes: entire dataset is on premise, scheduled backups to S3
+
+     Application <-- iSCSI --> Volume Gateway <=== HTTPS ===> AWS >--> EBS Snapshots
+
+TAPE GATEWAY : // Backed by S3 and Glacier
+• Some companies have backup processes using physical tapes (!)
+• With Tape Gateway, companies use the same processes but in the cloud
+• Virtual Tape Library (VTL) backed by Amazon S3 and Glacier
+• Back up data using existing tape-based processes (and iSCSI interface)
+• Works with leading backup software vendors
+
+   Backup Server <-- iSCSI --> | Tape Drive Or Media Changer to  Volume Gateway | <=== HTTPS ===> AWS >--> Archived Tapes stored in Glacier.
+
+AMAZON FSx ( File Server ) is for WINDOWS.
+AMAZON FSx for LUSTRE (Linux Cluster) is for Machine Learning, High Performance Computing (HPC) for linux machines.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+:::: AWS INTEGRATION & MESSAGING ::::
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+There are two patterns of application communication
+1) Synchronous communications --> application to application //  can be problematic if there are sudden spikes of traffic
+2) Asynchronous / Event based --> application to queue to application
+    • using SQS: queue model
+    • using SNS: pub/sub model
+    • using Kinesis: real-time streaming model
+
+SQS : --> Standard & FIFO queues
+-------------------------------------
+  STANDARD : Limitation of 256KB per message sent
+             Can have duplicate messages (at least once delivery, occasionally)
+             Can have out of order messages (best effort ordering
+  FIFO     : First-in -- First-out delivery
+             Exactly one processing
+
+    PRODUCER -----------------> [[ SQS QUEUE ]] --------------------> CONSUMER ------ Process & Delete --> Deleted in QUEUE
+                                      ^                                v
+                  (After Timeout) ->  |__ Only process & not delete ___|
+
+The message is persisted in SQS until a consumer deletes it and Message retention: default 4 days, up to 14 days
+consumers Poll SQS for messages (receive up to 10 messages at a time) and they should delete the message else they will be persisted in the queue.
+Create a queue --> Click send/recieve messages --> send a message --> Below poll for a message !!!
+until and unless you delete the message , the message keeps on appearing in the queue. so delete it after you read/process it.
+
+SQS MESSAGE VISIBILITY TIMEOUT :
+-----------------------------------
+After a message is polled by a consumer, it becomes invisible to other consumers. By default, the “message visibility timeout” is 30 seconds.
+That means the message has 30 seconds to be processed and after the message visibility timeout is over, the message is “visible” in SQS.
+If a message is not processed within the visibility timeout, it will be processed twice so A consumer can call the ChangeMessageVisibility API to get more time to process.
+• If visibility timeout is high (hours), and if the consumer crashes, re-processing will take time
+• If visibility timeout is too low (seconds), we may get duplicates
+
+SQS DEAD LETTER QUEUES :
+------------------------------
+If a consumer fails to process a message within the Visibility Timeout the message goes back to the queue!
+We can set a threshold of how many times a message can go back to the queue and After the MaximumReceives threshold is exceeded, the message goes into a dead letter queue (DLQ).
+• Useful for debugging!
+• Make sure to process the messages in the DLQ before they expire : Good to set a retention of 14 days in the DLQ
+--> Create a Queue and then specify this queue as a dead letter queue to all the other queues using their properties available at the bottom.
+
+SQS DELAY QUEUES :
+-----------------------
+Delay a message (consumers don’t see it immediately) up to 15 minutes default is 0 seconds (message is available right away)
+Can set a default at queue level  Can override the default on send using the DelaySeconds parameter .
+
+SQS FIFO QUEUES :
+------------------------
+Exactly-once send capability (by removing duplicates) and  Messages are processed in order by the consumer.
+The name should end with .fifo to work
+
+SQS WITH AUTOSCALING :
+------------------------
+EC2 Instances poll for messages --> creates a custom metric in cloudwatch [ queue length / number of instances ] --> cloudwatch will create an alarm if a threshold is reached --> this alarm will trigger the autoscaling group accordingly.
+
+SNS - SIMPLE NOTIFICATION SERVICE :
+-----------------------------------------
+The “event producer” only sends message to one SNS topic and  As many “event receivers” (subscriptions) as we want to listen to the SNS topic notifications and Each subscriber to the topic will get all the messages (note: new feature to filter messages)
+Up to 10,000,000 subscriptions per topic, 100,000 topics limit
+• Subscribers can be: SQS, HTTP / HTTPS (with delivery retries – how many times), Lambda, Emails, SMS messages, Mobile Notifications
+SNS + SQS = Fanout --->   Buying Service --> SNS -> SQS queue 1 --> Fraud services
+                                                    SQS Queue 2 --> Shipping service
+
+// SQS , after data is consumed and deleted it is gone
+// Kiness , we can replay or reprocess data
+
+KINESIS :
+-----------
+Kinesis is a managed alternative to Apache Kafka --  Great for application logs, metrics, IoT, clickstreams --  Great for “real-time” big data -- • Great for streaming processing frameworks (Spark, NiFi, etc…)
+• Data is automatically replicated to 3 AZ
+• Kinesis Streams: low latency streaming ingest at scale
+• Kinesis Analytics: perform real-time analytics on streams using SQL
+• Kinesis Firehose: load streams into S3, Redshift, ElasticSearch…
+
+[ STREAMS + IOT + LOGS ] ---> Kinesis Streams --> Kinesis Analytics --> Kinesis Firehose ---> [ S3 or RedShift ]
+
+PRODUCERS ---> [shard1 + shard2 + .......] ----> Consumers . // One Consumer per shard.
+Streams are divided in ordered Shards / Partitions, we increase or decrease shards as per demand . Once data is inserted in Kinesis, it can’t be deleted (immutability).
+A SHARD can be a 1MB/s or 1000 messages/s at write PER SHARD and  2MB/s at read PER SHARD (THROUGHPUT) .  Records are ordered per shard
+Billing is per shard provisioned, can have as many shards as you want--> More shards = more bill.
+
+NOW HOW TO SEND DATA TO SHARD ?
+Along with data, we send a key which will be hashed to find the right Shard. // Key is hashed to determine shard id
+The same key goes to the same partition (helps with ordering for a specific key) and Messages sent get a “sequence number”
+Choose a partition key that is highly distributed (helps prevent “hot partition”)
+    • user_id if many users
+    • Not country_id if 90% of the users are in one country then there will be a hot partition
+KCL -- Kinesis Client Library can be used by consumers.  || KPL -- Kinesis Producer Library is used by producers.
+
+Kinesis Firehose --> Near Real time , used to send into redshift - S3 - ElasticSearch - Splunk and only pay for data flowing through firehose and not for provisioning.
+--> We can also transform data using LAMBDA before sending data.
+
+Kinesis Data Streams vs Firehose :
+--> Streams  -- Going to write custom code (producer / consumer) • Real time (~200 ms) • Must manage scaling (shard splitting / merging) • Data Storage for 1 to 7 days, replay capability, multi consumers
+--> Firehose -- Fully managed, send to S3, Splunk, Redshift, ElasticSearch • Serverless data transformations with Lambda • Near real time (lowest buffer time is 1 minute) • Automated Scaling • No data storage
+
+KINESIS vs SQS ORDERING :
+-----------------------------
+Let’s assume 100 trucks, 5 kinesis shards, 1 SQS FIFO
+--> Kinesis Data Streams:
+      • On average you’ll have 20 trucks per shard
+      • Trucks will have their data ordered within each shard
+      • The maximum amount of consumers in parallel we can have is 5
+      • Can receive up to 5 MB/s of data
+--> SQS FIFO
+      • You only have one SQS FIFO queue
+      • You will have 100 Group ID
+      • You can have up to 100 Consumers (due to the 100 Group ID)
+      • You have up to 300 messages per second (or 3000 if using batching)
+
+SQS vs SNS vs KINESIS :
+---------------------------
+SQS:
+• Consumer “pull data”
+• Data is deleted after being consumed
+• Can have as many workers (consumers) as we want
+• No need to provision throughput
+• No ordering guarantee (except FIFO queues)
+• Individual message delay capability
+
+SNS:
+• Push data to many subscribers
+• Up to 10,000,000 subscribers
+• Data is not persisted (lost if not delivered)
+• Pub/Sub
+• Up to 100,000 topics
+• No need to provision throughput
+• Integrates with SQS for fan- out architecture pattern
+
+Kinesis:
+• Consumers “pull data”
+• As many consumers as we want
+• Possibility to replay data
+• Meant for real-time big data, analytics and ETL
+• Ordering at the shard level
+• Data expires after X days
+• Must provision throughput
+
+AWS MQ : // managed Apache ActiveMQ -- OpenWire , AMQP, STOMP, MQTT, WSS
+------------
+• SQS, SNS are “cloud-native” services, and they’re using proprietary protocols from AWS.
+• Traditional applications running from on-premise may use open protocols such as: MQTT, AMQP, STOMP, Openwire, WSS
+• When migrating to the cloud, instead of re-engineering the application to use SQS and SNS, we can use Amazon MQ
+• Amazon MQ doesn’t “scale” as much as SQS / SNS
+• Amazon MQ runs on a dedicated machine, can run in HA with failover
+• Amazon MQ has both queue feature (~SQS) and topic features (~SNS)
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+:::: SERVERLESS ::::
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+• AWS Lambda • DynamoDB • AWS Cognito • AWS API Gateway • Amazon S3 • AWS SNS & SQS • AWS Kinesis Data Firehose • Aurora Serverless • Step Functions • Fargate
+
+LAMBDA : • Node.js (JavaScript) • Python • Java (Java 8 compatible) • C# (.NET Core) • Golang • C# / Powershell • Ruby • Custom Runtime API (community supported, example Rust)
+          // Pay per calls + Pay per execution time
+You can tell the Lambda runtime which handler method to invoke by setting the handler parameter on your function's configuration.
+When you configure a function in Python, the value of the handler setting is the file name and the name of the handler module, separated by a dot.
+For example, main.Handler calls the Handler method defined in main.py.
+
+AWS Lambda Limits to Know - per region
+• Execution:
+    • Memory allocation: 128 MB – 3008 MB (64 MB increments)
+    • Maximum execution time: 900 seconds (15 minutes)
+    • Environment variables (4 KB)
+    • Disk capacity in the “function container” (in /tmp): 512 MB
+    • Concurrency executions: 1000 (can be increased)
+• Deployment:
+    • Lambda function deployment size (compressed .zip): 50 MB
+    • Size of uncompressed deployment (code + dependencies): 250 MB
+    • Can use the /tmp directory to load other files at startup
+    • Size of environment variables: 4 KB
+
+LAMBDA@edge :
+--------------
+                1                                    2
+  USER <---------------------> LAMBDA@edge <----------------> ORIGIN
+                4                                    3
+  1.  After CloudFront receives a request from a viewer (viewer request)
+  2.  Before CloudFront forwards the request to the origin (origin request)
+  3.  After CloudFront receives the response from the origin (origin response)
+  4.  Before CloudFront forwards the response to the viewer (viewer response)
+
+DYNAMO Db :
+----------------
+Table must have provisioned read and write capacity units
+--> Read Capacity Units (RCU): throughput for reads ($0.00013 per RCU)
+    • 1 RCU = 1 strongly consistent read of 4 KB per second
+    • 1 RCU = 2 eventually consistent read of 4 KB per second
+--> Write Capacity Units (WCU): throughput for writes ($0.00065 per WCU)
+    • 1 WCU = 1 write of 1 KB per second
+• Option to setup auto-scaling of throughput to meet demand
+• Throughput can be exceeded temporarily using “burst credit”, If burst credit are empty, you’ll get a “ProvisionedThroughputException”.
+• It’s then advised to do an exponential back-off retry
+
+DynamoDb Accelerator : DAx :
+------------------------------
+• DAX = DynamoDB Accelerator • Seamless cache for DynamoDB, no application re-write
+• Writes go through DAX to DynamoDB • Micro second latency for cached reads & queries • Solves the Hot Key problem (too many reads) • 5 minutes TTL for cache by default
+• Up to 10 nodes in the cluster • Multi AZ (3 nodes minimum recommended for production)
+
+DynamoDb Streams :
+-------------------
+Changes in DynamoDB (Create, Update, Delete) can end up in a DynamoDB Stream
+• This stream can be read by AWS Lambda, and we can then do:
+• React to changes in real time (welcome email to new users) -- • Analytics -- • Create derivative tables / views -- • Insert into ElasticSearch
+
+DyanmoDB Global Tables : // (cross region replication)
+---------------------------
+• Active Active replication, many regions 
+• Must enable DynamoDB Streams
+• Useful for low latency, DR purposes
+
+DynamoDB - New Features :
+-----------------------------
+--> Transactions (new from Nov 2018)
+    • All or nothing type of operations
+    • Coordinated Insert, Update & Delete across multiple tables
+    • Include up to 10 unique items or up to 4 MB of data
+--> On Demand (new from Nov 2018)
+    • No capacity planning needed (WCU / RCU) – scales automatically
+    • 2.5x more expensive than provisioned capacity (use with care)
+    • Helpful when spikes are un-predictable or the application is very low throughput
