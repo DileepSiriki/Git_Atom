@@ -1450,6 +1450,9 @@ Note: Permissions are granted to IAM identities (users, groups, and roles) to de
 Chef and Puppet are automation platforms that allow you to use code to automate the configurations of your servers.
 OpsWorks lets you use Chef and Puppet to automate how servers are configured, deployed, and managed across your Amazon EC2 instances or on-premises compute environments.
 
+Key-pairs are regional specific.
+Launching a new ec2 instance in new region needs us to create a new key-pair in that particular region.
+
 Placement Groups are logical groupings or clusters of EC2 instances within a single Availability Zone.
 Placement groups are recommended for applications that require low network latency, high network throughput, or both.
 
@@ -2185,6 +2188,11 @@ Note:  • Only works for ALB & NLB (newer generation), CloudFront -- • Does n
 • Set to a low value if your requests are short and high value say 1000sec, if instance is slow to process requests.
   If you set it to 0, then the inflight requests will get an error, and upon refresh by user, the new requests will be routed to other ELB's.
 
+-> N/W load balancer do not have a security group associated with it. It sends the same incoming requests to the ec2 instances directly,
+-> Appplication load balancer had a security group associated with it. So we can place our EC2 in a private subnet and it does not know the actual client talking to it.
+So block an IP, we can deploy WAF on application load balancer.
+
+
 AUTO SCALING GROUPS have the following attributes :
 • A launch configuration • AMI + Instance Type • EC2 User Data • EBS Volumes • Security Groups • SSH Key Pair • Min Size / Max Size / Initial Capacity • Network + Subnets Information
 • Load Balancer Information ( which load balancer to attach the ASG to) • Scaling Policies (what will scale out and what will scale in)
@@ -2298,6 +2306,28 @@ How can you enhance the security of your Redis cache to force users to enter a p
 To save costs, enable Read Replicas in the Same AZ.
 To create a disaster recovery strategy for your RDS PostgreSQL database so that in case of a regional outage, a database can be quickly made available for Read and Write workload in another region. -- Create a Read Replica in a different Region and enable Multi-Az  on main Db.
 PostgreSQL for RDS can be used to obtain short-lived credentials.
+
+REDSHIFT :
+-------------
+• Redshift is based on PostgreSQL, but it’s not used for OLTP
+• It’s OLAP – online analytical processing (analytics and data warehousing)
+• 10x better performance than other data warehouses, scale to PBs of data
+• Columnar storage of data (instead of row based)
+• Leader node: for query planning, results aggregation
+• Compute node: for performing the queries, send results to leader
+• Redshift Spectrum: perform queries directly against S3 (no need to load)
+--> You can configure Amazon Redshift to automatically copy snapshots (automated or manual) of a cluster to another AWS Region
+• Query data that is already  S3 without loading it
+• Must have a Redshift cluster available to start the query
+• The query is then submitted to thousands of Redshift Spectrum nodes
+
+ELASTIC-SEARCH :
+--------------------
+Example: In DynamoDB, you can only find by primary key or indexes.
+• With ElasticSearch, you can search any field, even partially matches
+• It’s common to use ElasticSearch as a complement to another database
+• ElasticSearch also has some usage for Big Data applications
+Comes with Kibana (visualization) & Logstash (log ingestion) – ELK stack
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
@@ -2785,7 +2815,8 @@ TAPE GATEWAY : // Backed by S3 and Glacier
 • Back up data using existing tape-based processes (and iSCSI interface)
 • Works with leading backup software vendors
 
-   Backup Server <-- iSCSI --> | Tape Drive Or Media Changer to  Volume Gateway | <=== HTTPS ===> AWS >--> Archived Tapes stored in Glacier.
+   Connect the backup applications to an AWS Storage Gateway using an iSCSI-virtual tape library (VTL)
+   Backup Server <-- iSCSI --> | Tape Drive Or Media Changer to  Tape Gateway | <=== HTTPS ===> AWS >--> Archived Tapes stored in Glacier.
 
 AMAZON FSx ( File Server ) is for WINDOWS.
 AMAZON FSx for LUSTRE (Linux Cluster) is for Machine Learning, High Performance Computing (HPC) for linux machines.
@@ -3003,7 +3034,7 @@ Changes in DynamoDB (Create, Update, Delete) can end up in a DynamoDB Stream
 
 DyanmoDB Global Tables : // (cross region replication)
 ---------------------------
-• Active Active replication, many regions 
+• Active Active replication, many regions
 • Must enable DynamoDB Streams
 • Useful for low latency, DR purposes
 
@@ -3017,3 +3048,145 @@ DynamoDB - New Features :
     • No capacity planning needed (WCU / RCU) – scales automatically
     • 2.5x more expensive than provisioned capacity (use with care)
     • Helpful when spikes are un-predictable or the application is very low throughput
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+:::: METRICS - MONITORING - AUDIT ::::
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+CloudWatch provides metrics for every services in AWS. Metric is a variable to monitor (CPUUtilization, NetworkIn…) AND Metrics belong to namespaces
+Dimension is an attribute of a metric (instance id, environment, etc…) and we can have Up to 10 dimensions per metric and Metrics have timestamps. we Can create CloudWatch dashboards of metrics
+Dashboards are global and can include graphs from different regions
+• EC2 instance metrics have metrics “every 5 minutes”, With detailed monitoring (for a cost), you get data “every 1 minute” . Use detailed monitoring if you want to more prompt scale your ASG!
+
+Possibility to define and send your own custom metrics to CloudWatch, Ability to use dimensions (attributes) to segment metrics
+cloudwatch is a Great way to setup dashboards for quick access to keys metrics. Dashboards are global and can include graphs from different regions.
+You can change the time zone & time range of the dashboards, You can setup automatic refresh (10s, 1m, 2m, 5m, 15m)
+
+--> 3 dashboards (up to 50 metrics) for free and $3/dashboard/month afterwards
+Applications can send logs to CloudWatch using the SDK
+• CloudWatch can collect log from: • Elastic Beanstalk: collection of logs from application • ECS: collection from containers
+                                   • AWS Lambda: collection from function logs • VPC Flow Logs: VPC specific logs • API Gateway • CloudTrail based on filter
+                                   • CloudWatch log agents: for example on EC2 machines • Route53: Log DNS queries
+• CloudWatch Logs can go to: • Batch exporter to S3 for archival • Stream to ElasticSearch cluster for further analytics
+
+CloudWatch Logs for EC2 :
+--------------------------------
+• By default, no logs from your EC2 machine will go to CloudWatch
+• You need to run a CloudWatch agent on EC2 to push the log files you want
+• Make sure IAM permissions are correct // create a role for ec2 to send logs to cloudwatch
+• The CloudWatch log agent can be setup on-premises too
+
+CloudWatch Logs Agent & Unified Agent :
+-------------------------------------------
+• For virtual servers (EC2 instances, on-premise servers…)
+• CloudWatch Logs Agent -- Old version of the agent, Can only send to CloudWatch Logs
+• CloudWatch Unified Agent --  Collect additional system-level metrics such as RAM, processes, etc… , • Collect logs to send to CloudWatch Logs , • Centralized configuration using SSM Parameter Store
+
+CloudWatch EVENTS :
+----------------------
+An event indicates changes in your AWS environment. AWS resources can generate events when their state changes, or you can create rules that self-trigger on an automated schedule.
+A rule matches incoming events and routes them to targets for processing. A single rule can route to multiple targets, all of which are processed in parallel.
+A target processes events. Targets can include Amazon EC2 instances. AWS Lambda functions, Kinesis streams, Amazon ECS tasks, Amazon SNS topics, Amazon SQS queues, and more.
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+:::: IDENTITY & ACCESS MANAGEMENT - IAM ::::
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+AWS STS – Security Token Service :
+---------------------------------------
+Allows to grant limited and temporary access to AWS resources. Token is valid for up to one hour (must be refreshed)
+If a user wants to assume a ROLE in an account or Cross Account --> Then the user calls the " AssumeRole " api towards STS --> Which calls the IAM to validate --> if valid, STS sends temporary creds to the User.
+
+
+######################################################
+DISASTER RECOVERY :
+-----------------------
+• RPO: Recovery Point Objective // Data Loss
+• RTO: Recovery Time Objective  // Down Time
+
+1. Backup and Restore (High RPO)
+2. Disaster Recovery – Pilot Light
+    • A small version of the app is always running in the cloud
+    • Useful for the critical core (pilot light)
+    • Very similar to Backup and Restore
+    • Faster than Backup and Restore as critical systems are already up
+3. Warm Standby
+    • Full system is up and running, but at minimum size
+    • Upon disaster, we can scale to production load
+4. Multi Site / Hot Site Approach
+    • Very low RTO (minutes or seconds) – very expensive
+    • Full Production Scale is running AWS and On Premise
+5. All AWS Multi Region
+
+On-Premise strategy with AWS :
+------------------------------------
+• Ability to download Amazon Linux 2 AMI as a VM (.iso format) --> • VMWare, KVM, VirtualBox (Oracle VM), Microsoft Hyper-V
+• VM Import / Export  --> • Migrate existing applications into EC2 • Create a DR repository strategy for your on-premise VMs • Can export back the VMs from EC2 to on-premise
+• AWS Application Discovery Service -->  • Gather information about your on-premise servers to plan a migration • Server utilization and dependency mappings • Track with AWS Migration Hub
+
+AWS DATA SYNC :
+------------------
+• Move large amount of data from on- premise to AWS
+• Can synchronize to: Amazon S3, Amazon EFS, Amazon FSx for Windows
+• Move data from your NAS or file system via NFS or SMB
+• Replication tasks can be scheduled hourly, daily, weekly
+• Leverage the DataSync agent to connect to your systems
+
+CloudFormation - StackSets :
+-----------------------------------
+• Create, update, or delete stacks across multiple accounts and regions with a single operation
+• Administrator account to create StackSets
+• Trusted accounts to create, update, delete stack instances from StackSets
+• When you update a stack set, all associated stack instances are updated throughout all accounts and regions.
+
+
+####################################################
+####################################################
+The ALB (and NLB) supports IP addresses as targets as well as instance IDs as targets.
+You cannot use instance ID based targets for on-premises servers and you cannot mix instance ID and IP address target types in a single target group.
+When you create a target group, you specify its target type, which determines how you specify its targets. After you create a target group, you cannot change its target type. Target type is an INSTANCE/IP/LAMBDA
+Using IP addresses as targets allows load balancing any application hosted in AWS or on-premises using IP addresses of the application back-ends as targets.
+You must have a VPN or Direct Connect connection to enable this configuration to work.
+A Classic load balancer can load based on ports only , not IP addresses.
+A Network Load Balancer can be configured with a single static IP address (the other types of ELB cannot have static IP's. They have DNS names) for each AZ that can be used by applications as the front-end IP of the load balancer.
+
+// STREAMING DATA --> KINESIS  // SQS is not best suited to streaming data
+// With SQS FIFIO & No GROUP ID, we can have only one consumer and with sqs standard we do not have ordering.
+// With SQS FIFO & GROUP ID, we can scale number of consumers.
+Amazon Kinesis Firehose is used for streaming data. With Firehose the data is immediately loaded into a destination that can be Amazon S3, RedShift, Elasticsearch, or Splunk.
+This is not an ideal use case for Firehose as this is not streaming data and there is no need to load data into an additional AWS service.
+Amazon Kinesis streams allows up to 1 MiB of data per second or 1,000 records per second for writes per shard. There is no limit on the number of shards. and SQS FIFO can have upto 300 messages per second.
+Shards in Kinesis Data Streams will have their data ordered within each shard.
+SQS is pull-based, not push-based. EC2 instances must poll the queue to find jobs to process.
+Elastic Map Reduce (EMR) is a hosted Hadoop framework and is not used for analytics on streaming data.
+
+VPC <=== PEERING CONNECTION ===> VPC
+Resource <==== PRIVATE LINK ====> Resource
+Resource in a VPC <==== VPC ENDPOINTS [Interface/Gateway] <====> Resources // Gateway for S3 & DynamoDB, it can be added as a route in route table.
+
+SCALING POLICIES :
+-------------------------
+Scaling based on a schedule allows you to set your own scaling schedule for predictable load changes. To configure your Auto Scaling group to scale based on a schedule, you create a scheduled action. This is ideal for situations where you know when and for how long you are going to need the additional capacity.
+Step scaling policies increase or decrease the current capacity of your Auto Scaling group based on a set of scaling adjustments, known as step adjustments. The adjustments vary based on the size of the alarm breach. This is more suitable to situations where the load unpredictable.
+  --> Increase or decrease the current capacity of the group based on a set of scaling adjustments, (Step)
+With simple scaling, after a scaling activity is started, the policy must wait for the scaling activity or health check replacement to complete and the cooldown period to expire before responding to additional alarms (in contrast to step scaling). Again, this is more suitable to unpredictable workloads.
+  --> Increase or decrease the current capacity of the group based on a single scaling adjustment. (Simple)
+// AWS recommend using step over simple scaling in most cases.
+//If you are scaling based on a utilization metric that increases or decreases proportionally to the number of instances in an Auto Scaling group, we recommend that you use target tracking scaling policies. Otherwise, we recommend that you use step scaling policies.
+
+An Elastic Fabric Adapter is an AWS Elastic Network Adapter (ENA) with added capabilities.
+The EFA lets you apply the scale, flexibility, and elasticity of the AWS Cloud to tightly-coupled HPC apps. It is ideal for tightly coupled app as it uses the Message Passing Interface (MPI).
+An Auto Scaling group can contain EC2 instances in one or more Availability Zones within the same Region. However, Auto Scaling groups cannot span multiple Regions.
+
+An active/standby broker is comprised of two brokers in two different Availability Zones, configured in a redundant pair. These brokers communicate synchronously with your application, and with Amazon EFS.
+Usually, only one of the broker instances is active at any time, while the other broker instance is on standby. If one of the broker instances malfunctions or undergoes maintenance, it takes Amazon MQ a short while to take the inactive instance out of service. This allows the healthy standby instance to become active and to begin accepting incoming communications. When you reboot a broker, the failover takes only a few seconds.
+For an active/standby broker, Amazon MQ provides two ActiveMQ Web Console URLs, but only one URL is active at a time.
+
+When a user requests your content, CloudFront typically serves the requested content regardless of where the user is located.
+If you need to prevent users in specific countries from accessing your content, you can use the CloudFront geo restriction feature to do one of the following:
+Allow your users to access your content only if they're in one of the countries on a whitelist of approved countries.
+Prevent your users from accessing your content if they're in one of the countries on a blacklist of banned countries.
