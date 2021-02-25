@@ -1753,6 +1753,7 @@ The percentage savings for each Reserved option is as follows:
           "Partial upfront payment option with the standard 3-years term" - 59%
           "All upfront payment option with the standard 1-year term       - 62%
 
+// A VPC endpoint is used to access public services from a VPC without traversing the Internet.
 A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by AWS PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
 Instances in your VPC do not require public IP addresses to communicate with resources in the service. Traffic between your VPC and the other service does not leave the Amazon network.
 There are two types of VPC endpoints: INTERFACE ENDPOINTS & GATEWAY ENDPOINTS.
@@ -2139,6 +2140,9 @@ Sometimes you want control over the EC2 Instance placement strategy , because we
 • That strategy can be defined using placement groups
 • When you create a placement group, you specify one of the following strategies for the group:
     • Cluster    — clusters instances into a low-latency group in a single Availability Zone, instances are on same hardware in same AZ.
+                   Cluster placement groups are recommended for applications that benefit from low network latency, high network throughput, or both. --> HPC - High-Performance Computing
+                   They are also recommended when the majority of the network traffic is between the instances in the group.
+                   To provide the lowest latency and the highest packet-per-second network performance for your placement group, choose an instance type that supports enhanced networking.
                    • Pros : Great network (10 Gbps bandwidth between instances)
                    • Cons : If the rack fails, all instances fails at the same time
                    • Use case: Big Data job that needs to complete fast or an application that needs extremely low latency and high network throughput
@@ -2209,11 +2213,26 @@ EBS VOLUME TYPES : // Only GP2 and IO1 can be used as boot volumes
 • EBS Volumes come in 4 types
 • GP2 (SSD): General purpose SSD volume that balances price and performance for a wide variety of workloads
 • IO1 (SSD): Highest-performance SSD volume for mission-critical low-latency or high- throughput workloads
+             I/O optimized instances and provisioned IOPS EBS volumes are more geared towards storage performance than network performance.
 • ST1 (HDD): Low cost HDD volume designed for frequently accessed, throughput- intensive workloads
 • SC1 (HDD): Lowest cost HDD volume designed for less frequently accessed workloads
 --> command lsblk will show the attached volumes .
 --> To attach a volume to instance in another AZ, create a snapshot of volume,  then make a volume from that snapshot which asks where to store the volume, specify the required AZ , now attach it to the instance.
     // Snapshot is not attached to an AZ. So to attach volume to instance in another region, copy the snap to required region , then make a volume from it in the required AZ in the required region.
+
+                                          SOLID STATE DRIVES                                                        HARD DISK DRIVES
+  ==================================================================================================================================================================
+    VOLUME TYPE      General Purpose SSD - GP2           Provisioned IPOS SSD - io1         Throughput Optimized - st1                Cold HDD - SC1
+    DESCRIPTION      Balance of price to performance     High performance                   low cost                                  lowest cost
+    USE CASES        Systemm boot Volumes                More than 10000 IPOS               Big Data -- Data warehouses               Throughput oriented storage for large volumes
+                    virtual desktops                     Large Database workloads           Fast throughput                             - of infrequently acessed data
+
+    VOLUME SIZE      1gib - 16Tib                        4gib - 16Tib                       500gib - 16Tib                             500gib - 16Tib
+    MAX IPOS         10000                               32000                              500                                        250
+    Max Throughput   160 Mib/s                           500 Mib/s                          500 Mib/s                                  250 Mib/s
+
+    ** Disk throughput is the measurement of how fast (per second) your storage can read/write data.
+
 
 EBS VS INSTANCE STORE : For Heigher IPOS , say in millions the solution is instance store, not EBS.
 ---------------------------------------
@@ -3215,18 +3234,22 @@ Resource in a VPC <==== VPC ENDPOINTS [Interface/Gateway] <====> Resources // Ga
 
 SCALING POLICIES :
 -------------------------
-Scaling based on a schedule allows you to set your own scaling schedule for predictable load changes. To configure your Auto Scaling group to scale based on a schedule, you create a scheduled action. This is ideal for situations where you know when and for how long you are going to need the additional capacity.
-Step scaling policies increase or decrease the current capacity of your Auto Scaling group based on a set of scaling adjustments, known as step adjustments. The adjustments vary based on the size of the alarm breach. This is more suitable to situations where the load unpredictable.
-  --> Increase or decrease the current capacity of the group based on a set of scaling adjustments, (Step)
-With simple scaling, after a scaling activity is started, the policy must wait for the scaling activity or health check replacement to complete and the cooldown period to expire before responding to additional alarms (in contrast to step scaling). Again, this is more suitable to unpredictable workloads.
-  --> Increase or decrease the current capacity of the group based on a single scaling adjustment. (Simple)
-// AWS recommend using step over simple scaling in most cases.
-// If you are scaling based on a utilization metric that increases or decreases proportionally to the number of instances in an Auto Scaling group, we recommend that you use target tracking scaling policies.
-   Otherwise, we recommend that you use step scaling policies.
+SCHEDULED : Allows you to set your own scaling schedule for predictable load changes. To configure your Auto Scaling group to scale based on a schedule, you create a scheduled action. This is ideal for situations where you know when and for how long you are going to need the additional capacity.
+            Scaling actions are performed automatically as a function of time and date. This will ensure that there are enough EC2 instances to serve the demand and prevent the application from slowing down.
+STEP      : Increase or decrease the current capacity of your Auto Scaling group based on a set of scaling adjustments, known as step adjustments. The adjustments vary based on the size of the alarm breach. This is more suitable to situations where the load unpredictable.
+            --> Increase or decrease the current capacity of the group based on a set of scaling adjustments, (Step)
+SIMPLE    : After a scaling activity is started, the policy must wait for the scaling activity or health check replacement to complete and the cooldown period to expire before responding to additional alarms (in contrast to step scaling). Again, this is more suitable to unpredictable workloads.
+            --> Increase or decrease the current capacity of the group based on a single scaling adjustment. (Simple)
+            --> AWS recommend using step over simple scaling in most cases.
+TRACKING  : If you are scaling based on a utilization metric that increases or decreases proportionally to the number of instances in an Auto Scaling group, we recommend that you use target tracking scaling policies.
+
+EX : A web application is running on a fleet of Amazon EC2 instances using an Auto Scaling Group. It is desired that the CPU usage in the fleet is kept at 40%.
+     This is a perfect use case for a target tracking scaling policy. With target tracking scaling policies, you select a scaling metric and set a target value. In this case you can just set the target value to 40% average aggregate CPU utilization.
+     A simple scaling policy will add instances when 40% CPU utilization is reached, but it is not designed to maintain 40% CPU utilization across the group.
+     The step scaling policy makes scaling adjustments based on a number of factors. The PercentChangeInCapacity value increments or decrements the group size by a specified percentage. This does not relate to CPU utilization.
 
 The cooldown period is a configurable setting for your Auto Scaling group that helps to ensure that it doesn’t launch or terminate additional instances before the previous scaling activity takes effect.
 After the Auto Scaling group dynamically scales using a simple scaling policy, it waits for the cooldown period to complete before resuming scaling activities.
-
 
 An Elastic Fabric Adapter is an AWS Elastic Network Adapter (ENA) with added capabilities.
 The EFA lets you apply the scale, flexibility, and elasticity of the AWS Cloud to tightly-coupled HPC apps. It is ideal for tightly coupled app as it uses the Message Passing Interface (MPI).
@@ -3278,6 +3301,7 @@ This means that you can easily migrate any standard Kubernetes application to Am
 This solution ensures that the same open-source software is used for automating the deployment, scaling, and management of containerized applications both on-premises and in the AWS Cloud.
 
 // STICKY SESSIONS -- ELASTICACHE for retain information about each user session
+// Amazon CloudFront, API Gateway, Amazon S3, AWS Lambda, DynamoDB --> SERVERLESS PACK
 In order to address scalability and to provide a shared data storage for sessions that can be accessible from any individual web server, you can abstract the HTTP sessions from the web servers themselves.
 A common solution to for this is to leverage an In-Memory Key/Value store such as Redis and Memcached.
 Sticky sessions, also known as session affinity, allow you to route a site user to the particular web server that is managing that individual user’s session.
@@ -3287,6 +3311,13 @@ Amazon DynamoDB global tables provide a fully managed solution for deploying a m
 This is the only solution presented that provides an active-active configuration where reads and writes can take place in multiple regions with full bi-directional synchronization.
 Amazon Aurora Global Database provides read access to a database in multiple regions – it does not provide active-active configuration with bi-directional synchronization (though you can failover to your read-only DBs and promote them to writable).
 
+AWS Global Accelerator is a service in which you create accelerators to improve availability and performance of your applications for local and global users.
+Global Accelerator directs traffic to optimal endpoints over the AWS global network. This improves the availability and performance of your internet applications that are used by a global audience.
+Global Accelerator is a global service that supports endpoints in multiple AWS Regions, which are listed in the AWS Region Table.
+By default, Global Accelerator provides you with two static IP addresses that you associate with your accelerator.
+(Or, instead of using the IP addresses that Global Accelerator provides, you can configure these entry points to be IPv4 addresses from your own IP address ranges that you bring to Global Accelerator.)
+
+// GA will direct users to the closest edge location and then use the AWS global network.
 AWS Global Accelerator uses the vast, congestion-free AWS global network to route TCP and UDP traffic to a healthy application endpoint in the closest AWS Region to the user.
 This means it will intelligently route traffic to the closest point of presence (reducing latency). Seamless failover is ensured as AWS Global Accelerator uses anycast IP address which means the IP does not change when failing over between regions so there are no issues with client caches having incorrect entries that need to expire.
 A Route 53 failover routing policy uses a primary and standby configuration. Therefore, it sends all traffic to the primary until it fails a health check at which time it sends traffic to the secondary. This solution does not intelligently route traffic for lowest latency.
@@ -3340,3 +3371,107 @@ AWS Global Accelerator is a service that improves the availability and performan
 You can configure the ALB as a target and Global Accelerator will automatically route users to the closest point of presence.
 Failover is automatic and does not rely on any client side cache changes as the IP addresses for Global Accelerator are static anycast addresses.
 Global Accelerator also uses the AWS global network which ensures consistent performance.
+
+You can specify one of the following when initiating a job to retrieve an archive based on your access time and cost requirements.
+Expedited — Expedited retrievals allow you to quickly access your data when occasional urgent requests for a subset of archives are required. For all but the largest archives (250 MB+), data accessed using Expedited retrievals are typically made available within 1–5 minutes. Provisioned Capacity ensures that retrieval capacity for Expedited retrievals is available when you need it.
+Standard — Standard retrievals allow you to access any of your archives within several hours. Standard retrievals typically complete within 3–5 hours. This is the default option for retrieval requests that do not specify the retrieval option.
+Bulk — Bulk retrievals are S3 Glacier’s lowest-cost retrieval option, which you can use to retrieve large amounts, even petabytes, of data inexpensively in a day. Bulk retrievals typically complete within 5–12 hours.
+Vault Lock allows you to easily deploy and enforce compliance controls on individual Glacier vaults via a lockable policy (Vault Lock policy).
+
+AUTHENTICATE : To check if you are a valid user
+AUTHORISE    : To check if you can access a particular service
+A key-value database is a type of nonrelational (NoSQL) database that uses a simple key-value method to store data. A key-value database stores data as a collection of key-value pairs in which a key serves as a unique identifier. Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability
+A VPG is used to setup an AWS VPN which you can use in combination with Direct Connect to encrypt all data that traverses the Direct Connect link. This combination provides an IPsec-encrypted private connection that also reduces network costs, increases bandwidth throughput, and provides a more consistent network
+
+POLICY :
+---------------
+Only 1 policy block.
+only 1 statement block but can have multiple arrays
+Effect can have only 1 value , either allow or deny.
+version can be either 2008-10-17 or 2012-10-17 ,  by default it is 2008-10-17 if not specified.
+
+{
+ VERSION   : 2008-10-17  // or 2012-10-17
+ STATEMENT : [
+               {
+                 EFFECT   : Allow //  or Deny
+                 ACTION   : [            ]
+                 RESOURCE : [            ]
+               }
+               {
+                 EFFECT   : Allow //  or Deny
+                 ACTION   : [            ]
+                 RESOURCE : [            ]
+
+                 PRINCIPAL    : [        ] // The below are available with latest policy version , along with policy variables
+                 NOTPRINCIPAL : [        ]
+                 NOTACTION    : [        ]
+                 CONDITION    : [        ] // To specufy when can this policy take effect.
+
+               }
+ ]
+}
+
+Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for scaling read operations and increasing availability. Up to 15 Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region. To increase availability, you can use Aurora Replicas as failover targets. That is, if the primary instance fails, an Aurora Replica is promoted to the primary instance.
+An Amazon Aurora DB cluster consists of a DB instance, compatible with either MySQL or PostgreSQL, and a cluster volume that represents the data for the DB cluster, copied across three Availability Zones as a single, virtual volume. The DB cluster contains a primary instance and, optionally, up to 15 Aurora Replicas. A DB cluster does not necessarily scale read operations as it is optional to deploy Aurora Replicas
+A cluster volume manages the data for DB instances in a DB cluster and does not provide read scaling.
+Amazon Aurora Global Database is not suitable for scaling read operations within a region. It is a new feature in the MySQL-compatible edition of Amazon Aurora, designed for applications with a global footprint. It allows a single Aurora database to span multiple AWS regions, with fast replication to enable low-latency global reads and disaster recovery from region-wide outages.
+
+Amazon CloudTrail can be used to log activity on the reports.
+The key difference between the two answers that include CloudTrail is that one references data events whereas the other references management events.
+Data events provide visibility into the resource operations performed on or within a resource. These are also known as data plane operations. Data events are often high-volume activities.
+Example data events include:
+    • Amazon S3 object-level API activity (for example, GetObject, DeleteObject, and PutObject API operations).
+    • AWS Lambda function execution activity (the Invoke API).
+Management events provide visibility into management operations that are performed on resources in your AWS account. These are also known as control plane operations. Example management events include:
+    • Configuring security (for example, IAM AttachRolePolicy API operations)
+    • Registering devices (for example, Amazon EC2 CreateDefaultVpc API operations).
+
+Both S3 and EFS offer concurrent access from many EC2 Linux instances, but EFS is not the most cost-effective solution.
+S3 is object storage while EFS is file storage .
+
+Aurora cluster volumes automatically grow as the amount of data in your database increases.
+An Aurora cluster volume can grow to a maximum size of 64 tebibytes (TiB). Table size is limited to the size of the cluster volume. That is, the maximum table size for a table in an Aurora DB cluster is 64 TiB.
+Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for scaling read operations and increasing availability.
+Up to 15 Aurora Replicas can be distributed across the Availability Zones that a DB cluster spans within an AWS Region.
+The DB cluster volume is made up of multiple copies of the data for the DB cluster.
+However, the data in the cluster volume is represented as a single, logical volume to the primary instance and to Aurora Replicas in the DB cluster.
+As a result, all Aurora Replicas return the same data for query results with minimal replica lag—usually much less than 100 milliseconds after the primary instance has written an update.
+Replica lag varies depending on the rate of database change. That is, during periods where a large amount of write operations occur for the database, you might see an increase in replica lag.
+Amazon Aurora Serverless is an on-demand, auto-scaling configuration for Amazon Aurora. The database automatically starts up, shuts down, and scales capacity up or down based on application needs.
+This is an ideal database solution for infrequently-used applications.
+
+
+EC2 STATUS CHECKS ON EBS :
+----------------------------
+The possible values are ok, impaired, warning, or insufficient-data.
+If all checks pass, the overall status of the volume is ok.
+If the check fails, the overall status is impaired. If the status is insufficient-data, then the checks may still be taking place on your volume at the time.
+
+You can use Route 53 to check the health of your resources and only return healthy resources in response to DNS queries. There are three types of DNS failover configurations:
+1. Active-passive: Route 53 actively returns a primary resource. In case of failure, Route 53 returns the backup resource. Configured using a failover policy.
+2. Active-active: Route 53 actively returns more than one resource. In case of failure, Route 53 fails back to the healthy resource. Configured using any routing policy besides failover.
+3. Combination: Multiple routing policies (such as latency-based, weighted, etc.) are combined into a tree to configure more complex DNS failover.
+
+// Customer vpc [[ Instances + Endpoint Network Interface ]] -----------------> Your VPC [[ API gateway --> API's ]]
+You can create your own application in your VPC and configure it as an AWS PrivateLink-powered service (referred to as an endpoint service).
+Other AWS principals can create a connection from their VPC to your endpoint service using an interface VPC endpoint.
+You are the service provider, and the AWS principals that create connections to your service are service consumers.
+This configuration is powered by AWS PrivateLink and clients do not need to use an internet gateway, NAT device, VPN connection or AWS Direct Connect connection, nor do they require public IP addresses.
+Another option is to use a VPC Peering connection.
+A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IPv4 addresses or IPv6 addresses.
+Instances in either VPC can communicate with each other as if they are within the same network. You can create a VPC peering connection between your own VPCs, or with a VPC in another AWS account.
+
+
+You can use MFA with a Cognito user pool (not in IAM) .
+A user pool is a user directory in Amazon Cognito. With a user pool, your users can sign in to your web or mobile app through Amazon Cognito.
+Your users can also sign in through social identity providers like Facebook or Amazon, and through SAML identity providers.
+
+Amazon FSx for Lustre provides a high-performance file system optimized for fast processing of workloads such as machine learning, high performance computing (HPC), video processing, financial modeling, and electronic design automation (EDA).
+Amazon FSx works natively with Amazon S3, letting you transparently access your S3 objects as files on Amazon FSx to run analyses for hours to months.
+Amazon FSx for Windows File Server provides a fully managed native Microsoft Windows file system so you can easily move your Windows-based applications that require shared file storage to AWS.
+This solution integrates with Windows file shares, not with Amazon S3.
+EFS and EBS are not good use cases for this solution. Neither storage solution is capable of presenting Amazon S3 objects as files to the application.
+
+Uploading using a pre-signed URL allows you to upload the object without having any AWS security credentials/permissions. '
+Pre-signed URLs can be generated programmatically and anyone who receives a valid pre-signed URL can then programmatically upload an object. This solution bypasses the web server avoiding any performance bottlenecks.

@@ -13,7 +13,7 @@ HIGH LEVEL vs LOW LEVEL LANGUAGES :
 #########################################################
 1. The main difference is that, Programmers can easily understand or interpret or compile the high level language in comparison of machine.
 2. On the other hand, Machine can easily understand the low level language in comparison of human beings.
-3. Examples of high level languages are C, C++, Java, Python & M/C langugage is in form of 0's and 1's .
+3. Examples of high level languages are C, C++, Java, Python & M/C language is in form of 0's and 1's .
 4. High is programmer friendly , memory efficient , easy to understand and debug , portable and can run on any platform
 5. Low is machine friendly , memory inefficient , tough to understand and debug , not portable and machine dependent .
 6. TRANSLATORS are used to convert high to low level . They are COMPILERS & INTERPRETORS .

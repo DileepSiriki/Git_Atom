@@ -344,7 +344,7 @@ The order of the elements doesn't matter—for example, the Resource element can
          ]
        }
 
-   POLICY BLOCKS AND STSTEMENTS :
+   POLICY BLOCKS AND STATEMENTS :
    ----------------------------------
      If you dissect any policy, you will see they always start and end with a curly brace.
      These curly braces denote a policy block. Each policy must have exactly one policy block.
