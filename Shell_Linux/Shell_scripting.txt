@@ -168,6 +168,8 @@ Every inode in the Linux structure has a unique number identified with it. It is
     -->     Additional metadata about the file
     -->     To check the list of inode numbers, use the following command: ls -i
 
+NOTE : Vi stands for Visual. It is a text editor that is an early attempt to a visual text editor.
+       Vim stands for Vi IMproved. It is an implementation of the Vi standard with many additions.
 
 1. help :  a. command --help  -> help is a bash built-in, providing help for bash commands only.
            b. man command     -> A little less descriptive than info but straight to point .
@@ -418,84 +420,49 @@ However if you create a hard link using "ln" command to a file and change the co
 
 
 21. who am i ## whoami ## who: To show the user information .
-                who am i gives more info than whoami . Also the date and time is printed .
+                who am i gives more info than whoami. Also the date and time is printed .
                 who is used to show who is logged in at the moment . gives multiple names
 
                 Other commands include -> users , who , w
 
 22. Head :  print the top N number of data of the given input. By default, it prints the first 10 lines of the specified files. If more than one file name is provided then data from each file is preceded by its file name.
             head -n 5 state.txt -> print n lines
-            head -c 6 state.txt -> print n bytes
+            head -c 6 state.txt -> print c bytes
             head -n 20 state.txt | tail -10  -> Print line between M and N lines
             head -n -15  -> cut the last 15 lines
 
-23. Tail : print the last N number of data of the given input. By default it prints the last 10 lines of the specified files. If more than one file name is provided then data from each file is precedes by its file name.
+// Head and tail by default print first and last 10 rows respectively.
+// Head -n 5 a.txt == head -5 a.txt
+// Tail -n 5 b.txt == Tail -5 b.txt
+
+23. Tail : print the last N number of data of the given input. By default it prints the last 10 lines of the specified files.
+           If more than one file name is provided then data from each file is precedes by its file name.
            similar options as head command.
 
 24. grep : The grep filter searches a file for a particular pattern of characters, and displays all lines that contain that pattern
-           grep -i regex file -> case insesitive searches
+           grep -i regex file -> case insensitive searches
+           grep -r            -> Recursive search
            grep -c regex file -> count of matches
            grep -w regex file -> search the whole word instead of a regular expression
            grep -n regex file -> show line numbers
            grep -v regex file -> lines not matching with regex
 
-25. diff and cmp :
+25. which : prints the executable path .
 
-26. bg :
-
-27. ps and kill and jobs : PS stand for PROCESS STATES similar to task manager .
-                           https://www.linux.com/training-tutorials/and-ampersand-and-linux/
-                           https://www.guru99.com/managing-processes-in-linux.html
-          jobs shows you the processes running in your current terminal, whether be it in the background or foreground. It also shows you a number associated with each job
-
-          The fg brings a job from the background to the foreground so you can interact with it. You tell fg which process you want to bring to the foreground with a percentage symbol (%) followed by the number associated with the job that jobs gave you:
-
-              $ fg %1 # brings the cp job to the foreground
-              cp -i -R original/dir/* backup/dir/
-
-          The bg command pushes a job to the background and resumes it again if it was paused:
-
-              $ bg %1
-              [1]+ cp -i -R original/dir/* backup/dir/ &
-
-          In the foreground process , no other commands can be run because the prompt will be not available.
-          But a background process started with & will wait for a keyboard input .
-
-          You can get the PID of any running process with the ps (short for processes) command. So, using
-
-              ps | grep cp
-
-              kill -s STOP 14444  -> you can stop the background copying
-              kill -s CONT 14444  -> To start the paused process again, you can use the CONT signal
-              pgrep = ps + pgrep
-
-           *** top command can be used to list the curent running processes in linux .
-           top allows you display of process statistics continuously until stopped vs. ps which gives you a single snapshot.
-           top enables you to see your processes ordered by the amount of processor power they use.
-           ps enables you to see all your processes, or just the processes used by certain users, for example root or yourself.
-
-           nice command can be used to start a process with a given priority . (b/w 1 to 20)
-           renice can be used to change priority of an already running process  .
-           df used to report free disk spaces
-           free used to report used and free RAM .
-
-
-28. which : prints the executable path .
-
-29. uniq : The uniq command in Linux is a command line utility that reports or filters out the repeated lines in a file.
-             In simple words, uniq is the tool that helps to detect the adjacent duplicate lines and also deletes the duplicate lines.
-             uniq filters out the adjacent matching lines from the input file(that is required as an argument) and writes the filtered data to the output file .
+26. uniq : The uniq command in Linux is a command line utility that reports or filters out the repeated lines in a file.
+           In simple words, uniq is the tool that helps to detect the adjacent duplicate lines and also deletes the duplicate lines.
+           uniq filters out the adjacent matching lines from the input file(that is required as an argument) and writes the filtered data to the output file .
 
              Note: uniq isn’t able to detect the duplicate lines unless they are adjacent.
              The content in the file must be therefore sorted before using uniq or you can simply use sort -u instead f uniq.
 
-30. SOURCE : source is a shell built-in command which is used to read and execute the content of a file(generally set of commands), passed as an argument in the current shell script.
+29. SOURCE : source is a shell built-in command which is used to read and execute the content of a file(generally set of commands), passed as an argument in the current shell script.
              The command after taking the content of the specified files passes it to the TCL interpreter as a text script which then gets executed.
              If any arguments are supplied, they become the positional parameters when filename is executed.
              Otherwise, the positional parameters remain unchanged.
              The entries in $PATH are used to find the directory containing FILENAME, however if the file is not present in $PATH it will search the file in the current directory
 
-31. find : Find command is used to search and locate the list of files and directories based on conditions you specify for files that match the arguments.
+30. find : Find command is used to search and locate the list of files and directories based on conditions you specify for files that match the arguments.
            Find can be used in a variety of conditions like you can find files by permissions, users, groups, file type, date, size, and other possible criteria.
            find <path> <options> <file/dir>
            find /home -iname tecmint.txt (i for ignorecase)
@@ -503,9 +470,92 @@ However if you create a hard link using "ln" command to a file and change the co
            find . -type f -name tecmint.php (search for file)
 
 
+###########################################################################################################################################################################################
+PROCESS HANDLING  :
+###########################################################################################################################################################################################
+PROCESS : An instance of a program is called a Process. In simple terms, any command that you give to your Linux machine starts a new process.
+          Foreground Processes: They run on the screen and need input from the user. For example Office Programs
+          Background Processes: They run in the background and usually do not need user input. For example Antivirus.
 
-31. df , free  :
-32. APT-GET , UPGRADE ETC;
+BG - FG - JOBS :
+==================
+If you start a foreground program/process from the terminal, then you cannot work on the terminal, till the program is up and running.
+Particular, data-intensive tasks take lots of processing power and may even take hours to complete. You do not want your terminal to be held up for such a long time.
+To avoid such a situation, you can run the program and send it to the background so that terminal remains available to you. Let's learn how to do this -
+
+      bg - put suspended process into background
+      fg - bring process into foreground
+      jobs - list processes
+
+--> Execute the "jobs" command to get the details of the  processes running and killed (killed using ctrl+z)
+    $jobs
+    [1]+ Stopped  gedit a.txt
+    [2]- Stopped  ping google.com
+    [3]  Stopped  vim c
+    [4]  Running  nedit c.txt
+
+--> Now Execute the command "fg %1" or "fg %2" to bring the respective job to the foreground.
+--> Now if a process is running in the foreground, and if we want to send it to background, first we can kill it using "ctrl+Z".
+    Now check the "jobs" command to list all the processes in the current session.
+    Now use the "bg %4" command to send the stopped process to the background so that we can continue using the terminal.
+
+
+Top  :  This utility tells the user about all the running processes on the Linux machine.
+        Press "q" to move back to the terminal
+        top allows you display of process statistics continuously until stopped vs. ps which gives you a single snapshot.
+        top enables you to see your processes ordered by the amount of processor power they use.
+        ps enables you to see all your processes, or just the processes used by certain users, for example root or yourself.
+
+        FIELD       DESCRIPTION
+        -------------------------
+        PID	        The process ID of each task
+        User	      The username of task owner
+        PR        	Priority Can be 20(highest) or -20(lowest)
+        NI        	The nice value of a task
+        VIRT      	Virtual memory used (kb)
+        RES	        Physical memory used (kb)
+        SHR	        Shared memory used (kb)
+        S	          Status -- 'D' = uninterruptible sleep -- 'R' = running -- 'T' = traced or stopped -- 'S' = sleeping --  'Z' = zombie
+        %CPU      	% of CPU time
+        %MEM      	Physical memory used
+        TIME+     	Total CPU time
+        Command   	Command executed
+
+ps   :  This command stands for 'Process Status'. It is similar to the "Task Manager" that pop-ups in a Windows Machine when we use Cntrl+Alt+Del.
+        This command is similar to 'top' command but the information displayed is different.
+        --> ps aux   //  You can do "ps a" or "ps au" or "ps aux | grep chrome"
+            The aux options are as follows:
+              a = show processes for all users
+              u = display the process’s user/owner
+              x = also show processes not attached to a terminal
+
+kill : This command terminates running processes on a Linux machine.
+       To use these utilities you need to know the PID (process id) of the process you want to kill.
+       There are also different signals that can be sent to both kill commands. What signal you send will be determined by what results you want from the kill command.
+       For instance, you can send the HUP (hang up) signal to the kill command, which will effectively restart the process.
+       You can get a list of all the signals that can be sent to the kill command by issuing kill -l.
+       --> kill -l // will give all the signals , nearly 65 signals.
+       --> Now use the " kill - <signal> <pid> " to kill a process .
+           ex : kill -9 3827
+
+           Signal Name   Single Value  Effect
+           SIGHUP        1             Hangup
+           SIGINT        2             Interrupt from keyboard
+           SIGKILL       9             Kill signal
+
+Nice  : Linux can run a lot of processes at a time, which can slow down the speed of some high priority processes and result in poor performance.
+        To avoid this, you can tell your machine to prioritize processes as per your requirements.
+        This priority is called Niceness in Linux, and it has a value between -20 to 19. The lower the Niceness index, the higher would be a priority given to that task.
+        The default value of all the processes is 0. To start a process with a niceness value other than the default value use the following syntax
+           -->  nice -n 'Nice value' process name
+
+        If there is some process already running on the system, then you can 'Renice' its value using syntax.
+           --> renice 'nice value' -p 'PID'
+Df    : Reports the free disk space(Hard Disk) on all the file systems.
+        Use "df -h" for a more readable format.
+
+Free  : This command shows the free and used memory (RAM) on the Linux system.
+        You can use the arguments "free -m"  to display output in  & "free -g"  to display output in GB.
 
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
