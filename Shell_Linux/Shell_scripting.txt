@@ -140,7 +140,7 @@ When you are logged in as root, the command prompt should end with # instead of 
 NOTE : By default when you change to root, you can not list the files and directories because now you are in directory "/root".
        Do a "cd .." and navigate to "/user/dileep" to see the regular files and directories.
 
-#####################################################################################################################################################################################
+###########################################################################################################################################################################################
 BASIC LINUX COMMANDS & USAGE :
 ###########################################################################################################################################################################################
 Everything in Linux is considered a file to maintain consistency. That includes hardware devices, printers, directories, and processes.
@@ -228,7 +228,7 @@ Each inode is identified by an integer number. An inode is assigned to a file wh
 
             ls -al -> detailed list of files and permissions , storage etc;
             drwxr-xr-x                      7               esrkdlp           rnd             4096         Jun 11  2019       workspace
-            [filetype-permissions] - [# od hardlinks] - [Owner-Creator] - [Owber-group] - [Size in bytes] - [Date-Time] - [Name of file/dir]
+            [filetype-permissions] - [# of hardlinks] - [Owner-Creator] - [Owner-group] - [Size in bytes] - [Date-Time] - [Name of file/dir]
             " - " -> file
             " d " -> directory
             " c " -> character files (Device files that are not files but have file like access to hardware.)
@@ -359,9 +359,9 @@ However if you create a hard link using "ln" command to a file and change the co
            So commands rmdir and rm -rf , basically do the same.
             rm file1 file2
             rm -i file -> interactive remove
-            rm -f file -> forece remove
+            rm -f file -> force remove
             rm -r file -> recursive remove
-            rm -rf dir -> recursive remove directory
+            rm -rf dir -> forcible recursive directory removal
 
 15. chmod ->  chmod {u|g|o|a} {+|-|=} {r|w|x} {filename}
                   drwxr-xr-x  -> [type][(owner)(group)(others)]
@@ -483,8 +483,8 @@ If you start a foreground program/process from the terminal, then you cannot wor
 Particular, data-intensive tasks take lots of processing power and may even take hours to complete. You do not want your terminal to be held up for such a long time.
 To avoid such a situation, you can run the program and send it to the background so that terminal remains available to you. Let's learn how to do this -
 
-      bg - put suspended process into background
-      fg - bring process into foreground
+      bg   - put suspended process into background
+      fg   - bring process into foreground
       jobs - list processes
 
 --> Execute the "jobs" command to get the details of the  processes running and killed (killed using ctrl+z)
@@ -498,7 +498,12 @@ To avoid such a situation, you can run the program and send it to the background
 --> Now if a process is running in the foreground, and if we want to send it to background, first we can kill it using "ctrl+Z".
     Now check the "jobs" command to list all the processes in the current session.
     Now use the "bg %4" command to send the stopped process to the background so that we can continue using the terminal.
-
+    This frees you to continue working on the same terminal or even to close the terminal and still let the process finish up.
+    Do note, however, that if the process is asked to print stuff out to the standard output (like in the case of echo or ls), it will continue to do so, even though it is being executed in the background.
+--> You can stop a job in the foreground by holding down [Ctrl] and pressing [Z]. This doesn’t abort the action, it pauses it.
+    When you start it again with (fg or bg) it will continue from where it left off Except for sleep: the time a sleep job is paused still counts once sleep is resumed.
+    This is because sleep takes note of the clock time when it was started, not how long it was running.
+    This means that if you run sleep 30 and pause it for more than 30 seconds, once you resume, sleep will exit immediately.
 
 Top  :  This utility tells the user about all the running processes on the Linux machine.
         Press "q" to move back to the terminal
@@ -543,6 +548,12 @@ kill : This command terminates running processes on a Linux machine.
            SIGINT        2             Interrupt from keyboard
            SIGKILL       9             Kill signal
 
+       --> kill -s STOP 14444  -- STOP here does the same thing as [Ctrl] + [Z] , that is, it pauses the execution of the process.
+           kill -s CONT 14444  -- To start the paused process again, you can use the CONT signal
+           kill -s TERM 14444  -- if you wanted to terminate the process, not just pause it
+           kill -s KILL 14444  -- If the process refuses to exit, you can force it with KILL
+
+
 Nice  : Linux can run a lot of processes at a time, which can slow down the speed of some high priority processes and result in poor performance.
         To avoid this, you can tell your machine to prioritize processes as per your requirements.
         This priority is called Niceness in Linux, and it has a value between -20 to 19. The lower the Niceness index, the higher would be a priority given to that task.
@@ -551,6 +562,7 @@ Nice  : Linux can run a lot of processes at a time, which can slow down the spee
 
         If there is some process already running on the system, then you can 'Renice' its value using syntax.
            --> renice 'nice value' -p 'PID'
+
 Df    : Reports the free disk space(Hard Disk) on all the file systems.
         Use "df -h" for a more readable format.
 
@@ -566,8 +578,7 @@ Free  : This command shows the free and used memory (RAM) on the Linux system.
 
 KERNAL :
 ----------
-Kernel is hart of an O/S say linux-OS .. It manages resource of Linux O/S. Resources means facilities available in Linux.
-It is reasonable for communication between Hardware and Software.
+Kernel is hart of an O/S say linux-OS .. It manages resource of Linux O/S. Kernal is reasonable for communication between Hardware and Software.
 A system may have many shells but only one kernal .
 For eg. Facility to store data, print data on printer, memory, file management etc . Kernel decides who will use this resource, for how long and when.
 It runs your programs (or set up to execute binary files) It's Memory resident portion of Linux. It performance following task :-
@@ -579,7 +590,8 @@ It runs your programs (or set up to execute binary files) It's Memory resident p
 
 Operating system is a system software. Kernel is a part of operating system.
 Operating system acts as an interface between user and hardware. When computer boots up Operating System is the first program that loads. It also provides protection and security.
-Kernel acts as an interface between applications and hardware, which coverts user command into machine language. When Operating System boots up Kernal is the first program that loads. It’s main purpose is memory management, disk management, process management and task management.
+Kernel acts as an interface between applications and hardware, which coverts user command into machine language. When Operating System boots up Kernal is the first program that loads.
+It’s main purpose is memory management, disk management, process management and task management.
 
 USER -> TERMINAL -> SHELL -> KERNAL -> HARDWARE
 USER -> APPLICATIONS -> OS -> HARDWARE
@@ -594,33 +606,30 @@ USER -> APPLICATIONS -> OS -> HARDWARE
 |                          ||    | SHELL-1 |  | Shell-2 |   ||        |                         |
 |                          ||     ---------    ---------    ||        |                         |
 |                            ===============================          |             ^           |
-|--------------------------------------------------------------------- ----------   |  ---------|
+ --------------------------------------------------------------------- ----------   |  ---------
 |                    Applications , cd , ls , grep , compilers etc ;                V           |  <<-->>  | USER-3 |
  -----------------------------------------------------------------------------------------------   <<-->>  | USER-4 |
 
 
-LINUX is a KERNAL , not an OS . Its a clone of UNIX KERNAL .
-LINUX KERNAL + GNU SOFTWARE = OPERATING SYSTEM (say Ubuntu / Redhat)
+LINUX KERNAL is a clone of UNIX KERNAL .
+LINUX KERNAL + GNU SOFTWARE = LINUX OPERATING SYSTEM. Ubuntu / Redhat / Debian / Fedora are some of the flavours using Linux OS.
 Everything in LINUX is a file even a printer and a mouse .
 
 UNIX OS  : HP-UX , IBM AIX , SUN SOLARIS , MAC OS X .(Paid services)
 LINUX OS : REDHAT , DEBIAN , UBUNTU. (Free and open source but some priced versions are available )
 
+POSIX : Portable Operating System interface is a family of standards specified by IEEE for maintaining compatibility between operating systems.
 
-POSIX :
--------
-Portable Operating System interface is a family of standards specified by IEEE for maintaining compatibility between operating systems.
-
-
-SHELL : ( a macro processor that executes commands) :
+SHELL : ( A macro processor that executes commands) :
 -----------------------------------------------------
 In computing, a shell is a computer program which exposes an operating system's services to a human user or other program .
 In general, operating system shells use either a command-line interface (CLI) or graphical user interface (GUI), depending on a computer's role and particular operation
 It is named a shell because it is the outermost layer around the operating system.
 A command-line interface (CLI) is an operating system shell that uses alphanumeric characters typed on a keyboard to provide instructions and data to the operating system.
 Including various services to their users, including file management, process management (running and terminating applications), batch processing, and operating system monitoring and configuration.
+
 MICROSOFT WINDOWS -> Windows Shell and Power shell
-LINUX/UNIX  -> Bourne again Shell (bash) , unix shell , Bourne shell (sh) , C SHELL (csh) , KORN SHELL(ksh)
+LINUX/UNIX        -> Bourne again Shell (bash) , unix shell , Bourne shell (sh) , C SHELL (csh) , KORN SHELL(ksh)
 
 In Unix, there are two major types of shells −
 Bourne shell − If you are using a Bourne-type shell, the $ character is the default prompt.
@@ -639,10 +648,19 @@ The different C-type shells follow −
 Users communicate with the kernel through a program known as the shell.
 The shell is a command line interpreter; it translates commands entered by the user and converts them into a language that is understood by the kernel.
 
+UNIX vs LINUX :
+--------------------
+Comparing Unix vs Linux, Linux source code is available to the general public whereas, in Unix, the source code is proprietary.
+UNIX OS was created in the late 1960s at AT&T Bell Labs whereas Linux is an operating system built by Linus Torvalds at the University of Helsinki in 1991.
+The main difference between Linux and Unix is Linux is a clone of Unix
+When we compare Unix to Linux, Linux default shell is BASH while the Unix shell is Bourne Shell.
+One key Unix and Linux difference is that Linux threat detection and solution are very fast while Unix users require longer wait times to get the proper bug fixing patch.
+Important versions of Linux are Redhat, Ubuntu, OpenSuse, Solaris, whereas important versions of Unix are HP-UX, AIS, BSD, etc
 
 UNINX SHELL :
 -------------
-A Unix shell is a command-line interpreter or shell that provides a command line user interface for Unix-like operating systems. The shell is both an interactive command language and a scripting language, and is used by the operating system to control the execution of the system using shell scripts.[
+A Unix shell is a command-line interpreter or shell that provides a command line user interface for Unix-like operating systems.
+The shell is both an interactive command language and a scripting language, and is used by the operating system to control the execution of the system using shell scripts.
 A Unix shell is both a command interpreter and a programming language.
 As a command interpreter, the shell provides the user interface to the rich set of gnu utilities. The programming language features allow these utilities to be combined
 Unix shells provide filename wildcarding, piping, here documents, command substitution, variables and control structures for condition-testing and iteration.
@@ -652,7 +670,7 @@ In early days of computing, instruction are provided using binary language, whic
 So in O/s there is special program called Shell. Shell accepts your instruction or commands in English and translate it into computers native binary language.
 
    --------------------        ------------       ---------------------------       -------
-  | command/shell_script | -> | Linux shell | -> | Binary equalent of command | -> | KERNAL |
+  | command/shell_script | -> | Linux shell | -> | Binary equalent of command | -> | KERNAL | -> HARDWARE
    --------------------        ------------       ---------------------------       -------
 
   $ls ; $date -> BASH -> 10001101 -> LINUX KERNAL
@@ -663,7 +681,8 @@ So in O/s there is special program called Shell. Shell accepts your instruction 
 SHELL SCRIPTING :	(called BATCH files in MS-DOS) ;
 --------------------------------------------------
 A shell script is a computer program designed to be run by the Unix shell, a command-line interpreter
-The biggest advantage of writing a shell script is that the commands and syntax are exactly the same as those directly entered at the command-line. The programmer does not have to switch to a totally different syntax, as they would if the script were written in a different language, or if a compiled language were used.
+The biggest advantage of writing a shell script is that the commands and syntax are exactly the same as those directly entered at the command-line.
+The programmer does not have to switch to a totally different syntax, as they would if the script were written in a different language, or if a compiled language were used.
 Disadvantages -> rm -rf */ and rm -rf * / (deletes everything including root ) and also that commands vary by  a single word -> cd cc df etc;
 
 
@@ -703,7 +722,7 @@ Ordinary Files − An ordinary file is a file on the system that contains data, 
 Directories    − Directories store both special and ordinary files.
                  For users familiar with Windows or Mac OS, Unix directories are equivalent to folders.
 
-Special Files  − Some special files provide access to hardware such as hard drives, CD-ROM drives, modems, and Ethernet adapters.
+Special Files  − Also called CHARACTER Files, provide access to hardware such as hard drives, CD-ROM drives, modems, and Ethernet adapters.
                  Other special files are similar to aliases or shortcuts and enable you to access a single file using different names.
                  These are located in /dev (device folder)
 
@@ -866,16 +885,17 @@ https://swcarpentry.github.io/shell-novice/06-script/index.html
 
 EXECUTE LINUX COMMANDS :
 ==========================
-To execute a linux command, do "$(command)" as in $echo "current dir is $(pwd)"
+To execute a linux command in a script, do "$(command)" as in $echo "current dir is $(pwd)"
 Also you can use `date`. As in -> echo " today is `date` "  or also as echo " today is $(date) " .
 
 
-$ echo 3 + 5 -> prints 3 + 5
-$ expr 3+5   -> prints 3+5 , use spaces .
-$ expr 3 + 5 -> 8
-$ echo "Todays date is `date`"  -> Todays date is TUE NOV 24 16:17:12 IST 2020
-$ echo `expr 3 + 5`    -> 8
-$ echo ` 2 + 3`   -> error
+$ echo 3 + 5                     -> prints 3 + 5
+$ expr 3+5                       -> prints 3+5 , use spaces .
+$ expr 3 + 5                     -> 8
+
+$ echo "Todays date is `date`"   -> Todays date is TUE NOV 24 16:17:12 IST 2020
+$ echo "3 + 5 = `expr 3 + 5`"    -> 8
+$ echo `2 + 3`                   -> error, saying command 2 not found.
 
 COMMAND LINE ARGUMENTS : https://www.grymoire.com/Unix/Quote.html
 ============================
@@ -891,32 +911,64 @@ $? :The exit status of the last command executed. -> 0 is a success , non-zero i
 $$ :The process number of the current shell. For shell scripts, this is the process ID under which they are executing.
 $! :The process number of the last background command.
 
-NOTE : https://unix.stackexchange.com/questions/129072/whats-the-difference-between-and
-There is no difference between $* and $@ but there is difference between "$*" and "$@" . Check below
-#!/bin/bash
-echo "With *:"
-for arg in "$*"; do echo "<$arg>"; done
-echo
-echo "With @:"
-for arg in "$@"; do echo "<$arg>"; done
+NOTE : DIFFERENTIATE $* and $@ :
 
-$ /tmp/test.sh 1  2 "3  4"
-With *:
-<1 2 3 4>
+1. SIMILARITY :
+--------------------------
+      #!/usr/bin/bash
+      echo "The total no of args are: $#"
+      echo "The \$* is: $*"
+      echo "The \$@ is: $@"
 
-With @:
-<1>
-<2>
-<3  4>
+      $ ./cmd 1 2 3
+      The total no of args are: 3
+      The $* is: 1 2 3
+      The $@ is: 1 2 3
+
+2. DIFFERENTIATION : Sending arguments in quotes will be seen as a single argument by $@ but $* will see them as different args.
+-------------------------
+        #!/usr/bin/bash
+        echo "Printing \$* "
+        for i in $*
+        do
+                echo i is: $i
+        done
+
+        echo "Printing \$@ "
+        for i in "$@"
+        do
+                echo i is: $i
+        done
 
 
--> bash file.sh 1 2 3 4 5
-$# = 5 ; $* = 1 2 3 4 5
--> ./file.sh 1 2 3 4 5
-$# = 5 ; $* = 1 2 3 4 5
+        $ ./cmd a b "c d" e
+        Printing $*
+        i is: a
+        i is: b
+        i is: c
+        i is: d
+        i is: e
+        Printing $@
+        i is: a
+        i is: b
+        i is: c d
+        i is: e
 
-ARRAYS :
+ARRAYS : https://www.geeksforgeeks.org/array-basics-shell-scripting-set-1/
 ===========
+DECLARE AN ARRAY : ARRAYNAME=(value1 value2  .... valueN)
+EX : arr=(prakhar ankit 1 rishabh manish abhinav)
+# To print particular element
+echo ${arr[3]}
+echo ${arr[1]}
+
+# Length of Particular element
+echo ${#arr[0]}
+
+# Size of an Array
+echo ${#arr[@]}
+echo ${#arr[*]}
+
 Syntax to access elements of an array : ${array_name[index]}
 You can access all the items in an array in one of the following ways −
 ${array_name[*]}
@@ -930,13 +982,27 @@ head -n "$2" "$1" | tail -n "$3"
 (or)
 wc -l "$@" | sort -n    -> if we have more than 1 file to process .
 
+NOTE :
+-----------
+1. Initialize variables as i=10 and not as i = 10
+2. While assigning values do not put spaces before and after = .
+   i=`expr $k + $m` --> is correct
+   i = `expr $k + $m` --> is incorrect
+3. If there is an error saying "uninary operator expected" while using a "test" keyword, check if the value is assigned to the variable.
+   We can not use an un assigned variable.
+4. Always use echo statement as --> echo " text "
+   And not as ---> echo"text"
+5. echo -e and echo -n are  very much important .
+   -e for interpreting the back slash characters
+   -n for not sending the text to new line.
+6. if test $i -eq 0   <===>     if [ $i -eq 0 ]    // For Mathematical Operators : [ we should specify -le and not le in code ]
+   Observe the spaces between each words and brackets.
 
 EXIT STATUS : ($?)
 ===================
 By default in Linux if particular command is executed, it return two type of values, (Values are used to see whether command is successful or not)
 if return value is zero (0), command is successful,
-if return value is nonzero (>0), command is not successful
-or some sort of error executing command/shell script.
+if return value is nonzero (>0), command is not successful or some sort of error executing command/shell script.
 This value is know as Exit Status of that command. To determine this exit Status we use $? variable of shell.
 
 ARITHEMATIC OPERATIONS : (for Multiplication it is \* , not *)
@@ -967,8 +1033,7 @@ whereas single brackets require [ -L "$file" ] && [ -f "$file" ]
 
 test command or [ expr ] is used to see if an expression is true, and if it is true it return zero(0),
 otherwise returns nonzero(>0) for false. Syntax: test expression OR [ expression ]
-Now will write script that determine whether given argument number is positive. Write script as
-follows
+Now will write script that determine whether given argument number is positive. Write script as follows
 
 if test $1 -gt 0
 then
@@ -985,7 +1050,7 @@ fi
 IF-THEN-FI :
 ================
 Unix Shell supports following forms of if…else statement −
-if...fi statement
+if ...then ... fi statement
 if...else...fi statement
 if...elif...else...fi statement
 
@@ -1002,12 +1067,12 @@ fi
 
 For Mathematical Operators : [ we should specify -le and not le in code ]
 
--eq ======== is equal to ======================== (5 == 6) ======== if test 5 -eq 6 ======== if expr [ 5 -eq 6 ]
--ne ======== is not equal to ==================== 5 != 6   ======== if test 5 -ne 6 ======== if expr [ 5 -ne 6 ]
--lt ======== is less than ======================= 5 < 6    ======== if test 5 -lt 6 ======== if expr [ 5 -lt 6 ]
--le ======== is less than or equal to =========== 5 <= 6   ======== if test 5 -le 6 ======== if expr [ 5 -le 6 ]
--gt ======== is greater than ==================== 5 > 6    ======== if test 5 -gt 6 ======== if expr [ 5 -gt 6 ]
--ge ======== is greater than or equal to ======== 5 >= 6   ======== if test 5 -ge 6 ======== if expr [ 5 -ge 6 ]
+-eq ======== is equal to ======================== (5 == 6) ======== if test 5 -eq 6 ======== if  [ 5 -eq 6 ]
+-ne ======== is not equal to ==================== 5 != 6   ======== if test 5 -ne 6 ======== if  [ 5 -ne 6 ]
+-lt ======== is less than ======================= 5 < 6    ======== if test 5 -lt 6 ======== if  [ 5 -lt 6 ]
+-le ======== is less than or equal to =========== 5 <= 6   ======== if test 5 -le 6 ======== if  [ 5 -le 6 ]
+-gt ======== is greater than ==================== 5 > 6    ======== if test 5 -gt 6 ======== if  [ 5 -gt 6 ]
+-ge ======== is greater than or equal to ======== 5 >= 6   ======== if test 5 -ge 6 ======== if  [ 5 -ge 6 ]
 
 For string Comparisons use :
 
@@ -1019,7 +1084,8 @@ string1                        string1 is NOT NULL or not defined
 
 Shell also test for file and directory types :
 
--s file                        Non empty file
+-e file                        test if file exists
+-s file                        file exists and is Non empty
 -f file                        Is File exist or normal file and not a directory
 -d dir                         Is Directory exist and not a file
 -w file                        Is writeable file
@@ -1076,6 +1142,30 @@ for i in 1 2 3 4 5 6 7 8 9 10
 do
  echo "$n * $i = `expr $i \* $n`"
 done
+
+NOTE :
+------
+1. Looping an array using while loop :
+      # !/bin/bash
+      # To declare static Array
+      arr=(1 12 31 4 5)
+      i=0
+
+      while [ $i -lt ${#arr[@]} ]
+      do
+       echo ${arr[$i]}
+       i=`expr $i + 1`
+      done
+
+2. Looping an array using for loop :
+        # !/bin/bash
+        # To declare static Array
+        arr=(1 2 3 4 5)
+
+        for i in "${arr[@]}"
+        do
+            echo $i
+        done
 
 WHILE LOOPS:
 ==============
@@ -1137,7 +1227,7 @@ done
 
 TAKING INPUT FROM USERS :
 ===========================
-SYNTAX : read <variable1> <variable2> etc ;
+SYNTAX : read <variable1> <variable2> ..... <variablen> ;
 
 echo "Enter the user name: "
 read first_name
@@ -1154,7 +1244,7 @@ echo "Name : $REPLY"
 
 -> To enter the input on the same PROMPT by using the -p command line option as follows:
 read -p "<Text>" <variable_name>
--> To not expose the user response as in passwords , use-s option
+-> To not expose the user response as in passwords , use -s option
 read -sp  "<Text>" <variable_name>
 
 -> To take array of values and access them as ${var[0]} and ${var[1]} etc ;
@@ -1228,3 +1318,6 @@ GETOPS for WHILE loops:
 =======================
 getopts is a very convenient bash script utility, which helps you to conveniently and gracefully handle the passing of flags(short version), and arguments in a clean, standardized manner.
 Instead of having the developer manually handle the flags passed to a script
+
+FILE READING AND WRITING :
+=============================
