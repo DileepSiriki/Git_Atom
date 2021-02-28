@@ -997,6 +997,9 @@ NOTE :
    -n for not sending the text to new line.
 6. if test $i -eq 0   <===>     if [ $i -eq 0 ]    // For Mathematical Operators : [ we should specify -le and not le in code ]
    Observe the spaces between each words and brackets.
+7. To find length of a string : count=${#string}
+   For an array , it is count=${#arr[@]}
+
 
 EXIT STATUS : ($?)
 ===================

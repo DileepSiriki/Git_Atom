@@ -2,13 +2,14 @@
 VERSION CONTROL SYSYTEMS : Is a software that helps software developers to work together and maintain a complete history of their work.
 
   Local Version Control Systems (RCS) : Stores versions of each file separately .
-  Centralized Version Control Systems : Depends on a central server , To collaborate with developers on other systems. Single point of failure and database corruptions .
+  Centralized Version Control Systems : Depends on a central server, used to collaborate with developers on other systems. Disadvantages include Single point of failure and database corruptions .
   Distributed Version Control Systems : clients don’t just check out the latest snapshot of the files: they fully mirror the repository.
-      Thus if any server dies, and these systems were collaborating via it, any of the client repositories can be copied back up to the server to restore it. Every clone is really a full backup of all the data
+      Thus if any server dies, and these systems were collaborating via it, any of the client repositories can be copied back up to the server to restore it.
+      Every clone is really a full backup of all the data
 
 GIT :
 =====
-### CHEAT-SHEET : https://github.com/github/training-kit/blob/master/downloads/github-git-cheat-sheet.md 
+### CHEAT-SHEET : https://github.com/github/training-kit/blob/master/downloads/github-git-cheat-sheet.md
 The major difference between Git and any other VCS is the way Git thinks about its data.
 Conceptually, most other systems store information as a list of file-based changes.
 These systems (CVS, Subversion, Perforce, Bazaar, and so on) think of the information they keep as a set of files and the changes made to each file over time.
@@ -53,12 +54,15 @@ if it was changed since it was checked out but has not been staged, it is modifi
 Git uses a series of configuration files to determine nondefault behaviour that you may want.
 Each of these “levels” (system, global, local) overwrites values in the previous level, so values in .git/config trump those in /etc/gitconfig, for instance.
 
+  // SYSTEM WIDE, For every user
   The first place Git looks for these values is in an /etc/gitconfig file, which contains values for every user on the system and all of their repositories.
   If you pass the option --system to git config, it reads and writes from this file specifically.
 
+  // USER WIDE, For a particular user
   The next place Git looks is the ~/.gitconfig (or ~/.config/git/config) file, which is specific to each user.
   You can make Git read and write to this file by passing the --global option.
 
+  // REPO WIDE, For a particular repo
   Finally, Git looks for configuration values in the configuration file in the Git directory (.git/config) of whatever repository you’re currently using.
   These values are specific to that single repository.
 
@@ -74,29 +78,29 @@ $ man git-<verb>
 
 GIT TERMINOLOGIES :
 ====================
-Blobs : Blob stands for Binary Large Object. Each version of a file is represented by blob. A blob holds the file data but doesn’t contain any metadata about the file. It is a binary file, and in Git database, it is named as SHA1 hash of that file. In Git, files are not addressed by names. Everything is content-addressed.
-Trees : Tree is an object, which represents a directory. It holds blobs as well as other sub-directories. A tree is a binary file that stores references to blobs and trees which are also named as SHA1 hash of the tree object.
-Commits : Commit holds the current state of the repository. A commit is also named by SHA1 hash. You can consider a commit object as a node of the linked list. Every commit object has a pointer to the parent commit object. From a given commit, you can traverse back by looking at the parent pointer to view the history of the commit. If a commit has multiple parent commits, then that particular commit has been created by merging two branches.
+Blobs    : Blob stands for Binary Large Object. Each version of a file is represented by blob. A blob holds the file data but doesn’t contain any metadata about the file. It is a binary file, and in Git database, it is named as SHA1 hash of that file. In Git, files are not addressed by names. Everything is content-addressed.
+Trees    : Tree is an object, which represents a directory. It holds blobs as well as other sub-directories. A tree is a binary file that stores references to blobs and trees which are also named as SHA1 hash of the tree object.
+Commits  : Commit holds the current state of the repository. A commit is also named by SHA1 hash. You can consider a commit object as a node of the linked list. Every commit object has a pointer to the parent commit object. From a given commit, you can traverse back by looking at the parent pointer to view the history of the commit. If a commit has multiple parent commits, then that particular commit has been created by merging two branches.
 Branches : Branches are used to create another line of development. By default, Git has a master branch, which is same as trunk in Subversion. Usually, a branch is created to work on a new feature. Once the feature is completed, it is merged back with the master branch and we delete the branch. Every branch is referenced by HEAD, which points to the latest commit in the branch. Whenever you make a commit, HEAD is updated with the latest commit.
-Tags : Tag assigns a meaningful name with a specific version in the repository. Tags are very similar to branches, but the difference is that tags are immutable. It means, tag is a branch, which nobody intends to modify. Once a tag is created for a particular commit, even if you create a new commit, it will not be updated. Usually, developers create tags for product releases.
-Clone : Clone operation creates the instance of the repository. Clone operation not only checks out the working copy, but it also mirrors the complete repository. Users can perform many operations with this local repository. The only time networking gets involved is when the repository instances are being synchronized.
-Pull ; Pull operation copies the changes from a remote repository instance to a local one. The pull operation is used for synchronization between two repository instances. This is same as the update operation in Subversion.
-Push : Push operation copies changes from a local repository instance to a remote one. This is used to store the changes permanently into the Git repository. This is same as the commit operation in Subversion.
-HEAD : HEAD is a pointer, which always points to the latest commit in the branch. Whenever you make a commit, HEAD is updated with the latest commit. The heads of the branches are stored in .git/refs/heads/ directory.
-       It is the pointer to the current branch reference, which is in turn a pointer to the last commit made on that branch.
-       That means HEAD will be the parent of the next commit that is created.
-       It’s generally simplest to think of HEAD as the snapshot of your last commit.
-       HEAD~ = Parent of HEAD
+Tags     : Tag assigns a meaningful name with a specific version in the repository. Tags are very similar to branches, but the difference is that tags are immutable. It means, tag is a branch, which nobody intends to modify. Once a tag is created for a particular commit, even if you create a new commit, it will not be updated. Usually, developers create tags for product releases.
+Clone    : Clone operation creates the instance of the repository. Clone operation not only checks out the working copy, but it also mirrors the complete repository. Users can perform many operations with this local repository. The only time networking gets involved is when the repository instances are being synchronized.
+Pull     : Pull operation copies the changes from a remote repository instance to a local one. The pull operation is used for synchronization between two repository instances. This is same as the update operation in Subversion.
+Push     : Push operation copies changes from a local repository instance to a remote one. This is used to store the changes permanently into the Git repository. This is same as the commit operation in Subversion.
+HEAD     : HEAD is a pointer, which always points to the latest commit in the branch. Whenever you make a commit, HEAD is updated with the latest commit. The heads of the branches are stored in .git/refs/heads/ directory.
+           It is the pointer to the current branch reference, which is in turn a pointer to the last commit made on that branch.
+           That means HEAD will be the parent of the next commit that is created.
+           It’s generally simplest to think of HEAD as the snapshot of your last commit.
+           HEAD~ = Parent of HEAD
 
 [CentOS]$ ls -1 .git/refs/heads/
 master
 [CentOS]$ cat .git/refs/heads/master
 570837e7d58fa4bccd86cb575d884502188b0c49
 
-Revision : Revision represents the version of the source code. Revisions in Git are represented by commits. These commits are identified by SHA1 secure hashes.
-URL : URL represents the location of the Git repository. Git URL is stored in config file.
+Revision        : Revision represents the version of the source code. Revisions in Git are represented by commits. These commits are identified by SHA1 secure hashes.
+URL             : URL represents the location of the Git repository. Git URL is stored in config file.
 
-Tracked files : are files that were in the last snapshot; they can be unmodified, modified, or staged.
+Tracked files   : are files that were in the last snapshot; they can be unmodified, modified, or staged.
 Untracked files : are everything else – any files in your working directory that were not in your last snapshot and are not in your staging area.
 When you first clone a repository, all of your files will be tracked and unmodified because Git just checked them out and you haven’t edited anything
 
@@ -105,6 +109,23 @@ Git is smart enough to figure out what commit you meant to type if you provide t
 as long as your partial SHA-1 is at least four characters long and unambiguous – that is, only one object in the current repository begins with that partial SHA-1.
   ex: git show <40chars> = git show <20chars> = git show <4chars>
 
+
+GIT STATUS :
+------------
+SHORT STATUS : While the git status output is pretty comprehensive, it’s also quite wordy. Git also has a short status flag so you can see your changes in a more compact way.
+If you run git status -s or git status --short you get a far more simplified output from the command:
+
+$ git status -s
+ M README
+MM Rakefile
+A lib/git.rb
+M lib/simplegit.rb
+?? LICENSE.txt
+
+New files that aren’t tracked have a ?? next to them, new files that have been added to the staging area have an A, modified files have an M and so on.
+There are two columns to the output - the let-hand column indicates the status of the staging area and the right-hand column indicates the status of the working tree.
+So for example in that output, the README file is modified in the working directory but not yet staged, while the lib/simplegit.rb file is modified and staged.
+The Rakefile was modified, staged and then modified again, so there are changes to it that are both staged and unstaged.
 
 GIT LOG :
 ==========
@@ -159,7 +180,7 @@ In Git, the stash operation takes your modified tracked files, stages changes, a
 git stash -> to stash the working directory and staged changes
 git stash list -> to list all stashes
 git stash pop -> execute the git stash pop command, to remove the changes from the stack and place them in the current working directory.
- git stash apply stash@{2} -> unstash 2nd stash (by default 1st one without any option)
+git stash apply stash@{2} -> unstash 2nd stash (by default 1st one without any option)
 
 
 GIT REMOVE/MOVE :
@@ -321,7 +342,7 @@ FROM THE NEXT COMMIT ->
      98ce56                            32bhu7                                  90ju78
 COMMIT     SIZE                    COMMIT     SIZE                        COMMIT     SIZE
 tree       92ec2                   tree       92ec2                       tree       92ec2
-parent      -          <----       parent     98ce56       <----          parent      32bhu7
+parent      -          <----       parent     98ce56       <----          parent     32bhu7
 author     scott                   author     scott                       author     scott
 committer  scott                   committer  scott                       committer  scott
 [<commit message>]                 [<COMMIT MESSAGE>]                     [<COMMIT MESSAGE>]
