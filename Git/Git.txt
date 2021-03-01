@@ -194,9 +194,11 @@ git push origin --delete <remote-branch> -> Delete a remote branches
 
 GIT RESET : ( *** Page 289 in GIT ***)
 ================
-git reset --soft -> just resets the HEAD pointer to previous commit and does not change anything
-git reset --mixed -> reverts those changes from the staging area that have not been committed yet. It reverts the changes from the staging area only. The actual changes made to the working copy of the file are unaffected. The default Git reset is equivalent to the git reset -- mixed.
-git reset --hard  -> it will clear the staging area; it will reset the HEAD pointer to the latest commit of the specific commit ID and delete the local file changes too.
+git reset --soft  -> Just resets the HEAD pointer to previous commit and does not change anything
+git reset --mixed -> Reverts those changes from the staging area that have not been committed yet.
+                     It reverts the changes from the staging area only. The actual changes made to the working copy of the file are unaffected.
+                     The default Git reset is equivalent to the git reset -- mixed.
+git reset --hard  -> It will clear the staging area; it will reset the HEAD pointer to the latest commit of the specific commit ID and delete the local file changes too.
 
 STEP 1: MOVE HEAD (GIT RESET --SOFT HEAD~)
 The first thing reset will do is move what HEAD points to.
@@ -586,4 +588,59 @@ when you run git branch (branchname), how does Git know the SHA-1 of the last co
 (.git/refs/heads/<branch>)
 
 
-HOW GIT TAKES CARE OF DOCS AND IMAGES ???
+##################################################################################################################
+:::: SUMMERY ::::
+##################################################################################################################
+// HEAD is a special pointer that points to the last commit on a branch we are on right now.
+
+git init
+git clone <url>
+git clone <url> <branch_name>
+git status
+
+git add <file>
+git commit -m <commit_message>
+git commit --amend -m <Commit_message>
+
+git log
+git log --oneline
+git log branch1..branch2         --> Show commits on branch2 that are not on branch1
+git log --oneline --decorate --graph --all --> Get a graph of branches
+
+git diff                         --> Difference between last commit and working directory
+git diff --staged                --> Difference between last commit and staged directory
+git diff branch1...branch2       --> Show diff of what is on branch2 but not on branch1
+
+git checkout --file              --> Unmodify a modified file in working directory
+git checkout <commit_id>         --> Change from one commit to another commit.
+
+git branch                       --> Show all branches and the branch we are on
+git branch <branch_name>         --> create a branch
+git checkout <branch_name>       --> Move to a branch
+git checkout -b <branch_name>    --> Create a branch and move to it
+git branch -d <branch_name>      --> Delete a branch
+git branch -D <branch_name>      --> Force delete a branch
+git branch --merged              --> Show branches that are merged to main.
+git branch --no-merged
+
+git remote
+git remote add <alias> <url>
+
+git reset --soft
+git reset --mixed
+git reset --hard
+
+git fetch
+git merge <remote> <branch>
+git pull <remote> <branch>       --> Fetch + Merge
+git push <remote> <branch>
+git rebase
+
+git Tags
+git stash
+git hooks                        --> Client side and server side scripts
+git show <commit_id>             --> Show changes in a particular commit
+git reflog                       --> Show the route of HEAD // where HEAD moved recently
+
+git mergetool
+git difftool

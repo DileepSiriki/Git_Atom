@@ -343,7 +343,7 @@ while True:
     time.sleep(1)
 
 
-import sys 
+import sys
 import time
 
 for i in range(10):
@@ -351,3 +351,24 @@ for i in range(10):
     time.sleep(1)
 
 print("d")
+
+######################################################################
+######################################################################
+
+a='a'
+b='b'
+c=4
+
+print(a+b)
+print(a+"money")
+print(b,"money")
+print(2+4)
+print("strings are %s and %s" %(a,b))
+print(type(c))
+
+str="awesome"
+def call():
+    print("python is " + str)
+call()
+
+print("abc"*10)

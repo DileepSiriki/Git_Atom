@@ -1,3 +1,15 @@
+SHEBANG #! :
+-----------------------
+The #! syntax used in scripts to indicate an interpreter for execution under UNIX / Linux operating systems.
+It is a file that specifies which program should be called to run the script
+Most Linux shell and perl / python script starts with the following line
+# char represents a comment but it is overridden by #! (! char after # to tell it as a shebang)
+It is nothing but the absolute path to the Bash interpreter.All scripts under Linux execute using the interpreter specified on a first line
+If you do not specify an interpreter line, the default is usually the /bin/sh. But, it is recommended that you set #!/bin/bash line.
+#!/usr/bin/env -> locates  out automatically the first shell to run the program found in the user's $PATH, typically /bin/sh.
+If you execute program as "python abc.py" shebang is not needed to be specified . But if you do as ./abc.py it is needed.
+
+
 ###########################################################################################################################################################################################
 WINDOWS COMMANDS (cmd prompt): https://www.thomas-krenn.com/en/wiki/Cmd_commands_under_Windows
 ###########################################################################################################################################################################################
@@ -572,7 +584,7 @@ Free  : This command shows the free and used memory (RAM) on the Linux system.
 
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
-:::: SHELL SCRIPTING ::::
+:::: SHELL SCRIPTING ::::  // EXAMPLES : https://linuxhint.com/30_bash_script_examples/
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
@@ -982,7 +994,7 @@ head -n "$2" "$1" | tail -n "$3"
 (or)
 wc -l "$@" | sort -n    -> if we have more than 1 file to process .
 
-NOTE :
+NOTE : https://linuxhint.com/30_bash_script_examples/
 -----------
 1. Initialize variables as i=10 and not as i = 10
 2. While assigning values do not put spaces before and after = .
@@ -999,7 +1011,20 @@ NOTE :
    Observe the spaces between each words and brackets.
 7. To find length of a string : count=${#string}
    For an array , it is count=${#arr[@]}
+8. Any of the following syntaxes can be followed to count the length of string.
 
+    ${#strvar}
+    expr length $strvar
+    expr “${strvar}”:’.*’
+    $strvar | wc -c
+    $strvar | awk '{print length}'
+9. wait waits for a process to finish; sleep sleeps for a certain amount of seconds.
+   Wait will wait until a minute or hour or day depending on the length of job specified.
+10.  SYNTAX to read a file : while read line; do Command; done < input.file
+     while read line
+     do
+     echo $line
+     done < file_name
 
 EXIT STATUS : ($?)
 ===================
@@ -1165,10 +1190,18 @@ NOTE :
         # To declare static Array
         arr=(1 2 3 4 5)
 
-        for i in "${arr[@]}"
+        for i in "${arr[@]}" // To read the arguments, do : for i in "$@"
         do
             echo $i
         done
+
+  3. Updated for loop
+        # !/bin/bash
+        for (( i=10; i>0; i-- ))
+        do
+            echo $i
+        done
+
 
 WHILE LOOPS:
 ==============

@@ -2,6 +2,9 @@
 #GITHUB-TOKEN 4d4ff38b27cd2f780fb73e3dd16cf3380a81ac7e
 #GIST 94f56b62d8e4f8d1ddf82b3877ee8e12
 
+NOTE  : Use ctrl+shft+b to execute a piece of code.
+        Use ctrl+shft+p to open settings
+
 '''
 ATOM SPECIFICATIONS:
 --------------------------
@@ -27,10 +30,10 @@ The #! syntax used in scripts to indicate an interpreter for execution under UNI
 It is a file that specifies which program should be called to run the script
 Most Linux shell and perl / python script starts with the following line
 # char represents a comment but it is overridden by #! (! char after # to tell it as a shebang)
-It is nothing but the absolute path to the Bash interpreter.All scripts under Linux execute using the interpreter specified on a first line
+It is nothing but the absolute path to the Bash interpreter. All scripts under Linux execute using the interpreter specified on a first line
 If you do not specify an interpreter line, the default is usually the /bin/sh. But, it is recommended that you set #!/bin/bash line.
 #!/usr/bin/env -> locates  out automatically the first shell to run the program found in the user's $PATH, typically /bin/sh.
-If you execute program as "python abc.py" shebang is not needed to be specified . But if you do as ./abc.py it is needed.
+If you execute program as "python abc.py" shebang is not needed to be specified because you are already specifying the interpreter as "python". But if you do as ./abc.py it is needed.
 '''
 
 #This is a single line comment .
@@ -63,35 +66,40 @@ Variables are containers for storing data values.
 A variable is created the moment you first assign a value to it.
 strings in Python are arrays of bytes representing unicode characters.
 Python does not have a character data type, a single character is simply a string with a length of 1 .
-Strings are IMMUTABLE . So you can not do " x='dileep' ; x[2]='d' "
-    So you can do a='dileep' ; a=a[0:2]+'m'+a[3:300] ; print(a) or create a new variable .
-However, Python does not have a character data type, a single character is simply a string with a length of 1.
-Square brackets can be used to access elements of the string
-Variable names can contain only letters, numbers, and underscores.They can start with a letter or an underscore, but not with a number.For instance, you can call a variable message_1 but not 1_message.
+
+Strings are IMMUTABLE . So if you do  " x='dileep' then  you can not do x[2]='d' "
+So you can do a='dileep' ; a=a[0:2]+'m'+a[3:300] ; print(a) or create a new variable .
+Square brackets can be used to access elements of the string.
+Variable names can contain only letters, numbers, and underscores.
+They can start with a letter or an underscore, but not with a number. For instance, you can call a variable message_1 but not 1_message.
 Be careful when using the lowercase letter l and the uppercase letter O because they could be confused with the numbers 1 and 0
 '''
+
 a=1
 b='name'
 c="is JOHN"
+
+print(abc) #Error
+print(a+b+c) #unsupported operand type(s) for +: 'int' and 'str'
+
 print(a,b,c) #1 name is JOHN
+print(b+c) #nameis JOHN
+print(str(a)+b+c) #1nameis JOHN  //  int and string can not be concatnated but we can first convert it into str and then concatnated.
+print(a+5)  #6
+
 d='dhoni'
 e="dhoni"
 f='''dhoni'''
 g="""dhoni"""
 print(d,e,f,g)  #dhoni dhoni dhoni dhoni -> all are valid
 
-#print(abc) #Error
-#print(a+b+c) #unsupported operand type(s) for +: 'int' and 'str'
-print(b+c) #nameis JOHN
-#int and string can not be concatnated but we can first convert it into str and then concatnated.
-print(str(a)+b+c) #1nameis JOHN
 
 a = """This is a multi line string1
 This is the principle behind
 multiline comments ."""
 print(a)
 
-# "+" donot put a space while a "," puts a space between strings in print.
+# "+" do not put a space while a "," puts a space between strings in print.
 str1="string1"
 str2="string2"
 print(str1,str2) #string1 string2
@@ -164,13 +172,14 @@ print("Python is " + x)
 
 """
 NUMBERS :
+-------------
 When you’re writing long numbers, you can group digits using underscores to make large numbers more readable
-A constant is like a variable whose value stays the same throughout the life of a program. Python doesn’t have built-in constant types, but Python programmers use all capital letters to indicate a variable should be treated as a constant and never be changed
-###ORDER OF ARITHEMATIC OPERATIONS
+A constant is like a variable whose value stays the same throughout the life of a program.
+Python doesn’t have built-in constant types, but Python programmers use all capital letters to indicate a variable should be treated as a constant and never be changed
+### ORDER OF ARITHEMATIC OPERATIONS
 PEMDAS which stands for Parentheses Exponents Multiplication Division Addition Subtraction.
-That’s the order Python follows as well. The mistake people make with PEMDAS is to think this is a strict order, as in “Do P, then E, then M, then D,
-then A, then S.” The actual order is you do the multiplication and division (M&D) in one step, from left to right, then you do the
-addition and subtraction in one step from left to right. So, you could rewrite PEMDAS as PE(M&D)(A&S)
+That’s the order Python follows as well. The mistake people make with PEMDAS is to think this is a strict order, as in “Do P, then E, then M, then D, then A, then S.”
+The actual order is you do the multiplication and division (M&D) in one step, from left to right, then you do the addition and subtraction in one step from left to right. So, you could rewrite PEMDAS as PE(M&D)(A&S)
 """
 x=14_12_000
 print(x)        #1412000
