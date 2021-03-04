@@ -307,7 +307,7 @@ print(b[2:5]) #llo  ,Get the characters from position 2 to position 5 (not inclu
 print(b[-2]) # d
 print(b[-5:-2]) #orl
 print(len(b)) #13
-print(b.strip()) # returns "Hello, World!" , removes any whitespace from the beginning or the end:
+print(b.strip()) # returns "Hello, World!" , removes any whitespace from the beginning or the end.
 print(b.lower()) #hello, world!
 print(b.upper()) #HELLO, WORLD!
 print(a.replace("H", "J")) #Jello, World!
@@ -337,8 +337,8 @@ print(text.find('is',12)) #-1
 a='z'
 b='y'
 c='x'
-print(a+b,end="     ")  #
-print(c)                #zy     x ->an end specified will not by default do a new line so it took a tab here as specified .
+print(a+b,end="     ")  #zy
+print(c)                #     x     ->an end specified in the previous line will not by default do a new line so it took a tab here as specified .
 print(a+b+c)            #zyx
 print(a+b+c,end=";")    #zyx;
 

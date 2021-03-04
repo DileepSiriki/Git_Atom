@@ -372,3 +372,11 @@ def call():
 call()
 
 print("abc"*10)
+
+print(encode("dileep"))
+print("dileep".encode())
+
+a="dhoni"
+print(a[2])
+print(a[2:10])
+print(len("dhoni"))

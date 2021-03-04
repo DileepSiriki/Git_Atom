@@ -717,7 +717,8 @@ PTS :
     Stands for pseudo terminal slave.
     A pts is the slave part of a pty.
     A pty (pseudo terminal device) is a terminal device which is emulated by an other program (example: xterm, screen, or ssh are such programs).
-    /dev/pts contains entries corresponding to devices. /dev/pts is a special directory that is created dynamically by the Linux kernel. The contents of the directory vary with time and reflect the state of the running system.
+    /dev/pts contains entries corresponding to devices. /dev/pts is a special directory that is created dynamically by the Linux kernel.
+    The contents of the directory vary with time and reflect the state of the running system.
 
 In laymen terms the primary difference between TTY and PTS is the type of connection to the computer.
 TTY ports are direct connections to the computer such as a keyboard/mouse or a serial connection to the device.
@@ -906,7 +907,7 @@ $ expr 3+5                       -> prints 3+5 , use spaces .
 $ expr 3 + 5                     -> 8
 
 $ echo "Todays date is `date`"   -> Todays date is TUE NOV 24 16:17:12 IST 2020
-$ echo "3 + 5 = `expr 3 + 5`"    -> 8
+$ echo "3 + 5 = `expr 3 + 5`"    -> 3 + 5 = 8
 $ echo `2 + 3`                   -> error, saying command 2 not found.
 
 COMMAND LINE ARGUMENTS : https://www.grymoire.com/Unix/Quote.html
@@ -960,6 +961,7 @@ NOTE : DIFFERENTIATE $* and $@ :
         i is: c
         i is: d
         i is: e
+
         Printing $@
         i is: a
         i is: b
@@ -1018,6 +1020,7 @@ NOTE : https://linuxhint.com/30_bash_script_examples/
     expr “${strvar}”:’.*’
     $strvar | wc -c
     $strvar | awk '{print length}'
+
 9. wait waits for a process to finish; sleep sleeps for a certain amount of seconds.
    Wait will wait until a minute or hour or day depending on the length of job specified.
 10.  SYNTAX to read a file : while read line; do Command; done < input.file
@@ -1320,7 +1323,7 @@ $ rm bad_file_name111 2>er
 Note that no space are allowed between 2 and >, The 2>er directs the standard error output to file. 2 number is default number of stderr file.
 
 Syntax: "from>&destination"
-If we want to tell users they have not specified arguments or someother but we dont to print them in stdout rather in stderr , then :
+If we want to tell users they have not specified arguments or some other mistake but we don't want  to print them in stdout rather in stderr , then :
 You can display a message on to STDERR by redirecting STDOUT into STDERR
 echo "Error : Number are not supplied" 1>&2
 echo "Usage : $0 number1 number2" 1>&2
