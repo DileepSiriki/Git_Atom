@@ -97,7 +97,7 @@ The asterisk in the parameter name *kids tells Python to make an empty tuple cal
 
 def my_function(*kids):
   print("The youngest child is",kids[2])
-my_function("Emil", "Tobias", "Linus")
+my_function("Emil", "Tobias", "Linus")    #The youngest child is Linus
 
 #Positional + Arbitary arguments
 def make_pizza(size, *toppings):
@@ -145,6 +145,7 @@ my_function(fruits)
 
 #function definitions cannot be empty.
 #if you for some reason have a function definition with no content, put in the pass statement to avoid getting an error
+#useful if you want to write a function in future but you want to keep track if where to write
 def myfunction():
     pass
 
@@ -153,7 +154,7 @@ A lambda function is a small anonymous function.
 A lambda function can take any number of arguments, but can only have one expression.
 Use lambda functions when an anonymous function is required for a short period of time.
 Lambda functions are used along with built-in functions like filter(), map() etc
-SYNTAX :    lambda arguments : expression
+SYNTAX :    lambda <arguments> : expression
 '''
 print(lambda a : a) #<function <lambda> at 0x000002999977CF70>
 

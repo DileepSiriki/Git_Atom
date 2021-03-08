@@ -380,3 +380,110 @@ a="dhoni"
 print(a[2])
 print(a[2:10])
 print(len("dhoni"))
+
+
+
+a="kumar"
+print(len(a))
+print(a[len(a)-1])
+print(a[4:1:-1])
+print(a[len(a)::-1])
+b=a[len(a)::-1]
+print(a,b)
+print(a[0:2],'z',a[3:])
+print(a[len(a):0:-1])
+print(a[2])
+print ('dileep')
+
+a='1'
+b='2'
+print(a+b)
+print("dileep is ",a )
+print("dileep  is"+b)
+c=a+b
+print(c)
+d=a+b+'k'
+print(d)
+
+print(2+2)
+
+a=''' speed \
+def
+'''
+print(a)
+
+a='a'
+b='b'
+print('first alphabet is %s and next comes %s' %(a,"x"))
+
+a,b,c='f','g','h'
+print(a,b,c)
+print(a*20,"dhoni")
+
+a,b="dileep","kumar"
+print(f"I am {a}{b}")
+c=f"I am {a}{b}"
+print(c)
+
+a=10
+print(id(a))
+
+a="dhoni"
+print(reversed(a))
+print(list(reversed(a)))
+print(' '.join(list(reversed(a))))
+print(" ".join(a))
+
+
+print(a)
+print(a.capitalize())
+print(a.find("a"))
+d=a.split(sep="o")
+print(d,"hi")
+
+a='dileep'
+b='kumar'
+print("hi %s%s" %(a,b))
+print("hi {}{}".format(a,b))
+print(f"hi {a}{b}")
+print("hi {x}{y}".format(x=a,y=b))
+
+m="hello world !!!"
+def rev():
+    print(m[::-1])
+rev()
+
+def rev1():
+    i=1
+    while(i<=len(m)) :
+        print(m[-i],end="")
+        i=i+1
+rev1()
+
+
+thislist = ["zaw", "apple", "banana", "cherry", "orange","apple", "kiwi", "melon", "mango"]
+thislist.append("dhoni")
+print(thislist)
+print(thislist.index("apple"))
+print("apple" in thislist)
+print(list(reversed(thislist)))
+print("@".join(list(reversed(thislist))))
+print(thislist[len(thislist)-1])
+print(thislist.pop(2))
+print(thislist)
+del thislist
+print(thislist)
+
+thislist = ["zaw", "apple", "banana", "cherry", "orange","apple", "kiwi", "melon", "mango"]
+print(len(thislist))
+thislist.pop()
+print(len(thislist))
+
+print(thislist)
+
+a=[1,2]
+b=a.copy()
+print(a,b)
+
+c=[1,1,2,2,3,5,1]
+print(set(c))

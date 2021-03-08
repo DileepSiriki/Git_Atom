@@ -35,7 +35,7 @@ if b > a:
 
  '''
 With the break statement we can stop the loop even if the while condition is true:
-With the continue statement we can stop the current iteration, and continue with the next:
+continue statement stops the current iteration, and continue with the next.
 break leaves a loop, continue jumps to the next iteration.
 Note that range(6) is not the values of 0 to 6, but the values 0 to 5.
 however it is possible to specify the starting value by adding a parameter: range(2, 6), which means values from 2 to 6 (but not including 6):

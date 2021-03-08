@@ -736,8 +736,8 @@ CONNECTING TO A LINUX INSTANCE :
               ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCTCrYHTl/5It/KrXMLN7BUDKskVE4PpApkCgd6dV12HljvAhXpl66zdPDiN9NHVB+3jmxmF8ZBJN ec2-linux
               ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+twbxxGzNfaghfjny88GFt/EnULmZhRVwpb9Ln0G0A3hbNGPgDt8tjOpACAk1usOwSyN4RJg0Cv ec2-linux_1
 
-     CONNECT TO AN INSTANCE IF PRIVATE KEY IS  :
-     ---------------------------------------------
+     CONNECT TO AN INSTANCE IF PRIVATE KEY IS LOST:
+     -----------------------------------------------
       Step 1: Create a new key pair
       Step 2: Get information about the original instance and its root volume
       Step 3: Stop the original instance
@@ -767,7 +767,7 @@ CONNECTING TO A LINUX INSTANCE :
       • EC2 Instance Connect
 
 --> If your local computer operating system is Windows
-      • SSH client - ssh -i "Private-Key" username@DNS-name    // WSL
+      • SSH client - ssh -i "Private-Key" username@DNS-name    // WSL or windows command line if SSH is installed or from powershell.
       • AWS Systems Manager Session Manager
       • PuTTY ( free SSH client for Windows)
       • Windows Subsystem for Linux

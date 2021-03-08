@@ -2693,9 +2693,9 @@ Up to 10 policies per group
 • Using the AWS CLI on our EC2 machines --> Not at all recommended . Use roles instead
 • Using the AWS SDK on our local computer
 • Using the AWS SDK on our EC2 machines
-• Using the AWS Instance Metadata Service for EC2 -->  curl http://169.254.169.254/latest/meta-data (neednot have a role assigned to get data)
+• Using the AWS Instance Metadata Service for EC2 -->  curl http://169.254.169.254/latest/meta-data/ (need not have a role assigned to get data)
 
-EC2 METADATA :
+EC2 METADATA : ( "/" at the end is important)
 -------------------
 • AWS EC2 Instance Metadata is powerful but one of the least known features to developers
 • It allows AWS EC2 instances to ”learn about themselves” without using an IAM Role for that purpose.
@@ -2704,7 +2704,7 @@ EC2 METADATA :
 • Metadata = Info about the EC2 instance
 • Userdata = launch script of the EC2 instance
 
-Launch an instance and execute commands "curl http://169.254.169.254/latest/"  --> " curl http://169.254.169.254/latest/meta-data " ---> So on .... and explore the directory.
+Launch an instance and execute commands "curl http://169.254.169.254/latest/"  --> " curl http://169.254.169.254/latest/meta-data/ " ---> So on .... and explore the directory.
 An entry is a value if it is a simple string, and it is a directory if it has an associated "/" at the end.
 
 SDK :
@@ -3475,3 +3475,29 @@ EFS and EBS are not good use cases for this solution. Neither storage solution i
 
 Uploading using a pre-signed URL allows you to upload the object without having any AWS security credentials/permissions. '
 Pre-signed URLs can be generated programmatically and anyone who receives a valid pre-signed URL can then programmatically upload an object. This solution bypasses the web server avoiding any performance bottlenecks.
+
+BASTON HOST :
+----------------
+A bastion host is a server whose purpose is to provide access to a private network from an external network, such as the Internet.
+Because of its exposure to potential attack, a bastion host must minimize the chances of penetration.
+Say if we have an instance in a private subnet, then we can use a baston host in a public subnet to get access to the instance in the private subnet
+
+NAT Instance  (OLD)                                            vs     NAT Gateway  (LATEST)
+---------------------------------------------------------------------------------------------------------
+Managed by you (e.g. software updates)                                 Managed by AWS
+Scale up (instance type) manually and use enhanced networking          Elastic scalability up to 45 Gbps
+
+No high availability – scripted/auto-scaled HA possible                Provides automatic high availability within an AZ and can be
+using multiple NATs in multiple subnets                                placed in multiple AZs
+
+Need to assign Security Group                                          No Security Groups
+Can use as a bastion host                                              Cannot access through SSH
+Use an Elastic IP address or a public IP address with a                Choose the Elastic IP address to associate with a NAT gateway at creation
+NAT instance
+
+Can implement port forwarding through manual                           Does not support port forwarding
+customisation
+
+When to use ENI: This is the basic adapter type for when you don’t have any high-performance requirements. Can use with all instance types.
+When to use ENA: Good for use cases that require higher bandwidth and lower inter-instance latency. Supported for limited instance types (HVM only).
+When to use EFA: High Performance Computing. MPI and ML use cases. Tightly coupled applications. Can use with all instance types.

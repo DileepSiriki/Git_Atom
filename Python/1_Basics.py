@@ -246,7 +246,7 @@ x = memoryview(bytes(5))	                 -> memoryview
 
 #to get a random number
 import random
-print(random.randrange(1,10))
+print(random.randrange(1,1000000))
 
 #constructs an integer number from a string literal (providing the string represents a whole number)
 z = int("3")
@@ -392,6 +392,12 @@ print(''.join(reversed(b))) #gnirtS desrever
 print(b.find("v")) #2
 print(b.index('v')) #2
 
+a="dhoni"
+print(reversed(a))
+print(list(reversed(a)))
+print(' '.join(list(reversed(a))))
+print(" ".join(a))
+
 #index returns a -1 on not finding a substring while find returns an error
 print(b.find("z")) #-1
 #print(b.index('z')) #ValueError: substring not found
@@ -410,11 +416,25 @@ rev() #!dlroW ,olleH
 '''
 f STRINGS : [Format Strings] :  f and F both do the same thing
 When you want to use a variable’s value inside a string .
-To insert a variable’s value into a string, place the letter f immediately before the opening quotation mark . Put braces around the name or names of any variable you want to use inside the string. Python will replace each variable with its value when the string is displayed.
+To insert a variable’s value into a string, place the letter f immediately before the opening quotation mark "" .
+Put curly braces {} around the name or names of any variable you want to use inside the string. Python will replace each variable with its value when the string is displayed.
 To use it : f"any_string {var_1} {var_2}"
 F-strings are faster than the two most commonly used string formatting mechanisms, which are % formatting and str.format()
 
 '''
+---------------------------------------------
+NOTE : There are 3 ways to format a string.
+---------------------------------------------
+a='dileep'
+b='kumar'
+print("hi %s%s" %(a,b))
+print("hi {}{}".format(a,b))
+print(f"hi {a}{b}")
+
+print("hi {x}{y}".format(x=a,y=b))
+
+---------------------------------------------
+
 first_name="dileep"
 last_name="kumar"
 full_name=f"{first_name} {last_name}"
@@ -424,7 +444,7 @@ print(f"Hello, {full_name.title()}!")   #Hello, Dileep Kumar!
 
 val = 'Geeks'
 ue = "for"
-print("Hello %s %s %s" %(val,ue,val))      #old school formatting -> readable enough. However, once you start using several parameters and longer strings, your code will quickly become much less easily readable and leads to errors, like not displaying tuples or dictionaries correctly
+print("Hello %s %s %s" %(val,ue,val))      #old school formatting ->  readable enough. However, once you start using several parameters and longer strings, your code will quickly become much less easily readable and leads to errors, like not displaying tuples or dictionaries correctly
 
 print("Hello {} , please go through {} {} {}".format(val,val,ue,val))   #str.format() -> you get the added perk of being able to pass objects and then reference parameters and methods in between the braces
 person = {'name': 'Eric', 'age': 74}
@@ -433,7 +453,7 @@ print("Hello, {name}. You are {age}. Your name {name} looks great.".format(**per
 
 ### VERY VERY IMPORTANT
 person = {'name': 'Eric', 'age': 74}
-print("hello, {1}. You are {0} of age".format(person['name'], person['age']))  #hello, 74. You are Eric of age
+print("hello, {1}. You are {0} of age".format(person['name'], person['age']))  # hello, 74. You are Eric of age
 print("hello, {0}. You are {1} of age".format(person['name'], person['age']))  # hello, Eric. You are 74 of age
 print("hello, {dileep}. You are {kumar} of age ".format(dileep=person['name'],kumar=person['age'])) ## hello, Eric. You are 74 of age
 
@@ -624,13 +644,14 @@ print ("After converting tuple to dictionary : ",end="")
 print (c) #After converting tuple to dictionary : {'a': 1, 'f': 2, 'g': 3}
 
 #code for disabling the softspace feature
+print('GFG')
 print('G','F','G', sep='') #GFG
 print('09','12','2016', sep='-') #09-12-2016
 print('pratik','geeksforgeeks', sep='@') #pratik@geeksforgeeks
 
 '''
 TAKING INPUT FROM USER :
-raw_input() is used in python 2.x while input is used in python 3.x
+raw_input() is used in python 2.x while input() is used in python 3.x
 '''
 print("how old are you ?",end=" ")
 age=input("Age=")

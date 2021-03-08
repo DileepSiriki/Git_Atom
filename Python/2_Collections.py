@@ -9,7 +9,7 @@ Set Types       :	set, frozenset
 -> {} Set is a collection which is unindexed , unordered and unmutable (but can add elements). No duplicate members and you cannot be sure in which order the items will appear.
 -> Dictionary is a collection which is unordered, changeable and indexed. No duplicate members.
 
-                    ORDERING     INDEXING    MUTATION    DUPLICATES  REPRESENTATION
+                    ORDERING     INDEXING    MUTATION    DUPLICATES  REPRESENTATION // MODI
 LISTS                 yes           yes         yes         yes         []
 TUPLES                yes           yes         no          yes         ()
 SETS                  no            no          partial     no          {}
@@ -48,6 +48,7 @@ if "apple" not in thislist:
 print(len(thislist)) #8
 thislist.append("orange")
 print(thislist) #['zaw', 'blackcurrant', 'banana', 'cherry', 'orange', 'kiwi', 'melon', 'mango', 'orange']
+
 thislist=['zaw', 'blackcurrant', 'banana', 'cherry', 'orange', 'kiwi', 'melon', 'mango', 'orange', 345, 56]
 print(len(thislist)) #11
 thislist.insert(1, "coconut")
@@ -85,7 +86,7 @@ print(list1) #['a', 'b', 'c', 1, 2, 3]
 list1.extend(list2)
 print(list1) #['a', 'b', 'c', 1, 2, 3, 1, 2, 3]
 
-thislist = list(("apple", "banana", "cherry")) # note the double round-brackets
+thislist = list(("apple", "banana", "cherry"))  # note the double round-brackets
 print(thislist) #['apple', 'banana', 'cherry']
 
 
@@ -102,8 +103,8 @@ print(f"my fav subject among all was {languages[1]}. ")
 
 motorcycles = ['honda', 'yamaha', 'suzuki']
 print(motorcycles)           #['honda', 'yamaha', 'suzuki']
-motorcycles[0] = 'ducati'    #['ducati', 'yamaha', 'suzuki']
-print(motorcycles)
+motorcycles[0] = 'ducati'
+print(motorcycles            #['ducati', 'yamaha', 'suzuki']
 motorcycles.append('karizma')
 print(motorcycles)          #['ducati', 'yamaha', 'suzuki', 'karizma']
 motorcycles.insert(1, 'pulsar') # To insert at a certain position
@@ -115,7 +116,8 @@ list = [3, 5, 7, 8, 9, 20]
 del list[0:3]
 print(list)     #[9, 20]
 
-#The pop() method removes the last item in a list, but it lets you work with that item after removing it. The term pop comes from thinking of a list as a stack of items and popping one item off the top of the stack
+#The pop() method removes the last item in a list, but it lets you work with that item after removing it.
+#The term pop comes from thinking of a list as a stack of items and popping one item off the top of the stack
 #Remember that each time you use pop(), the item you work with is no longer stored in the list.
 #pop() is also permanent but the value can be caught to a variable.
 motorcycles = ['honda', 'yamaha', 'suzuki']
@@ -161,6 +163,8 @@ print(cars)
 print("\nHere is the sorted list:")
 print(sorted(cars)) #['audi', 'bmw', 'subaru', 'toyota'] -> affect is not permanent
 print(cars)         #['bmw', 'audi', 'toyota', 'subaru']
+cars.sort()
+print(cars)         #['audi', 'bmw', 'subaru', 'toyota'] -> affect is permanent
 
 #The reverse() method changes the order of a list permanently, but you can revert to the original order anytime by applying reverse() to the same list a second time
 cars = ['bmw', 'audi', 'toyota', 'subaru']
@@ -183,7 +187,7 @@ a[1]=list('dhoni')
 print(a)    #[1, ['d', 'h', 'o', 'n', 'i']]
 
 players=list(78,90)
-print(players) #int object is not iterable
+print(players) #list expected at most 1 argument, got 2
 players=list([78,90])
 print(players)  #[78,90]
 a="dileep"
@@ -322,8 +326,10 @@ print(squares)  #[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 
 a=[1,2]
 b=[3,4]
-c=a+b   a.extend(b)     #joining two lists
-
+c=a+b
+print(c)        #[1, 2, 3, 4]
+a.extend(b)     #joining two lists
+print(a)        #[1, 2, 3, 4]
 
 '''
 TUPLES :
@@ -339,9 +345,10 @@ print(thistuple) #('apple', 'banana', 'cherry')
 y = list(thistuple)
 y[1] = "kiwi"
 x = tuple(y)
-print(x) #('apple', 'kiwi', 'cherry')
-del thistuple[1]
-del thistuple #deletes the complete touple
+print(x)              #('apple', 'kiwi', 'cherry')
+del thistuple[1]      #'tuple' object doesn't support item deletion
+print(thistuple)
+del thistuple         #deletes the complete touple
 
 a,b,c,d,e=(1),('1'),[1],['1'],(1,)
 print(type(a),type(b),type(c),type(d),type(e))  #<class 'int'> <class 'str'> <class 'list'> <class 'list'> <class 'tuple'>
@@ -425,6 +432,8 @@ print(sorted(a, reverse=True)) #[4, 3, 2, 1]
 print(sorted(a)) #[1, 2, 3, 4]
 print(type(sorted(a))) #<class 'list'>
 print(type(a)) #<class 'set'>
+
+
 
 '''
 DICTIONARIES :
