@@ -267,7 +267,7 @@ Compression  : Compress the data to small size so that it can be transferred fas
 
 3. SESSION LAYER :
 -----------------------
-PROTOCOL     : TCP - UDP
+PROTOCOL       :  RPC, SCP
 The main role of session layer is to setup and maintain the connection between different systems.
 Authentication : Before a computer can be connected to a server, the computer has to provide user name and password for the authentication.
                  The function of authentication and setting up a connection after authentication is performed by session layer.
@@ -275,7 +275,7 @@ Authorization  : Once a connection is established, session layer checks whether 
 Session        : Session layer also checks that the data which is received from the server in form of data packets belongs to which application for example when you access Facebook profile through your browser, the data transferred from the Facebook server is transferred to your web browser application, thus the session layer helps in session management.
 management
 
-4. TRANSPORT LAYER :
+4. TRANSPORT LAYER : TCP - UDP
 ---------------------
 The main role of transport layer is to check the reliability of data communication.
 Segmentation : Data received from session layer is divided into small data units called segments.
@@ -332,7 +332,7 @@ Error Detection      : Tail of the each frame transferred contains certain bits 
 
 7. PHYSICAL LAYER :
 -------------------
-Transport layer converts the data into segments,
+Transport layer converts the data into segments, 
 Network layer converts the segments into packets and
 Data link layer converts the packets into frames.
 A frame is nothing but a sequence of bits such as 1001011.

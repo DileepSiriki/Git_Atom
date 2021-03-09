@@ -10,6 +10,15 @@ CLOUD :  [ Define 4 lines - Uses - Types - Virtualization - Hypervisor & Types]
     A agile - c cost effective - D deploy global in sec - E elastic - F trade capital expense for variable expenses - G no engineers for maintenance
     Guessing capacity - no running data centres - pay as you go - serverless - scalable , shared responsibility.
 
+    A - Agile
+    C - Cost effective  // Trade capital for variable expense
+    D - Deploy globally in minutes
+    E - Elastic // Horizontal & Vertical
+    F - Finance // Massive economies of scale
+    G - Stop guessing capacity // Pay as you go
+    I - Infrastructure maintenance
+    S - serverless - scalable , shared responsibility
+
   ADVANTAGES :
   Trade capital for variable expense, Benefit from massive economies of scale, Stop guessing capacity, Increase speed and agility, Stop spending money on running and maintaining data centers, Go global in minutes.
 

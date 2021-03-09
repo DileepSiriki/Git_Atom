@@ -487,3 +487,14 @@ print(a,b)
 
 c=[1,1,2,2,3,5,1]
 print(set(c))
+
+def pets(type, name):
+    """This function is used to get pet details """
+    print(f"I have a {type} and I call it {name}")
+pets("dog","bill")
+print(pets.__doc__)
+
+
+name = lambda a : a + [2]
+a=[1,2,3]
+print(name(a))

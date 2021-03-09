@@ -76,6 +76,16 @@ Advantages of Cloud Computing include:  (IMPORTANT)
      For example, AWS has infrastructure all over the world, so you can deploy your application in multiple physical locations with just a few clicks.
      Putting applications in closer proximity to end users reduces latency and improves their experience.
 
+
+A - Agile
+C - Cost effective  // Trade capital for variable expense
+D - Deploy globally in minutes
+E - Elastic // Horizontal & Vertical
+F - Finance // Massive economies of scale
+G - Stop guessing capacity // Pay as you go
+I - Infrastructure maintenance
+S - serverless - scalable , shared responsibility
+
   CLASSIFICATION OF CLOUD  :
 ---------------------------------
 
@@ -272,7 +282,8 @@ TYPE-2 : Hosted Hypervisor     - OS virtualization
                             -------------------------------------------------------------------
                            |                         H A R D W A R E                           |
                             -------------------------------------------------------------------
-                                            H  O  S  T  -  M  A  C  H  I  N  E
+                                              H  O  S  T  -  M  A  C  H  I  N  E
+
 
 DIFFERENCES ->> TYPE-1 vs TYPE-2:  https://www.youtube.com/watch?v=FZR0rG3HKIk&t=28s
 -----------------------------------
@@ -289,8 +300,8 @@ Used by cloud vendors .
 
 Type 2 runs on the host OS to provide virtualization management and other services.
 It relies on the host machine's pre existing OS to manage calls to CPU, memory, storage and network resources.
-the presence of an underlying OS with Type 2 hypervisors introduces unavoidable latency;
-all of the hypervisor's activities and the work of every VM has to pass through the host OS.
+The presence of an underlying OS with Type 2 hypervisors introduces unavoidable latency.
+All of the hypervisor's activities and the work of every VM has to pass through the host OS.
 Also, any security flaws or vulnerabilities in the host OS could potentially compromise all of the VMs running above it.
 Used where performance and security are lesser concerns.
 For example, software developers might use a Type 2 hypervisor to create VMs to test a software product prior to release.
@@ -342,7 +353,7 @@ Advantages of Cloud Computing include:  (IMPORTANT)
    This means you can provide a lower latency and better experience for your customers simply and at minimal cost.
 
 
-AMAZON WEB SERVICES  : Since 2006 -
+AMAZON WEB SERVICES  : ( Since 2006 )
 --------------------------
 Amazon Web Services is a secure cloud service offering a broad set of global cloud-based products including compute, storage, databases, analytics, networking, mobile, developer tools, management tools, IoT, security, and enterprise applications: on-demand, available in seconds, with pay-as-you-go pricing.
 From data warehousing to deployment tools, directories to content delivery, over 175 AWS services are available around 190 countries .
@@ -415,7 +426,7 @@ FIVE PILLARS OF AWS : https://aws.amazon.com/blogs/apn/the-5-pillars-of-the-aws-
    •  Experiment more often
    •  Consider mechanical sympathy
 
-5. COST OPTIMIZATION : -> AWS Cost Explorer ,  AWS Cost & Usage Report
+5. COST OPTIMIZATION : -> AWS Cost Explorer ,  AWS Cost & Usage Report, AWS Budgets
    The cost optimization pillar includes the ability to avoid or eliminate unneeded cost or sub-optimal resources.
    Focuses on achieving business outcomes while minimizing costs.
    OpEx is an ongoing pay-as-you-go model whereas CapEx is a one-time purchase model.
@@ -654,9 +665,9 @@ Move from idea to market, faster
   Build better applications, easier : Serverless applications have built-in service integrations, so you can focus on building your application instead of configuring it.
   Move from idea to market, faster  : By eliminating operational overhead, your teams can release quickly, get feedback, and iterate to get to market faster.
 
-  COMPUTE                 : LAMBDA  -  FARGATE
-  APPLICATION INTEGRATION : SNS  - SQS - APPSYNC - API GATEWAY - EVENET BRIDGE - STEP FUNCTIONS
-  DATA STORE              : S3 - Dynamo DB - AURORA - RDS
+  COMPUTE                 :: LAMBDA - FARGATE
+  APPLICATION INTEGRATION :: SNS    - SQS       - APPSYNC - API GATEWAY - EVENET BRIDGE - STEP FUNCTIONS
+  DATA STORE              :: S3     - Dynamo DB - AURORA  - RDS
 
 
 BORGER GATEWAY PROTOCL - BGP :  https://www.cloudflare.com/learning/security/glossary/what-is-bgp/
@@ -667,7 +678,8 @@ Similarly, when someone submits data across the Internet, BGP is responsible for
 BGP is the protocol that makes the Internet work.
 It does this by enabling data routing on the Internet. When a user in Singapore loads a website with origin servers in Argentina, BGP is the protocol that enables that communication to happen quickly and efficiently.
 
-The Internet is a network of networks; it’s broken up into hundreds of thousands of smaller networks known as autonomous systems (AS). Each of these networks is essentially a large pool of routers run by a single organization.
+The Internet is a network of networks; it’s broken up into hundreds of thousands of smaller networks known as autonomous systems (AS).
+Each of these networks is essentially a large pool of routers run by a single organization.
 If we continue to think of BGP as the postal service of the Internet, AS’s are like individual post office branches.
 A town may have hundreds of mailboxes, but the mail in those boxes must go through the local postal branch before being routed to another destination.
 The internal routers within an AS are like mailboxes, they forward their outbound transmissions to the AS, which then uses BGP routing to get these transmissions to their destinations.
@@ -717,9 +729,9 @@ To summarize, when a company offers an API to their customers, it just means tha
     WEB BROWSER                                                             -----                    WEB SERVER            DATABASE
 
 
-HUMAN - HUMAN       --> Speech , text , gestures etc ;
-HUMAN - COMPUTER    --> Monitor with a GUI , Mouse , Keyboard etc ;
-SOFTWARE - SOFTWARE --> API - Application Programming Interface
+HUMAN    - HUMAN      --> Speech , text , gestures etc ;
+HUMAN    - COMPUTER   --> Monitor with a GUI , Mouse , Keyboard etc ;
+SOFTWARE - SOFTWARE   --> API - Application Programming Interface
 An API is a set of programming code that enables data transmission between one software product and another. It also contains the terms of this data exchange.
 
 Application programming interfaces consist of two components:
@@ -815,5 +827,5 @@ NOTE  : We have two Models : OSI ( Open System interconnection model ) & TCP-IP 
            The top layer then deletes the headers added in the same layer in the sender side and sends the data to layer above it .
            This happens until data is sent until Application layer again and the receiver interprets the data .
 
-        ** TCP - IP -> Transmission Control Protocol  - Internet Protocol  --> As a MODEL
-           TCP - IP -> Transport layer protocol - Internet layer protocol  --> As a PROTOCOL
+        ** TCP - IP -> Transmission Control Protocol  - Internet Protocol        --> As a MODEL
+           TCP - IP -> Transport layer protocol       - Internet layer protocol  --> As a PROTOCOL
