@@ -58,21 +58,22 @@ Then, by attaching this new SQS queue to your test environment, you can continue
 
                                                                    -----------
                                         ------------------------> |           |
-                                        |                         |    SQS    | --------O EC2
+                                        |                         |    SQS    | --------O EC2 - For new orders // Analytics // processing orders
                                         |                         |           |
                                         |                          -----------
                                         |
  -----------                            |                          -----------
 |            |                         ---                        |           |
-|    SNS     | <--------------------> | T | <-------------------->|    SQS    | --------O EC2
+|    SNS     | <--------------------> | T | <-------------------->|    SQS    | --------O LMMBDA
 |            |    TO TOPIC             ---                        |           |
  -----------                            |                          -----------
                                         |
                                         |                           -----------
                                         |                          |           |
-                                        |                          |   SQS     |--------O EC2
+                                        |                          |   SQS     |--------O DATABASE
                                         L _ _ _ _ _ _ _ _ _ _ _ _  |           |
                                                                     -----------
+                                                                    
 --> Also you can receive immediate notification when an event occurs, such as a specific change to your Amazon EC2 AutoScaling group,
     a new file uploaded to an Amazon S3 bucket, or a metric threshold breached in Amazon CloudWatch.
 --> you could send e-commerce order confirmations as user notifications

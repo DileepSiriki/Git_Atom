@@ -135,8 +135,8 @@ Amazon S3 provides a number of security features for the protection of data at r
    Use bucket-level or object-level permissions alongside IAM policies to protect resources from unauthorized access and to prevent information disclosure, data integrity compromise or deletion.
 
 2- Versioning:
-  Amazon S3 supports object versions. Versioning is disabled by default.
-  Enable versioning to store a new version for every modified or deleted object from which you can restore compromised objects if necessary.
+   Amazon S3 supports object versions. Versioning is disabled by default.
+   Enable versioning to store a new version for every modified or deleted object from which you can restore compromised objects if necessary.
 
 3- Replication:
    Although Amazon S3 stores your data across multiple geographically diverse Availability Zones by default, compliance requirements might dictate that you store data at even greater distances.
@@ -463,8 +463,8 @@ Create a Bucket : example.com
 
 Create another Bucket : www.example.com
 
-  If you also want your users to be able to use www.your-domain-name, such as www.example.com, toaccess your sample website, you create a second S3 bucket.
-  You then configure the second bucket toroute traffic to the first bucket.
+  If you also want your users to be able to use www.your-domain-name, such as www.example.com, to access your sample website, you create a second S3 bucket.
+  You then configure the second bucket to route traffic to the first bucket.
 
   Once the bucket www.example.com is created ,
   go to permissions -> enable static website HOSTING
@@ -485,7 +485,7 @@ STEP 4 :
   Choose Define simple record
     --> specify RECORD NAME --> Accept the default value, which is the name of your hostedzone and your domain. This will route internet traffic to the bucket that has the same name asyour domain.
     --> Repeat the process for www.example.com and other sub domains.
-    --> specify VALUE/ROUTE to Choose Alias to S3 website endpoint, then choose the AWS Region that the bucket was createdin
+    --> specify VALUE/ROUTE to Choose Alias to S3 website endpoint, then choose the AWS Region that the bucket was created in
     For the first record that you create, choose the bucket that has the same name as your hostedzone and your domain.
     For the second record, choose the bucket that has the name www.your-domain-name.
     --> specify RECORD TYPE --> Accept the default value of A – Routes traffic to an IPv4 address and some AWS resources
@@ -697,7 +697,7 @@ You can increase the volumes of an instance at any time by attaching more EBS to
         A solid-state drive (SSD) is a newer, faster type of device that stores data on instantly-accessible memory chips.
 
         IOPS measures the number of read and write operations per second, while throughput measures the number of bits read or written per second.
-        You have 4 buckets (Disk blocks) of the same size that you want to fill or empty water.
+        If You have 4 buckets (Disk blocks) of the same size that you want to fill or empty water.
         You'll be using a jug to transfer the water into the buckets. Now your question will be ,
             At a given time (per second), how many jugs of water can you pour(write) or withdraw (read)? This is IOPS
             At a given time (per second) what's the amount(bit, kb, mb, ect) of water the jug can transfer into/out of the bucket continuously? This is throughput.

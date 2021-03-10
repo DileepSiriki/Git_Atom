@@ -57,7 +57,7 @@ Your AWS account has a limit on the number of instances that you can have runnin
     --> STOP & START :
         ---------------
         You can stop and start your instance if it has an Amazon EBS volume as its root device. The instance retains its instance ID.
-        When you stop an instance, we shut it down. We don't charge usage for a stopped instance, or data transfer fees, but we do charge for the storage for any Amazon EBS volumes.
+        When you stop an instance, we shut it down. AWS don't charge usage for a stopped instance, or data transfer fees, but we do charge for the storage for any Amazon EBS volumes.
         Each time you start a stopped instance we charge a minimum of one minute for usage. After one minute, we charge only for the seconds you use.
         For example, if you run an instance for 20 seconds and then stop it, we charge for a full one minute.
         If you run an instance for 3 minutes and 40 seconds, we charge for exactly 3 minutes and 40 seconds of usage.
@@ -1231,7 +1231,8 @@ STORAGE EC2 :
 
     • Hard disk drives (HDD) :
       Optimized for large streaming workloads where the dominant performance attribute is throughput.
-      Throughput is defined as the amount of information or material passed put through or delivered in a specific period of time. An example of throughput is twenty screens of copy being printed within a five minute period.
+      Throughput is defined as the amount of information or material passed put through or delivered in a specific period of time.
+      An example of throughput is twenty screens of copy being printed within a five minute period.
       HDDs rely on spinning disks, or platters, to read and write data.
       Hard disk drives consist of one or more magnetically-sensitive platters, an actuator arm with a read/write head on it for each platter, and a motor to spin the platters and move the arms.
       There is also an I/O controller and firmware that tells the hardware what to do and communicates with the rest of the system.

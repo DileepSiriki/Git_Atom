@@ -21,7 +21,7 @@ CLOUD INTRO :
 
 DEFINITION :
 ----------------
-Cloud computing is the on-demand delivery of IT resources over a public or private Internet with pay-as-you-go pricing. Instead of buying, owning, and maintaining physical data centers and servers, you can access technology services, such as computing power, storage, and databases, on an as-needed basis from a cloud provider like Amazon Web Services (AWS).
+Cloud computing is the on-demand delivery of IT resources over a public or private Internet with pay-as-you-go pricing. Instead of buying, owning, and maintaining physical data centers and servers, you can access technology services, such as computing power, storage, and databases, on an as-needed basis from a cloud provider like Amazon Web Services (AWS), Azure or Google Cloud platform (GCP).
 Also refers to manipulating, configuring, and accessing the hardware and software resources remotely without actually installing any software locally on a PC , providing a platform independency . We can access through a WEB BROWSER or a CLI and also API's and SDK's.
 Organizations of every type, size, and industry are using the cloud for a wide variety of use cases, such as data backup, disaster recovery, email, virtual desktops, software development and testing, big data analytics, and customer-facing web applications.
 For example, healthcare companies are using the cloud to develop more personalized treatments for patients. Financial services companies are using the cloud to power real-time fraud detection and prevention. And video game makers are using the cloud to deliver online games to millions of players around the world.

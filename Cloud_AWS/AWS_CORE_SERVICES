@@ -1100,6 +1100,11 @@ Task Runner is installed and runs automatically on resources created by your pip
 // Logstash is an open source tool for collecting, parsing, and storing logs for future use. Kibana 3 is a web interface that can be used to search and view the logs that Logstash has indexed. Both of these tools are based on Elasticsearch.
 // Elasticsearch, Logstash, and Kibana, when used together is known as an ELK stack.
 
+LOGSTASH --> ELASTIC SEARCH --> KIBANA
+Elasticsearch is a search and analytics engine.
+Logstash is a server‑side data processing pipeline that ingests data from multiple sources simultaneously, transforms it, and then sends it to a "stash" like Elasticsearch.
+Kibana lets users visualize data with charts and graphs in Elasticsearch.
+
 Used to analyse and get real time  insights on machine generated data at a peta byte scale. Supports Log stash , Kibana etc ;
 Amazon Elasticsearch Service (Amazon ES) is a managed service that makes it easy to deploy, operate, and scale Elasticsearch clusters in the AWS Cloud.
 Elasticsearch is a popular open-source search and analytics engine for use cases such as log analytics, real-time application monitoring, and click stream analysis.
@@ -1200,7 +1205,8 @@ It can take the below forms :
     --> Real-time IoT device monitoring
 
 Amazon Kinesis Video Streams enables you to securely stream video from connected devices (IoT devices) to AWS for analytics, machine learning (ML), playback, and other processing.
-Kinesis Video Streams automatically provisions and elastically scales all the infrastructure needed to ingest streaming video data from millions of devices. It durably stores, encrypts, and indexes video data in your streams, and allows you to access your data through easy-to-use APIs.
+Kinesis Video Streams automatically provisions and elastically scales all the infrastructure needed to ingest streaming video data from millions of devices.
+It durably stores, encrypts, and indexes video data in your streams, and allows you to access your data through easy-to-use APIs.
 
 Amazon Kinesis Video Streams is a fully managed AWS service that you can use to stream live video from devices to the AWS Cloud, or build applications for real-time video processing or batch-oriented video analytics.
 Kinesis Video Streams isn't just storage for video data. You can use it to watch your video streams in real time as they are received in the cloud.
@@ -1388,7 +1394,7 @@ This is why customers such as Vanguard, Accenture, Foursquare, and Ancestry have
 There are two major models for how to run your containers on AWS:
 Both are completely valid techniques for operating your containers in a scalable and reliable fashion.
 
-    --> EC2  // Deploy and manage your own cluster of EC2 instances for running the containers - For consistant demand of CPU cores.
+    --> EC2  // Deploy and manage your own cluster of EC2 instances for running the containers - For consistent demand of CPU cores.
         With the EC2 launch type billing is based on the cost of the underlying EC2 instances.
         This allows you to optimize price by taking advantage of billing models such as spot instances (bid a low price for an instance), or reserved instances .
         If your workload has a consistent demand for many CPU cores and many gigabytes of memory, and you want to optimize for price you should consider running a cluster of reserved EC2 instances, or spot instances.

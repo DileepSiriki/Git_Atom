@@ -15,8 +15,8 @@ DECRYPTION     is the process of turning ciphertext back into plaintext .
 BLOCK CYPHER   is an algorithm that operates on fixed-length blocks of data, one block at a time. It is slower .
 STREAM CYPHER  is an algorithm that operates on one bit at a time. It is quicker.
 
-SYMMETRIC ENCRYPTION    uses the same secret key to perform both the encryption and decryption processes.
-ASYMMETRIC ENCRYPTION   also known as public-key encryption, uses two keys, a public key for encryption and a corresponding private key for decryption.
+SYMMETRIC   ENCRYPTION  uses the same secret key to perform both the encryption and decryption processes.
+ASYMMETRIC  ENCRYPTION  also known as public-key encryption, uses two keys, a public key for encryption and a corresponding private key for decryption.
 CLIENT SIDE ENCRYPTION  is encrypting data at or close to its source, such as encrypting data in the application or service that generates it.
 SERVER SIDE ENCRYPTION  is encrypting data at its destination, that is, the application or service that receives it.
 
@@ -65,7 +65,7 @@ PUBLIC AND PRIVATE KEYS  are used to protect data in an asymmetric encryption sc
       The message contents can also be secured so that only a private key holder can decrypt it.
 
 
-1. AWS CLOUD-HSM :
+1. AWS CLOUD-HSM : // Physical device
 HARDWARE SECURITY MODULE is a computing device that performs cryptographic operations and provides secure storage for cryptographic keys.
 AWS CloudHSM organizes HSMs in clusters, which are automatically synchronized collections of HSMs within a given Availability Zone (AZ).
 If you want a managed service for creating and controlling encryption keys, but do not want or need to operate your own HSM, consider using AWS Key Management Service.

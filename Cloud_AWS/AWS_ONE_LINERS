@@ -95,7 +95,7 @@ Media Services            |
                     Task Runner polls for tasks in pipeline and then performs those tasks. You can define data-driven workflows, so that tasks can be dependent on the successful completion of previous tasks.
 
 4. AWS GLUE            : Fully managed ETL (extract, transform, and load) service used to categorize your data, clean it, enrich it, and move it reliably between various data stores and data streams.
-                         It is used to combine data [ Prepare a data lake ] from various sources and clean , normalize and prepare data to one common syntax and save to S3. EXTRACT from various DB's [CSV/JSON/XML]-------------> [[ TRANSFORM to common DB ]] ----------------> LOAD to another DB .
+    // Python script     It is used to combine data [ Prepare a data lake ] from various sources and clean , normalize and prepare data to one common syntax and save to S3. EXTRACT from various DB's [CSV/JSON/XML]-------------> [[ TRANSFORM to common DB ]] ----------------> LOAD to another DB .
                          Automatically identify type of data in S3/Redshift --> then provides a unified view of data as catalog that can be used with EMR/ATHENA. Glue automatically generates Scala or Python code for your ETL jobs that you can further customize.
 5. AWS LAKE FORMATION  : The data lake is your persistent data that is stored in Amazon S3 and managed by Lake Formation using a Data Catalog. AWS Lake Formation is a fully managed service that makes it easier for you to build, secure, and manage data lakes.
                          Collect -> Clean -> Move to S3 -> make data available for Analytics. // Lake Formation simplifies and automates many of the complex manual steps that are usually required to create data lakes. These steps include collecting, cleansing, moving, and cataloging data, and securely making that data available for analytics and machine learning. Once a datalake is formed we can use EMR/Athena/Redshift for analytics.
@@ -638,7 +638,7 @@ SQS : IS A QUEUE Service.
    APP-FLOW         DATA-EXCHANGE         DATA-PIPELINE
    GLUE             LAKE-FORMATION        QUCIK-SIGHT
    CLOUD-SEARCH     ELASTIC-SEARCH        MANAGED-STREAMING-FOR-KAFKA
-   ATHENA           KINESIS               EMR -- ELASTIC-MAP-REDUCE  / EMR-SPECTRUM       REDSHIFT
+   ATHENA           KINESIS               EMR -- ELASTIC-MAP-REDUCE       REDSHIFT -- Redshift Spectrum 
 
 2. CONTAINERS = 5
    //  DOCKER FILE --> docker build ---> DOCKER IMAGE -- docker run ---> DOCKER CONTAINER.
