@@ -1,35 +1,93 @@
 
+SERVERLESS APPLICATION :
+-------------------------------
+This looks simple but it has got lot more complex elements associated with it.
+// For testing we can give dummy email and verify directly before deploying.
+
+The application will present users with an HTML based user interface for indicating the location where they would like to be picked up and will interface on the backend with a RESTful web service to submit the request and dispatch a nearby unicorn.
+The application will also provide facilities for users to register with the service and log in before requesting rides.
+The application architecture uses AWS Lambda, Amazon API Gateway, Amazon DynamoDB, Amazon Cognito, and AWS Amplify Console.
+
+1. Enable Web Hosting with the AWS Amplify Console: // using a git repsoitory
+you can open on all mobiles/mac/android etc;
+configure AWS Amplify to host the static resources for your web application with continuous deployment built-in.
+The Amplify Console provides a git-based workflow for continuous deployment
+Your end users will then access your site using the public website URL exposed by AWS Amplify Console.
+You don't need to run any web servers or use other services in order to make your site available.
+
+2. User Management :
+In this module you'll create an Amazon Cognito user pool to manage your users' accounts.
+You'll deploy pages that enable customers to register as a new user, verify their email address, and sign into the site.
+users need to provide email and password but we can configure sognito to provide more details.
+After users submit their registration, Amazon Cognito will send a confirmation email with a verification code to the address they provided.
+To confirm their account, users will return to your site and enter their email address and the verification code they received.
+You can also confirm user accounts using the Amazon Cognito console if want to use fake email addresses for testing.
+
+When users sign in, they enter their username (or email) and password.
+A JavaScript function then communicates with Amazon Cognito, authenticates using the Secure Remote Password protocol (SRP), and receives back a set of JSON Web Tokens (JWT).
+The JWTs contain claims about the identity of the user and will be used in the next module to authenticate against the RESTful API you build with Amazon API Gateway.
+update config to enter cognito id and app client id.
+
+3. Serverless Service Backend :
+In this module you'll use AWS Lambda and Amazon DynamoDB to build a backend process for handling requests for your web application.
+The browser application that you deployed in the first module allows users to request that a unicorn be sent to a location of their choice.
+In order to fulfill those requests, the JavaScript running in the browser will need to invoke a service running in the cloud.
+You'll implement a Lambda function that will be invoked each time a user requests a unicorn.
+The function will select a unicorn from the fleet, record the request in a DynamoDB table and then respond to the front-end application with details about the unicorn being dispatched.
+
+create a dynamodb table and then create a role ( BasicExecutionRole + an inline to write it to dynamo Db) for the lambda function.
+
+4. RESTful APIs :
+We use Amazon API Gateway to expose the Lambda function you built in the previous module as a RESTful API. This API will be accessible on the public Internet.
+It will be secured using the Amazon Cognito user pool you created in the previous module.
+Using this configuration you will then turn your statically hosted website into a dynamic web application by adding client-side JavaScript that makes AJAX calls to the exposed APIs.
+The static website you deployed in the first module already has a page configured to interact with the API you'll build in this module.
+The page at /ride.html has a simple map-based interface for requesting a unicorn ride.
+After authenticating using the /signin.html page, your users will be able to select their pickup location by clicking a point on the map and then requesting a ride by choosing the "Request Unicorn" button in the upper right corner.
+
+Amazon API Gateway can use the JWT tokens returned by Cognito User Pools to authenticate API calls.
+In the Amazon API Gateway console, create a new Cognito user pool authorizer for your API. Configure it with the details of the user pool that you created in the previous module.
+create a resource /ride and a method POST
+// The four main HTTP methods (GET(Read), PUT(Update), POST (Create), and DELETE (Delete)) can be mapped to CRUD operations
+Now we select the lambda function that we want to invoke.
+
+=============================================================================================================================================================================================================
+=============================================================================================================================================================================================================
+
+
 TELL ME ABOUT YOURSELF :
 --------------------------
-So good afternoon [Rehman and Surya if i am not wrong], i would like to thank you BOTH for this wonderful opportunity.
-I am Dileep and I have a Bachelor's degree in computer science from SRKR Andhra university.  I belong to vizianagaram  but i stay in hyderabad.
+Hello abc, xyz good afternoon!!  First of all I would like to thank you BOTH for this wonderful opportunity.
+I am Dileep and I have a Bachelor's degree in computer science from SRKR Andhra university, Visakhapatnam.  I belong to Vizianagaram  but currently i stay in Hyderabad.
 I have a 4+ years of hands-on software development experience from TCS Hyderabad.
-As part of my experience I have Experience with supporting mission critical systems. I have worked on 2 projects Moshell and E2C.
+As part of my experience I have supported mission critical 24*7 systems. I have worked on 2 projects Moshell and E2C.
 
-	1. Coming to moshell, it belongs to a swedish company ERICSSON and is a tool to connect to various network elements belonging to all generations 2g,3g,4g and now 5g as well.
-	   It is a command line application, so I worked as a linux developer for over 2 years and as part of my roles, I have developed multiple scripts using linux shell scripting and bash and a bit of python.
-	   We use git and gerrit extensively for the contineous integration of our code.
+	  1. Coming to moshell, it belongs to a Swedish company ERICSSON and is a tool to connect to various network elements belonging to all generations 2g,3g,4g and now 5g as well.
+       Ericsson has customers from all over the world that buy the network elements to connect users.
+	     It is a command line application, so I worked as a linux developer for over 2 years and as part of my roles, I have developed multiple scripts using linux shell scripting and bash and a bit of python.
+       We deliver new commands regularly to users to perform operations on all kinds on nodes from upgrading, logging, get statistics and patching.
+       We use git and gerrit extensively for the continuous integration of our code and JENKINS for build and deployment.
 
-    2. Coming to E2C, it belongs to the same company Ericsson which is in a process of migrating most of its applications from on-prem to AWS cloud.
-	   So I worked as a solutions architect for more than 1 and half a year now and involved in architectural discussions.
-	   Aws is a speghatti bowl and have more than 180 resources . It is a point of time that i had a complete turn from development to architecture .
-	   As a part of the job, I took my CCP (aws certified cloud practioner j) certification and achieved a total of 986/1000 which is a pretty much decent score.
+    2. Coming to E2C, it belongs to the same company Ericsson which is in a process of migrating most of its applications from on-premises to AWS cloud.
+	     So I worked as a solutions architect and suport engineer for more than a year and half a year now and involved in architectural discussions.
+	     Aws is a spaghetti bowl and have more than 180 resources . It is a point of time that I had a complete turn from development to architecture .
+	     As a part of the job, I took my CCP ( AWS certified cloud practitioner ) certification and achieved a total of 986/1000 which is a pretty much decent score.
 
-	   So as part of AWS :
-	   a. I have performed some of the operations such as updating the AMI's to upgraded versions or sometimes to a bit downgraded versions and perform autoscaling and load balancing using target groups.
-	   b. Configure VPC with required security groups and NACL's and Igw', knowledge on classful, class less CIDR ranges , subnets, subnet mask, VPN.
-	   c. Sometimes perform sql queries on AWS ATHENA on various logs and report the results.
-	   d. Create peering connections,configure flow logs, create IAM users, roles and train other colleagues.
-	   e. Use S3 for data archiving and backup, apply data cycle policies etc;
-	   f. I also have experience on varius encryption techniques (symmetric and asymetric) , how to manage CMK's and the generated data keys and signing certificates .
-       g. configure sns topics and add subscribers , build sample serverless applications.
+    	   So as part of the team :
+    	   a. I have performed operations on EC2 such as updating the AMI's to upgraded versions or sometimes to a bit downgraded versions and perform autoscaling and load balancing using target groups.
+    	   b. Configure VPC with required security groups and NACL's and IGW', knowledge on classful, class less CIDR ranges , subnets, subnet mask, VPN.
+    	   c. Sometimes perform SQL queries on AWS ATHENA on various logs and report the results.
+    	   d. Create peering connections, configure flow logs, create IAM users, roles and train other colleagues.
+    	   e. Use S3 for data archiving and backup, apply data cycle policies etc;
+    	   f. configure SQS,  SNS topics and add subscribers , build sample serverless applications and have good knowledge on  various encryption techniques (symmetric and asymmetric) , how to manage CMK's and the generated data keys and signing certificates .
 
-    3. Right now I am  planning to migrate one of our teams website to cloud into a serverless architecture which I can demonstarte if we have time.
+    3. Right now I am  planning to migrate one of our teams website to cloud into a serverless architecture which I can demonstrate if we have time.
 
-I belong to a nuclear family, I am self motivated and hardworking. To mention about my hobbies, I would love to play cricket and do some paintings.
-So to summerize, I am quite good in most of the AWS services, linux scripting, git,basics of  python and SQL as well.
-I am now currently in a process to learn other devops tools such as DOCKER, Kubernetis and planning to have my next certification in the coming week for SSA.
-I understand that for this position of cloud engineer that you are looking for, I am confident I will be able to succeed and be able to perform my responsibilities.
+I belong to a nuclear family, I am self motivated and hardworking and performed well in academics throughout my career ( > 85% ).
+To mention about my hobbies, I would love to play cricket and do some paintings.
+So to summarize, I have a  quite good hands-on experience in most of the AWS services, Linux scripting, git, basics of  python and SQL as well.
+I am now currently in a process to learn other DEVOPS tools such as DOCKER, KUBERNETIS and planning to have my next AWS certification in the coming week as a solutions architect - SSA.
+I understand that for this position of cloud engineer that you are looking for, I am confident I will be able to use my skills and learning to succeed and be able to perform my responsibilities.
 
 =============================================================================================================================================================================================================
 =============================================================================================================================================================================================================
