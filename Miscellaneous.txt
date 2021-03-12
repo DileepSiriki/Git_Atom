@@ -332,7 +332,7 @@ Error Detection      : Tail of the each frame transferred contains certain bits 
 
 7. PHYSICAL LAYER :
 -------------------
-Transport layer converts the data into segments, 
+Transport layer converts the data into segments,
 Network layer converts the segments into packets and
 Data link layer converts the packets into frames.
 A frame is nothing but a sequence of bits such as 1001011.
@@ -630,7 +630,8 @@ Planned meetings
 Demo , reviews
 Retrospection
 
-User stories --> Tesk1 - 8hrs + Task2 - 10hrs + Task 3 - 30hrs .............
+EPIC = Story 1 + story 2 .....
+User stories --> Task1 - 8hrs + Task2 - 10hrs + Task 3 - 30hrs .............
 Point = 8hrs
 
 Scrum Master - Product Owner - 3-4 Developers - 1 Tester - 1 Tech Lead

@@ -1,0 +1,65 @@
+
+TELL ME ABOUT YOURSELF :
+--------------------------
+So good afternoon [Rehman and Surya if i am not wrong], i would like to thank you BOTH for this wonderful opportunity.
+I am Dileep and I have a Bachelor's degree in computer science from SRKR Andhra university.  I belong to vizianagaram  but i stay in hyderabad.
+I have a 4+ years of hands-on software development experience from TCS Hyderabad.
+As part of my experience I have Experience with supporting mission critical systems. I have worked on 2 projects Moshell and E2C.
+
+	1. Coming to moshell, it belongs to a swedish company ERICSSON and is a tool to connect to various network elements belonging to all generations 2g,3g,4g and now 5g as well.
+	   It is a command line application, so I worked as a linux developer for over 2 years and as part of my roles, I have developed multiple scripts using linux shell scripting and bash and a bit of python.
+	   We use git and gerrit extensively for the contineous integration of our code.
+
+    2. Coming to E2C, it belongs to the same company Ericsson which is in a process of migrating most of its applications from on-prem to AWS cloud.
+	   So I worked as a solutions architect for more than 1 and half a year now and involved in architectural discussions.
+	   Aws is a speghatti bowl and have more than 180 resources . It is a point of time that i had a complete turn from development to architecture .
+	   As a part of the job, I took my CCP (aws certified cloud practioner j) certification and achieved a total of 986/1000 which is a pretty much decent score.
+
+	   So as part of AWS :
+	   a. I have performed some of the operations such as updating the AMI's to upgraded versions or sometimes to a bit downgraded versions and perform autoscaling and load balancing using target groups.
+	   b. Configure VPC with required security groups and NACL's and Igw', knowledge on classful, class less CIDR ranges , subnets, subnet mask, VPN.
+	   c. Sometimes perform sql queries on AWS ATHENA on various logs and report the results.
+	   d. Create peering connections,configure flow logs, create IAM users, roles and train other colleagues.
+	   e. Use S3 for data archiving and backup, apply data cycle policies etc;
+	   f. I also have experience on varius encryption techniques (symmetric and asymetric) , how to manage CMK's and the generated data keys and signing certificates .
+       g. configure sns topics and add subscribers , build sample serverless applications.
+
+    3. Right now I am  planning to migrate one of our teams website to cloud into a serverless architecture which I can demonstarte if we have time.
+
+I belong to a nuclear family, I am self motivated and hardworking. To mention about my hobbies, I would love to play cricket and do some paintings.
+So to summerize, I am quite good in most of the AWS services, linux scripting, git,basics of  python and SQL as well.
+I am now currently in a process to learn other devops tools such as DOCKER, Kubernetis and planning to have my next certification in the coming week for SSA.
+I understand that for this position of cloud engineer that you are looking for, I am confident I will be able to succeed and be able to perform my responsibilities.
+
+=============================================================================================================================================================================================================
+=============================================================================================================================================================================================================
+
+NEGOTIATE WITH HR : // ONLY ON THURSDAY EVENING OR FRIDAY !!!
+-------------------------------------------------------------------
+
+1. location
+2. remote or in office ?
+3. hike cycle
+4. take home salary ? variable pay?
+5. Your package = Fixed Pay(X% of total package) + Variable pay(100-X% of total package).
+   So Variable pay is the part of your salary package .
+   you will get your fixed pay at the end of every month but you will get your variable pay once in a quarter/half year/year(may differ from company to company).
+
+ a. do not show greediness or enthusiasm
+ b. negotiable ?
+ c. mention percentage like 50% or 70%  hike not a figure like 55000 or 700000
+ d. I usually outperform my colleagues in the previous company hopefuly I will do it here as well. So i think this can be an investiment on me.
+
+ I donot doubt that ABC will offer me a competitive salary within the industry standards.
+ Since i am a fresher, i am looking forward to getting started with building my career.
+ I am passionate about the cloud field and i know that ABC will give me an opprtuninty to get hands-0n experience.
+ For me being a part of the team and learning is equally important.
+ while interacting with the interviewers today hopefuly i got to know more about the training, dev and experience about working in this company.
+ I am sure we can come to an agreement on the salary.
+
+ Based on my 4 year experience in the software field and the info provided on the glassdoor, i believe a salary in the range of rs.x to rs.y would do justice.
+
+ BUDGET : I understand that this is your budget, but i think this is my value and deservingly so. It would be great if you can match up to it.
+ and then we can always come to a point where we both are comfortable.
+
+=============================================================================================================================================================================================================

@@ -175,7 +175,7 @@ Elastic container Registry - Elastic container Service -
 
 2. ELASTIC BLOCK STORE : It is a hard drive to EC2 instances - Persists its data even after termination of an instance - EBS can be connected to only one Instance at a time - But one instance can be connected more than one EBS .
                          As a primary storage device for data that requires frequent and granular updates.
-    ( HDD - SDD )        Detach and attach to different instance - change configuration any time - independent of lifecycle of instance - can encrypt and take periodic incremental snapshots.
+    ( HDD - SSD )        Detach and attach to different instance - change configuration any time - independent of lifecycle of instance - can encrypt and take periodic incremental snapshots.
 
 3. STORAGE GATEWAY     : Hybrid cloud storage service that seamlessly connect on-premises applications to cloud storage, caching data locally for low-latency access. This gives you on-premises access to virtually unlimited cloud storage.
                          Download the virtual appliance gateway or purchase the hardware appliance, configure required storage, and manage and monitor the service. Once configured, you start using the gateway to write and read data to and from AWS storage. You can monitor the status of your data transfer and your storage interfaces through the AWS Management Console.
@@ -638,7 +638,7 @@ SQS : IS A QUEUE Service.
    APP-FLOW         DATA-EXCHANGE         DATA-PIPELINE
    GLUE             LAKE-FORMATION        QUCIK-SIGHT
    CLOUD-SEARCH     ELASTIC-SEARCH        MANAGED-STREAMING-FOR-KAFKA
-   ATHENA           KINESIS               EMR -- ELASTIC-MAP-REDUCE       REDSHIFT -- Redshift Spectrum 
+   ATHENA           KINESIS               EMR -- ELASTIC-MAP-REDUCE       REDSHIFT -- Redshift Spectrum
 
 2. CONTAINERS = 5
    //  DOCKER FILE --> docker build ---> DOCKER IMAGE -- docker run ---> DOCKER CONTAINER.

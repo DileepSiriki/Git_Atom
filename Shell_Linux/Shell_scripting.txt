@@ -20,26 +20,27 @@ help < command > -->  Get help on a command
 cls	             -->  clear screen
 cmd	             -->  start command prompt
 date	           -->  show/set date
-dir              -->  show	list directory content
-echo	           --> 	showtext output
-exit             --> 	show	exits the command prompt or a batch file
-find             --> 	show	find files
-hostname         --> 	show	display host name
-shutdown         --> 	show	shutdown the computer
-sort             --> 	show	sort the screen output
-start	           --> 	showstart an own window to execute a program or command
-taskkill         --> 	show	terminate a process or a application
-tasklist         --> 	show	display applications and related tasks
-time	           --> 	showdisplay/edit the system time
-timeout	         --> 	showwait any time
-fc	             --> 	showcopare files and display the differences
-mkdir	           --> 	showcreate a new directory
-move             --> 	show	move/rename files
-rename           --> 	show	rename files
-replace	         --> 	showreplace files
-rmdir / rd       --> 	show	delete directory
-tree             --> 	show	display folder structure graphically
-type             --> 	show	display content of text files
+dir              -->  list directory content
+echo	           --> 	show text output
+more             -->  display file contents
+exit             -->  exits the command prompt or a batch file
+find             --> 	find files
+hostname         --> 	display host name
+shutdown         --> 	shutdown the computer
+sort             --> 	sort the screen output
+start	           --> 	start an own window to execute a program or command
+taskkill         --> 	terminate a process or a application
+tasklist         --> 	display applications and related tasks
+time	           --> 	display/edit the system time
+timeout	         --> 	wait any time
+fc	             --> 	compare files and display the differences
+mkdir	           --> 	create a new directory
+move             --> 	move/rename files
+rename           --> 	rename files
+replace	         --> 	replace files
+rmdir / rd       --> 	delete directory
+tree             --> 	display folder structure graphically
+type             --> 	display content of text files
 
 NETWORK COMMANDS :
 -----------------------
@@ -141,7 +142,7 @@ The procedure to change the root user password on Ubuntu Linux:
      passwd
   2. OR set a password for root user in a single go: // PREFERRABLE, this creates a password for root user.
      sudo passwd root
-  3. Test it your root password by typing the following command:
+  3. Test your root password by typing the following command:
      su -
 
 When you are logged in as root, the command prompt should end with # instead of $.
@@ -205,7 +206,7 @@ NOTE : Vi stands for Visual. It is a text editor that is an early attempt to a v
            cat > textfile.txt       -> opens a file to write content. press ctrl+D to save and exit
                                     -> if you do it to an already existing file , previous contents will be deleted .
            cat >> textfile.txt      -> Opens a file to append text to it if some text is already existing in it.
-           cat textfile.txt         -> opens a file
+           cat textfile.txt         -> Displays the contents of a  file
            echo <text> > textfile   -> remove old contents in textfile and write <text> to it .
            echo <text> >> textfile  -> append <text> to the textfile .
 
@@ -772,7 +773,8 @@ NOTE : Only applicable for "bash" shell.
 
 Shells can have variables of 2 types : LOCAL VARIABLES, which are only accessible from the current shell, and  ENVIRONMENTAL VARIABLES (exported), which are passed on to every executed program.
 command " set " is a built-in shell command, it also sees shell-local variables (including shell functions). This type of variable defined in LOWER CASE LETTERS.
-command " env " on the other hand is an independent executable (/usr/bin/env); it only sees the variables that the shell passes to it, or environment variables. This type of variable defined in CAPITAL CASE LETTERS.
+command " env " on the other hand is an independent executable (/usr/bin/env); it only sees the variables that the shell passes to it, or environment variables.
+This type of variable defined in CAPITAL CASE LETTERS.
 Even simple commands, like ls, mkdir, rm, and others are just small programs that usually live inside a directory on your computer called /usr/bin.
 There are other places on your system that commonly hold executable programs as well; some common ones include /usr/local/bin, /usr/local/sbin, and /usr/sbin.
 
@@ -1082,8 +1084,8 @@ IF-THEN-FI :
 ================
 Unix Shell supports following forms of if…else statement −
 if ...then ... fi statement
-if...else...fi statement
-if...elif...else...fi statement
+if ...then ..... else...fi statement
+if ...then ... elif...then .... else...fi statement
 
 if cat $1
 then

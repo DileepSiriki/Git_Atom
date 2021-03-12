@@ -18,6 +18,45 @@ Foreign Key :
 Foreign keys are used to build a relationship between the tables. A foreign key in a child table is defined as the primary key in the parent table.
 A table can have more than one foreign key. It can accept duplicate values and also null values. Foreign keys are optional in a table.
 
+Structured Query language (SQL) pronounced as "S-Q-L" or sometimes as "See-Quel" is the standard language for dealing with Relational Databases.
+A relational database defines relationships in the form of tables.
+Ex : MySQL Database, Oracle, Ms SQL Server, Sybase, PostgreSQL etc.
+ACID --> Atomicity - Consistency - Isolation - Durability
+
+Atomicity   − This property states that a transaction must be treated as an atomic unit, that is, either all of its operations are executed or none.
+              There must be no state in a database where a transaction is left partially completed.
+              States should be defined either before the execution of the transaction or after the execution/abortion/failure of the transaction.
+Consistency − The database must remain in a consistent state after any transaction.
+              No transaction should have any adverse effect on the data residing in the database.
+              If the database was in a consistent state before the execution of a transaction, it must remain consistent after the execution of the transaction as well.
+Isolation   − In a database system where more than one transaction are being executed simultaneously and in parallel, the property of isolation states that all the transactions will be carried out and executed as if it is the only transaction in the system.
+              No transaction will affect the existence of any other transaction.
+Durability  − The database should be durable enough to hold all its latest updates even if the system fails or restarts.
+              If a transaction updates a chunk of data in a database and commits, then the database will hold the modified data.
+              If a transaction commits but the system fails before the data could be written on to the disk, then that data will be updated once the system springs back into action.
+
+Not only Structured Query language (NO-SQL) pronounced as "Not only SQL" or sometimes as "Not SQL" is the standard language for dealing with Non-Relational/Distributed  Databases.
+NoSQL is a non-relational DMS, that does not require a fixed schema, avoids joins, and is easy to scale.
+NoSQL database is used for distributed data stores with humongous data storage needs. NoSQL is used for Big data and real-time web apps
+For example companies like Twitter, Facebook, Google that collect terabytes of user data every single day.
+Ex : MongoDB, Redis, , Neo4j, Cassandra, Hbase.
+BASE : Basically Available - Soft State - Eventually Consistent
+
+Basically Available   – Guarantees the availability of the data . There will be a response to any request (can be failure too).
+                        Rather than enforcing immediate consistency, BASE-modelled NoSQL databases will ensure availability of data by spreading and replicating it across the nodes of the database cluster.
+Soft State            – The state of the system could change over time.
+                        Due to the lack of immediate consistency, data values may change over time.
+                        The BASE model breaks off with the concept of a database which enforces its own consistency, delegating that responsibility to developers.
+Eventually Consistent – The system will eventually become consistent once it stops receiving input.
+                        The fact that BASE does not enforce immediate consistency does not mean that it never achieves it.
+                        However, until it does, data reads are still possible (even though they might not reflect the reality).
+
+--> SQL databases are table based databases whereas NoSQL databases can be document based, key-value pairs, graph databases.
+--> SQL databases have a predefined schema whereas NoSQL databases use dynamic schema for unstructured data.
+--> SQL should be used when data validity is super important NoSQL is used when it's more important to have fast data than correct data.
+--> SQL databases are vertically scalable. This means that you can increase the load on a single server by increasing things like RAM, CPU or SSD.
+    NoSQL databases are horizontally scalable. This means that you handle more traffic by sharing, or adding more servers in your NoSQL database.
+    It is similar to adding more floors to the same building versus adding more buildings to the neighbourhood.
 
 --> SQL keywords are NOT case sensitive: select is the same as SELECT
 --> Some database systems require a semicolon at the end of each SQL statement.
@@ -33,7 +72,7 @@ A table can have more than one foreign key. It can accept duplicate values and a
 --> CREATE INDEX     - creates an index (search key)
 --> DROP INDEX       - deletes an index
 
-FIELD  : Every table is broken up into smaller entities called fields. The fields in the Customers table consist of CustomerID, CustomerName, ContactName, Address, City, PostalCode and Country.
+FIELD  : Every table is broken up into smaller entities called fields. The fields in the Customers table consist of CustomerID, CustomerName, ContactName, Address, PostalCode and Country.
          A field is a column in a table that is designed to maintain specific information about every record in the table.
 
 RECORD : A record, also called a row, is each individual entry that exists in a table. For example, there are 91 records in the above Customers table.
@@ -42,7 +81,7 @@ RECORD : A record, also called a row, is each individual entry that exists in a 
 
 TABLE :
 ----------
-CustomerID     CustomerName          ContactName	       Address	City	                                 PostalCode	                  Country
+CustomerID     CustomerName          ContactName	       Address	    	                                 PostalCode	                  Country
 ================================================================================================================================================
 1              Alfreds               Futterkiste         Maria Anders	Obere Str. 57	Berlin               12209                       	Germany
 2              Ana Trujillo          Ana Trujillo        Avda. de la Constitución 2222	México D.F.	     05021                        Mexico
@@ -193,7 +232,6 @@ BETWEEN / NOT BETWEEN :
 The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
 The BETWEEN operator is inclusive: begin and end values are included.
 --> SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2;
-
 --> SELECT * FROM Products WHERE Price BETWEEN 10 AND 20 AND CategoryID NOT IN (1,2,3);
 --> SELECT * FROM Products WHERE ProductName BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni' ORDER BY ProductName;
 --> SELECT * FROM Products WHERE ProductName NOT BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni' ORDER BY ProductName;
@@ -206,6 +244,10 @@ The BETWEEN operator is inclusive: begin and end values are included.
 ========================================================================================================================================================================================================================================================
 ========================================================================================================================================================================================================================================================
 A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+INNER JOIN gives us records that have matching entries in both tables.
+LEFT JOIN  prints all values in left table and all matching entries from right table.
+RIGHT JOIN prints all values in right table and all matching entries from left table.
+FULL OUTER JOIN is a combination of above three joins. So it will print all entries from right as well as left tables.
 
 ORDERS TABLE :
 -----------------
@@ -231,3 +273,217 @@ Here are the different types of the JOINs in SQL:  https://www.w3schools.com/sql
 LEFT  (OUTER) JOIN   : Returns all records from the left table, and the matched records from the right table
 RIGHT (OUTER) JOIN   : Returns all records from the right table, and the matched records from the left table
 FULL  (OUTER) JOIN   : Returns all records when there is a match in either left or right table
+
+INNER JOIN :
+--------------
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+
+SELECT Orders.OrderID, Customers.CustomerName
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+
+LEFT JOIN :
+------------
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
+
+SELECT Customers.CustomerName, Orders.OrderID
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+ORDER BY Customers.CustomerName;
+
+RIGHT JOIN :
+---------------
+SELECT column_name(s)
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name = table2.column_name;
+
+SELECT Orders.OrderID, Employees.LastName, Employees.FirstName
+FROM Orders
+RIGHT JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID
+ORDER BY Orders.OrderID;
+
+FULL OUTER JOIN :
+---------------------
+SELECT column_name(s)
+FROM table1
+FULL OUTER JOIN table2
+ON table1.column_name = table2.column_name
+WHERE condition;
+
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+:::: UNION ::::
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+The UNION operator is used to combine the result-set of two or more SELECT statements.
+Every SELECT statement within UNION must have the same number of columns
+The columns must also have similar data types,
+The columns in every SELECT statement must also be in the same order
+
+SELECT column_name(s) FROM table1
+UNION
+SELECT column_name(s) FROM table2;
+
+--> The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL:
+
+SELECT column_name(s) FROM table1
+UNION ALL
+SELECT column_name(s) FROM table2;
+
+Example :
+SELECT City FROM Customers UNION SELECT City FROM Suppliers ORDER BY City;
+SELECT City FROM Customers UNION ALL SELECT City FROM Suppliers ORDER BY City;
+SELECT City, Country FROM Customers WHERE Country='Germany' UNION SELECT City, Country FROM Suppliers WHERE Country='Germany' ORDER BY City;
+
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+:::: GROUP BY ::::
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+The GROUP BY statement groups rows that have the same values into summary rows, like "find the number of customers in each country".
+The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.
+
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+ORDER BY column_name(s);
+
+SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country;
+SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country ORDER BY COUNT(CustomerID) DESC;
+
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+:::: SELECT INTO ---- INSERT INTO SELECT  ::::
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+The SELECT INTO statement copies data from one table into a new table.
+
+SELECT *
+INTO newtable
+FROM oldtable
+WHERE condition;
+
+SELECT column1, column2, column3, ...
+INTO newtable
+FROM oldtable
+WHERE condition;
+
+--> SELECT * INTO CustomersBackup2017 FROM Customers;
+
+
+The INSERT INTO SELECT statement copies data from one table and inserts it into another table.
+The INSERT INTO SELECT statement requires that the data types in source and target tables matches.
+Note: The existing records in the target table are unaffected.
+
+INSERT INTO table2
+SELECT * FROM table1
+WHERE condition;
+
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+:::: SQL DATABASE  ::::
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+The CREATE DATABASE statement is used to create a new SQL database.
+--> CREATE DATABASE databasename;
+
+The DROP DATABASE statement is used to drop an existing SQL database.
+--> DROP DATABASE databasename;
+
+The BACKUP DATABASE statement is used in SQL Server to create a full back up of an existing SQL database.
+--> BACKUP DATABASE databasename TO DISK = 'filepath';
+
+A differential back up only backs up the parts of the database that have changed since the last full database backup.
+--> BACKUP DATABASE databasename TO DISK = 'filepath' WITH DIFFERENTIAL;
+
+
+
+The CREATE TABLE statement is used to create a new table in a database.
+CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+   ....
+);
+
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+
+The DROP TABLE statement is used to drop an existing table in a database.
+--> DROP TABLE table_name;
+
+The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+--> ALTER TABLE Customers ADD Email varchar(255);
+--> ALTER TABLE table_name DROP COLUMN column_name;
+--> ALTER TABLE table_name MODIFY COLUMN column_name datatype;
+
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+:::: SQL constraints  ::::
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+Constraints can be specified when the table is created with the CREATE TABLE statement, or after the table is created with the ALTER TABLE statement.
+CREATE TABLE table_name (
+    column1 datatype constraint,
+    column2 datatype constraint,
+    column3 datatype constraint,
+    ....
+);
+
+SQL constraints are used to specify rules for the data in a table.
+Constraints are used to limit the type of data that can go into a table.
+This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted.
+Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table.
+The following constraints are commonly used in SQL:
+
+NOT NULL - Ensures that a column cannot have a NULL value
+UNIQUE - Ensures that all values in a column are different
+PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+FOREIGN KEY - Prevents actions that would destroy links between tables
+CHECK - Ensures that the values in a column satisfies a specific condition
+DEFAULT - Sets a default value for a column if no value is specified
+CREATE INDEX - Used to create and retrieve data from the database very quickly
+
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+:::: SQL VIEWS  ::::
+========================================================================================================================================================================================================================================================
+========================================================================================================================================================================================================================================================
+In SQL, a view is a virtual table based on the result-set of an SQL statement.
+A view contains rows and columns, just like a real table. The fields in a view are fields from one or more real tables in the database.
+You can add SQL statements and functions to a view and present the data as if the data were coming from one single table.
+
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+CREATE VIEW [Brazil Customers] AS
+SELECT CustomerName, ContactName
+FROM Customers
+WHERE Country = 'Brazil';
+
+--> SELECT * FROM [Brazil Customers];
+
+
+CREATE VIEW [Products Above Average Price] AS
+SELECT ProductName, Price
+FROM Products
+WHERE Price > (SELECT AVG(Price) FROM Products);
+
+--> SELECT * FROM [Products Above Average Price];

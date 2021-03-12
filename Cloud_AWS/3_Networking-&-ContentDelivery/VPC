@@ -720,7 +720,7 @@ The transit gateway acts as a Regional virtual router for traffic flowing betwee
 
 There is no physical hardware involved in peering . -->  AWS -> vpc -> peering Connections -> CREATE / ACCEPT etc;
 Sender will create a request and the receiver must accept the request . We specify the VPC id's in the request made .
-oth sender and receiver must update route tables accordingly.
+Both sender and receiver must update route tables accordingly.
 
 SAME ACCOUNT :
     -> vpc to vpc in same region -> specify MY ACCUNT -> enter VPC ID (receiver)
@@ -773,13 +773,13 @@ In most cases, security groups can meet your needs; however, you can also use ne
 
             OUTBOUND : (Optional)
             ---------
-            SOURCE                       PROTOCOL  PORTS  COMMENTS
+            DESTINATION                 PROTOCOL  PORTS  COMMENTS
             ------------------------------------------------------------------------------
             0.0.0.0/0                    ALL       ALL     Default rule to allow all outbound access to any IPv4 address.
             ::/0 [for IPV6]
 
 
-      NACL-SECURITY :
+      NACL-SECURITY : NETWORK ACCESS CONTROL LIST
       ---------------
       The NACL table also have similar rules .
       The table has a RULE number and also ALLOW and DENY options as well.

@@ -498,3 +498,26 @@ print(pets.__doc__)
 name = lambda a : a + [2]
 a=[1,2,3]
 print(name(a))
+
+
+k="dhoni has a dog"
+a=k.split("o")
+print(a)
+print(";".join(a))
+
+
+a="doni"
+print(a[::-1])
+
+
+a,b=1,2
+if(a==1 and b==2):
+    print("yay")
+else:
+    print("ik")
+
+for(i=1;i<=10;i++)
+    print(i)
+
+for i in range(1,10):
+    print(i)
