@@ -521,3 +521,106 @@ for(i=1;i<=10;i++)
 
 for i in range(1,10):
     print(i)
+
+=====================
+
+num=100
+
+for i in range(1,num):
+    count=0
+    for j in range(1, i+1):
+
+        k=i%j
+        #print(i,j,k)
+        if(k==0):
+            count=count+1
+    #print(i,"count is ",count)
+    if(count<=2):
+        print(i)
+
+fact=1
+num=100
+for i in range(1,num+1):
+    fact = fact*i
+print(fact)
+
+num=100
+factorial=1
+for i in range(1,num + 1):
+       factorial = factorial*i
+print(factorial)
+
+
+lower = 100
+upper = 2000
+
+for num in range(lower, upper + 1):
+
+   # order of number
+   order = len(str(num))
+
+   # initialize sum
+   sum = 0
+
+   temp = num
+   while temp > 0:
+       digit = temp % 10
+       sum += digit ** order
+       temp //= 10
+
+   if num == sum:
+       print(num)
+
+# Python program to shuffle a deck of card
+
+# importing modules
+import itertools, random
+
+# make a deck of cards
+deck = list(itertools.product(range(1,14),['Spade','Heart','Diamond','Club']))
+
+# shuffle the cards
+random.shuffle(deck)
+
+# draw five cards
+print("You got:")
+for i in range(5):
+   print(deck[i][0], "of", deck[i][1])
+
+
+
+a,b=0,1
+num=50
+count=0
+while(count<num):
+
+    c=a+b
+    print(c)
+    a=b
+    b=c
+    count=count+1
+
+
+
+def recur_fibo(n):
+   if n <= 1:
+       return n
+   else:
+       return(recur_fibo(n-1) + recur_fibo(n-2))
+
+nterms = 50
+
+# check if the number of terms is valid
+if nterms <= 0:
+   print("Plese enter a positive integer")
+else:
+   print("Fibonacci sequence:")
+   for i in range(nterms):
+       print(recur_fibo(i))
+
+
+def fib(n):
+    if n<=1:
+        retirn 1
+    else:
+        return fib(fib(n-1)+fib(n-2))
