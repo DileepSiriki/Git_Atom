@@ -2,15 +2,6 @@
 
 AWS CERTIFICATIONS : --> [ view the user guide AWS_Certifications.pdf ]
 ----------------------
-UDEMY is free for TCS Employees.
-So login to tcsglobal.udemy.com and provide your EMp.ID and AUTH.CODE to get started .
-Ask your friends for credentials if you are willing to take courses for free.
-In UDEMY there are multiple dumps and videos available that can help.
-Ex : https://tcsglobal.udemy.com/course/aws-certified-cloud-practitioner-practice-test/learn/quiz/4426386#overview
-     https://tcsglobal.udemy.com/course/practice-exams-aws-certified-cloud-practitioner/learn/quiz/4915789/results?expanded=457865732#overview
-  --> Make sure to select 2 options / 3 Options (as requested ) for multiple answer questions.
-  --> Read all options even though we know the answer and recite the definitions of individual services. // Sometimes a more specific service might be the answer.
-  --> If you do not know the answer, eliminate options that belong or mean the same thing leaving out with lesser choices.
 
 There are 4 levels of proficiency in AWS :
   --> FOUNDATIONAL
@@ -50,15 +41,11 @@ GUIDE TO PASS CERTIFICATIONS :
 3. Parallelly view the reference pictures along with the chapter available at cloud_AWS/0_Reference_pics.
 4. Go through the AWS_Overview.pdf & AWS_Vpc.pdf & AWS_Certifications.pdf available in 0_Documents
 5. Study all the FAQ's available at :  https://aws.amazon.com/faqs/
-6. Now try to answer the dumps made available in this folder.
-7. Try to find new dumps and upload the same .
-8. https://tcsglobal.udemy.com/course/aws-certified-cloud-practitioner-practice-test/learn/quiz/4426386#overview
 
 LABS :
 https://run.qwiklabs.com/catalog?keywords=introduction&locale=&cloud%5B%5D=AWS&format%5B%5D=any&level%5B%5D=any&duration%5B%5D=any&price%5B%5D=free&modality%5B%5D=any&language%5B%5D=any
 https://wellarchitectedlabs.com/
 
-// Find how to get discount on AWS Certification.
 
 EXAM CODES :
 -------------
@@ -67,19 +54,19 @@ AWS CERTIFICATION
   https://www.youracclaim.com/badges/0c32a915-c544-4e5e-891b-c866536d594d
 
 AWS CERTIFIED ASSOCIATE
- 	AWS Certified Developer             - Associate     	DVA-C01
+ 	AWS Certified Developer             - Associate     	 DVA-C01
  	AWS Certified Solutions Architect   - Associate	      SAA-C02
- 	AWS Certified SysOps Administrator  - Associate     	SOA-C01
- 	AWS Certified SysOps Administrator  - Associate Beta	SO1-C02
+ 	AWS Certified SysOps Administrator  - Associate     	 SOA-C01
+ 	AWS Certified SysOps Administrator  - Associate Beta	 SO1-C02
 
 AWS CERTIFIED PROFESSIONAL
- 	AWS Certified DevOps Engineer       - Professional	  DOP-C01
- 	AWS Certified Solutions Architect   - Professional	  SAP-C01
+ 	AWS Certified DevOps Engineer       - Professional	 DOP-C01
+ 	AWS Certified Solutions Architect   - Professional	 SAP-C01
 
 AWS CERTIFIED SPECIALIST
  	AWS Certified Advanced Networking   - Specialty	      ANS-C00
  	AWS Certified Data Analytics        - Specialty	      DAS-C01
  	AWS Certified Database              - Specialty	      DBS-C01
- 	AWS Certified Machine Learning      - Specialty     	MLS-C01
+ 	AWS Certified Machine Learning      - Specialty     	 MLS-C01
  	AWS Certified Security              - Specialty	      SCS-C01
- 	AWS Certified Alexa Skill Builder   - Specialty     	AXS-C01	 (Retiring)
+ 	AWS Certified Alexa Skill Builder   - Specialty       	 AXS-C01	 (Retiring)
