@@ -1,0 +1,237 @@
+
+INTRODUCTION -> 
+=================================================================================
+Kubernetes, also known as K8s, is an open-source container orchestration platform. 
+It was originally developed by Google and is now maintained by the Cloud Native Computing Foundation (CNCF). 
+Kubernetes provides a scalable and flexible way to manage containerized applications. 
+It groups containers that make up an application into logical units for easy management and discovery.
+With Kubernetes, you can deploy, scale, and manage containers across multiple hosts. 
+It automates various tasks such as load balancing, scaling, and self-healing, making it easier to run and manage applications in a distributed environment.
+Kubernetes uses a declarative approach, where you define the desired state of your application using YAML or JSON files. 
+It then continuously monitors the actual state of the application and takes actions to ensure that the desired state is maintained.
+Kubernetes has become the de facto standard for container orchestration, and it is widely used in production environments. 
+It supports various container runtimes, including Docker, and can be deployed on various cloud providers or on-premises infrastructure.
+Overall, Kubernetes simplifies the deployment and management of containerized applications, allowing developers to focus on building and shipping their applications rather than worrying about the underlying infrastructure.
+
+
+
+KEY FEATURES ->
+=================================================================================
+- automatic scaling
+- service discovery
+- load balancing
+- rolling updates
+- rollbacks
+- storage orchestration
+- It also provides a rich set of APIs and tools for managing and monitoring applications.
+
+
+
+MONOLITHIC APPLICATIONS -> [[ Single 1000 ton boulder ]]
+=================================================================================
+A Software application designed as a single, cohesive unit, where all components and functions (such as the user interface, business logic, and data access) are tightly interwoven into one codebase. 
+This type of architecture often results in a single executable or deployable artifact.
+
+Single Codebase    : All application functionality resides in a single project or codebase.
+Tight Coupling     : Components are highly dependent on each other, making it challenging to modify one part without impacting others.
+Unified Deployment : The application is deployed as a whole, often requiring downtime during updates.
+
+
+CHALLENGES :
+Scaling a monolith typically involves duplicating the entire application, which can be resource-intensive.
+It doesn't support scaling individual components independently based on their workload.
+Small changes to one part of the application may require rebuilding and redeploying the entire application.
+It can slow down development as teams must coordinate tightly to avoid conflicts.
+As the application grows, the codebase becomes larger and more complex, making it harder to understand and maintain.
+Introducing changes or fixes becomes risky because of the high degree of interdependency.
+A failure in one part of the application (e.g., a memory leak or a bug) can cause the entire application to fail.
+Continuous delivery and deployment are more challenging, as even minor changes require redeploying the entire application.
+The whole application typically relies on a single technology stack, making it difficult to adopt newer technologies for specific parts of the system.
+As more developers work on the same codebase, merge conflicts and coordination issues can slow down the development process.
+Transitioning from a monolithic architecture to a modern, microservices-based architecture is often complex and costly.
+
+monolithic applications with all components tightly coupled and almost impossible to separate, a nightmare to manage and deployed on super expensive hardware.
+A monolith has a rather expensive taste in hardware. Being a large, single piece of software which continuously grows, it has to run on a single system which has to satisfy its compute, memory, storage, and networking requirements. 
+The hardware of such capacity is not only complex and extremely pricey, but at times challenging to procure.
+Since the entire monolith application runs as a single process, the scaling of individual features of the monolith is almost impossible. 
+It internally supports a hardcoded number of connections and operations. However, scaling the entire application can be achieved by manually deploying a new instance of the monolith on another server, typically behind a load balancing appliance - another pricey solution.
+
+
+MICROSERVICES -> [[ Small Pebbles ]]
+=================================================================================
+Carved out of the monolith, separated from one another, becoming distributed components each described by a set of specific characteristics. 
+Once weighed all together, the pebbles make up the weight of the entire boulder. 
+These pebbles represent loosely coupled microservices, each performing a specific business function. 
+All the functions grouped together form the overall functionality of the original monolithic application. 
+Pebbles are easy to select and group together based on color, size, shape, and require minimal effort to relocate when needed.
+
+Microservices can be deployed individually on separate servers provisioned with fewer resources - only what is required by each service and the host system itself, helping to lower compute resource expenses.
+Applications are composed of small independent processes which communicate with each other through Application Programming Interfaces (APIs) over a network.
+With the overall application becoming modular, each microservice can be scaled individually, either manually or automated through demand-based autoscaling.
+Seamless upgrades and patching processes are other benefits of microservices architecture. 
+There is virtually no downtime and no service disruption to clients because upgrades are rolled out seamlessly - one service at a time, rather than having to recompile, rebuild and restart an entire monolithic application. 
+As a result, businesses are able to develop and roll-out new features and updates a lot faster, in an agile approach, having separate teams focusing on separate features, thus being more productive and cost-effective.
+
+
+CONTAINERS -> 
+=================================================================================
+Eventhough a monolith application is somehow converted to microservices through incremental refactoring approach, Choosing runtimes may be another challenge. 
+If deploying many modules on a single physical or virtual server, chances are that different libraries and runtime environments may conflict with one another, causing errors and failures. 
+This forces deployments of single modules per servers in order to separate their dependencies - not an economical way of resource management, and no real segregation of libraries and runtimes.
+As each server also has an underlying Operating System running with its libraries, thus consuming server resources - at times the OS consuming more resources than the application module itself.
+
+Application containers came along providing encapsulated lightweight runtime environments for application modules. Containers promised consistent software environments for developers, testers, all the way from Development to Production. 
+Wide support of containers ensured application portability from physical bare-metal to Virtual Machines, but this time with multiple applications deployed on the very same server, each running in their own execution environments isolated from one another, thus avoiding conflicts, errors, and failures. 
+Other features of containerized application environments are higher server utilization, individual module scalability, flexibility, interoperability and easy integration with automation tools.
+
+A containerized application is a software application that is packaged along with its dependencies, libraries, and configuration files into a container. 
+Containers are lightweight, portable, and self-sufficient runtime environments, ensuring consistency across development, testing, and production environments.
+Each container runs in its isolated environment, avoiding conflicts between applications. Containers share the host OS kernel but have separate processes and resource namespaces.
+Containers can run consistently across different environments, from a developer's laptop to a cloud server.
+Unlike virtual machines, containers do not include a full operating system, making them faster to start and less resource-intensive.:
+The application runs the same way, regardless of the underlying infrastructure, because all dependencies are bundled within the container.
+Containers can run on any system that supports container runtimes (e.g., Docker), regardless of the underlying hardware or OS.
+All application dependencies are included in the container image, reducing issues related to missing or mismatched libraries.
+Containers start quickly, enabling faster application deployment and scaling. Containers are lightweight compared to virtual machines, allowing more containers to run on the same hardware.
+Containers can be scaled horizontally by deploying more instances of the application container.
+
+
+Containerization Tools : 
+Docker      : The most popular tool for creating and managing containers.
+Podman      : An alternative to Docker, offering rootless container management.
+Kubernetes  : A powerful orchestration platform for deploying, scaling, and managing containerized applications.
+CRI-O       : A lightweight container runtime designed for Kubernetes.
+
+
+Containers are an application-centric method to deliver high-performing, scalable applications on any infrastructure of your choice. 
+Containers are best suited to deliver microservices by providing portable, isolated virtual environments for applications to run without interference from other running applications.
+
+
+                            +-----------------+  +-----------------+  +-----------------+
+                            |       App       |  |       App       |  |       App       |
+                            |-----------------|  |-----------------|  |-----------------|
+                            |   Bin/Library   |  |   Bin/Library   |  |   Bin/Library   |
+                            +-----------------+  +-----------------+  +-----------------+
+                                Container-1           Container-2         Container-3
+                            +-----------------------------------------------------------+
+                            |                    Container Runtime                      |
+                            +-----------------------------------------------------------+
+                            |                    Operating System                       |
+                            +-----------------------------------------------------------+
+                            |                         Hardware                          |
+                            +-----------------------------------------------------------+
+
+                                                Container Deployment
+
+
+Microservices are lightweight applications written in various modern programming languages, with specific dependencies, libraries and environmental requirements. 
+To ensure that an application has everything it needs to run successfully it is packaged together with its dependencies.
+Containers encapsulate microservices and their dependencies but do not run them directly. Containers run container images.
+A container image bundles the application along with its runtime, libraries, and dependencies, and it represents the source of a container deployed to offer an isolated executable environment for the application. 
+Containers can be deployed from a specific image on many platforms, such as workstations, Virtual Machines, public cloud, etc.
+
+
+CONTAINER ORCHESTRATION -> 
+=================================================================================
+
+In Development (Dev) environments, running containers on a single host for development and testing of applications may be a suitable option. 
+However, when migrating to Quality Assurance (QA) and Production (Prod) environments, that is no longer a viable option because the applications and services need to meet specific requirements:
+
+    - Fault-tolerance
+    - On-demand scalability
+    - Optimal resource usage
+    - Auto-discovery to automatically discover and communicate with each other
+    - Accessibility from the outside world
+    - Seamless updates/rollbacks without any downtime
+
+Container orchestrators are tools which group systems together to form clusters where containers' deployment and management is automated at scale while meeting the requirements mentioned above. 
+The clustered systems confer the advantages of distributed systems, such as increased performance, cost efficiency, reliability, workload distribution, and reduced latency.
+container orchestrators are an obvious choice when it comes to managing containerized applications at scale.
+Kubernetes is one of the most in-demand container orchestration tools available today.
+
+Ex : 
+    - AWS Elastic Container service
+    - Azure Container Instances
+    - Kubernetes
+    - docker swarm 
+
+
+ECS (Elastic Container Service): A fully managed container orchestration service provided by AWS that supports Docker containers. It does not rely on Kubernetes.
+EKS (Elastic Kubernetes Service): A managed Kubernetes service by AWS for deploying and managing Kubernetes clusters.
+
+
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+|        Aspect         |                         Docker                            |                     Kubernetes                           |
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+| Purpose               | - Builds, runs, and manages containers                    | - Orchestrates and manages containers across multiple    |
+|                       |                                                           |   nodes                                                   |
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+| Scope                 | - Single-node or standalone setups                        | - Multi-node, distributed systems                        |
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+| Core Functionality    | - Containerization and runtime                            | - Scheduling, scaling, and maintaining containers        |
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+| Scaling               | - Manual scaling                                          | - Automatic scaling based on resources                   |
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+| High Availability     | - Limited, single-node focus                              | - Ensures redundancy and failover                        |
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+| Load Balancing        | - Requires manual setup                                   | - Built-in traffic distribution                          |
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+| Cluster Management    | - Not natively supported                                  | - Centralized cluster management                         |
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+| Complexity            | - Easy to set up and manage                               | - Requires more setup and expertise                      |
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+| Integration           | - Works alongside orchestration tools (like Kubernetes)   | - Can use Docker as its container runtime                |
++-----------------------+-----------------------------------------------------------+----------------------------------------------------------+
+
+Initially KUBERNETIS was built to Orchestrate only DOCKER but then as it grew in popularity, other runtimes like RKT want to be in. 
+Then CRI ( Container runtime interface ) was developed which allowed any vendor to work with kubernetis. 
+But runtimes should adhere to OCI ( Open container Initiative ) to be adopted by kubernetis. 
+OCI consisted of IMAGESPEC ( how image should be built ) and RUNTIMESPEC ( how runtime is developed )
+But docker was not built to support CRI because it was built way before. So kubernetis introduced DOCKERSHIM to support docker. 
+
+
+    docker   --------------> DOCKER CLI            |  DOCKERSHIM ------> | 
+                                                                         |
+                                                                         |
+    containerd ------------> CTR  / NERDCTL        |                     |
+                                                   |                     |    KUBERNETIS
+    runtime-3 -------------> CRICTL                |                     |
+    runtime-2 -------------> CRICTL                |  CRI  ----------->  |
+    runtime-1 -------------> CRICTL                |                     |
+
+
+
+
+
+
+CONTAINERD -> 
+But after version 1.24 due to the extra maintainance task using DOCKERSHIM, DOCKER was removed as supported runtime for kubernetis.
+So there is a container runtime tool CONTAINER-D which is industry standard and thats built on OCI standards which docker uses to connect to kubernetis. 
+    - Docker relies on containerd as its default container runtime.
+    - containerd handles the low-level tasks of pulling images, creating namespaces, and managing container lifecycle (start, stop, pause, etc.).
+    - Docker provides the user-facing tools (e.g., CLI and API) and a higher-level abstraction for managing containers.
+    - containerd works in the background to execute container-related operations at a lower level.
+    - Docker depends on containerd to run containers, but containerd can work independently (e.g., Kubernetes uses containerd directly as a runtime without Docker).
+    - Docker runs its own daemon (dockerd), which communicates with containerd. containerd runs as a separate daemon (containerd).
+
+    --> Docker → CLI/API → dockerd → containerd → runc (low-level runtime for executing containers).
+
+
+CTR ->  ( built by containerd community - only for debugging and not user freindly)
+In containerd, ctr is a lightweight CLI (command-line interface) used primarily for debugging and testing purposes. 
+It interacts directly with the containerd daemon to manage containers, images, snapshots, and other low-level container-related operations.
+ctr is not essential for running containerd; it’s a debugging tool.
+In production, higher-level orchestration tools (like Kubernetes or Docker) interact with containerd directly, not through ctr.
+
+
+NERDCTL ->   ( built by containerd community - user friendly )
+nerdctl is a user-friendly CLI for interacting with containerd, providing Docker-compatible commands to manage containers, images, and related resources. 
+It is designed as a more practical alternative to ctr, offering a more intuitive experience for users familiar with Docker.
+nerdctl commands are similar to docker . 
+nerdctl run -d --name nginx-container -p 8080:80 nginx    is similar to     docker  run -d --name nginx-container -p 8080:80 nginx
+nerdctl run --name redis redis:alpine                     is similar to     docker run --name redis redis:alpine
+
+
+CRICTL ->  ( built by kubernetis community )
+crictl is a command-line interface (CLI) designed for managing containers and images in container runtimes that implement the Container Runtime Interface (CRI), such as containerd and CRI-O. 
+It is primarily used in Kubernetes environments to interact directly with the container runtime.

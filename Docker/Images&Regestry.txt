@@ -1,0 +1,257 @@
+IMAGES --> [[ Blue prints for docker containers ]]
+=================================================================================
+A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container.
+Docker Hub is the default global marketplace for storing and distributing images. 
+It has over 100,000 images created by developers that you can run locally. You can search for Docker Hub images and run them directly from Docker Desktop.
+
+Examples : 
+    1. For a PostgreSQL image, that image will package the database binaries, config files, and other dependencies. 
+    2. For a Python web app, it'll include the Python runtime, your app code, and all of its dependencies.
+
+There are two important principles of images:
+    1. Images are immutable. Once an image is created, it can't be modified. You can only make a new image or add changes on top of it.
+    2. Container images are composed of layers. Each layer represents a set of file system changes that add, remove, or modify files.
+
+IMAGE LAYERS -->
+=================================================================================
+Each docker image consists of immutable layers.
+Each layer in an image contains a set of filesystem changes - additions, deletions, or modifications. Let’s look at a theoretical image:
+
+    The first layer adds basic commands and a package manager, such as apt.
+    The second layer installs a Python runtime and pip for dependency management.
+    The third layer copies in an application’s specific requirements.txt file.
+    The fourth layer installs that application’s specific dependencies.
+    The fifth layer copies in the actual source code of the application.
+
+This is beneficial because it allows layers to be reused between images. 
+For example, imagine you wanted to create another Python application. Due to layering, you can leverage the same Python base. 
+This will make builds faster and reduce the amount of storage and bandwidth required to distribute the images. 
+Layers let you extend images of others by reusing their base layers, allowing you to add only the data that your application needs.
+
+Layering is made possible by content-addressable storage and union filesystems.
+After each layer is downloaded, it is extracted into its own directory on the host filesystem.
+When you run a container from an image, a union filesystem is created where layers are stacked on top of each other, creating a new and unified view.
+When the container starts, its root directory is set to the location of this unified directory, using chroot.
+When the union filesystem is created, in addition to the image layers, a directory is created specifically for the running container. 
+This allows the container to make filesystem changes while allowing the original image layers to remain untouched. 
+This enables you to run multiple containers from the same underlying image.
+
+
+UNION FILESYSTEM --> 
+When you start a container, Docker stacks the layers using a union filesystem (e.g., OverlayFS). 
+This filesystem presents a unified view by merging the layers.
+
+    If you inspect the running container’s root filesystem,
+    The container sees all layers as a single filesystem, though the data is actually spread across multiple directories on the host.
+
+    python
+    Copy code
+    /
+    ├── usr/
+    ├── bin/
+    ├── lib/
+    ├── app/             # From the app.py layer
+
+
+WRITABLE LAYERS FOR CONTAINERS -->
+When a container runs, Docker creates a writable layer for the container on top of the image layers. 
+This writable layer allows changes without modifying the underlying image.
+Changes are isolated to the container and do not affect the image or other containers.
+
+    Let’s say the container modifies a file /app/config.json. The writable layer will store the modified file:
+
+    Writable layer:
+    /app/config.json (modified)
+
+    Underlying layers (unchanged):
+    /app/config.json (original from image layer)
+
+
+RUN MULTIPLE CONTAINERS FROM ONE IMAGE ---> 
+Since image layers are immutable, multiple containers can share the same underlying layers, with each container having its own writable layer.
+The shared layers (base image, dependencies, app.py) remain untouched, reducing storage usage and enabling efficient sharing.
+
+    Container 1: Runs app.py and writes logs to /app/logs/log1.txt.
+    Container 2: Runs the same app.py but writes logs to /app/logs/log2.txt.
+
+    Writable layers:
+
+    Container 1:
+    Writable layer: /app/logs/log1.txt
+
+    Container 2:
+    Writable layer: /app/logs/log2.txt
+
+
+HANDS-ON -->
+=================================================================================
+1.  docker run --name=base-container -ti ubuntu
+    Once the image has been downloaded and the container has started, you should see a new shell prompt. 
+    This is running inside your container. It will look similar to the following (the container ID will vary):
+    root@d8c5ca119fcd:/#
+
+2.  apt update && apt install -y nodejs
+    Inside the container, run the above command to install Node.js
+    When this command runs, it downloads and installs Node inside the container. 
+    In the context of the union filesystem, these filesystem changes occur within the directory unique to this container.
+
+3.  node -e 'console.log("Hello world!")'
+    Validate if Node is installed by running the following command:
+    You should then see a “Hello world!” appear in the console.
+
+4.  docker container commit -m "Add node" base-container node-base
+    Now that you have Node installed, you’re ready to save the changes you’ve made as a new image layer, from which you can start new containers or build new images. 
+    To do so, you will use the docker container commit command. Exit from container using ctrl+d and run above command
+
+    dileepkumar.siriki@TD-C02F154AMD6T Downloads % docker container commit -m "Add node" base-container node-base
+    sha256:e4f561875336bcc07320b86a0339fee1b65e25b292cb0b6141450037dbca1b04
+
+
+5.  docker image history node-base
+    View the layers of your image using the docker image history command.
+    You will see output similar to the following. Note the “Add node” comment on the top line. 
+    This layer contains the Node.js install you just made.
+
+    IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+    d5c1fca2cdc4   10 seconds ago   /bin/bash                                       126MB     Add node
+    2b7cc08dcdbb   5 weeks ago      /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+    <missing>      5 weeks ago      /bin/sh -c #(nop) ADD file:07cdbabf782942af0…   69.2MB
+    <missing>      5 weeks ago      /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
+    <missing>      5 weeks ago      /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
+    <missing>      5 weeks ago      /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH     0B
+    <missing>      5 weeks ago      /bin/sh -c #(nop)  ARG RELEASE                  0B
+
+
+6.  docker run node-base node -e "console.log('Hello again')"
+    To prove your image has Node installed, you can start a new container using this above new image.
+
+7.  docker rm -f base-container
+    Now that you’re done creating your base image, you can remove that container. 
+
+
+REGESTRY -->
+=================================================================================
+An image registry is a centralized location for storing and sharing your container images. It can be either public or private. 
+Docker Hub is a public registry that anyone can use and is the default registry.
+You can store your container images on your computer system, but what if you want to share them with your friends or use them on another machine? That's where the image registry comes in.
+
+While Docker Hub is a popular option, there are many other available container registries available today:
+    Amazon Elastic Container Registry(ECR), 
+    Azure Container Registry (ACR), and 
+    Google Container Registry (GCR). 
+
+You can even run your private registry on your local system or inside your organization. For example, 
+    Harbor, 
+    JFrog Artifactory, 
+    GitLab Container registry etc.
+
+
+REGISTRY vs REPOSITORY -->
+=================================================================================
+A registry is a centralized location that stores and manages container images. 
+A repository is a collection of related container images within a registry. Think of it as a folder where you organize your images based on projects. Each repository contains one or more container images.
+
+
+        +-------------------+
+        |    Registry       |  [ docker.io / ECR / ACR / GCR ]
+        +-------------------+
+                |
+                +--------------------------------------+
+                |                                      |
+        +-------------------+                  +-------------------+
+        |   Repository A    |                  |   Repository B    |
+        |   (e.g., nginx)   |                  |   (e.g., ubuntu)  |
+        +-------------------+                  +-------------------+
+                |                                      |
+        +-------+-------+                      +-------+-------+
+        |               |                      |               |
+        +----------+   +-----------+          +-----------+   +------------+
+        | Tag: 1.2 |   | Tag: 1.22 |          | Tag: 20.0 |   | Tag: 22.04 |
+        | Image ID |   | Image ID  |          | Image ID  |   | Image ID   |
+        +----------+   +-----------+          +-----------+   +------------+
+
+
+
+BUILD AN APP IMAGE -->
+=================================================================================
+
+1.  Start a new container using the newly created node-base image:
+    docker run --name=app-container -ti node-base
+
+2.  Inside of this container, run the following command to create a Node program:
+    echo 'console.log("Hello from an app")' > app.js
+   
+3.  To run this Node program, you can use the following command and see the message printed on the screen:
+    node app.js
+
+4.  In another terminal, run the following command to save this container’s changes as a new image:     
+    docker container commit -c "CMD node app.js" -m "Add app" app-container sample-app
+    
+    This command not only creates a new image named sample-app, but also adds additional configuration to the image to set the default command when starting a container. 
+    In this case, you are setting it to automatically run node app.js.
+
+5.  In a terminal outside of the container, run the following command to view the updated layers:
+    docker image history sample-app
+
+    You’ll then see output that looks like the following. Note the top layer comment has “Add app” and the next layer has “Add node”:
+
+    IMAGE          CREATED              CREATED BY                                      SIZE      COMMENT
+    c1502e2ec875   About a minute ago   /bin/bash                                       33B       Add app
+    5310da79c50a   4 minutes ago        /bin/bash                                       126MB     Add node
+    2b7cc08dcdbb   5 weeks ago          /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+    <missing>      5 weeks ago          /bin/sh -c #(nop) ADD file:07cdbabf782942af0…   69.2MB
+    <missing>      5 weeks ago          /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
+    <missing>      5 weeks ago          /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
+    <missing>      5 weeks ago          /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH     0B
+    <missing>      5 weeks ago          /bin/sh -c #(nop)  ARG RELEASE                  0B
+
+6.  Finally, start a new container using the brand new image. Since you specified the default command, you can use the following command:
+    docker run sample-app
+    You should see your greeting appear in the terminal, coming from your Node program.
+
+7.  Now that you’re done with your containers, you can remove them using the following command:
+    docker rm -f app-container
+
+
+
+BUILD - TAG - PUBLISH -->
+=================================================================================
+Most often, images are built using a Dockerfile.
+The final . in the command provides the path or URL to the build context. 
+At this location, the builder will find the Dockerfile and other referenced files.
+When you run a build, the builder pulls the base image, if needed, and then runs the instructions specified in the Dockerfile.
+
+        --> docker build .
+
+
+Tagging images is the method to provide an image with a memorable name. 
+However, there is a structure to the name of an image. A full image name has the following structure:
+
+    --> [HOST[:PORT_NUMBER]/]PATH[:TAG]
+
+    HOST         : The optional registry hostname where the image is located. 
+                   If no host is specified, Docker's public registry at docker.io is used by default.
+    PORT_NUMBER  : The registry port number if a hostname is provided
+    PATH         : The path of the image, consisting of slash-separated components. 
+                   For Docker Hub, the format follows [NAMESPACE/]REPOSITORY, where namespace is either a user's or organization's name. 
+                   If no namespace is specified, library is used, which is the namespace for Docker Official Images.
+    TAG          : A custom, human-readable identifier that's typically used to identify different versions or variants of an image. If no tag is specified, latest is used by default.
+
+
+    EXAMPLES :
+    nginx, equivalent to docker.io/library/nginx:latest: this pulls an image from the docker.io registry, the library namespace, the nginx image repository, and the latest tag.
+    docker/welcome-to-docker, equivalent to docker.io/docker/welcome-to-docker:latest: this pulls an image from the docker.io registry, the docker namespace, the welcome-to-docker image repository, and the latest tag
+    ghcr.io/dockersamples/example-voting-app-vote:pr-311: this pulls an image from the GitHub Container Registry, the dockersamples namespace, the example-voting-app-vote image repository, and the pr-311 tag
+
+
+To tag an image during a build, add the -t or --tag flag:
+    --> docker build -t my-username/my-image .
+
+
+Once you have an image built and tagged, you're ready to push it to a registry. 
+Before you're able to push an image to a repository, you will need to be authenticated. To do so, simply use the docker login command.
+To do so, use the docker push command:
+    --> docker push my-username/my-image
+
+
+

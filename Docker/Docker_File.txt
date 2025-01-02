@@ -1,0 +1,96 @@
+DOCKER FILE -->
+=================================================================================
+A Dockerfile is a text-based document that's used to create a container image. 
+It provides instructions to the image builder on the commands to run, files to copy, startup command, and more.
+
+As an example, the following Dockerfile would produce a ready-to-run Python application:
+
+    +------------------------------------------------------------+
+    |    FROM python:3.12                                        |
+    |    WORKDIR /usr/local/app                                  |
+    |                                                            |
+    |    # Install the application dependencies                  |
+    |    COPY requirements.txt ./                                |
+    |    RUN pip install --no-cache-dir -r requirements.txt      |
+    |                                                            |
+    |    # Copy in the source code                               |
+    |    COPY src ./src                                          |
+    |    EXPOSE 5000                                             |
+    |                                                            |
+    |    # Setup an app user so the container doesn't run as     |
+    |    # the root user                                         |
+    |    RUN useradd app                                         |
+    |    USER app                                                |
+    |                                                            |
+    |    CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0",    |
+    |         "--port", "8080"]                                  |
+    +------------------------------------------------------------+
+
+
+COMMON INSTRUCTIONS -->
+=================================================================================
+FROM <image>          - this specifies the base image that the build will extend.
+WORKDIR <path>        - this instruction specifies the "working directory" or the path in the image where files will be copied and commands will be executed.
+RUN <command>         - this instruction tells the builder to run the specified command.
+ENV <name> <value>    - this instruction sets an environment variable that a running container will use.
+EXPOSE <port-number>  - this instruction sets configuration on the image that indicates a port the image would like to expose.
+USER <user-or-uid>    - this instruction sets the default user for all subsequent instructions.
+CMD ["<command>", "<arg1>"]   - this instruction sets the default command a container using this image will run.
+COPY <host-path> <image-path> - this instruction tells the builder to copy files from the host and put them into the container image.
+
+
+DOCKER INIT -->
+=================================================================================
+Containerize new projects quickly with docker init.
+The docker init command will analyze your project and quickly create a Dockerfile, a compose.yaml, and a .dockerignore, helping you get up and going.
+
+
+BUILD CACHE -->
+=================================================================================
+When you run the docker build command to create a new image, Docker executes each instruction in your Dockerfile, creating a layer for each command and in the order specified. 
+For each instruction, Docker checks whether it can reuse the instruction from a previous build. 
+If it finds that you've already executed a similar instruction before, Docker doesn't need to redo it. 
+Instead, it’ll use the cached result. This way, your build process becomes faster and more efficient, saving you valuable time and resources.
+
+    TIMES WHEN CACHE ISN'Tag USED :
+        Any changes to the command of a RUN instruction invalidates that layer.
+        Any changes to files copied into the image with the COPY or ADD instructions. Docker keeps an eye on any alterations to files within your project directory. Whether it's a change in content or properties like permissions. 
+        Once one layer is invalidated, all following layers are also invalidated. If any previous layer, including the base image or intermediary layers, has been invalidated due to changes, Docker ensures that subsequent layers relying on it are also invalidated. 
+        This keeps the build process synchronized and prevents inconsistencies.
+
+So When you're writing or editing a Dockerfile, keep an eye out for unnecessary cache misses to ensure that builds run as fast and efficiently as possible.
+When you do a "docker build ." for the first time, it might take some time as in 1-2mnts but if you dont change anything and dop it again, build process happens in 2-3 seconds. 
+So in dockerfile, you can put the not-frequent changing steps at the beginning like installing dependencies and more-frequent changing steps like code at the end so that any change to code does not trigger re-building dependencies each time. 
+
+
+
+COMMANDS USED -->
+=================================================================================
+
++-----------------------+-----------------------------------------------------+---------------------------------------------------------------------------------+
+| Dockerfile Commands   | Command                                             | Description                                                                     |
+|-----------------------|-----------------------------------------------------|---------------------------------------------------------------------------------|
+| FROM                  | FROM <image>:<tag>                                  | Set the base image for the Docker image.                                        |
+| WORKDIR               | WORKDIR /path/to/directory                          | Set the working directory for subsequent commands.                              |
+| RUN                   | RUN <command>                                       | Execute a command during the build process.                                     |
+| CMD                   | CMD ["executable", "param1", "param2"]              | Set the default command to run when the container starts.                       |
+|                       | CMD ["executable", "param1", "param2"]              | CMD with arguments in exec form (recommended).                                  |
+|                       | CMD <command>                                       | CMD in shell form (deprecated).                                                 |
+| ENTRYPOINT            | ENTRYPOINT ["executable", "param1", "param2"]       | Set the main command to run in the container.                                   |
+|                       | ENTRYPOINT <command>                                | ENTRYPOINT in shell form (deprecated).                                          |
+| COPY                  | COPY <src> <dest>                                   | Copy files or directories from the host to the container.                       |
+| ADD                   | ADD <src> <dest>                                    | Copy files, but also supports remote URLs and automatic extraction of tar files |
+| ENV                   | ENV <key>=<value>                                   | Set an environment variable inside the container.                               |
+| EXPOSE                | EXPOSE <port>                                       | Expose a port on the container (used for networking).                           |
+| VOLUME                | VOLUME ["/path"]                                    | Create a mount point for a volume.                                              |
+| USER                  | USER <username>                                     | Set the user to run the container as.                                           |
+| ARG                   | ARG <name>[=<default_value>]                        | Define a build-time argument.                                                   |
+| LABEL                 | LABEL <key>=<value>                                 | Add metadata to the image.                                                      |
+| RUN                   | RUN <command>                                       | Execute a command in the shell during image build.                              |
+| SLEEP                 | SLEEP <time>                                        | Sleep for the specified time (typically used for debugging).                    |
+| SHELL                 | SHELL ["executable", "parameters"]                  | Change the default shell used for the RUN command.                              |
+| HEALTHCHECK           | HEALTHCHECK --interval=<duration> --retries=<count> | Define a health check for the running container.                                |
+| ARG                   | ARG <name>                                          | Define a build-time argument.                                                   |
+| COPY                  | COPY . /app                                         | Copy the content of the current directory into `/app` inside the container.     |
++-----------------------+-----------------------------------------------------+---------------------------------------------------------------------------------+
+
