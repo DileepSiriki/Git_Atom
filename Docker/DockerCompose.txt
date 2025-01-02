@@ -1,0 +1,83 @@
+DOCKER COMPOSE --> [[ To run a multi-container application ]]
+=================================================================================
+We have been working with single container applications. But, now you're wanting to do something more complicated - run databases, message queues, caches, or a variety of other services. 
+Do you install everything in a single container? Run multiple containers? If you run multiple, how do you connect them all together?
+One best practice for containers is that each container should do one thing and do it well. While there are exceptions to this rule, avoid the tendency to have one container do multiple things.
+You can use multiple docker run commands to start multiple containers. But, you'll soon realize you'll need to manage networks, all of the flags needed to connect containers to those networks, and more. 
+And when you're done, cleanup is a little more complicated.
+
+With Docker Compose, you can define all of your containers and their configurations in a single YAML file. 
+If you include this file in your code repository, anyone that clones your repository can get up and running with a single command.
+It's important to understand that Compose is a declarative tool - you simply define it and go. 
+You don't always need to recreate everything from scratch. If you make a change, run docker compose up again and Compose will reconcile the changes in your file and apply them intelligently.
+
+
+DOCKER FILE vs DOCKER COMPOSE FILE :
+    A Dockerfile provides instructions to build a container image while a Compose file defines your running containers. 
+    A Compose file references a Dockerfile to build an image to use for a particular service.
+
+
+Starting up a single-container application is easy. For example, a Python script that performs a specific data processing task runs within a container with all its dependencies. 
+Similarly, a Node.js application serving a static website with a small API endpoint can be effectively containerized with all its necessary libraries and dependencies. 
+However, as applications grow in size, managing them as individual containers becomes more difficult.
+Imagine the data processing Python script needs to connect to a database. 
+Suddenly, you're now managing not just the script but also a database server within the same container. 
+If the script requires user logins, you'll need an authentication mechanism, further bloating the container size.
+Now you might ask, "Do I need to run these containers separately? If I run them separately, how shall I connect them all together?"
+
+While docker run is a convenient tool for launching containers, it becomes difficult to manage a growing application stack with it. Here's why:
+    --> Imagine running several docker run commands (frontend, backend, and database) with different configurations for development, testing, and production environments. It's error-prone and time-consuming.
+    --> Applications often rely on each other. Manually starting containers in a specific order and managing network connections become difficult as the stack expands.
+    --> Each application needs its docker run command, making it difficult to scale individual services. Scaling the entire application means potentially wasting resources on components that don't need a boost.
+    --> Persisting data for each application requires separate volume mounts or configurations within each docker run command. This creates a scattered data management approach.
+    --> Setting environment variables for each application through separate docker run commands is tedious and error-prone.
+
+
+That's where Docker Compose comes to the rescue.
+Docker Compose defines your entire multi-container application in a single YAML file called compose.yml. 
+This file specifies configurations for all your containers, their dependencies, environment variables, and even volumes and networks. 
+
+With Docker Compose:
+    --> You don't need to run multiple docker run commands. All you need to do is define your entire multi-container application in a single YAML file. 
+    --> This centralizes configuration and simplifies management.
+    --> You can run containers in a specific order and manage network connections easily.
+    --> You can simply scale individual services up or down within the multi-container setup. This allows for efficient allocation based on real-time needs.
+    --> You can implement persistent volumes with ease.
+    --> It's easy to set environment variables once in your Docker Compose file.
+    --> By leveraging Docker Compose for running multi-container setups, you can build complex applications with modularity, scalability, and consistency at their core.
+
+
+
+
+
+
+
+
+
+
+
+HANDS-ON -->
+=================================================================================
+git clone https://github.com/dockersamples/todo-list-app 
+cd todo-list-app
+docker compose up -d --build
+
+A couple of things to call out :
+    Two container images were downloaded from Docker Hub - node and MySQL
+    A network was created for your application
+    A volume was created to persist the database files between container restarts
+    Two containers were started with all of their necessary config
+    Visit  http://localhost:3000 for the application
+
+To tear the whole thing down :
+    docker compose down
+
+Volume persistence :
+    By default, volumes aren't automatically removed when you tear down a Compose stack. 
+    The idea is that you might want the data back if you start the stack again.
+    If you do want to remove the volumes, add the --volumes flag when running the docker compose down command
+    docker compose down --volumes
+
+    Alternatively, you can use the Docker Desktop GUI to remove the containers by selecting the application stack and selecting the Delete button.
+    Note that if you remove the containers for a Compose app in the GUI, it's removing only the containers. 
+    You'll have to manually remove the network and volumes if you want to do so.

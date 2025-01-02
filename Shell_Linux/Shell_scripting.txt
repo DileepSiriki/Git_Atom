@@ -153,9 +153,25 @@ When you are logged in as root, the command prompt should end with # instead of 
 NOTE : By default when you change to root, you can not list the files and directories because now you are in directory "/root".
        Do a "cd .." and navigate to "/user/dileep" to see the regular files and directories.
 
+
 ###########################################################################################################################################################################################
 BASIC LINUX COMMANDS & USAGE :
 ###########################################################################################################################################################################################
+
+General-Purpose Linux Distributions --> 
+These are designed for everyday use, from desktop computing to basic server tasks.
+    Ubuntu ( APT )      : User-friendly, popular among beginners and professionals. It’s based on Debian and has variants like:
+    Debian ( APT )      : Known for its stability and large software repository. Often used as a base for other distros (e.g., Ubuntu).
+    Fedora ( DNF )      : Cutting-edge and community-driven, showcasing the latest in open-source technologies.
+    openSUSE ( ZYPPER ) : Offers both a rolling release (Tumbleweed) and a stable version (Leap).
+
+Enterprise and Server Distributions --> 
+Designed for businesses and servers, focusing on stability, performance, and support.
+    Red Hat Enterprise Linux (RHEL) ( DNF )        : A commercial distro with long-term support, popular in enterprises.
+    CentOS (Now CentOS Stream)      ( DNF )        : A free alternative to RHEL, widely used for servers.
+    SUSE Linux Enterprise Server (SLES) ( ZYPPER ) : Enterprise-focused with robust support for mission-critical applications.
+
+
 Everything in Linux is considered a file to maintain consistency. That includes hardware devices, printers, directories, and processes.
 Regular files such as music, text, videos, and other multimedia files also have additional data associated with them called metadata.
 We can run two or more commands directly at one go using ";" as in "date;who;ls" .
